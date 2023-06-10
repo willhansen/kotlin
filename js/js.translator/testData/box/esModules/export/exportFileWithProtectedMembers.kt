@@ -16,26 +16,26 @@ open class Foo protected constructor() {
 
     protected var baz: String
         get() = _baz
-        set(value) {
-            _baz = value
+        set(konstue) {
+            _baz = konstue
         }
 
-    protected val bazReadOnly: String
+    protected konst bazReadOnly: String
         get() = _baz
 
-    protected val quux: String = "quux"
+    protected konst quux: String = "quux"
 
     protected var quuz: String = "quuz"
 
     protected class NestedClass {
-        val prop: String = "nested class property"
+        konst prop: String = "nested class property"
     }
     protected object NestedObject {
-        val prop: String = "nested object property"
+        konst prop: String = "nested object property"
     }
 
     protected companion object {
-        val prop: String = "companion object property"
+        konst prop: String = "companion object property"
     }
 }
 
@@ -51,7 +51,7 @@ export function box() {
     if (foo.bazReadOnly != 'baz') return 'failed to read `bazReadOnly`';
     foo.baz = 'beer';
     if (foo.baz != 'beer') return 'failed to write protected var';
-    if (foo.bazReadOnly != 'beer') return 'unexpected value of `bazReadOnly` after modifying `baz`';
+    if (foo.bazReadOnly != 'beer') return 'unexpected konstue of `bazReadOnly` after modifying `baz`';
     if (foo.quux != 'quux') return 'failed to read `quux`';
     if (foo.quuz != 'quuz') return 'failed to read `quuz`';
     foo.quuz = 'ale';

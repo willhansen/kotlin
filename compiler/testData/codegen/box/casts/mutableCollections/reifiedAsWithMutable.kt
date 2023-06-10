@@ -18,14 +18,14 @@ class M : Map<String, String> by HashMap<String, String>()
 class MM : MutableMap<String, String> by HashMap<String, String>()
 
 class ME : Map.Entry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
 }
 
 class MME : MutableMap.MutableEntry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
-    override fun setValue(value: String): String = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
+    override fun setValue(konstue: String): String = throw UnsupportedOperationException()
 }
 
 inline fun <reified T> reifiedAsSucceeds(x: Any, operation: String) {
@@ -51,29 +51,29 @@ inline fun <reified T> reifiedAsFailsWithCCE(x: Any, operation: String) {
 }
 
 fun box(): String {
-    val itr = Itr() as Any
-    val mitr = MItr()
+    konst itr = Itr() as Any
+    konst mitr = MItr()
 
     reifiedAsFailsWithCCE<MutableIterator<*>>(itr, "reifiedAs<MutableIterator<*>>(itr)")
     reifiedAsSucceeds<MutableIterator<*>>(mitr, "reifiedAs<MutableIterator<*>>(mitr)")
 
-    val litr = LItr() as Any
-    val mlitr = MLItr()
+    konst litr = LItr() as Any
+    konst mlitr = MLItr()
 
     reifiedAsFailsWithCCE<MutableIterator<*>>(litr, "reifiedAs<MutableIterator<*>>(litr)")
     reifiedAsFailsWithCCE<MutableListIterator<*>>(litr, "reifiedAs<MutableListIterator<*>>(litr)")
     reifiedAsSucceeds<MutableListIterator<*>>(mlitr, "reifiedAs<MutableListIterator<*>>(mlitr)")
 
-    val it = It() as Any
-    val mit = MIt()
-    val arrayList = ArrayList<String>()
+    konst it = It() as Any
+    konst mit = MIt()
+    konst arrayList = ArrayList<String>()
 
     reifiedAsFailsWithCCE<MutableIterable<*>>(it, "reifiedAs<MutableIterable<*>>(it)")
     reifiedAsSucceeds<MutableIterable<*>>(mit, "reifiedAs<MutableIterable<*>>(mit)")
     reifiedAsSucceeds<MutableIterable<*>>(arrayList, "reifiedAs<MutableIterable<*>>(arrayList)")
 
-    val coll = C() as Any
-    val mcoll = MC()
+    konst coll = C() as Any
+    konst mcoll = MC()
 
     reifiedAsFailsWithCCE<MutableCollection<*>>(coll, "reifiedAs<MutableCollection<*>>(coll)")
     reifiedAsFailsWithCCE<MutableIterable<*>>(coll, "reifiedAs<MutableIterable<*>>(coll)")
@@ -81,8 +81,8 @@ fun box(): String {
     reifiedAsSucceeds<MutableIterable<*>>(mcoll, "reifiedAs<MutableIterable<*>>(mcoll)")
     reifiedAsSucceeds<MutableCollection<*>>(arrayList, "reifiedAs<MutableCollection<*>>(arrayList)")
 
-    val list = L() as Any
-    val mlist = ML()
+    konst list = L() as Any
+    konst mlist = ML()
 
     reifiedAsFailsWithCCE<MutableList<*>>(list, "reifiedAs<MutableList<*>>(list)")
     reifiedAsFailsWithCCE<MutableCollection<*>>(list, "reifiedAs<MutableCollection<*>>(list)")
@@ -92,9 +92,9 @@ fun box(): String {
     reifiedAsSucceeds<MutableIterable<*>>(mlist, "reifiedAs<MutableIterable<*>>(mlist)")
     reifiedAsSucceeds<MutableList<*>>(arrayList, "reifiedAs<MutableList<*>>(arrayList)")
 
-    val set = S() as Any
-    val mset = MS()
-    val hashSet = HashSet<String>()
+    konst set = S() as Any
+    konst mset = MS()
+    konst hashSet = HashSet<String>()
 
     reifiedAsFailsWithCCE<MutableSet<*>>(set, "reifiedAs<MutableSet<*>>(set)")
     reifiedAsFailsWithCCE<MutableCollection<*>>(set, "reifiedAs<MutableCollection<*>>(set)")
@@ -106,19 +106,19 @@ fun box(): String {
     reifiedAsSucceeds<MutableCollection<*>>(hashSet, "reifiedAs<MutableCollection<*>>(hashSet)")
     reifiedAsSucceeds<MutableIterable<*>>(hashSet, "reifiedAs<MutableIterable<*>>(hashSet)")
 
-    val map = M() as Any
-    val mmap = MM()
-    val hashMap = HashMap<String, String>()
+    konst map = M() as Any
+    konst mmap = MM()
+    konst hashMap = HashMap<String, String>()
 
     reifiedAsFailsWithCCE<MutableMap<*, *>>(map, "reifiedAs<MutableMap<*, *>>(map)")
     reifiedAsSucceeds<MutableMap<*, *>>(mmap, "reifiedAs<MutableMap<*, *>>(mmap)")
     reifiedAsSucceeds<MutableMap<*, *>>(hashMap, "reifiedAs<MutableMap<*, *>>(hashMap)")
 
-    val entry = ME() as Any
-    val mentry = MME()
+    konst entry = ME() as Any
+    konst mentry = MME()
 
     hashMap[""] = ""
-    val hashMapEntry = hashMap.entries.first()
+    konst hashMapEntry = hashMap.entries.first()
 
     reifiedAsFailsWithCCE<MutableMap.MutableEntry<*, *>>(entry, "reifiedAs<MutableMap.MutableEntry<*, *>>(entry)")
     reifiedAsSucceeds<MutableMap.MutableEntry<*, *>>(mentry, "reifiedAs<MutableMap.MutableEntry<*, *>>(mentry)")

@@ -7,11 +7,11 @@ import kotlin.test.assertEquals
 annotation class Anno
 
 fun box(): String {
-    val a = Anno::class.annotations
+    konst a = Anno::class.annotations
 
     if (a.size != 1) return "Fail 1: $a"
-    val ann = a.single() as? Retention ?: return "Fail 2: ${a.single()}"
-    assertEquals(AnnotationRetention.RUNTIME, ann.value)
+    konst ann = a.single() as? Retention ?: return "Fail 2: ${a.single()}"
+    assertEquals(AnnotationRetention.RUNTIME, ann.konstue)
 
     return "OK"
 }

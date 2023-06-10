@@ -12,13 +12,13 @@ interface IncrementalSyncTask : Task {
     @get:NormalizeLineEndings
     @get:IgnoreEmptyDirectories
     @get:SkipWhenEmpty
-    val from: ConfigurableFileCollection
+    konst from: ConfigurableFileCollection
 
     @get:OutputDirectory
-    val destinationDirectory: Property<File>
+    konst destinationDirectory: Property<File>
 
     @get:Internal
     @Deprecated("Use destinationDirProperty with Provider API", ReplaceWith("destinationDirProperty.get()"))
-    val destinationDir: File
+    konst destinationDir: File
         get() = destinationDirectory.get()
 }

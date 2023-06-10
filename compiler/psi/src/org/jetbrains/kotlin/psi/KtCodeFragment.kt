@@ -31,22 +31,22 @@ import org.jetbrains.kotlin.psi.psiUtil.getElementTextWithContext
 import java.util.*
 
 abstract class KtCodeFragment(
-    private val myProject: Project,
+    private konst myProject: Project,
     name: String,
     text: CharSequence,
     imports: String?, // Should be separated by KtCodeFragment.IMPORT_SEPARATOR
     elementType: IElementType,
-    private val context: PsiElement?
+    private konst context: PsiElement?
 ) : KtFile(
     run {
-        val psiManager = PsiManager.getInstance(myProject) as PsiManagerEx
+        konst psiManager = PsiManager.getInstance(myProject) as PsiManagerEx
         psiManager.fileManager.createFileViewProvider(LightVirtualFile(name, KotlinFileType.INSTANCE, text), true)
     }, false
 ), KtCodeFragmentBase {
     private var viewProvider = super.getViewProvider() as SingleRootFileViewProvider
     private var imports = LinkedHashSet<String>()
 
-    private val fakeContextForJavaFile: PsiElement? by lazy {
+    private konst fakeContextForJavaFile: PsiElement? by lazy {
         this.getCopyableUserData(FAKE_CONTEXT_FOR_JAVA_FILE)?.invoke()
     }
 
@@ -84,7 +84,7 @@ abstract class KtCodeFragment(
     override fun getContext(): PsiElement? {
         if (fakeContextForJavaFile != null) return fakeContextForJavaFile
         if (context != null && context !is KtElement) {
-            val logInfoForContextElement = (context as? PsiFile)?.virtualFile?.path ?: context.getElementTextWithContext()
+            konst logInfoForContextElement = (context as? PsiFile)?.virtualFile?.path ?: context.getElementTextWithContext()
             LOG.warn("CodeFragment with non-kotlin context should have fakeContextForJavaFile set: \noriginalContext = $logInfoForContextElement")
             return null
         }
@@ -95,7 +95,7 @@ abstract class KtCodeFragment(
     override fun getResolveScope() = context?.resolveScope ?: super.getResolveScope()
 
     override fun clone(): KtCodeFragment {
-        val elementClone = calcTreeElement().clone() as FileElement
+        konst elementClone = calcTreeElement().clone() as FileElement
 
         return (cloneImpl(elementClone) as KtCodeFragment).apply {
             isPhysical = false
@@ -136,12 +136,12 @@ abstract class KtCodeFragment(
         }
 
         // we need this code to force re-highlighting, otherwise it does not work by some reason
-        val tempElement = KtPsiFactory(project).createColon()
+        konst tempElement = KtPsiFactory(project).createColon()
         add(tempElement).delete()
     }
 
     fun addImport(import: String) {
-        val contextFile = getContextContainingFile()
+        konst contextFile = getContextContainingFile()
         if (contextFile != null) {
             if (contextFile.importDirectives.find { it.text == import } == null) {
                 imports.add(import)
@@ -156,7 +156,7 @@ abstract class KtCodeFragment(
         return null
     }
 
-    override val importDirectives: List<KtImportDirective>
+    override konst importDirectives: List<KtImportDirective>
         get() = importsAsImportList()?.imports ?: emptyList()
 
     override fun setVisibilityChecker(checker: VisibilityChecker?) {}
@@ -174,8 +174,8 @@ abstract class KtCodeFragment(
     }
 
     fun getOriginalContext(): KtElement? {
-        val contextElement = getContext() as? KtElement
-        val contextFile = contextElement?.containingFile as? KtFile
+        konst contextElement = getContext() as? KtElement
+        konst contextFile = contextElement?.containingFile as? KtFile
         if (contextFile is KtCodeFragment) {
             return contextFile.getOriginalContext()
         }
@@ -184,7 +184,7 @@ abstract class KtCodeFragment(
 
     private fun initImports(imports: String?) {
         if (imports != null && imports.isNotEmpty()) {
-            val importsWithPrefix = imports.split(IMPORT_SEPARATOR).map { it.takeIf { it.startsWith("import ") } ?: "import ${it.trim()}" }
+            konst importsWithPrefix = imports.split(IMPORT_SEPARATOR).map { it.takeIf { it.startsWith("import ") } ?: "import ${it.trim()}" }
             importsWithPrefix.forEach {
                 addImport(it)
             }
@@ -192,10 +192,10 @@ abstract class KtCodeFragment(
     }
 
     companion object {
-        const val IMPORT_SEPARATOR: String = ","
+        const konst IMPORT_SEPARATOR: String = ","
 
-        val FAKE_CONTEXT_FOR_JAVA_FILE: Key<Function0<KtElement>> = Key.create("FAKE_CONTEXT_FOR_JAVA_FILE")
+        konst FAKE_CONTEXT_FOR_JAVA_FILE: Key<Function0<KtElement>> = Key.create("FAKE_CONTEXT_FOR_JAVA_FILE")
 
-        private val LOG = Logger.getInstance(KtCodeFragment::class.java)
+        private konst LOG = Logger.getInstance(KtCodeFragment::class.java)
     }
 }

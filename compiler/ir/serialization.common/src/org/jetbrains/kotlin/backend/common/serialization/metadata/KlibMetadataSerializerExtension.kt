@@ -24,16 +24,16 @@ import org.jetbrains.kotlin.types.FlexibleType
 import org.jetbrains.kotlin.types.KotlinType
 
 class KlibMetadataSerializerExtension(
-    private val languageVersionSettings: LanguageVersionSettings,
-    override val metadataVersion: BinaryVersion,
-    override val stringTable: StringTableImpl,
-    private val allowErrorTypes: Boolean,
-    private val exportKDoc: Boolean
+    private konst languageVersionSettings: LanguageVersionSettings,
+    override konst metadataVersion: BinaryVersion,
+    override konst stringTable: StringTableImpl,
+    private konst allowErrorTypes: Boolean,
+    private konst exportKDoc: Boolean
 ) : KotlinSerializerExtensionBase(KlibMetadataSerializerProtocol) {
     override fun shouldUseTypeTable(): Boolean = true
 
     private fun descriptorFileId(descriptor: DeclarationDescriptorWithSource): Int? {
-        val fileName = descriptor.source.containingFile.name ?: return null
+        konst fileName = descriptor.source.containingFile.name ?: return null
         return stringTable.getStringIndex(fileName)
     }
 
@@ -90,11 +90,11 @@ class KlibMetadataSerializerExtension(
 }
 
 fun DeclarationDescriptorWithSource.findKDocString(): String? {
-    val psi = source.getPsi()
+    konst psi = source.getPsi()
     if (psi is KtDeclaration) {
         if (psi is KtPrimaryConstructor)
             return null  // to be rendered with class itself
-        val kdoc = psi.docComment
+        konst kdoc = psi.docComment
         if (kdoc != null) {
             return kdoc.getDefaultSection().parent.text
         }

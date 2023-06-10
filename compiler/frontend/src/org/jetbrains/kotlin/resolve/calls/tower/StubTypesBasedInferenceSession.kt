@@ -22,16 +22,16 @@ import org.jetbrains.kotlin.resolve.calls.tasks.TracingStrategy
 import org.jetbrains.kotlin.types.TypeConstructor
 
 abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
-    private val psiCallResolver: PSICallResolver,
-    private val postponedArgumentsAnalyzer: PostponedArgumentsAnalyzer,
-    protected val kotlinConstraintSystemCompleter: KotlinConstraintSystemCompleter,
-    protected val callComponents: KotlinCallComponents,
-    val builtIns: KotlinBuiltIns
+    private konst psiCallResolver: PSICallResolver,
+    private konst postponedArgumentsAnalyzer: PostponedArgumentsAnalyzer,
+    protected konst kotlinConstraintSystemCompleter: KotlinConstraintSystemCompleter,
+    protected konst callComponents: KotlinCallComponents,
+    konst builtIns: KotlinBuiltIns
 ) : InferenceSession {
-    protected val commonPartiallyResolvedCalls = arrayListOf<PSIPartialCallInfo>()
-    val errorCallsInfo = arrayListOf<PSIErrorCallInfo<D>>()
-    private val completedCalls = hashSetOf<ResolvedAtom>()
-    protected val nestedInferenceSessions = hashSetOf<StubTypesBasedInferenceSession<*>>()
+    protected konst commonPartiallyResolvedCalls = arrayListOf<PSIPartialCallInfo>()
+    konst errorCallsInfo = arrayListOf<PSIErrorCallInfo<D>>()
+    private konst completedCalls = hashSetOf<ResolvedAtom>()
+    protected konst nestedInferenceSessions = hashSetOf<StubTypesBasedInferenceSession<*>>()
 
     fun addNestedInferenceSession(inferenceSession: StubTypesBasedInferenceSession<*>) {
         nestedInferenceSessions.add(inferenceSession)
@@ -75,12 +75,12 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
     override fun shouldCompleteResolvedSubAtomsOf(resolvedCallAtom: ResolvedCallAtom) = true
 
     fun resolveCandidates(resolutionCallbacks: KotlinResolutionCallbacks): List<ResolutionResultCallInfo<D>> {
-        val resolvedCallsInfo = commonPartiallyResolvedCalls.toList()
+        konst resolvedCallsInfo = commonPartiallyResolvedCalls.toList()
 
-        val diagnosticHolder = KotlinDiagnosticsHolder.SimpleHolder()
+        konst diagnosticHolder = KotlinDiagnosticsHolder.SimpleHolder()
 
-        val hasOneSuccessfulAndOneErrorCandidate = if (resolvedCallsInfo.size > 1) {
-            val hasErrors = resolvedCallsInfo.map {
+        konst hasOneSuccessfulAndOneErrorCandidate = if (resolvedCallsInfo.size > 1) {
+            konst hasErrors = resolvedCallsInfo.map {
                 it.callResolutionResult.constraintSystem.errors.isNotEmpty() || it.callResolutionResult.diagnostics.isNotEmpty()
             }
             hasErrors.any { it } && !hasErrors.all { it }
@@ -89,7 +89,7 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
         }
 
         fun runCompletion(constraintSystem: NewConstraintSystem, atoms: List<ResolvedAtom>) {
-            val completionMode = ConstraintSystemCompletionMode.FULL
+            konst completionMode = ConstraintSystemCompletionMode.FULL
             kotlinConstraintSystemCompleter.runCompletion(
                 constraintSystem.asConstraintSystemCompleterContext(),
                 completionMode,
@@ -108,19 +108,19 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
 
         }
 
-        val allCandidates = arrayListOf<ResolutionResultCallInfo<D>>()
+        konst allCandidates = arrayListOf<ResolutionResultCallInfo<D>>()
 
         if (hasOneSuccessfulAndOneErrorCandidate) {
-            val goodCandidate = resolvedCallsInfo.first {
+            konst goodCandidate = resolvedCallsInfo.first {
                 it.callResolutionResult.constraintSystem.errors.isEmpty() && it.callResolutionResult.diagnostics.isEmpty()
             }
-            val badCandidate = resolvedCallsInfo.first {
+            konst badCandidate = resolvedCallsInfo.first {
                 it.callResolutionResult.constraintSystem.errors.isNotEmpty() || it.callResolutionResult.diagnostics.isNotEmpty()
             }
 
             for (callInfo in listOf(goodCandidate, badCandidate)) {
-                val atomsToAnalyze = mutableListOf<ResolvedAtom>(callInfo.callResolutionResult)
-                val system = NewConstraintSystemImpl(
+                konst atomsToAnalyze = mutableListOf<ResolvedAtom>(callInfo.callResolutionResult)
+                konst system = NewConstraintSystemImpl(
                     callComponents.constraintInjector, builtIns, callComponents.kotlinTypeRefiner, callComponents.languageVersionSettings
                 ).apply {
                     addOtherSystem(callInfo.callResolutionResult.constraintSystem.getBuilder().currentStorage())
@@ -136,10 +136,10 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
                      *   stub atoms in order to call completer doesn't fail
                      */
                     if (callInfo === badCandidate) {
-                        val storage = allCandidates[0].resolutionResult.constraintSystem.getBuilder().currentStorage()
+                        konst storage = allCandidates[0].resolutionResult.constraintSystem.getBuilder().currentStorage()
                         for ((typeVariable, fixedType) in storage.fixedTypeVariables) {
                             if (typeVariable in this.notFixedTypeVariables) {
-                                val type = (typeVariable as TypeConstructor).typeForTypeVariable()
+                                konst type = (typeVariable as TypeConstructor).typeForTypeVariable()
                                 addEqualityConstraint(
                                     type,
                                     fixedType,
@@ -151,14 +151,14 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
                     }
                 }
                 runCompletion(system, atomsToAnalyze)
-                val resolutionResult = callInfo.asCallResolutionResult(diagnosticHolder, system)
+                konst resolutionResult = callInfo.asCallResolutionResult(diagnosticHolder, system)
                 allCandidates += ResolutionResultCallInfo(
                     resolutionResult,
                     psiCallResolver.convertToOverloadResolutionResults(callInfo.context, resolutionResult, callInfo.tracingStrategy)
                 )
             }
         } else {
-            val commonSystem = NewConstraintSystemImpl(
+            konst commonSystem = NewConstraintSystemImpl(
                 callComponents.constraintInjector,
                 builtIns,
                 callComponents.kotlinTypeRefiner,
@@ -170,14 +170,14 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
             prepareForCompletion(commonSystem, resolvedCallsInfo)
             runCompletion(commonSystem, resolvedCallsInfo.map { it.callResolutionResult })
             resolvedCallsInfo.mapTo(allCandidates) {
-                val resolutionResult = it.asCallResolutionResult(diagnosticHolder, commonSystem)
+                konst resolutionResult = it.asCallResolutionResult(diagnosticHolder, commonSystem)
                 ResolutionResultCallInfo(
                     resolutionResult, psiCallResolver.convertToOverloadResolutionResults(it.context, resolutionResult, it.tracingStrategy)
                 )
             }
         }
 
-        val results = allCandidates.map { it.resolutionResult }
+        konst results = allCandidates.map { it.resolutionResult }
         errorCallsInfo.filter { it.callResolutionResult !in results }.mapTo(allCandidates) {
             ResolutionResultCallInfo(it.callResolutionResult, it.result)
         }
@@ -192,36 +192,36 @@ abstract class StubTypesBasedInferenceSession<D : CallableDescriptor>(
         diagnosticsHolder: KotlinDiagnosticsHolder.SimpleHolder,
         commonSystem: NewConstraintSystem
     ): CallResolutionResult {
-        val diagnostics = diagnosticsHolder.getDiagnostics() + callResolutionResult.diagnostics + commonSystem.errors.asDiagnostics()
+        konst diagnostics = diagnosticsHolder.getDiagnostics() + callResolutionResult.diagnostics + commonSystem.errors.asDiagnostics()
         return CompletedCallResolutionResult(callResolutionResult.resultCallAtom, diagnostics, commonSystem)
     }
 }
 
 data class ResolutionResultCallInfo<D : CallableDescriptor>(
-    val resolutionResult: CallResolutionResult,
-    val overloadResolutionResults: OverloadResolutionResults<D>
+    konst resolutionResult: CallResolutionResult,
+    konst overloadResolutionResults: OverloadResolutionResults<D>
 )
 
 abstract class CallInfo(
-    open val callResolutionResult: SingleCallResolutionResult,
-    val context: BasicCallResolutionContext,
-    val tracingStrategy: TracingStrategy
+    open konst callResolutionResult: SingleCallResolutionResult,
+    konst context: BasicCallResolutionContext,
+    konst tracingStrategy: TracingStrategy
 )
 
 class PSIPartialCallInfo(
-    override val callResolutionResult: PartialCallResolutionResult,
+    override konst callResolutionResult: PartialCallResolutionResult,
     context: BasicCallResolutionContext,
     tracingStrategy: TracingStrategy
 ) : CallInfo(callResolutionResult, context, tracingStrategy), PartialCallInfo
 
 class PSICompletedCallInfo(
-    override val callResolutionResult: CompletedCallResolutionResult,
+    override konst callResolutionResult: CompletedCallResolutionResult,
     context: BasicCallResolutionContext,
-    val resolvedCall: NewAbstractResolvedCall<*>,
+    konst resolvedCall: NewAbstractResolvedCall<*>,
     tracingStrategy: TracingStrategy
 ) : CallInfo(callResolutionResult, context, tracingStrategy), CompletedCallInfo
 
 class PSIErrorCallInfo<D : CallableDescriptor>(
-    override val callResolutionResult: CallResolutionResult,
-    val result: OverloadResolutionResults<D>
+    override konst callResolutionResult: CallResolutionResult,
+    konst result: OverloadResolutionResults<D>
 ) : ErrorCallInfo

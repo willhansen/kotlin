@@ -25,23 +25,23 @@ public class IncrementalCompilation {
     public static final String INCREMENTAL_COMPILATION_JS_PROPERTY = "kotlin.incremental.compilation.js";
 
     public static boolean isEnabledForJvm() {
-        return Boolean.valueOf(System.getProperty(INCREMENTAL_COMPILATION_JVM_PROPERTY));
+        return Boolean.konstueOf(System.getProperty(INCREMENTAL_COMPILATION_JVM_PROPERTY));
     }
 
     public static boolean isEnabledForJs() {
-        return Boolean.valueOf(System.getProperty(INCREMENTAL_COMPILATION_JS_PROPERTY));
+        return Boolean.konstueOf(System.getProperty(INCREMENTAL_COMPILATION_JS_PROPERTY));
     }
 
     @Deprecated
     @TestOnly
-    public static void setIsEnabledForJvm(boolean value) {
-        System.setProperty(INCREMENTAL_COMPILATION_JVM_PROPERTY, String.valueOf(value));
+    public static void setIsEnabledForJvm(boolean konstue) {
+        System.setProperty(INCREMENTAL_COMPILATION_JVM_PROPERTY, String.konstueOf(konstue));
     }
 
     @Deprecated
     @TestOnly
-    public static void setIsEnabledForJs(boolean value) {
-        System.setProperty(INCREMENTAL_COMPILATION_JS_PROPERTY, String.valueOf(value));
+    public static void setIsEnabledForJs(boolean konstue) {
+        System.setProperty(INCREMENTAL_COMPILATION_JS_PROPERTY, String.konstueOf(konstue));
     }
 
     @Deprecated

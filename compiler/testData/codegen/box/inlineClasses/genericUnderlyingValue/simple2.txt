@@ -2,7 +2,7 @@
 @kotlin.Metadata
 public final class ICAny {
     // source: 'simple2.kt'
-    private final @org.jetbrains.annotations.Nullable field value: java.lang.Object
+    private final @org.jetbrains.annotations.Nullable field konstue: java.lang.Object
     private synthetic method <init>(p0: java.lang.Object): void
     public synthetic final static method box-impl(p0: java.lang.Object): ICAny
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.Nullable p0: java.lang.Object): java.lang.Object

@@ -5,7 +5,7 @@ open annotation class ModuleInfo : Annotation {
 
   }
 
-  val keyBind: Int
+  konst keyBind: Int
     field = keyBind
     get
 

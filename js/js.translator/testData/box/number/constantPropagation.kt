@@ -11,26 +11,26 @@ package foo
 // PROPERTY_READ_COUNT: name=L_23 count=2 scope=testLongVal
 // PROPERTY_READ_COUNT: name=L46 count=1 scope=testLongVal
 fun testLongVal() {
-    val longValue = 23L
+    konst longValue = 23L
 
-    val longValueCopy = longValue
+    konst longValueCopy = longValue
     assertEquals(23L, longValueCopy)
 
-    val minusLongValue = -longValue
+    konst minusLongValue = -longValue
     assertEquals(-23L, minusLongValue)
 
-    val minusLongValueParenthesized = -(longValue)
+    konst minusLongValueParenthesized = -(longValue)
     assertEquals(-23L, minusLongValueParenthesized)
 
-    val twiceLongValue = 2 * longValue
+    konst twiceLongValue = 2 * longValue
     assertEquals(46L, twiceLongValue)
 }
 
-private const val privateLongConst = 10 * 10L
+private const konst privateLongConst = 10 * 10L
 
-internal const val internalLongConst = 10 * 100L
+internal const konst internalLongConst = 10 * 100L
 
-const val longConst = 42L
+const konst longConst = 42L
 
 // PROPERTY_READ_COUNT: name=privateLongConst count=1 scope=testLongConst
 // PROPERTY_READ_COUNT: name=L100 count=1 scope=testLongConst
@@ -45,16 +45,16 @@ fun testLongConst() {
 
     assertEquals(1000L, internalLongConst)
 
-    val longConstCopy = longConst
+    konst longConstCopy = longConst
     assertEquals(42L, longConstCopy)
 
-    val minusLongConst = -longConst
+    konst minusLongConst = -longConst
     assertEquals(-42L, minusLongConst)
 
-    val minusLongConstParenthesized = -(longConst)
+    konst minusLongConstParenthesized = -(longConst)
     assertEquals(-42L, minusLongConstParenthesized)
 
-    val twiceLongConst = 2 * longConst
+    konst twiceLongConst = 2 * longConst
     assertEquals(84L, twiceLongConst)
 }
 
@@ -62,87 +62,87 @@ fun testLongConst() {
 // PROPERTY_READ_COUNT: name=L_9223372036854775807 count=2 scope=testLongMaxMinValue
 // PROPERTY_READ_COUNT: name=Long$Companion$MIN_VALUE count=4 scope=testLongMaxMinValue
 fun testLongMaxMinValue() {
-    val longMaxValue = Long.MAX_VALUE
+    konst longMaxValue = Long.MAX_VALUE
     assertEquals(9223372036854775807L, longMaxValue)
 
-    val minusLongMaxValue = -Long.MAX_VALUE
+    konst minusLongMaxValue = -Long.MAX_VALUE
     assertEquals(-9223372036854775807L, minusLongMaxValue)
 
-    val longMinValue = Long.MIN_VALUE
+    konst longMinValue = Long.MIN_VALUE
     assertEquals(-9223372036854775807L - 1L, longMinValue)
 
-    val minusLongMinValue = -Long.MIN_VALUE
+    konst minusLongMinValue = -Long.MIN_VALUE
     assertEquals(-9223372036854775807L - 1L, minusLongMinValue)
 }
 
 // PROPERTY_READ_COUNT: name=intValue count=4 scope=testIntVal
 fun testIntVal() {
-    val intValue = 23
+    konst intValue = 23
 
-    val intValueCopy = intValue
+    konst intValueCopy = intValue
     assertEquals(23, intValueCopy)
 
-    val minusIntValue = -intValue
+    konst minusIntValue = -intValue
     assertEquals(-23, minusIntValue)
 
-    val minusIntValueParenthesized = -(intValue)
+    konst minusIntValueParenthesized = -(intValue)
     assertEquals(-23, minusIntValueParenthesized)
 
-    val twiceIntValue = 2 * intValue
+    konst twiceIntValue = 2 * intValue
     assertEquals(46, twiceIntValue)
 }
 
-const val intConst = 42
+const konst intConst = 42
 
 // PROPERTY_NOT_READ_FROM: intConst scope=testIntConst
 fun testIntConst() {
-    val intConstCopy = intConst
+    konst intConstCopy = intConst
     assertEquals(42, intConstCopy)
 
-    val minusIntConst = -intConst
+    konst minusIntConst = -intConst
     assertEquals(-42, minusIntConst)
 
-    val minusIntConstParenthesized = -(intConst)
+    konst minusIntConstParenthesized = -(intConst)
     assertEquals(-42, minusIntConstParenthesized)
 
-    val twiceIntConst = 2 * intConst
+    konst twiceIntConst = 2 * intConst
     assertEquals(84, twiceIntConst)
 }
 
 // PROPERTY_NOT_READ_FROM: MAX_VALUE scope=testIntMaxMinValue
 // PROPERTY_NOT_READ_FROM: MIN_VALUE scope=testIntMaxMinValue
 fun testIntMaxMinValue() {
-    val intMaxValue = Int.MAX_VALUE
+    konst intMaxValue = Int.MAX_VALUE
     assertEquals(2147483647, intMaxValue)
 
-    val minusIntMaxValue = -Int.MAX_VALUE
+    konst minusIntMaxValue = -Int.MAX_VALUE
     assertEquals(-2147483647, minusIntMaxValue)
 
-    val intMinValue = Int.MIN_VALUE
+    konst intMinValue = Int.MIN_VALUE
     assertEquals(-2147483648, intMinValue)
 
-    val minusIntMinValue = -Int.MIN_VALUE
+    konst minusIntMinValue = -Int.MIN_VALUE
     assertEquals(-2147483648, minusIntMinValue)
 }
 
-const val bigLongConst = 123456789012345L
+const konst bigLongConst = 123456789012345L
 
 // PROPERTY_READ_COUNT: name=longConst count=1 scope=testImportedLongConstInlineFunLib1
 // PROPERTY_READ_COUNT: name=bigLongConst count=1 scope=testImportedLongConstInlineFunLib1
 inline fun testImportedLongConstInlineFunLib1() {
-    val longConstCopy = longConst
+    konst longConstCopy = longConst
     assertEquals(42L, longConstCopy)
 
-    val minusLongConst = -longConst
+    konst minusLongConst = -longConst
     assertEquals(-42L, minusLongConst)
 
-    val minusLongConstParenthesized = -(longConst)
+    konst minusLongConstParenthesized = -(longConst)
     assertEquals(-42L, minusLongConstParenthesized)
 
-    val twiceLongConst = 2 * longConst
+    konst twiceLongConst = 2 * longConst
     assertEquals(84L, twiceLongConst)
 
-    val bigLongConstCopy = bigLongConst
+    konst bigLongConstCopy = bigLongConst
     assertEquals(123456789012345L, bigLongConstCopy)
 }
 
@@ -158,9 +158,9 @@ private fun testImportedLongConstInlinedLocally() {
 
 class A {
     companion object {
-        private const val a = 10L
+        private const konst a = 10L
 
-        const val b = 20L
+        const konst b = 20L
     }
 
     fun testCompanion() {
@@ -201,38 +201,38 @@ package foo
 // PROPERTY_READ_COUNT: name=bigLongConst count=1 scope=testImportedLongConst
 // PROPERTY_READ_COUNT: name=L123456789012345 count=1 scope=testImportedLongConst
 fun testImportedLongConst() {
-    val longConstCopy = longConst
+    konst longConstCopy = longConst
     assertEquals(42L, longConstCopy)
 
-    val minusLongConst = -longConst
+    konst minusLongConst = -longConst
     assertEquals(-42L, minusLongConst)
 
-    val minusLongConstParenthesized = -(longConst)
+    konst minusLongConstParenthesized = -(longConst)
     assertEquals(-42L, minusLongConstParenthesized)
 
-    val twiceLongConst = 2 * longConst
+    konst twiceLongConst = 2 * longConst
     assertEquals(84L, twiceLongConst)
 
-    val bigLongConstCopy = bigLongConst
+    konst bigLongConstCopy = bigLongConst
     assertEquals(123456789012345L, bigLongConstCopy)
 }
 
 // PROPERTY_READ_COUNT: name=longConst count=1 scope=testImportedLongConstInlineFun
 // PROPERTY_READ_COUNT: name=bigLongConst count=1 scope=testImportedLongConstInlineFun
 inline fun testImportedLongConstInlineFun() {
-    val longConstCopy = longConst
+    konst longConstCopy = longConst
     assertEquals(42L, longConstCopy)
 
-    val minusLongConst = -longConst
+    konst minusLongConst = -longConst
     assertEquals(-42L, minusLongConst)
 
-    val minusLongConstParenthesized = -(longConst)
+    konst minusLongConstParenthesized = -(longConst)
     assertEquals(-42L, minusLongConstParenthesized)
 
-    val twiceLongConst = 2 * longConst
+    konst twiceLongConst = 2 * longConst
     assertEquals(84L, twiceLongConst)
 
-    val bigLongConstCopy = bigLongConst
+    konst bigLongConstCopy = bigLongConst
     assertEquals(123456789012345L, bigLongConstCopy)
 }
 

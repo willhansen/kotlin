@@ -8,5 +8,5 @@ class C {
   companion object
 }
 
-val anonObject: Any
+konst anonObject: Any
 

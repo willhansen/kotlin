@@ -29,8 +29,8 @@ class AggregatingKotlinTestReportIT : KGPBaseTest() {
                 it.replace("expectedFun()", "assertEquals(0, 1)")
             }
 
-            val nativeTarget = MPPNativeTargets.current
-            val capitalizedNativeTarget = nativeTarget.capitalize()
+            konst nativeTarget = MPPNativeTargets.current
+            konst capitalizedNativeTarget = nativeTarget.capitalize()
 
             buildAndFail(":allTests") {
                 // expect only an aggregate test task fail
@@ -109,7 +109,7 @@ class AggregatingKotlinTestReportIT : KGPBaseTest() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(freeArgs = listOf("-Pkotlin.tests.individualTaskReports=false"))
         ) {
-            val nativeTarget = MPPNativeTargets.current
+            konst nativeTarget = MPPNativeTargets.current
 
             build(":allTests") {
                 assertTasksExecuted(

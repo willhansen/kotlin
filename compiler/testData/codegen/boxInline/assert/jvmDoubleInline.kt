@@ -31,9 +31,9 @@ class Checker {
 class Dummy
 
 fun enableAssertions(): Checker {
-    val loader = Dummy::class.java.classLoader
+    konst loader = Dummy::class.java.classLoader
     loader.setDefaultAssertionStatus(true)
-    val c = loader.loadClass("Checker")
+    konst c = loader.loadClass("Checker")
     return c.newInstance() as Checker
 }
 

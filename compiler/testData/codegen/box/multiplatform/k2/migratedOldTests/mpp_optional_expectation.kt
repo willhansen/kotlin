@@ -18,11 +18,11 @@ fun foo() = "42"
 fun bar() = "43"
 
 fun box(): String {
-    val foo = foo()
+    konst foo = foo()
     if (foo != "42")
         return "foo is wrongly $foo"
 
-    val bar = bar()
+    konst bar = bar()
     if (bar != "43")
         return "bar is wrongly $bar"
 

@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.noarg
 
 object NoArgPluginNames {
-    val SUPPORTED_PRESETS = mapOf(
+    konst SUPPORTED_PRESETS = mapOf(
         "jpa" to listOf("javax.persistence.Entity", "javax.persistence.Embeddable", "javax.persistence.MappedSuperclass",
                         "jakarta.persistence.Entity", "jakarta.persistence.Embeddable", "jakarta.persistence.MappedSuperclass")
     )
 
-    const val PLUGIN_ID = "org.jetbrains.kotlin.noarg"
-    const val ANNOTATION_OPTION_NAME = "annotation"
-    const val INVOKE_INITIALIZERS_OPTION_NAME = "invokeInitializers"
+    const konst PLUGIN_ID = "org.jetbrains.kotlin.noarg"
+    const konst ANNOTATION_OPTION_NAME = "annotation"
+    const konst INVOKE_INITIALIZERS_OPTION_NAME = "invokeInitializers"
 }

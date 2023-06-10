@@ -27,7 +27,7 @@ class TopLevel
 }
 
 private fun Any.toStringWithoutHashCode(): String {
-    val string = toString()
-    assertEquals(1, string.count { it == '@' }, "Invalid toString() value: $string")
+    konst string = toString()
+    assertEquals(1, string.count { it == '@' }, "Inkonstid toString() konstue: $string")
     return string.substringBefore('@')
 }

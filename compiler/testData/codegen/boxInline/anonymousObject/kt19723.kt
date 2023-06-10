@@ -3,7 +3,7 @@
 package test
 
 inline fun String.fire(message: String? = null) {
-    val res = this + message!!
+    konst res = this + message!!
 }
 
 // FILE: 2.kt
@@ -11,7 +11,7 @@ inline fun String.fire(message: String? = null) {
 import test.*
 
 fun box(): String {
-    val receiver = "receiver"
+    konst receiver = "receiver"
     "".let {
         {
             receiver.fire()

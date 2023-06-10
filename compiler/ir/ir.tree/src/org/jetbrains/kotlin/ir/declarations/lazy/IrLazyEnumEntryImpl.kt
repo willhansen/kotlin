@@ -31,13 +31,13 @@ import org.jetbrains.kotlin.name.Name
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrLazyEnumEntryImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrEnumEntrySymbol,
-    override val descriptor: ClassDescriptor,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst symbol: IrEnumEntrySymbol,
+    override konst descriptor: ClassDescriptor,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrEnumEntry(), IrLazyDeclarationBase {
     init {
         symbol.bind(this)

@@ -35,7 +35,7 @@ fun t2() = d.d().test2()
 fun test(a_b: a.b) {
     a_b.a_b()
 
-    val ab_c = t2()
+    konst ab_c = t2()
     ab_c.<!UNRESOLVED_REFERENCE!>ab_c<!>()
     ab_c.a_bc()
 }

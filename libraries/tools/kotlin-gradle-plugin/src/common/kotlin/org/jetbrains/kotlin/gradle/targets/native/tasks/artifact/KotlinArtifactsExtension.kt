@@ -13,20 +13,20 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinNativeArtifactDSL.ExperimentalArtif
 import org.jetbrains.kotlin.gradle.utils.castIsolatedKotlinPluginClassLoaderAware
 import javax.inject.Inject
 
-private const val KOTLIN_ARTIFACTS_EXTENSION_NAME = "kotlinArtifacts"
+private const konst KOTLIN_ARTIFACTS_EXTENSION_NAME = "kotlinArtifacts"
 internal fun Project.registerKotlinArtifactsExtension() {
-    val kotlinArtifactsExt = objects.newInstance(KotlinArtifactsExtensionImpl::class.java, this)
+    konst kotlinArtifactsExt = objects.newInstance(KotlinArtifactsExtensionImpl::class.java, this)
     extensions.add(KOTLIN_ARTIFACTS_EXTENSION_NAME, kotlinArtifactsExt)
     kotlinArtifactsExt.artifacts.all { it.registerAssembleTask(this) }
 }
 
-val Project.kotlinArtifactsExtension: KotlinArtifactsExtension
+konst Project.kotlinArtifactsExtension: KotlinArtifactsExtension
     get() = extensions.getByName(KOTLIN_ARTIFACTS_EXTENSION_NAME).castIsolatedKotlinPluginClassLoaderAware()
 
 @OptIn(ExperimentalArtifactDsl::class)
-abstract class KotlinNativeArtifactDSLImpl @Inject constructor(private val project: Project) : KotlinNativeArtifactDSL {
+abstract class KotlinNativeArtifactDSLImpl @Inject constructor(private konst project: Project) : KotlinNativeArtifactDSL {
     companion object {
-        private val UNSAFE_NAME_SYMBOLS = """\W""".toRegex()
+        private konst UNSAFE_NAME_SYMBOLS = """\W""".toRegex()
     }
 
     override fun Library(name: String, configure: Action<KotlinNativeLibraryConfig>) {
@@ -67,7 +67,7 @@ abstract class KotlinNativeArtifactDSLImpl @Inject constructor(private val proje
 
     private inline fun <reified T : KotlinArtifactConfig> addKotlinArtifact(name: String, configure: Action<in T>) {
         //create via newInstance for extensibility
-        val config: T = project.objects.newInstance(T::class.java, name)
+        konst config: T = project.objects.newInstance(T::class.java, name)
         project.kotlinArtifactsExtension.artifactConfigs.add(config)
 
         //current project is added by default
@@ -76,9 +76,9 @@ abstract class KotlinNativeArtifactDSLImpl @Inject constructor(private val proje
         //apply user configuration
         configure.execute(config)
         //create immutable artifact object
-        val artifact = config.createArtifact(config as ExtensionAware)
+        konst artifact = config.createArtifact(config as ExtensionAware)
 
-        val isAdded = project.kotlinArtifactsExtension.artifacts.add(artifact)
+        konst isAdded = project.kotlinArtifactsExtension.artifacts.add(artifact)
         if (!isAdded) {
             error("Kotlin artifact '${artifact.name}' is already exists! Change the name, please!")
         }

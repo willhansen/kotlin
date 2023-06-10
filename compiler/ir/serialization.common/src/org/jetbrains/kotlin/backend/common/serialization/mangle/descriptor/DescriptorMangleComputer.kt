@@ -47,7 +47,7 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
 
     open fun PropertyDescriptor.platformSpecificSuffix(): String? = null
 
-    private val CallableDescriptor.isRealStatic: Boolean
+    private konst CallableDescriptor.isRealStatic: Boolean
         get() = dispatchReceiverParameter == null && containingDeclaration !is PackageFragmentDescriptor
 
     override fun DeclarationDescriptor.asTypeParameterContainer(): DeclarationDescriptor =
@@ -60,7 +60,7 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
         function.extensionReceiverParameter?.type
 
     override fun getValueParameters(function: FunctionDescriptor): List<ValueParameterDescriptor> =
-        function.valueParameters
+        function.konstueParameters
 
     override fun getReturnType(function: FunctionDescriptor): KotlinType? =
         function.returnType
@@ -81,18 +81,18 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
         mangleType(vpBuilder, param.type, null)
     }
 
-    final override fun isVararg(valueParameter: ValueParameterDescriptor) = valueParameter.varargElementType != null
+    final override fun isVararg(konstueParameter: ValueParameterDescriptor) = konstueParameter.varargElementType != null
 
-    final override fun getValueParameterType(valueParameter: ValueParameterDescriptor): KotlinType =
-        valueParameter.type
+    final override fun getValueParameterType(konstueParameter: ValueParameterDescriptor): KotlinType =
+        konstueParameter.type
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     final override fun mangleType(tBuilder: StringBuilder, wrappedType: KotlinType, declarationSiteSession: Nothing?) {
-        when (val type = wrappedType.unwrap()) {
+        when (konst type = wrappedType.unwrap()) {
             is SimpleType -> {
 
                 if (type is SupposititiousSimpleType) {
-                    val classId = type.overwrittenClass
+                    konst classId = type.overwrittenClass
                     classId.packageFqName.let {
                         if (!it.isRoot) {
                             builder.appendSignature(it.asString())
@@ -101,7 +101,7 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
                         builder.appendSignature(classId.relativeClassName.asString())
                     }
                 } else {
-                    when (val classifier = type.constructor.declarationDescriptor) {
+                    when (konst classifier = type.constructor.declarationDescriptor) {
                         is ClassDescriptor -> with(copy(MangleMode.FQNAME)) { classifier.visit() }
                         is TypeParameterDescriptor -> tBuilder.mangleTypeParameterReference(classifier)
                         else -> error("Unexpected classifier: $classifier")
@@ -117,17 +117,17 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
             is DynamicType -> tBuilder.appendSignature(MangleConstant.DYNAMIC_MARK)
             is FlexibleType -> {
                 // Reproduce type approximation done for flexible types in TypeTranslator.
-                val upper = type.upperBound
-                val upperDescriptor = upper.constructor.declarationDescriptor
+                konst upper = type.upperBound
+                konst upperDescriptor = upper.constructor.declarationDescriptor
                     ?: error("No descriptor for type $upper")
                 if (upperDescriptor is ClassDescriptor) {
-                    val lower = type.lowerBound
-                    val lowerDescriptor = lower.constructor.declarationDescriptor as? ClassDescriptor
+                    konst lower = type.lowerBound
+                    konst lowerDescriptor = lower.constructor.declarationDescriptor as? ClassDescriptor
                         ?: error("No class descriptor for lower type $lower of $type")
-                    val intermediate = if (lowerDescriptor == upperDescriptor && type !is RawType) {
+                    konst intermediate = if (lowerDescriptor == upperDescriptor && type !is RawType) {
                         lower.replace(newArguments = upper.arguments)
                     } else lower
-                    val mixed = intermediate.makeNullableAsSpecified(upper.isMarkedNullable)
+                    konst mixed = intermediate.makeNullableAsSpecified(upper.isMarkedNullable)
                     mangleType(tBuilder, mixed, null)
                 } else mangleType(tBuilder, upper, null)
             }
@@ -145,7 +145,7 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
         typeParameter.index
 
     private fun manglePropertyAccessor(accessor: PropertyAccessorDescriptor) {
-        val property = accessor.correspondingProperty
+        konst property = accessor.correspondingProperty
         accessor.mangleFunction(
             name = accessor.name,
             isConstructor = false,
@@ -216,9 +216,9 @@ open class DescriptorMangleComputer(builder: StringBuilder, mode: MangleMode) :
                 descriptor.mangleSimpleDeclaration(descriptor.name.asString())
             } else {
 
-                val actualDescriptor = (descriptor as? IrPropertyDelegateDescriptor)?.correspondingProperty ?: descriptor
+                konst actualDescriptor = (descriptor as? IrPropertyDelegateDescriptor)?.correspondingProperty ?: descriptor
 
-                val extensionReceiver = actualDescriptor.extensionReceiverParameter
+                konst extensionReceiver = actualDescriptor.extensionReceiverParameter
 
                 typeParameterContainers.add(actualDescriptor)
                 actualDescriptor.containingDeclaration.visit()

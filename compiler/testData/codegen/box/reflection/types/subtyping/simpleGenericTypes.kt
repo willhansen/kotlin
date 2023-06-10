@@ -16,9 +16,9 @@ fun gOfString(): G<String> = null!!
 fun gOfInt(): G<Int> = null!!
 
 fun box(): String {
-    val gs = ::gOfString.returnType
-    val gi = ::gOfInt.returnType
-    val a = ::A.returnType
+    konst gs = ::gOfString.returnType
+    konst gi = ::gOfInt.returnType
+    konst a = ::A.returnType
 
     assertTrue(a.isSubtypeOf(gs))
     assertTrue(gs.isSupertypeOf(a))

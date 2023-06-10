@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.pill.util.PathContext
 import org.jetbrains.kotlin.pill.util.xml
 import java.io.File
 
-class PArtifact(val artifactName: String, private val outputDir: File, private val contents: Root) {
+class PArtifact(konst artifactName: String, private konst outputDir: File, private konst contents: Root) {
     fun render(context: PathContext) = xml("component", "name" to "ArtifactManager") {
         xml("artifact", "name" to artifactName) {
             xml("output-path") {

@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.visitors.transformInplace
 
 class FirUserTypeRefImpl(
     override var source: KtSourceElement?,
-    override val isMarkedNullable: Boolean,
-    override val qualifier: MutableList<FirQualifierPart>,
+    override konst isMarkedNullable: Boolean,
+    override konst qualifier: MutableList<FirQualifierPart>,
     override var annotations: MutableOrEmptyList<FirAnnotation>
 ) : FirUserTypeRef() {
-    override val customRenderer: Boolean
+    override konst customRenderer: Boolean
         get() = false
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

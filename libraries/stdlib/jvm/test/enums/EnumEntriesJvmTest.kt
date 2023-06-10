@@ -26,25 +26,25 @@ class EnumEntriesJvmTest {
 
     @Test
     fun testEmptyEnumSerialization() {
-        val entries = serializeAndDeserialize(enumEntries(EmptyEnum::values))
-        compare(EmptyEnum.values().toList(), entries) { listBehavior() }
+        konst entries = serializeAndDeserialize(enumEntries(EmptyEnum::konstues))
+        compare(EmptyEnum.konstues().toList(), entries) { listBehavior() }
     }
 
     @Test
     fun testNonEmptyEnumSerialization() {
-        val entries = serializeAndDeserialize(enumEntries(NonEmptyEnum::values))
-        compare(NonEmptyEnum.values().toList(), entries) { listBehavior() }
+        konst entries = serializeAndDeserialize(enumEntries(NonEmptyEnum::konstues))
+        compare(NonEmptyEnum.konstues().toList(), entries) { listBehavior() }
     }
 
     @Test
     fun testLambdaIsNotSerialized() {
-        val nonSerializable = object {}  // Deliberately non-serializable
-        val entries = enumEntries {
+        konst nonSerializable = object {}  // Deliberately non-serializable
+        konst entries = enumEntries {
             nonSerializable // Capture it
-            EmptyEnum.values()
+            EmptyEnum.konstues()
         }
 
-        val newEntries = serializeAndDeserialize(entries)
+        konst newEntries = serializeAndDeserialize(entries)
         assertEquals(entries, newEntries)
     }
 
@@ -57,7 +57,7 @@ class EnumEntriesJvmTest {
      * ```
      * without ANY entries.
      */
-    private val bytes =
+    private konst bytes =
         ("-84,-19,0,5,115,114,0,42,107,111,116,108,105,110,46,101,110,117,109,115,46,69,110,117,109,69,110,116,114," +
                 "105,101,115,83,101,114,105,97,108,105,122,97,116,105,111,110,80,114,111,120,121,0,0,0,0,0,0,0,0,2," +
                 "0,1,76,0,1,99,116,0,17,76,106,97,118,97,47,108,97,110,103,47,67,108,97,115,115,59,120,112,118,114,0," +
@@ -74,7 +74,7 @@ class EnumEntriesJvmTest {
     @Test
     fun testEnumEvolution() {
         // Test checks that if the enum has new members after being serialized, they are all still deserialized properly
-        val list = deserializeFromByteArray<EnumEntries<Evolved>>(bytes)
-        assertEquals(enumEntries(Evolved::values), list)
+        konst list = deserializeFromByteArray<EnumEntries<Evolved>>(bytes)
+        assertEquals(enumEntries(Evolved::konstues), list)
     }
 }

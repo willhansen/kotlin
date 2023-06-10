@@ -13,7 +13,7 @@ public fun <T> compare(expected: T, actual: T, block: CompareContext<T>.() -> Un
     CompareContext(expected, actual).block()
 }
 
-public class CompareContext<out T>(public val expected: T, public val actual: T) {
+public class CompareContext<out T>(public konst expected: T, public konst actual: T) {
 
     public fun equals(message: String = "") {
         assertEquals(expected, actual, message)
@@ -41,8 +41,8 @@ public class CompareContext<out T>(public val expected: T, public val actual: T)
     }
 
     private fun assertFailEquals(expected: () -> Unit, actual: () -> Unit) {
-        val expectedFail = assertFails(expected)
-        val actualFail = assertFails(actual)
+        konst expectedFail = assertFails(expected)
+        konst actualFail = assertFails(actual)
         //assertEquals(expectedFail != null, actualFail != null)
         assertTypeEquals(expectedFail, actualFail)
     }

@@ -11,7 +11,7 @@ fun getT(): Throwable {
 }
 
 fun box(): String {
-    val z = Throwable(cause = getT(), message = getM())
+    konst z = Throwable(cause = getT(), message = getM())
     if (res != "TM") return "Wrong argument calculation order: $res"
     return z.message!!
 }

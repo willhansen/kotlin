@@ -28,7 +28,7 @@ import kotlin.concurrent.write
 open class GenericReplCompiler(
     disposable: Disposable,
     scriptDefinition: KotlinScriptDefinition,
-    private val compilerConfiguration: CompilerConfiguration,
+    private konst compilerConfiguration: CompilerConfiguration,
     messageCollector: MessageCollector
 ) : ReplCompiler {
 
@@ -38,7 +38,7 @@ open class GenericReplCompiler(
         messageCollector: MessageCollector
     ) : this(Disposer.newDisposable(), scriptDefinition, compilerConfiguration, messageCollector)
 
-    private val checker =
+    private konst checker =
         GenericReplChecker(
             disposable,
             scriptDefinition,
@@ -53,11 +53,11 @@ open class GenericReplCompiler(
 
     override fun compile(state: IReplStageState<*>, codeLine: ReplCodeLine): ReplCompileResult {
         state.lock.write {
-            val compilerState = state.asState(GenericReplCompilerState::class.java)
+            konst compilerState = state.asState(GenericReplCompilerState::class.java)
 
-            val (psiFile, errorHolder) = run {
+            konst (psiFile, errorHolder) = run {
                 if (compilerState.lastLineState == null || compilerState.lastLineState!!.codeLine != codeLine) {
-                    val res = checker.check(state, codeLine)
+                    konst res = checker.check(state, codeLine)
                     when (res) {
                         is ReplCheckResult.Incomplete -> return@compile ReplCompileResult.Incomplete("Code is incomplete")
                         is ReplCheckResult.Error -> return@compile ReplCompileResult.Error(res.message, res.location)
@@ -69,7 +69,7 @@ open class GenericReplCompiler(
             }
 
             @Suppress("DEPRECATION")
-            val newDependencies =
+            konst newDependencies =
                 ScriptDependenciesProvider.getInstance(checker.environment.project)?.getScriptConfiguration(psiFile)
                     ?.legacyDependencies
             var classpathAddendum: List<File>? = null
@@ -78,9 +78,9 @@ open class GenericReplCompiler(
                 classpathAddendum = newDependencies?.let { checker.environment.updateClasspath(it.classpath.map(::JvmClasspathRoot)) }
             }
 
-            val analysisResult = compilerState.analyzerEngine.analyzeReplLine(psiFile, codeLine)
+            konst analysisResult = compilerState.analyzerEngine.analyzeReplLine(psiFile, codeLine)
             AnalyzerWithCompilerReport.reportDiagnostics(analysisResult.diagnostics, errorHolder, renderDiagnosticName = false)
-            val scriptDescriptor = when (analysisResult) {
+            konst scriptDescriptor = when (analysisResult) {
                 is ReplCodeAnalyzerBase.ReplLineAnalysisResult.Successful -> {
                     (analysisResult.scriptDescriptor as? ScriptDescriptor)
                         ?: error("Unexpected script descriptor type ${analysisResult.scriptDescriptor::class}")
@@ -91,7 +91,7 @@ open class GenericReplCompiler(
                 else -> error("Unexpected result ${analysisResult::class.java}")
             }
 
-            val generationState = GenerationState.Builder(
+            konst generationState = GenerationState.Builder(
                 psiFile.project,
                 ClassBuilderFactories.BINARIES,
                 compilerState.analyzerEngine.module,
@@ -110,7 +110,7 @@ open class GenericReplCompiler(
 
             compilerState.history.push(LineId(codeLine.no, 0, codeLine.hashCode()), scriptDescriptor)
 
-            val classes = generationState.factory.asList().map { CompiledClassData(it.relativePath, it.asByteArray()) }
+            konst classes = generationState.factory.asList().map { CompiledClassData(it.relativePath, it.asByteArray()) }
 
             return ReplCompileResult.CompiledClasses(
                 LineId(codeLine.no, 0, codeLine.hashCode()),
@@ -128,6 +128,6 @@ open class GenericReplCompiler(
     }
 
     companion object {
-        private const val SCRIPT_RESULT_FIELD_NAME = "\$\$result"
+        private const konst SCRIPT_RESULT_FIELD_NAME = "\$\$result"
     }
 }

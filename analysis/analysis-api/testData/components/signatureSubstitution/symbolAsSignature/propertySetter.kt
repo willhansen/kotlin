@@ -1,3 +1,3 @@
 var foo: Int
     get() = 10
-    se<caret>t(value){}
+    se<caret>t(konstue){}

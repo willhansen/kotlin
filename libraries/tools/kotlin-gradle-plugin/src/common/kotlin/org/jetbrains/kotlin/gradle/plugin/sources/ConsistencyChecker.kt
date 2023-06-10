@@ -5,28 +5,28 @@
 
 package org.jetbrains.kotlin.gradle.plugin.sources
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.config.LanguageVersion
 import org.jetbrains.kotlin.project.model.LanguageSettings
 
 internal class ConsistencyCheck<T, S>(
-    val name: String,
-    val getValue: (T) -> S,
-    val leftExtendsRightConsistently: (S, S) -> Boolean,
-    val consistencyConditionHint: String
+    konst name: String,
+    konst getValue: (T) -> S,
+    konst leftExtendsRightConsistently: (S, S) -> Boolean,
+    konst consistencyConditionHint: String
 )
 
 internal class FragmentConsistencyChecks<T>(
     unitName: String, // "fragment" or "source set"
-    private val languageSettings: T.() -> LanguageSettings
+    private konst languageSettings: T.() -> LanguageSettings
 ) {
-    private val defaultLanguageVersion = LanguageVersion.LATEST_STABLE
+    private konst defaultLanguageVersion = LanguageVersion.LATEST_STABLE
 
-    private val languageVersionCheckHint =
+    private konst languageVersionCheckHint =
         "The language version of the dependent $unitName must be greater than or equal to that of its dependency."
 
-    val languageVersionCheck = ConsistencyCheck<T, LanguageVersion>(
+    konst languageVersionCheck = ConsistencyCheck<T, LanguageVersion>(
         name = "language version",
         getValue = { unit ->
             unit.languageSettings().languageVersion?.let { parseLanguageVersionSetting(it) } ?: defaultLanguageVersion
@@ -35,9 +35,9 @@ internal class FragmentConsistencyChecks<T>(
         consistencyConditionHint = languageVersionCheckHint
     )
 
-    private val unstableFeaturesHint = "The dependent $unitName must enable all unstable language features that its dependency has."
+    private konst unstableFeaturesHint = "The dependent $unitName must enable all unstable language features that its dependency has."
 
-    val unstableFeaturesCheck = ConsistencyCheck<T, Set<LanguageFeature>>(
+    konst unstableFeaturesCheck = ConsistencyCheck<T, Set<LanguageFeature>>(
         name = "unstable language feature set",
         getValue = { unit ->
             unit.languageSettings().enabledLanguageFeatures
@@ -48,33 +48,33 @@ internal class FragmentConsistencyChecks<T>(
         consistencyConditionHint = unstableFeaturesHint
     )
 
-    private val optInAnnotationsInUseHint = "The dependent $unitName must use all opt-in annotations that its dependency uses."
+    private konst optInAnnotationsInUseHint = "The dependent $unitName must use all opt-in annotations that its dependency uses."
 
-    val optInAnnotationsCheck = ConsistencyCheck<T, Set<String>>(
+    konst optInAnnotationsCheck = ConsistencyCheck<T, Set<String>>(
         name = "set of opt-in annotations in use",
         getValue = { unit -> unit.languageSettings().optInAnnotationsInUse },
         leftExtendsRightConsistently = { left, right -> left.containsAll(right) },
         consistencyConditionHint = optInAnnotationsInUseHint
     )
 
-    val allChecks = listOf(languageVersionCheck, unstableFeaturesCheck, optInAnnotationsCheck)
+    konst allChecks = listOf(languageVersionCheck, unstableFeaturesCheck, optInAnnotationsCheck)
 }
 
 internal class FragmentConsistencyChecker<T>(
-    private val unitsName: String,
-    private val name: T.() -> String,
-    val checks: List<ConsistencyCheck<T, *>>
+    private konst unitsName: String,
+    private konst name: T.() -> String,
+    konst checks: List<ConsistencyCheck<T, *>>
 ) {
     fun <S> runSingleCheck(
         dependent: T,
         dependency: T,
         check: ConsistencyCheck<T, S>
     ) {
-        val leftValue = check.getValue(dependent)
-        val rightValue = check.getValue(dependency)
+        konst leftValue = check.getValue(dependent)
+        konst rightValue = check.getValue(dependency)
 
         if (!check.leftExtendsRightConsistently(leftValue, rightValue)) {
-            throw InvalidUserDataException(
+            throw InkonstidUserDataException(
                 "Inconsistent settings for Kotlin $unitsName: '${dependent.name()}' depends on '${dependency.name()}'\n" +
                         "'${dependent.name()}': ${check.name} is ${leftValue}\n" +
                         "'${dependency.name()}': ${check.name} is ${rightValue}\n" +

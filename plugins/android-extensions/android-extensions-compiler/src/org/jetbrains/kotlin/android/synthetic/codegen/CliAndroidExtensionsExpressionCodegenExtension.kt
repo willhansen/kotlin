@@ -20,8 +20,8 @@ import kotlinx.android.extensions.CacheImplementation
 import org.jetbrains.kotlin.psi.KtElement
 
 class CliAndroidExtensionsExpressionCodegenExtension(
-        val isExperimental: Boolean,
-        private val globalCacheImpl: CacheImplementation
+        konst isExperimental: Boolean,
+        private konst globalCacheImpl: CacheImplementation
 ) : AbstractAndroidExtensionsExpressionCodegenExtension() {
     override fun isExperimental(element: KtElement?) = isExperimental
     override fun isEnabled(element: KtElement?) = true

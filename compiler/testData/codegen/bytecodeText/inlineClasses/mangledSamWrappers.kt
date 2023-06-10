@@ -1,5 +1,5 @@
 // !LANGUAGE: +InlineClasses
-inline class A(val value: String)
+inline class A(konst konstue: String)
 
 fun interface B {
     fun f(x: A): A
@@ -10,8 +10,8 @@ inline fun g(unit: Unit = Unit, b: B): A {
 }
 
 fun box(): String {
-    val b = { _ : A -> A("OK") }
-    return g(b = b).value
+    konst b = { _ : A -> A("OK") }
+    return g(b = b).konstue
 }
 
 // @B.class:

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T>(val x: T)
+konstue class X<T>(konst x: T)
 
 fun useX(x: X<String?>): String = if (x.x == null) "OK" else "fail: $x"
 

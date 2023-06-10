@@ -1,12 +1,12 @@
-open class Outer(val fn: (() -> String)?) {
+open class Outer(konst fn: (() -> String)?) {
     companion object {
-        val ok = "Fail: Companion.ok"
+        konst ok = "Fail: Companion.ok"
     }
 
-    val ok = "Fail: Outer.ok"
+    konst ok = "Fail: Outer.ok"
 
     fun test(): Outer {
-        val ok = "OK"
+        konst ok = "OK"
         class Local : Outer({ ok })
 
         return Local()

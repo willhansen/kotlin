@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 abstract class IrTypeAlias : IrDeclarationBase(), IrDeclarationWithName,
         IrDeclarationWithVisibility, IrTypeParametersContainer {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: TypeAliasDescriptor
+    abstract override konst descriptor: TypeAliasDescriptor
 
-    abstract override val symbol: IrTypeAliasSymbol
+    abstract override konst symbol: IrTypeAliasSymbol
 
     abstract var isActual: Boolean
 

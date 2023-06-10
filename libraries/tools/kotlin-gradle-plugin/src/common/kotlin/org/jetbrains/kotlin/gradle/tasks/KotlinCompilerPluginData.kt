@@ -14,28 +14,28 @@ import java.io.File
 @InternalKotlinGradlePluginApi
 data class KotlinCompilerPluginData(
     @get:Classpath
-    val classpath: FileCollection,
+    konst classpath: FileCollection,
 
     @get:Internal
-    val options: CompilerPluginOptions,
+    konst options: CompilerPluginOptions,
 
     /**
      * Used only for Up-to-date checks
      */
     @get:Nested
-    val inputsOutputsState: InputsOutputsState
+    konst inputsOutputsState: InputsOutputsState
 ) {
     data class InputsOutputsState(
         @get:Input
-        val inputs: Map<String, String>,
+        konst inputs: Map<String, String>,
 
         @get:InputFiles
         @get:IgnoreEmptyDirectories
         @get:NormalizeLineEndings
         @get:PathSensitive(PathSensitivity.RELATIVE)
-        val inputFiles: Set<File>,
+        konst inputFiles: Set<File>,
 
         @get:OutputFiles
-        val outputFiles: Set<File>
+        konst outputFiles: Set<File>
     )
 }

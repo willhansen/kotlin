@@ -7,14 +7,14 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val arr = intArrayOf(10, 20, 30, 40)
+konst arr = intArrayOf(10, 20, 30, 40)
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
     for ((index, x) in arr.withIndex()) {
         s.append("$index:$x;")
     }
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "0:10;1:20;2:30;3:40;") "OK" else "fail: '$ss'"
 }
 

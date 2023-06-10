@@ -22,24 +22,24 @@ inline fun JvmIrBuilder.irArray(arrayType: IrType, block: IrArrayBuilder.() -> U
 fun JvmIrBuilder.irArrayOf(arrayType: IrType, elements: List<IrExpression> = listOf()): IrExpression =
     irArray(arrayType) { elements.forEach { +it } }
 
-private class IrArrayElement(val expression: IrExpression, val isSpread: Boolean)
+private class IrArrayElement(konst expression: IrExpression, konst isSpread: Boolean)
 
-class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
+class IrArrayBuilder(konst builder: JvmIrBuilder, konst arrayType: IrType) {
     // We build unboxed arrays for inline classes (UIntArray, etc) by first building
     // an unboxed array of the underlying primitive type, then coercing the result
     // to the correct type.
-    val unwrappedArrayType = arrayType.unboxInlineClass()
+    konst unwrappedArrayType = arrayType.unboxInlineClass()
 
     // Check if the array type is an inline class wrapper (UIntArray, etc.)
-    val isUnboxedInlineClassArray
+    konst isUnboxedInlineClassArray
         get() = arrayType !== unwrappedArrayType
 
     // The unwrapped element type
-    val elementType = unwrappedArrayType.getArrayElementType(builder.context.irBuiltIns)
+    konst elementType = unwrappedArrayType.getArrayElementType(builder.context.irBuiltIns)
 
-    private val elements: MutableList<IrArrayElement> = mutableListOf()
+    private konst elements: MutableList<IrArrayElement> = mutableListOf()
 
-    private val hasSpread
+    private konst hasSpread
         get() = elements.any { it.isSpread }
 
     operator fun IrExpression.unaryPlus() = add(this)
@@ -48,7 +48,7 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
     fun addSpread(expression: IrExpression) = elements.add(IrArrayElement(expression, true))
 
     fun build(): IrExpression {
-        val array = when {
+        konst array = when {
             elements.isEmpty() -> newArray(0)
             !hasSpread -> buildSimpleArray()
             elements.size == 1 -> copyArray(elements.single().expression)
@@ -61,10 +61,10 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
     private fun newArray(size: Int) = newArray(builder.irInt(size))
 
     private fun newArray(size: IrExpression): IrExpression {
-        val arrayConstructor = if (unwrappedArrayType.isBoxedArray)
+        konst arrayConstructor = if (unwrappedArrayType.isBoxedArray)
             builder.irSymbols.arrayOfNulls
         else
-            unwrappedArrayType.classOrNull!!.constructors.single { it.owner.valueParameters.size == 1 }
+            unwrappedArrayType.classOrNull!!.constructors.single { it.owner.konstueParameters.size == 1 }
 
         return builder.irCall(arrayConstructor, unwrappedArrayType).apply {
             if (typeArgumentsCount != 0)
@@ -76,9 +76,9 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
     // Build an array without spreads
     private fun buildSimpleArray(): IrExpression =
         builder.irBlock {
-            val result = irTemporary(newArray(elements.size))
+            konst result = irTemporary(newArray(elements.size))
 
-            val set = unwrappedArrayType.classOrNull!!.functions.single {
+            konst set = unwrappedArrayType.classOrNull!!.functions.single {
                 it.owner.name.asString() == "set"
             }
 
@@ -100,9 +100,9 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
             return spread
 
         return builder.irBlock {
-            val spreadVar = if (spread is IrGetValue) spread.symbol.owner else irTemporary(spread)
-            val size = unwrappedArrayType.classOrNull!!.getPropertyGetter("size")!!
-            val arrayCopyOf = builder.irSymbols.getArraysCopyOfFunction(unwrappedArrayType as IrSimpleType)
+            konst spreadVar = if (spread is IrGetValue) spread.symbol.owner else irTemporary(spread)
+            konst size = unwrappedArrayType.classOrNull!!.getPropertyGetter("size")!!
+            konst arrayCopyOf = builder.irSymbols.getArraysCopyOfFunction(unwrappedArrayType as IrSimpleType)
             // TODO consider using System.arraycopy if the requested array type is non-generic.
             +irCall(arrayCopyOf).apply {
                 putValueArgument(0, coerce(irGet(spreadVar), unwrappedArrayType))
@@ -113,17 +113,17 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
 
     // Build an array containing spread expressions.
     private fun buildComplexArray(): IrExpression {
-        val spreadBuilder = if (unwrappedArrayType.isBoxedArray)
+        konst spreadBuilder = if (unwrappedArrayType.isBoxedArray)
             builder.irSymbols.spreadBuilder
         else
             builder.irSymbols.primitiveSpreadBuilders.getValue(elementType)
 
-        val addElement = spreadBuilder.functions.single { it.owner.name.asString() == "add" }
-        val addSpread = spreadBuilder.functions.single { it.owner.name.asString() == "addSpread" }
-        val toArray = spreadBuilder.functions.single { it.owner.name.asString() == "toArray" }
+        konst addElement = spreadBuilder.functions.single { it.owner.name.asString() == "add" }
+        konst addSpread = spreadBuilder.functions.single { it.owner.name.asString() == "addSpread" }
+        konst toArray = spreadBuilder.functions.single { it.owner.name.asString() == "toArray" }
 
         return builder.irBlock {
-            val spreadBuilderVar = irTemporary(irCallConstructor(spreadBuilder.constructors.single(), listOf()).apply {
+            konst spreadBuilderVar = irTemporary(irCallConstructor(spreadBuilder.constructors.single(), listOf()).apply {
                 putValueArgument(0, irInt(elements.size))
             })
 
@@ -134,10 +134,10 @@ class IrArrayBuilder(val builder: JvmIrBuilder, val arrayType: IrType) {
                 }
             }
 
-            val toArrayCall = irCall(toArray).apply {
+            konst toArrayCall = irCall(toArray).apply {
                 dispatchReceiver = irGet(spreadBuilderVar)
                 if (unwrappedArrayType.isBoxedArray) {
-                    val size = spreadBuilder.functions.single { it.owner.name.asString() == "size" }
+                    konst size = spreadBuilder.functions.single { it.owner.name.asString() == "size" }
                     putValueArgument(0, irCall(builder.irSymbols.arrayOfNulls, arrayType).apply {
                         putTypeArgument(0, elementType)
                         putValueArgument(0, irCall(size).apply {

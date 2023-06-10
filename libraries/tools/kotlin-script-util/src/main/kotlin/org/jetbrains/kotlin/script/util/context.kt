@@ -58,4 +58,4 @@ fun scriptCompilationClasspathFromContext(
     )
 
 @Deprecated("Use the object from kotlin.script.experimental.jvm.util")
-val KotlinJars = kotlin.script.experimental.jvm.util.KotlinJars
+konst KotlinJars = kotlin.script.experimental.jvm.util.KotlinJars

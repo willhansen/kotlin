@@ -58,7 +58,7 @@ public enum class ShortenOption {
     SHORTEN_AND_STAR_IMPORT;
 
     public companion object {
-        public val defaultClassShortenOption: (KtClassLikeSymbol) -> ShortenOption = {
+        public konst defaultClassShortenOption: (KtClassLikeSymbol) -> ShortenOption = {
             if (it.classIdIfNonLocal?.isNestedClass == true) {
                 SHORTEN_IF_ALREADY_IMPORTED
             } else {
@@ -66,7 +66,7 @@ public enum class ShortenOption {
             }
         }
 
-        public val defaultCallableShortenOption: (KtCallableSymbol) -> ShortenOption = { symbol ->
+        public konst defaultCallableShortenOption: (KtCallableSymbol) -> ShortenOption = { symbol ->
             if (symbol is KtEnumEntrySymbol) DO_NOT_SHORTEN
             else SHORTEN_AND_IMPORT
         }
@@ -119,12 +119,12 @@ public interface KtReferenceShortenerMixIn : KtAnalysisSessionMixIn {
 }
 
 public interface ShortenCommand {
-    public val targetFile: SmartPsiElementPointer<KtFile>
-    public val importsToAdd: List<FqName>
-    public val starImportsToAdd: List<FqName>
-    public val typesToShorten: List<SmartPsiElementPointer<KtUserType>>
-    public val qualifiersToShorten: List<SmartPsiElementPointer<KtDotQualifiedExpression>>
+    public konst targetFile: SmartPsiElementPointer<KtFile>
+    public konst importsToAdd: List<FqName>
+    public konst starImportsToAdd: List<FqName>
+    public konst typesToShorten: List<SmartPsiElementPointer<KtUserType>>
+    public konst qualifiersToShorten: List<SmartPsiElementPointer<KtDotQualifiedExpression>>
 
-    public val isEmpty: Boolean
+    public konst isEmpty: Boolean
         get() = typesToShorten.isEmpty() && qualifiersToShorten.isEmpty()
 }

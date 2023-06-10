@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test function with boxed parameter`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -44,7 +44,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
 
 
     fun `test function with boxed parameter - with box from dependencies`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             registerDependency("a", "b", "(a, b)") {
@@ -77,7 +77,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
     }
 
     fun `test function parameter with suitable typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -105,7 +105,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
     }
 
     fun `test boxed property return type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -113,7 +113,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
                     class Box<T>
                     class A
                     typealias X = A
-                    val x: Box<X> = null!!
+                    konst x: Box<X> = null!!
                 """.trimIndent()
             )
 
@@ -122,7 +122,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
                     class Box<T>
                     class B
                     typealias X = B
-                    val x: Box<B> = null!!
+                    konst x: Box<B> = null!!
                 """.trimIndent()
             )
         }
@@ -131,7 +131,7 @@ class HierarchicalTypeSubstitutionCommonizationTest : AbstractInlineSourcesCommo
             "(a, b)", """
                 expect class Box<T>()
                 expect class X()
-                expect val x: Box<X>
+                expect konst x: Box<X>
             """.trimIndent()
         )
     }

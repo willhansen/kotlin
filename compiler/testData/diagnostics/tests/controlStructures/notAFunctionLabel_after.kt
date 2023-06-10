@@ -51,7 +51,7 @@ fun testLoopLabelInReturn(xs: List<Int>) {
 }
 
 fun testValLabelInReturn() {
-    <!REDUNDANT_LABEL_WARNING!>L@<!> val fn = { <!NOT_A_FUNCTION_LABEL!>return@L<!> }
+    <!REDUNDANT_LABEL_WARNING!>L@<!> konst fn = { <!NOT_A_FUNCTION_LABEL!>return@L<!> }
     fn()
 }
 

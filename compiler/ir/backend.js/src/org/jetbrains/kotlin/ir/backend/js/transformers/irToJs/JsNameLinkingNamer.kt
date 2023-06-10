@@ -20,31 +20,31 @@ import org.jetbrains.kotlin.utils.DFS
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 class JsNameLinkingNamer(
-    private val context: JsIrBackendContext,
-    private val minimizedMemberNames: Boolean,
-    private val isEsModules: Boolean
+    private konst context: JsIrBackendContext,
+    private konst minimizedMemberNames: Boolean,
+    private konst isEsModules: Boolean
 ) : IrNamerBase() {
 
-    val nameMap = mutableMapOf<IrDeclaration, JsName>()
+    konst nameMap = mutableMapOf<IrDeclaration, JsName>()
 
     private fun IrDeclarationWithName.getName(prefix: String = ""): JsName {
         return nameMap.getOrPut(this) {
-            val name = (this as? IrClass)?.let { context.localClassNames[this] } ?: let {
+            konst name = (this as? IrClass)?.let { context.localClassNames[this] } ?: let {
                 this.nameIfPropertyAccessor() ?: getJsNameOrKotlinName().asString()
             }
             JsName(sanitizeName(prefix + name), true)
         }
     }
 
-    val importedModules = mutableListOf<JsImportedModule>()
-    val imports = mutableMapOf<IrDeclaration, JsStatement>()
+    konst importedModules = mutableListOf<JsImportedModule>()
+    konst imports = mutableMapOf<IrDeclaration, JsStatement>()
 
     override fun getNameForStaticDeclaration(declaration: IrDeclarationWithName): JsName {
         if (declaration.isEffectivelyExternal()) {
-            val jsModule: String? = declaration.getJsModule()
-            val maybeParentFile: IrFile? = declaration.parent as? IrFile
-            val fileJsModule: String? = maybeParentFile?.getJsModule()
-            val jsQualifier: List<JsName>? = maybeParentFile?.getJsQualifier()?.split('.')?.map { JsName(it, false) }
+            konst jsModule: String? = declaration.getJsModule()
+            konst maybeParentFile: IrFile? = declaration.parent as? IrFile
+            konst fileJsModule: String? = maybeParentFile?.getJsModule()
+            konst jsQualifier: List<JsName>? = maybeParentFile?.getJsQualifier()?.split('.')?.map { JsName(it, false) }
 
             return when {
                 jsModule != null -> declaration.generateImportForDeclarationWithJsModule(jsModule)
@@ -58,11 +58,11 @@ class JsNameLinkingNamer(
 
     override fun getNameForMemberFunction(function: IrSimpleFunction): JsName {
         require(function.dispatchReceiverParameter != null)
-        val signature = jsFunctionSignature(function, context)
+        konst signature = jsFunctionSignature(function, context)
         if (context.keeper.shouldKeep(function)) {
             context.minimizedNameGenerator.keepName(signature)
         }
-        val result = if (minimizedMemberNames && !function.hasStableJsName(context)) {
+        konst result = if (minimizedMemberNames && !function.hasStableJsName(context)) {
             function.parentAsClass.fieldData()
             context.minimizedNameGenerator.nameBySignature(signature)
         } else {
@@ -78,13 +78,13 @@ class JsNameLinkingNamer(
     }
 
     private fun IrDeclarationWithName.generateImportForDeclarationWithJsModule(jsModule: String): JsName {
-        val nameString = if (isJsNonModule()) {
+        konst nameString = if (isJsNonModule()) {
             getJsNameOrKotlinName().asString()
         } else {
-            val parent = fqNameWhenAvailable!!.parent()
+            konst parent = fqNameWhenAvailable!!.parent()
             parent.child(getJsNameOrKotlinName()).asString()
         }
-        val name = JsName(sanitizeName(nameString), true)
+        konst name = JsName(sanitizeName(nameString), true)
 
         if (isEsModules) {
             imports[this] = JsImport(jsModule, JsImport.Target.Default(name.makeRef()))
@@ -100,12 +100,12 @@ class JsNameLinkingNamer(
     ): JsName {
         if (this in nameMap) return getName()
 
-        val declarationStableName = getJsNameOrKotlinName().identifier
+        konst declarationStableName = getJsNameOrKotlinName().identifier
 
         if (isEsModules) {
-            val importedName = jsQualifier?.firstOrNull() ?: declarationStableName.toJsName(temporary = false)
-            val importStatement = JsImport(fileJsModule, JsImport.Element(importedName))
-            imports[this] = when (val qualifiedReference = jsQualifier?.makeRef()) {
+            konst importedName = jsQualifier?.firstOrNull() ?: declarationStableName.toJsName(temporary = false)
+            konst importStatement = JsImport(fileJsModule, JsImport.Element(importedName))
+            imports[this] = when (konst qualifiedReference = jsQualifier?.makeRef()) {
                 null -> importStatement
                 else -> JsCompositeBlock(
                     listOf(
@@ -118,9 +118,9 @@ class JsNameLinkingNamer(
             }
 
         } else {
-            val moduleName = JsName(sanitizeName("\$module\$$fileJsModule"), true)
+            konst moduleName = JsName(sanitizeName("\$module\$$fileJsModule"), true)
             importedModules += JsImportedModule(fileJsModule, moduleName, null)
-            val qualifiedReference =
+            konst qualifiedReference =
                 if (jsQualifier == null) moduleName.makeRef() else (listOf(moduleName) + jsQualifier).makeRef()
             imports[this] =
                 jsElementAccess(declarationStableName, qualifiedReference).putIntoVariableWitName(declarationStableName.toJsName())
@@ -130,7 +130,7 @@ class JsNameLinkingNamer(
     }
 
     private fun IrDeclarationWithName.generateRegularQualifiedImport(jsQualifier: List<JsName>?): JsName {
-        val name = getJsNameOrKotlinName().identifier
+        konst name = getJsNameOrKotlinName().identifier
 
         if (jsQualifier != null) {
             imports[this] = jsElementAccess(name, jsQualifier.makeRef()).putIntoVariableWitName(name.toJsName())
@@ -143,27 +143,27 @@ class JsNameLinkingNamer(
 
     private fun IrClass.fieldData(): Map<IrField, String> {
         return context.fieldDataCache.getOrPut(this) {
-            val nameCnt = hashMapOf<String, Int>()
+            konst nameCnt = hashMapOf<String, Int>()
 
-            val allClasses = DFS.topologicalOrder(listOf(this)) { node ->
+            konst allClasses = DFS.topologicalOrder(listOf(this)) { node ->
                 node.superTypes.mapNotNull {
                     it.safeAs<IrSimpleType>()?.classifier.safeAs<IrClassSymbol>()?.owner
                 }
             }
 
-            val result = hashMapOf<IrField, String>()
+            konst result = hashMapOf<IrField, String>()
 
             if (minimizedMemberNames) {
                 allClasses.reversed().forEach {
                     it.declarations.forEach { declaration ->
                         when {
                             declaration is IrFunction && declaration.dispatchReceiverParameter != null -> {
-                                val property = (declaration as? IrSimpleFunction)?.correspondingPropertySymbol?.owner
+                                konst property = (declaration as? IrSimpleFunction)?.correspondingPropertySymbol?.owner
                                 if (property?.isExported(context) == true || property?.isEffectivelyExternal() == true) {
                                     context.minimizedNameGenerator.reserveName(property.getJsNameOrKotlinName().identifier)
                                 }
                                 if (declaration.hasStableJsName(context)) {
-                                    val signature = jsFunctionSignature(declaration, context)
+                                    konst signature = jsFunctionSignature(declaration, context)
                                     context.minimizedNameGenerator.reserveName(signature)
                                 }
                             }
@@ -182,18 +182,18 @@ class JsNameLinkingNamer(
                 it.declarations.forEach {
                     when {
                         it is IrField -> {
-                            val correspondingProperty = it.correspondingPropertySymbol?.owner
-                            val hasStableName = correspondingProperty != null &&
+                            konst correspondingProperty = it.correspondingPropertySymbol?.owner
+                            konst hasStableName = correspondingProperty != null &&
                                     correspondingProperty.visibility.isPublicAPI &&
                                     (correspondingProperty.isExported(context) || correspondingProperty.getJsName() != null) &&
                                     correspondingProperty.isSimpleProperty
-                            val safeName = when {
+                            konst safeName = when {
                                hasStableName -> (correspondingProperty ?: it).getJsNameOrKotlinName().identifier
                                minimizedMemberNames && !context.keeper.shouldKeep(it) -> context.minimizedNameGenerator.generateNextName()
                                else -> it.safeName()
                             }
-                            val resultName = if (!hasStableName) {
-                                val suffix = nameCnt.getOrDefault(safeName, 0) + 1
+                            konst resultName = if (!hasStableName) {
+                                konst suffix = nameCnt.getOrDefault(safeName, 0) + 1
                                 nameCnt[safeName] = suffix
                                 safeName + "_$suffix"
                             } else safeName

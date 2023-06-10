@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.ir.util.isEffectivelyExternal
 import org.jetbrains.kotlin.ir.visitors.*
 
 class PropertiesLowering : DeclarationTransformer {
-    override val withLocalDeclarations: Boolean get() = true
+    override konst withLocalDeclarations: Boolean get() = true
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         when (declaration) {
@@ -68,7 +68,7 @@ class LocalDelegatedPropertiesLowering : IrElementTransformerVoid(), BodyLowerin
     override fun visitLocalDelegatedProperty(declaration: IrLocalDelegatedProperty): IrStatement {
         declaration.transformChildrenVoid(this)
 
-        val initializer = declaration.delegate.initializer!!
+        konst initializer = declaration.delegate.initializer!!
         declaration.delegate.initializer = IrBlockImpl(
             initializer.startOffset, initializer.endOffset, initializer.type, null,
             listOfNotNull(

@@ -28,10 +28,10 @@ var Long.someProperty: Long
     }
 
 fun box(): String {
-    val changeObject = changeObject()
+    konst changeObject = changeObject()
     if (changeObject != "012") return "fail 1: $changeObject"
 
-    val changeLong = changeLong()
+    konst changeLong = changeLong()
     if (changeLong != 1L) return "fail 1: $changeLong"
 
     return "OK"

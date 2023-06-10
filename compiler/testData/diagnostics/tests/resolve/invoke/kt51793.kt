@@ -9,7 +9,7 @@ interface Builder {
 interface A : Builder
 interface B : Builder
 
-val A.k: Key get() = TODO()
+konst A.k: Key get() = TODO()
 
 fun A.main() {
     fun B.bar() {

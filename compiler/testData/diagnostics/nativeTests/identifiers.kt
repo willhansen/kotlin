@@ -16,28 +16,28 @@ class NormalClass {
 object <!INVALID_CHARACTERS_NATIVE_ERROR!>`Check;Object`<!>
 object NormalObject
 
-data class Pair(val first: Int, val <!INVALID_CHARACTERS_NATIVE_ERROR!>`next,one`<!>: Int)
+data class Pair(konst first: Int, konst <!INVALID_CHARACTERS_NATIVE_ERROR!>`next,one`<!>: Int)
 
 object Delegate {
     operator fun getValue(thisRef: Any?, property: kotlin.reflect.KProperty<*>): Any? = null
 }
 
 fun <!INVALID_CHARACTERS_NATIVE_ERROR!>`check(function`<!>() {
-    val <!INVALID_CHARACTERS_NATIVE_ERROR!>`check)variable`<!> = 1
-    val <!INVALID_CHARACTERS_NATIVE_ERROR!>`check[delegated[variable`<!> by Delegate
+    konst <!INVALID_CHARACTERS_NATIVE_ERROR!>`check)variable`<!> = 1
+    konst <!INVALID_CHARACTERS_NATIVE_ERROR!>`check[delegated[variable`<!> by Delegate
 
-    val normalVariable = 2
-    val normalDelegatedVariable by Delegate
+    konst normalVariable = 2
+    konst normalDelegatedVariable by Delegate
 
-    val (check, <!INVALID_CHARACTERS_NATIVE_ERROR!>`destructuring]declaration`<!>) = Pair(1, 2)
+    konst (check, <!INVALID_CHARACTERS_NATIVE_ERROR!>`destructuring]declaration`<!>) = Pair(1, 2)
 }
 
 fun normalFunction() {}
 
-val <!INVALID_CHARACTERS_NATIVE_ERROR!>`check{property`<!> = 1
-val <!INVALID_CHARACTERS_NATIVE_ERROR!>`check}delegated}property`<!> by Delegate
-val normalProperty = 2
-val normalDelegatedProperty by Delegate
+konst <!INVALID_CHARACTERS_NATIVE_ERROR!>`check{property`<!> = 1
+konst <!INVALID_CHARACTERS_NATIVE_ERROR!>`check}delegated}property`<!> by Delegate
+konst normalProperty = 2
+konst normalDelegatedProperty by Delegate
 
 fun checkValueParameter(<!INVALID_CHARACTERS_NATIVE_ERROR!>`check/parameter`<!>: Int) {}
 

@@ -5,9 +5,9 @@ interface B {
     fun result(): Int
 }
 
-class A(private val x: Int) {
+class A(private konst x: Int) {
     fun test() = object : B {
-        val y = x + 1
+        konst y = x + 1
 
         override fun result() = x * 10 + y
     }

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.resolve.calls.util
 import org.jetbrains.kotlin.psi.*
 
 fun KtElement?.getCalleeExpressionIfAny(): KtExpression? =
-    when (val element = if (this is KtExpression) KtPsiUtil.deparenthesize(this) else this) {
+    when (konst element = if (this is KtExpression) KtPsiUtil.deparenthesize(this) else this) {
         is KtSimpleNameExpression -> element
         is KtCallElement -> element.calleeExpression
         is KtQualifiedExpression -> element.selectorExpression.getCalleeExpressionIfAny()

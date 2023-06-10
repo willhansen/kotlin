@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Value(val value: Any)
+konstue class Value(konst konstue: Any)
 
 object Foo {
-    fun foo(value: Value) {
-        res = value.value as String
+    fun foo(konstue: Value) {
+        res = konstue.konstue as String
     }
 
-    fun bar(value: Value?) {
-        res = value?.value as String?
+    fun bar(konstue: Value?) {
+        res = konstue?.konstue as String?
     }
 }
 

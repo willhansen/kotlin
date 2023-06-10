@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.platform.TargetPlatformVersion
 import org.jetbrains.org.objectweb.asm.Opcodes
 
 enum class JvmTarget(
-    override val description: String,
-    val majorVersion: Int,
+    override konst description: String,
+    konst majorVersion: Int,
 ) : TargetPlatformVersion {
     JVM_1_6("1.6", Opcodes.V1_6),
     JVM_1_8("1.8", Opcodes.V1_8),
@@ -43,13 +43,13 @@ enum class JvmTarget(
 
     companion object {
         @JvmField
-        val DEFAULT = JVM_1_8
+        konst DEFAULT = JVM_1_8
 
         @JvmStatic
-        fun fromString(string: String) = values().find { it.description == string }
+        fun fromString(string: String) = konstues().find { it.description == string }
 
         fun getDescription(majorVersion: Int): String {
-            val platformDescription = values().find { it.majorVersion == majorVersion }?.description ?: when (majorVersion) {
+            konst platformDescription = konstues().find { it.majorVersion == majorVersion }?.description ?: when (majorVersion) {
                 Opcodes.V1_7 -> "1.7"
                 else -> null
             }
@@ -59,14 +59,14 @@ enum class JvmTarget(
         }
 
         fun supportedValues(): List<JvmTarget> =
-            values().asList() - JVM_1_6
+            konstues().asList() - JVM_1_6
 
-        const val SUPPORTED_VERSIONS_DESCRIPTION =
+        const konst SUPPORTED_VERSIONS_DESCRIPTION =
             "1.8, 9, 10, ..., 20"
 
         init {
-            check(SUPPORTED_VERSIONS_DESCRIPTION == "1.8, 9, 10, ..., ${values().last().description}") {
-                "Please update the value of the constant JvmTarget.SUPPORTED_VERSIONS_DESCRIPTION."
+            check(SUPPORTED_VERSIONS_DESCRIPTION == "1.8, 9, 10, ..., ${konstues().last().description}") {
+                "Please update the konstue of the constant JvmTarget.SUPPORTED_VERSIONS_DESCRIPTION."
             }
         }
     }

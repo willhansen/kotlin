@@ -26,17 +26,17 @@ fun FuzzyType.nullability() = type.nullability()
 fun KotlinType.toFuzzyType(freeParameters: Collection<TypeParameterDescriptor>) = FuzzyType(this, freeParameters)
 
 class FuzzyType(
-    val type: KotlinType,
+    konst type: KotlinType,
     freeParameters: Collection<TypeParameterDescriptor>
 ) {
-    val freeParameters: Set<TypeParameterDescriptor>
+    konst freeParameters: Set<TypeParameterDescriptor>
 
     init {
         if (freeParameters.isNotEmpty()) {
             // we allow to pass type parameters from another function with the same original in freeParameters
-            val usedTypeParameters = HashSet<TypeParameterDescriptor>().apply { addUsedTypeParameters(type) }
+            konst usedTypeParameters = HashSet<TypeParameterDescriptor>().apply { addUsedTypeParameters(type) }
             if (usedTypeParameters.isNotEmpty()) {
-                val originalFreeParameters = freeParameters.map { it.toOriginal() }.toSet()
+                konst originalFreeParameters = freeParameters.map { it.toOriginal() }.toSet()
                 this.freeParameters = usedTypeParameters.filter { it.toOriginal() in originalFreeParameters }.toSet()
             } else {
                 this.freeParameters = emptySet()
@@ -49,9 +49,9 @@ class FuzzyType(
     // Diagnostic for EA-109046
     @Suppress("USELESS_ELVIS")
     private fun TypeParameterDescriptor.toOriginal(): TypeParameterDescriptor {
-        val callableDescriptor = containingDeclaration as? CallableMemberDescriptor ?: return this
-        val original = callableDescriptor.original ?: error("original = null for $callableDescriptor")
-        val typeParameters = original.typeParameters ?: error("typeParameters = null for $original")
+        konst callableDescriptor = containingDeclaration as? CallableMemberDescriptor ?: return this
+        konst original = callableDescriptor.original ?: error("original = null for $callableDescriptor")
+        konst typeParameters = original.typeParameters ?: error("typeParameters = null for $original")
         return typeParameters[index]
     }
 
@@ -60,7 +60,7 @@ class FuzzyType(
     override fun hashCode() = type.hashCode()
 
     private fun MutableSet<TypeParameterDescriptor>.addUsedTypeParameters(type: KotlinType) {
-        val typeParameter = type.constructor.declarationDescriptor as? TypeParameterDescriptor
+        konst typeParameter = type.constructor.declarationDescriptor as? TypeParameterDescriptor
         if (typeParameter != null && add(typeParameter)) {
             typeParameter.upperBounds.forEach { addUsedTypeParameters(it) }
         }
@@ -104,11 +104,11 @@ class FuzzyType(
             return if (type.checkInheritance(otherType.type)) TypeSubstitutor.EMPTY else null
         }
 
-        val builder = ConstraintSystemBuilderImpl()
-        val typeVariableSubstitutor = builder.registerTypeVariables(CallHandle.NONE, freeParameters + otherType.freeParameters)
+        konst builder = ConstraintSystemBuilderImpl()
+        konst typeVariableSubstitutor = builder.registerTypeVariables(CallHandle.NONE, freeParameters + otherType.freeParameters)
 
-        val typeInSystem = typeVariableSubstitutor.substitute(type, Variance.INVARIANT)
-        val otherTypeInSystem = typeVariableSubstitutor.substitute(otherType.type, Variance.INVARIANT)
+        konst typeInSystem = typeVariableSubstitutor.substitute(type, Variance.INVARIANT)
+        konst otherTypeInSystem = typeVariableSubstitutor.substitute(otherType.type, Variance.INVARIANT)
 
         when (matchKind) {
             MatchKind.IS_SUBTYPE ->
@@ -119,30 +119,30 @@ class FuzzyType(
 
         builder.fixVariables()
 
-        val constraintSystem = builder.build()
+        konst constraintSystem = builder.build()
 
         if (constraintSystem.status.hasContradiction()) return null
 
         // currently ConstraintSystem return successful status in case there are problems with nullability
         // that's why we have to check subtyping manually
-        val substitutor = constraintSystem.resultingSubstitutor
-        val substitutedType = substitutor.substitute(type, Variance.INVARIANT) ?: return null
+        konst substitutor = constraintSystem.resultingSubstitutor
+        konst substitutedType = substitutor.substitute(type, Variance.INVARIANT) ?: return null
         if (substitutedType.isError) return TypeSubstitutor.EMPTY
-        val otherSubstitutedType = substitutor.substitute(otherType.type, Variance.INVARIANT) ?: return null
+        konst otherSubstitutedType = substitutor.substitute(otherType.type, Variance.INVARIANT) ?: return null
         if (otherSubstitutedType.isError) return TypeSubstitutor.EMPTY
         if (!substitutedType.checkInheritance(otherSubstitutedType)) return null
 
-        val substitutorToKeepCapturedTypes = object : DelegatedTypeSubstitution(substitutor.substitution) {
+        konst substitutorToKeepCapturedTypes = object : DelegatedTypeSubstitution(substitutor.substitution) {
             override fun approximateCapturedTypes() = false
         }.buildSubstitutor()
 
-        val substitutionMap: Map<TypeConstructor, TypeProjection> = constraintSystem.typeVariables
+        konst substitutionMap: Map<TypeConstructor, TypeProjection> = constraintSystem.typeVariables
             .map { it.originalTypeParameter }
             .associateBy(
                 keySelector = { it.typeConstructor },
-                valueTransform = {
-                    val typeProjection = TypeProjectionImpl(Variance.INVARIANT, it.defaultType)
-                    val substitutedProjection = substitutorToKeepCapturedTypes.substitute(typeProjection)
+                konstueTransform = {
+                    konst typeProjection = TypeProjectionImpl(Variance.INVARIANT, it.defaultType)
+                    konst substitutedProjection = substitutorToKeepCapturedTypes.substitute(typeProjection)
                     substitutedProjection?.takeUnless { ErrorUtils.containsUninferredTypeVariable(it.type) } ?: typeProjection
                 })
         return TypeConstructorSubstitution.createByConstructorsMap(substitutionMap, approximateCapturedTypes = true).buildSubstitutor()

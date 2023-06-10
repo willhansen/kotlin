@@ -8,7 +8,7 @@ interface GetStep {
 }
 
 class Outer {
-    private val ok: String
+    private konst ok: String
 
     private constructor(ok: String) {
         this.ok = ok
@@ -18,7 +18,7 @@ class Outer {
         this.ok = "xxx"
     }
 
-    val obj = object : GetStep {
+    konst obj = object : GetStep {
         override fun get(): Step = Step(::Outer)
     }
 

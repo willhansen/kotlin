@@ -16,7 +16,7 @@ fun builder(c: suspend () -> Unit) {
 suspend fun foo(): String {
     var a = "OK"
     var i = 0
-    val x: suspend () -> String = {
+    konst x: suspend () -> String = {
         suspendHere(a[i++].toString())
     }
 

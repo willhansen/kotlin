@@ -1,7 +1,7 @@
 class C {
     companion object {
-        val x = 45
+        konst x = 45
     }
 
-    val y = <expr>Companion</expr>::x.get()
+    konst y = <expr>Companion</expr>::x.get()
 }

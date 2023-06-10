@@ -76,13 +76,13 @@ class ClasspathBasedKapt3Extension(
     logger: MessageCollectorBackedKaptLogger,
     compilerConfiguration: CompilerConfiguration
 ) : AbstractKapt3Extension(options, logger, compilerConfiguration) {
-    override val analyzePartially: Boolean
+    override konst analyzePartially: Boolean
         get() = options[KaptFlag.USE_LIGHT_ANALYSIS] && super.analyzePartially
 
     private var processorLoader: ProcessorLoader? = null
 
     override fun loadProcessors(): LoadedProcessors {
-        val efficientProcessorLoader = object : ProcessorLoader(options, logger) {
+        konst efficientProcessorLoader = object : ProcessorLoader(options, logger) {
             override fun doLoadProcessors(classpath: LinkedHashSet<File>, classLoader: ClassLoader): List<Processor> =
                 when (classLoader) {
                     is URLClassLoader -> ServiceLoaderLite.loadImplementations(Processor::class.java, classLoader)
@@ -110,8 +110,8 @@ class ClasspathBasedKapt3Extension(
 
     private fun clearJavacZipCaches() {
         try {
-            val zipFileIndexCacheClass = Class.forName("com.sun.tools.javac.file.ZipFileIndexCache")
-            val zipFileIndexCacheInstance = zipFileIndexCacheClass.getMethod("getSharedInstance").invoke(null)
+            konst zipFileIndexCacheClass = Class.forName("com.sun.tools.javac.file.ZipFileIndexCache")
+            konst zipFileIndexCacheInstance = zipFileIndexCacheClass.getMethod("getSharedInstance").invoke(null)
             zipFileIndexCacheClass.getMethod("clearCache").invoke(zipFileIndexCacheInstance)
         } catch (e: Throwable) {
         }
@@ -119,11 +119,11 @@ class ClasspathBasedKapt3Extension(
 }
 
 abstract class AbstractKapt3Extension(
-    val options: KaptOptions,
-    val logger: MessageCollectorBackedKaptLogger,
-    val compilerConfiguration: CompilerConfiguration
+    konst options: KaptOptions,
+    konst logger: MessageCollectorBackedKaptLogger,
+    konst compilerConfiguration: CompilerConfiguration
 ) : PartialAnalysisHandlerExtension() {
-    private val pluginInitializedTime: Long = System.currentTimeMillis()
+    private konst pluginInitializedTime: Long = System.currentTimeMillis()
 
     private var annotationProcessingComplete = false
 
@@ -134,10 +134,10 @@ abstract class AbstractKapt3Extension(
         return false
     }
 
-    override val analyzePartially: Boolean
+    override konst analyzePartially: Boolean
         get() = !annotationProcessingComplete
 
-    override val analyzeDefaultParameterValues: Boolean
+    override konst analyzeDefaultParameterValues: Boolean
         get() = options[KaptFlag.DUMP_DEFAULT_PARAMETER_VALUES]
 
     override fun doAnalysis(
@@ -167,7 +167,7 @@ abstract class AbstractKapt3Extension(
 
         logger.info { "Initial analysis took ${System.currentTimeMillis() - pluginInitializedTime} ms" }
 
-        val bindingContext = bindingTrace.bindingContext
+        konst bindingContext = bindingTrace.bindingContext
         if (options.mode.generateStubs) {
             logger.info { "Kotlin files to compile: " + files.map { it.virtualFile?.name ?: "<in memory ${it.hashCode()}>" } }
 
@@ -178,13 +178,13 @@ abstract class AbstractKapt3Extension(
 
         if (!options.mode.runAnnotationProcessing) return doNotGenerateCode()
 
-        val processors = loadProcessors()
+        konst processors = loadProcessors()
         if (processors.processors.isEmpty()) return if (options.mode != WITH_COMPILATION) doNotGenerateCode() else null
 
-        val kaptContext = KaptContext(options, false, logger)
+        konst kaptContext = KaptContext(options, false, logger)
 
         fun handleKaptError(error: KaptError): AnalysisResult {
-            val cause = error.cause
+            konst cause = error.cause
 
             if (cause != null) {
                 kaptContext.logger.exception(cause)
@@ -196,12 +196,12 @@ abstract class AbstractKapt3Extension(
         try {
             runAnnotationProcessing(kaptContext, processors)
         } catch (error: KaptBaseError) {
-            val kind = when (error.kind) {
+            konst kind = when (error.kind) {
                 KaptBaseError.Kind.EXCEPTION -> KaptError.Kind.EXCEPTION
                 KaptBaseError.Kind.ERROR_RAISED -> KaptError.Kind.ERROR_RAISED
             }
 
-            val cause = error.cause
+            konst cause = error.cause
             return handleKaptError(if (cause != null) KaptError(kind, cause) else KaptError(kind))
         } catch (error: KaptError) {
             return handleKaptError(error)
@@ -227,10 +227,10 @@ abstract class AbstractKapt3Extension(
     private fun runAnnotationProcessing(kaptContext: KaptContext, processors: LoadedProcessors) {
         if (!options.mode.runAnnotationProcessing) return
 
-        val javaSourceFiles = options.collectJavaSourceFiles(kaptContext.sourcesToReprocess)
+        konst javaSourceFiles = options.collectJavaSourceFiles(kaptContext.sourcesToReprocess)
         logger.info { "Java source files: " + javaSourceFiles.joinToString { it.normalize().absolutePath } }
 
-        val (annotationProcessingTime) = measureTimeMillis {
+        konst (annotationProcessingTime) = measureTimeMillis {
             kaptContext.doAnnotationProcessing(javaSourceFiles, processors.processors)
         }
 
@@ -239,8 +239,8 @@ abstract class AbstractKapt3Extension(
         if (options.detectMemoryLeaks != DetectMemoryLeaksMode.NONE) {
             MemoryLeakDetector.add(processors.classLoader)
 
-            val isParanoid = options.detectMemoryLeaks == DetectMemoryLeaksMode.PARANOID
-            val (leakDetectionTime, leaks) = measureTimeMillis { MemoryLeakDetector.process(isParanoid) }
+            konst isParanoid = options.detectMemoryLeaks == DetectMemoryLeaksMode.PARANOID
+            konst (leakDetectionTime, leaks) = measureTimeMillis { MemoryLeakDetector.process(isParanoid) }
             logger.info { "Leak detection took $leakDetectionTime ms" }
 
             for (leak in leaks) {
@@ -259,24 +259,24 @@ abstract class AbstractKapt3Extension(
         bindingContext: BindingContext,
         files: List<KtFile>
     ): KaptContextForStubGeneration {
-        val builderFactory = OriginCollectingClassBuilderFactory(ClassBuilderMode.KAPT3)
+        konst builderFactory = OriginCollectingClassBuilderFactory(ClassBuilderMode.KAPT3)
 
-        val configuration = compilerConfiguration.copy().apply {
+        konst configuration = compilerConfiguration.copy().apply {
             put(JVMConfigurationKeys.DO_NOT_CLEAR_BINDING_CONTEXT, true)
         }
 
-        val targetId = TargetId(
+        konst targetId = TargetId(
             name = configuration[CommonConfigurationKeys.MODULE_NAME] ?: module.name.asString(),
             type = "java-production"
         )
 
-        val isIrBackend = options.flags[KaptFlag.USE_JVM_IR]
-        val generationState = GenerationState.Builder(project, builderFactory, module, bindingContext, configuration)
+        konst isIrBackend = options.flags[KaptFlag.USE_JVM_IR]
+        konst generationState = GenerationState.Builder(project, builderFactory, module, bindingContext, configuration)
             .targetId(targetId)
             .isIrBackend(isIrBackend)
             .build()
 
-        val (classFilesCompilationTime) = measureTimeMillis {
+        konst (classFilesCompilationTime) = measureTimeMillis {
             KotlinCodegenFacade.compileCorrectFiles(
                 files,
                 generationState,
@@ -286,8 +286,8 @@ abstract class AbstractKapt3Extension(
             )
         }
 
-        val compiledClasses = builderFactory.compiledClasses
-        val origins = builderFactory.origins
+        konst compiledClasses = builderFactory.compiledClasses
+        konst origins = builderFactory.origins
 
         logger.info { "Stubs compilation took $classFilesCompilationTime ms" }
         logger.info { "Compiled classes: " + compiledClasses.joinToString { it.name } }
@@ -296,9 +296,9 @@ abstract class AbstractKapt3Extension(
     }
 
     private fun generateKotlinSourceStubs(kaptContext: KaptContextForStubGeneration) {
-        val converter = ClassFileToSourceStubConverter(kaptContext, generateNonExistentClass = true)
+        konst converter = ClassFileToSourceStubConverter(kaptContext, generateNonExistentClass = true)
 
-        val (stubGenerationTime, kaptStubs) = measureTimeMillis {
+        konst (stubGenerationTime, kaptStubs) = measureTimeMillis {
             converter.convert()
         }
 
@@ -314,22 +314,22 @@ abstract class AbstractKapt3Extension(
         stubs: List<KaptStub>,
         messageCollector: MessageCollector,
     ) {
-        val reportOutputFiles = kaptContext.generationState.configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
-        val outputFiles = if (reportOutputFiles) kaptContext.generationState.factory.asList().associateBy {
+        konst reportOutputFiles = kaptContext.generationState.configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
+        konst outputFiles = if (reportOutputFiles) kaptContext.generationState.factory.asList().associateBy {
             it.relativePath.substringBeforeLast(".class", missingDelimiterValue = "")
         } else null
 
         for (kaptStub in stubs) {
-            val stub = kaptStub.file
-            val className = (stub.defs.first { it is JCTree.JCClassDecl } as JCTree.JCClassDecl).simpleName.toString()
+            konst stub = kaptStub.file
+            konst className = (stub.defs.first { it is JCTree.JCClassDecl } as JCTree.JCClassDecl).simpleName.toString()
 
-            val packageName = stub.getPackageNameJava9Aware()?.toString() ?: ""
-            val packageDir =
+            konst packageName = stub.getPackageNameJava9Aware()?.toString() ?: ""
+            konst packageDir =
                 if (packageName.isEmpty()) options.stubsOutputDir else File(options.stubsOutputDir, packageName.replace('.', '/'))
             packageDir.mkdirs()
 
-            val sourceFile = File(packageDir, "$className.java")
-            val classFilePathWithoutExtension = if (packageName.isEmpty()) {
+            konst sourceFile = File(packageDir, "$className.java")
+            konst classFilePathWithoutExtension = if (packageName.isEmpty()) {
                 className
             } else {
                 "${packageName.replace('.', '/')}/$className"
@@ -338,7 +338,7 @@ abstract class AbstractKapt3Extension(
             fun reportStubsOutputForIC(generatedFile: File) {
                 if (!reportOutputFiles) return
                 if (classFilePathWithoutExtension == "error/NonExistentClass") return
-                val sourceFiles = (outputFiles?.get(classFilePathWithoutExtension)
+                konst sourceFiles = (outputFiles?.get(classFilePathWithoutExtension)
                     ?: error("The `outputFiles` map is not properly initialized (key = $classFilePathWithoutExtension)")).sourceFiles
                 messageCollector.report(OUTPUT, OutputMessageUtil.formatOutputMessage(sourceFiles, generatedFile))
             }
@@ -355,9 +355,9 @@ abstract class AbstractKapt3Extension(
         messageCollector: MessageCollector,
         converter: ClassFileToSourceStubConverter
     ) {
-        val incrementalDataOutputDir = options.incrementalDataOutputDir ?: return
+        konst incrementalDataOutputDir = options.incrementalDataOutputDir ?: return
 
-        val reportOutputFiles = kaptContext.generationState.configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
+        konst reportOutputFiles = kaptContext.generationState.configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
         kaptContext.generationState.factory.writeAll(
             incrementalDataOutputDir,
             if (!reportOutputFiles) null else fun(sources: List<File>, output: File) {
@@ -373,9 +373,9 @@ internal fun JCTree.prettyPrint(context: Context): String {
     return StringWriter().apply { PrettyWithWorkarounds(context, this, false).printStat(this@prettyPrint) }.toString()
 }
 
-private class PrettyWithWorkarounds(private val context: Context, val out: Writer, sourceOutput: Boolean) : Pretty(out, sourceOutput) {
+private class PrettyWithWorkarounds(private konst context: Context, konst out: Writer, sourceOutput: Boolean) : Pretty(out, sourceOutput) {
     companion object {
-        private const val ENUM = Flags.ENUM.toLong()
+        private const konst ENUM = Flags.ENUM.toLong()
     }
 
     override fun print(s: Any) {
@@ -384,7 +384,7 @@ private class PrettyWithWorkarounds(private val context: Context, val out: Write
 
     override fun visitVarDef(tree: JCTree.JCVariableDecl) {
         if ((tree.mods.flags and ENUM) != 0L) {
-            // Pretty does not print annotations for enum values for some reason
+            // Pretty does not print annotations for enum konstues for some reason
             printExpr(TreeMaker.instance(context).Modifiers(0, tree.mods.annotations))
 
             if (isJava11OrLater()) {
@@ -400,7 +400,7 @@ private class PrettyWithWorkarounds(private val context: Context, val out: Write
 }
 
 private inline fun <T> measureTimeMillis(block: () -> T): Pair<Long, T> {
-    val start = System.currentTimeMillis()
-    val result = block()
+    konst start = System.currentTimeMillis()
+    konst result = block()
     return Pair(System.currentTimeMillis() - start, result)
 }

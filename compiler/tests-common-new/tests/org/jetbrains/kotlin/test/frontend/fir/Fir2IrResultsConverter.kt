@@ -22,8 +22,8 @@ class Fir2IrResultsConverter(
     FrontendKinds.FIR,
     BackendKinds.IrBackend
 ) {
-    private val jvmResultsConverter = Fir2IrJvmResultsConverter(testServices)
-    private val jsResultsConverter = Fir2IrJsResultsConverter(testServices)
+    private konst jvmResultsConverter = Fir2IrJvmResultsConverter(testServices)
+    private konst jsResultsConverter = Fir2IrJsResultsConverter(testServices)
 
     override fun transform(module: TestModule, inputArtifact: FirOutputArtifact): IrBackendInput? = when {
         module.targetPlatform.isJvm() || module.targetPlatform.isCommon() -> {

@@ -1,6 +1,6 @@
 package
 
-public val x: kotlin.Int = 456
+public konst x: kotlin.Int = 456
 public fun bar(/*0*/ container: Container<kotlin.String>, /*1*/ wrapper: Wrapper<kotlin.String>): kotlin.Unit
 public fun baz(/*0*/ container: Container<kotlin.Any>, /*1*/ wrapper: Wrapper<kotlin.String>): kotlin.Unit
 public fun dif(/*0*/ container: Container<kotlin.String>, /*1*/ wrapper: Wrapper<kotlin.Int>): kotlin.Unit

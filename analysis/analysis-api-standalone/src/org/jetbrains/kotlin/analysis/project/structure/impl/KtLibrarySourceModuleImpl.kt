@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 
 internal class KtLibrarySourceModuleImpl(
-    override val directRegularDependencies: List<KtModule>,
-    override val directDependsOnDependencies: List<KtModule>,
-    override val directFriendDependencies: List<KtModule>,
-    override val contentScope: GlobalSearchScope,
-    override val platform: TargetPlatform,
-    override val project: Project,
-    override val libraryName: String,
-    override val binaryLibrary: KtLibraryModule,
+    override konst directRegularDependencies: List<KtModule>,
+    override konst directDependsOnDependencies: List<KtModule>,
+    override konst directFriendDependencies: List<KtModule>,
+    override konst contentScope: GlobalSearchScope,
+    override konst platform: TargetPlatform,
+    override konst project: Project,
+    override konst libraryName: String,
+    override konst binaryLibrary: KtLibraryModule,
 ) : KtLibrarySourceModule, KtModuleWithPlatform {
-    override val transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
-    override val analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
+    override konst transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
+    override konst analyzerServices: PlatformDependentAnalyzerServices = super.analyzerServices
 }

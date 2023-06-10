@@ -2,10 +2,10 @@
 // MODULE: lib
 // FILE: A.kt
 
-inline class A private constructor(private val value: String) {
+inline class A private constructor(private konst konstue: String) {
     constructor(c: Char) : this(c + "K")
 
-    val publicValue: String get() = value
+    konst publicValue: String get() = konstue
 }
 
 // MODULE: main(lib)

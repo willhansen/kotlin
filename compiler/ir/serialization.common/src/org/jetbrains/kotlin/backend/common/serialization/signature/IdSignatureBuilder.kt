@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.name.FqName
 
 abstract class IdSignatureBuilder<D> {
     protected var packageFqn: FqName = FqName.ROOT
-    protected val classFqnSegments = mutableListOf<String>()
+    protected konst classFqnSegments = mutableListOf<String>()
     protected var hashId: Long? = null
     protected var hashIdAcc: Long? = null
     protected var overridden: List<D>? = null
@@ -21,7 +21,7 @@ abstract class IdSignatureBuilder<D> {
 
     protected var isTopLevelPrivate: Boolean = false
 
-    protected abstract val currentFileSignature: IdSignature.FileSignature?
+    protected abstract konst currentFileSignature: IdSignature.FileSignature?
 
     protected abstract fun accept(d: D)
 
@@ -40,30 +40,30 @@ abstract class IdSignatureBuilder<D> {
 
 
     protected fun buildContainerSignature(container: IdSignature): IdSignature.CompositeSignature {
-        val localName = classFqnSegments.joinToString(".")
-        val localHash = hashId
+        konst localName = classFqnSegments.joinToString(".")
+        konst localHash = hashId
         return IdSignature.CompositeSignature(container, IdSignature.LocalSignature(localName, localHash, description))
     }
 
     protected fun build(): IdSignature {
-        val packageFqName = packageFqn.asString()
-        val classFqName = classFqnSegments.joinToString(".")
+        konst packageFqName = packageFqn.asString()
+        konst classFqName = classFqnSegments.joinToString(".")
         return when {
             overridden != null -> {
-                val preserved = overridden!!
+                konst preserved = overridden!!
                 overridden = null
-                val memberSignature = build()
-                val overriddenSignatures = preserved.map { buildSignature(it) }
+                konst memberSignature = build()
+                konst overriddenSignatures = preserved.map { buildSignature(it) }
                 return IdSignature.SpecialFakeOverrideSignature(memberSignature, overriddenSignatures)
             }
             isTopLevelPrivate -> {
-                val fileSig = currentFileSignature
+                konst fileSig = currentFileSignature
                     ?: error("File expected to be not null ($packageFqName, $classFqName)")
                 isTopLevelPrivate = false
                 IdSignature.CompositeSignature(fileSig, build())
             }
             container != null -> {
-                val preservedContainer = container!!
+                konst preservedContainer = container!!
                 container = null
                 buildContainerSignature(preservedContainer)
             }
@@ -72,10 +72,10 @@ abstract class IdSignatureBuilder<D> {
                 IdSignature.CommonSignature(packageFqName, classFqName, hashId, mask)
             }
             else -> {
-                val accessorSignature = IdSignature.CommonSignature(packageFqName, classFqName, hashIdAcc, mask)
+                konst accessorSignature = IdSignature.CommonSignature(packageFqName, classFqName, hashIdAcc, mask)
                 hashIdAcc = null
                 classFqnSegments.run { removeAt(lastIndex) }
-                val propertySignature = build()
+                konst propertySignature = build()
                 IdSignature.AccessorSignature(propertySignature, accessorSignature)
             }
         }

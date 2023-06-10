@@ -35,11 +35,11 @@ import org.jetbrains.kotlin.storage.StorageManager
  * changed.
  */
 open class ContractDescription(
-    val effects: List<EffectDeclaration>,
-    val ownerFunction: FunctionDescriptor,
+    konst effects: List<EffectDeclaration>,
+    konst ownerFunction: FunctionDescriptor,
     storageManager: StorageManager
 ) {
-    private val computeFunctor = storageManager.createNullableLazyValue {
+    private konst computeFunctor = storageManager.createNullableLazyValue {
         ContractInterpretationDispatcher().convertContractDescriptorToFunctor(this)
     }
 

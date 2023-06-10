@@ -4,7 +4,7 @@
 // USE_OLD_INLINE_CLASSES_MANGLING_SCHEME
 // FILE: 1.kt
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 abstract class A {
     fun foo(s: String) = IC(s)

@@ -13,7 +13,7 @@ import kotlin.script.experimental.impl.internalScriptingRunSuspend
 
 // wraps AsyncDependenciesResolver to provide implementation for synchronous DependenciesResolver::resolve
 class AsyncDependencyResolverWrapper(
-        override val delegate: AsyncDependenciesResolver
+        override konst delegate: AsyncDependenciesResolver
 ): AsyncDependenciesResolver, DependencyResolverWrapper<AsyncDependenciesResolver> {
 
     override fun resolve(

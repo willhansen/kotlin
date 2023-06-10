@@ -5,14 +5,14 @@
 import java.lang.reflect.Modifier
 
 class A {
-    val x = "outer"
-    val y = "outer"
+    konst x = "outer"
+    konst y = "outer"
 
     companion object {
         @JvmField
-        val x = "companion"
+        konst x = "companion"
 
-        const val y = "companion"
+        const konst y = "companion"
     }
 }
 

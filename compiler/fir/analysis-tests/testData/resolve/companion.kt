@@ -5,7 +5,7 @@ abstract class Some {
         class InCompanion
     }
 
-    abstract val x: InCompanion
+    abstract konst x: InCompanion
 }
 
 abstract class Another {
@@ -13,5 +13,5 @@ abstract class Another {
         class InCompanion
     }
 
-    abstract val x: InCompanion
+    abstract konst x: InCompanion
 }

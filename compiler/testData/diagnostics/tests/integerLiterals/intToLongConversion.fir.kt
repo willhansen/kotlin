@@ -25,15 +25,15 @@ fun test_constants() {
     takeNullableInt(1 + 1 + 1) // OK
     takeLong(1 + 1 + 1) // will be OK with implicit widening conversion
     takeNullableLong(1 + 1 + 1) // will be OK with implicit widening conversion
-    val x = takeOverloaded(2147483648 - 1 + 1) // now resolved to (1), will be resolved to (2)
+    konst x = takeOverloaded(2147483648 - 1 + 1) // now resolved to (1), will be resolved to (2)
     takeA(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
     takeB(x)
 }
 
-val topLevelIntProperty: Int = 1 + 1 + 1
-val topLevelLongProperty: Long = 1 + 1 + 1
-val topLevelImplicitIntProperty = 1 + 1 + 1
-val topLevelImplicitLongProperty = 3000000000 * 2 + 1
+konst topLevelIntProperty: Int = 1 + 1 + 1
+konst topLevelLongProperty: Long = 1 + 1 + 1
+konst topLevelImplicitIntProperty = 1 + 1 + 1
+konst topLevelImplicitLongProperty = 3000000000 * 2 + 1
 
 fun testTopLevelProperties() {
     // OK
@@ -48,10 +48,10 @@ fun testTopLevelProperties() {
 }
 
 fun testLocalProperties() {
-    val localIntProperty: Int = 1 + 1
-    val localLongProperty: Long = 1 + 1
-    val localImplicitIntProperty = 1 + 1
-    val localImplicitLongProperty = 3000000000 * 2
+    konst localIntProperty: Int = 1 + 1
+    konst localLongProperty: Long = 1 + 1
+    konst localImplicitIntProperty = 1 + 1
+    konst localImplicitLongProperty = 3000000000 * 2
 
     // OK
     takeInt(localIntProperty)

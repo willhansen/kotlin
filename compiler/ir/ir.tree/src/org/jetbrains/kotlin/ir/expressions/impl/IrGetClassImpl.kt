@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.ir.expressions.IrGetClass
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrGetClassImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var argument: IrExpression,
 ) : IrGetClass()

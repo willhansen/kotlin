@@ -8,14 +8,14 @@ class GenericController<T> {
 
 fun <S> generate(g: suspend GenericController<S>.(S) -> Unit): S = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield(4)
 }
 
-val test2 = generate<Int> {
+konst test2 = generate<Int> {
     yield(4)
 }
 
-val test3 = generate { bar: Int ->
+konst test3 = generate { bar: Int ->
     yield(4)
 }

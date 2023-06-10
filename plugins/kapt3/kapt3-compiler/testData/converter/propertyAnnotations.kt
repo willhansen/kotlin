@@ -5,5 +5,5 @@ annotation class Anno2
 
 class Test {
     @property:[Anno Anno2]
-    val prop = "A"
+    konst prop = "A"
 }

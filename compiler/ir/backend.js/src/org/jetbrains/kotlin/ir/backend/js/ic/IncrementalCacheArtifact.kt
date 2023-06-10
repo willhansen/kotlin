@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.utils.newHashSetWithExpectedSize
 import java.io.BufferedOutputStream
 import java.io.File
 
-internal sealed class SourceFileCacheArtifact(val srcFile: KotlinSourceFile, val binaryAstFile: File) {
+internal sealed class SourceFileCacheArtifact(konst srcFile: KotlinSourceFile, konst binaryAstFile: File) {
     abstract fun commitMetadata()
 
     fun commitBinaryAst(fragment: JsIrProgramFragment) {
@@ -29,8 +29,8 @@ internal sealed class SourceFileCacheArtifact(val srcFile: KotlinSourceFile, val
     class CommitMetadata(
         srcFile: KotlinSourceFile,
         binaryAstFile: File,
-        private val metadataFile: File,
-        private val encodedMetadata: ByteArray
+        private konst metadataFile: File,
+        private konst encodedMetadata: ByteArray
     ) : SourceFileCacheArtifact(srcFile, binaryAstFile) {
         override fun commitMetadata() {
             metadataFile.parentFile?.mkdirs()
@@ -41,7 +41,7 @@ internal sealed class SourceFileCacheArtifact(val srcFile: KotlinSourceFile, val
     class RemoveMetadata(
         srcFile: KotlinSourceFile,
         binaryAstFile: File,
-        private val metadataFile: File
+        private konst metadataFile: File
     ) : SourceFileCacheArtifact(srcFile, binaryAstFile) {
         override fun commitMetadata() {
             metadataFile.delete()
@@ -50,10 +50,10 @@ internal sealed class SourceFileCacheArtifact(val srcFile: KotlinSourceFile, val
 }
 
 internal class IncrementalCacheArtifact(
-    private val artifactsDir: File,
-    private val forceRebuildJs: Boolean,
-    private val srcCacheActions: List<SourceFileCacheArtifact>,
-    private val externalModuleName: String?
+    private konst artifactsDir: File,
+    private konst forceRebuildJs: Boolean,
+    private konst srcCacheActions: List<SourceFileCacheArtifact>,
+    private konst externalModuleName: String?
 ) {
     fun getSourceFiles() = srcCacheActions.mapTo(newHashSetWithExpectedSize(srcCacheActions.size)) { it.srcFile }
 
@@ -61,8 +61,8 @@ internal class IncrementalCacheArtifact(
         moduleName: String,
         rebuiltFileFragments: Map<KotlinSourceFile, JsIrProgramFragment>,
     ): ModuleArtifact {
-        val fileArtifacts = srcCacheActions.map { srcFileAction ->
-            val rebuiltFileFragment = rebuiltFileFragments[srcFileAction.srcFile]
+        konst fileArtifacts = srcCacheActions.map { srcFileAction ->
+            konst rebuiltFileFragment = rebuiltFileFragments[srcFileAction.srcFile]
             if (rebuiltFileFragment != null) {
                 srcFileAction.commitBinaryAst(rebuiltFileFragment)
             }

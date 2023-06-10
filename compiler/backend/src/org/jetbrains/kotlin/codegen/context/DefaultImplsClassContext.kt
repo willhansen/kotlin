@@ -28,16 +28,16 @@ class DefaultImplsClassContext(
     contextKind: OwnerKind,
     parentContext: CodegenContext<*>?,
     localLookup: ((DeclarationDescriptor) -> Boolean)?,
-    val interfaceContext: ClassContext
+    konst interfaceContext: ClassContext
 ) : ClassContext(typeMapper, contextDescriptor, contextKind, parentContext, localLookup) {
 
     override fun getCompanionObjectContext(): CodegenContext<*>? = interfaceContext.companionObjectContext
 
     override fun getAccessors(): Collection<AccessorForCallableDescriptor<*>> {
-        val accessors = super.getAccessors()
-        val alreadyExistKeys = accessors.map({ Pair(it.calleeDescriptor, it.superCallTarget) })
-        val filtered = interfaceContext.accessors.associateByTo(linkedMapOf()) { Pair(it.calleeDescriptor, it.superCallTarget) }
+        konst accessors = super.getAccessors()
+        konst alreadyExistKeys = accessors.map({ Pair(it.calleeDescriptor, it.superCallTarget) })
+        konst filtered = interfaceContext.accessors.associateByTo(linkedMapOf()) { Pair(it.calleeDescriptor, it.superCallTarget) }
             .apply { keys -= alreadyExistKeys }
-        return accessors + filtered.values
+        return accessors + filtered.konstues
     }
 }

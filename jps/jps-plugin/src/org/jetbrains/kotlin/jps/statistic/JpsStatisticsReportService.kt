@@ -21,12 +21,12 @@ interface JpsBuilderMetricReporter : BuildMetricsReporter {
     fun flush(context: CompileContext): CompileStatisticsData
 }
 
-private const val jpsBuildTaskName = "JPS build"
+private const konst jpsBuildTaskName = "JPS build"
 
-class JpsBuilderMetricReporterImpl(private val reporter: BuildMetricsReporterImpl) : JpsBuilderMetricReporter, BuildMetricsReporter by reporter {
+class JpsBuilderMetricReporterImpl(private konst reporter: BuildMetricsReporterImpl) : JpsBuilderMetricReporter, BuildMetricsReporter by reporter {
 
     companion object {
-        private val hostName: String? = try {
+        private konst hostName: String? = try {
             InetAddress.getLocalHost().hostName
         } catch (_: Exception) {
             //do nothing
@@ -34,11 +34,11 @@ class JpsBuilderMetricReporterImpl(private val reporter: BuildMetricsReporterImp
         }
     }
 
-    private val uuid = UUID.randomUUID()
-    private val startTime = System.currentTimeMillis()
+    private konst uuid = UUID.randomUUID()
+    private konst startTime = System.currentTimeMillis()
 
     override fun flush(context: CompileContext): CompileStatisticsData {
-        val buildMetrics = reporter.getMetrics()
+        konst buildMetrics = reporter.getMetrics()
         return CompileStatisticsData(
             projectName = context.projectDescriptor.project.name,
             label = "JPS build", //TODO will be updated in KT-58026
@@ -72,8 +72,8 @@ class JpsBuilderMetricReporterImpl(private val reporter: BuildMetricsReporterImp
 // TODO test UserDataHolder in CompileContext to store CompileStatisticsData.Build or KotlinBuilderMetric
 class JpsStatisticsReportService {
 
-    private val fileReportSettings: FileReportSettings? = initFileReportSettings()
-    private val httpReportSettings: HttpReportSettings? = initHttpReportSettings()
+    private konst fileReportSettings: FileReportSettings? = initFileReportSettings()
+    private konst httpReportSettings: HttpReportSettings? = initHttpReportSettings()
 
     companion object {
         private fun initFileReportSettings(): FileReportSettings? {
@@ -81,19 +81,19 @@ class JpsStatisticsReportService {
         }
 
         private fun initHttpReportSettings(): HttpReportSettings? {
-            val httpReportUrl = System.getProperty("kotlin.build.report.http.url") ?: return null
-            val httpReportUser = System.getProperty("kotlin.build.report.http.user")
-            val httpReportPassword = System.getProperty("kotlin.build.report.http.password")
-            val includeGitBranch = System.getProperty("kotlin.build.report.http.git_branch", "false").toBoolean()
-            val verboseEnvironment = System.getProperty("kotlin.build.report.http.environment.verbose", "false").toBoolean()
+            konst httpReportUrl = System.getProperty("kotlin.build.report.http.url") ?: return null
+            konst httpReportUser = System.getProperty("kotlin.build.report.http.user")
+            konst httpReportPassword = System.getProperty("kotlin.build.report.http.password")
+            konst includeGitBranch = System.getProperty("kotlin.build.report.http.git_branch", "false").toBoolean()
+            konst verboseEnvironment = System.getProperty("kotlin.build.report.http.environment.verbose", "false").toBoolean()
             return HttpReportSettings(httpReportUrl, httpReportUser, httpReportPassword, verboseEnvironment, includeGitBranch)
         }
     }
 
-    private val contextMetrics = HashMap<CompileContext, JpsBuilderMetricReporter>()
-    private val log = Logger.getInstance("#org.jetbrains.kotlin.jps.statistic.KotlinBuilderReportService")
-    private val loggerAdapter = JpsKotlinLogger(log)
-    private val httpService = httpReportSettings?.let { HttpReportService(it.url, it.user, it.password) }
+    private konst contextMetrics = HashMap<CompileContext, JpsBuilderMetricReporter>()
+    private konst log = Logger.getInstance("#org.jetbrains.kotlin.jps.statistic.KotlinBuilderReportService")
+    private konst loggerAdapter = JpsKotlinLogger(log)
+    private konst httpService = httpReportSettings?.let { HttpReportService(it.url, it.user, it.password) }
     fun buildStarted(context: CompileContext) {
         if (contextMetrics[context] != null) {
             log.error("Service already initialized for context")
@@ -102,13 +102,13 @@ class JpsStatisticsReportService {
     }
 
     fun buildFinished(context: CompileContext) {
-        val metrics = contextMetrics.remove(context)
+        konst metrics = contextMetrics.remove(context)
         if (metrics == null) {
             log.error("Service hasn't initialized for context")
             return
         }
 
-        val compileStatisticsData = metrics.flush(context)
+        konst compileStatisticsData = metrics.flush(context)
         httpService?.sendData(compileStatisticsData, loggerAdapter)
         fileReportSettings?.also {
             FileReportService(it.buildReportDir, true, loggerAdapter)

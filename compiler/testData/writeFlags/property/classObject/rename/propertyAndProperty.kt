@@ -3,7 +3,7 @@ class Test {
   public var prop: Int = 0;
 
   companion object {
-    public const val prop: Int = 0;
+    public const konst prop: Int = 0;
   }
 }
 

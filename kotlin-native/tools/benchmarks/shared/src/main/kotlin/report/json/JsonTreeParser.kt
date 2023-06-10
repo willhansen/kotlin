@@ -18,7 +18,7 @@
 // A bit changed part of kotlinx.serialization plugin
 package org.jetbrains.report.json
 
-class JsonTreeParser internal constructor(private val p: Parser) {
+class JsonTreeParser internal constructor(private konst p: Parser) {
 
     companion object {
         fun parse(input: String): JsonElement = JsonTreeParser(input).readFully()
@@ -29,14 +29,14 @@ class JsonTreeParser internal constructor(private val p: Parser) {
     private fun readObject(): JsonElement {
         p.requireTc(TC_BEGIN_OBJ) { "Expected start of object" }
         p.nextToken()
-        val result: MutableMap<String, JsonElement> = hashMapOf()
+        konst result: MutableMap<String, JsonElement> = hashMapOf()
         while (true) {
             if (p.tc == TC_COMMA) p.nextToken()
             if (!p.canBeginValue) break
-            val key = p.takeStr()
+            konst key = p.takeStr()
             p.requireTc(TC_COLON) { "Expected ':'" }
             p.nextToken()
-            val elem = read()
+            konst elem = read()
             result[key] = elem
         }
         p.requireTc(TC_END_OBJ) { "Expected end of object" }
@@ -45,18 +45,18 @@ class JsonTreeParser internal constructor(private val p: Parser) {
     }
 
     private fun readValue(isString: Boolean): JsonElement {
-        val str = p.takeStr()
+        konst str = p.takeStr()
         return JsonLiteral(str, isString)
     }
 
     private fun readArray(): JsonElement {
         p.requireTc(TC_BEGIN_LIST) { "Expected start of array" }
         p.nextToken()
-        val result: MutableList<JsonElement> = arrayListOf()
+        konst result: MutableList<JsonElement> = arrayListOf()
         while (true) {
             if (p.tc == TC_COMMA) p.nextToken()
             if (!p.canBeginValue) break
-            val elem = read()
+            konst elem = read()
             result.add(elem)
         }
         p.requireTc(TC_END_LIST) { "Expected end of array" }
@@ -65,8 +65,8 @@ class JsonTreeParser internal constructor(private val p: Parser) {
     }
 
     fun read(): JsonElement {
-        if (!p.canBeginValue) fail(p.curPos, "Can't begin reading value from here")
-        val tc = p.tc
+        if (!p.canBeginValue) fail(p.curPos, "Can't begin reading konstue from here")
+        konst tc = p.tc
         return when (tc) {
             TC_NULL -> JsonNull.also { p.nextToken() }
             TC_STRING -> readValue(isString = true)
@@ -78,7 +78,7 @@ class JsonTreeParser internal constructor(private val p: Parser) {
     }
 
     fun readFully(): JsonElement {
-        val r = read()
+        konst r = read()
         p.requireTc(TC_EOF) { "Input wasn't consumed fully" }
         return r
     }

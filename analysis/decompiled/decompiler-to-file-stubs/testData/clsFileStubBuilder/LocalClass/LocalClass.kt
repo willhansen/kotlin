@@ -7,11 +7,11 @@ class LocalClass {
         Local()
     }
 
-    private val bar = object {}
+    private konst bar = object {}
 
-    private val sam = Runnable {}
+    private konst sam = Runnable {}
 
-    private val sub = object : Runnable {
+    private konst sub = object : Runnable {
         override fun run() {
         }
     }

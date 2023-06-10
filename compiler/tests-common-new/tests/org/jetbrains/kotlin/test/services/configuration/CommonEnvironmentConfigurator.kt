@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.test.services.EnvironmentConfigurator
 import org.jetbrains.kotlin.test.services.TestServices
 
 class CommonEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(ConfigurationDirectives)
 
     override fun provideAdditionalAnalysisFlags(
@@ -37,10 +37,10 @@ class CommonEnvironmentConfigurator(testServices: TestServices) : EnvironmentCon
     }
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
-        val rawFlags = module.directives[ConfigurationDirectives.KOTLIN_CONFIGURATION_FLAGS]
-        parseAnalysisFlags(rawFlags).forEach { (key, value) ->
+        konst rawFlags = module.directives[ConfigurationDirectives.KOTLIN_CONFIGURATION_FLAGS]
+        parseAnalysisFlags(rawFlags).forEach { (key, konstue) ->
             @Suppress("UNCHECKED_CAST")
-            configuration.put(key as CompilerConfigurationKey<Any>, value)
+            configuration.put(key as CompilerConfigurationKey<Any>, konstue)
         }
 
         if (module.targetPlatform.isCommon() && WITH_STDLIB in module.directives) {

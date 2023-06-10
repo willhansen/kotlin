@@ -29,17 +29,17 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class ProtectedInSuperClassCompanionCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val targetDescriptor = resolvedCall.resultingDescriptor.original
+        konst targetDescriptor = resolvedCall.resultingDescriptor.original
 
         // Protected non-JVM static
         if (targetDescriptor.visibility != DescriptorVisibilities.PROTECTED) return
         if (targetDescriptor.hasJvmStaticAnnotation()) return
-        val containerDescriptor = targetDescriptor.containingDeclaration
+        konst containerDescriptor = targetDescriptor.containingDeclaration
         // Declared in companion object
         if (containerDescriptor is ClassDescriptor && containerDescriptor.isCompanionObject) {
-            val companionDescriptor = containerDescriptor
-            val companionOwnerDescriptor = companionDescriptor.containingDeclaration as? ClassDescriptor ?: return
-            val parentClassDescriptors = context.scope.ownerDescriptor.parentsWithSelf.filterIsInstance<ClassDescriptor>()
+            konst companionDescriptor = containerDescriptor
+            konst companionOwnerDescriptor = companionDescriptor.containingDeclaration as? ClassDescriptor ?: return
+            konst parentClassDescriptors = context.scope.ownerDescriptor.parentsWithSelf.filterIsInstance<ClassDescriptor>()
             // Called from within a derived class
             if (!parentClassDescriptors.any { DescriptorUtils.isSubclass(it, companionOwnerDescriptor) }) return
             // Called not within the same companion object or its owner class

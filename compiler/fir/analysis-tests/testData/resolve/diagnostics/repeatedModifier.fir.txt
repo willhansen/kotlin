@@ -23,7 +23,7 @@ FILE: repeatedModifier.kt
                 super<R|kotlin/Any|>()
             }
 
-            private final val D: R|kotlin/Int| = Int(5)
+            private final konst D: R|kotlin/Int| = Int(5)
                 private get(): R|kotlin/Int|
 
         }
@@ -32,13 +32,13 @@ FILE: repeatedModifier.kt
             ^foo R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Int|>|(Int(8))
         }
 
-        public final static fun values(): R|kotlin/Array<C>| {
+        public final static fun konstues(): R|kotlin/Array<C>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|C| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|C| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<C>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<C>|
             public get(): R|kotlin/enums/EnumEntries<C>|
 
     }
@@ -47,11 +47,11 @@ FILE: repeatedModifier.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val int: R|kotlin/Int| = R|<local>/int|
+        private final konst int: R|kotlin/Int| = R|<local>/int|
             private get(): R|kotlin/Int|
 
         protected final var double: R|kotlin/Double| = this@R|/E|.R|/E.int|.R|kotlin/Int.plus|(Double(8.0))
             protected get(): R|kotlin/Double|
-            protected set(value: R|kotlin/Double|): R|kotlin/Unit|
+            protected set(konstue: R|kotlin/Double|): R|kotlin/Unit|
 
     }

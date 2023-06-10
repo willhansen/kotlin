@@ -21,12 +21,12 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtPsiUtil
 
 open class StatementFilter {
-    open val filter: ((KtExpression) -> Boolean)?
+    open konst filter: ((KtExpression) -> Boolean)?
         get() = null
 
     companion object {
         @JvmField
-        val NONE = object : StatementFilter() {
+        konst NONE = object : StatementFilter() {
             override fun toString() = "NONE"
         }
     }

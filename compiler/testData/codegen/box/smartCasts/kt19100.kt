@@ -7,6 +7,6 @@ open class KFoo {
 
 class KFooQux : KFoo()
 
-val KFooQux.qux get() = "OK"
+konst KFooQux.qux get() = "OK"
 
 fun box() = KFooQux().foo()

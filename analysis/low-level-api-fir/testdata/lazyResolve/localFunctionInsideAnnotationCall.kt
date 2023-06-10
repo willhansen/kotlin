@@ -1,6 +1,6 @@
 package one
 
-annotation class Anno(val s: String)
+annotation class Anno(konst s: String)
 
 @Anno(f<caret>un(): String {
 

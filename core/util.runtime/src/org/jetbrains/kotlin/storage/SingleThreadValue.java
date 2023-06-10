@@ -6,22 +6,22 @@
 package org.jetbrains.kotlin.storage;
 
 /**
- * A storage for the value that should exist and be accessible in the single thread.
+ * A storage for the konstue that should exist and be accessible in the single thread.
  *
- * Unlike ThreadLocal, thread doesn't store a reference to the value that makes it inaccessible globally, but simplifies memory
+ * Unlike ThreadLocal, thread doesn't store a reference to the konstue that makes it inaccessible globally, but simplifies memory
  * management.
  *
- * The other difference from ThreadLocal is inability to have different values per each thread, so SingleThreadValue instance
+ * The other difference from ThreadLocal is inability to have different konstues per each thread, so SingleThreadValue instance
  * should be protected with external lock from rewrites.
  *
  * @param <T>
  */
 class SingleThreadValue<T> {
-    private final T value;
+    private final T konstue;
     private final Thread thread;
 
-    SingleThreadValue(T value) {
-        this.value = value;
+    SingleThreadValue(T konstue) {
+        this.konstue = konstue;
         thread = Thread.currentThread();
     }
 
@@ -30,7 +30,7 @@ class SingleThreadValue<T> {
     }
 
     public T getValue() {
-        if (!hasValue()) throw new IllegalStateException("No value in this thread (hasValue should be checked before)");
-        return value;
+        if (!hasValue()) throw new IllegalStateException("No konstue in this thread (hasValue should be checked before)");
+        return konstue;
     }
 }

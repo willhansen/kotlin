@@ -10,7 +10,7 @@ import kotlin.test.*
 inline fun exec(f: () -> Unit) = f()
 
 inline fun test2() {
-    val obj = object {
+    konst obj = object {
         fun sayOk() = println("Ok")
     }
     obj.sayOk()

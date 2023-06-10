@@ -16,7 +16,7 @@ interface IdeCompilerArgumentsResolver {
     fun resolveCompilerArguments(any: Any): List<String>?
 
     companion object {
-        internal val logger: Logger = Logging.getLogger(IdeMultiplatformImport::class.java)
+        internal konst logger: Logger = Logging.getLogger(IdeMultiplatformImport::class.java)
 
         @JvmStatic
         fun instance(project: Project): IdeCompilerArgumentsResolver {
@@ -27,5 +27,5 @@ interface IdeCompilerArgumentsResolver {
     }
 }
 
-internal val Project.kotlinIdeCompilerArgumentsResolver: IdeCompilerArgumentsResolver get() = IdeCompilerArgumentsResolver.instance(project)
+internal konst Project.kotlinIdeCompilerArgumentsResolver: IdeCompilerArgumentsResolver get() = IdeCompilerArgumentsResolver.instance(project)
 

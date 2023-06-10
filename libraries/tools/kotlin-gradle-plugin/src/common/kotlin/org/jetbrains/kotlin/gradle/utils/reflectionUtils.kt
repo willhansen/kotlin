@@ -25,7 +25,7 @@ internal inline fun <reified T> Any.castIsolatedKotlinPluginClassLoaderAware(): 
     /* Fast path */
     if (this is T) return this
 
-    val targetClassFromReceiverClassLoader = try {
+    konst targetClassFromReceiverClassLoader = try {
         this::class.java.classLoader.loadClass(T::class.java.name)
     } catch (_: ClassNotFoundException) {
         null

@@ -1,16 +1,16 @@
 class Outer() {
-  val s = "xyzzy"
+  konst s = "xyzzy"
 
-  open inner class InnerBase(public val name: String) {
+  open inner class InnerBase(public konst name: String) {
   }
 
   inner class InnerDerived(): InnerBase(s) {
   }
 
-  val x = InnerDerived()
+  konst x = InnerDerived()
 }
 
 fun box() : String {
-  val o = Outer()
+  konst o = Outer()
   return if (o.x.name != "xyzzy") "fail" else "OK"
 }

@@ -9,18 +9,18 @@ plugins {
 
 description = "Kotlin Standard Library for experimental WebAssembly platform"
 
-val unimplementedNativeBuiltIns =
+konst unimplementedNativeBuiltIns =
     (file("$rootDir/core/builtins/native/kotlin/").list().toSortedSet() - file("$rootDir/libraries/stdlib/wasm/builtins/kotlin/").list())
         .map { "core/builtins/native/kotlin/$it" }
 
 
 
-val builtInsSources by task<Sync> {
-    val sources = listOf(
+konst builtInsSources by task<Sync> {
+    konst sources = listOf(
         "core/builtins/src/kotlin/"
     ) + unimplementedNativeBuiltIns
 
-    val excluded = listOf(
+    konst excluded = listOf(
         // JS-specific optimized version of emptyArray() already defined
         "ArrayIntrinsics.kt",
         // Included with K/N collections
@@ -39,8 +39,8 @@ val builtInsSources by task<Sync> {
     into("$buildDir/builtInsSources")
 }
 
-val commonMainSources by task<Sync> {
-    val sources = listOf(
+konst commonMainSources by task<Sync> {
+    konst sources = listOf(
         "libraries/stdlib/common/src/",
         "libraries/stdlib/src/kotlin/",
         "libraries/stdlib/unsigned/"
@@ -57,8 +57,8 @@ val commonMainSources by task<Sync> {
     dependsOn(":prepare:build.version:writeStdlibVersion")
 }
 
-val commonTestSources by task<Sync> {
-    val sources = listOf(
+konst commonTestSources by task<Sync> {
+    konst sources = listOf(
         "libraries/stdlib/test/",
         "libraries/stdlib/common/test/"
     )
@@ -83,24 +83,24 @@ kotlin {
     }
 
     sourceSets {
-        val wasmMain by getting {
+        konst wasmMain by getting {
             kotlin.srcDirs("builtins", "internal", "runtime", "src", "stubs")
             kotlin.srcDirs("$rootDir/libraries/stdlib/native-wasm/src")
             kotlin.srcDirs(files(builtInsSources.map { it.destinationDir }))
         }
 
-        val commonMain by getting {
+        konst commonMain by getting {
             kotlin.srcDirs(files(commonMainSources.map { it.destinationDir }))
         }
 
-        val commonTest by getting {
+        konst commonTest by getting {
             dependencies {
                 api(project(":kotlin-test:kotlin-test-wasm"))
             }
             kotlin.srcDir(files(commonTestSources.map { it.destinationDir }))
         }
 
-        val wasmTest by getting {
+        konst wasmTest by getting {
             dependencies {
                 api(project(":kotlin-test:kotlin-test-wasm"))
             }
@@ -139,8 +139,8 @@ tasks.named("compileKotlinWasm") {
     dependsOn(builtInsSources)
 }
 
-val compileTestKotlinWasm by tasks.existing(KotlinCompile::class) {
-    val sources: FileCollection = kotlin.sourceSets["commonTest"].kotlin
+konst compileTestKotlinWasm by tasks.existing(KotlinCompile::class) {
+    konst sources: FileCollection = kotlin.sourceSets["commonTest"].kotlin
     doFirst {
         // Note: common test sources are copied to the actual source directory by commonMainSources task,
         // so can't do this at configuration time:
@@ -148,12 +148,12 @@ val compileTestKotlinWasm by tasks.existing(KotlinCompile::class) {
     }
 }
 
-val compileTestDevelopmentExecutableKotlinWasm = tasks.named<KotlinJsIrLink>("compileTestDevelopmentExecutableKotlinWasm") {
+konst compileTestDevelopmentExecutableKotlinWasm = tasks.named<KotlinJsIrLink>("compileTestDevelopmentExecutableKotlinWasm") {
     (this as KotlinCompile<*>).kotlinOptions.freeCompilerArgs += listOf("-Xwasm-enable-array-range-checks")
 }
 
-val runtimeElements by configurations.creating {}
-val apiElements by configurations.creating {}
+konst runtimeElements by configurations.creating {}
+konst apiElements by configurations.creating {}
 
 publish(sbom = false) {
     pom.packaging = "klib"
@@ -162,7 +162,7 @@ publish(sbom = false) {
     }
 }
 
-afterEvaluate {
+afterEkonstuate {
     // cleanup default publications
     // TODO: remove after mpp plugin allows avoiding their creation at all, KT-29273
     publishing {

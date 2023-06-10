@@ -2,7 +2,7 @@
 // KT-1998 Strange "Overload resolution ambiguity"
 
 object A {
-    val c : String = "test"
+    konst c : String = "test"
 
     fun f(b: B): String {
         return b.c // Test no "Overload resolution ambiguity" is reported here
@@ -11,5 +11,5 @@ object A {
 
 class B
 
-val B.c : String
+konst B.c : String
     get() = "test"

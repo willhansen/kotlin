@@ -13,13 +13,13 @@ import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 import java.io.Serializable
 
 object JvmBuiltInsSignatures {
-    val DROP_LIST_METHOD_SIGNATURES: Set<String> =
+    konst DROP_LIST_METHOD_SIGNATURES: Set<String> =
         SignatureBuildingComponents.inJavaUtil(
             "Collection",
             "toArray()[Ljava/lang/Object;", "toArray([Ljava/lang/Object;)[Ljava/lang/Object;"
         ) + "java/lang/annotation/Annotation.annotationType()Ljava/lang/Class;"
 
-    val HIDDEN_METHOD_SIGNATURES: Set<String> =
+    konst HIDDEN_METHOD_SIGNATURES: Set<String> =
         signatures {
             buildPrimitiveValueMethodsSet() +
 
@@ -74,7 +74,7 @@ object JvmBuiltInsSignatures {
         }
 
 
-    val VISIBLE_METHOD_SIGNATURES: Set<String> =
+    konst VISIBLE_METHOD_SIGNATURES: Set<String> =
         signatures {
             inJavaLang(
                 "CharSequence",
@@ -125,7 +125,7 @@ object JvmBuiltInsSignatures {
                     )
         }
 
-    val MUTABLE_METHOD_SIGNATURES: Set<String> =
+    konst MUTABLE_METHOD_SIGNATURES: Set<String> =
         signatures {
             inJavaUtil("Collection", "removeIf(Ljava/util/function/Predicate;)Z") +
 
@@ -144,7 +144,7 @@ object JvmBuiltInsSignatures {
                     )
         }
 
-    val HIDDEN_CONSTRUCTOR_SIGNATURES: Set<String> =
+    konst HIDDEN_CONSTRUCTOR_SIGNATURES: Set<String> =
         signatures {
             buildPrimitiveStringConstructorsSet() +
                     inJavaLang("Float", *constructors("D")) +
@@ -161,7 +161,7 @@ object JvmBuiltInsSignatures {
                     )
         }
 
-    val VISIBLE_CONSTRUCTOR_SIGNATURES: Set<String> =
+    konst VISIBLE_CONSTRUCTOR_SIGNATURES: Set<String> =
         signatures {
             inJavaLang("Throwable", *constructors("Ljava/lang/String;Ljava/lang/Throwable;ZZ"))
         }
@@ -181,8 +181,8 @@ object JvmBuiltInsSignatures {
         if (isArrayOrPrimitiveArray(fqName)) {
             return true
         }
-        val javaClassId = JavaToKotlinClassMap.mapKotlinToJava(fqName) ?: return false
-        val classViaReflection = try {
+        konst javaClassId = JavaToKotlinClassMap.mapKotlinToJava(fqName) ?: return false
+        konst classViaReflection = try {
             Class.forName(javaClassId.asSingleFqName().asString())
         } catch (e: ClassNotFoundException) {
             return false

@@ -8,11 +8,11 @@ package a
 
 import kotlin.reflect.jvm.isAccessible
 
-inline class S(val s: String)
+inline class S(konst s: String)
 
-private val ok = S("OK")
+private konst ok = S("OK")
 
-val ref = ::ok.apply { isAccessible = true }
+konst ref = ::ok.apply { isAccessible = true }
 
 // MODULE: main(lib)
 // FILE: B.kt

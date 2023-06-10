@@ -3,13 +3,13 @@
 import kotlin.test.*
 
 fun box(): String {
-    val intList = mutableListOf<Int>()
+    konst intList = mutableListOf<Int>()
     for (i in 7.toByte() downTo 1.toShort() step 2) {
         intList += i
     }
     assertEquals(listOf(7, 5, 3, 1), intList)
 
-    val longList = mutableListOf<Long>()
+    konst longList = mutableListOf<Long>()
     for (i in 7 downTo 1L step 2) {
         longList += i
     }

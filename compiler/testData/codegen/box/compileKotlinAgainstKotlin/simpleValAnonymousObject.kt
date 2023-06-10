@@ -5,7 +5,7 @@ package pkg
 
 interface ClassA {
     companion object {
-        val DEFAULT = object : ClassA {
+        konst DEFAULT = object : ClassA {
             override fun toString() = "OK"
         }
     }
@@ -17,6 +17,6 @@ interface ClassA {
 import pkg.ClassA
 
 fun box(): String {
-    val obj = ClassA.DEFAULT
+    konst obj = ClassA.DEFAULT
     return obj.toString()
 }

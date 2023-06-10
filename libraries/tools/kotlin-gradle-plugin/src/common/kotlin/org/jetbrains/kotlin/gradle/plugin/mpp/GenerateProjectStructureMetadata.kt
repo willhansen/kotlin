@@ -17,17 +17,17 @@ import javax.inject.Inject
 abstract class GenerateProjectStructureMetadata : DefaultTask() {
 
     @get:Inject
-    abstract internal val projectLayout: ProjectLayout
+    abstract internal konst projectLayout: ProjectLayout
 
     @get:Internal
     internal lateinit var lazyKotlinProjectStructureMetadata: Lazy<KotlinProjectStructureMetadata>
 
     @get:Nested
-    internal val kotlinProjectStructureMetadata: KotlinProjectStructureMetadata
-        get() = lazyKotlinProjectStructureMetadata.value
+    internal konst kotlinProjectStructureMetadata: KotlinProjectStructureMetadata
+        get() = lazyKotlinProjectStructureMetadata.konstue
 
     @get:OutputFile
-    val resultFile: File
+    konst resultFile: File
         get() = projectLayout.buildDirectory.file(
             "kotlinProjectStructureMetadata/$MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME"
         ).get().asFile
@@ -35,10 +35,10 @@ abstract class GenerateProjectStructureMetadata : DefaultTask() {
     @TaskAction
     fun generateMetadataXml() {
         resultFile.parentFile.mkdirs()
-        val resultString = kotlinProjectStructureMetadata.toJson()
+        konst resultString = kotlinProjectStructureMetadata.toJson()
         resultFile.writeText(resultString)
     }
 }
 
-internal const val MULTIPLATFORM_PROJECT_METADATA_FILE_NAME = "kotlin-project-structure-metadata.xml"
-internal const val MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME = "kotlin-project-structure-metadata.json"
+internal const konst MULTIPLATFORM_PROJECT_METADATA_FILE_NAME = "kotlin-project-structure-metadata.xml"
+internal const konst MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME = "kotlin-project-structure-metadata.json"

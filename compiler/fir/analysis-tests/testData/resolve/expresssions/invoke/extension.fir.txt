@@ -10,7 +10,7 @@ FILE: extension.kt
             ^invoke this@R|/Foo|
         }
 
-        public final val x: R|kotlin/Int| = Int(0)
+        public final konst x: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
         public final fun foo(): R|Foo| {

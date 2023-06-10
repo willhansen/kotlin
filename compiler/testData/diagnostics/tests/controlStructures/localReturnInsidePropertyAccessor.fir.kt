@@ -1,7 +1,7 @@
 interface ClassData
 
 fun f() = object : ClassData {
-    val someInt: Int
+    konst someInt: Int
         get() {
             return 5
         }

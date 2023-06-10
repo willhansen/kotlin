@@ -1,4 +1,4 @@
-//KT-1571 Frontend fails to check val reassigment for operator overloading.
+//KT-1571 Frontend fails to check konst reassigment for operator overloading.
 package kt1571
 
 var c0 = 0
@@ -16,7 +16,7 @@ class A() {
     }
 }
 
-val a : A = A()
+konst a : A = A()
 get() {
     c0++
     return field
@@ -31,7 +31,7 @@ fun box() : String {
     if (c1 != 1) {
         return "2"
     }
-    <!VAL_REASSIGNMENT!>a<!> *= 3 // a = a * 3, shouldn't be able to do this on val
+    <!VAL_REASSIGNMENT!>a<!> *= 3 // a = a * 3, shouldn't be able to do this on konst
     if (c0 != 2) {
         return "3"
     }

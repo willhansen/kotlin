@@ -15,11 +15,11 @@ import kotlin.coroutines.intrinsics.createCoroutineUnintercepted
 import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 import kotlin.coroutines.resume
 
-class TowerResolveManager private constructor(private val shouldStopAtTheLevel: (TowerGroup) -> Boolean) {
+class TowerResolveManager private constructor(private konst shouldStopAtTheLevel: (TowerGroup) -> Boolean) {
 
     constructor(collector: CandidateCollector) : this(collector::shouldStopAtTheGroup)
 
-    private val queue = PriorityQueue<SuspendedResolverTask>()
+    private konst queue = PriorityQueue<SuspendedResolverTask>()
 
     fun reset() {
         queue.clear()
@@ -35,7 +35,7 @@ class TowerResolveManager private constructor(private val shouldStopAtTheLevel: 
         if (shouldStopAtTheLevel(requested)) {
             stopResolverTask()
         }
-        val peeked = queue.peek()
+        konst peeked = queue.peek()
 
         // Task ordering should be FIFO
         // Here, if peeked have equal group it means that it came first to this function, so should be processed before us
@@ -47,8 +47,8 @@ class TowerResolveManager private constructor(private val shouldStopAtTheLevel: 
     private suspend fun stopResolverTask(): Nothing = suspendCoroutineUninterceptedOrReturn { COROUTINE_SUSPENDED }
 
     private data class SuspendedResolverTask(
-        val continuation: Continuation<Unit>,
-        val group: TowerGroup
+        konst continuation: Continuation<Unit>,
+        konst group: TowerGroup
     ) : Comparable<SuspendedResolverTask> {
         override fun compareTo(other: SuspendedResolverTask): Int {
             return group.compareTo(other.group)
@@ -56,9 +56,9 @@ class TowerResolveManager private constructor(private val shouldStopAtTheLevel: 
     }
 
     fun enqueueResolverTask(group: TowerGroup = TowerGroup.Start, task: suspend () -> Unit) {
-        val continuation = task.createCoroutineUnintercepted(
+        konst continuation = task.createCoroutineUnintercepted(
             object : Continuation<Unit> {
-                override val context: CoroutineContext
+                override konst context: CoroutineContext
                     get() = EmptyCoroutineContext
 
                 override fun resumeWith(result: Result<Unit>) {
@@ -79,7 +79,7 @@ class TowerResolveManager private constructor(private val shouldStopAtTheLevel: 
 
     fun runTasks() {
         while (queue.isNotEmpty()) {
-            val current = queue.poll()
+            konst current = queue.poll()
             resumeTask(current)
         }
     }

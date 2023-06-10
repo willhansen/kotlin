@@ -1,6 +1,6 @@
 // !DUMP_CFG
 
-val x = object {
+konst x = object {
     class Nested {
         fun foo() {}
     }

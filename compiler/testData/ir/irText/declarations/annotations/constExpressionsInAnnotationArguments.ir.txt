@@ -1,10 +1,10 @@
 FILE fqName:<root> fileName:/constExpressionsInAnnotationArguments.kt
-  PROPERTY name:ONE visibility:public modality:FINAL [const,val]
+  PROPERTY name:ONE visibility:public modality:FINAL [const,konst]
     FIELD PROPERTY_BACKING_FIELD name:ONE type:kotlin.Int visibility:public [final,static]
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=1
+        CONST Int type=kotlin.Int konstue=1
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-ONE> visibility:public modality:FINAL <> () returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:ONE visibility:public modality:FINAL [const,val]
+      correspondingProperty: PROPERTY name:ONE visibility:public modality:FINAL [const,konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-ONE> (): kotlin.Int declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:ONE type:kotlin.Int visibility:public [final,static]' type=kotlin.Int origin=null
@@ -15,12 +15,12 @@ FILE fqName:<root> fileName:/constExpressionsInAnnotationArguments.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:A modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in <root>.A.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in <root>.A'

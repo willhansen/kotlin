@@ -1,4 +1,4 @@
-class D(val a: String, val b: Boolean)
+class D(konst a: String, konst b: Boolean)
 
 fun foo(p: Boolean, v: D?): String {
     if (p && v!!.b) <!DEBUG_INFO_SMARTCAST!>v<!>.a

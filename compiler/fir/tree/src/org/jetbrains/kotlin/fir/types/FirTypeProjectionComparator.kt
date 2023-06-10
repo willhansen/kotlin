@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.fir.types
 import org.jetbrains.kotlin.fir.render
 
 object FirTypeProjectionComparator : Comparator<FirTypeProjection> {
-    private val FirTypeProjection.priority : Int
+    private konst FirTypeProjection.priority : Int
         get() = when (this) {
             is FirTypeProjectionWithVariance -> 2
             is FirStarProjection -> 1
@@ -16,7 +16,7 @@ object FirTypeProjectionComparator : Comparator<FirTypeProjection> {
         }
 
     override fun compare(a: FirTypeProjection, b: FirTypeProjection): Int {
-        val priorityDiff = a.priority - b.priority
+        konst priorityDiff = a.priority - b.priority
         if (priorityDiff != 0) {
             return priorityDiff
         }
@@ -26,7 +26,7 @@ object FirTypeProjectionComparator : Comparator<FirTypeProjection> {
                 require(b is FirTypeProjectionWithVariance) {
                     "priority is inconsistent: ${a.render()} v.s. ${b.render()}"
                 }
-                val typeRefDiff = FirTypeRefComparator.compare(a.typeRef, b.typeRef)
+                konst typeRefDiff = FirTypeRefComparator.compare(a.typeRef, b.typeRef)
                 if (typeRefDiff != 0) {
                     return typeRefDiff
                 }

@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val int: T)
+konstue class Z<T: Int>(konst int: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(val long: T)
+konstue class L<T: Long>(konst long: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val string: T)
+konstue class Str<T: String>(konst string: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj<T: Any>(val obj: T)
+konstue class Obj<T: Any>(konst obj: T)
 
 fun box(): String {
     var xz = Z(0)
@@ -20,7 +20,7 @@ fun box(): String {
     var xs = Str("")
     var xo = Obj("")
 
-    val fn = {
+    konst fn = {
         xz = Z(42)
         xl = L(1234L)
         xs = Str("abc")

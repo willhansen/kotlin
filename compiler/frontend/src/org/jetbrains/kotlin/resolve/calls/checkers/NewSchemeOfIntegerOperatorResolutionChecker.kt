@@ -30,17 +30,17 @@ import org.jetbrains.kotlin.types.typeUtil.*
 
 object NewSchemeOfIntegerOperatorResolutionChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        for ((valueParameter, arguments) in resolvedCall.valueArguments) {
-            val expectedType = if (valueParameter.isVararg) {
-                valueParameter.varargElementType ?: continue
+        for ((konstueParameter, arguments) in resolvedCall.konstueArguments) {
+            konst expectedType = if (konstueParameter.isVararg) {
+                konstueParameter.varargElementType ?: continue
             } else {
-                valueParameter.type
+                konstueParameter.type
             }.unwrap().lowerIfFlexible()
             if (!needToCheck(expectedType)) {
                 continue
             }
             for (argument in arguments.arguments) {
-                val expression = KtPsiUtil.deparenthesize(argument.getArgumentExpression()) ?: continue
+                konst expression = KtPsiUtil.deparenthesize(argument.getArgumentExpression()) ?: continue
                 checkArgumentImpl(expectedType, expression, context.trace, context.moduleDescriptor)
             }
         }
@@ -69,41 +69,41 @@ object NewSchemeOfIntegerOperatorResolutionChecker : CallChecker {
         trace: BindingTrace,
         moduleDescriptor: ModuleDescriptor
     ) {
-        val bindingContext = trace.bindingContext
-        val callForArgument = argumentExpression.getResolvedCall(bindingContext) ?: return
+        konst bindingContext = trace.bindingContext
+        konst callForArgument = argumentExpression.getResolvedCall(bindingContext) ?: return
         if (!callForArgument.isIntOperator()) return
-        val callElement = callForArgument.call.callElement as? KtExpression ?: return
-        val deparenthesizedElement = KtPsiUtil.deparenthesize(callElement)!!
+        konst callElement = callForArgument.call.callElement as? KtExpression ?: return
+        konst deparenthesizedElement = KtPsiUtil.deparenthesize(callElement)!!
         if (deparenthesizedElement is KtConstantExpression) return
         if (deparenthesizedElement is KtUnaryExpression) {
-            val token = deparenthesizedElement.operationToken
+            konst token = deparenthesizedElement.operationToken
             if (token == KtTokens.PLUS || token == KtTokens.MINUS) return
         }
 
-        val compileTimeValue = bindingContext[BindingContext.COMPILE_TIME_VALUE, argumentExpression] ?: return
+        konst compileTimeValue = bindingContext[BindingContext.COMPILE_TIME_VALUE, argumentExpression] ?: return
 
-        val newExpressionType = when (compileTimeValue) {
+        konst newExpressionType = when (compileTimeValue) {
             is IntegerValueTypeConstant -> {
-                val currentExpressionType = compileTimeValue.unknownIntegerType
-                val valueTypeConstructor = currentExpressionType.constructor as? IntegerLiteralTypeConstructor ?: return
-                valueTypeConstructor.getApproximatedType()
+                konst currentExpressionType = compileTimeValue.unknownIntegerType
+                konst konstueTypeConstructor = currentExpressionType.constructor as? IntegerLiteralTypeConstructor ?: return
+                konstueTypeConstructor.getApproximatedType()
             }
             is TypedCompileTimeConstant -> {
-                val typeFromCall = callForArgument.resultingDescriptor.returnType?.lowerIfFlexible()
+                konst typeFromCall = callForArgument.resultingDescriptor.returnType?.lowerIfFlexible()
                 if (typeFromCall != null) {
                     typeFromCall
                 } else {
-                    val constantValue = compileTimeValue.constantValue
+                    konst constantValue = compileTimeValue.constantValue
                     if (constantValue is ErrorValue) return
-                    // Values of all numeric constants are held in Long value
-                    val value = constantValue.value as? Long ?: return
-                    IntegerLiteralTypeConstructor(value, moduleDescriptor, compileTimeValue.parameters).getApproximatedType()
+                    // Values of all numeric constants are held in Long konstue
+                    konst konstue = constantValue.konstue as? Long ?: return
+                    IntegerLiteralTypeConstructor(konstue, moduleDescriptor, compileTimeValue.parameters).getApproximatedType()
                 }
             }
             else -> return
         }
         if (newExpressionType.constructor != expectedType.constructor) {
-            val willBeConversion = newExpressionType.isInt() && expectedType.makeNotNullable().isLong()
+            konst willBeConversion = newExpressionType.isInt() && expectedType.makeNotNullable().isLong()
             if (!willBeConversion) {
                 trace.report(Errors.INTEGER_OPERATOR_RESOLVE_WILL_CHANGE.on(argumentExpression, newExpressionType))
             }
@@ -111,11 +111,11 @@ object NewSchemeOfIntegerOperatorResolutionChecker : CallChecker {
     }
 
     private fun ResolvedCall<*>.isIntOperator(): Boolean {
-        val descriptor = resultingDescriptor as? SimpleFunctionDescriptor ?: return false
+        konst descriptor = resultingDescriptor as? SimpleFunctionDescriptor ?: return false
         return descriptor.fqNameSafe in literalOperatorsFqNames
     }
 
-    private val literalOperatorsFqNames: Set<FqName> = listOf(
+    private konst literalOperatorsFqNames: Set<FqName> = listOf(
         "plus", "minus", "times", "div", "rem", "plus", "minus",
         "times", "div", "rem", "shl", "shr", "ushr", "and", "or",
         "xor", "unaryPlus", "unaryMinus", "inv",

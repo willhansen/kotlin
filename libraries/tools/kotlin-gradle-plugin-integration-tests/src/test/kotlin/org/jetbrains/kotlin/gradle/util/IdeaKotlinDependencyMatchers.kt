@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.gradle.idea.tcs.extras.isNativeDistribution
 import org.jetbrains.kotlin.gradle.idea.testFixtures.tcs.IdeaKotlinDependencyMatcher
 import org.jetbrains.kotlin.gradle.idea.testFixtures.tcs.binaryCoordinates
 
-val kotlinStdlibDependencies = binaryCoordinates(Regex(".*kotlin-stdlib.*"))
+konst kotlinStdlibDependencies = binaryCoordinates(Regex(".*kotlin-stdlib.*"))
 
-val jetbrainsAnnotationDependencies = binaryCoordinates(Regex("org\\.jetbrains:annotations:.*"))
+konst jetbrainsAnnotationDependencies = binaryCoordinates(Regex("org\\.jetbrains:annotations:.*"))
 
-val kotlinNativeDistributionDependencies = IdeaKotlinDependencyMatcher("native distribution") { dependency ->
+konst kotlinNativeDistributionDependencies = IdeaKotlinDependencyMatcher("native distribution") { dependency ->
     dependency is IdeaKotlinResolvedBinaryDependency && dependency.isNativeDistribution
 }

@@ -40,7 +40,7 @@ object IrWhenUtils {
         if (condition is IrWhen && condition.origin == IrStatementOrigin.WHEN_COMMA) {
             assert(condition.type.isBoolean()) { "WHEN_COMMA should always be a Boolean: ${condition.dump()}" }
 
-            val candidates = ArrayList<IrCall>()
+            konst candidates = ArrayList<IrCall>()
 
             // Match the following structure:
             //
@@ -63,9 +63,9 @@ object IrWhenUtils {
             }
             return candidates.ifEmpty { null }
         } else if (condition is IrCall && condition.symbol == ororSymbol) {
-            val candidates = ArrayList<IrCall>()
-            for (i in 0 until condition.valueArgumentsCount) {
-                val argument = condition.getValueArgument(i)!!
+            konst candidates = ArrayList<IrCall>()
+            for (i in 0 until condition.konstueArgumentsCount) {
+                konst argument = condition.getValueArgument(i)!!
                 candidates += matchConditions(ororSymbol, argument) ?: return null
             }
             return candidates.ifEmpty { null }

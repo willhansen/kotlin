@@ -18,6 +18,6 @@ fun interface F : Base {
 fun box(): String {
     if (F { o -> o + "K" }.result() != "OK") return "Fail"
 
-    val lambda: (String) -> String = { o -> o + "K" }
+    konst lambda: (String) -> String = { o -> o + "K" }
     return F(lambda).result()
 }

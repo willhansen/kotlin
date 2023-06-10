@@ -5,7 +5,7 @@ operator fun ArrayList<String>.set(index1: Int, index2: Int, elem: String) {
 }
 
 fun box(): String {
-    val s = ArrayList<String>(1)
+    konst s = ArrayList<String>(1)
     s.add("")
     s[1, -1] = "O"
     s[2, -2] += "K"

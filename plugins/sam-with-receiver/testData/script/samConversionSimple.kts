@@ -20,14 +20,14 @@ public class Exec {
 }
 
 // FILE: test_with_error.kts
-val e = Exec()
+konst e = Exec()
 
 e.exec <!TYPE_MISMATCH!>{ <!EXPECTED_PARAMETERS_NUMBER_MISMATCH!>a, <!CANNOT_INFER_PARAMETER_TYPE!>b<!><!> -> System.out.println(a) }<!>
 
 // FILE: test.kts
-val e = Exec()
+konst e = Exec()
 
 e.exec { b ->
-    val a: String = this
+    konst a: String = this
     System.out.println(a)
 }

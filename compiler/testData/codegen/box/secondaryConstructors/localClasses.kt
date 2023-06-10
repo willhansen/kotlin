@@ -1,12 +1,12 @@
-open class C(val grandParentProp: String)
+open class C(konst grandParentProp: String)
 fun box(): String {
     var sideEffects: String = ""
     var parentSideEffects: String = ""
-    val justForUsageInClosure = 7
-    val justForUsageInParentClosure = "parentCaptured"
+    konst justForUsageInClosure = 7
+    konst justForUsageInParentClosure = "parentCaptured"
 
     abstract class B : C {
-        val parentProp: String
+        konst parentProp: String
         init {
             sideEffects += "minus-one#"
             parentSideEffects += "1"
@@ -54,21 +54,21 @@ fun box(): String {
         override fun toString() = "$prop#$parentProp#$grandParentProp"
     }
 
-    val a1 = A(5, 10).toString()
+    konst a1 = A(5, 10).toString()
     if (a1 != "5#15#parentCaptured") return "fail1: $a1"
     if (sideEffects != "minus-one#zero#0.7#first#second#third") return "fail2: ${sideEffects}"
     if (parentSideEffects != "1#4#3") return "fail3: ${parentSideEffects}"
 
     sideEffects = ""
     parentSideEffects = ""
-    val a2 = A(123).toString()
+    konst a2 = A(123).toString()
     if (a2 != "123#int#130#parentCaptured") return "fail1: $a2"
     if (sideEffects != "minus-one#zero#0.5#first#second#fourth") return "fail4: ${sideEffects}"
     if (parentSideEffects != "1#4#parentCaptured") return "fail5: ${parentSideEffects}"
 
     sideEffects = ""
     parentSideEffects = ""
-    val a3 = A().toString()
+    konst a3 = A().toString()
     if (a3 != "7#int#14#parentCaptured") return "fail6: $a3"
     if (sideEffects != "minus-one#zero#0.5#first#second#fourth#fifth") return "fail7: ${sideEffects}"
     if (parentSideEffects != "1#4#parentCaptured") return "fail8: ${parentSideEffects}"

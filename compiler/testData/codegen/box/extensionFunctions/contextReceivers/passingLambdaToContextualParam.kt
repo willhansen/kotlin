@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 class C {
-    val result = "OK"
+    konst result = "OK"
 }
 
 fun contextual(f: context(C) () -> String) = f(C())

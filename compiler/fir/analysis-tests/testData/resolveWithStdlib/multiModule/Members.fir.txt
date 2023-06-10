@@ -5,7 +5,7 @@ FILE: common.kt
 
         public final expect fun foo(): R|kotlin/Unit|
 
-        public final expect val x: R|kotlin/Int|
+        public final expect konst x: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }
@@ -28,7 +28,7 @@ FILE: jvm.kt
         public final fun bar(): R|kotlin/Unit| {
         }
 
-        public final actual val x: R|kotlin/Int| = Int(42)
+        public final actual konst x: R|kotlin/Int| = Int(42)
             public get(): R|kotlin/Int|
 
     }

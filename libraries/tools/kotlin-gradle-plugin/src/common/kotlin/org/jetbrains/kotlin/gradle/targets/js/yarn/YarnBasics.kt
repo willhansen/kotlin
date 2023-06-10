@@ -25,7 +25,7 @@ abstract class YarnBasics : NpmApi {
         args: List<String>
     ) {
         services.execWithProgress(description) { exec ->
-            val arguments = args
+            konst arguments = args
                 .plus(
                     if (logger.isDebugEnabled) "--verbose" else ""
                 )
@@ -33,9 +33,9 @@ abstract class YarnBasics : NpmApi {
                     if (yarn.ignoreScripts) "--ignore-scripts" else ""
                 ).filter { it.isNotEmpty() }
 
-            val nodeExecutable = nodeJs.nodeExecutable
+            konst nodeExecutable = nodeJs.nodeExecutable
             if (!yarn.ignoreScripts) {
-                val nodePath = if (nodeJs.isWindows) {
+                konst nodePath = if (nodeJs.isWindows) {
                     File(nodeExecutable).parent
                 } else {
                     nodeExecutable
@@ -46,7 +46,7 @@ abstract class YarnBasics : NpmApi {
                 )
             }
 
-            val command = yarn.executable
+            konst command = yarn.executable
             if (yarn.standalone) {
                 exec.executable = command
                 exec.args = arguments

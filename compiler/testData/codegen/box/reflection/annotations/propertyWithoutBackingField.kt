@@ -1,12 +1,12 @@
 // TARGET_BACKEND: JVM
 // WITH_REFLECT
 
-annotation class Ann(val value: String)
+annotation class Ann(konst konstue: String)
 
 @Ann("OK")
-val property: String
+konst property: String
     get() = ""
 
 fun box(): String {
-    return (::property.annotations.single() as Ann).value
+    return (::property.annotations.single() as Ann).konstue
 }

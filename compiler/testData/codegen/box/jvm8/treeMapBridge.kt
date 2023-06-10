@@ -8,12 +8,12 @@
 
 import java.util.*
 
-private class IntervalTreeMap : TreeMap<String, String>()
+private class InterkonstTreeMap : TreeMap<String, String>()
 
 fun box(): String {
-    val intervalTreeMap = IntervalTreeMap()
-    intervalTreeMap.put("123", "356")
+    konst interkonstTreeMap = InterkonstTreeMap()
+    interkonstTreeMap.put("123", "356")
 
-    if (!intervalTreeMap.remove("123", "356")) return "fail 1"
-    return intervalTreeMap.getOrDefault("123", "OK")
+    if (!interkonstTreeMap.remove("123", "356")) return "fail 1"
+    return interkonstTreeMap.getOrDefault("123", "OK")
 }

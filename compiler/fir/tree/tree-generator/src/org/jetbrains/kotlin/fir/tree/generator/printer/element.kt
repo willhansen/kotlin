@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.util.withIndent
 import java.io.File
 
 fun Element.generateCode(generationPath: File): GeneratedFile {
-    val dir = generationPath.resolve(packageName.replace(".", "/"))
-    val file = File(dir, "$type.kt")
-    val stringBuilder = StringBuilder()
+    konst dir = generationPath.resolve(packageName.replace(".", "/"))
+    konst file = File(dir, "$type.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("package $packageName")
         println()
-        val imports = collectImports()
+        konst imports = collectImports()
         imports.forEach { println("import $it") }
         if (imports.isNotEmpty()) {
             println()
@@ -37,7 +37,7 @@ fun Element.generateCode(generationPath: File): GeneratedFile {
 
 fun SmartPrinter.printElement(element: Element) {
     with(element) {
-        val isInterface = kind == Kind.Interface || kind == Kind.SealedInterface
+        konst isInterface = kind == Kind.Interface || kind == Kind.SealedInterface
         fun abstract() {
             if (!isInterface) {
                 print("abstract ")
@@ -54,7 +54,7 @@ fun SmartPrinter.printElement(element: Element) {
         if (typeArguments.isNotEmpty()) {
             print(typeArguments.joinToString(", ", "<", ">") { it.toString() })
         }
-        val needPureAbstractElement = !isInterface && !allParents.any { it.kind == Kind.AbstractClass || it.kind == Kind.SealedClass }
+        konst needPureAbstractElement = !isInterface && !allParents.any { it.kind == Kind.AbstractClass || it.kind == Kind.SealedClass }
 
         if (parents.isNotEmpty() || needPureAbstractElement) {
             print(" : ")
@@ -68,7 +68,7 @@ fun SmartPrinter.printElement(element: Element) {
                 parents.joinToString(", ") {
                     var result = it.type
                     parentsArguments[it]?.let { arguments ->
-                        result += arguments.values.joinToString(", ", "<", ">") { it.typeWithArguments }
+                        result += arguments.konstues.joinToString(", ", "<", ">") { it.typeWithArguments }
                     }
                     result + it.kind.braces()
                 },
@@ -110,7 +110,7 @@ fun SmartPrinter.printElement(element: Element) {
             }
 
             allFields.filter { it.withReplace }.forEach {
-                val override = overridenFields[it, it] &&
+                konst override = overridenFields[it, it] &&
                         !(it.name == "source" && fullQualifiedName.endsWith("FirQualifiedAccessExpression"))
                 it.replaceDeclaration(override, forceNullable = it.useNullableForReplace)
                 for (overridenType in it.overridenTypes) {

@@ -2,8 +2,8 @@
 import kotlin.test.*
 
 fun box(): String {
-    val sb = StringBuilder("1234")
-    val result = StringBuilder()
+    konst sb = StringBuilder("1234")
+    konst result = StringBuilder()
     var ctr = 0
     for (c in sb) {
         if (ctr % 2 == 0)

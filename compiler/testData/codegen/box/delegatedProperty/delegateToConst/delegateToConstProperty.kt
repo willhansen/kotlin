@@ -4,8 +4,8 @@
 operator fun Any?.getValue(thisRef: Any?, property: Any?) =
     if (this == a && thisRef == null) "OK" else "Failed"
 
-const val a = "TEXT"
+const konst a = "TEXT"
 
-val s: String by a
+konst s: String by a
 
 fun box(): String = s

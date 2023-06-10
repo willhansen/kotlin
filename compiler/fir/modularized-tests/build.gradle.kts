@@ -32,7 +32,7 @@ dependencies {
 
     testRuntimeOnly(project(":compiler:fir:plugin-utils"))
 
-    val asyncProfilerClasspath = project.findProperty("fir.bench.async.profiler.classpath") as? String
+    konst asyncProfilerClasspath = project.findProperty("fir.bench.async.profiler.classpath") as? String
     if (asyncProfilerClasspath != null) {
         testRuntimeOnly(files(*asyncProfilerClasspath.split(File.pathSeparatorChar).toTypedArray()))
     }
@@ -49,9 +49,9 @@ projectTest(minHeapSizeMb = 8192, maxHeapSizeMb = 8192, reservedCodeCacheSizeMb 
     workingDir = rootDir
 
     run {
-        val argsExt = project.findProperty("fir.modularized.jvm.args") as? String
+        konst argsExt = project.findProperty("fir.modularized.jvm.args") as? String
         if (argsExt != null) {
-            val paramRegex = "([^\"]\\S*|\".+?\")\\s*".toRegex()
+            konst paramRegex = "([^\"]\\S*|\".+?\")\\s*".toRegex()
             jvmArgs(paramRegex.findAll(argsExt).map { it.groupValues[1] }.toList())
         }
     }

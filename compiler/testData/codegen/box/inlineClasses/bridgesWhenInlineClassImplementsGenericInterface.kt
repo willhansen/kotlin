@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlinedComparable(val x: Int) : Comparable<InlinedComparable> {
+konstue class InlinedComparable(konst x: Int) : Comparable<InlinedComparable> {
     override fun compareTo(other: InlinedComparable): Int {
         return x.compareTo(other.x)
     }
@@ -16,7 +16,7 @@ interface Base<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlinedBase(val x: Int) : Base<InlinedBase> {
+konstue class InlinedBase(konst x: Int) : Base<InlinedBase> {
     override fun Base<InlinedBase>.foo(a: Base<InlinedBase>, b: InlinedBase): Base<InlinedBase> {
         return if (a is InlinedBase) InlinedBase(a.x + b.x) else this
     }
@@ -27,10 +27,10 @@ value class InlinedBase(val x: Int) : Base<InlinedBase> {
 }
 
 fun box(): String {
-    val a = InlinedComparable(42)
+    konst a = InlinedComparable(42)
     if (generic(a, a) != 0) return "Fail 1"
 
-    val b = InlinedBase(3)
+    konst b = InlinedBase(3)
     if (b.double().x != 6) return "Fail 2"
 
     return "OK"

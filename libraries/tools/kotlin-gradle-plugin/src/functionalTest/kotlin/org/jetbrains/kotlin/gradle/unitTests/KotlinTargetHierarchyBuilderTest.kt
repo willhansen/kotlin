@@ -22,7 +22,7 @@ class KotlinTargetHierarchyBuilderTest {
 
     @Test
     fun `test - interface offers functions for known presets`() {
-        val kotlinTargetHierarchyBuilderInterface = KotlinTargetHierarchyBuilder::class.java
+        konst kotlinTargetHierarchyBuilderInterface = KotlinTargetHierarchyBuilder::class.java
 
         buildProjectWithMPP().multiplatformExtension.presets
 
@@ -34,7 +34,7 @@ class KotlinTargetHierarchyBuilderTest {
             // jvmWithJava is covered by the withJvm() call
             .filter { it !is KotlinJvmWithJavaTargetPreset }
             .forEach { preset ->
-                val expectedFunctionName = "with${preset.name.capitalizeAsciiOnly()}"
+                konst expectedFunctionName = "with${preset.name.capitalizeAsciiOnly()}"
                 if (kotlinTargetHierarchyBuilderInterface.declaredMethods.none { it.name == expectedFunctionName })
                     fail("${kotlinTargetHierarchyBuilderInterface.name}: Missing ${expectedFunctionName}() function")
             }

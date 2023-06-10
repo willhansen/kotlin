@@ -15,28 +15,28 @@ open class TypeApproximatorConfiguration {
         TO_UPPER_BOUND_IF_SUPERTYPE
     }
 
-    open val flexible: Boolean get() = false // simple flexible types (FlexibleTypeImpl)
-    open val dynamic: Boolean get() = false // DynamicType
-    open val rawType: Boolean get() = false // RawTypeImpl
-    open val errorType: Boolean get() = false
-    open val integerLiteralConstantType: Boolean get() = false // IntegerLiteralTypeConstructor
-    open val integerConstantOperatorType: Boolean get() = false
-    open val definitelyNotNullType: Boolean get() = true
-    open val intersection: IntersectionStrategy = IntersectionStrategy.TO_COMMON_SUPERTYPE
-    open val intersectionTypesInContravariantPositions = false
-    open val localTypes = false
+    open konst flexible: Boolean get() = false // simple flexible types (FlexibleTypeImpl)
+    open konst dynamic: Boolean get() = false // DynamicType
+    open konst rawType: Boolean get() = false // RawTypeImpl
+    open konst errorType: Boolean get() = false
+    open konst integerLiteralConstantType: Boolean get() = false // IntegerLiteralTypeConstructor
+    open konst integerConstantOperatorType: Boolean get() = false
+    open konst definitelyNotNullType: Boolean get() = true
+    open konst intersection: IntersectionStrategy = IntersectionStrategy.TO_COMMON_SUPERTYPE
+    open konst intersectionTypesInContravariantPositions = false
+    open konst localTypes = false
 
     /**
      * Is only expected to be true for FinalApproximationAfterResolutionAndInference
      * But it's only used for K2 to reproduce K1 behavior for the approximation of resolved calls
      */
-    open val convertToNonRawVersionAfterApproximationInK2 get() = false
+    open konst convertToNonRawVersionAfterApproximationInK2 get() = false
 
     /**
      * Whether to approximate anonymous type. This flag does not have any effect if `localTypes` is true because all anonymous types are
      * local.
      */
-    open val anonymous = false
+    open konst anonymous = false
 
     /**
      * This function determines the approximator behavior if a type variable based type is encountered.
@@ -51,29 +51,29 @@ open class TypeApproximatorConfiguration {
         true  // false means that this type we can leave as is
 
     abstract class AllFlexibleSameValue : TypeApproximatorConfiguration() {
-        abstract val allFlexible: Boolean
+        abstract konst allFlexible: Boolean
 
-        override val flexible: Boolean get() = allFlexible
-        override val dynamic: Boolean get() = allFlexible
-        override val rawType: Boolean get() = allFlexible
+        override konst flexible: Boolean get() = allFlexible
+        override konst dynamic: Boolean get() = allFlexible
+        override konst rawType: Boolean get() = allFlexible
     }
 
     object LocalDeclaration : AllFlexibleSameValue() {
-        override val allFlexible: Boolean get() = true
-        override val intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
-        override val errorType: Boolean get() = true
-        override val integerLiteralConstantType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
+        override konst allFlexible: Boolean get() = true
+        override konst intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
+        override konst errorType: Boolean get() = true
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
 
         override fun shouldKeepTypeVariableBasedType(marker: TypeVariableTypeConstructorMarker, isK2: Boolean): Boolean = isK2
     }
 
-    open class PublicDeclaration(override val localTypes: Boolean, override val anonymous: Boolean) : AllFlexibleSameValue() {
-        override val allFlexible: Boolean get() = true
-        override val errorType: Boolean get() = true
-        override val definitelyNotNullType: Boolean get() = false
-        override val integerLiteralConstantType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
+    open class PublicDeclaration(override konst localTypes: Boolean, override konst anonymous: Boolean) : AllFlexibleSameValue() {
+        override konst allFlexible: Boolean get() = true
+        override konst errorType: Boolean get() = true
+        override konst definitelyNotNullType: Boolean get() = false
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
 
         override fun shouldKeepTypeVariableBasedType(marker: TypeVariableTypeConstructorMarker, isK2: Boolean): Boolean = isK2
 
@@ -81,53 +81,53 @@ open class TypeApproximatorConfiguration {
         object ApproximateAnonymousTypes : PublicDeclaration(localTypes = false, anonymous = true)
     }
 
-    sealed class AbstractCapturedTypesApproximation(val approximatedCapturedStatus: CaptureStatus?) :
+    sealed class AbstractCapturedTypesApproximation(konst approximatedCapturedStatus: CaptureStatus?) :
         AllFlexibleSameValue() {
-        override val allFlexible: Boolean get() = true
-        override val errorType: Boolean get() = true
+        override konst allFlexible: Boolean get() = true
+        override konst errorType: Boolean get() = true
 
         // i.e. will be approximated only approximatedCapturedStatus captured types
         override fun capturedType(ctx: TypeSystemInferenceExtensionContext, type: CapturedTypeMarker): Boolean =
             approximatedCapturedStatus != null && type.captureStatus(ctx) == approximatedCapturedStatus
 
-        override val intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
+        override konst intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
         override fun shouldKeepTypeVariableBasedType(marker: TypeVariableTypeConstructorMarker, isK2: Boolean): Boolean = true
     }
 
     object IncorporationConfiguration : AbstractCapturedTypesApproximation(CaptureStatus.FOR_INCORPORATION)
     object SubtypeCapturedTypesApproximation : AbstractCapturedTypesApproximation(CaptureStatus.FOR_SUBTYPING)
     object InternalTypesApproximation : AbstractCapturedTypesApproximation(CaptureStatus.FROM_EXPRESSION) {
-        override val integerLiteralConstantType: Boolean get() = true
-        override val integerConstantOperatorType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst integerConstantOperatorType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
     }
 
     object FinalApproximationAfterResolutionAndInference :
         AbstractCapturedTypesApproximation(CaptureStatus.FROM_EXPRESSION) {
-        override val integerLiteralConstantType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
 
-        override val convertToNonRawVersionAfterApproximationInK2: Boolean get() = true
+        override konst convertToNonRawVersionAfterApproximationInK2: Boolean get() = true
     }
 
     object TypeArgumentApproximation : AbstractCapturedTypesApproximation(null) {
-        override val integerLiteralConstantType: Boolean get() = true
-        override val integerConstantOperatorType: Boolean get() = true
-        override val intersectionTypesInContravariantPositions: Boolean get() = true
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst integerConstantOperatorType: Boolean get() = true
+        override konst intersectionTypesInContravariantPositions: Boolean get() = true
     }
 
     object IntegerLiteralsTypesApproximation : AllFlexibleSameValue() {
-        override val integerLiteralConstantType: Boolean get() = true
-        override val allFlexible: Boolean get() = true
-        override val intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
+        override konst integerLiteralConstantType: Boolean get() = true
+        override konst allFlexible: Boolean get() = true
+        override konst intersection: IntersectionStrategy get() = IntersectionStrategy.ALLOWED
         override fun shouldKeepTypeVariableBasedType(marker: TypeVariableTypeConstructorMarker, isK2: Boolean): Boolean = true
-        override val errorType: Boolean get() = true
+        override konst errorType: Boolean get() = true
 
         override fun capturedType(ctx: TypeSystemInferenceExtensionContext, type: CapturedTypeMarker): Boolean = false
     }
 
     object UpperBoundAwareIntersectionTypeApproximator : AllFlexibleSameValue() {
-        override val allFlexible: Boolean get() = true
-        override val intersection: IntersectionStrategy = IntersectionStrategy.TO_UPPER_BOUND_IF_SUPERTYPE
+        override konst allFlexible: Boolean get() = true
+        override konst intersection: IntersectionStrategy = IntersectionStrategy.TO_UPPER_BOUND_IF_SUPERTYPE
     }
 }

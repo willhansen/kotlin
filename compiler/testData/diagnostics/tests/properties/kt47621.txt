@@ -8,7 +8,7 @@ public final class C : j.J {
     public final fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun getX(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    protected/*protected and package*/ open override /*1*/ /*fake_override*/ fun setX(/*0*/ value: kotlin.Int): kotlin.Unit
+    protected/*protected and package*/ open override /*1*/ /*fake_override*/ fun setX(/*0*/ konstue: kotlin.Int): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
@@ -19,7 +19,7 @@ package j {
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open fun getX(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-        protected/*protected and package*/ open fun setX(/*0*/ value: kotlin.Int): kotlin.Unit
+        protected/*protected and package*/ open fun setX(/*0*/ konstue: kotlin.Int): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 }

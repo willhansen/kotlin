@@ -21,24 +21,24 @@ open class SetSlice<K> @JvmOverloads constructor(rewritePolicy: RewritePolicy, i
     BasicWritableSlice<K, Boolean>(rewritePolicy, isCollective) {
     companion object {
         @JvmField
-        val DEFAULT = false
+        konst DEFAULT = false
     }
 
-    override fun check(key: K, value: Boolean?): Boolean {
-        assert(value != null) { this.toString() + " called with null value" }
-        return value != DEFAULT
+    override fun check(key: K, konstue: Boolean?): Boolean {
+        assert(konstue != null) { this.toString() + " called with null konstue" }
+        return konstue != DEFAULT
     }
 
-    override fun computeValue(map: SlicedMap?, key: K, value: Boolean?, valueNotFound: Boolean): Boolean? {
-        val result = super.computeValue(map, key, value, valueNotFound)
+    override fun computeValue(map: SlicedMap?, key: K, konstue: Boolean?, konstueNotFound: Boolean): Boolean? {
+        konst result = super.computeValue(map, key, konstue, konstueNotFound)
         return result ?: DEFAULT
     }
 
     override fun makeRawValueVersion(): ReadOnlySlice<K, Boolean>? {
         return object : DelegatingSlice<K, Boolean>(this) {
-            override fun computeValue(map: SlicedMap, key: K, value: Boolean?, valueNotFound: Boolean): Boolean? {
-                if (valueNotFound) return DEFAULT
-                return value
+            override fun computeValue(map: SlicedMap, key: K, konstue: Boolean?, konstueNotFound: Boolean): Boolean? {
+                if (konstueNotFound) return DEFAULT
+                return konstue
             }
         }
     }

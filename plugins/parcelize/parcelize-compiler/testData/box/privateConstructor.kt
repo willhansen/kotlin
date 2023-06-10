@@ -11,17 +11,17 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class Data private constructor(val value: String) : Parcelable {
+class Data private constructor(konst konstue: String) : Parcelable {
     constructor() : this("OK")
 }
 
 fun box() = parcelTest { parcel ->
     Data().writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val data = parcelableCreator<Data>().createFromParcel(parcel)
-    assert(data.value == "OK")
+    konst data = parcelableCreator<Data>().createFromParcel(parcel)
+    assert(data.konstue == "OK")
 }

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.cli.common.arguments.CommonToolArguments
 import org.reflections.Reflections
 import kotlin.reflect.KClass
 
-private val reflections = Reflections("org.jetbrains.kotlin")
+private konst reflections = Reflections("org.jetbrains.kotlin")
 
 fun getCompilerArgumentImplementations(): List<KClass<out CommonToolArguments>> {
     return reflections.getSubTypesOf(CommonToolArguments::class.java)

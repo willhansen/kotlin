@@ -4,7 +4,7 @@
 package lib
 
 class TestObserver<T> {
-    fun assertValue(valuePredicate: (T) -> Boolean): Unit = TODO()
+    fun assertValue(konstuePredicate: (T) -> Boolean): Unit = TODO()
 }
 
 class Single<T> {
@@ -22,7 +22,7 @@ fun provideDomainSingle(): DomainSingle<Employee> = TODO()
 
 class CreateEmployeeUseCaseAccessor {
     fun testNormalName() {
-        val testObs = provideDomainSingle().test()
+        konst testObs = provideDomainSingle().test()
         testObs.assertValue { true }
     }
 }
@@ -34,7 +34,7 @@ import lib.*
 
 class CreateEmployeeUseCaseTest {
     fun testNormalName() {
-        val testObs = provideDomainSingle().test()
+        konst testObs = provideDomainSingle().test()
         testObs.assertValue { true }
     }
 }

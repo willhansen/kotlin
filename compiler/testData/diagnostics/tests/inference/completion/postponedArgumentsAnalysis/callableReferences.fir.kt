@@ -3,10 +3,10 @@
 class Foo<T>
 class P<K, T>(x: K, y: T)
 
-val Foo<Int>.bar: Foo<Int> get() = this
+konst Foo<Int>.bar: Foo<Int> get() = this
 
 fun <T> Foo<T>.bar(x: String) = null as Foo<Int>
 
 fun main() {
-    val x: P<String, Foo<Int>.() -> Foo<Int>> = P("", Foo<Int>::bar)
+    konst x: P<String, Foo<Int>.() -> Foo<Int>> = P("", Foo<Int>::bar)
 }

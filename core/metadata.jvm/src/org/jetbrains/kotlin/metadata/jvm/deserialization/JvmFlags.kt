@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.metadata.deserialization.Flags
  */
 object JvmFlags {
     // Properties
-    val IS_MOVED_FROM_INTERFACE_COMPANION = Flags.FlagField.booleanFirst()
+    konst IS_MOVED_FROM_INTERFACE_COMPANION = Flags.FlagField.booleanFirst()
 
     //Class
-    val IS_COMPILED_IN_JVM_DEFAULT_MODE = Flags.FlagField.booleanFirst()
-    val IS_COMPILED_IN_COMPATIBILITY_MODE = Flags.FlagField.booleanAfter(IS_COMPILED_IN_JVM_DEFAULT_MODE)
+    konst IS_COMPILED_IN_JVM_DEFAULT_MODE = Flags.FlagField.booleanFirst()
+    konst IS_COMPILED_IN_COMPATIBILITY_MODE = Flags.FlagField.booleanAfter(IS_COMPILED_IN_JVM_DEFAULT_MODE)
 
     fun getPropertyFlags(isMovedFromInterfaceCompanion: Boolean): Int =
         IS_MOVED_FROM_INTERFACE_COMPANION.toFlags(isMovedFromInterfaceCompanion)

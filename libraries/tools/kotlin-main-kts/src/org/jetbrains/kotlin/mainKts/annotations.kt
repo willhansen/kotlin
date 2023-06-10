@@ -22,7 +22,7 @@ package org.jetbrains.kotlin.mainKts
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class Import(vararg val paths: String)
+annotation class Import(vararg konst paths: String)
 
 /**
  * Compiler options that will be applied on script compilation
@@ -32,7 +32,7 @@ annotation class Import(vararg val paths: String)
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class CompilerOptions(vararg val options: String)
+annotation class CompilerOptions(vararg konst options: String)
 
 /**
  * Option that configures the name of the variable that will hold a file pointing to the script location.
@@ -40,4 +40,4 @@ annotation class CompilerOptions(vararg val options: String)
  */
 @Target(AnnotationTarget.FILE)
 @Retention(AnnotationRetention.SOURCE)
-annotation class ScriptFileLocation(val variable: String)
+annotation class ScriptFileLocation(konst variable: String)

@@ -11,7 +11,7 @@ inline fun String.b(body: (a1: String, a2: String) -> String) = a(s2 = this,  bo
 import test.*
 
 fun box(): String {
-    val z = "OK".b { a, b ->
+    konst z = "OK".b { a, b ->
         a + b
     }
 

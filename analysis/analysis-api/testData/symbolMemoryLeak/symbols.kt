@@ -8,14 +8,14 @@ class Y<T> {
 
 var z: Int
     get = 10
-    set(value) {}
+    set(konstue) {}
 
 object Q
 
-val z: String = ""
+konst z: String = ""
 
 fun yyy() {
-//    val q = 10
+//    konst q = 10
 //    fun aaa() {}
 //
 //    class F {}

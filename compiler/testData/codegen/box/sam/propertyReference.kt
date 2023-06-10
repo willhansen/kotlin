@@ -9,7 +9,7 @@ interface Interface {
 // MODULE: main(lib)
 // FILE: 1.kt
 
-val String.property: String
+konst String.property: String
     get() = this
 
 fun box(): String {

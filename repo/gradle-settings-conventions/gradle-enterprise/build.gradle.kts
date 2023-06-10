@@ -11,7 +11,7 @@ repositories {
 
 kotlin.jvmToolchain(8)
 
-val buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
+konst buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-build-gradle-plugin:$buildGradlePluginVersion")
     implementation("com.gradle:gradle-enterprise-gradle-plugin:3.12.4")

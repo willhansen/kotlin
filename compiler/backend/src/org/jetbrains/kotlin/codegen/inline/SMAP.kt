@@ -11,8 +11,8 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import java.util.*
 import kotlin.math.max
 
-const val KOTLIN_STRATA_NAME = "Kotlin"
-const val KOTLIN_DEBUG_STRATA_NAME = "KotlinDebug"
+const konst KOTLIN_STRATA_NAME = "Kotlin"
+const konst KOTLIN_DEBUG_STRATA_NAME = "KotlinDebug"
 
 object SMAPBuilder {
     fun build(fileMappings: List<FileMapping>, backwardsCompatibleSyntax: Boolean): String? {
@@ -20,11 +20,11 @@ object SMAPBuilder {
             return null
         }
 
-        val debugMappings = linkedMapOf<Pair<String, String>, FileMapping>()
+        konst debugMappings = linkedMapOf<Pair<String, String>, FileMapping>()
         for (fileMapping in fileMappings) {
             for ((_, dest, range, callSite) in fileMapping.lineMappings) {
                 callSite?.let { (line, file, path) ->
-                    debugMappings.getOrPut(file to path) { FileMapping(file, path) }.mapNewInterval(line, dest, range)
+                    debugMappings.getOrPut(file to path) { FileMapping(file, path) }.mapNewInterkonst(line, dest, range)
                 }
             }
         }
@@ -33,8 +33,8 @@ object SMAPBuilder {
         //   1. they require *E between strata, which is not correct syntax according to JSR-045;
         //   2. in KotlinDebug, they use `1#2,3:4` to mean "map lines 4..6 to line 1 of #2", when in reality (and in
         //      the non-debug stratum) this maps lines 4..6 to lines 1..3. The correct syntax is `1#2:4,3`.
-        val defaultStrata = fileMappings.toSMAP(KOTLIN_STRATA_NAME, mapToFirstLine = false)
-        val debugStrata = debugMappings.values.toSMAP(KOTLIN_DEBUG_STRATA_NAME, mapToFirstLine = !backwardsCompatibleSyntax)
+        konst defaultStrata = fileMappings.toSMAP(KOTLIN_STRATA_NAME, mapToFirstLine = false)
+        konst debugStrata = debugMappings.konstues.toSMAP(KOTLIN_DEBUG_STRATA_NAME, mapToFirstLine = !backwardsCompatibleSyntax)
         if (backwardsCompatibleSyntax && defaultStrata.isNotEmpty() && debugStrata.isNotEmpty()) {
             return "SMAP\n${fileMappings[0].name}\n$KOTLIN_STRATA_NAME\n$defaultStrata${SMAP.END}\n$debugStrata${SMAP.END}\n"
         }
@@ -56,38 +56,38 @@ object SMAPBuilder {
         lineMappings.joinToString("") { it.toSMAP(id, mapToFirstLine) }
 }
 
-class SourceMapCopier(val parent: SourceMapper, private val smap: SMAP, val callSite: SourcePosition? = null) {
-    private val visitedLines = TIntIntHashMap()
+class SourceMapCopier(konst parent: SourceMapper, private konst smap: SMAP, konst callSite: SourcePosition? = null) {
+    private konst visitedLines = TIntIntHashMap()
     private var lastVisitedRange: RangeMapping? = null
 
     fun mapLineNumber(lineNumber: Int): Int {
-        val mappedLineNumber = visitedLines.get(lineNumber)
+        konst mappedLineNumber = visitedLines.get(lineNumber)
         if (mappedLineNumber > 0) {
             return mappedLineNumber
         }
 
-        val range = lastVisitedRange?.takeIf { lineNumber in it } ?: smap.findRange(lineNumber) ?: return -1
+        konst range = lastVisitedRange?.takeIf { lineNumber in it } ?: smap.findRange(lineNumber) ?: return -1
         lastVisitedRange = range
-        val newLineNumber = parent.mapLineNumber(range.mapDestToSource(lineNumber), callSite ?: range.callSite)
+        konst newLineNumber = parent.mapLineNumber(range.mapDestToSource(lineNumber), callSite ?: range.callSite)
 
         visitedLines.put(lineNumber, newLineNumber)
         return newLineNumber
     }
 }
 
-data class SourcePosition(val line: Int, val file: String, val path: String)
+data class SourcePosition(konst line: Int, konst file: String, konst path: String)
 
-class SourceMapper(val sourceInfo: SourceInfo?) {
+class SourceMapper(konst sourceInfo: SourceInfo?) {
     private var maxUsedValue: Int = sourceInfo?.linesInFile ?: 0
     private var fileMappings: LinkedHashMap<Pair<String, String>, FileMapping> = linkedMapOf()
 
-    val resultMappings: List<FileMapping>
-        get() = fileMappings.values.toList()
+    konst resultMappings: List<FileMapping>
+        get() = fileMappings.konstues.toList()
 
     companion object {
-        const val FAKE_FILE_NAME = "fake.kt"
-        const val FAKE_PATH = "kotlin/jvm/internal/FakeKt"
-        const val LOCAL_VARIABLE_INLINE_ARGUMENT_SYNTHETIC_LINE_NUMBER = 1
+        const konst FAKE_FILE_NAME = "fake.kt"
+        const konst FAKE_PATH = "kotlin/jvm/internal/FakeKt"
+        const konst LOCAL_VARIABLE_INLINE_ARGUMENT_SYNTHETIC_LINE_NUMBER = 1
     }
 
     init {
@@ -95,22 +95,22 @@ class SourceMapper(val sourceInfo: SourceInfo?) {
             // If 'sourceFileName' is null we are dealing with a synthesized class
             // (e.g., multi-file class facade with multiple parts). Such classes
             // only have synthetic debug information and we use a fake file name.
-            val sourceFileName = sourceInfo.sourceFileName ?: FAKE_FILE_NAME
+            konst sourceFileName = sourceInfo.sourceFileName ?: FAKE_FILE_NAME
             // Explicitly map the file to itself -- we'll probably need a lot of lines from it, so this will produce fewer ranges.
             getOrRegisterNewSource(sourceFileName, sourceInfo.pathOrCleanFQN)
-                .mapNewInterval(1, 1, sourceInfo.linesInFile)
+                .mapNewInterkonst(1, 1, sourceInfo.linesInFile)
         }
     }
 
-    val isTrivial: Boolean
+    konst isTrivial: Boolean
         get() = maxUsedValue == 0 || maxUsedValue == sourceInfo?.linesInFile
 
     private fun getOrRegisterNewSource(name: String, path: String): FileMapping =
         fileMappings.getOrPut(name to path) { FileMapping(name, path) }
 
     fun mapLineNumber(inlineSource: SourcePosition, inlineCallSite: SourcePosition?): Int {
-        val fileMapping = getOrRegisterNewSource(inlineSource.file, inlineSource.path)
-        val mappedLineIndex = fileMapping.mapNewLineNumber(inlineSource.line, maxUsedValue, inlineCallSite)
+        konst fileMapping = getOrRegisterNewSource(inlineSource.file, inlineSource.path)
+        konst mappedLineIndex = fileMapping.mapNewLineNumber(inlineSource.line, maxUsedValue, inlineCallSite)
         maxUsedValue = max(maxUsedValue, mappedLineIndex)
         return mappedLineIndex
     }
@@ -120,27 +120,27 @@ class SourceMapper(val sourceInfo: SourceInfo?) {
     }
 }
 
-class SMAP(val fileMappings: List<FileMapping>) {
+class SMAP(konst fileMappings: List<FileMapping>) {
     // assuming disjoint line mappings (otherwise binary search can't be used anyway)
-    private val intervals = fileMappings.flatMap { it.lineMappings }.sortedBy { it.dest }
+    private konst interkonsts = fileMappings.flatMap { it.lineMappings }.sortedBy { it.dest }
 
     fun findRange(lineNumber: Int): RangeMapping? {
-        val index = intervals.binarySearch { if (lineNumber in it) 0 else it.dest - lineNumber }
-        return if (index < 0) null else intervals[index]
+        konst index = interkonsts.binarySearch { if (lineNumber in it) 0 else it.dest - lineNumber }
+        return if (index < 0) null else interkonsts[index]
     }
 
     companion object {
-        const val FILE_SECTION = "*F"
-        const val LINE_SECTION = "*L"
-        const val STRATA_SECTION = "*S"
-        const val END = "*E"
+        const konst FILE_SECTION = "*F"
+        const konst LINE_SECTION = "*L"
+        const konst STRATA_SECTION = "*S"
+        const konst END = "*E"
     }
 }
 
-data class SMAPAndMethodNode(val node: MethodNode, val classSMAP: SMAP)
+data class SMAPAndMethodNode(konst node: MethodNode, konst classSMAP: SMAP)
 
-class FileMapping(val name: String, val path: String) {
-    val lineMappings = arrayListOf<RangeMapping>()
+class FileMapping(konst name: String, konst path: String) {
+    konst lineMappings = arrayListOf<RangeMapping>()
 
     fun toSourceInfo(): SourceInfo =
         SourceInfo(name, path, lineMappings.fold(0) { result, mapping -> max(result, mapping.source + mapping.range - 1) })
@@ -149,9 +149,9 @@ class FileMapping(val name: String, val path: String) {
         // Save some space in the SMAP by reusing (or extending if it's the last one) the existing range.
         // TODO some *other* range may already cover `source`; probably too slow to check them all though.
         //   Maybe keep the list ordered by `source` and use binary search to locate the closest range on the left?
-        val mapping = lineMappings.lastOrNull()?.takeIf { it.canReuseFor(source, currentIndex, callSite) }
+        konst mapping = lineMappings.lastOrNull()?.takeIf { it.canReuseFor(source, currentIndex, callSite) }
             ?: lineMappings.firstOrNull()?.takeIf { it.canReuseFor(source, currentIndex, callSite) }
-            ?: mapNewInterval(source, currentIndex + 1, 1, callSite)
+            ?: mapNewInterkonst(source, currentIndex + 1, 1, callSite)
         mapping.range = max(mapping.range, source - mapping.source + 1)
         return mapping.mapSourceToDest(source)
     }
@@ -159,11 +159,11 @@ class FileMapping(val name: String, val path: String) {
     private fun RangeMapping.canReuseFor(newSource: Int, globalMaxDest: Int, newCallSite: SourcePosition?): Boolean =
         callSite == newCallSite && (newSource - source) in 0 until range + (if (globalMaxDest in this) 10 else 0)
 
-    fun mapNewInterval(source: Int, dest: Int, range: Int, callSite: SourcePosition? = null): RangeMapping =
+    fun mapNewInterkonst(source: Int, dest: Int, range: Int, callSite: SourcePosition? = null): RangeMapping =
         RangeMapping(source, dest, range, callSite, parent = this).also { lineMappings.add(it) }
 }
 
-data class RangeMapping(val source: Int, val dest: Int, var range: Int, val callSite: SourcePosition?, val parent: FileMapping) {
+data class RangeMapping(konst source: Int, konst dest: Int, var range: Int, konst callSite: SourcePosition?, konst parent: FileMapping) {
     operator fun contains(destLine: Int): Boolean =
         dest <= destLine && destLine < dest + range
 
@@ -177,5 +177,5 @@ data class RangeMapping(val source: Int, val dest: Int, var range: Int, val call
         dest + (sourceLine - source)
 }
 
-val RangeMapping.toRange: IntRange
+konst RangeMapping.toRange: IntRange
     get() = dest until dest + range

@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.psi.KtFile
  */
 @OptIn(KtAnalysisApiInternals::class)
 @Suppress("AnalysisApiMissingLifetimeCheck")
-public abstract class KtAnalysisSession(final override val token: KtLifetimeToken) : KtLifetimeOwner,
+public abstract class KtAnalysisSession(final override konst token: KtLifetimeToken) : KtLifetimeOwner,
     KtSmartCastProviderMixIn,
     KtCallResolverMixIn,
     KtSamResolverMixIn,
@@ -66,119 +66,119 @@ public abstract class KtAnalysisSession(final override val token: KtLifetimeToke
     KtSymbolProviderByJavaPsiMixIn,
     KtSymbolFromResolveExtensionProviderMixIn {
 
-    public abstract val useSiteModule: KtModule
+    public abstract konst useSiteModule: KtModule
 
-    override val analysisSession: KtAnalysisSession get() = this
+    override konst analysisSession: KtAnalysisSession get() = this
 
     public abstract fun createContextDependentCopy(originalKtFile: KtFile, elementToReanalyze: KtElement): KtAnalysisSession
 
-    internal val smartCastProvider: KtSmartCastProvider get() = smartCastProviderImpl
-    protected abstract val smartCastProviderImpl: KtSmartCastProvider
+    internal konst smartCastProvider: KtSmartCastProvider get() = smartCastProviderImpl
+    protected abstract konst smartCastProviderImpl: KtSmartCastProvider
 
-    internal val diagnosticProvider: KtDiagnosticProvider get() = diagnosticProviderImpl
-    protected abstract val diagnosticProviderImpl: KtDiagnosticProvider
+    internal konst diagnosticProvider: KtDiagnosticProvider get() = diagnosticProviderImpl
+    protected abstract konst diagnosticProviderImpl: KtDiagnosticProvider
 
-    internal val scopeProvider: KtScopeProvider get() = scopeProviderImpl
-    protected abstract val scopeProviderImpl: KtScopeProvider
+    internal konst scopeProvider: KtScopeProvider get() = scopeProviderImpl
+    protected abstract konst scopeProviderImpl: KtScopeProvider
 
-    internal val containingDeclarationProvider: KtSymbolContainingDeclarationProvider get() = containingDeclarationProviderImpl
-    protected abstract val containingDeclarationProviderImpl: KtSymbolContainingDeclarationProvider
+    internal konst containingDeclarationProvider: KtSymbolContainingDeclarationProvider get() = containingDeclarationProviderImpl
+    protected abstract konst containingDeclarationProviderImpl: KtSymbolContainingDeclarationProvider
 
-    internal val symbolProvider: KtSymbolProvider get() = symbolProviderImpl
-    protected abstract val symbolProviderImpl: KtSymbolProvider
+    internal konst symbolProvider: KtSymbolProvider get() = symbolProviderImpl
+    protected abstract konst symbolProviderImpl: KtSymbolProvider
 
-    internal val callResolver: KtCallResolver get() = callResolverImpl
-    protected abstract val callResolverImpl: KtCallResolver
+    internal konst callResolver: KtCallResolver get() = callResolverImpl
+    protected abstract konst callResolverImpl: KtCallResolver
 
-    internal val samResolver: KtSamResolver get() = samResolverImpl
-    protected abstract val samResolverImpl: KtSamResolver
+    internal konst samResolver: KtSamResolver get() = samResolverImpl
+    protected abstract konst samResolverImpl: KtSamResolver
 
-    internal val completionCandidateChecker: KtCompletionCandidateChecker get() = completionCandidateCheckerImpl
-    protected abstract val completionCandidateCheckerImpl: KtCompletionCandidateChecker
+    internal konst completionCandidateChecker: KtCompletionCandidateChecker get() = completionCandidateCheckerImpl
+    protected abstract konst completionCandidateCheckerImpl: KtCompletionCandidateChecker
 
-    internal val symbolDeclarationOverridesProvider: KtSymbolDeclarationOverridesProvider get() = symbolDeclarationOverridesProviderImpl
-    protected abstract val symbolDeclarationOverridesProviderImpl: KtSymbolDeclarationOverridesProvider
+    internal konst symbolDeclarationOverridesProvider: KtSymbolDeclarationOverridesProvider get() = symbolDeclarationOverridesProviderImpl
+    protected abstract konst symbolDeclarationOverridesProviderImpl: KtSymbolDeclarationOverridesProvider
 
-    internal val referenceShortener: KtReferenceShortener get() = referenceShortenerImpl
-    protected abstract val referenceShortenerImpl: KtReferenceShortener
+    internal konst referenceShortener: KtReferenceShortener get() = referenceShortenerImpl
+    protected abstract konst referenceShortenerImpl: KtReferenceShortener
 
-    internal val importOptimizer: KtImportOptimizer get() = importOptimizerImpl
-    protected abstract val importOptimizerImpl: KtImportOptimizer
+    internal konst importOptimizer: KtImportOptimizer get() = importOptimizerImpl
+    protected abstract konst importOptimizerImpl: KtImportOptimizer
 
-    internal val symbolDeclarationRendererProvider: KtSymbolDeclarationRendererProvider get() = symbolDeclarationRendererProviderImpl
-    protected abstract val symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider
+    internal konst symbolDeclarationRendererProvider: KtSymbolDeclarationRendererProvider get() = symbolDeclarationRendererProviderImpl
+    protected abstract konst symbolDeclarationRendererProviderImpl: KtSymbolDeclarationRendererProvider
 
-    internal val expressionTypeProvider: KtExpressionTypeProvider get() = expressionTypeProviderImpl
-    protected abstract val expressionTypeProviderImpl: KtExpressionTypeProvider
+    internal konst expressionTypeProvider: KtExpressionTypeProvider get() = expressionTypeProviderImpl
+    protected abstract konst expressionTypeProviderImpl: KtExpressionTypeProvider
 
-    internal val psiTypeProvider: KtPsiTypeProvider get() = psiTypeProviderImpl
-    protected abstract val psiTypeProviderImpl: KtPsiTypeProvider
+    internal konst psiTypeProvider: KtPsiTypeProvider get() = psiTypeProviderImpl
+    protected abstract konst psiTypeProviderImpl: KtPsiTypeProvider
 
-    internal val jvmTypeMapper: KtJvmTypeMapper get() = jvmTypeMapperImpl
-    protected abstract val jvmTypeMapperImpl: KtJvmTypeMapper
+    internal konst jvmTypeMapper: KtJvmTypeMapper get() = jvmTypeMapperImpl
+    protected abstract konst jvmTypeMapperImpl: KtJvmTypeMapper
 
-    internal val typeProvider: KtTypeProvider get() = typeProviderImpl
-    protected abstract val typeProviderImpl: KtTypeProvider
+    internal konst typeProvider: KtTypeProvider get() = typeProviderImpl
+    protected abstract konst typeProviderImpl: KtTypeProvider
 
-    internal val typeInfoProvider: KtTypeInfoProvider get() = typeInfoProviderImpl
-    protected abstract val typeInfoProviderImpl: KtTypeInfoProvider
+    internal konst typeInfoProvider: KtTypeInfoProvider get() = typeInfoProviderImpl
+    protected abstract konst typeInfoProviderImpl: KtTypeInfoProvider
 
-    internal val subtypingComponent: KtSubtypingComponent get() = subtypingComponentImpl
-    protected abstract val subtypingComponentImpl: KtSubtypingComponent
+    internal konst subtypingComponent: KtSubtypingComponent get() = subtypingComponentImpl
+    protected abstract konst subtypingComponentImpl: KtSubtypingComponent
 
-    internal val expressionInfoProvider: KtExpressionInfoProvider get() = expressionInfoProviderImpl
-    protected abstract val expressionInfoProviderImpl: KtExpressionInfoProvider
+    internal konst expressionInfoProvider: KtExpressionInfoProvider get() = expressionInfoProviderImpl
+    protected abstract konst expressionInfoProviderImpl: KtExpressionInfoProvider
 
-    internal val compileTimeConstantProvider: KtCompileTimeConstantProvider get() = compileTimeConstantProviderImpl
-    protected abstract val compileTimeConstantProviderImpl: KtCompileTimeConstantProvider
+    internal konst compileTimeConstantProvider: KtCompileTimeConstantProvider get() = compileTimeConstantProviderImpl
+    protected abstract konst compileTimeConstantProviderImpl: KtCompileTimeConstantProvider
 
-    internal val visibilityChecker: KtVisibilityChecker get() = visibilityCheckerImpl
-    protected abstract val visibilityCheckerImpl: KtVisibilityChecker
+    internal konst visibilityChecker: KtVisibilityChecker get() = visibilityCheckerImpl
+    protected abstract konst visibilityCheckerImpl: KtVisibilityChecker
 
-    internal val overrideInfoProvider: KtOverrideInfoProvider get() = overrideInfoProviderImpl
-    protected abstract val overrideInfoProviderImpl: KtOverrideInfoProvider
+    internal konst overrideInfoProvider: KtOverrideInfoProvider get() = overrideInfoProviderImpl
+    protected abstract konst overrideInfoProviderImpl: KtOverrideInfoProvider
 
-    internal val inheritorsProvider: KtInheritorsProvider get() = inheritorsProviderImpl
-    protected abstract val inheritorsProviderImpl: KtInheritorsProvider
+    internal konst inheritorsProvider: KtInheritorsProvider get() = inheritorsProviderImpl
+    protected abstract konst inheritorsProviderImpl: KtInheritorsProvider
 
-    internal val multiplatformInfoProvider: KtMultiplatformInfoProvider get() = multiplatformInfoProviderImpl
-    protected abstract val multiplatformInfoProviderImpl: KtMultiplatformInfoProvider
+    internal konst multiplatformInfoProvider: KtMultiplatformInfoProvider get() = multiplatformInfoProviderImpl
+    protected abstract konst multiplatformInfoProviderImpl: KtMultiplatformInfoProvider
 
-    internal val originalPsiProvider: KtOriginalPsiProvider get() = originalPsiProviderImpl
-    protected abstract val originalPsiProviderImpl: KtOriginalPsiProvider
+    internal konst originalPsiProvider: KtOriginalPsiProvider get() = originalPsiProviderImpl
+    protected abstract konst originalPsiProviderImpl: KtOriginalPsiProvider
 
-    internal val symbolInfoProvider: KtSymbolInfoProvider get() = symbolInfoProviderImpl
-    protected abstract val symbolInfoProviderImpl: KtSymbolInfoProvider
+    internal konst symbolInfoProvider: KtSymbolInfoProvider get() = symbolInfoProviderImpl
+    protected abstract konst symbolInfoProviderImpl: KtSymbolInfoProvider
 
-    internal val analysisScopeProvider: KtAnalysisScopeProvider get() = analysisScopeProviderImpl
-    protected abstract val analysisScopeProviderImpl: KtAnalysisScopeProvider
+    internal konst analysisScopeProvider: KtAnalysisScopeProvider get() = analysisScopeProviderImpl
+    protected abstract konst analysisScopeProviderImpl: KtAnalysisScopeProvider
 
-    internal val referenceResolveProvider: KtReferenceResolveProvider get() = referenceResolveProviderImpl
-    protected abstract val referenceResolveProviderImpl: KtReferenceResolveProvider
+    internal konst referenceResolveProvider: KtReferenceResolveProvider get() = referenceResolveProviderImpl
+    protected abstract konst referenceResolveProviderImpl: KtReferenceResolveProvider
 
-    internal val signatureSubstitutor: KtSignatureSubstitutor get() = signatureSubstitutorImpl
-    protected abstract val signatureSubstitutorImpl: KtSignatureSubstitutor
+    internal konst signatureSubstitutor: KtSignatureSubstitutor get() = signatureSubstitutorImpl
+    protected abstract konst signatureSubstitutorImpl: KtSignatureSubstitutor
 
-    internal val scopeSubstitution: KtScopeSubstitution get() = scopeSubstitutionImpl
-    protected abstract val scopeSubstitutionImpl: KtScopeSubstitution
+    internal konst scopeSubstitution: KtScopeSubstitution get() = scopeSubstitutionImpl
+    protected abstract konst scopeSubstitutionImpl: KtScopeSubstitution
 
-    internal val resolveExtensionProvider: KtSymbolFromResolveExtensionProvider get() = resolveExtensionProviderImpl
-    protected abstract val resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider
-
-    @KtAnalysisApiInternals
-    public val substitutorFactory: KtSubstitutorFactory get() = substitutorFactoryImpl
-    protected abstract val substitutorFactoryImpl: KtSubstitutorFactory
+    internal konst resolveExtensionProvider: KtSymbolFromResolveExtensionProvider get() = resolveExtensionProviderImpl
+    protected abstract konst resolveExtensionProviderImpl: KtSymbolFromResolveExtensionProvider
 
     @KtAnalysisApiInternals
-    public val symbolProviderByJavaPsi: KtSymbolProviderByJavaPsi get() = symbolProviderByJavaPsiImpl
+    public konst substitutorFactory: KtSubstitutorFactory get() = substitutorFactoryImpl
+    protected abstract konst substitutorFactoryImpl: KtSubstitutorFactory
+
     @KtAnalysisApiInternals
-    protected abstract val symbolProviderByJavaPsiImpl: KtSymbolProviderByJavaPsi
+    public konst symbolProviderByJavaPsi: KtSymbolProviderByJavaPsi get() = symbolProviderByJavaPsiImpl
+    @KtAnalysisApiInternals
+    protected abstract konst symbolProviderByJavaPsiImpl: KtSymbolProviderByJavaPsi
 
 
     @PublishedApi
-    internal val typesCreator: KtTypeCreator
+    internal konst typesCreator: KtTypeCreator
         get() = typesCreatorImpl
-    protected abstract val typesCreatorImpl: KtTypeCreator
+    protected abstract konst typesCreatorImpl: KtTypeCreator
 }
 
 public fun KtAnalysisSession.getModule(element: PsiElement): KtModule {

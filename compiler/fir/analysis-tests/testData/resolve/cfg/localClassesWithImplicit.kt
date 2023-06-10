@@ -24,7 +24,7 @@ fun test(a: Any, b: Any) {
         fun baz() = 1
     }
 
-    val x = object {
+    konst x = object {
         fun foo() = myRun {
             a.length
             if (b is String) {

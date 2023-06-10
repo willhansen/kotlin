@@ -340,7 +340,7 @@ fun <T> case_24(x: Inv<out T?>?, y: Nothing?) {
 
 // TESTCASE NUMBER: 25
 fun case_25(x: Int?) {
-    val x = (l@ {
+    konst x = (l@ {
         if (x == null) return@l
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.inv()
@@ -589,7 +589,7 @@ fun case_39(x: MutableCollection<out Nothing?>?, y: Nothing?) {
 
 // TESTCASE NUMBER: 40
 fun case_40(x: Collection<Collection<Collection<Collection<Collection<Collection<Collection<*>>>>>>>?) {
-    val z = (l@ {
+    konst z = (l@ {
         if (x !== <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>) else { return@l }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<*>>>>>>> & kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<*>>>>>>>?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<*>>>>>>> & kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<kotlin.collections.Collection<*>>>>>>>?"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -666,7 +666,7 @@ fun case_44(x: Inv<out Inv<out Inv<out Inv<out Inv<out Inv<out Inv<out Number>>>
 
 // TESTCASE NUMBER: 45
 fun <T> case_45(x: T) {
-    val y = (l@ {
+    konst y = (l@ {
         if (x == null) return@l
         <!DEBUG_INFO_EXPRESSION_TYPE("T & T & Any")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("T & T & Any"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -700,7 +700,7 @@ fun <T> case_46(x: T?) {
 
 // TESTCASE NUMBER: 47
 fun <T> case_47(x: Inv<in T>?) {
-    val y = l@ {
+    konst y = l@ {
         if (x !== null) else return@l
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<in T> & Inv<in T>?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<in T> & Inv<in T>?")!>x<!>.equals(null)
@@ -717,7 +717,7 @@ fun <T> case_47(x: Inv<in T>?) {
 
 // TESTCASE NUMBER: 48
 fun <T> case_48(x: Inv<out T?>?, y: Nothing?) {
-    val y = ((((l@ {
+    konst y = ((((l@ {
         if (x !== <!DEBUG_INFO_CONSTANT!>y<!> && true) else return@l
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out T?> & Inv<out T?>?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<out T?> & Inv<out T?>?")!>x<!>.equals(null)

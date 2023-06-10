@@ -8,12 +8,12 @@ import javax.tools.StandardLocation
 
 class GenerateKotlinSourceFile : AbstractProcessor() {
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
-        val annotation = annotations.singleOrNull() ?: return true
+        konst annotation = annotations.singleOrNull() ?: return true
         for (type in roundEnv.getElementsAnnotatedWith(annotation)) {
             if (type !is TypeElement) continue
-            val packageName = processingEnv.elementUtils.getPackageOf(type).qualifiedName.toString()
-            val simpleName = type.simpleName.toString() + "Generated"
-            val file = processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, "example", "$simpleName.kt", type)
+            konst packageName = processingEnv.elementUtils.getPackageOf(type).qualifiedName.toString()
+            konst simpleName = type.simpleName.toString() + "Generated"
+            konst file = processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, "example", "$simpleName.kt", type)
             file.openWriter().use { writer ->
                 writer.write("package $packageName\n\nclass $simpleName")
             }

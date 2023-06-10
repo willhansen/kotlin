@@ -4,14 +4,14 @@ public fun box(): kotlin.String?
 
 public open class Foo {
     public constructor Foo(/*0*/ prop: kotlin.Int)
-    public final val prop: kotlin.Int
+    public final konst prop: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public object MyObject : Foo {
         private constructor MyObject()
-        public final override /*1*/ /*fake_override*/ val prop: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst prop: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

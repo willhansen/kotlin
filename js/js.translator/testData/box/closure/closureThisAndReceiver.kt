@@ -2,7 +2,7 @@
 // EXPECTED_REACHABLE_NODES: 1292
 package foo
 
-class A(val a: String) {
+class A(konst a: String) {
     fun A.foo() = { a + this.a + this@foo.a + this@A.a }()
     fun bar(a: A) = this.foo() + " " + a.foo()
 
@@ -20,8 +20,8 @@ class A(val a: String) {
 }
 
 fun box(): String {
-    val a = A("a")
-    val b = A("b")
+    konst a = A("a")
+    konst b = A("b")
 
     assertEquals("aaaa aaaa", a.bar(a))
     assertEquals("aaaa bbba", a.bar(b))

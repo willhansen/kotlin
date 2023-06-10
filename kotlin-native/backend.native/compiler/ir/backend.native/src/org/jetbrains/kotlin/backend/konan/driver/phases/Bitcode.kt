@@ -28,14 +28,14 @@ import java.io.File
 
 
 internal data class WriteBitcodeFileInput(
-        override val llvmModule: LLVMModuleRef,
-        val outputFile: File,
+        override konst llvmModule: LLVMModuleRef,
+        konst outputFile: File,
 ) : LlvmIrHolder
 
 /**
  * Write in-memory LLVM module to filesystem as a bitcode.
  */
-internal val WriteBitcodeFilePhase = createSimpleNamedCompilerPhase<PhaseContext, WriteBitcodeFileInput>(
+internal konst WriteBitcodeFilePhase = createSimpleNamedCompilerPhase<PhaseContext, WriteBitcodeFileInput>(
         "WriteBitcodeFile",
         "Write bitcode file",
 ) { context, (llvmModule, outputFile) ->
@@ -44,7 +44,7 @@ internal val WriteBitcodeFilePhase = createSimpleNamedCompilerPhase<PhaseContext
     LLVMWriteBitcodeToFile(llvmModule, outputFile.canonicalPath)
 }
 
-internal val CheckExternalCallsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
+internal konst CheckExternalCallsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
         name = "CheckExternalCalls",
         description = "Check external calls",
         postactions = getDefaultLlvmModuleActions(),
@@ -52,7 +52,7 @@ internal val CheckExternalCallsPhase = createSimpleNamedCompilerPhase<NativeGene
     checkLlvmModuleExternalCalls(context)
 }
 
-internal val RewriteExternalCallsCheckerGlobals = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
+internal konst RewriteExternalCallsCheckerGlobals = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
         name = "RewriteExternalCallsCheckerGlobals",
         description = "Rewrite globals for external calls checker after optimizer run",
         postactions = getDefaultLlvmModuleActions(),
@@ -62,7 +62,7 @@ internal val RewriteExternalCallsCheckerGlobals = createSimpleNamedCompilerPhase
 
 internal class OptimizationState(
         konanConfig: KonanConfig,
-        val llvmConfig: LlvmPipelineConfig
+        konst llvmConfig: LlvmPipelineConfig
 ) : BasicPhaseContext(konanConfig)
 
 internal fun optimizationPipelinePass(name: String, description: String, pipeline: (LlvmPipelineConfig, LoggingContext) -> LlvmOptimizationPipeline) =
@@ -77,38 +77,38 @@ internal fun optimizationPipelinePass(name: String, description: String, pipelin
         }
 
 
-internal val MandatoryBitcodeLLVMPostprocessingPhase = optimizationPipelinePass(
+internal konst MandatoryBitcodeLLVMPostprocessingPhase = optimizationPipelinePass(
         name = "MandatoryBitcodeLLVMPostprocessingPhase",
         description = "Mandatory bitcode llvm postprocessing",
         pipeline = ::MandatoryOptimizationPipeline,
 )
 
-internal val ModuleBitcodeOptimizationPhase = optimizationPipelinePass(
+internal konst ModuleBitcodeOptimizationPhase = optimizationPipelinePass(
         name = "ModuleBitcodeOptimization",
         description = "Optimize bitcode",
         pipeline = ::ModuleOptimizationPipeline,
 )
 
-internal val LTOBitcodeOptimizationPhase = optimizationPipelinePass(
+internal konst LTOBitcodeOptimizationPhase = optimizationPipelinePass(
         name = "LTOBitcodeOptimization",
         description = "Runs llvm lto pipeline",
         pipeline = ::LTOOptimizationPipeline
 )
 
-internal val ThreadSanitizerPhase = optimizationPipelinePass(
+internal konst ThreadSanitizerPhase = optimizationPipelinePass(
         name = "ThreadSanitizer",
         description = "Prepare to run with thread sanitizer",
         pipeline = ::ThreadSanitizerPipeline,
 )
 
-internal val CoveragePhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
+internal konst CoveragePhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
         name = "Coverage",
         description = "Produce coverage information",
         postactions = getDefaultLlvmModuleActions(),
         op = { context, _ -> runCoveragePass(context) }
 )
 
-internal val RemoveRedundantSafepointsPhase = createSimpleNamedCompilerPhase<BitcodePostProcessingContext, Unit>(
+internal konst RemoveRedundantSafepointsPhase = createSimpleNamedCompilerPhase<BitcodePostProcessingContext, Unit>(
         name = "RemoveRedundantSafepoints",
         description = "Remove function prologue safepoints inlined to another function",
         postactions = getDefaultLlvmModuleActions(),
@@ -120,48 +120,48 @@ internal val RemoveRedundantSafepointsPhase = createSimpleNamedCompilerPhase<Bit
         }
 )
 
-internal val OptimizeTLSDataLoadsPhase = createSimpleNamedCompilerPhase<BitcodePostProcessingContext, Unit>(
+internal konst OptimizeTLSDataLoadsPhase = createSimpleNamedCompilerPhase<BitcodePostProcessingContext, Unit>(
         name = "OptimizeTLSDataLoads",
         description = "Optimize multiple loads of thread data",
         postactions = getDefaultLlvmModuleActions(),
         op = { context, _ -> removeMultipleThreadDataLoads(context) }
 )
 
-internal val CStubsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
+internal konst CStubsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
         name = "CStubs",
         description = "C stubs compilation",
         postactions = getDefaultLlvmModuleActions(),
         op = { context, _ -> produceCStubs(context) }
 )
 
-internal val LinkBitcodeDependenciesPhase = createSimpleNamedCompilerPhase<NativeGenerationState, List<File>>(
+internal konst LinkBitcodeDependenciesPhase = createSimpleNamedCompilerPhase<NativeGenerationState, List<File>>(
         name = "LinkBitcodeDependencies",
         description = "Link bitcode dependencies",
         postactions = getDefaultLlvmModuleActions(),
         op = { context, input -> linkBitcodeDependencies(context, input) }
 )
 
-internal val VerifyBitcodePhase = createSimpleNamedCompilerPhase<PhaseContext, LLVMModuleRef>(
+internal konst VerifyBitcodePhase = createSimpleNamedCompilerPhase<PhaseContext, LLVMModuleRef>(
         name = "VerifyBitcode",
         description = "Verify bitcode",
         op = { _, llvmModule -> verifyModule(llvmModule) }
 )
 
-internal val PrintBitcodePhase = createSimpleNamedCompilerPhase<PhaseContext, LLVMModuleRef>(
+internal konst PrintBitcodePhase = createSimpleNamedCompilerPhase<PhaseContext, LLVMModuleRef>(
         name = "PrintBitcode",
         description = "Print bitcode",
         op = { _, llvmModule -> LLVMDumpModule(llvmModule) }
 )
 
 internal fun <T : BitcodePostProcessingContext> PhaseEngine<T>.runBitcodePostProcessing() {
-    val optimizationConfig = createLTOFinalPipelineConfig(
+    konst optimizationConfig = createLTOFinalPipelineConfig(
             context,
             context.llvm.targetTriple,
             closedWorld = context.config.isFinalBinary,
             timePasses = context.config.flexiblePhaseConfig.needProfiling,
     )
     useContext(OptimizationState(context.config, optimizationConfig)) {
-        val module = this@runBitcodePostProcessing.context.llvmModule
+        konst module = this@runBitcodePostProcessing.context.llvmModule
         it.runPhase(MandatoryBitcodeLLVMPostprocessingPhase, module)
         it.runPhase(ModuleBitcodeOptimizationPhase, module)
         it.runPhase(LTOBitcodeOptimizationPhase, module)

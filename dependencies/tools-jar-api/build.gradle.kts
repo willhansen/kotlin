@@ -8,7 +8,7 @@ plugins {
     `java-base`
 }
 
-val runtimeElements by configurations.creating {
+konst runtimeElements by configurations.creating {
     isCanBeResolved = false
     isCanBeConsumed = true
     attributes {
@@ -16,26 +16,26 @@ val runtimeElements by configurations.creating {
     }
 }
 
-val toolsJarStubs by tasks.registering {
-    val toolsJarFile = toolsJar().singleFile
+konst toolsJarStubs by tasks.registering {
+    konst toolsJarFile = toolsJar().singleFile
     inputs.file(toolsJarFile)
 
-    val outDir = buildDir.resolve(name)
+    konst outDir = buildDir.resolve(name)
     outputs.dir(outDir)
 
-    val usedInternalApiPackages = listOf(
+    konst usedInternalApiPackages = listOf(
         "com/sun/tools/javac" // Used in KAPT
     )
 
     doLast {
         outDir.deleteRecursively()
-        val zipFile = ZipFile(toolsJarFile)
+        konst zipFile = ZipFile(toolsJarFile)
         zipFile.stream()
             .filter { it.name.endsWith(".class") }
             .forEach { zipEntry ->
                 zipFile.getInputStream(zipEntry).use { entryStream ->
-                    val classReader = ClassReader(entryStream)
-                    val classWriter = ClassWriter( 0)
+                    konst classReader = ClassReader(entryStream)
+                    konst classWriter = ClassWriter( 0)
                     var isExported = false
                     classReader.accept(object : ClassVisitor(API_VERSION, classWriter) {
                         override fun visit(
@@ -46,7 +46,7 @@ val toolsJarStubs by tasks.registering {
                             superName: String?,
                             interfaces: Array<out String>?
                         ) {
-                            val isPublic = access and ACC_PUBLIC != 0
+                            konst isPublic = access and ACC_PUBLIC != 0
                             if (isPublic && usedInternalApiPackages.any { name?.startsWith(it) == true }) {
                                 isExported = true
                             }
@@ -63,7 +63,7 @@ val toolsJarStubs by tasks.registering {
                     }, SKIP_CODE)
 
                     if (isExported) {
-                        val result = File(outDir, zipEntry.name)
+                        konst result = File(outDir, zipEntry.name)
                         result.parentFile.mkdirs()
                         result.writeBytes(classWriter.toByteArray())
                     }
@@ -72,7 +72,7 @@ val toolsJarStubs by tasks.registering {
     }
 }
 
-val jar = tasks.register<Jar>("jar") {
+konst jar = tasks.register<Jar>("jar") {
     dependsOn(toolsJarStubs)
     from {
         fileTree(toolsJarStubs.get().outputs.files.singleFile)

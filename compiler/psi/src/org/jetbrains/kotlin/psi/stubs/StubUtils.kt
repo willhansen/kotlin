@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.name.ClassId
 object StubUtils {
     @JvmStatic
     fun deserializeClassId(dataStream: StubInputStream): ClassId? {
-        val classId = dataStream.readName() ?: return null
+        konst classId = dataStream.readName() ?: return null
         return ClassId.fromString(classId.string)
     }
 

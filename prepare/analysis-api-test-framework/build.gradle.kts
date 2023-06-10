@@ -2,7 +2,7 @@ plugins {
     java
 }
 
-val testModules = listOf(
+konst testModules = listOf(
     ":analysis:analysis-api-fir",
     ":analysis:low-level-api-fir",
     ":analysis:analysis-test-framework",
@@ -12,7 +12,7 @@ val testModules = listOf(
     ":analysis:decompiled:decompiler-to-file-stubs",
 )
 
-val mainModules = listOf(
+konst mainModules = listOf(
     ":kotlin-preloader",
 )
 

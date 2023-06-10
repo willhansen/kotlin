@@ -1,7 +1,7 @@
 package
 
 package fooIsExtension {
-    public val fooIsExtension.A.foo: fooIsExtension.B.() -> kotlin.Unit
+    public konst fooIsExtension.A.foo: fooIsExtension.B.() -> kotlin.Unit
     public fun test(/*0*/ a: fooIsExtension.A, /*1*/ b: fooIsExtension.B): kotlin.Unit
 
     public final class A {
@@ -24,7 +24,7 @@ package fooIsMember {
 
     public final class A {
         public constructor A()
-        public final val foo: fooIsMember.B.() -> kotlin.Unit
+        public final konst foo: fooIsMember.B.() -> kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

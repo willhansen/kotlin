@@ -13,12 +13,12 @@ import org.junit.jupiter.api.DisplayName
 @JsGradlePluginTests
 class KotlinJsDomApiDependencyIT : KGPBaseTest() {
 
-    private val defaultJsOptions = BuildOptions.JsOptions(
+    private konst defaultJsOptions = BuildOptions.JsOptions(
         useIrBackend = true,
         jsCompilerType = KotlinJsCompilerType.IR
     )
 
-    override val defaultBuildOptions =
+    override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(
             jsOptions = defaultJsOptions,
         )
@@ -47,7 +47,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {
@@ -61,7 +61,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {
@@ -108,7 +108,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {
@@ -122,7 +122,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {
@@ -169,7 +169,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {
@@ -183,7 +183,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace(added!!, "")
+                konst replaced = it.replace(added!!, "")
                 replaced + "\n" +
                         """
                         dependencies {

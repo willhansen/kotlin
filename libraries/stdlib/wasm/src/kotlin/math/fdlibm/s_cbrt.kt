@@ -17,13 +17,13 @@
 
 package kotlin.math.fdlibm
 
-private const val B1 = 715094163 /* B1 = (682-0.03306235651)*2**20 */
-private const val B2 = 696219795 /* B2 = (664-0.03306235651)*2**20 */
-private const val C =  5.42857142857142815906e-01 /* 19/35     = 0x3FE15F15, 0xF15F15F1 */
-private const val D = -7.05306122448979611050e-01 /* -864/1225 = 0xBFE691DE, 0x2532C834 */
-private const val E =  1.41428571428571436819e+00 /* 99/70     = 0x3FF6A0EA, 0x0EA0EA0F */
-private const val F =  1.60714285714285720630e+00 /* 45/28     = 0x3FF9B6DB, 0x6DB6DB6E */
-private const val G =  3.57142857142857150787e-01 /* 5/14      = 0x3FD6DB6D, 0xB6DB6DB7 */
+private const konst B1 = 715094163 /* B1 = (682-0.03306235651)*2**20 */
+private const konst B2 = 696219795 /* B2 = (664-0.03306235651)*2**20 */
+private const konst C =  5.42857142857142815906e-01 /* 19/35     = 0x3FE15F15, 0xF15F15F1 */
+private const konst D = -7.05306122448979611050e-01 /* -864/1225 = 0xBFE691DE, 0x2532C834 */
+private const konst E =  1.41428571428571436819e+00 /* 99/70     = 0x3FF6A0EA, 0x0EA0EA0F */
+private const konst F =  1.60714285714285720630e+00 /* 45/28     = 0x3FF9B6DB, 0x6DB6DB6E */
+private const konst G =  3.57142857142857150787e-01 /* 5/14      = 0x3FD6DB6D, 0xB6DB6DB7 */
 
 internal fun __ieee754_cbrt(v: Double): Double {
     var hx: Int

@@ -30,7 +30,7 @@ abstract class AbstractByDecompiledPsiStubBuilderTest : AbstractStubBuilderTest(
     }
 
     override fun getStubToTest(classFile: VirtualFile): PsiFileStub<*> {
-        val decompiledFile = PsiManager.getInstance(project).findFile(classFile)
+        konst decompiledFile = PsiManager.getInstance(project).findFile(classFile)
             ?: error("No decompiled file was found for $classFile")
         return KtFileStubBuilder().buildStubTree(decompiledFile) as PsiFileStub<*>
     }

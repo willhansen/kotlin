@@ -2,12 +2,12 @@ import kotlin.reflect.KProperty
 
 fun <T> lazy(initializer: () -> T): Lazy<T> = Lazy(initializer())
 
-class Lazy<T>(val value: T)
+class Lazy<T>(konst konstue: T)
 
-inline operator fun <T> Lazy<T>.getValue(thisRef: Any?, property: KProperty<*>): T = value
+inline operator fun <T> Lazy<T>.getValue(thisRef: Any?, property: KProperty<*>): T = konstue
 
 class A {
-    val i by lazy {
+    konst i by lazy {
         1
     }
 }

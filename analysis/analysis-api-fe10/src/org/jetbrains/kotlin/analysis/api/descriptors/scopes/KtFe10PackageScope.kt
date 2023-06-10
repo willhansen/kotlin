@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 internal class KtFe10PackageScope(
     scope: MemberScope,
-    private val owner: KtPackageSymbol,
+    private konst owner: KtPackageSymbol,
     analysisContext: Fe10AnalysisContext
 ) : KtFe10ScopeMember(scope, constructors = emptyList(), analysisContext) {
     override fun getPackageSymbols(nameFilter: KtScopeNameFilter): Sequence<KtPackageSymbol> = withValidityAssertion {
-        val packageFragmentProvider = analysisContext.resolveSession.packageFragmentProvider
+        konst packageFragmentProvider = analysisContext.resolveSession.packageFragmentProvider
         return packageFragmentProvider.getSubPackagesOf(owner.fqName, nameFilter)
             .asSequence()
             .map { KtFe10PackageSymbol(it, analysisContext) }

@@ -5,7 +5,7 @@
 
 fun box(): String {
     var result = 0u
-    val uIntRange: UIntProgression = 1u..3u
+    konst uIntRange: UIntProgression = 1u..3u
     for (i: UInt? in uIntRange) {
         result = sum(result, i)
     }

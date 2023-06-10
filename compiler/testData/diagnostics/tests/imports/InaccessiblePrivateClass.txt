@@ -1,8 +1,8 @@
 package
 
 package p1 {
-    public val x: p2.X
-    public val y: p1.Y
+    public konst x: p2.X
+    public konst y: p1.Y
 
     private final class X {
         public constructor X()

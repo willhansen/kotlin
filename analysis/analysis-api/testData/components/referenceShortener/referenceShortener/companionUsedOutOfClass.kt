@@ -1,7 +1,7 @@
 // FILE: main.kt
 package a.b.c
 
-class MyClass(val id: Int) {
+class MyClass(konst id: Int) {
     companion object {
         fun foo() = ""
     }

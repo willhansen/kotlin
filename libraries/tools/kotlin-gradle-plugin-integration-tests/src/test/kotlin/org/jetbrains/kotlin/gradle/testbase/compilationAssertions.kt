@@ -13,9 +13,9 @@ import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
 
-private val kotlinSrcRegex by lazy { Regex("\\[KOTLIN] compile iteration: ([^\\r\\n]*)") }
+private konst kotlinSrcRegex by lazy { Regex("\\[KOTLIN] compile iteration: ([^\\r\\n]*)") }
 
-private val javaSrcRegex by lazy { Regex("\\[DEBUG] \\[[^]]*JavaCompiler] Compiler arguments: ([^\\r\\n]*)") }
+private konst javaSrcRegex by lazy { Regex("\\[DEBUG] \\[[^]]*JavaCompiler] Compiler arguments: ([^\\r\\n]*)") }
 
 /**
  * Extracts the list of compiled .kt files from the build output.
@@ -26,7 +26,7 @@ private val javaSrcRegex by lazy { Regex("\\[DEBUG] \\[[^]]*JavaCompiler] Compil
  */
 fun extractCompiledKotlinFiles(output: String): List<Path> {
     return kotlinSrcRegex.findAll(output).asIterable()
-        .flatMap { matchResult -> matchResult.groups[1]!!.value.split(", ") }
+        .flatMap { matchResult -> matchResult.groups[1]!!.konstue.split(", ") }
         .toPaths()
 }
 
@@ -39,7 +39,7 @@ fun extractCompiledKotlinFiles(output: String): List<Path> {
  */
 fun extractCompiledJavaFiles(projectDir: File, output: String): List<Path> {
     return javaSrcRegex.findAll(output).asIterable()
-        .flatMap { matchResult -> matchResult.groups[1]!!.value.split(" ") }
+        .flatMap { matchResult -> matchResult.groups[1]!!.konstue.split(" ") }
         .filter { filePath -> filePath.endsWith(".java", ignoreCase = true) }
         .map { javaFilePath -> projectDir.toPath().relativize(Paths.get(javaFilePath)) }
 }
@@ -54,7 +54,7 @@ fun assertCompiledKotlinSources(
     output: String,
     errorMessageSuffix: String = ""
 ) {
-    val actualSources = extractCompiledKotlinFiles(output)
+    konst actualSources = extractCompiledKotlinFiles(output)
     assertSameFiles(expectedSources, actualSources, "Compiled Kotlin files differ${errorMessageSuffix}:\n")
 }
 
@@ -68,7 +68,7 @@ fun GradleProject.assertCompiledJavaSources(
     output: String,
     errorMessageSuffix: String = ""
 ) {
-    val actualSources = extractCompiledJavaFiles(projectPath.toRealPath().toFile(), output)
+    konst actualSources = extractCompiledJavaFiles(projectPath.toRealPath().toFile(), output)
     assertSameFiles(expectedSources, actualSources, "Compiled Java files differ${errorMessageSuffix}:\n")
 }
 
@@ -126,6 +126,6 @@ fun BuildResult.assertIncrementalCompilationFellBackToNonIncremental(reason: Bui
 }
 
 // Each of the following messages should uniquely correspond to a case in `IncrementalCompilerRunner.ICResult`
-private const val INCREMENTAL_COMPILATION_COMPLETED = "Incremental compilation completed"
-const val NON_INCREMENTAL_COMPILATION_WILL_BE_PERFORMED = "Non-incremental compilation will be performed"
-private const val FALLING_BACK_TO_NON_INCREMENTAL_COMPILATION = "Falling back to non-incremental compilation"
+private const konst INCREMENTAL_COMPILATION_COMPLETED = "Incremental compilation completed"
+const konst NON_INCREMENTAL_COMPILATION_WILL_BE_PERFORMED = "Non-incremental compilation will be performed"
+private const konst FALLING_BACK_TO_NON_INCREMENTAL_COMPILATION = "Falling back to non-incremental compilation"

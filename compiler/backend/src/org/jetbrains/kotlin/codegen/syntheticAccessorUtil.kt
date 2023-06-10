@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.codegen
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
-enum class AccessorKind(val suffix: String) {
+enum class AccessorKind(konst suffix: String) {
     NORMAL("p"),
     IN_CLASS_COMPANION("cp"),
     FIELD_FROM_LOCAL("lp"),
@@ -36,7 +36,7 @@ fun getAccessorNameSuffix(
     if (accessorKind == AccessorKind.JVM_DEFAULT_COMPATIBILITY)
         return descriptor.getJvmName() + "$" + AccessorKind.JVM_DEFAULT_COMPATIBILITY.suffix
 
-    val suffix = when (descriptor) {
+    konst suffix = when (descriptor) {
         is ConstructorDescriptor ->
             return "will be ignored"
         is SimpleFunctionDescriptor ->

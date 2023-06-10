@@ -18,27 +18,27 @@ enum class LoopLabelType { BREAK, CONTINUE }
 enum class SyntheticLocalType { IS_INTERFACE_PARAMETER, TABLE_SWITCH_SELECTOR }
 
 class WasmFunctionCodegenContext(
-    val irFunction: IrFunction,
-    private val wasmFunction: WasmFunction.Defined,
-    val backendContext: WasmBackendContext,
-    val context: WasmModuleCodegenContext,
+    konst irFunction: IrFunction,
+    private konst wasmFunction: WasmFunction.Defined,
+    konst backendContext: WasmBackendContext,
+    konst context: WasmModuleCodegenContext,
 ) {
-    val bodyGen: WasmExpressionBuilder =
+    konst bodyGen: WasmExpressionBuilder =
         WasmIrExpressionBuilder(wasmFunction.instructions)
 
-    val tagIdx: Int
+    konst tagIdx: Int
         get() = 0
 
-    private val wasmLocals = LinkedHashMap<IrValueSymbol, WasmLocal>()
-    private val wasmSyntheticLocals = LinkedHashMap<SyntheticLocalType, WasmLocal>()
-    private val loopLevels = LinkedHashMap<Pair<IrLoop, LoopLabelType>, Int>()
-    private val nonLocalReturnLevels = LinkedHashMap<IrReturnableBlockSymbol, Int>()
+    private konst wasmLocals = LinkedHashMap<IrValueSymbol, WasmLocal>()
+    private konst wasmSyntheticLocals = LinkedHashMap<SyntheticLocalType, WasmLocal>()
+    private konst loopLevels = LinkedHashMap<Pair<IrLoop, LoopLabelType>, Int>()
+    private konst nonLocalReturnLevels = LinkedHashMap<IrReturnableBlockSymbol, Int>()
 
     fun defineLocal(irValueDeclaration: IrValueSymbol) {
         assert(irValueDeclaration !in wasmLocals) { "Redefinition of local" }
 
-        val owner = irValueDeclaration.owner
-        val wasmLocal = WasmLocal(
+        konst owner = irValueDeclaration.owner
+        konst wasmLocal = WasmLocal(
             wasmFunction.locals.size,
             owner.name.asString(),
             if (owner is IrValueParameter) context.transformValueParameterType(owner) else context.transformType(owner.type),
@@ -57,7 +57,7 @@ class WasmFunctionCodegenContext(
         return wasmFunction.locals[index]
     }
 
-    private val SyntheticLocalType.wasmType
+    private konst SyntheticLocalType.wasmType
         get() = when (this) {
             SyntheticLocalType.IS_INTERFACE_PARAMETER ->
                 WasmRefNullType(WasmHeapType.Type(context.referenceGcType(backendContext.irBuiltIns.anyClass)))
@@ -84,7 +84,7 @@ class WasmFunctionCodegenContext(
     }
 
     fun defineLoopLevel(irLoop: IrLoop, labelType: LoopLabelType, level: Int) {
-        val loopKey = Pair(irLoop, labelType)
+        konst loopKey = Pair(irLoop, labelType)
         assert(loopKey !in loopLevels) { "Redefinition of loop" }
         loopLevels[loopKey] = level
     }

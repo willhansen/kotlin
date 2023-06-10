@@ -12,7 +12,7 @@ fun box(): String = okInline()
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-internal const val ok = "OK"
+internal const konst ok = "OK"
 
 internal inline fun okInline() =
         ::ok.get()

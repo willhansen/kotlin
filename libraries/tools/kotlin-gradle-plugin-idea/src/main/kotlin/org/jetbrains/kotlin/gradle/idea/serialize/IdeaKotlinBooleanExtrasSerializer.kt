@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.gradle.idea.serialize
 
 object IdeaKotlinBooleanExtrasSerializer : IdeaKotlinExtrasSerializer<Boolean> {
-    override fun serialize(context: IdeaKotlinSerializationContext, value: Boolean): ByteArray {
-        return byteArrayOf(if (value) 1 else 0)
+    override fun serialize(context: IdeaKotlinSerializationContext, konstue: Boolean): ByteArray {
+        return byteArrayOf(if (konstue) 1 else 0)
     }
 
     override fun deserialize(context: IdeaKotlinSerializationContext, data: ByteArray): Boolean? {
@@ -16,11 +16,11 @@ object IdeaKotlinBooleanExtrasSerializer : IdeaKotlinExtrasSerializer<Boolean> {
             return null
         }
 
-        return when (val value = data.first()) {
+        return when (konst konstue = data.first()) {
             0.toByte() -> false
             1.toByte() -> true
             else -> {
-                context.logger.error("Failed to decode Boolean from value $value")
+                context.logger.error("Failed to decode Boolean from konstue $konstue")
                 null
             }
         }

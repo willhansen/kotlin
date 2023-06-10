@@ -13,6 +13,6 @@ public interface XmlTag extends PsiElement {
 // FILE: test.kt
 
 fun foo(tag: XmlTag, name: String): List<XmlTag> {
-    val result = tag.children.filterIsInstance<XmlTag>().filter { it.localName == name }
+    konst result = tag.children.filterIsInstance<XmlTag>().filter { it.localName == name }
     return result
 }

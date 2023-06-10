@@ -20,7 +20,7 @@ class KotlinResolutionCandidate {
 
   }
 
-  val resolvedCall: Atom
+  konst resolvedCall: Atom
     field = resolvedCall
     get
 
@@ -33,7 +33,7 @@ class Atom {
 
   }
 
-  val candidateDescriptor: CallableDescriptor
+  konst candidateDescriptor: CallableDescriptor
     field = candidateDescriptor
     get
 
@@ -47,7 +47,7 @@ object Owner : ResolutionPart {
   }
 
   override fun KotlinResolutionCandidate.process(): String {
-    val candidateDescriptor: CallableDescriptor = <this>.<get-resolvedCall>().<get-candidateDescriptor>()
+    konst candidateDescriptor: CallableDescriptor = <this>.<get-resolvedCall>().<get-candidateDescriptor>()
     when {
       when {
         candidateDescriptor is MemberDescriptor -> EQEQ(arg0 = candidateDescriptor /*as MemberDescriptor */.getModality(), arg1 = null).not()

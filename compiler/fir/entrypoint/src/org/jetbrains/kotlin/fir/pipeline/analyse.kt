@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.fir.resolve.transformers.FirTotalResolveProcessor
 import org.jetbrains.kotlin.fir.withFileAnalysisExceptionWrapping
 
 fun FirSession.runResolution(firFiles: List<FirFile>): Pair<ScopeSession, List<FirFile>> {
-    val resolveProcessor = FirTotalResolveProcessor(this)
+    konst resolveProcessor = FirTotalResolveProcessor(this)
     resolveProcessor.process(firFiles)
     return resolveProcessor.scopeSession to firFiles
 }
 
 fun FirSession.runCheckers(scopeSession: ScopeSession, firFiles: List<FirFile>, reporter: DiagnosticReporter) {
-    val collector = FirDiagnosticsCollector.create(this, scopeSession)
+    konst collector = FirDiagnosticsCollector.create(this, scopeSession)
     for (file in firFiles) {
         withFileAnalysisExceptionWrapping(file) {
             collector.collectDiagnostics(file, reporter)

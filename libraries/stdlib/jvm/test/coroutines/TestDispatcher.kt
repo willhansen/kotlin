@@ -12,11 +12,11 @@ import kotlin.coroutines.*
 import kotlin.test.assertEquals
 
 class TestDispatcher(
-    private val name: String
+    private konst name: String
 ) : AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor, Closeable {
     private lateinit var thread: Thread
 
-    val executor: ExecutorService = Executors.newSingleThreadExecutor { runnable ->
+    konst executor: ExecutorService = Executors.newSingleThreadExecutor { runnable ->
         Thread(runnable, name).also { thread = it }
     }
 
@@ -38,8 +38,8 @@ class TestDispatcher(
         }
     }
 
-    inner class DispatchedContinuation<T>(val delegate: Continuation<T>) : Continuation<T> {
-        override val context: CoroutineContext = delegate.context
+    inner class DispatchedContinuation<T>(konst delegate: Continuation<T>) : Continuation<T> {
+        override konst context: CoroutineContext = delegate.context
 
         override fun resumeWith(result: Result<T>) {
             executor.execute {

@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 abstract class KtLightMemberImpl<out D : PsiMember>(
-    override val lightMemberOrigin: LightMemberOriginForDeclaration?,
-    private val containingClass: KtLightClass,
+    override konst lightMemberOrigin: LightMemberOriginForDeclaration?,
+    private konst containingClass: KtLightClass,
 ) : KtLightElementBase(containingClass), PsiMember, KtLightMember<D> {
     abstract override fun hasModifierProperty(name: String): Boolean
 
@@ -31,7 +31,7 @@ abstract class KtLightMemberImpl<out D : PsiMember>(
 
     override fun getNameIdentifier(): PsiIdentifier = KtLightIdentifier(this, kotlinOrigin as? KtNamedDeclaration)
 
-    override val kotlinOrigin: KtDeclaration? get() = lightMemberOrigin?.originalElement
+    override konst kotlinOrigin: KtDeclaration? get() = lightMemberOrigin?.originalElement
 
     abstract override fun getDocComment(): PsiDocComment?
 
@@ -41,9 +41,9 @@ abstract class KtLightMemberImpl<out D : PsiMember>(
         return parent.isValid && lightMemberOrigin?.isValid() != false
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
         return this == another ||
-                lightMemberOrigin?.isEquivalentTo(another) == true ||
-                another is KtLightMember<*> && lightMemberOrigin?.isEquivalentTo(another.lightMemberOrigin) == true
+                lightMemberOrigin?.isEquikonstentTo(another) == true ||
+                another is KtLightMember<*> && lightMemberOrigin?.isEquikonstentTo(another.lightMemberOrigin) == true
     }
 }

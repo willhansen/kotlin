@@ -4,7 +4,7 @@
 // CHECK_BYTECODE_LISTING
 
 @JvmInline
-value class A(val value1: MyClass, val value2: MyClass) {
+konstue class A(konst konstue1: MyClass, konst konstue2: MyClass) {
     override fun hashCode() = 42
 }
 

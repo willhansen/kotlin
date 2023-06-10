@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.js.backend.ast.JsContext
 import org.jetbrains.kotlin.js.backend.ast.JsNode
 import org.jetbrains.kotlin.js.backend.ast.JsVisitorWithContextImpl
 
-internal class NodeRemover<T>(val klass: Class<T>, val predicate: (T) -> Boolean): JsVisitorWithContextImpl() {
+internal class NodeRemover<T>(konst klass: Class<T>, konst predicate: (T) -> Boolean): JsVisitorWithContextImpl() {
 
     override fun <T : JsNode> doTraverse(node: T, ctx: JsContext<*>) {
         if (klass.isInstance(node)) {
-            val instance = klass.cast(node)!!
+            konst instance = klass.cast(node)!!
 
             if (predicate(instance)) {
                 ctx.removeMe()

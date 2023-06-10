@@ -2,55 +2,55 @@
 package foo
 
 interface A {
-    @JsName("foo") fun foo(value: Int): String
+    @JsName("foo") fun foo(konstue: Int): String
 }
 
 interface B {
-    @JsName("bar") fun foo(value: Int): String
+    @JsName("bar") fun foo(konstue: Int): String
 }
 
 open class C : A, B {
-    override fun foo(value: Int) = "C.foo($value)"
+    override fun foo(konstue: Int) = "C.foo($konstue)"
 }
 
 class CDerived : C() {
-    override fun foo(value: Int) = "CDerived.foo($value)"
+    override fun foo(konstue: Int) = "CDerived.foo($konstue)"
 }
 
 open class D {
-    open fun foo(value: Int) = "D.foo($value)"
+    open fun foo(konstue: Int) = "D.foo($konstue)"
 }
 
 class E : D(), A, B
 
 fun box(): String {
-    val a: A = C()
+    konst a: A = C()
     assertEquals("C.foo(55)", a.foo(55))
 
-    val b: B = C()
+    konst b: B = C()
     assertEquals("C.foo(23)", b.foo(23))
 
-    val a2: A = CDerived()
+    konst a2: A = CDerived()
     assertEquals("CDerived.foo(55)", a2.foo(55))
 
-    val b2: B = CDerived()
+    konst b2: B = CDerived()
     assertEquals("CDerived.foo(23)", b2.foo(23))
 
-    val d: dynamic = C()
+    konst d: dynamic = C()
     assertEquals("C.foo(42)", d.foo(42))
     assertEquals("C.foo(99)", d.bar(99))
 
-    val d2: dynamic = CDerived()
+    konst d2: dynamic = CDerived()
     assertEquals("CDerived.foo(42)", d2.foo(42))
     assertEquals("CDerived.foo(99)", d2.bar(99))
 
-    val da: A = E()
+    konst da: A = E()
     assertEquals("D.foo(55)", da.foo(55))
 
-    val db: B = E()
+    konst db: B = E()
     assertEquals("D.foo(23)", db.foo(23))
 
-    val dd: dynamic = E()
+    konst dd: dynamic = E()
     assertEquals("D.foo(42)", dd.foo(42))
     assertEquals("D.foo(99)", dd.bar(99))
     if (testUtils.isLegacyBackend()) {

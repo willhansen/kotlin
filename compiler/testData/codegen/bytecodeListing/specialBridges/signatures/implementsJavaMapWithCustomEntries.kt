@@ -41,16 +41,16 @@ public class JImpl<K, V> implements J<K, V> {
         return delegate.containsKey(key);
     }
     @Override
-    public boolean containsValue(Object value) {
-        return delegate.containsValue(value);
+    public boolean containsValue(Object konstue) {
+        return delegate.containsValue(konstue);
     }
     @Override
     public V get(Object key) {
         return delegate.get(key);
     }
     @Override
-    public V put(K key, V value) {
-        return delegate.put(key, value);
+    public V put(K key, V konstue) {
+        return delegate.put(key, konstue);
     }
     @Override
     public V remove(Object key) {
@@ -69,7 +69,7 @@ public class JImpl<K, V> implements J<K, V> {
         return delegate.keySet();
     }
     @Override
-    public Collection<V> values() {
-        return delegate.values();
+    public Collection<V> konstues() {
+        return delegate.konstues();
     }
 }

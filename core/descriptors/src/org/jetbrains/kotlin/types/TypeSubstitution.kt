@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.types.model.typeConstructor
 abstract class TypeSubstitution {
     companion object {
         @JvmField
-        val EMPTY: TypeSubstitution = object : TypeSubstitution() {
+        konst EMPTY: TypeSubstitution = object : TypeSubstitution() {
             override fun get(key: KotlinType): Nothing? = null
             override fun isEmpty() = true
             override fun toString() = "Empty TypeSubstitution"
@@ -90,7 +90,7 @@ abstract class TypeConstructorSubstitution : TypeSubstitution() {
 
         @JvmStatic
         fun create(typeConstructor: TypeConstructor, arguments: List<TypeProjection>): TypeSubstitution {
-            val parameters = typeConstructor.parameters
+            konst parameters = typeConstructor.parameters
 
             if (parameters.lastOrNull()?.isCapturedFromOuterDeclaration == true) {
                 return createByConstructorsMap(typeConstructor.parameters.map { it.typeConstructor }.zip(arguments).toMap())
@@ -111,9 +111,9 @@ class SubstitutionWithContravariantCapturedTypeApproximation(substitution: TypeS
 }
 
 class IndexedParametersSubstitution(
-    val parameters: Array<TypeParameterDescriptor>,
-    val arguments: Array<TypeProjection>,
-    private val approximateContravariantCapturedTypes: Boolean = false
+    konst parameters: Array<TypeParameterDescriptor>,
+    konst arguments: Array<TypeProjection>,
+    private konst approximateContravariantCapturedTypes: Boolean = false
 ) : TypeSubstitution() {
     init {
         assert(parameters.size <= arguments.size) {
@@ -131,8 +131,8 @@ class IndexedParametersSubstitution(
     override fun approximateContravariantCapturedTypes() = approximateContravariantCapturedTypes
 
     override fun get(key: KotlinType): TypeProjection? {
-        val parameter = key.constructor.declarationDescriptor as? TypeParameterDescriptor ?: return null
-        val index = parameter.index
+        konst parameter = key.constructor.declarationDescriptor as? TypeParameterDescriptor ?: return null
+        konst index = parameter.index
 
         if (index < parameters.size && parameters[index].typeConstructor == parameter.typeConstructor) {
             return arguments[index]
@@ -150,12 +150,12 @@ fun KotlinType.replace(
 ): KotlinType {
     if ((newArguments.isEmpty() || newArguments === arguments) && newAnnotations === annotations) return this
 
-    val newAttributes = attributes.replaceAnnotations(
+    konst newAttributes = attributes.replaceAnnotations(
         // Specially handle FilteredAnnotations here due to FilteredAnnotations.isEmpty()
         if (newAnnotations is FilteredAnnotations && newAnnotations.isEmpty()) Annotations.EMPTY else newAnnotations
     )
 
-    return when (val unwrapped = unwrap()) {
+    return when (konst unwrapped = unwrap()) {
         is FlexibleType -> KotlinTypeFactory.flexibleType(
             unwrapped.lowerBound.replace(newArguments, newAttributes),
             unwrapped.upperBound.replace(newArgumentsForUpperBound, newAttributes)
@@ -187,7 +187,7 @@ fun SimpleType.replace(
     )
 }
 
-open class DelegatedTypeSubstitution(val substitution: TypeSubstitution) : TypeSubstitution() {
+open class DelegatedTypeSubstitution(konst substitution: TypeSubstitution) : TypeSubstitution() {
     override fun get(key: KotlinType) = substitution[key]
     override fun prepareTopLevelType(topLevelType: KotlinType, position: Variance) =
         substitution.prepareTopLevelType(topLevelType, position)

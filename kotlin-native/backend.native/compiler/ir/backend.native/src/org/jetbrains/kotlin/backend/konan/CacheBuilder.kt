@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.library.unresolvedDependencies
 
 internal fun KotlinLibrary.getAllTransitiveDependencies(allLibraries: Map<String, KotlinLibrary>): List<KotlinLibrary> {
-    val allDependencies = mutableSetOf<KotlinLibrary>()
+    konst allDependencies = mutableSetOf<KotlinLibrary>()
 
     fun traverseDependencies(library: KotlinLibrary) {
         library.unresolvedDependencies.forEach {
-            val dependency = allLibraries[it.path]!!
+            konst dependency = allLibraries[it.path]!!
             if (dependency !in allDependencies) {
                 allDependencies += dependency
                 traverseDependencies(dependency)
@@ -37,28 +37,28 @@ internal fun KotlinLibrary.getAllTransitiveDependencies(allLibraries: Map<String
 
 // TODO: deleteRecursively might throw an exception!
 class CacheBuilder(
-        val konanConfig: KonanConfig,
-        val spawnCompilation: (List<String>, CompilerConfiguration.() -> Unit) -> Unit
+        konst konanConfig: KonanConfig,
+        konst spawnCompilation: (List<String>, CompilerConfiguration.() -> Unit) -> Unit
 ) {
-    private val configuration = konanConfig.configuration
-    private val autoCacheableFrom = configuration.get(KonanConfigKeys.AUTO_CACHEABLE_FROM)!!.map { File(it) }
-    private val icEnabled = configuration.get(CommonConfigurationKeys.INCREMENTAL_COMPILATION)!!
-    private val includedLibraries = configuration.get(KonanConfigKeys.INCLUDED_LIBRARIES).orEmpty().toSet()
-    private val generateTestRunner = configuration.getNotNull(KonanConfigKeys.GENERATE_TEST_RUNNER)
+    private konst configuration = konanConfig.configuration
+    private konst autoCacheableFrom = configuration.get(KonanConfigKeys.AUTO_CACHEABLE_FROM)!!.map { File(it) }
+    private konst icEnabled = configuration.get(CommonConfigurationKeys.INCREMENTAL_COMPILATION)!!
+    private konst includedLibraries = configuration.get(KonanConfigKeys.INCLUDED_LIBRARIES).orEmpty().toSet()
+    private konst generateTestRunner = configuration.getNotNull(KonanConfigKeys.GENERATE_TEST_RUNNER)
 
     fun needToBuild() = konanConfig.isFinalBinary && konanConfig.ignoreCacheReason == null && (autoCacheableFrom.isNotEmpty() || icEnabled)
 
-    private val allLibraries by lazy { konanConfig.resolvedLibraries.getFullList(TopologicalLibraryOrder) }
-    private val uniqueNameToLibrary by lazy { allLibraries.associateBy { it.uniqueName } }
+    private konst allLibraries by lazy { konanConfig.resolvedLibraries.getFullList(TopologicalLibraryOrder) }
+    private konst uniqueNameToLibrary by lazy { allLibraries.associateBy { it.uniqueName } }
 
-    private val caches = mutableMapOf<KotlinLibrary, CachedLibraries.Cache>()
-    private val cacheRootDirectories = mutableMapOf<KotlinLibrary, String>()
+    private konst caches = mutableMapOf<KotlinLibrary, CachedLibraries.Cache>()
+    private konst cacheRootDirectories = mutableMapOf<KotlinLibrary, String>()
 
     // If libA depends on libB, then dependableLibraries[libB] contains libA.
-    private val dependableLibraries = mutableMapOf<KotlinLibrary, MutableList<KotlinLibrary>>()
+    private konst dependableLibraries = mutableMapOf<KotlinLibrary, MutableList<KotlinLibrary>>()
 
     private fun findAllDependable(libraries: List<KotlinLibrary>): Set<KotlinLibrary> {
-        val visited = mutableSetOf<KotlinLibrary>()
+        konst visited = mutableSetOf<KotlinLibrary>()
 
         fun dfs(library: KotlinLibrary) {
             visited.add(library)
@@ -71,20 +71,20 @@ class CacheBuilder(
         return visited
     }
 
-    private data class LibraryFile(val library: KotlinLibrary, val file: String) {
+    private data class LibraryFile(konst library: KotlinLibrary, konst file: String) {
         override fun toString() = "${library.uniqueName}|$file"
     }
 
-    private val KotlinLibrary.isExternal
+    private konst KotlinLibrary.isExternal
         get() = autoCacheableFrom.any { libraryFile.absolutePath.startsWith(it.absolutePath) }
 
     fun build() {
-        val externalLibrariesToCache = mutableListOf<KotlinLibrary>()
-        val icedLibraries = mutableListOf<KotlinLibrary>()
+        konst externalLibrariesToCache = mutableListOf<KotlinLibrary>()
+        konst icedLibraries = mutableListOf<KotlinLibrary>()
 
         allLibraries.forEach { library ->
-            val isDefaultOrExternal = library.isDefault || library.isExternal
-            val cache = konanConfig.cachedLibraries.getLibraryCache(library, !isDefaultOrExternal)
+            konst isDefaultOrExternal = library.isDefault || library.isExternal
+            konst cache = konanConfig.cachedLibraries.getLibraryCache(library, !isDefaultOrExternal)
             cache?.let {
                 caches[library] = it
                 cacheRootDirectories[library] = it.rootDirectory
@@ -95,7 +95,7 @@ class CacheBuilder(
                 icedLibraries += library
             }
             library.unresolvedDependencies.forEach {
-                val dependency = uniqueNameToLibrary[it.path]!!
+                konst dependency = uniqueNameToLibrary[it.path]!!
                 dependableLibraries.getOrPut(dependency) { mutableListOf() }.add(library)
             }
         }
@@ -105,49 +105,49 @@ class CacheBuilder(
         if (!icEnabled) return
 
         // Every library dependable on one of the changed external libraries needs its cache to be fully rebuilt.
-        val needFullRebuild = findAllDependable(externalLibrariesToCache)
+        konst needFullRebuild = findAllDependable(externalLibrariesToCache)
 
-        val libraryFilesWithFqNames = mutableMapOf<KotlinLibrary, List<FileWithFqName>>()
+        konst libraryFilesWithFqNames = mutableMapOf<KotlinLibrary, List<FileWithFqName>>()
 
-        val changedFiles = mutableListOf<LibraryFile>()
-        val removedFiles = mutableListOf<LibraryFile>()
-        val addedFiles = mutableListOf<LibraryFile>()
-        val reversedPerFileDependencies = mutableMapOf<LibraryFile, MutableList<LibraryFile>>()
-        val reversedWholeLibraryDependencies = mutableMapOf<KotlinLibrary, MutableList<LibraryFile>>()
+        konst changedFiles = mutableListOf<LibraryFile>()
+        konst removedFiles = mutableListOf<LibraryFile>()
+        konst addedFiles = mutableListOf<LibraryFile>()
+        konst reversedPerFileDependencies = mutableMapOf<LibraryFile, MutableList<LibraryFile>>()
+        konst reversedWholeLibraryDependencies = mutableMapOf<KotlinLibrary, MutableList<LibraryFile>>()
         for (library in icedLibraries) {
             if (library in needFullRebuild) continue
-            val cache = caches[library] ?: continue
+            konst cache = caches[library] ?: continue
             if (cache !is CachedLibraries.Cache.PerFile) {
                 require(library.isInteropLibrary())
                 continue
             }
 
-            val libraryCacheRootDir = File(cache.path)
-            val cachedFiles = libraryCacheRootDir.listFiles.map { it.name }
+            konst libraryCacheRootDir = File(cache.path)
+            konst cachedFiles = libraryCacheRootDir.listFiles.map { it.name }
 
-            val actualFilesWithFqNames = library.getFilesWithFqNames()
+            konst actualFilesWithFqNames = library.getFilesWithFqNames()
             libraryFilesWithFqNames[library] = actualFilesWithFqNames
-            val actualFiles = actualFilesWithFqNames.withIndex()
-                    .associate { CacheSupport.cacheFileId(it.value.fqName, it.value.filePath) to it.index }
+            konst actualFiles = actualFilesWithFqNames.withIndex()
+                    .associate { CacheSupport.cacheFileId(it.konstue.fqName, it.konstue.filePath) to it.index }
                     .toMutableMap()
 
             for (cachedFile in cachedFiles) {
-                val libraryFile = LibraryFile(library, cachedFile)
-                val fileIndex = actualFiles[cachedFile]
+                konst libraryFile = LibraryFile(library, cachedFile)
+                konst fileIndex = actualFiles[cachedFile]
                 if (fileIndex == null) {
                     removedFiles.add(libraryFile)
                 } else {
                     actualFiles.remove(cachedFile)
-                    val actualContentHash = SerializedIrFileFingerprint(library, fileIndex).fileFingerprint
-                    val previousContentHash = FingerprintHash.fromByteArray(cache.getFileHash(cachedFile))
+                    konst actualContentHash = SerializedIrFileFingerprint(library, fileIndex).fileFingerprint
+                    konst previousContentHash = FingerprintHash.fromByteArray(cache.getFileHash(cachedFile))
                     if (previousContentHash != actualContentHash)
                         changedFiles.add(libraryFile)
 
-                    val dependencies = cache.getFileDependencies(cachedFile)
+                    konst dependencies = cache.getFileDependencies(cachedFile)
                     for (dependency in dependencies) {
-                        val dependentLibrary = uniqueNameToLibrary[dependency.libName]
+                        konst dependentLibrary = uniqueNameToLibrary[dependency.libName]
                                 ?: error("Unknown dependent library ${dependency.libName}")
-                        when (val kind = dependency.kind) {
+                        when (konst kind = dependency.kind) {
                             is DependenciesTracker.DependencyKind.WholeModule ->
                                 reversedWholeLibraryDependencies.getOrPut(dependentLibrary) { mutableListOf() }.add(libraryFile)
                             is DependenciesTracker.DependencyKind.CertainFiles ->
@@ -176,7 +176,7 @@ class CacheBuilder(
         configuration.report(CompilerMessageSeverity.LOGGING, "    CHANGED FILES:")
         changedFiles.forEach { configuration.report(CompilerMessageSeverity.LOGGING, "        $it") }
 
-        val dirtyFiles = mutableSetOf<LibraryFile>()
+        konst dirtyFiles = mutableSetOf<LibraryFile>()
 
         fun dfs(libraryFile: LibraryFile) {
             dirtyFiles += libraryFile
@@ -198,15 +198,15 @@ class CacheBuilder(
             File(caches[it.library]!!.rootDirectory).child(it.file).deleteRecursively()
         }
 
-        val groupedDirtyFiles = dirtyFiles.groupBy { it.library }
+        konst groupedDirtyFiles = dirtyFiles.groupBy { it.library }
         configuration.report(CompilerMessageSeverity.LOGGING, "    DIRTY FILES:")
-        groupedDirtyFiles.values.flatten().forEach {
+        groupedDirtyFiles.konstues.flatten().forEach {
             configuration.report(CompilerMessageSeverity.LOGGING, "        $it")
         }
 
         for (library in icedLibraries) {
-            val filesToCache = groupedDirtyFiles[library]?.let { libraryFiles ->
-                val filesWithFqNames = libraryFilesWithFqNames[library]!!.associateBy {
+            konst filesToCache = groupedDirtyFiles[library]?.let { libraryFiles ->
+                konst filesWithFqNames = libraryFilesWithFqNames[library]!!.associateBy {
                     CacheSupport.cacheFileId(it.fqName, it.filePath)
                 }
                 libraryFiles.map { filesWithFqNames[it.file]!!.filePath }
@@ -220,8 +220,8 @@ class CacheBuilder(
     }
 
     private fun buildLibraryCache(library: KotlinLibrary, isExternal: Boolean, filesToCache: List<String>) {
-        val dependencies = library.getAllTransitiveDependencies(uniqueNameToLibrary)
-        val dependencyCaches = dependencies.map {
+        konst dependencies = library.getAllTransitiveDependencies(uniqueNameToLibrary)
+        konst dependencyCaches = dependencies.map {
             cacheRootDirectories[it] ?: run {
                 configuration.report(CompilerMessageSeverity.LOGGING,
                         "SKIPPING ${library.libraryName} as some of the dependencies aren't cached")
@@ -233,14 +233,14 @@ class CacheBuilder(
         filesToCache.forEach { configuration.report(CompilerMessageSeverity.LOGGING, "    $it") }
 
         // Produce monolithic caches for external libraries for now.
-        val makePerFileCache = !isExternal && !library.isInteropLibrary()
+        konst makePerFileCache = !isExternal && !library.isInteropLibrary()
 
-        val libraryCacheDirectory = when {
+        konst libraryCacheDirectory = when {
             library.isDefault -> konanConfig.systemCacheDirectory
             isExternal -> CachedLibraries.computeVersionedCacheDirectory(konanConfig.autoCacheDirectory, library, uniqueNameToLibrary)
             else -> konanConfig.incrementalCacheDirectory!!
         }
-        val libraryCache = libraryCacheDirectory.child(
+        konst libraryCache = libraryCacheDirectory.child(
                 if (makePerFileCache)
                     CachedLibraries.getPerFileCachedLibraryName(library)
                 else
@@ -250,13 +250,13 @@ class CacheBuilder(
             // TODO: Run monolithic cache builds in parallel.
             libraryCacheDirectory.mkdirs()
             spawnCompilation(konanConfig.additionalCacheFlags /* TODO: Some way to put them directly to CompilerConfiguration? */) {
-                val libraryPath = library.libraryFile.absolutePath
-                val libraries = dependencies.filter { !it.isDefault }.map { it.libraryFile.absolutePath }
-                val cachedLibraries = dependencies.zip(dependencyCaches).associate { it.first.libraryFile.absolutePath to it.second }
+                konst libraryPath = library.libraryFile.absolutePath
+                konst libraries = dependencies.filter { !it.isDefault }.map { it.libraryFile.absolutePath }
+                konst cachedLibraries = dependencies.zip(dependencyCaches).associate { it.first.libraryFile.absolutePath to it.second }
                 configuration.report(CompilerMessageSeverity.LOGGING, "    dependencies:\n        " +
                         libraries.joinToString("\n        "))
                 configuration.report(CompilerMessageSeverity.LOGGING, "    caches used:\n        " +
-                        cachedLibraries.entries.joinToString("\n        ") { "${it.key}: ${it.value}" })
+                        cachedLibraries.entries.joinToString("\n        ") { "${it.key}: ${it.konstue}" })
                 configuration.report(CompilerMessageSeverity.LOGGING, "    cache dir: " +
                         libraryCacheDirectory.absolutePath)
 

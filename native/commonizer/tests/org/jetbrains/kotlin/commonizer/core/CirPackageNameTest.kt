@@ -22,9 +22,9 @@ class CirPackageNameTest {
             "foo.bar" to arrayOf("foo", "bar"),
             "foo.bar.baz" to arrayOf("foo", "bar", "baz")
         ).forEach { (rawPackageFqName, segments) ->
-            val packageFqName = FqName(rawPackageFqName)
+            konst packageFqName = FqName(rawPackageFqName)
 
-            val packageNames = listOf(
+            konst packageNames = listOf(
                 CirPackageName.create(rawPackageFqName),
                 CirPackageName.create(rawPackageFqName),
                 CirPackageName.create(packageFqName),
@@ -33,7 +33,7 @@ class CirPackageNameTest {
                 CirPackageName.create(segments)
             )
 
-            val first = packageNames.first()
+            konst first = packageNames.first()
             packageNames.forEach { packageName ->
                 assertTrue(segments.contentEquals(packageName.segments))
                 assertSame(first, packageName)
@@ -43,14 +43,14 @@ class CirPackageNameTest {
 
     @Test
     fun createRoot() {
-        val rootPackageNames = listOf(
+        konst rootPackageNames = listOf(
             CirPackageName.create(""),
             CirPackageName.create(FqName("")),
             CirPackageName.create(FqName.ROOT),
             CirPackageName.create(emptyArray())
         )
 
-        val first = rootPackageNames.first()
+        konst first = rootPackageNames.first()
         rootPackageNames.forEach { rootPackageName ->
             assertSame(first, rootPackageName)
             assertTrue(rootPackageName.segments.isEmpty())
@@ -85,12 +85,12 @@ class CirPackageNameTest {
 
     @Test
     fun startsWith() {
-        val packageNames = listOf("", "foo", "foo.bar", "foo.bar.baz").map(CirPackageName::create)
+        konst packageNames = listOf("", "foo", "foo.bar", "foo.bar.baz").map(CirPackageName::create)
 
         for (i in packageNames.indices) {
-            val a = packageNames[i]
+            konst a = packageNames[i]
             for (j in packageNames.indices) {
-                val b = packageNames[j]
+                konst b = packageNames[j]
                 assertEquals(i >= j, a.startsWith(b))
             }
         }

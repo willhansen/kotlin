@@ -2,7 +2,7 @@ enum class Test {
     A(0),
     B;
 
-    val n: Int
+    konst n: Int
 
     constructor(n: Int) { this.n = n }
     constructor() : this(0)

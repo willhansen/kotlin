@@ -1,9 +1,9 @@
 fun dynamic.foo()
 fun dynamic?.foo()
-val dynamic.foo: Int
-val dynamic?.foo: Int
+konst dynamic.foo: Int
+konst dynamic?.foo: Int
 
-val foo: dynamic.() -> Unit
+konst foo: dynamic.() -> Unit
 
 // testing look-ahead with comments and whitespace
 

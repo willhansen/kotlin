@@ -3,7 +3,7 @@ class C() {
     fun Any.toMyPrefixedString(prefix: String = "", suffix: String="") : String = prefix + " " + suffix
 
     fun testReceiver() : String {
-        val res : String = "mama".toMyPrefixedString("111", "222")
+        konst res : String = "mama".toMyPrefixedString("111", "222")
         return res
     }
 

@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class A
-class B<X>(val x: X)
+class B<X>(konst x: X)
 
 context(T)
 fun <T> T.f(t: B<T>) {}

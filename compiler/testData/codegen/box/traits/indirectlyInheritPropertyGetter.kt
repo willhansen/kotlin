@@ -1,5 +1,5 @@
 interface A {
-    val str: String
+    konst str: String
         get() = "OK"
 }
 

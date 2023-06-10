@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 object FunctionsFromAny {
-    val EQUALS_METHOD_NAME = OperatorNameConventions.EQUALS
-    val HASH_CODE_METHOD_NAME = OperatorNameConventions.HASH_CODE
-    val TO_STRING_METHOD_NAME = OperatorNameConventions.TO_STRING
+    konst EQUALS_METHOD_NAME = OperatorNameConventions.EQUALS
+    konst HASH_CODE_METHOD_NAME = OperatorNameConventions.HASH_CODE
+    konst TO_STRING_METHOD_NAME = OperatorNameConventions.TO_STRING
 
     fun addFunctionFromAnyIfNeeded(
         thisDescriptor: ClassDescriptor,
@@ -47,7 +47,7 @@ object FunctionsFromAny {
             declaredFunctions,
             fromSupertypes
         ) { function ->
-            val parameters = function.valueParameters
+            konst parameters = function.konstueParameters
             parameters.size == 1 && KotlinBuiltIns.isNullableAny(parameters.first().type)
         }
     }
@@ -61,7 +61,7 @@ object FunctionsFromAny {
             declaredFunctions,
             fromSupertypes
         ) {
-            it.valueParameters.isEmpty()
+            it.konstueParameters.isEmpty()
         }
     }
 
@@ -74,7 +74,7 @@ object FunctionsFromAny {
             declaredFunctions,
             fromSupertypes
         ) {
-            it.valueParameters.isEmpty()
+            it.konstueParameters.isEmpty()
         }
     }
 
@@ -88,11 +88,11 @@ object FunctionsFromAny {
         doCreateFunctionFromAny(classDescriptor, TO_STRING_METHOD_NAME)
 
     private fun doCreateFunctionFromAny(classDescriptor: ClassDescriptor, name: Name): SimpleFunctionDescriptor {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             classDescriptor, Annotations.EMPTY, name, CallableMemberDescriptor.Kind.SYNTHESIZED, classDescriptor.source
         )
 
-        val functionFromAny = classDescriptor.builtIns.any.getMemberScope(emptyList())
+        konst functionFromAny = classDescriptor.builtIns.any.getMemberScope(emptyList())
             .getContributedFunctions(name, NoLookupLocation.FROM_BUILTINS).single()
 
         functionDescriptor.initialize(
@@ -100,7 +100,7 @@ object FunctionsFromAny {
             classDescriptor.thisAsReceiverParameter,
             emptyList(),
             functionFromAny.typeParameters,
-            functionFromAny.valueParameters.map { it.copy(functionDescriptor, it.name, it.index) },
+            functionFromAny.konstueParameters.map { it.copy(functionDescriptor, it.name, it.index) },
             functionFromAny.returnType,
             Modality.OPEN,
             DescriptorVisibilities.PUBLIC

@@ -2,11 +2,11 @@
 package foo
 
 class A() {
-    val a: Int = 1
+    konst a: Int = 1
 }
 
 class B() {
-    val b: Int = 2
+    konst b: Int = 2
 }
 
 fun box(): String {

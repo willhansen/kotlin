@@ -19,20 +19,20 @@ public class Parent {
 
 import test.Parent
 
-open class Child(val x: Parent?) : Parent() {
+open class Child(konst x: Parent?) : Parent() {
     inner class QQQ {
         fun z() {
             x as Child
-            val q = x.qqq
+            konst q = x.qqq
             x.qqq = q + "OK"
         }
     }
 }
 
 fun box(): String {
-    val cc = Child(null)
-    val c = Child(cc)
-    val d = c.QQQ()
+    konst cc = Child(null)
+    konst c = Child(cc)
+    konst d = c.QQQ()
     d.z()
     return cc.qqq
 }

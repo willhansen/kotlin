@@ -4,7 +4,7 @@ package foo
 
 fun box(): String {
     var result = "fail1"
-    val i = 1
+    konst i = 1
     when (i) {
         1 ->
             when (i) {

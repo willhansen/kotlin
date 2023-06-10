@@ -3,11 +3,11 @@ fun box(): String {
         abstract fun foo(): String
     }
 
-    open class L2(val s: String) : L1() {
+    open class L2(konst s: String) : L1() {
         override fun foo() = s
     }
 
-    open class L3(unused: Double, value: String = "OK") : L2(value)
+    open class L3(unused: Double, konstue: String = "OK") : L2(konstue)
 
     open class L4(i: Int, j: Long, z: Boolean, l: L3) : L3(3.14)
 

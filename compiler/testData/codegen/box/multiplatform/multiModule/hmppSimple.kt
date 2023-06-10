@@ -18,8 +18,8 @@ expect fun func(): String
 expect var prop: String
 
 fun test_1(): String {
-    val a = A()
-    val b = B()
+    konst a = A()
+    konst b = B()
     prop = "Set prop in common."
     return "${func()} $prop ${a.foo()} ${b.bar()}"
 }
@@ -39,9 +39,9 @@ expect class C constructor() {
 }
 
 fun test_2(): String {
-    val a = A()
-    val b = B()
-    val c = C()
+    konst a = A()
+    konst b = B()
+    konst c = C()
     prop = "Set prop in intermediate."
     return "${func()} $prop ${a.foo()} ${b.bar()} ${c.baz()}"
 }
@@ -61,9 +61,9 @@ actual class C actual constructor() {
 }
 
 fun box(): String {
-    val s1 = test_1()
+    konst s1 = test_1()
     if (s1 != "Actual func. Set prop in common. Actual A. Actual B.") return s1
-    val s2 = test_2()
+    konst s2 = test_2()
     if (s2 != "Actual func. Set prop in intermediate. Actual A. Actual B. Actual C.") return s2
     return "OK"
 }

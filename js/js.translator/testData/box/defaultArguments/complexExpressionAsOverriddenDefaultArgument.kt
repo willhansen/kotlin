@@ -29,7 +29,7 @@ class B : A() {
 
 fun box(): String {
     global = ""
-    val b = B()
+    konst b = B()
     assertEquals(102, b.foo(100))
     assertEquals("", global)
 

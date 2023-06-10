@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.types.KotlinType
 
 class ResultClassInReturnTypeChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val languageVersionSettings = context.languageVersionSettings
+        konst languageVersionSettings = context.languageVersionSettings
 
         if (languageVersionSettings.getFlag(AnalysisFlags.allowResultReturnType)) return
 
@@ -31,9 +31,9 @@ class ResultClassInReturnTypeChecker : DeclarationChecker {
 
         if (declaration !is KtCallableDeclaration || descriptor !is CallableMemberDescriptor) return
 
-        val returnType = descriptor.returnType ?: return
+        konst returnType = descriptor.returnType ?: return
         if (isForbiddenReturnType(returnType, declaration, descriptor)) {
-            val typeReferenceOrDeclarationName = declaration.typeReference ?: declaration.nameIdentifier ?: return
+            konst typeReferenceOrDeclarationName = declaration.typeReference ?: declaration.nameIdentifier ?: return
             context.trace.reportDiagnosticOnce(Errors.RESULT_CLASS_IN_RETURN_TYPE.on(typeReferenceOrDeclarationName))
         }
     }
@@ -48,7 +48,7 @@ class ResultClassInReturnTypeChecker : DeclarationChecker {
                 return true
             }
 
-            val visibility = (declarationDescriptor as DeclarationDescriptorWithVisibility).visibility
+            konst visibility = (declarationDescriptor as DeclarationDescriptorWithVisibility).visibility
             return !DescriptorVisibilities.isPrivate(visibility) && visibility != DescriptorVisibilities.LOCAL
         }
 
@@ -61,7 +61,7 @@ internal fun KotlinType.isResultType(): Boolean {
 }
 
 private fun DeclarationDescriptor.isResultClass(): Boolean {
-    val container = containingDeclaration ?: return false
+    konst container = containingDeclaration ?: return false
     return container is PackageFragmentDescriptor &&
             container.fqName == StandardNames.RESULT_FQ_NAME.parent() &&
             name == StandardNames.RESULT_FQ_NAME.shortName()

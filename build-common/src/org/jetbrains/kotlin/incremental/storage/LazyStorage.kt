@@ -17,10 +17,10 @@
 package org.jetbrains.kotlin.incremental.storage
 
 interface LazyStorage<K, V> {
-    val keys: Collection<K>
+    konst keys: Collection<K>
     operator fun contains(key: K): Boolean
     operator fun get(key: K): V?
-    operator fun set(key: K, value: V)
+    operator fun set(key: K, konstue: V)
     fun remove(key: K)
     fun clean()
     fun flush(memoryCachesOnly: Boolean)
@@ -28,5 +28,5 @@ interface LazyStorage<K, V> {
 }
 
 interface AppendableLazyStorage<K, V> : LazyStorage<K, V> {
-    fun append(key: K, value: V)
+    fun append(key: K, konstue: V)
 }

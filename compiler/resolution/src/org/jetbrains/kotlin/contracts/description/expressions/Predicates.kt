@@ -20,14 +20,14 @@ import org.jetbrains.kotlin.contracts.description.BooleanExpression
 import org.jetbrains.kotlin.contracts.description.ContractDescriptionVisitor
 import org.jetbrains.kotlin.types.KotlinType
 
-class IsInstancePredicate(val arg: VariableReference, val type: KotlinType, val isNegated: Boolean) : BooleanExpression {
+class IsInstancePredicate(konst arg: VariableReference, konst type: KotlinType, konst isNegated: Boolean) : BooleanExpression {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitIsInstancePredicate(this, data)
 
     fun negated(): IsInstancePredicate = IsInstancePredicate(arg, type, isNegated.not())
 }
 
-class IsNullPredicate(val arg: VariableReference, val isNegated: Boolean) : BooleanExpression {
+class IsNullPredicate(konst arg: VariableReference, konst isNegated: Boolean) : BooleanExpression {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitIsNullPredicate(this, data)
 

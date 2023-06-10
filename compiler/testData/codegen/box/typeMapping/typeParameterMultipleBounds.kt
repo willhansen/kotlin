@@ -19,7 +19,7 @@ interface K {
 }
 
 fun box(): String {
-    val k = K::class.java
+    konst k = K::class.java
 
     k.getDeclaredMethod("c1", C::class.java)
     k.getDeclaredMethod("c2", C::class.java)

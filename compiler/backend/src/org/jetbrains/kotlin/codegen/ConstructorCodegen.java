@@ -415,7 +415,7 @@ public class ConstructorCodegen {
             Type type = parameter.getAsmType();
 
             if (superKind == JvmMethodParameterKind.VALUE && kind == JvmMethodParameterKind.SUPER_CALL_PARAM) {
-                // Stop when we reach the actual value parameters present in the code; they will be generated via ResolvedCall below
+                // Stop when we reach the actual konstue parameters present in the code; they will be generated via ResolvedCall below
                 break;
             }
 

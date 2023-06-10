@@ -19,7 +19,7 @@ var global = 42
 
 fun foo(x: Int, unit: Unit) {
     var local = 5
-    val y: Unit = when (x) {
+    konst y: Unit = when (x) {
         0 -> {}
         1 -> local = 6
         2 -> global = 43
@@ -32,7 +32,7 @@ fun foo(x: Int, unit: Unit) {
             bar()
         }
         8 -> {
-            val z: Any = Unit
+            konst z: Any = Unit
             z as Unit
         }
         else -> throw Error()

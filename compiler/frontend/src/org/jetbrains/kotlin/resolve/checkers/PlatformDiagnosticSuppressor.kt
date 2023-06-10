@@ -36,7 +36,7 @@ interface PlatformDiagnosticSuppressor : PlatformSpecificExtension<PlatformDiagn
     }
 }
 
-class CompositePlatformDiagnosticSuppressor(private val suppressors: List<PlatformDiagnosticSuppressor>) : PlatformDiagnosticSuppressor {
+class CompositePlatformDiagnosticSuppressor(private konst suppressors: List<PlatformDiagnosticSuppressor>) : PlatformDiagnosticSuppressor {
     override fun shouldReportUnusedParameter(parameter: VariableDescriptor, bindingContext: BindingContext): Boolean =
         suppressors.all { it.shouldReportUnusedParameter(parameter, bindingContext) }
 

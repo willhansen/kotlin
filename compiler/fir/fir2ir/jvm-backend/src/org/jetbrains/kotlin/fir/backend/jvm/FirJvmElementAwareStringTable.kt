@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
 class FirJvmElementAwareStringTable(
-    private val typeMapper: IrTypeMapper,
-    private val components: Fir2IrComponents,
+    private konst typeMapper: IrTypeMapper,
+    private konst components: Fir2IrComponents,
     nameResolver: JvmNameResolver? = null
 ) : JvmStringTable(nameResolver), FirElementAwareStringTable {
     override fun getLocalClassIdReplacement(firClass: FirClass): ClassId =
@@ -26,10 +26,10 @@ class FirJvmElementAwareStringTable(
             ?: throw AssertionError("not a local class: ${firClass.symbol.classId}")
 
     private fun IrClass.getLocalClassIdReplacement(): ClassId =
-        when (val parent = parent) {
+        when (konst parent = parent) {
             is IrClass -> parent.getLocalClassIdReplacement().createNestedClassId(name)
             else -> {
-                val fqName = FqName(typeMapper.mapClass(this).internalName.replace('/', '.'))
+                konst fqName = FqName(typeMapper.mapClass(this).internalName.replace('/', '.'))
                 ClassId(fqName.parent(), FqName.topLevel(fqName.shortName()), true)
             }
         }

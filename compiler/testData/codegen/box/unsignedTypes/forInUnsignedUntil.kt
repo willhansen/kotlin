@@ -1,13 +1,13 @@
 // WITH_STDLIB
 
-const val MaxUI = UInt.MAX_VALUE
-const val MinUI = UInt.MIN_VALUE
+const konst MaxUI = UInt.MAX_VALUE
+const konst MinUI = UInt.MIN_VALUE
 
-const val MaxUL = ULong.MAX_VALUE
-const val MinUL = ULong.MIN_VALUE
+const konst MaxUL = ULong.MAX_VALUE
+const konst MinUL = ULong.MIN_VALUE
 
-val M = MaxUI.toULong()
-val N = Int.MAX_VALUE.toUInt()
+konst M = MaxUI.toULong()
+konst N = Int.MAX_VALUE.toUInt()
 
 fun testSimpleUIntLoop() {
     var s = 0
@@ -58,7 +58,7 @@ fun testEmptyULongLoop2() {
 }
 
 fun testMaxUItoMinUI() {
-    val xs = ArrayList<UInt>()
+    konst xs = ArrayList<UInt>()
     for (i in MaxUI until MinUI) {
         xs.add(i)
         if (xs.size > 23) break
@@ -69,7 +69,7 @@ fun testMaxUItoMinUI() {
 }
 
 fun testMaxULtoMinUL() {
-    val xs = ArrayList<ULong>()
+    konst xs = ArrayList<ULong>()
     for (i in MaxUL until MinUL) {
         xs.add(i)
         if (xs.size > 23) break
@@ -80,9 +80,9 @@ fun testMaxULtoMinUL() {
 }
 
 fun testWrappingUIntLoop() {
-    val NA = N - 1u
-    val NB = N + 1u
-    val xs = ArrayList<UInt>()
+    konst NA = N - 1u
+    konst NB = N + 1u
+    konst xs = ArrayList<UInt>()
     for (i in NA until NB) {
         xs.add(i)
         if (xs.size > 3) break
@@ -91,9 +91,9 @@ fun testWrappingUIntLoop() {
 }
 
 fun testWrappingULongLoop() {
-    val MA = M - 1UL
-    val MB = M + 1UL
-    val xs = ArrayList<ULong>()
+    konst MA = M - 1UL
+    konst MB = M + 1UL
+    konst xs = ArrayList<ULong>()
     for (i in MA until MB) {
         xs.add(i)
         if (xs.size > 3) break

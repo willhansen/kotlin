@@ -6,7 +6,7 @@ interface I
 fun consume(x: WrapperFactory<Wrapper<I>>) {}
 
 fun test(x: I) {
-    val y = foo(x)
+    konst y = foo(x)
     <!DEBUG_INFO_EXPRESSION_TYPE("WrapperFactory<Wrapper<I>>")!>y<!>
     consume(y)
 }
@@ -17,6 +17,6 @@ fun <CX: I> foo(
     fn2: (CX?) -> Unit = {}
 ) = WrapperFactory { Wrapper(fn1, fn2) }
 
-class WrapperFactory<W>(val creator: () -> W)
+class WrapperFactory<W>(konst creator: () -> W)
 
-class Wrapper<in CX2>(val fn1: (CX2) -> Unit, val fn2: (CX2?) -> Unit)
+class Wrapper<in CX2>(konst fn1: (CX2) -> Unit, konst fn2: (CX2?) -> Unit)

@@ -29,7 +29,7 @@ fun <U> id(x: U) = x
 fun <E> intersect(vararg x: In<E>): E = null as E
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>intersect(getIn(), getIn())<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>intersect(getIn(), Test.foo(getIn()))<!>

@@ -52,5 +52,5 @@ fun f() {
 }
 
 external interface Object {
-    val constructor: Any?
+    konst constructor: Any?
 }

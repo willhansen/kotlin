@@ -14,10 +14,10 @@ fun runIt(kr: KRunnable) {
     kr.run()
 }
 
-class C(var value: String) {
+class C(var konstue: String) {
     fun test(): String {
-        runIt { value = "OK" }
-        return value
+        runIt { konstue = "OK" }
+        return konstue
     }
 }
 

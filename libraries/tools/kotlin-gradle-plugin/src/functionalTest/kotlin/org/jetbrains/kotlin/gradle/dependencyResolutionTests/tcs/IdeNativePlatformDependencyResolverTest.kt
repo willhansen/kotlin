@@ -23,18 +23,18 @@ class IdeNativePlatformDependencyResolverTest {
 
     @Test
     fun `test - posix on linux`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.linuxX64()
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
-        val dependencies = listOf(
+        konst dependencies = listOf(
             binaryCoordinates("org.jetbrains.kotlin.native:posix:${project.konanVersion}:$LINUX_X64"),
             binaryCoordinates(Regex("""org\.jetbrains\.kotlin\.native:.*:${project.konanVersion}:$LINUX_X64"""))
         )
@@ -48,18 +48,18 @@ class IdeNativePlatformDependencyResolverTest {
     @Test
     fun `test - CoreFoundation on macos`() {
         Assume.assumeTrue("Macos host required for this test", HostManager.hostIsMac)
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.macosArm64()
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val macosArm64Main = kotlin.sourceSets.getByName("macosArm64Main")
-        val macosArm64Test = kotlin.sourceSets.getByName("macosArm64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst macosArm64Main = kotlin.sourceSets.getByName("macosArm64Main")
+        konst macosArm64Test = kotlin.sourceSets.getByName("macosArm64Test")
 
-        val dependencies = listOf(
+        konst dependencies = listOf(
             binaryCoordinates("org.jetbrains.kotlin.native:CoreFoundation:${project.konanVersion}:$MACOS_ARM64"),
             binaryCoordinates(Regex("""org\.jetbrains\.kotlin\.native:.*:${project.konanVersion}:$MACOS_ARM64"""))
         )
@@ -72,16 +72,16 @@ class IdeNativePlatformDependencyResolverTest {
 
     @Test
     fun `test - non native source sets`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64()
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
 
         IdeNativePlatformDependencyResolver.resolve(commonMain).assertMatches(emptyList<Any>())
         IdeNativePlatformDependencyResolver.resolve(commonTest).assertMatches(emptyList<Any>())

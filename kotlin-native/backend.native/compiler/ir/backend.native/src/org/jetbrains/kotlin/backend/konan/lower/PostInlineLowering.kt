@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
  *     - Convert immutableBlobOf() arguments to special IrConst.
  *     - Convert `obj::class` and `Class::class` to calls.
  */
-internal class PostInlineLowering(val context: Context) : BodyLoweringPass {
+internal class PostInlineLowering(konst context: Context) : BodyLoweringPass {
 
-    private val symbols get() = context.ir.symbols
+    private konst symbols get() = context.ir.symbols
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val irFile = container.file
+        konst irFile = container.file
         irBody.transformChildren(object : IrElementTransformer<IrBuilderWithScope> {
             override fun visitDeclaration(declaration: IrDeclarationBase, data: IrBuilderWithScope) =
                     super.visitDeclaration(declaration,
@@ -59,7 +59,7 @@ internal class PostInlineLowering(val context: Context) : BodyLoweringPass {
 
                 return data.at(expression).run {
                     irCall(symbols.kClassImplConstructor, listOf(expression.argument.type)).apply {
-                        val typeInfo = irCall(symbols.getObjectTypeInfo).apply {
+                        konst typeInfo = irCall(symbols.getObjectTypeInfo).apply {
                             putValueArgument(0, expression.argument)
                         }
 
@@ -77,19 +77,19 @@ internal class PostInlineLowering(val context: Context) : BodyLoweringPass {
                 if (expression.symbol == symbols.immutableBlobOf) {
                     // Convert arguments of the binary blob to special IrConst<String> structure, so that
                     // vararg lowering will not affect it.
-                    val args = expression.getValueArgument(0) as? IrVararg
+                    konst args = expression.getValueArgument(0) as? IrVararg
                             ?: error("varargs shall not be lowered yet")
-                    val builder = StringBuilder()
+                    konst builder = StringBuilder()
                     args.elements.forEach {
                         require(it is IrConst<*>) { renderCompilerError(irFile, it, "expected const") }
-                        val value = (it as? IrConst<*>)?.value
-                        require(value is Short && value >= 0 && value <= 0xff) {
-                            renderCompilerError(irFile, it, "incorrect value for binary data: $value")
+                        konst konstue = (it as? IrConst<*>)?.konstue
+                        require(konstue is Short && konstue >= 0 && konstue <= 0xff) {
+                            renderCompilerError(irFile, it, "incorrect konstue for binary data: $konstue")
                         }
-                        // Luckily, all values in range 0x00 .. 0xff represent valid UTF-16 symbols,
+                        // Luckily, all konstues in range 0x00 .. 0xff represent konstid UTF-16 symbols,
                         // block 0 (Basic Latin) and block 1 (Latin-1 Supplement) in
                         // Basic Multilingual Plane, so we could just append data "as is".
-                        builder.append(value.toInt().toChar())
+                        builder.append(konstue.toInt().toChar())
                     }
                     expression.putValueArgument(0, IrConstImpl(
                             expression.startOffset, expression.endOffset,
@@ -104,7 +104,7 @@ internal class PostInlineLowering(val context: Context) : BodyLoweringPass {
                 return if (tryGetConstantConstructorIntrinsicType(expression.constructor) == ConstantConstructorIntrinsicType.KTYPE_IMPL) {
                     // Inline functions themselves are not called (they have been inlined at all call sites),
                     // so it is ok not to build exact type parameters for them.
-                    val needExactTypeParameters = (container as? IrSimpleFunction)?.isInline != true
+                    konst needExactTypeParameters = (container as? IrSimpleFunction)?.isInline != true
                     with(KTypeGenerator(context, irFile, expression, needExactTypeParameters)) {
                         data.at(expression).irKType(expression.typeArguments[0], leaveReifiedForLater = false)
                     }

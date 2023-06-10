@@ -50,22 +50,22 @@ class KpmCompilerPluginTest {
                 }
         }
 
-        val project = buildProjectWithKPM {
+        konst project = buildProjectWithKPM {
             plugins.apply(TestPlugin::class.java)
             plugins.apply(NativeOnly::class.java)
 
             projectModel {
                 main {
                     jvm
-                    val linuxX64 = fragments.create("linuxX64", GradleKpmLinuxX64Variant::class.java)
-                    val jvmAndLinux = fragments.create("jvmAndLinux")
+                    konst linuxX64 = fragments.create("linuxX64", GradleKpmLinuxX64Variant::class.java)
+                    konst jvmAndLinux = fragments.create("jvmAndLinux")
 
                     jvm.refines(jvmAndLinux)
                     linuxX64.refines(jvmAndLinux)
                 }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         project.pluginDataOfTask("compileCommonMainKotlinMetadata").run {
             assertEquals(setOf("metadata"), artifacts())
@@ -90,7 +90,7 @@ class KpmCompilerPluginTest {
 
     @Test
     fun `compiler plugins should be applied lazily`() {
-        val project = buildProjectWithKPM {
+        konst project = buildProjectWithKPM {
             plugins.apply(TestPluginWithListeners::class.java)
 
             projectModel {
@@ -101,13 +101,13 @@ class KpmCompilerPluginTest {
         }
 
         with(TestPluginWithListeners) {
-            onGetKpmCompilerPlugin = { throw AssertionError("KPM Compiler Plugin should not be obtained on project evaluate") }
-            onPluginDataGet = { throw AssertionError("Plugin data should not be requested on project evaluate") }
+            onGetKpmCompilerPlugin = { throw AssertionError("KPM Compiler Plugin should not be obtained on project ekonstuate") }
+            onPluginDataGet = { throw AssertionError("Plugin data should not be requested on project ekonstuate") }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         // Getting task shouldn't trigger plugin initialization as well (lazy all the way)
-        val task = project.tasks.getByName("compileKotlinJvm") as AbstractKotlinCompile<*>
+        konst task = project.tasks.getByName("compileKotlinJvm") as AbstractKotlinCompile<*>
 
         var pluginInitialized = false
         var pluginDataObtainCount = 0
@@ -125,7 +125,7 @@ class KpmCompilerPluginTest {
 
     @Test
     fun `it should not be possible to read plugin data during configuration phase`() {
-        val project = buildProjectWithKPM {
+        konst project = buildProjectWithKPM {
             plugins.apply(TestPluginWithListeners::class.java)
 
             projectModel {
@@ -135,12 +135,12 @@ class KpmCompilerPluginTest {
             }
 
             // Getting task shouldn't fail due to laziness
-            val task = tasks.getByName("compileKotlinJvm") as AbstractKotlinCompile<*>
+            konst task = tasks.getByName("compileKotlinJvm") as AbstractKotlinCompile<*>
             // But trying to get pluginData during "configuration" should fail
             assertFailsWith<IllegalStateException> { task.kotlinPluginData!!.get() }
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     private fun Project.pluginDataOfTask(taskName: String) = this
@@ -163,14 +163,14 @@ class KpmCompilerPluginTest {
         .toSet()
 
     private open class FakeKpmPlugin(
-        val id: String,
-        val options: Map<String, String> = emptyMap(),
-        val metadataArtifact: String? = null,
-        val metadataNativeArtifact: String? = null,
-        val platformArtifact: String? = null
+        konst id: String,
+        konst options: Map<String, String> = emptyMap(),
+        konst metadataArtifact: String? = null,
+        konst metadataNativeArtifact: String? = null,
+        konst platformArtifact: String? = null
     ) : KpmCompilerPlugin, GradleKpmCompilerPlugin {
         override fun apply(target: Project) = Unit
-        override val kpmCompilerPlugin get() = this
+        override konst kpmCompilerPlugin get() = this
 
         private fun pluginData(artifact: String) = PluginData(
             pluginId = id,
@@ -178,7 +178,7 @@ class KpmCompilerPluginTest {
                 group = "test",
                 artifact = artifact
             ),
-            options = options.map { StringOption(it.key, it.value) }
+            options = options.map { StringOption(it.key, it.konstue) }
         )
 
         override fun forMetadataCompilation(fragment: KpmFragment) = metadataArtifact?.let(::pluginData)
@@ -190,7 +190,7 @@ class KpmCompilerPluginTest {
     }
 
     open class TestPluginWithListeners : KpmCompilerPlugin, GradleKpmCompilerPlugin {
-        override val kpmCompilerPlugin: KpmCompilerPlugin get() = this.also { onGetKpmCompilerPlugin() }
+        override konst kpmCompilerPlugin: KpmCompilerPlugin get() = this.also { onGetKpmCompilerPlugin() }
         override fun apply(target: Project) = onApply()
         override fun forMetadataCompilation(fragment: KpmFragment): PluginData? = null.also { onPluginDataGet() }
         override fun forNativeMetadataCompilation(fragment: KpmFragment): PluginData? = null.also { onPluginDataGet() }

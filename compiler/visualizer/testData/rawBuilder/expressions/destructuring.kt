@@ -1,4 +1,4 @@
-data class Some(val first: Int, val second: Double, val third: String)
+data class Some(konst first: Int, konst second: Double, konst third: String)
 
 fun foo(some: Some) {
 //       Int
@@ -24,5 +24,5 @@ fun foo(some: Some) {
 fun bar(some: Some) {
 //       Int   String bar.some: Some
 //       │     │      │
-    val (a, _, `_`) = some
+    konst (a, _, `_`) = some
 }

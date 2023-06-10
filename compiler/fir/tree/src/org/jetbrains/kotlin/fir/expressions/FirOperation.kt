@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import java.util.*
 
-enum class FirOperation(val operator: String = "???") {
+enum class FirOperation(konst operator: String = "???") {
     // Binary
     EQ("=="),
     NOT_EQ("!="),
@@ -38,20 +38,20 @@ enum class FirOperation(val operator: String = "???") {
     OTHER;
 
     companion object {
-        val ASSIGNMENTS: Set<FirOperation> = EnumSet.of(ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, TIMES_ASSIGN, DIV_ASSIGN, REM_ASSIGN)
+        konst ASSIGNMENTS: Set<FirOperation> = EnumSet.of(ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, TIMES_ASSIGN, DIV_ASSIGN, REM_ASSIGN)
 
-        val BOOLEANS: Set<FirOperation> = EnumSet.of(
+        konst BOOLEANS: Set<FirOperation> = EnumSet.of(
             EQ, NOT_EQ, IDENTITY, NOT_IDENTITY, LT, GT, LT_EQ, GT_EQ, IS, NOT_IS
         )
 
-        val COMPARISONS: Set<FirOperation> = EnumSet.of(LT, GT, LT_EQ, GT_EQ)
+        konst COMPARISONS: Set<FirOperation> = EnumSet.of(LT, GT, LT_EQ, GT_EQ)
 
-        val TYPES: Set<FirOperation> = EnumSet.of(IS, NOT_IS, AS, SAFE_AS)
+        konst TYPES: Set<FirOperation> = EnumSet.of(IS, NOT_IS, AS, SAFE_AS)
     }
 }
 
 object FirOperationNameConventions {
-    val ASSIGNMENTS: Map<FirOperation, Name> = EnumMap(
+    konst ASSIGNMENTS: Map<FirOperation, Name> = EnumMap(
         mapOf(
             FirOperation.PLUS_ASSIGN to OperatorNameConventions.PLUS_ASSIGN,
             FirOperation.MINUS_ASSIGN to OperatorNameConventions.MINUS_ASSIGN,
@@ -60,9 +60,9 @@ object FirOperationNameConventions {
             FirOperation.REM_ASSIGN to OperatorNameConventions.REM_ASSIGN
         )
     )
-    val ASSIGNMENT_NAMES = ASSIGNMENTS.map { (k, v) -> v to k }.toMap()
+    konst ASSIGNMENT_NAMES = ASSIGNMENTS.map { (k, v) -> v to k }.toMap()
 
-    val ASSIGNMENTS_TO_SIMPLE_OPERATOR: Map<FirOperation, Name> = EnumMap(
+    konst ASSIGNMENTS_TO_SIMPLE_OPERATOR: Map<FirOperation, Name> = EnumMap(
         mapOf(
             FirOperation.PLUS_ASSIGN to OperatorNameConventions.PLUS,
             FirOperation.MINUS_ASSIGN to OperatorNameConventions.MINUS,

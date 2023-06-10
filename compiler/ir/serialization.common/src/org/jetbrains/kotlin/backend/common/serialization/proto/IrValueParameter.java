@@ -30,7 +30,7 @@ public final class IrValueParameter extends
   private IrValueParameter(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -83,10 +83,10 @@ public final class IrValueParameter extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -104,7 +104,7 @@ public final class IrValueParameter extends
     public IrValueParameter parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrValueParameter(input, extensionRegistry);
     }
   };
@@ -163,13 +163,13 @@ public final class IrValueParameter extends
   public static final int DEFAULT_VALUE_FIELD_NUMBER = 4;
   private int defaultValue_;
   /**
-   * <code>optional int32 default_value = 4;</code>
+   * <code>optional int32 default_konstue = 4;</code>
    */
   public boolean hasDefaultValue() {
     return ((bitField0_ & 0x00000008) == 0x00000008);
   }
   /**
-   * <code>optional int32 default_value = 4;</code>
+   * <code>optional int32 default_konstue = 4;</code>
    */
   public int getDefaultValue() {
     return defaultValue_;
@@ -257,23 +257,23 @@ public final class IrValueParameter extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parseFrom(java.io.InputStream input)
@@ -430,7 +430,7 @@ public final class IrValueParameter extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -458,11 +458,11 @@ public final class IrValueParameter extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -480,13 +480,13 @@ public final class IrValueParameter extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -518,9 +518,9 @@ public final class IrValueParameter extends
     /**
      * <code>required int64 name_type = 2;</code>
      */
-    public Builder setNameType(long value) {
+    public Builder setNameType(long konstue) {
       bitField0_ |= 0x00000002;
-      nameType_ = value;
+      nameType_ = konstue;
       
       return this;
     }
@@ -550,9 +550,9 @@ public final class IrValueParameter extends
     /**
      * <code>optional int32 vararg_element_type = 3;</code>
      */
-    public Builder setVarargElementType(int value) {
+    public Builder setVarargElementType(int konstue) {
       bitField0_ |= 0x00000004;
-      varargElementType_ = value;
+      varargElementType_ = konstue;
       
       return this;
     }
@@ -568,28 +568,28 @@ public final class IrValueParameter extends
 
     private int defaultValue_ ;
     /**
-     * <code>optional int32 default_value = 4;</code>
+     * <code>optional int32 default_konstue = 4;</code>
      */
     public boolean hasDefaultValue() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 default_value = 4;</code>
+     * <code>optional int32 default_konstue = 4;</code>
      */
     public int getDefaultValue() {
       return defaultValue_;
     }
     /**
-     * <code>optional int32 default_value = 4;</code>
+     * <code>optional int32 default_konstue = 4;</code>
      */
-    public Builder setDefaultValue(int value) {
+    public Builder setDefaultValue(int konstue) {
       bitField0_ |= 0x00000008;
-      defaultValue_ = value;
+      defaultValue_ = konstue;
       
       return this;
     }
     /**
-     * <code>optional int32 default_value = 4;</code>
+     * <code>optional int32 default_konstue = 4;</code>
      */
     public Builder clearDefaultValue() {
       bitField0_ = (bitField0_ & ~0x00000008);

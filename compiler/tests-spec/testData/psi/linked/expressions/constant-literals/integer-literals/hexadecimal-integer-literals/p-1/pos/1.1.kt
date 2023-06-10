@@ -4,53 +4,53 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, integer-literals, hexadecimal-integer-literals -> paragraph 1 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: Hexadecimal integer literals with valid symbols.
+ * DESCRIPTION: Hexadecimal integer literals with konstid symbols.
  */
 
-val value = 0x1234567890
-val value = 0X23456789
-val value = 0x345678
-val value = 0X4567
-val value = 0X56
-val value = 0x65
-val value = 0X7654
-val value = 0x876543
-val value = 0x98765432
+konst konstue = 0x1234567890
+konst konstue = 0X23456789
+konst konstue = 0x345678
+konst konstue = 0X4567
+konst konstue = 0X56
+konst konstue = 0x65
+konst konstue = 0X7654
+konst konstue = 0x876543
+konst konstue = 0x98765432
 
-val value = 0X0
-val value = 0x1
+konst konstue = 0X0
+konst konstue = 0x1
 
-val value = 0x100000
-val value = 0X1000001
+konst konstue = 0x100000
+konst konstue = 0X1000001
 
-val value = 0X0000000
-val value = 0x0000001000000
-val value = 0x00000010
+konst konstue = 0X0000000
+konst konstue = 0x0000001000000
+konst konstue = 0x00000010
 
-val value = 0xABCDEF
-val value = 0Xabcdef
-val value = 0xAbcD
-val value = 0Xa
-val value = 0xE
-val value = 0xEeEeEeEe
-val value = 0XAAAAAAAA
-val value = 0xcDf
-val value = 0xAcccccccccA
+konst konstue = 0xABCDEF
+konst konstue = 0Xabcdef
+konst konstue = 0xAbcD
+konst konstue = 0Xa
+konst konstue = 0xE
+konst konstue = 0xEeEeEeEe
+konst konstue = 0XAAAAAAAA
+konst konstue = 0xcDf
+konst konstue = 0xAcccccccccA
 
-val value = 0x0123456789ABCDEF
-val value = 0x0123456789abcdef
-val value = 0XAA00AA
-val value = 0xBc12eF
-val value = 0xa0
-val value = 0XE1
-val value = 0xE1eE2eE3eE4e
-val value = 0XAAAAAAAA000000000
-val value = 0xcDf091
-val value = 0xAcccc0000cccccA
-val value = 0X0000000A
-val value = 0xe0000000
-val value = 0x0000000D0000000
-val value = 0xA0A
+konst konstue = 0x0123456789ABCDEF
+konst konstue = 0x0123456789abcdef
+konst konstue = 0XAA00AA
+konst konstue = 0xBc12eF
+konst konstue = 0xa0
+konst konstue = 0XE1
+konst konstue = 0xE1eE2eE3eE4e
+konst konstue = 0XAAAAAAAA000000000
+konst konstue = 0xcDf091
+konst konstue = 0xAcccc0000cccccA
+konst konstue = 0X0000000A
+konst konstue = 0xe0000000
+konst konstue = 0x0000000D0000000
+konst konstue = 0xA0A
 
-val value = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+konst konstue = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 

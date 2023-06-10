@@ -17,12 +17,12 @@
 package org.jetbrains.kotlin.config
 
 object SettingConstants {
-    const val KOTLIN_COMMON_COMPILER_ARGUMENTS_SECTION = "KotlinCommonCompilerArguments"
-    const val KOTLIN_TO_JS_COMPILER_ARGUMENTS_SECTION = "Kotlin2JsCompilerArguments"
-    const val KOTLIN_TO_JVM_COMPILER_ARGUMENTS_SECTION = "Kotlin2JvmCompilerArguments"
-    const val KOTLIN_COMPILER_SETTINGS_SECTION = "KotlinCompilerSettings"
-    const val KOTLIN_JPS_PLUGIN_SETTINGS_SECTION = "KotlinJpsPluginSettings"
-    const val KOTLIN_COMPILER_SETTINGS_FILE = "kotlinc.xml"
-    const val KOTLIN_COMPILER_REFERENCE_INDEX_BUILDER_ID = "kotlin.compiler.ref.index"
-    const val KOTLIN_DATA_CONTAINER_ID = "kotlin-data-container"
+    const konst KOTLIN_COMMON_COMPILER_ARGUMENTS_SECTION = "KotlinCommonCompilerArguments"
+    const konst KOTLIN_TO_JS_COMPILER_ARGUMENTS_SECTION = "Kotlin2JsCompilerArguments"
+    const konst KOTLIN_TO_JVM_COMPILER_ARGUMENTS_SECTION = "Kotlin2JvmCompilerArguments"
+    const konst KOTLIN_COMPILER_SETTINGS_SECTION = "KotlinCompilerSettings"
+    const konst KOTLIN_JPS_PLUGIN_SETTINGS_SECTION = "KotlinJpsPluginSettings"
+    const konst KOTLIN_COMPILER_SETTINGS_FILE = "kotlinc.xml"
+    const konst KOTLIN_COMPILER_REFERENCE_INDEX_BUILDER_ID = "kotlin.compiler.ref.index"
+    const konst KOTLIN_DATA_CONTAINER_ID = "kotlin-data-container"
 }

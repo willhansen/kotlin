@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.backend.common.phaser
 
 /**
  * Control which parts of compilation pipeline are enabled and
- * how compiler should validate their invariants.
+ * how compiler should konstidate their invariants.
  */
 interface PhaseConfigurationService {
     /**
@@ -39,13 +39,13 @@ interface PhaseConfigurationService {
     fun shouldDumpStateAfter(phase: AnyNamedPhase): Boolean
 
     /**
-     * Check if compiler should validate its state right before
+     * Check if compiler should konstidate its state right before
      * the execution of the given [phase].
      */
     fun shouldValidateStateBefore(phase: AnyNamedPhase): Boolean
 
     /**
-     * Check if compiler should validate its state right after
+     * Check if compiler should konstidate its state right after
      * the execution of the given [phase].
      */
     fun shouldValidateStateAfter(phase: AnyNamedPhase): Boolean
@@ -53,27 +53,27 @@ interface PhaseConfigurationService {
     /**
      * Returns true if compiler should measure how long takes each phase.
      */
-    val needProfiling: Boolean
+    konst needProfiling: Boolean
 
     /**
      * Returns true if compiler should check pre- and post-conditions of compiler phases.
      */
-    val checkConditions: Boolean
+    konst checkConditions: Boolean
 
     /**
      * Returns true if compiler should check post-conditions that are applicable to subsequent (thus "sticky") phases.
      */
-    val checkStickyConditions: Boolean
+    konst checkStickyConditions: Boolean
 
     /**
      * Returns a path to a directory that should store phase dump.
      * null if directory is not set.
      */
-    val dumpToDirectory: String?
+    konst dumpToDirectory: String?
 
     /**
      * Returns a fully-qualified name that should be used to filter phase dump.
      * null if dump should not be filtered.
      */
-    val dumpOnlyFqName: String?
+    konst dumpOnlyFqName: String?
 }

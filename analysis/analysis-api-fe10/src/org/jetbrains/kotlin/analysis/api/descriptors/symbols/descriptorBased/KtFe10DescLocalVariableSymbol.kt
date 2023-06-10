@@ -22,19 +22,19 @@ import org.jetbrains.kotlin.descriptors.impl.LocalVariableDescriptor
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFe10DescLocalVariableSymbol(
-    override val descriptor: LocalVariableDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: LocalVariableDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtLocalVariableSymbol(), KtFe10DescSymbol<LocalVariableDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = withValidityAssertion { !descriptor.isVar }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.type.toKtType(analysisContext) }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { KtSymbolKind.LOCAL }
 
     context(KtAnalysisSession)

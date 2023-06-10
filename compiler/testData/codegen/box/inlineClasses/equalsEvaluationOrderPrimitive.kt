@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val x: Int = 0)
+konstue class A(konst x: Int = 0)
 
 var i = 0
 

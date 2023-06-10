@@ -63,60 +63,60 @@ public inline operator fun BigInteger.inc(): BigInteger = this.add(BigInteger.ON
 @kotlin.internal.InlineOnly
 public inline operator fun BigInteger.dec(): BigInteger = this.subtract(BigInteger.ONE)
 
-/** Inverts the bits including the sign bit in this value. */
+/** Inverts the bits including the sign bit in this konstue. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline fun BigInteger.inv(): BigInteger = this.not()
 
-/** Performs a bitwise AND operation between the two values. */
+/** Performs a bitwise AND operation between the two konstues. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline infix fun BigInteger.and(other: BigInteger): BigInteger = this.and(other)
 
-/** Performs a bitwise OR operation between the two values. */
+/** Performs a bitwise OR operation between the two konstues. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline infix fun BigInteger.or(other: BigInteger): BigInteger = this.or(other)
 
-/** Performs a bitwise XOR operation between the two values. */
+/** Performs a bitwise XOR operation between the two konstues. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline infix fun BigInteger.xor(other: BigInteger): BigInteger = this.xor(other)
 
-/** Shifts this value left by the [n] number of bits. */
+/** Shifts this konstue left by the [n] number of bits. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline infix fun BigInteger.shl(n: Int): BigInteger = this.shiftLeft(n)
 
-/** Shifts this value right by the [n] number of bits, filling the leftmost bits with copies of the sign bit. */
+/** Shifts this konstue right by the [n] number of bits, filling the leftmost bits with copies of the sign bit. */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline infix fun BigInteger.shr(n: Int): BigInteger = this.shiftRight(n)
 
 
 /**
- * Returns the value of this [Int] number as a [BigInteger].
+ * Returns the konstue of this [Int] number as a [BigInteger].
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
-public inline fun Int.toBigInteger(): BigInteger = BigInteger.valueOf(this.toLong())
+public inline fun Int.toBigInteger(): BigInteger = BigInteger.konstueOf(this.toLong())
 
 /**
- * Returns the value of this [Long] number as a [BigInteger].
+ * Returns the konstue of this [Long] number as a [BigInteger].
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
-public inline fun Long.toBigInteger(): BigInteger = BigInteger.valueOf(this)
+public inline fun Long.toBigInteger(): BigInteger = BigInteger.konstueOf(this)
 
 /**
- * Returns the value of this [BigInteger] number as a [BigDecimal].
+ * Returns the konstue of this [BigInteger] number as a [BigDecimal].
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public inline fun BigInteger.toBigDecimal(): BigDecimal = BigDecimal(this)
 
 /**
- * Returns the value of this [BigInteger] number as a [BigDecimal]
+ * Returns the konstue of this [BigInteger] number as a [BigDecimal]
  * scaled according to the specified [scale] and rounded according to the settings specified with [mathContext].
  *
  * @param scale the scale of the resulting [BigDecimal], i.e. number of decimal places of the fractional part.

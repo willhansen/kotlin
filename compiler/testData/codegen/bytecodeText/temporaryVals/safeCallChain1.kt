@@ -1,6 +1,6 @@
-class A(val b: B)
-class B(val c: C)
-class C(val s: String)
+class A(konst b: B)
+class B(konst c: C)
+class C(konst s: String)
 
 fun test(an: A?) = an?.b?.c?.s
 

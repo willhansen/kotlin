@@ -23,7 +23,7 @@ sourceSets {
     "test" { projectDefault() }
 }
 
-val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateRuntimeDescriptorTestsKt")
+konst generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateRuntimeDescriptorTestsKt")
 
 projectTest(parallel = true) {
     dependsOn(":dist")

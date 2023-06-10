@@ -9,11 +9,11 @@ public record MyRec(String name) implements KI {
 // FILE: main.kt
 
 interface KI {
-    val name: String
+    konst name: String
 }
 
 fun box(): String {
-    val r = MyRec("fail")
+    konst r = MyRec("fail")
     if (r.name() != "fail") return "fail 1"
     if ((r as KI).name != "OK") return "fail 2"
 

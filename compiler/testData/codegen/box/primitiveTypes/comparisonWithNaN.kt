@@ -28,7 +28,7 @@ fun box(): String {
     _assertFalse(dnan >= dnan)
     _assertFalse(dnan == dnan)
     
-    // Double.compareTo: "NaN is considered by this method to be equal to itself and greater than all other values"
+    // Double.compareTo: "NaN is considered by this method to be equal to itself and greater than all other konstues"
     _assert(0.0.compareTo(dnan) == -1)
     _assert(dnan.compareTo(0.0) == 1)
     _assert(dnan.compareTo(dnan) == 0)

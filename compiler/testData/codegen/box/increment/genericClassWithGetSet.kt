@@ -1,28 +1,28 @@
-class A<T>(var value: T) {
-    operator fun get(i: Int) = value
+class A<T>(var konstue: T) {
+    operator fun get(i: Int) = konstue
 
     operator fun set(i: Int, newValue: T) {
-        value = newValue
+        konstue = newValue
     }
 }
 
 fun box(): String {
-    val aByte = A<Byte>(1)
+    konst aByte = A<Byte>(1)
     var bByte: Byte = 1
 
-    val aShort = A<Short>(1)
+    konst aShort = A<Short>(1)
     var bShort: Short = 1
 
-    val aInt = A<Int>(1)
+    konst aInt = A<Int>(1)
     var bInt: Int = 1
 
-    val aLong = A<Long>(1)
+    konst aLong = A<Long>(1)
     var bLong: Long = 1
 
-    val aFloat = A<Float>(1.0f)
+    konst aFloat = A<Float>(1.0f)
     var bFloat: Float = 1.0f
 
-    val aDouble = A<Double>(1.0)
+    konst aDouble = A<Double>(1.0)
     var bDouble: Double = 1.0
     
     aByte[0]++

@@ -20,5 +20,5 @@ public class Derived implements Base {
 interface MyBase : Base
 
 abstract class Implementation : Derived(), MyBase {
-    val parentNode: String? get() = super.parent
+    konst parentNode: String? get() = super.parent
 }

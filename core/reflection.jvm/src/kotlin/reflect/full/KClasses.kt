@@ -32,7 +32,7 @@ import kotlin.reflect.jvm.internal.*
  * for more information.
  */
 @SinceKotlin("1.1")
-val <T : Any> KClass<T>.primaryConstructor: KFunction<T>?
+konst <T : Any> KClass<T>.primaryConstructor: KFunction<T>?
     get() = (this as KClassImpl<T>).constructors.firstOrNull {
         ((it as KFunctionImpl).descriptor as ConstructorDescriptor).isPrimary
     }
@@ -43,7 +43,7 @@ val <T : Any> KClass<T>.primaryConstructor: KFunction<T>?
  * or `null` if the class doesn't have a companion object.
  */
 @SinceKotlin("1.1")
-val KClass<*>.companionObject: KClass<*>?
+konst KClass<*>.companionObject: KClass<*>?
     get() = nestedClasses.firstOrNull {
         (it as KClassImpl<*>).descriptor.isCompanionObject
     }
@@ -53,7 +53,7 @@ val KClass<*>.companionObject: KClass<*>?
  * or `null` if the class doesn't have a companion object.
  */
 @SinceKotlin("1.1")
-val KClass<*>.companionObjectInstance: Any?
+konst KClass<*>.companionObjectInstance: Any?
     get() = companionObject?.objectInstance
 
 
@@ -68,7 +68,7 @@ val KClass<*>.companionObjectInstance: Any?
             "Use starProjectedType or createType() for clearer semantics."
 )
 @SinceKotlin("1.1")
-val KClass<*>.defaultType: KType
+konst KClass<*>.defaultType: KType
     get() = KTypeImpl((this as KClassImpl<*>).descriptor.defaultType) { jClass }
 
 
@@ -77,37 +77,37 @@ val KClass<*>.defaultType: KType
  * Does not include members declared in supertypes.
  */
 @SinceKotlin("1.1")
-val KClass<*>.declaredMembers: Collection<KCallable<*>>
-    get() = (this as KClassImpl).data.value.declaredMembers
+konst KClass<*>.declaredMembers: Collection<KCallable<*>>
+    get() = (this as KClassImpl).data.konstue.declaredMembers
 
 /**
  * Returns all functions declared in this class, including all non-static methods declared in the class
  * and the superclasses, as well as static methods declared in the class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.functions: Collection<KFunction<*>>
+konst KClass<*>.functions: Collection<KFunction<*>>
     get() = members.filterIsInstance<KFunction<*>>()
 
 /**
  * Returns static functions declared in this class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.staticFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.allStaticMembers.filterIsInstance<KFunction<*>>()
+konst KClass<*>.staticFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.allStaticMembers.filterIsInstance<KFunction<*>>()
 
 /**
  * Returns non-extension non-static functions declared in this class and all of its superclasses.
  */
 @SinceKotlin("1.1")
-val KClass<*>.memberFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.allNonStaticMembers.filter { it.isNotExtension && it is KFunction<*> } as Collection<KFunction<*>>
+konst KClass<*>.memberFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.allNonStaticMembers.filter { it.isNotExtension && it is KFunction<*> } as Collection<KFunction<*>>
 
 /**
  * Returns extension functions declared in this class and all of its superclasses.
  */
 @SinceKotlin("1.1")
-val KClass<*>.memberExtensionFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.allNonStaticMembers.filter { it.isExtension && it is KFunction<*> } as Collection<KFunction<*>>
+konst KClass<*>.memberExtensionFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.allNonStaticMembers.filter { it.isExtension && it is KFunction<*> } as Collection<KFunction<*>>
 
 /**
  * Returns all functions declared in this class.
@@ -115,64 +115,64 @@ val KClass<*>.memberExtensionFunctions: Collection<KFunction<*>>
  * declared in the class and the superclasses, as well as static methods declared in the class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.declaredFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.declaredMembers.filterIsInstance<KFunction<*>>()
+konst KClass<*>.declaredFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.declaredMembers.filterIsInstance<KFunction<*>>()
 
 /**
  * Returns non-extension non-static functions declared in this class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.declaredMemberFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.declaredNonStaticMembers.filter { it.isNotExtension && it is KFunction<*> } as Collection<KFunction<*>>
+konst KClass<*>.declaredMemberFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.declaredNonStaticMembers.filter { it.isNotExtension && it is KFunction<*> } as Collection<KFunction<*>>
 
 /**
  * Returns extension functions declared in this class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.declaredMemberExtensionFunctions: Collection<KFunction<*>>
-    get() = (this as KClassImpl).data.value.declaredNonStaticMembers.filter { it.isExtension && it is KFunction<*> } as Collection<KFunction<*>>
+konst KClass<*>.declaredMemberExtensionFunctions: Collection<KFunction<*>>
+    get() = (this as KClassImpl).data.konstue.declaredNonStaticMembers.filter { it.isExtension && it is KFunction<*> } as Collection<KFunction<*>>
 
 /**
  * Returns static properties declared in this class.
  * Only properties representing static fields of Java classes are considered static.
  */
 @SinceKotlin("1.1")
-val KClass<*>.staticProperties: Collection<KProperty0<*>>
-    get() = (this as KClassImpl).data.value.allStaticMembers.filter { it.isNotExtension && it is KProperty0<*> } as Collection<KProperty0<*>>
+konst KClass<*>.staticProperties: Collection<KProperty0<*>>
+    get() = (this as KClassImpl).data.konstue.allStaticMembers.filter { it.isNotExtension && it is KProperty0<*> } as Collection<KProperty0<*>>
 
 /**
  * Returns non-extension properties declared in this class and all of its superclasses.
  */
 @SinceKotlin("1.1")
-val <T : Any> KClass<T>.memberProperties: Collection<KProperty1<T, *>>
-    get() = (this as KClassImpl<T>).data.value.allNonStaticMembers.filter { it.isNotExtension && it is KProperty1<*, *> } as Collection<KProperty1<T, *>>
+konst <T : Any> KClass<T>.memberProperties: Collection<KProperty1<T, *>>
+    get() = (this as KClassImpl<T>).data.konstue.allNonStaticMembers.filter { it.isNotExtension && it is KProperty1<*, *> } as Collection<KProperty1<T, *>>
 
 /**
  * Returns extension properties declared in this class and all of its superclasses.
  */
 @SinceKotlin("1.1")
-val <T : Any> KClass<T>.memberExtensionProperties: Collection<KProperty2<T, *, *>>
-    get() = (this as KClassImpl<T>).data.value.allNonStaticMembers.filter { it.isExtension && it is KProperty2<*, *, *> } as Collection<KProperty2<T, *, *>>
+konst <T : Any> KClass<T>.memberExtensionProperties: Collection<KProperty2<T, *, *>>
+    get() = (this as KClassImpl<T>).data.konstue.allNonStaticMembers.filter { it.isExtension && it is KProperty2<*, *, *> } as Collection<KProperty2<T, *, *>>
 
 /**
  * Returns non-extension properties declared in this class.
  */
 @SinceKotlin("1.1")
-val <T : Any> KClass<T>.declaredMemberProperties: Collection<KProperty1<T, *>>
-    get() = (this as KClassImpl<T>).data.value.declaredNonStaticMembers.filter { it.isNotExtension && it is KProperty1<*, *> } as Collection<KProperty1<T, *>>
+konst <T : Any> KClass<T>.declaredMemberProperties: Collection<KProperty1<T, *>>
+    get() = (this as KClassImpl<T>).data.konstue.declaredNonStaticMembers.filter { it.isNotExtension && it is KProperty1<*, *> } as Collection<KProperty1<T, *>>
 
 /**
  * Returns extension properties declared in this class.
  */
 @SinceKotlin("1.1")
-val <T : Any> KClass<T>.declaredMemberExtensionProperties: Collection<KProperty2<T, *, *>>
-    get() = (this as KClassImpl<T>).data.value.declaredNonStaticMembers.filter { it.isExtension && it is KProperty2<*, *, *> } as Collection<KProperty2<T, *, *>>
+konst <T : Any> KClass<T>.declaredMemberExtensionProperties: Collection<KProperty2<T, *, *>>
+    get() = (this as KClassImpl<T>).data.konstue.declaredNonStaticMembers.filter { it.isExtension && it is KProperty2<*, *, *> } as Collection<KProperty2<T, *, *>>
 
 
-private val KCallableImpl<*>.isExtension: Boolean
+private konst KCallableImpl<*>.isExtension: Boolean
     get() = descriptor.extensionReceiverParameter != null
 
-private val KCallableImpl<*>.isNotExtension: Boolean
+private konst KCallableImpl<*>.isNotExtension: Boolean
     get() = !isExtension
 
 /**
@@ -180,7 +180,7 @@ private val KCallableImpl<*>.isNotExtension: Boolean
  * Includes superclasses and superinterfaces of the class, but does not include the class itself.
  */
 @SinceKotlin("1.1")
-val KClass<*>.superclasses: List<KClass<*>>
+konst KClass<*>.superclasses: List<KClass<*>>
     get() = supertypes.mapNotNull { it.classifier as? KClass<*> }
 
 /**
@@ -188,17 +188,17 @@ val KClass<*>.superclasses: List<KClass<*>>
  * There is not more than one type in the returned collection that has any given classifier.
  */
 @SinceKotlin("1.1")
-val KClass<*>.allSupertypes: Collection<KType>
+konst KClass<*>.allSupertypes: Collection<KType>
     get() = DFS.dfs(
         supertypes,
         { current ->
-            val klass = current.classifier as? KClass<*> ?: throw KotlinReflectionInternalError("Supertype not a class: $current")
-            val supertypes = klass.supertypes
-            val typeArguments = current.arguments
+            konst klass = current.classifier as? KClass<*> ?: throw KotlinReflectionInternalError("Supertype not a class: $current")
+            konst supertypes = klass.supertypes
+            konst typeArguments = current.arguments
             if (typeArguments.isEmpty()) supertypes
             else TypeSubstitutor.create((current as KTypeImpl).type).let { substitutor ->
                 supertypes.map { supertype ->
-                    val substituted = substitutor.substitute((supertype as KTypeImpl).type, Variance.INVARIANT)
+                    konst substituted = substitutor.substitute((supertype as KTypeImpl).type, Variance.INVARIANT)
                         ?: throw KotlinReflectionInternalError("Type substitution failed: $supertype ($current)")
                     KTypeImpl(substituted)
                 }
@@ -219,7 +219,7 @@ val KClass<*>.allSupertypes: Collection<KType>
  * The returned collection does not contain more than one instance of any given class.
  */
 @SinceKotlin("1.1")
-val KClass<*>.allSuperclasses: Collection<KClass<*>>
+konst KClass<*>.allSuperclasses: Collection<KClass<*>>
     get() = allSupertypes.map { supertype ->
         supertype.classifier as? KClass<*> ?: throw KotlinReflectionInternalError("Supertype not a class: $supertype")
     }
@@ -241,28 +241,28 @@ fun KClass<*>.isSuperclassOf(derived: KClass<*>): Boolean =
 
 
 /**
- * Casts the given [value] to the class represented by this [KClass] object.
- * Throws an exception if the value is `null` or if it is not an instance of this class.
+ * Casts the given [konstue] to the class represented by this [KClass] object.
+ * Throws an exception if the konstue is `null` or if it is not an instance of this class.
  *
  * @see [KClass.isInstance]
  * @see [KClass.safeCast]
  */
 @SinceKotlin("1.1")
-fun <T : Any> KClass<T>.cast(value: Any?): T {
-    if (!isInstance(value)) throw TypeCastException("Value cannot be cast to $qualifiedName")
-    return value as T
+fun <T : Any> KClass<T>.cast(konstue: Any?): T {
+    if (!isInstance(konstue)) throw TypeCastException("Value cannot be cast to $qualifiedName")
+    return konstue as T
 }
 
 /**
- * Casts the given [value] to the class represented by this [KClass] object.
- * Returns `null` if the value is `null` or if it is not an instance of this class.
+ * Casts the given [konstue] to the class represented by this [KClass] object.
+ * Returns `null` if the konstue is `null` or if it is not an instance of this class.
  *
  * @see [KClass.isInstance]
  * @see [KClass.cast]
  */
 @SinceKotlin("1.1")
-fun <T : Any> KClass<T>.safeCast(value: Any?): T? {
-    return if (isInstance(value)) value as T else null
+fun <T : Any> KClass<T>.safeCast(konstue: Any?): T? {
+    return if (isInstance(konstue)) konstue as T else null
 }
 
 
@@ -273,7 +273,7 @@ fun <T : Any> KClass<T>.safeCast(value: Any?): T? {
 @SinceKotlin("1.1")
 fun <T : Any> KClass<T>.createInstance(): T {
     // TODO: throw a meaningful exception
-    val noArgsConstructor = constructors.singleOrNull { it.parameters.all(KParameter::isOptional) }
+    konst noArgsConstructor = constructors.singleOrNull { it.parameters.all(KParameter::isOptional) }
         ?: throw IllegalArgumentException("Class should have a single no-arg constructor: $this")
 
     return noArgsConstructor.callBy(emptyMap())

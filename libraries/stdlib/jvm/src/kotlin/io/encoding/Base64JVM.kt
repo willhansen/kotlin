@@ -23,14 +23,14 @@ internal actual inline fun Base64.platformCharsToBytes(source: CharSequence, sta
 @ExperimentalEncodingApi
 @kotlin.internal.InlineOnly
 internal actual inline fun Base64.platformEncodeToString(source: ByteArray, startIndex: Int, endIndex: Int): String {
-//    val subArray = if (startIndex == 0 && endIndex == source.size) {
+//    konst subArray = if (startIndex == 0 && endIndex == source.size) {
 //        source
 //    } else {
 //        source.copyOfRange(startIndex, endIndex)
 //    }
 //    return javaEncoder().encodeToString(subArray)
     // TODO: Move to kotlin-stdlib-jdk8 and use the commented-out implementation above when KT-54970 gets fixed.
-    val byteResult = encodeToByteArrayImpl(source, startIndex, endIndex)
+    konst byteResult = encodeToByteArrayImpl(source, startIndex, endIndex)
     return String(byteResult, Charsets.ISO_8859_1)
 }
 

@@ -9,7 +9,7 @@
 // 0 java/lang/invoke/LambdaMetafactory
 // 1 class FunInterfaceWithInlineNStringKt\$box\$t\$1
 
-inline class Z(val value: String?)
+inline class Z(konst konstue: String?)
 
 fun interface IFooZ {
     fun foo(x: Z): Z
@@ -18,8 +18,8 @@ fun interface IFooZ {
 fun foo1(fs: IFooZ) = fs.foo(Z("O"))
 
 fun box(): String {
-    val t = foo1 { Z(it.value!! + "K") }
-    if (t.value != "OK") return "Failed: t=$t"
+    konst t = foo1 { Z(it.konstue!! + "K") }
+    if (t.konstue != "OK") return "Failed: t=$t"
 
     return "OK"
 }

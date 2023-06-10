@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.isAnonymousObject
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-internal val singletonReferencesPhase = makeIrFilePhase(
+internal konst singletonReferencesPhase = makeIrFilePhase(
     ::SingletonReferencesLowering,
     name = "SingletonReferences",
     description = "Handle singleton references"
 )
 
-private class SingletonReferencesLowering(val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
-    private val constructingEnums = arrayListOf<IrDeclarationParent>()
+private class SingletonReferencesLowering(konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
+    private konst constructingEnums = arrayListOf<IrDeclarationParent>()
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
@@ -38,14 +38,14 @@ private class SingletonReferencesLowering(val context: JvmBackendContext) : File
 
     override fun visitEnumConstructorCall(expression: IrEnumConstructorCall): IrExpression {
         constructingEnums.push(expression.symbol.owner.parent)
-        val call = super.visitEnumConstructorCall(expression)
+        konst call = super.visitEnumConstructorCall(expression)
         constructingEnums.pop()
         return call
     }
 
     override fun visitGetEnumValue(expression: IrGetEnumValue): IrExpression {
-        val candidate = expression.symbol.owner.correspondingClass
-        val appropriateThis = thisOfClass(candidate)
+        konst candidate = expression.symbol.owner.correspondingClass
+        konst appropriateThis = thisOfClass(candidate)
         return if (candidate != null && appropriateThis != null && isThisAccessible(candidate) && !isVisitingSuperConstructor(candidate)) {
             // Replace `SomeEnumClass.SomeEnumEntry` with `this`, if possible.
             //
@@ -54,14 +54,14 @@ private class SingletonReferencesLowering(val context: JvmBackendContext) : File
             // must be replaced with `SomeEnumEntry.this`.
             IrGetValueImpl(expression.startOffset, expression.endOffset, expression.type, appropriateThis.symbol)
         } else {
-            val entrySymbol = context.cachedDeclarations.getFieldForEnumEntry(expression.symbol.owner)
+            konst entrySymbol = context.cachedDeclarations.getFieldForEnumEntry(expression.symbol.owner)
             IrGetFieldImpl(expression.startOffset, expression.endOffset, entrySymbol.symbol, expression.type)
         }
     }
 
     private fun isThisAccessible(irClass: IrClass): Boolean {
         for (scope in allScopes.asReversed()) {
-            when (val irScopeElement = scope.irElement) {
+            when (konst irScopeElement = scope.irElement) {
                 irClass ->
                     return true
                 is IrClass ->
@@ -79,7 +79,7 @@ private class SingletonReferencesLowering(val context: JvmBackendContext) : File
     }
 
     override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
-        val instanceField = if (allScopes.any { it.irElement == expression.symbol.owner })
+        konst instanceField = if (allScopes.any { it.irElement == expression.symbol.owner })
             context.cachedDeclarations.getPrivateFieldForObjectInstance(expression.symbol.owner) // Constructor or static method.
         else
             context.cachedDeclarations.getFieldForObjectInstance(expression.symbol.owner) // Not in object scope at all.
@@ -90,7 +90,7 @@ private class SingletonReferencesLowering(val context: JvmBackendContext) : File
     private fun thisOfClass(declaration: IrClass?, allowConstructorReceiver: Boolean = true): IrValueParameter? {
         if (declaration == null) return null
         for (scope in allScopes.reversed()) {
-            when (val element = scope.irElement) {
+            when (konst element = scope.irElement) {
                 is IrFunction ->
                     element.dispatchReceiverParameter?.let { if (it.type.classOrNull == declaration.symbol) return it }
                 is IrClass -> if (allowConstructorReceiver && element == declaration) return element.thisReceiver
@@ -101,20 +101,20 @@ private class SingletonReferencesLowering(val context: JvmBackendContext) : File
 
     // `this` isn't usable before `super.<init>`. Consider the example,
     //
-    // 1:  enum class Test(val x: String, val closure1: () -> String) {
+    // 1:  enum class Test(konst x: String, konst closure1: () -> String) {
     // 2:    FOO("O", { FOO.x }) {
-    // 3:      val y: String = run { FOO.x }
+    // 3:      konst y: String = run { FOO.x }
     // 4:    };
     // 5:  }
     //
     // The constructing sequence would look like the following, if the reference was lowered to `this`:
     //
     //   FOO.<init>(this) {
-    //     val lambda1 = new lambda_in_line_1_type
+    //     konst lambda1 = new lambda_in_line_1_type
     //     lambda_in_line_1_type.<init>(lambda1, this)
     //     Test.<init>(this, "O", lambda1)
     //     ...
-    //     val lambda3 = new lambda_in_line_3_type
+    //     konst lambda3 = new lambda_in_line_3_type
     //     lambda_in_line_3_type.<init>(lambda3, this)
     //   }
     //

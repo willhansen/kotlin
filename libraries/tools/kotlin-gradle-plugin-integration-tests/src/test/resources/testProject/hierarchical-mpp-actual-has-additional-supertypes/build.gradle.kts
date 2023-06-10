@@ -14,9 +14,9 @@ repositories {
 kotlin {
     jvm {}
     sourceSets {
-        val common = maybeCreate("commonMain")
-        val concurrent = maybeCreate("concurrentMain")
-        val jvm = maybeCreate("jvmMain")
+        konst common = maybeCreate("commonMain")
+        konst concurrent = maybeCreate("concurrentMain")
+        konst jvm = maybeCreate("jvmMain")
 
         concurrent.dependsOn(common)
         jvm.dependsOn(concurrent)

@@ -2,11 +2,11 @@
 
 enum class MyEnumClass {
     FirstEntry {
-        val a: Int = 1
+        konst a: Int = 1
     },
     SecondEntry,
     ThirdEntry {
-        val b = 2
-        val Int.d get() = 2
+        konst b = 2
+        konst Int.d get() = 2
     }
 }

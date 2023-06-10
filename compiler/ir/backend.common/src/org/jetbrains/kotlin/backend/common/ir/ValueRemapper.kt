@@ -18,18 +18,18 @@ abstract class AbstractValueRemapper : IrElementTransformerVoid() {
     protected abstract fun remapValue(oldValue: IrValueSymbol): IrValueSymbol?
 
     override fun visitGetValue(expression: IrGetValue): IrExpression {
-        val newValue = remapValue(expression.symbol) ?: return expression
+        konst newValue = remapValue(expression.symbol) ?: return expression
         return expression.run { IrGetValueImpl(startOffset, endOffset, newValue, origin) }
     }
 
     override fun visitSetValue(expression: IrSetValue): IrExpression {
         expression.transformChildrenVoid()
-        val newValue = remapValue(expression.symbol) ?: return expression
+        konst newValue = remapValue(expression.symbol) ?: return expression
         assert(newValue.owner.isAssignable)
-        return expression.run { IrSetValueImpl(startOffset, endOffset, type, newValue, value, origin) }
+        return expression.run { IrSetValueImpl(startOffset, endOffset, type, newValue, konstue, origin) }
     }
 }
 
-open class ValueRemapper(protected open val map: Map<IrValueSymbol, IrValueSymbol>) : AbstractValueRemapper() {
+open class ValueRemapper(protected open konst map: Map<IrValueSymbol, IrValueSymbol>) : AbstractValueRemapper() {
     override fun remapValue(oldValue: IrValueSymbol): IrValueSymbol? = map[oldValue]
 }

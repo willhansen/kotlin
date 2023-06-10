@@ -6,10 +6,10 @@ public final enum class Test {
     public deprecated final enum static @kotlin.Deprecated(message="") field ENTRY1: Test
     public final enum static field ENTRY2: Test
     public deprecated final enum static @kotlin.Deprecated(message="") field ENTRY3: Test
-    private synthetic final static method $values(): Test[]
+    private synthetic final static method $konstues(): Test[]
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int): void
     public static @org.jetbrains.annotations.NotNull method getEntries(): kotlin.enums.EnumEntries
-    public static method valueOf(p0: java.lang.String): Test
-    public static method values(): Test[]
+    public static method konstueOf(p0: java.lang.String): Test
+    public static method konstues(): Test[]
 }

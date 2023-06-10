@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.ir.types.isUnit
  *
  * ```
  * {
- *   val result
+ *   konst result
  *   loop@ do {
  *     ...
  *     {
@@ -69,15 +69,15 @@ import org.jetbrains.kotlin.ir.types.isUnit
  * }
  *
  */
-class ReturnableBlockLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class ReturnableBlockLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         container.transform(ReturnableBlockTransformer(context, (container as IrSymbolOwner).symbol), null)
     }
 }
 
-class ReturnableBlockTransformer(val context: CommonBackendContext, val containerSymbol: IrSymbol? = null) : IrElementTransformerVoidWithContext() {
+class ReturnableBlockTransformer(konst context: CommonBackendContext, konst containerSymbol: IrSymbol? = null) : IrElementTransformerVoidWithContext() {
     private var labelCnt = 0
-    private val returnMap = mutableMapOf<IrReturnableBlockSymbol, (IrReturn) -> IrExpression>()
+    private konst returnMap = mutableMapOf<IrReturnableBlockSymbol, (IrReturn) -> IrExpression>()
 
     override fun visitReturn(expression: IrReturn): IrExpression {
         expression.transformChildrenVoid()
@@ -87,13 +87,13 @@ class ReturnableBlockTransformer(val context: CommonBackendContext, val containe
     override fun visitContainerExpression(expression: IrContainerExpression): IrExpression {
         if (expression !is IrReturnableBlock) return super.visitContainerExpression(expression)
 
-        val scopeSymbol = currentScope?.scope?.scopeOwnerSymbol ?: containerSymbol
-        val builder = context.createIrBuilder(scopeSymbol!!)
-        val variable by lazy {
+        konst scopeSymbol = currentScope?.scope?.scopeOwnerSymbol ?: containerSymbol
+        konst builder = context.createIrBuilder(scopeSymbol!!)
+        konst variable by lazy {
             builder.scope.createTmpVariable(expression.type, "tmp\$ret\$${labelCnt++}", true)
         }
 
-        val loop by lazy {
+        konst loop by lazy {
             IrDoWhileLoopImpl(
                 expression.startOffset,
                 expression.endOffset,
@@ -110,7 +110,7 @@ class ReturnableBlockTransformer(val context: CommonBackendContext, val containe
         returnMap[expression.symbol] = { returnExpression ->
             hasReturned = true
             builder.irComposite(returnExpression) {
-                +irSet(variable.symbol, returnExpression.value)
+                +irSet(variable.symbol, returnExpression.konstue)
                 +irBreak(loop)
             }
         }
@@ -119,20 +119,20 @@ class ReturnableBlockTransformer(val context: CommonBackendContext, val containe
         fun transformSingleStatement(statement: IrStatement, isLastInList: Boolean): IrStatement {
             return if (isLastInList && statement is IrReturn && statement.returnTargetSymbol == expression.symbol) {
                 statement.transformChildrenVoid()
-                if (!hasReturned) statement.value else {
-                    builder.irSet(variable.symbol, statement.value)
+                if (!hasReturned) statement.konstue else {
+                    builder.irSet(variable.symbol, statement.konstue)
                 }
             } else {
                 statement.transformStatement(this)
             }
         }
 
-        val newStatements = expression.statements.mapIndexed { i, currentStatement ->
+        konst newStatements = expression.statements.mapIndexed { i, currentStatement ->
             if (expression.statements.size == 1 && currentStatement is IrInlinedFunctionBlock) {
-                val lastIndex = currentStatement.statements.lastIndex
+                konst lastIndex = currentStatement.statements.lastIndex
                 for ((j, statement) in currentStatement.statements.withIndex()) {
-                    val lastInList = j == lastIndex
-                    val transformedStatement = transformSingleStatement(statement, lastInList)
+                    konst lastInList = j == lastIndex
+                    konst transformedStatement = transformSingleStatement(statement, lastInList)
                     currentStatement.statements[j] = transformedStatement
                     if (lastInList) {
                         currentStatement.type = (transformedStatement as? IrExpression)?.type ?: context.irBuiltIns.unitType
@@ -167,7 +167,7 @@ class ReturnableBlockTransformer(val context: CommonBackendContext, val containe
                 +variable
                 +loop
                 if (!expression.type.isUnit()) {
-                    // In case of Unit return type we don't need to return an explicit value. This will not be optimized by JVM backend and
+                    // In case of Unit return type we don't need to return an explicit konstue. This will not be optimized by JVM backend and
                     // may result in exceptions in `MethodVerifier` before optimizations.
                     // Also note that `UNDEFINED_OFFSET` is needed to make proper line number for JVM.
                     expression.type = context.irBuiltIns.unitType

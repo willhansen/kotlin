@@ -6,22 +6,22 @@ import kotlin.test.assertEquals
 
 class Host {
     companion object {
-        val x = 1
+        konst x = 1
         var y = 2
 
-        val xx: Int
+        konst xx: Int
             get() = x
 
         var yy: Int
             get() = y
-            set(value) { y = value }
+            set(konstue) { y = konstue }
     }
 }
 
-val c_x = Host.Companion::x
-val c_xx = Host.Companion::xx
-val c_y = Host.Companion::y
-val c_yy = Host.Companion::yy
+konst c_x = Host.Companion::x
+konst c_xx = Host.Companion::xx
+konst c_y = Host.Companion::y
+konst c_yy = Host.Companion::yy
 
 fun box(): String {
     assertEquals(1, c_x.getter())

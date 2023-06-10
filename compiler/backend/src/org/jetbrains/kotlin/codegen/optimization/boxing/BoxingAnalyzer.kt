@@ -15,7 +15,7 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.Interpreter
 class BoxingAnalyzer(
     owner: String,
     method: MethodNode,
-    private val boxingInterpreter: BoxingInterpreter
+    private konst boxingInterpreter: BoxingInterpreter
 ) : FastMethodAnalyzer<BasicValue>(owner, method, boxingInterpreter) {
     override fun newFrame(nLocals: Int, nStack: Int): Frame<BasicValue> =
         BoxingFrame(nLocals, nStack)
@@ -28,16 +28,16 @@ class BoxingAnalyzer(
 
             var changed = false
             for (i in 0 until locals) {
-                val local = getLocal(i)
-                val merged = boxingInterpreter.mergeLocalVariableValues(local, frame.getLocal(i))
+                konst local = getLocal(i)
+                konst merged = boxingInterpreter.mergeLocalVariableValues(local, frame.getLocal(i))
                 if (local != merged) {
                     setLocal(i, merged)
                     changed = true
                 }
             }
             for (i in 0 until stackSize) {
-                val onStack = getStack(i)
-                val merged = boxingInterpreter.mergeStackValues(onStack, frame.getStack(i))
+                konst onStack = getStack(i)
+                konst merged = boxingInterpreter.mergeStackValues(onStack, frame.getStack(i))
                 if (onStack != merged) {
                     setStack(i, merged)
                     changed = true

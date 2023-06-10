@@ -13,7 +13,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: Int?)
+inline class IC(konst s: Int?)
 
 var c: Continuation<Any>? = null
 
@@ -33,7 +33,7 @@ class Test() : IBar {
     override suspend fun bar(): IC = suspendMe()
 
     suspend fun test1(): String {
-        val b: IBar = this
+        konst b: IBar = this
         return b.bar()!!.s.toResultString()
     }
 

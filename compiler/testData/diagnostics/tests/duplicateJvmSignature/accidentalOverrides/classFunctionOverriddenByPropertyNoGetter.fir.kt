@@ -3,5 +3,5 @@ open class B {
 }
 
 class C : B() {
-    val x: Int = 1
+    konst x: Int = 1
 }

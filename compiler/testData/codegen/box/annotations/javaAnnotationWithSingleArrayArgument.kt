@@ -3,11 +3,11 @@
 // FILE: A.java
 
 public class A {
-    @Annos(value = @Anno(token = "OK"))
-    @Strings(value = "OK")
-    @Ints(value = 42)
-    @Enums(value = E.EA)
-    @Classes(value = double.class)
+    @Annos(konstue = @Anno(token = "OK"))
+    @Strings(konstue = "OK")
+    @Ints(konstue = 42)
+    @Enums(konstue = E.EA)
+    @Classes(konstue = double.class)
     public void test() {}
 }
 
@@ -16,23 +16,23 @@ public class A {
 import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 
-annotation class Anno(val token: String)
+annotation class Anno(konst token: String)
 enum class E { EA }
 
-annotation class Annos(val value: Array<Anno>)
-annotation class Strings(val value: Array<String>)
-annotation class Ints(val value: IntArray)
-annotation class Enums(val value: Array<E>)
-annotation class Classes(val value: Array<KClass<*>>)
+annotation class Annos(konst konstue: Array<Anno>)
+annotation class Strings(konst konstue: Array<String>)
+annotation class Ints(konst konstue: IntArray)
+annotation class Enums(konst konstue: Array<E>)
+annotation class Classes(konst konstue: Array<KClass<*>>)
 
 class C : A()
 
 fun box(): String {
-    val annotations = C::class.java.getMethod("test").annotations.toList()
-    assertEquals("OK", annotations.filterIsInstance<Annos>().single().value.single().token)
-    assertEquals("OK", annotations.filterIsInstance<Strings>().single().value.single())
-    assertEquals(42, annotations.filterIsInstance<Ints>().single().value.single())
-    assertEquals(E.EA, annotations.filterIsInstance<Enums>().single().value.single())
-    assertEquals(Double::class, annotations.filterIsInstance<Classes>().single().value.single())
+    konst annotations = C::class.java.getMethod("test").annotations.toList()
+    assertEquals("OK", annotations.filterIsInstance<Annos>().single().konstue.single().token)
+    assertEquals("OK", annotations.filterIsInstance<Strings>().single().konstue.single())
+    assertEquals(42, annotations.filterIsInstance<Ints>().single().konstue.single())
+    assertEquals(E.EA, annotations.filterIsInstance<Enums>().single().konstue.single())
+    assertEquals(Double::class, annotations.filterIsInstance<Classes>().single().konstue.single())
     return "OK"
 }

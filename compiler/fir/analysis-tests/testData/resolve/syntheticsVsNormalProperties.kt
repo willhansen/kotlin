@@ -16,11 +16,11 @@ open class Executor
 class CommandExecutor : Executor()
 
 class B : A() {
-    val executor = CommandExecutor()
+    konst executor = CommandExecutor()
 
     fun test() {
         // should be CommandExecutor
-        val e = executor
+        konst e = executor
     }
 }
 

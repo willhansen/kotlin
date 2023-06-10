@@ -2,8 +2,8 @@
 
 import java.util.concurrent.*
 
-val concurrent: ConcurrentMap<String, Int> = null!!
-val concurrentHash: ConcurrentHashMap<String, Int> = null!!
+konst concurrent: ConcurrentMap<String, Int> = null!!
+konst concurrentHash: ConcurrentHashMap<String, Int> = null!!
 
 fun foo() {
     concurrent.remove("", 1)

@@ -1,19 +1,19 @@
 object A {
-    const val a: String = "$"
-    const val b = "1234$a"
-    const val c = 10000
+    const konst a: String = "$"
+    const konst b = "1234$a"
+    const konst c = 10000
 
-    val bNonConst = "1234$a"
-    val bNullable: String? = "1234$a"
+    konst bNonConst = "1234$a"
+    konst bNullable: String? = "1234$a"
 }
 
 object B {
-    const val a: String = "$"
-    const val b = "1234$a"
-    const val c = 10000
+    const konst a: String = "$"
+    const konst b = "1234$a"
+    const konst c = 10000
 
-    val bNonConst = "1234$a"
-    val bNullable: String? = "1234$a"
+    konst bNonConst = "1234$a"
+    konst bNullable: String? = "1234$a"
 }
 
 fun box(): String {

@@ -18,8 +18,8 @@ class Foo<T>
 open class TypeBase<T>
 
 inline fun <reified T> reifiedType(): Type {
-    val base = object : TypeBase<T>() {}
-    val superType = base::class.java.genericSuperclass!!
+    konst base = object : TypeBase<T>() {}
+    konst superType = base::class.java.genericSuperclass!!
     return (superType as ParameterizedType).actualTypeArguments.first()!!
 }
 

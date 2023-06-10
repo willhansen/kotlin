@@ -32,45 +32,45 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.utils.Printer
 
 interface Qualifier : QualifierReceiver {
-    val referenceExpression: KtSimpleNameExpression
+    konst referenceExpression: KtSimpleNameExpression
 }
 
-val Qualifier.expression: KtExpression
+konst Qualifier.expression: KtExpression
     get() = referenceExpression.getTopmostParentQualifiedExpressionForSelector() ?: referenceExpression
 
 class PackageQualifier(
-    override val referenceExpression: KtSimpleNameExpression,
-    override val descriptor: PackageViewDescriptor
+    override konst referenceExpression: KtSimpleNameExpression,
+    override konst descriptor: PackageViewDescriptor
 ) : Qualifier {
-    override val classValueReceiver: ReceiverValue? get() = null
-    override val staticScope: MemberScope get() = descriptor.memberScope
+    override konst classValueReceiver: ReceiverValue? get() = null
+    override konst staticScope: MemberScope get() = descriptor.memberScope
 
     override fun toString() = "Package{$descriptor}"
 }
 
 class TypeParameterQualifier(
-    override val referenceExpression: KtSimpleNameExpression,
-    override val descriptor: TypeParameterDescriptor
+    override konst referenceExpression: KtSimpleNameExpression,
+    override konst descriptor: TypeParameterDescriptor
 ) : Qualifier {
-    override val classValueReceiver: ReceiverValue? get() = null
-    override val staticScope: MemberScope get() = MemberScope.Empty
+    override konst classValueReceiver: ReceiverValue? get() = null
+    override konst staticScope: MemberScope get() = MemberScope.Empty
 
     override fun toString() = "TypeParameter{$descriptor}"
 }
 
 interface ClassifierQualifier : Qualifier {
-    override val descriptor: ClassifierDescriptorWithTypeParameters
+    override konst descriptor: ClassifierDescriptorWithTypeParameters
 }
 
 class ClassQualifier(
-    override val referenceExpression: KtSimpleNameExpression,
-    override val descriptor: ClassDescriptor
+    override konst referenceExpression: KtSimpleNameExpression,
+    override konst descriptor: ClassDescriptor
 ) : ClassifierQualifier {
-    override val classValueReceiver: ClassValueReceiver? = descriptor.classValueType?.let {
+    override konst classValueReceiver: ClassValueReceiver? = descriptor.classValueType?.let {
         ClassValueReceiver(this, it)
     }
 
-    override val staticScope: MemberScope
+    override konst staticScope: MemberScope
         get() =
             if (descriptor.kind == ClassKind.ENUM_ENTRY) descriptor.staticScope
             else ChainedMemberScope.create(
@@ -83,16 +83,16 @@ class ClassQualifier(
 }
 
 class TypeAliasQualifier(
-    override val referenceExpression: KtSimpleNameExpression,
-    override val descriptor: TypeAliasDescriptor,
-    val classDescriptor: ClassDescriptor
+    override konst referenceExpression: KtSimpleNameExpression,
+    override konst descriptor: TypeAliasDescriptor,
+    konst classDescriptor: ClassDescriptor
 ) : ClassifierQualifier {
-    override val classValueReceiver: ClassValueReceiver?
+    override konst classValueReceiver: ClassValueReceiver?
         get() = classDescriptor.classValueType?.let {
             ClassValueReceiver(this, it)
         }
 
-    override val staticScope: MemberScope
+    override konst staticScope: MemberScope
         get() = when {
             DescriptorUtils.isEnumClass(classDescriptor) ->
                 ChainedMemberScope.create(
@@ -137,15 +137,15 @@ class TypeAliasQualifier(
 }
 
 class ClassValueReceiver @JvmOverloads constructor(
-    val classQualifier: ClassifierQualifier,
-    private val type: KotlinType,
+    konst classQualifier: ClassifierQualifier,
+    private konst type: KotlinType,
     original: ClassValueReceiver? = null
 ) : ExpressionReceiver {
-    private val original = original ?: this
+    private konst original = original ?: this
 
     override fun getType() = type
 
-    override val expression: KtExpression
+    override konst expression: KtExpression
         get() = classQualifier.expression
 
     override fun replaceType(newType: KotlinType) = ClassValueReceiver(classQualifier, newType, original)

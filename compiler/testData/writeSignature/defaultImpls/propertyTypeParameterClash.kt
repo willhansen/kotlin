@@ -2,7 +2,7 @@ class B<M>
 
 interface A<T, Y : B<T>> {
 
-    val <T> T.z: T?
+    konst <T> T.z: T?
         get() = null
 }
 

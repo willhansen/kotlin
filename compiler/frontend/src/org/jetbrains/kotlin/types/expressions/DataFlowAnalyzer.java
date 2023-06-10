@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.resolve.calls.context.ResolutionContext;
 import org.jetbrains.kotlin.resolve.calls.inference.BuilderInferenceSession;
 import org.jetbrains.kotlin.resolve.calls.smartcasts.*;
 import org.jetbrains.kotlin.resolve.constants.*;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.types.*;
 import org.jetbrains.kotlin.types.checker.KotlinTypeChecker;
 import org.jetbrains.kotlin.types.expressions.typeInfoFactory.TypeInfoFactoryKt;
@@ -54,7 +54,7 @@ import static org.jetbrains.kotlin.types.TypeUtils.*;
 
 public class DataFlowAnalyzer {
     private final Iterable<AdditionalTypeChecker> additionalTypeCheckers;
-    private final ConstantExpressionEvaluator constantExpressionEvaluator;
+    private final ConstantExpressionEkonstuator constantExpressionEkonstuator;
     private final ModuleDescriptor module;
     private final KotlinBuiltIns builtIns;
     private final ExpressionTypingFacade facade;
@@ -66,7 +66,7 @@ public class DataFlowAnalyzer {
 
     public DataFlowAnalyzer(
             @NotNull Iterable<AdditionalTypeChecker> additionalTypeCheckers,
-            @NotNull ConstantExpressionEvaluator constantExpressionEvaluator,
+            @NotNull ConstantExpressionEkonstuator constantExpressionEkonstuator,
             @NotNull ModuleDescriptor module,
             @NotNull KotlinBuiltIns builtIns,
             @NotNull ExpressionTypingFacade facade,
@@ -77,7 +77,7 @@ public class DataFlowAnalyzer {
             @NotNull KotlinTypeChecker kotlinTypeChecker
     ) {
         this.additionalTypeCheckers = additionalTypeCheckers;
-        this.constantExpressionEvaluator = constantExpressionEvaluator;
+        this.constantExpressionEkonstuator = constantExpressionEkonstuator;
         this.module = module;
         this.builtIns = builtIns;
         this.facade = facade;
@@ -105,7 +105,7 @@ public class DataFlowAnalyzer {
     }
 
     private boolean typeHasOverriddenEquals(@NotNull KotlinType type, @NotNull KtElement lookupElement) {
-        // `equals` from `String` is not fake override because it is marked as `IntrinsicConstEvaluation`
+        // `equals` from `String` is not fake override because it is marked as `IntrinsicConstEkonstuation`
         if (KotlinBuiltIns.isString(type)) return false;
 
         Collection<? extends SimpleFunctionDescriptor> members = type.getMemberScope().getContributedFunctions(
@@ -198,7 +198,7 @@ public class DataFlowAnalyzer {
                              languageVersionSettings.supportsFeature(LanguageFeature.BooleanElvisBoundSmartCasts) &&
                              right instanceof KtConstantExpression &&
                              KotlinBuiltIns.isBoolean(rhsType)) {
-                        // ?: false is equivalent to == true, ?: true is equivalent to != false
+                        // ?: false is equikonstent to == true, ?: true is equikonstent to != false
                         equals = KtPsiUtil.isFalseConstant(right);
                     }
                     if (equals != null) {
@@ -301,7 +301,7 @@ public class DataFlowAnalyzer {
         }
 
         if (expression instanceof KtConstantExpression && reportErrorForTypeMismatch) {
-            ConstantValue<?> constantValue = constantExpressionEvaluator.evaluateToConstantValue(expression, c.trace, c.expectedType);
+            ConstantValue<?> constantValue = constantExpressionEkonstuator.ekonstuateToConstantValue(expression, c.trace, c.expectedType);
             boolean error = new CompileTimeConstantChecker(c, module, true)
                     .checkConstantExpressionType(constantValue, (KtConstantExpression) expression, c.expectedType);
             hasError.set(error);
@@ -429,23 +429,23 @@ public class DataFlowAnalyzer {
 
     @NotNull
     public KotlinTypeInfo createCompileTimeConstantTypeInfo(
-            @NotNull CompileTimeConstant<?> value,
+            @NotNull CompileTimeConstant<?> konstue,
             @NotNull KtExpression expression,
             @NotNull ExpressionTypingContext context
     ) {
         KotlinType expressionType;
-        if (value instanceof IntegerValueTypeConstant) {
-            IntegerValueTypeConstant integerValueTypeConstant = (IntegerValueTypeConstant) value;
+        if (konstue instanceof IntegerValueTypeConstant) {
+            IntegerValueTypeConstant integerValueTypeConstant = (IntegerValueTypeConstant) konstue;
             if (context.contextDependency == INDEPENDENT) {
                 expressionType = integerValueTypeConstant.getType(context.expectedType);
-                constantExpressionEvaluator.updateNumberType(expressionType, expression, context.statementFilter, context.trace);
+                constantExpressionEkonstuator.updateNumberType(expressionType, expression, context.statementFilter, context.trace);
             }
             else {
                 expressionType = integerValueTypeConstant.getUnknownIntegerType();
             }
         }
         else {
-            expressionType = ((TypedCompileTimeConstant<?>) value).getType();
+            expressionType = ((TypedCompileTimeConstant<?>) konstue).getType();
         }
 
         NewSchemeOfIntegerOperatorResolutionChecker.checkArgument(context.expectedType, expression, context.trace, module);

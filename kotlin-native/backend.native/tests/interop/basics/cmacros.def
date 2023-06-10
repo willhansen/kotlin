@@ -15,7 +15,7 @@ int arg_call(int x) {
 }
 
 typedef struct {
-    int value
+    int konstue
 } struct_t;
 
 struct_t getStruct() {

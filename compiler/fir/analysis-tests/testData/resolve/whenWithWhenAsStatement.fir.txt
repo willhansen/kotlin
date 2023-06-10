@@ -1,10 +1,10 @@
 FILE: whenWithWhenAsStatement.kt
-    public final fun test(value: R|kotlin/Int|): R|kotlin/Unit| {
-        when (R|<local>/value|) {
+    public final fun test(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+        when (R|<local>/konstue|) {
             ==($subj$, Int(0)) ->  {
             }
             ==($subj$, Int(1)) ->  {
-                when (R|<local>/value|) {
+                when (R|<local>/konstue|) {
                     ==($subj$, Int(2)) ->  {
                         Boolean(false)
                     }

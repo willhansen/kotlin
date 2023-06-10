@@ -10,7 +10,7 @@ fun builder(c: suspend Context.() -> Unit) {
 
 class Foo {
     fun foo() {
-        val fionaClient = Any()
+        konst fionaClient = Any()
         coVerify { !fionaClient }
     }
 }

@@ -10,7 +10,7 @@ repositories {
 
 kotlin.jvmToolchain(8)
 
-val buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
+konst buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-build-gradle-plugin:$buildGradlePluginVersion")
 }

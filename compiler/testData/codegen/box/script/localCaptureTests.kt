@@ -11,7 +11,7 @@ fun box(): String =
 // FILE: script.kts
 
 interface Base {
-    val v: String
+    konst v: String
 
     fun c0(): Char {
         fun getC0() = v[0]
@@ -19,13 +19,13 @@ interface Base {
     }
 }
 
-enum class Build(override val v: String): Base {
+enum class Build(override konst v: String): Base {
     Debug("OK"),
     Release("NO");
 
     fun c1(): Char {
-        val g = object {
-            val c1 = v[1]
+        konst g = object {
+            konst c1 = v[1]
         }
         return g.c1
     }

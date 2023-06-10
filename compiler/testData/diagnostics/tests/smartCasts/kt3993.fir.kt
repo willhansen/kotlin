@@ -1,4 +1,4 @@
-class User(val login : Boolean) {}
+class User(konst login : Boolean) {}
 
 fun currentAccess(user: User?): Int {
     return when {

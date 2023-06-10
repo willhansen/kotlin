@@ -24,6 +24,6 @@ fun indefiniteFlow() {
 
 fun shadowing() {
     var x: Int
-    runTwice { val <!NAME_SHADOWING!>x<!>: Int; x = 42; x.inc() }
+    runTwice { konst <!NAME_SHADOWING!>x<!>: Int; x = 42; x.inc() }
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }

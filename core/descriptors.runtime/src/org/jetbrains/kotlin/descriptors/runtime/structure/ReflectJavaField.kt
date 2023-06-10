@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.descriptors.runtime.structure
 import org.jetbrains.kotlin.load.java.structure.JavaField
 import java.lang.reflect.Field
 
-class ReflectJavaField(override val member: Field) : ReflectJavaMember(), JavaField {
-    override val isEnumEntry: Boolean
+class ReflectJavaField(override konst member: Field) : ReflectJavaMember(), JavaField {
+    override konst isEnumEntry: Boolean
         get() = member.isEnumConstant
 
-    override val type: ReflectJavaType
+    override konst type: ReflectJavaType
         get() = ReflectJavaType.create(member.genericType)
 
-    override val initializerValue: Any? get() = null
-    override val hasConstantNotNullInitializer get() = false
+    override konst initializerValue: Any? get() = null
+    override konst hasConstantNotNullInitializer get() = false
 }

@@ -7,13 +7,13 @@ package codegen.inline.genericFunctionReference
 
 import kotlin.test.*
 
-class Z<T>(val x: T)
+class Z<T>(konst x: T)
 
 inline fun<T, R> foo(x: T, f: (T) -> R): R {
     return f(x)
 }
 
 @Test fun runTest() {
-    val arr = Array(1) { foo(it, ::Z) }
+    konst arr = Array(1) { foo(it, ::Z) }
     println(arr[0].x)
 }

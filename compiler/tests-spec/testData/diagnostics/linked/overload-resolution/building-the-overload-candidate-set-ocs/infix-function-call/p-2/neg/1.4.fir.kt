@@ -25,7 +25,7 @@ import libPackage.*
 
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
    "" <!INFIX_MODIFIER_REQUIRED!>contains<!>  regex
 }
 
@@ -40,6 +40,6 @@ import libPackage.*
 }
 
 fun case2() {
-    val regex = Regex("")
+    konst regex = Regex("")
     "" <!INFIX_MODIFIER_REQUIRED!>contains<!>  regex
 }

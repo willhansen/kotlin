@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import java.io.Serializable as JavaSerializable
 
 @Serializable
-class Data(val x: Int, <!INCORRECT_TRANSIENT!>@Transient<!> val y: String)
+class Data(konst x: Int, <!INCORRECT_TRANSIENT!>@Transient<!> konst y: String)
 
 @Serializable
-class Data2(val x: Int, @Transient val y: String) : JavaSerializable
+class Data2(konst x: Int, @Transient konst y: String) : JavaSerializable

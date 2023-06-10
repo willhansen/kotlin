@@ -24,7 +24,7 @@ fun hasDuplicates(a : IntArray) : Boolean {
 }
 
 fun box() : String {
-    val a = IntArray(5)
+    konst a = IntArray(5)
     a[0] = 0
     a[1] = 0
     a[2] = 1

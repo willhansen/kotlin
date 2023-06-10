@@ -16,6 +16,6 @@ FILE: overloadByReceiver.kt
     public final fun takeInt(x: R|kotlin/Int|): R|kotlin/Unit| {
     }
     public final fun test(d: R|D|): R|kotlin/Unit| {
-        lval x: R|kotlin/Int| = R|<local>/d|.R|/foo|()
+        lkonst x: R|kotlin/Int| = R|<local>/d|.R|/foo|()
         R|/takeInt|(R|<local>/x|)
     }

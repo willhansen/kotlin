@@ -2,30 +2,30 @@
 // FILE: A.kt
 // VERSION: 1
 
-open class X(x: String, y: String, open val z: String) {
-    val w = x+y
+open class X(x: String, y: String, open konst z: String) {
+    konst w = x+y
 }
 
 // FILE: B.kt
 // VERSION: 2
 
-open class X(val x: String, var y: String, open var z: String) {
-    val w = x+y
+open class X(konst x: String, var y: String, open var z: String) {
+    konst w = x+y
 }
 
 // MODULE: mainLib(lib)
 // FILE: mainLib.kt
 
-val x = X("first", "second", "third")
+konst x = X("first", "second", "third")
 
 class Y(a: String, b: String, c: String): X(a, b, c) {
-    val x: String = "fourth"
-    val y: String = "fifth"
-    override val z: String = "sixth"
-    val superz: String = super.z
+    konst x: String = "fourth"
+    konst y: String = "fifth"
+    override konst z: String = "sixth"
+    konst superz: String = super.z
 }
 
-val y = Y("seventh", "eighth", "ninth")
+konst y = Y("seventh", "eighth", "ninth")
 
 fun lib(): String {
     return when {

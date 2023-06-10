@@ -21,13 +21,13 @@ private class KotlinStaticAnnotationsResolver(
     ktFiles: Collection<KtFile>,
     scope: GlobalSearchScope
 ) : KotlinAnnotationsResolver {
-    private val filesInScope = ktFiles.filter { scope.contains(it.virtualFile) }
+    private konst filesInScope = ktFiles.filter { scope.contains(it.virtualFile) }
 
-    private val allDeclarations: List<KtDeclaration> by lazy {
-        val result = mutableListOf<KtDeclaration>()
+    private konst allDeclarations: List<KtDeclaration> by lazy {
+        konst result = mutableListOf<KtDeclaration>()
 
-        val visitor = declarationRecursiveVisitor visit@{
-            val isLocal = when (it) {
+        konst visitor = declarationRecursiveVisitor visit@{
+            konst isLocal = when (it) {
                 is KtClassOrObject -> it.isLocal
                 is KtFunction -> it.isLocal
                 is KtProperty -> it.isLocal
@@ -58,7 +58,7 @@ private class KotlinStaticAnnotationsResolver(
     }
 }
 
-public class KotlinStaticAnnotationsResolverFactory(private val files: Collection<KtFile>) : KotlinAnnotationsResolverFactory {
+public class KotlinStaticAnnotationsResolverFactory(private konst files: Collection<KtFile>) : KotlinAnnotationsResolverFactory {
     override fun createAnnotationResolver(searchScope: GlobalSearchScope): KotlinAnnotationsResolver {
         return KotlinStaticAnnotationsResolver(files, searchScope)
     }

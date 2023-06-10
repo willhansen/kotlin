@@ -46,7 +46,7 @@ FILE: localClassesWithImplicit.kt
 
         }
 
-        lval x: R|<anonymous>| = object : R|kotlin/Any| {
+        lkonst x: R|<anonymous>| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }

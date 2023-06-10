@@ -31,7 +31,7 @@ class AndroidGradlePluginVersionTest {
     }
 
     @Test
-    fun `test - invalid version string`() {
+    fun `test - inkonstid version string`() {
         assertNull(AndroidGradlePluginVersionOrNull("x"))
         assertFailsWith<IllegalArgumentException> { AndroidGradlePluginVersion("x") }
     }

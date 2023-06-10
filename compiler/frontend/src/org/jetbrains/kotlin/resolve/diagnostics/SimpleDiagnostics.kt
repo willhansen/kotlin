@@ -22,10 +22,10 @@ import java.util.ArrayList
 
 class SimpleDiagnostics(diagnostics: Collection<Diagnostic>) : SimpleGenericDiagnostics<Diagnostic>(diagnostics), Diagnostics {
     //copy to prevent external change
-    private val diagnostics = ArrayList(diagnostics)
+    private konst diagnostics = ArrayList(diagnostics)
 
     @Suppress("UNCHECKED_CAST")
-    private val elementsCache = DiagnosticsElementsCache(this) { true }
+    private konst elementsCache = DiagnosticsElementsCache(this) { true }
 
     override fun all() = diagnostics
 

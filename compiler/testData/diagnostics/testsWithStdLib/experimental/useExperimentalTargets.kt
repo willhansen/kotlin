@@ -11,7 +11,7 @@ package api
 annotation class E
 
 @E
-open class Foo(val s: String = "")
+open class Foo(konst s: String = "")
 
 // FILE: usage.kt
 
@@ -31,16 +31,16 @@ class Constructor {
 }
 
 @OptIn(E::class)
-val property = Foo().s
+konst property = Foo().s
 
 @OptIn(E::class)
 fun function() {
     Foo()
 }
 
-fun valueParameter(@OptIn(E::class) p: String = Foo().s): String {
+fun konstueParameter(@OptIn(E::class) p: String = Foo().s): String {
     @OptIn(E::class)
-    val localVariable: String = Foo().s
+    konst localVariable: String = Foo().s
     return localVariable
 }
 
@@ -48,10 +48,10 @@ var propertyAccessors: String
     @OptIn(E::class)
     get() = Foo().s
     @OptIn(E::class)
-    set(value) { Foo() }
+    set(konstue) { Foo() }
 
 fun expression(): String {
-    val s = @OptIn(E::class) Foo().s
+    konst s = @OptIn(E::class) Foo().s
     return s
 }
 

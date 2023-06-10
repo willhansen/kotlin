@@ -35,4 +35,4 @@ abstract class FirPlatformClassMapper : FirSessionComponent {
     abstract fun getCorrespondingKotlinClass(classId: ClassId?): ClassId?
 }
 
-val FirSession.platformClassMapper: FirPlatformClassMapper by FirSession.sessionComponentAccessor()
+konst FirSession.platformClassMapper: FirPlatformClassMapper by FirSession.sessionComponentAccessor()

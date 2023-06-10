@@ -46,14 +46,14 @@ fun case_4(x: Char) {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Unit = kotlin.Unit
+    konst x: Unit = kotlin.Unit
 
     if (<!SENSELESS_COMPARISON!>x == null<!>) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit & kotlin.Nothing")!>x<!>
 }
 
 // TESTCASE NUMBER: 6
 fun case_6(x: EmptyClass) {
-    val y = true
+    konst y = true
 
     if (<!SENSELESS_COMPARISON!>x == null<!> && !y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyClass & kotlin.Nothing")!>x<!>
@@ -83,7 +83,7 @@ fun case_9(x: TypealiasString) {
 
 // TESTCASE NUMBER: 10
 fun case_10() {
-    val a = Class()
+    konst a = Class()
 
     if (<!SENSELESS_COMPARISON!>a.prop_5 != null<!> || true) {
         if (<!SENSELESS_COMPARISON!>a.prop_5 == null<!>) {
@@ -94,7 +94,7 @@ fun case_10() {
 
 // TESTCASE NUMBER: 11
 fun case_11(x: TypealiasString, y: TypealiasString) {
-    val z: TypealiasString = TypealiasString()
+    konst z: TypealiasString = TypealiasString()
 
     if (<!SENSELESS_COMPARISON!>x != null<!>) {
 
@@ -122,14 +122,14 @@ fun case_13(x: otherpackage.EmptyClass13) =
 
 // TESTCASE NUMBER: 14
 class A14 {
-    val x: otherpackage.TypealiasString14
+    konst x: otherpackage.TypealiasString14
     init {
         x = otherpackage.TypealiasString14()
     }
 }
 
 fun case_14() {
-    val a = A14()
+    konst a = A14()
 
     if (<!SENSELESS_COMPARISON!>a.x == null<!>) {
         if (<!SENSELESS_COMPARISON!>a.x == null<!>) {
@@ -168,14 +168,14 @@ fun case_14() {
 
 // TESTCASE NUMBER: 15
 fun case_15(x: TypealiasString) {
-    val t = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>if (true && <!SENSELESS_COMPARISON!>x != null<!>) "" else {
+    konst t = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>if (true && <!SENSELESS_COMPARISON!>x != null<!>) "" else {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasString")!>x<!>
     }<!>
 }
 
 // TESTCASE NUMBER: 16
 fun case_16() {
-    val x: TypealiasNothing = return
+    konst x: TypealiasNothing = return
 
     if (<!SENSELESS_COMPARISON!>x == null<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNothing")!>x<!>
@@ -187,7 +187,7 @@ fun case_16() {
  * UNEXPECTED BEHAVIOUR
  * ISSUES: KT-28329
  */
-val case_17 = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>if (true && true && <!SENSELESS_COMPARISON!>intProperty != null<!>) 0 else {
+konst case_17 = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>if (true && true && <!SENSELESS_COMPARISON!>intProperty != null<!>) 0 else {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>intProperty<!>
 }<!>
 
@@ -200,15 +200,15 @@ fun case_18(a: DeepObject.A.B.C.D.E.F.G.J) {
 
 // TESTCASE NUMBER: 19
 fun case_19(b: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
-            val B19 = if (b) {
+            konst B19 = if (b) {
                 object {
-                    val C19 = if (b) {
+                    konst C19 = if (b) {
                         object {
-                            val D19 = if (b) {
+                            konst D19 = if (b) {
                                 object {
-                                    val x: Number = 10
+                                    konst x: Number = 10
                                 }
                             } else null
                         }
@@ -225,10 +225,10 @@ fun case_19(b: Boolean) {
 
 // TESTCASE NUMBER: 20
 fun case_20() {
-    val a = object {
-        val B19 = object {
-            val C19 = object {
-                val D19 = object {}
+    konst a = object {
+        konst B19 = object {
+            konst C19 = object {
+                konst D19 = object {}
             }
         }
     }
@@ -255,7 +255,7 @@ fun case_22(a: (() -> Unit)) {
 // TESTCASE NUMBER: 23
 fun case_23(a: ((Float) -> Int), b: Float) {
     if (<!SENSELESS_COMPARISON!>a == null<!> && <!SENSELESS_COMPARISON!>b == null<!>) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Nothing")!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Nothing")!>b<!>)<!>
         if (<!FORBIDDEN_IDENTITY_EQUALS_WARNING, SENSELESS_COMPARISON!>x !== null<!>) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>x<!>
         }

@@ -10,7 +10,7 @@ fun bar() {
     SomeEnum.A.<!UNRESOLVED_REFERENCE!>declaringClass<!>
 }
 
-fun <E : Enum<E>> foo(values: Array<E>) {
-    EnumSet.noneOf(values.first().<!UNRESOLVED_REFERENCE!>declaringClass<!>)
-    EnumSet.noneOf(values.first().<!UNRESOLVED_REFERENCE!>getDeclaringClass<!>())
+fun <E : Enum<E>> foo(konstues: Array<E>) {
+    EnumSet.noneOf(konstues.first().<!UNRESOLVED_REFERENCE!>declaringClass<!>)
+    EnumSet.noneOf(konstues.first().<!UNRESOLVED_REFERENCE!>getDeclaringClass<!>())
 }

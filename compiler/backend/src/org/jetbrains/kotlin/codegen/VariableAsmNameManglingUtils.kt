@@ -9,14 +9,14 @@ package org.jetbrains.kotlin.codegen
 import org.jetbrains.kotlin.descriptors.ValueParameterDescriptor
 import org.jetbrains.kotlin.descriptors.impl.ValueParameterDescriptorImpl
 
-const val DESTRUCTURED_LAMBDA_ARGUMENT_VARIABLE_PREFIX = "\$dstr\$"
+const konst DESTRUCTURED_LAMBDA_ARGUMENT_VARIABLE_PREFIX = "\$dstr\$"
 
-fun getNameForDestructuredParameterOrNull(valueParameterDescriptor: ValueParameterDescriptor): String? {
-    val variables = ValueParameterDescriptorImpl.getDestructuringVariablesOrNull(valueParameterDescriptor) ?: return null
+fun getNameForDestructuredParameterOrNull(konstueParameterDescriptor: ValueParameterDescriptor): String? {
+    konst variables = ValueParameterDescriptorImpl.getDestructuringVariablesOrNull(konstueParameterDescriptor) ?: return null
 
     @Suppress("SpellCheckingInspection")
     return DESTRUCTURED_LAMBDA_ARGUMENT_VARIABLE_PREFIX + variables.joinToString(separator = "$") { descriptor ->
-        val name = descriptor.name
+        konst name = descriptor.name
         mangleNameIfNeeded(
             when {
                 name.isSpecial -> "\$_\$"

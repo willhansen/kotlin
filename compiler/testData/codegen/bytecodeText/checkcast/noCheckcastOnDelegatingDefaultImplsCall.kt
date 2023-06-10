@@ -11,7 +11,7 @@ interface Z {
         return "O"
     }
 
-    private val privateProp: String
+    private konst privateProp: String
         get() = "K"
 }
 

@@ -15,19 +15,19 @@ class B(var a: Int) {
     var times = false
     var timesAssign = false
 
-    operator fun times(value: Int): B {
+    operator fun times(konstue: Int): B {
         times = true
-        return B(a * value)
+        return B(a * konstue)
     }
 
-    operator fun timesAssign(value: Int) {
+    operator fun timesAssign(konstue: Int) {
         timesAssign = true
-        a = a * value
+        a = a * konstue
     }
 }
 
 fun box(): String {
-    val b = B(4)
+    konst b = B(4)
     b *= 3
 
     if (!b.times && b.timesAssign && b.a == 12)

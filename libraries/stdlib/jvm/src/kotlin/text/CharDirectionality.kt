@@ -10,11 +10,11 @@ package kotlin.text
  * Character directionality is used to calculate the
  * visual ordering of text.
  */
-public enum class CharDirectionality(public val value: Int) {
+public enum class CharDirectionality(public konst konstue: Int) {
 
     /**
      * Undefined bidirectional character type. Undefined `char`
-     * values have undefined directionality in the Unicode specification.
+     * konstues have undefined directionality in the Unicode specification.
      */
     UNDEFINED(Character.DIRECTIONALITY_UNDEFINED.toInt()),
 
@@ -115,8 +115,8 @@ public enum class CharDirectionality(public val value: Int) {
 
 
     public companion object {
-        private val directionalityMap by lazy { CharDirectionality.values().associateBy { it.value } }
+        private konst directionalityMap by lazy { CharDirectionality.konstues().associateBy { it.konstue } }
 
-        public fun valueOf(directionality: Int): CharDirectionality = directionalityMap[directionality] ?: throw IllegalArgumentException("Directionality #$directionality is not defined.")
+        public fun konstueOf(directionality: Int): CharDirectionality = directionalityMap[directionality] ?: throw IllegalArgumentException("Directionality #$directionality is not defined.")
     }
 }

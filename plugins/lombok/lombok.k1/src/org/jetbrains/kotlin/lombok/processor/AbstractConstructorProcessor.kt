@@ -20,19 +20,19 @@ abstract class AbstractConstructorProcessor<A : ConstructorAnnotation> : Process
     @Suppress("IncorrectFormatting") // KTIJ-22227
     override fun contribute(classDescriptor: ClassDescriptor, partsBuilder: SyntheticPartsBuilder) {
         getAnnotation(classDescriptor)?.let { annotation ->
-            val valueParameters = getPropertiesForParameters(classDescriptor).map { property ->
+            konst konstueParameters = getPropertiesForParameters(classDescriptor).map { property ->
                 LombokValueParameter(property.name, property.type)
             }
             if (annotation.staticName == null) {
-                val constructor = classDescriptor.createJavaConstructor(
-                    valueParameters = valueParameters,
+                konst constructor = classDescriptor.createJavaConstructor(
+                    konstueParameters = konstueParameters,
                     visibility = annotation.visibility
                 )
                 partsBuilder.addConstructor(constructor)
             } else {
-                val function = classDescriptor.createFunction(
+                konst function = classDescriptor.createFunction(
                     Name.identifier(annotation.staticName!!),
-                    valueParameters,
+                    konstueParameters,
                     classDescriptor.defaultType,
                     typeParameters = classDescriptor.declaredTypeParameters,
                     visibility = annotation.visibility,

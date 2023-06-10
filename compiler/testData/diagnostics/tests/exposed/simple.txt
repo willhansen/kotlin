@@ -10,9 +10,9 @@ private open class Base {
 public final class Derived</*0*/ T : My> : Base {
     public constructor Derived</*0*/ T : My>(/*0*/ x: My)
     public constructor Derived</*0*/ T : My>(/*0*/ xx: My?, /*1*/ x: My)
-    public final val x: My
-    public final val y: Base? = null
-    public final val My.z: kotlin.Int
+    public final konst x: My
+    public final konst y: Base? = null
+    public final konst My.z: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(/*0*/ m: My): My
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

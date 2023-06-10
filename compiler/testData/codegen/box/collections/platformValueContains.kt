@@ -13,7 +13,7 @@ public class J {
 // FILE: test.kt
 
 class MySet : Set<String> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {
@@ -34,17 +34,17 @@ class MySet : Set<String> {
 }
 
 fun box(): String {
-    val mySet = MySet()
+    konst mySet = MySet()
 
     // no UnsupportedOperationException thrown
     mySet.contains(J.nullValue())
     J.nullValue() in mySet
 
-    val set: Set<String> = mySet
+    konst set: Set<String> = mySet
     set.contains(J.nullValue())
     J.nullValue() in set
 
-    val anySet: Set<Any?> = mySet as Set<Any?>
+    konst anySet: Set<Any?> = mySet as Set<Any?>
     anySet.contains(J.nullValue())
     anySet.contains(null)
     J.nullValue() in anySet

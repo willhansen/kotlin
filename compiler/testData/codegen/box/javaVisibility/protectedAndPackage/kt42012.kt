@@ -22,15 +22,15 @@ open class Child : Parent() {
     inner class QQQ {
         fun z(x: Parent?) {
             x as Child
-            val q = x.qqq
+            konst q = x.qqq
             x.qqq = q + "OK"
         }
     }
 }
 
 fun box(): String {
-    val c = Child()
-    val d = c.QQQ()
+    konst c = Child()
+    konst d = c.QQQ()
     d.z(c)
     return c.qqq
 }

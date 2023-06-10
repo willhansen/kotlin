@@ -1,1 +1,1 @@
-val p: Int by A() = 1
+konst p: Int by A() = 1

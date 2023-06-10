@@ -7,12 +7,12 @@ package a
 
 fun IntArray.forEachNoInline(block: (Int) -> Unit) = this.forEach { block(it) }
 
-inline fun foo(values: IntArray, crossinline block: (Int, Int, Int) -> Int): Int {
-    val o = object {
+inline fun foo(konstues: IntArray, crossinline block: (Int, Int, Int) -> Int): Int {
+    konst o = object {
         lateinit var s: String
         var x: Int = 42
     }
-    values.forEachNoInline {
+    konstues.forEachNoInline {
         o.x = block(o.x, o.s.length, it)
     }
     return o.x

@@ -29,7 +29,7 @@ interface IrGenerationExtension : IrDeserializer.IrLinkerExtension {
     //
     // K2 KAPT doesn't use stub generation, so this property has no effect on extensions applied when K2 is enabled.
     @FirIncompatiblePluginAPI
-    val shouldAlsoBeAppliedInKaptStubGenerationMode: Boolean get() = false
+    konst shouldAlsoBeAppliedInKaptStubGenerationMode: Boolean get() = false
 }
 
 /**

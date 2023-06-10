@@ -64,17 +64,17 @@ interface PeerNpmDependencyExtension :
     BaseNpmDependencyExtension
 
 internal fun Project.addNpmDependencyExtension() {
-    val extensions = (dependencies as ExtensionAware).extensions
+    konst extensions = (dependencies as ExtensionAware).extensions
 
-    values()
+    konstues()
         .forEach { scope ->
-            val type = when (scope) {
+            konst type = when (scope) {
                 NORMAL, OPTIONAL -> NpmDependencyExtension::class.java
                 DEV -> DevNpmDependencyExtension::class.java
                 PEER -> PeerNpmDependencyExtension::class.java
             }
 
-            val extension: BaseNpmDependencyExtension = when (scope) {
+            konst extension: BaseNpmDependencyExtension = when (scope) {
                 NORMAL, OPTIONAL -> DefaultNpmDependencyExtension(
                     this,
                     scope,
@@ -99,7 +99,7 @@ internal fun Project.addNpmDependencyExtension() {
 }
 
 private fun scopePrefix(scope: NpmDependency.Scope): String {
-    val scopePrefix = scope.name
+    konst scopePrefix = scope.name
         .removePrefix(NORMAL.name)
         .toLowerCaseAsciiOnly()
 
@@ -107,8 +107,8 @@ private fun scopePrefix(scope: NpmDependency.Scope): String {
 }
 
 private abstract class NpmDependencyExtensionDelegate(
-    protected val project: Project,
-    protected val scope: NpmDependency.Scope,
+    protected konst project: Project,
+    protected konst scope: NpmDependency.Scope,
 ) : NpmDependencyExtension,
     DevNpmDependencyExtension,
     PeerNpmDependencyExtension,
@@ -133,7 +133,7 @@ private abstract class NpmDependencyExtensionDelegate(
     override fun call(vararg args: Any?): NpmDependency {
         if (args.size > 2) npmDeclarationException(args)
 
-        return when (val arg = args[0]) {
+        return when (konst arg = args[0]) {
             is String -> withName(
                 name = arg,
                 args = args
@@ -151,7 +151,7 @@ private abstract class NpmDependencyExtensionDelegate(
     protected abstract fun processNonStringFirstArgument(arg: Any?, vararg args: Any?): NpmDependency
 
     private fun withName(name: String, vararg args: Any?): NpmDependency {
-        return when (val arg1 = if (args.size > 1) args[1] else null) {
+        return when (konst arg1 = if (args.size > 1) args[1] else null) {
             null -> throw IllegalArgumentException(
                 "NPM dependency '$name' doesn't have version. Please, set version explicitly."
             )
@@ -196,11 +196,11 @@ private abstract class NpmDependencyExtensionDelegate(
 }
 
 private class DefaultNpmDependencyExtension(
-    private val project: Project,
+    private konst project: Project,
     scope: NpmDependency.Scope,
 ) : Closure<NpmDependency>(project.dependencies),
     NpmDependencyExtension {
-    private val delegate = defaultNpmDependencyDelegate(
+    private konst delegate = defaultNpmDependencyDelegate(
         project,
         scope,
     )
@@ -240,7 +240,7 @@ private class DefaultDevNpmDependencyExtension(
     project: Project
 ) : Closure<NpmDependency>(project.dependencies),
     DevNpmDependencyExtension {
-    private val delegate = defaultNpmDependencyDelegate(
+    private konst delegate = defaultNpmDependencyDelegate(
         project,
         DEV,
     )
@@ -333,7 +333,7 @@ private class DefaultPeerNpmDependencyExtension(
     project: Project
 ) : Closure<NpmDependency>(project.dependencies),
     PeerNpmDependencyExtension {
-    private val delegate: NpmDependencyExtensionDelegate = object : NpmDependencyExtensionDelegate(
+    private konst delegate: NpmDependencyExtensionDelegate = object : NpmDependencyExtensionDelegate(
         project,
         PEER,
     ) {

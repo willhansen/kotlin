@@ -5,8 +5,8 @@ fun ushort(vararg a: UShort) {}
 fun uint(vararg a: UInt) {}
 fun ulong(vararg a: ULong) {}
 
-class ValueParam(vararg val a: ULong)
+class ValueParam(vararg konst a: ULong)
 
-annotation class Ann(vararg val a: UInt)
+annotation class Ann(vararg konst a: UInt)
 
 fun array(<!FORBIDDEN_VARARG_PARAMETER_TYPE!>vararg<!> a: UIntArray) {}

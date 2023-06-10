@@ -23,7 +23,7 @@ package kotlin.native.internal
 )
 @Retention(AnnotationRetention.BINARY)
 @PublishedApi
-internal annotation class ExportForCppRuntime(val name: String = "")
+internal annotation class ExportForCppRuntime(konst name: String = "")
 
 /**
  * This annotation denotes that the element is intrinsic and its usages require special handling in compiler.
@@ -72,7 +72,7 @@ internal annotation class NoReorderFields
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 @PublishedApi
-internal annotation class ExportTypeInfo(val name: String)
+internal annotation class ExportTypeInfo(konst name: String)
 
 /**
  * If a lambda shall be carefully lowered by the compiler.
@@ -86,21 +86,21 @@ internal annotation class VolatileLambda
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-internal annotation class Escapes(val who: Int)
+internal annotation class Escapes(konst who: Int)
 
-// Decyphering of binary values can be found in EscapeAnalysis.kt
+// Decyphering of binary konstues can be found in EscapeAnalysis.kt
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-internal annotation class PointsTo(vararg val onWhom: Int)
+internal annotation class PointsTo(vararg konst onWhom: Int)
 
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-internal annotation class TypedIntrinsic(val kind: String)
+internal annotation class TypedIntrinsic(konst kind: String)
 
 @Target(AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.BINARY)
-internal annotation class ConstantConstructorIntrinsic(val kind: String)
+internal annotation class ConstantConstructorIntrinsic(konst kind: String)
 
 /**
  * Indicates that `@SymbolName external` function is implemented in library-stored bitcode
@@ -119,7 +119,7 @@ internal annotation class Independent
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-@PublishedApi internal annotation class FilterExceptions(val mode: String = "terminate")
+@PublishedApi internal annotation class FilterExceptions(konst mode: String = "terminate")
 
 /**
  * Marks a class whose instances to be added to the list of leak detector candidates.
@@ -147,7 +147,7 @@ internal annotation class HasFinalizer
  * Marks a declaration that is internal for Kotlin/Native and shouldn't be used externally.
  */
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 internal annotation class InternalForKotlinNative
 
 /**
@@ -166,17 +166,17 @@ internal annotation class HasFreezeHook
  * placing safe points and switching thread state when using blocking APIs.
  */
 @Target(AnnotationTarget.FUNCTION)
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 @InternalForKotlinNative
-annotation class GCUnsafeCall(val callee: String)
+annotation class GCUnsafeCall(konst callee: String)
 
 /**
  * Marks a declaration that is internal for Kotlin/Native tests and shouldn't be used externally.
  */
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 internal annotation class InternalForKotlinNativeTests
 
 @InternalForKotlinNativeTests
 @Target(AnnotationTarget.FILE)
-public annotation class ReflectionPackageName(val name: String)
+public annotation class ReflectionPackageName(konst name: String)

@@ -1,5 +1,5 @@
 class My {
-    val x: Int
+    konst x: Int
     init {
         var y: Int? = null
         if (y != null) {

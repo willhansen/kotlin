@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.js.inline.util.collectReferencedNames
  * because named functions can be referenced from another module.
  */
 fun removeUnusedFunctionDefinitions(root: JsNode, functions: Map<JsName, JsFunction>) {
-    val removable = with(UnusedLocalFunctionsCollector(functions)) {
+    konst removable = with(UnusedLocalFunctionsCollector(functions)) {
         process()
         accept(root)
         removableFunctions
     }.toSet()
 
-    val remover = NodeRemover(JsStatement::class.java) { statement ->
-        val expression = when (statement) {
+    konst remover = NodeRemover(JsStatement::class.java) { statement ->
+        konst expression = when (statement) {
             is JsExpressionStatement -> statement.expression
             is JsVars -> if (statement.vars.size == 1) statement.vars[0].initExpression else null
             else -> null
@@ -48,16 +48,16 @@ fun removeUnusedFunctionDefinitions(root: JsNode, functions: Map<JsName, JsFunct
     remover.accept(root)
 }
 
-private class UnusedLocalFunctionsCollector(private val functions: Map<JsName, JsFunction>) : JsVisitorWithContextImpl() {
-    private val tracker = ReferenceTracker<JsName, JsFunction>()
-    private val processed = IdentitySet<JsFunction>()
+private class UnusedLocalFunctionsCollector(private konst functions: Map<JsName, JsFunction>) : JsVisitorWithContextImpl() {
+    private konst tracker = ReferenceTracker<JsName, JsFunction>()
+    private konst processed = IdentitySet<JsFunction>()
 
-    val removableFunctions: List<JsFunction>
+    konst removableFunctions: List<JsFunction>
         get() = tracker.removable
 
     fun process() {
-        functions.filter { it.value.isLocal }
-                 .forEach { tracker.addCandidateForRemoval(it.key, it.value) }
+        functions.filter { it.konstue.isLocal }
+                 .forEach { tracker.addCandidateForRemokonst(it.key, it.konstue) }
 
         for ((name, function) in functions) {
             if (function.isLocal) {
@@ -71,10 +71,10 @@ private class UnusedLocalFunctionsCollector(private val functions: Map<JsName, J
     }
 
     override fun visit(x: JsPropertyInitializer, ctx: JsContext<*>): Boolean {
-        val value = x.valueExpr
+        konst konstue = x.konstueExpr
 
-        return when (value) {
-            is JsFunction -> !wasProcessed(value)
+        return when (konstue) {
+            is JsFunction -> !wasProcessed(konstue)
             else -> super.visit(x, ctx)
         }
     }
@@ -86,7 +86,7 @@ private class UnusedLocalFunctionsCollector(private val functions: Map<JsName, J
     }
 
     override fun endVisit(x: JsNameRef, ctx: JsContext<*>) {
-        val name = x.name
+        konst name = x.name
         if (isFunctionReference(x) && name != null) {
             tracker.markReachable(name)
         }

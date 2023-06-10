@@ -12,28 +12,28 @@ import kotlin.native.concurrent.ThreadLocal
 import kotlin.reflect.KProperty
 
 class Delegate {
-    val value: Int = 10
+    konst konstue: Int = 10
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
-        return value
+        return konstue
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {
     }
 }
 
-class AtomicInt(var value: Int)
+class AtomicInt(var konstue: Int)
 object Foo {
     var field1: Int = 10
-    val backer2 = AtomicInt(0)
+    konst backer2 = AtomicInt(0)
     var field2: Int
-        get() = backer2.value
-        set(value: Int) { backer2.value = value }
+        get() = backer2.konstue
+        set(konstue: Int) { backer2.konstue = konstue }
 }
 
 object Foo1 {
     var field1: Int = 10
-        set(value: Int) { backer2.value = value }
-    val backer2 = AtomicInt(0)
+        set(konstue: Int) { backer2.konstue = konstue }
+    konst backer2 = AtomicInt(0)
 }
 
 object WithDelegate {
@@ -49,11 +49,11 @@ object Bar {
 class Foo2 {
     companion object {
         var field1: Int = 10
-        val backer2 = AtomicInt(0)
+        konst backer2 = AtomicInt(0)
         var field2: Int
-            get() = backer2.value
-            set(value: Int) {
-                backer2.value = value
+            get() = backer2.konstue
+            set(konstue: Int) {
+                backer2.konstue = konstue
             }
     }
 }
@@ -89,8 +89,8 @@ enum class Color2() {
     BLUE();
 
     var rgb: Int = 2
-        set(value: Int) {
-            a = value
+        set(konstue: Int) {
+            a = konstue
         }
 }
 

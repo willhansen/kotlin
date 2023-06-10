@@ -4,7 +4,7 @@ KtFile: Builder.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -41,7 +41,7 @@ KtFile: Builder.kt
                         REFERENCE_EXPRESSION
                           PsiElement(IDENTIFIER)('lazy')
               PsiWhiteSpace(' ')
-              PsiElement(val)('val')
+              PsiElement(konst)('konst')
               PsiWhiteSpace(' ')
               PsiElement(IDENTIFIER)('groovy')
               PsiWhiteSpace(' ')
@@ -86,7 +86,7 @@ KtFile: Builder.kt
                         REFERENCE_EXPRESSION
                           PsiElement(IDENTIFIER)('lazy')
               PsiWhiteSpace(' ')
-              PsiElement(val)('val')
+              PsiElement(konst)('konst')
               PsiWhiteSpace(' ')
               PsiElement(IDENTIFIER)('gant')
               PsiWhiteSpace(' ')
@@ -158,7 +158,7 @@ KtFile: Builder.kt
                         REFERENCE_EXPRESSION
                           PsiElement(IDENTIFIER)('lazy')
               PsiWhiteSpace(' ')
-              PsiElement(val)('val')
+              PsiElement(konst)('konst')
               PsiWhiteSpace(' ')
               PsiElement(IDENTIFIER)('JPS')
               PsiWhiteSpace(' ')
@@ -414,7 +414,7 @@ KtFile: Builder.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('lib')
             PsiWhiteSpace(' ')

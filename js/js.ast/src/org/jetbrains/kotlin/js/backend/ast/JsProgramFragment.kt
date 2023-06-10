@@ -6,16 +6,16 @@ package org.jetbrains.kotlin.js.backend.ast
 
 import java.util.*
 
-class JsProgramFragment(val scope: JsScope, val packageFqn: String) {
-    val importedModules = mutableListOf<JsImportedModule>()
-    val imports: MutableMap<String, JsExpression> = LinkedHashMap()
-    val declarationBlock = JsCompositeBlock()
-    val exportBlock = JsCompositeBlock()
-    val initializerBlock = JsCompositeBlock()
-    val nameBindings = mutableListOf<JsNameBinding>()
-    val classes: MutableMap<JsName, JsClassModel> = LinkedHashMap()
-    val inlineModuleMap: MutableMap<String, JsExpression> = LinkedHashMap()
+class JsProgramFragment(konst scope: JsScope, konst packageFqn: String) {
+    konst importedModules = mutableListOf<JsImportedModule>()
+    konst imports: MutableMap<String, JsExpression> = LinkedHashMap()
+    konst declarationBlock = JsCompositeBlock()
+    konst exportBlock = JsCompositeBlock()
+    konst initializerBlock = JsCompositeBlock()
+    konst nameBindings = mutableListOf<JsNameBinding>()
+    konst classes: MutableMap<JsName, JsClassModel> = LinkedHashMap()
+    konst inlineModuleMap: MutableMap<String, JsExpression> = LinkedHashMap()
     var tests: JsStatement? = null
     var mainFunction: JsStatement? = null
-    val inlinedLocalDeclarations = mutableMapOf<String, JsCompositeBlock>()
+    konst inlinedLocalDeclarations = mutableMapOf<String, JsCompositeBlock>()
 }

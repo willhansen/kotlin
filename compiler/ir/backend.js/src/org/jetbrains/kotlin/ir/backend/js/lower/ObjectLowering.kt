@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
-class ObjectDeclarationLowering(val context: JsCommonBackendContext) : DeclarationTransformer {
+class ObjectDeclarationLowering(konst context: JsCommonBackendContext) : DeclarationTransformer {
 
     private var IrClass.instanceField by context.mapping.objectToInstanceField
     private var IrClass.syntheticPrimaryConstructor by context.mapping.classToSyntheticPrimaryConstructor
@@ -45,9 +45,9 @@ class ObjectDeclarationLowering(val context: JsCommonBackendContext) : Declarati
         if (declaration !is IrClass || declaration.kind != ClassKind.OBJECT || declaration.isEffectivelyExternal())
             return null
 
-        val getInstanceFun = context.getOrCreateGetInstanceFunction(declaration)
+        konst getInstanceFun = context.getOrCreateGetInstanceFunction(declaration)
 
-        val instanceField = context.irFactory.buildField {
+        konst instanceField = context.irFactory.buildField {
             name = Name.identifier(declaration.name.asString() + "_instance")
             type = declaration.defaultType.makeNullable()
             isStatic = true
@@ -59,9 +59,9 @@ class ObjectDeclarationLowering(val context: JsCommonBackendContext) : Declarati
 
         declaration.instanceField = instanceField
 
-        val primaryConstructor = declaration.primaryConstructor ?: declaration.syntheticPrimaryConstructor!!
+        konst primaryConstructor = declaration.primaryConstructor ?: declaration.syntheticPrimaryConstructor!!
 
-        val initEntryInstancesFun = declaration.parent.safeAs<IrClass>()?.initEntryInstancesFun
+        konst initEntryInstancesFun = declaration.parent.safeAs<IrClass>()?.initEntryInstancesFun
 
         getInstanceFun.body = context.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
             statements += context.createIrBuilder(getInstanceFun.symbol).irBlockBody(getInstanceFun) {
@@ -80,7 +80,7 @@ class ObjectDeclarationLowering(val context: JsCommonBackendContext) : Declarati
     }
 
     private fun IrBuilderWithScope.irNullabilityCheck(instanceField: IrField): IrExpression {
-        val context = this@ObjectDeclarationLowering.context
+        konst context = this@ObjectDeclarationLowering.context
         return if (context is JsIrBackendContext && context.es6mode) {
             irEqeqeqWithoutBox(irGetField(null, instanceField), context.getVoid())
         } else {
@@ -89,30 +89,30 @@ class ObjectDeclarationLowering(val context: JsCommonBackendContext) : Declarati
     }
 }
 
-class ObjectUsageLowering(val context: JsCommonBackendContext) : BodyLoweringPass {
+class ObjectUsageLowering(konst context: JsCommonBackendContext) : BodyLoweringPass {
 
     private var IrClass.instanceField by context.mapping.objectToInstanceField
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val functionContainer = container.takeIf { it is IrConstructor && it.isPrimary }
-        val irClass = functionContainer?.parentAsClass
+        konst functionContainer = container.takeIf { it is IrConstructor && it.isPrimary }
+        konst irClass = functionContainer?.parentAsClass
 
         irClass?.instanceField?.let {
             if (context.es6mode && irClass.superClass == null) return@let
             // Initialize instance field in the beginning of the constructor because it can be used inside the constructor later
-            val initInstanceField = generateInitInstanceField(it, irClass.getValueForInstanceFieldForTheFirstTime())
+            konst initInstanceField = generateInitInstanceField(it, irClass.getValueForInstanceFieldForTheFirstTime())
             (irBody as IrBlockBody).statements.add(0, initInstanceField)
         }
 
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
-                val obj: IrClass = expression.symbol.owner
+                konst obj: IrClass = expression.symbol.owner
                 if (obj.isEffectivelyExternal()) return expression
                 return JsIrBuilder.buildCall(context.getOrCreateGetInstanceFunction(obj).symbol)
             }
 
             override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall): IrExpression {
-                val instanceField = irClass?.instanceField
+                konst instanceField = irClass?.instanceField
                 return if (!context.es6mode || instanceField == null) {
                     super.visitDelegatingConstructorCall(expression)
                 } else {
@@ -136,8 +136,8 @@ class ObjectUsageLowering(val context: JsCommonBackendContext) : BodyLoweringPas
         }
     }
 
-    private fun generateInitInstanceField(instanceField: IrField, value: IrExpression): IrStatement {
-        return JsIrBuilder.buildSetField(instanceField.symbol, null, value, context.irBuiltIns.unitType)
+    private fun generateInitInstanceField(instanceField: IrField, konstue: IrExpression): IrStatement {
+        return JsIrBuilder.buildSetField(instanceField.symbol, null, konstue, context.irBuiltIns.unitType)
     }
 }
 

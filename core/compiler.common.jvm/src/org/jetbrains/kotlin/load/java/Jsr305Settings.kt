@@ -8,20 +8,20 @@ package org.jetbrains.kotlin.load.java
 import org.jetbrains.kotlin.name.FqName
 
 data class Jsr305Settings(
-    val globalLevel: ReportLevel,
-    val migrationLevel: ReportLevel? = null,
-    val userDefinedLevelForSpecificAnnotation: Map<FqName, ReportLevel> = emptyMap()
+    konst globalLevel: ReportLevel,
+    konst migrationLevel: ReportLevel? = null,
+    konst userDefinedLevelForSpecificAnnotation: Map<FqName, ReportLevel> = emptyMap()
 ) {
     @OptIn(ExperimentalStdlibApi::class)
-    val description by lazy {
+    konst description by lazy {
         buildList {
             add(globalLevel.description)
             migrationLevel?.let { add("under-migration:${it.description}") }
-            userDefinedLevelForSpecificAnnotation.forEach { add("@${it.key}:${it.value.description}") }
+            userDefinedLevelForSpecificAnnotation.forEach { add("@${it.key}:${it.konstue.description}") }
         }.toTypedArray()
     }
 
-    val isDisabled = globalLevel == ReportLevel.IGNORE
+    konst isDisabled = globalLevel == ReportLevel.IGNORE
             && migrationLevel == ReportLevel.IGNORE
             && userDefinedLevelForSpecificAnnotation.isEmpty()
 }

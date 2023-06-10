@@ -39,35 +39,35 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.types.isError
 
 class LazyJavaAnnotationDescriptor(
-    private val c: LazyJavaResolverContext,
-    private val javaAnnotation: JavaAnnotation,
+    private konst c: LazyJavaResolverContext,
+    private konst javaAnnotation: JavaAnnotation,
     isFreshlySupportedAnnotation: Boolean = false
 ) : AnnotationDescriptor, PossiblyExternalAnnotationDescriptor {
-    override val fqName by c.storageManager.createNullableLazyValue {
+    override konst fqName by c.storageManager.createNullableLazyValue {
         javaAnnotation.classId?.asSingleFqName()
     }
 
-    override val type by c.storageManager.createLazyValue {
-        val fqName = fqName
+    override konst type by c.storageManager.createLazyValue {
+        konst fqName = fqName
             ?: return@createLazyValue ErrorUtils.createErrorType(ErrorTypeKind.NOT_FOUND_FQNAME_FOR_JAVA_ANNOTATION, javaAnnotation.toString())
-        val annotationClass = JavaToKotlinClassMapper.mapJavaToKotlin(fqName, c.module.builtIns)
+        konst annotationClass = JavaToKotlinClassMapper.mapJavaToKotlin(fqName, c.module.builtIns)
             ?: javaAnnotation.resolve()?.let { javaClass -> c.components.moduleClassResolver.resolveClass(javaClass) }
             ?: createTypeForMissingDependencies(fqName)
         annotationClass.defaultType
     }
 
-    override val source = c.components.sourceElementFactory.source(javaAnnotation)
+    override konst source = c.components.sourceElementFactory.source(javaAnnotation)
 
-    override val allValueArguments by c.storageManager.createLazyValue {
+    override konst allValueArguments by c.storageManager.createLazyValue {
         javaAnnotation.arguments.mapNotNull { arg ->
-            val name = arg.name ?: DEFAULT_ANNOTATION_MEMBER_NAME
-            resolveAnnotationArgument(arg)?.let { value -> name to value }
+            konst name = arg.name ?: DEFAULT_ANNOTATION_MEMBER_NAME
+            resolveAnnotationArgument(arg)?.let { konstue -> name to konstue }
         }.toMap()
     }
 
     private fun resolveAnnotationArgument(argument: JavaAnnotationArgument?): ConstantValue<*>? {
         return when (argument) {
-            is JavaLiteralAnnotationArgument -> ConstantValueFactory.createConstantValue(argument.value)
+            is JavaLiteralAnnotationArgument -> ConstantValueFactory.createConstantValue(argument.konstue)
             is JavaEnumValueAnnotationArgument -> resolveFromEnumValue(argument.enumClassId, argument.entryName)
             is JavaArrayAnnotationArgument -> resolveFromArray(argument.name ?: DEFAULT_ANNOTATION_MEMBER_NAME, argument.getElements())
             is JavaAnnotationAsAnnotationArgument -> resolveFromAnnotation(argument.getAnnotation())
@@ -83,7 +83,7 @@ class LazyJavaAnnotationDescriptor(
     private fun resolveFromArray(argumentName: Name, elements: List<JavaAnnotationArgument>): ConstantValue<*>? {
         if (type.isError) return null
 
-        val arrayType =
+        konst arrayType =
             DescriptorResolverUtils.getAnnotationParameterByName(argumentName, annotationClass!!)?.type
             // Try to load annotation arguments even if the annotation class is not found
                 ?: c.components.module.builtIns.getArrayType(
@@ -91,11 +91,11 @@ class LazyJavaAnnotationDescriptor(
                     ErrorUtils.createErrorType(ErrorTypeKind.UNKNOWN_ARRAY_ELEMENT_TYPE_OF_ANNOTATION_ARGUMENT)
                 )
 
-        val values = elements.map { argument ->
+        konst konstues = elements.map { argument ->
             resolveAnnotationArgument(argument) ?: NullValue()
         }
 
-        return ConstantValueFactory.createArrayValue(values, arrayType)
+        return ConstantValueFactory.createArrayValue(konstues, arrayType)
     }
 
     private fun resolveFromEnumValue(enumClassId: ClassId?, entryName: Name?): ConstantValue<*>? {
@@ -117,7 +117,7 @@ class LazyJavaAnnotationDescriptor(
             c.components.deserializedDescriptorResolver.components.notFoundClasses
         )
 
-    override val isIdeExternalAnnotation: Boolean = javaAnnotation.isIdeExternalAnnotation
+    override konst isIdeExternalAnnotation: Boolean = javaAnnotation.isIdeExternalAnnotation
 
-    val isFreshlySupportedTypeUseAnnotation: Boolean = javaAnnotation.isFreshlySupportedTypeUseAnnotation || isFreshlySupportedAnnotation
+    konst isFreshlySupportedTypeUseAnnotation: Boolean = javaAnnotation.isFreshlySupportedTypeUseAnnotation || isFreshlySupportedAnnotation
 }

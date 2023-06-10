@@ -25,8 +25,8 @@ public interface C {
 
 public final class My {
     public constructor My(/*0*/ b: B)
-    public final val x: {A & B & C}?
-    public final val y: C?
+    public final konst x: {A & B & C}?
+    public final konst y: C?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(/*0*/ b: B): {A & B & C}?
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

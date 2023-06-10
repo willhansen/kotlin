@@ -15,7 +15,7 @@ class JavaClass {
 open class TestApp {
     companion object {
         @JvmStatic
-        var value: String = "OK"
+        var konstue: String = "OK"
             private set
     }
 }

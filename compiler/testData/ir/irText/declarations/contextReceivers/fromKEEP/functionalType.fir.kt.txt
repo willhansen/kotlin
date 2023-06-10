@@ -14,7 +14,7 @@ class O {
 
   }
 
-  val o: String
+  konst o: String
     field = "O"
     get
 
@@ -27,7 +27,7 @@ class K {
 
   }
 
-  val k: String
+  konst k: String
     field = "K"
     get
 

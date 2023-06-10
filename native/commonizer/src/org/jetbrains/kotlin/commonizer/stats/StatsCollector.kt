@@ -21,11 +21,11 @@ enum class StatsType {
 
 interface StatsCollector {
     data class StatsKey(
-        val id: String,
-        val extensionReceiver: String?,
-        val parameterNames: List<String>,
-        val parameterTypes: List<String>,
-        val declarationType: DeclarationType
+        konst id: String,
+        konst extensionReceiver: String?,
+        konst parameterNames: List<String>,
+        konst parameterTypes: List<String>,
+        konst declarationType: DeclarationType
     ) {
         constructor(id: String, declarationType: DeclarationType) : this(id, null, emptyList(), emptyList(), declarationType)
     }

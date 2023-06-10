@@ -16,7 +16,7 @@ fun expectString(x: String?) {
 }
 
 suspend fun test(block: (String) -> Unit) {
-    val string: String? = "TEST".takeIf { true }
+    konst string: String? = "TEST".takeIf { true }
     check(string != null) // smartcast from String? to String
     expectString(string)
     suspendHere()

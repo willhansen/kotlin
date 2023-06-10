@@ -33,7 +33,7 @@ internal class FirThisReceiverExpressionImpl(
     override var typeArguments: MutableOrEmptyList<FirTypeProjection>,
     override var source: KtSourceElement?,
     override var calleeReference: FirThisReference,
-    override val isImplicit: Boolean,
+    override konst isImplicit: Boolean,
 ) : FirThisReceiverExpression() {
     override var explicitReceiver: FirExpression? = null
     override var dispatchReceiver: FirExpression = FirNoReceiverExpression

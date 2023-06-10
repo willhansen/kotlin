@@ -8,12 +8,12 @@ import kotlin.concurrent.*
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 class GenericWrapper<T>(@Volatile var x: T)
 
-val global = GenericWrapper("FA")
-val globalLong = GenericWrapper(1L)
+konst global = GenericWrapper("FA")
+konst globalLong = GenericWrapper(1L)
 
 fun box() : String {
-    val local = GenericWrapper("IL")
-    val localLong = GenericWrapper(2L)
+    konst local = GenericWrapper("IL")
+    konst localLong = GenericWrapper(2L)
     if (global.x + local.x != "FAIL") return "FAIL 1"
     if (globalLong.x + localLong.x != 3L) return "FAIL 2"
     global.x = "O"

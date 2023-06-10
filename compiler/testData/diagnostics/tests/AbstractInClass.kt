@@ -3,10 +3,10 @@ package abstract
 
 class MyClass() {
     //properties
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val a: Int<!>
-    val a1: Int = 1
-    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> val a2: Int
-    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> val a3: Int = 1
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst a: Int<!>
+    konst a1: Int = 1
+    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> konst a2: Int
+    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> konst a3: Int = 1
 
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var b: Int<!>                private set
     var b1: Int = 0;                         private set
@@ -18,10 +18,10 @@ class MyClass() {
     <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> var c2: Int      set(v: Int) { field = v }
     <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> var c3: Int = 0; set(v: Int) { field = v }
 
-    val e: Int                               get() = a
-    val e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
-    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> val e2: Int      get() = a
-    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> val e3: Int = 0; get() = a
+    konst e: Int                               get() = a
+    konst e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
+    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> konst e2: Int      get() = a
+    <!ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS!>abstract<!> konst e3: Int = 0; get() = a
 
     //methods
     <!NON_ABSTRACT_FUNCTION_WITH_NO_BODY!>fun f()<!>

@@ -6,7 +6,7 @@
 package org.w3c.dom
 
 public external interface ItemArrayLike<out T> {
-    val length: Int
+    konst length: Int
     fun item(index: Int): T?
 }
 
@@ -14,7 +14,7 @@ public external interface ItemArrayLike<out T> {
  * Returns the view of this `ItemArrayLike<T>` collection as `List<T>`
  */
 public fun <T> ItemArrayLike<T>.asList(): List<T> = object : AbstractList<T>() {
-    override val size: Int get() = this@asList.length
+    override konst size: Int get() = this@asList.length
 
     override fun get(index: Int): T = when (index) {
         in 0..lastIndex -> this@asList.item(index).unsafeCast<T>()

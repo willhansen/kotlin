@@ -3,7 +3,7 @@ interface Source<out T> {
 }
 
 fun demo(strs: Source<String>) {
-    val objects: Source<Any> = strs
+    konst objects: Source<Any> = strs
 }
 
 interface Comparable<in T> {
@@ -12,5 +12,5 @@ interface Comparable<in T> {
 
 fun demo(x: Comparable<Number>) {
     x.compareTo(1.0)
-    val y: Comparable<Double> = x
+    konst y: Comparable<Double> = x
 }

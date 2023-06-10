@@ -2,7 +2,7 @@ annotation class AllOpen
 
 @AllOpen
 class Test {
-    val prop: String = ""
+    konst prop: String = ""
     fun method() {}
 
     class Nested {

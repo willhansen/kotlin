@@ -19,16 +19,16 @@ package org.jetbrains.kotlin.js.inline.util.rewriters
 import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.backend.ast.metadata.coroutineMetadata
 
-class NameReplacingVisitor(private val replaceMap: Map<JsName, JsExpression>) : JsVisitorWithContextImpl() {
+class NameReplacingVisitor(private konst replaceMap: Map<JsName, JsExpression>) : JsVisitorWithContextImpl() {
 
     override fun endVisit(x: JsNameRef, ctx: JsContext<JsNode>) {
         if (x.qualifier != null) return
-        val replacement = replaceMap[x.name] ?: return
+        konst replacement = replaceMap[x.name] ?: return
         if (replacement is JsNameRef) {
             applyToNamedNode(x)
         }
         else {
-            val replacementCopy = replacement.deepCopy()
+            konst replacementCopy = replacement.deepCopy()
             if (x.source != null) {
                 replacementCopy.source = x.source
             }
@@ -56,7 +56,7 @@ class NameReplacingVisitor(private val replaceMap: Map<JsName, JsExpression>) : 
 
     private fun applyToNamedNode(x: HasName) {
         while (true) {
-            val replacement = replaceMap[x.name]
+            konst replacement = replaceMap[x.name]
             if (replacement is HasName) {
                 x.name = replacement.name
             }

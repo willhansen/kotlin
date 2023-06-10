@@ -13,7 +13,7 @@ fun ConstraintStorage.buildCurrentSubstitutor(
     context: TypeSystemInferenceExtensionContext,
     additionalBindings: Map<TypeConstructorMarker, StubTypeMarker>
 ): TypeSubstitutorMarker {
-    return context.typeSubstitutorByTypeConstructor(fixedTypeVariables.entries.associate { it.key to it.value } + additionalBindings)
+    return context.typeSubstitutorByTypeConstructor(fixedTypeVariables.entries.associate { it.key to it.konstue } + additionalBindings)
 }
 
 fun ConstraintStorage.buildAbstractResultingSubstitutor(
@@ -22,10 +22,10 @@ fun ConstraintStorage.buildAbstractResultingSubstitutor(
 ): TypeSubstitutorMarker = with(context) {
     if (allTypeVariables.isEmpty()) return createEmptySubstitutor()
 
-    val currentSubstitutorMap = fixedTypeVariables.entries.associate {
-        it.key to it.value
+    konst currentSubstitutorMap = fixedTypeVariables.entries.associate {
+        it.key to it.konstue
     }
-    val uninferredSubstitutorMap = if (transformTypeVariablesToErrorTypes) {
+    konst uninferredSubstitutorMap = if (transformTypeVariablesToErrorTypes) {
         notFixedTypeVariables.entries.associate { (freshTypeConstructor, typeVariable) ->
             freshTypeConstructor to context.createUninferredType(
                 (typeVariable.typeVariable).freshTypeConstructor()
@@ -43,7 +43,7 @@ fun ConstraintStorage.buildNotFixedVariablesToNonSubtypableTypesSubstitutor(
     context: TypeSystemInferenceExtensionContext
 ): TypeSubstitutorMarker {
     return context.typeSubstitutorByTypeConstructor(
-        notFixedTypeVariables.mapValues { context.createStubTypeForTypeVariablesInSubtyping(it.value.typeVariable) }
+        notFixedTypeVariables.mapValues { context.createStubTypeForTypeVariablesInSubtyping(it.konstue.typeVariable) }
     )
 }
 
@@ -59,7 +59,7 @@ fun TypeSystemInferenceExtensionContext.extractTypeForGivenRecursiveTypeParamete
 ): KotlinTypeMarker? {
     for (argument in type.getArguments()) {
         if (argument.isStarProjection()) continue
-        val typeConstructor = argument.getType().typeConstructor()
+        konst typeConstructor = argument.getType().typeConstructor()
         if (typeConstructor is TypeVariableTypeConstructorMarker
             && typeConstructor.typeParameter == typeParameter
             && typeConstructor.typeParameter?.hasRecursiveBounds(type.typeConstructor()) == true
@@ -75,7 +75,7 @@ fun TypeSystemInferenceExtensionContext.extractTypeForGivenRecursiveTypeParamete
 fun NewConstraintSystemImpl.registerTypeVariableIfNotPresent(
     typeVariable: TypeVariableMarker
 ) {
-    val builder = getBuilder()
+    konst builder = getBuilder()
     if (typeVariable.freshTypeConstructor(this) !in builder.currentStorage().allTypeVariables.keys) {
         builder.registerVariable(typeVariable)
     }

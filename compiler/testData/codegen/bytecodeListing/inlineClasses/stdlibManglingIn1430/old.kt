@@ -3,7 +3,7 @@
 // FILE: 1.kt
 package test
 
-inline class IC(val i: Int)
+inline class IC(konst i: Int)
 
 // FILE: 2.kt
 package kotlin

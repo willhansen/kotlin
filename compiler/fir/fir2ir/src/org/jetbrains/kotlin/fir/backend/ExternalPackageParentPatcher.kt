@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 // TODO: should be a lowering
 internal class ExternalPackageParentPatcher(
-    private val components: Fir2IrComponents,
-    private val fir2IrExtensions: Fir2IrExtensions
+    private konst components: Fir2IrComponents,
+    private konst fir2IrExtensions: Fir2IrExtensions
 ) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -22,9 +22,9 @@ internal class ExternalPackageParentPatcher(
 
     override fun visitMemberAccess(expression: IrMemberAccessExpression<*>) {
         super.visitMemberAccess(expression)
-        val callee = expression.symbol.owner as? IrMemberWithContainerSource ?: return
+        konst callee = expression.symbol.owner as? IrMemberWithContainerSource ?: return
         if (callee.parent is IrExternalPackageFragment) {
-            val parentClass = fir2IrExtensions.generateOrGetFacadeClass(callee, components) ?: return
+            konst parentClass = fir2IrExtensions.generateOrGetFacadeClass(callee, components) ?: return
             parentClass.parent = callee.parent
             callee.parent = parentClass
             when (callee) {

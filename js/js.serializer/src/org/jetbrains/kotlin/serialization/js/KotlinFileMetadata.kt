@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.psi.KtFile
 
 sealed class KotlinFileMetadata
 
-data class KotlinPsiFileMetadata(val ktFile: KtFile) : KotlinFileMetadata()
+data class KotlinPsiFileMetadata(konst ktFile: KtFile) : KotlinFileMetadata()
 
 data class KotlinDeserializedFileMetadata(
-    val packageFragment: KotlinJavascriptPackageFragment,
-    val fileId: Int
+    konst packageFragment: KotlinJavascriptPackageFragment,
+    konst fileId: Int
 ) : KotlinFileMetadata()

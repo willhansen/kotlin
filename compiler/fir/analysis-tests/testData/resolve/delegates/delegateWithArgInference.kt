@@ -1,6 +1,6 @@
 import kotlin.reflect.KProperty
 
-class Delegate<T>(val data: T) {
+class Delegate<T>(konst data: T) {
     operator fun getValue(thisRef: Nothing?, prop: KProperty<*>): T = data
 }
 
@@ -10,7 +10,7 @@ fun <M> materialize(): M = null!!
 fun <M2> materialize2(): M2 = null!!
 fun <Q> id(v: Q): Q = v
 
-val x by makeIntDelegate(run {
-    val x: String = materialize()
+konst x by makeIntDelegate(run {
+    konst x: String = materialize()
     materialize2()
 })

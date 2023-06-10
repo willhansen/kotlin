@@ -1,7 +1,7 @@
 fun baz(s: String?): String {
     if (s == null) return ""
     // if explicit type String is given for t, problem disappears
-    val t = when(s) {
+    konst t = when(s) {
         // !! is detected as unnecessary here
         "abc" -> s
         else -> "xyz"
@@ -10,7 +10,7 @@ fun baz(s: String?): String {
 }
 
 fun foo(s: String?): String {
-    val t = when {
+    konst t = when {
         s != null -> s
         else -> ""
     }

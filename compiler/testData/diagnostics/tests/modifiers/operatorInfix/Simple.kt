@@ -27,12 +27,12 @@ infix fun Example.plus(o: Example) = ""
 
 fun test() {
     var a = Example()
-    val b = Example()
+    konst b = Example()
 
     consumeString(a())
     consumeString(a[1])
 
-    val (x, y) = Example()
+    konst (x, y) = Example()
     consumeString(x)
     consumeString(y)
 

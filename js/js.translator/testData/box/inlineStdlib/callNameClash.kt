@@ -7,12 +7,12 @@ fun f(x: Int): Int = x * 2
 
 fun Int.f(): Int = this * 3
 
-class A(var value: Int) {
+class A(var konstue: Int) {
     companion object {
         fun f(): Int = 5
     }
 
-    fun f(): Int = value
+    fun f(): Int = konstue
 }
 
 fun test(a: A): Int =

@@ -27,17 +27,17 @@ import org.jetbrains.kotlin.ir.util.initializeParameterArguments
 import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 
 class IrPropertyReferenceImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrPropertySymbol,
+    override konst symbol: IrPropertySymbol,
     typeArgumentsCount: Int,
     override var field: IrFieldSymbol?,
     override var getter: IrSimpleFunctionSymbol?,
     override var setter: IrSimpleFunctionSymbol?,
     override var origin: IrStatementOrigin? = null,
 ) : IrPropertyReference() {
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(0)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(0)
 }

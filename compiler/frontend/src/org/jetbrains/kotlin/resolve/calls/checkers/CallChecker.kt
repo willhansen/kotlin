@@ -41,26 +41,26 @@ interface CallChecker {
 }
 
 class CallCheckerContext @JvmOverloads constructor(
-    val resolutionContext: ResolutionContext<*>,
-    override val deprecationResolver: DeprecationResolver,
-    override val moduleDescriptor: ModuleDescriptor,
-    val missingSupertypesResolver: MissingSupertypesResolver,
-    val callComponents: KotlinCallComponents,
-    override val trace: BindingTrace = resolutionContext.trace
+    konst resolutionContext: ResolutionContext<*>,
+    override konst deprecationResolver: DeprecationResolver,
+    override konst moduleDescriptor: ModuleDescriptor,
+    konst missingSupertypesResolver: MissingSupertypesResolver,
+    konst callComponents: KotlinCallComponents,
+    override konst trace: BindingTrace = resolutionContext.trace
 ) : CheckerContext {
-    val scope: LexicalScope
+    konst scope: LexicalScope
         get() = resolutionContext.scope
 
-    val dataFlowInfo: DataFlowInfo
+    konst dataFlowInfo: DataFlowInfo
         get() = resolutionContext.dataFlowInfo
 
-    val isAnnotationContext: Boolean
+    konst isAnnotationContext: Boolean
         get() = resolutionContext.isAnnotationContext
 
-    val dataFlowValueFactory: DataFlowValueFactory
+    konst dataFlowValueFactory: DataFlowValueFactory
         get() = resolutionContext.dataFlowValueFactory
 
-    override val languageVersionSettings: LanguageVersionSettings
+    override konst languageVersionSettings: LanguageVersionSettings
         get() = resolutionContext.languageVersionSettings
 }
 

@@ -2,7 +2,7 @@ fun test() {
 
     outer@while(true) {
         inner@while(false) {
-            val x = <expr>break@outer</expr>
+            konst x = <expr>break@outer</expr>
         }
     }
 }

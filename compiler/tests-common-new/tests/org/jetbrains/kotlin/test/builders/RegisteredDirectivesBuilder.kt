@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.test.builders
 import org.jetbrains.kotlin.test.directives.model.*
 
 class RegisteredDirectivesBuilder private constructor(
-    private val simpleDirectives: MutableList<SimpleDirective>,
-    private val stringDirectives: MutableMap<StringDirective, List<String>>,
-    private val valueDirectives: MutableMap<ValueDirective<*>, List<Any>>
+    private konst simpleDirectives: MutableList<SimpleDirective>,
+    private konst stringDirectives: MutableMap<StringDirective, List<String>>,
+    private konst konstueDirectives: MutableMap<ValueDirective<*>, List<Any>>
 ) {
     constructor() : this(mutableListOf(), mutableMapOf(), mutableMapOf())
 
@@ -21,7 +21,7 @@ class RegisteredDirectivesBuilder private constructor(
                 is StringDirective -> directive with old[directive]
                 is ValueDirective<*> -> {
                     // no way to call with
-                    valueDirectives[directive] = old[directive]
+                    konstueDirectives[directive] = old[directive]
                 }
             }
         }
@@ -35,48 +35,48 @@ class RegisteredDirectivesBuilder private constructor(
         simpleDirectives.remove(this)
     }
 
-    infix fun StringDirective.with(value: String) {
-        with(listOf(value))
+    infix fun StringDirective.with(konstue: String) {
+        with(listOf(konstue))
     }
 
-    infix fun StringDirective.with(values: List<String>) {
-        stringDirectives.putWithExistsCheck(this, values)
+    infix fun StringDirective.with(konstues: List<String>) {
+        stringDirectives.putWithExistsCheck(this, konstues)
     }
 
-    operator fun StringDirective.plus(value: String) {
-        val previous = stringDirectives[this] ?: listOf()
-        stringDirectives[this] = previous + value
+    operator fun StringDirective.plus(konstue: String) {
+        konst previous = stringDirectives[this] ?: listOf()
+        stringDirectives[this] = previous + konstue
     }
 
     operator fun StringDirective.unaryMinus() {
         stringDirectives.remove(this)
     }
 
-    infix fun <T : Any> ValueDirective<T>.with(value: T) {
-        with(listOf(value))
+    infix fun <T : Any> ValueDirective<T>.with(konstue: T) {
+        with(listOf(konstue))
     }
 
-    infix fun <T : Any> ValueDirective<T>.with(values: List<T>) {
-        valueDirectives.putWithExistsCheck(this, values)
+    infix fun <T : Any> ValueDirective<T>.with(konstues: List<T>) {
+        konstueDirectives.putWithExistsCheck(this, konstues)
     }
 
     operator fun ValueDirective<*>.unaryMinus() {
-        valueDirectives.remove(this)
+        konstueDirectives.remove(this)
     }
 
-    private fun <K : Directive, V> MutableMap<K, V>.putWithExistsCheck(key: K, value: V) {
-        val alreadyRegistered = get(key)
+    private fun <K : Directive, V> MutableMap<K, V>.putWithExistsCheck(key: K, konstue: V) {
+        konst alreadyRegistered = get(key)
         if (alreadyRegistered == null) {
-            put(key, value)
-        } else if (alreadyRegistered is List<Any?> && value is List<Any?>) {
+            put(key, konstue)
+        } else if (alreadyRegistered is List<Any?> && konstue is List<Any?>) {
             @Suppress("UNCHECKED_CAST")
-            put(key, (alreadyRegistered + value) as V)
+            put(key, (alreadyRegistered + konstue) as V)
         } else {
-            error("Default values for $key directive already registered")
+            error("Default konstues for $key directive already registered")
         }
     }
 
     fun build(): RegisteredDirectives {
-        return RegisteredDirectivesImpl(simpleDirectives, stringDirectives, valueDirectives)
+        return RegisteredDirectivesImpl(simpleDirectives, stringDirectives, konstueDirectives)
     }
 }

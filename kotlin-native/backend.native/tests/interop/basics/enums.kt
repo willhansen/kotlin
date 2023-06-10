@@ -11,20 +11,20 @@ import kotlin.test.*
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 fun main() {
     memScoped {
-        val e = alloc<E.Var>()
-        e.value = E.C
-        assertEquals(E.C, e.value)
+        konst e = alloc<E.Var>()
+        e.konstue = E.C
+        assertEquals(E.C, e.konstue)
 
         assertFailsWith<NotImplementedError> {
-            e.value = TODO()
+            e.konstue = TODO()
         }
     }
-    val values = E.values()
-    assertEquals(values[0], E.A)
-    assertEquals(values[1], E.B)
-    assertEquals(values[2], E.C)
+    konst konstues = E.konstues()
+    assertEquals(konstues[0], E.A)
+    assertEquals(konstues[1], E.B)
+    assertEquals(konstues[2], E.C)
 // TODO: temporariry commented. Task for investigation is KT-56107
-//    val entries = E.entries
+//    konst entries = E.entries
 //    assertEquals(entries[0], E.A)
 //    assertEquals(entries[1], E.B)
 //    assertEquals(entries[2], E.C)

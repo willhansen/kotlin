@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 
-internal val singleAbstractMethodPhase = makeIrFilePhase(
+internal konst singleAbstractMethodPhase = makeIrFilePhase(
     ::JvmSingleAbstractMethodLowering,
     name = "SingleAbstractMethod",
     description = "Replace SAM conversions with instances of interface-implementing classes",
@@ -37,10 +37,10 @@ internal val singleAbstractMethodPhase = makeIrFilePhase(
 
 private class JvmSingleAbstractMethodLowering(context: JvmBackendContext) : SingleAbstractMethodLowering(context) {
 
-    private val isJavaSamConversionWithEqualsHashCode =
+    private konst isJavaSamConversionWithEqualsHashCode =
         context.state.languageVersionSettings.supportsFeature(LanguageFeature.JavaSamConversionEqualsHashCode)
 
-    override val inInlineFunctionScope: Boolean
+    override konst inInlineFunctionScope: Boolean
         get() = allScopes.any { (it.irElement as? IrDeclaration)?.isInPublicInlineScope == true }
 
     override fun getWrapperVisibility(expression: IrTypeOperatorCall, scopes: List<ScopeWithIr>) =
@@ -62,9 +62,9 @@ private class JvmSingleAbstractMethodLowering(context: JvmBackendContext) : Sing
         endOffset = UNDEFINED_OFFSET
     }
 
-    private val IrType.isKotlinFunInterface: Boolean
+    private konst IrType.isKotlinFunInterface: Boolean
         get() = getClass()?.origin != IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
 
-    override val IrType.needEqualsHashCodeMethods
+    override konst IrType.needEqualsHashCodeMethods
         get() = isKotlinFunInterface || isJavaSamConversionWithEqualsHashCode
 }

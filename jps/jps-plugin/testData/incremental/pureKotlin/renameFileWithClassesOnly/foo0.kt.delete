@@ -1,3 +1,3 @@
 package foo
 
-class A(val x: Int) {}
+class A(konst x: Int) {}

@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.types.KotlinType
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 class BuiltInAnnotationDescriptor(
-        private val builtIns: KotlinBuiltIns,
-        override val fqName: FqName,
-        override val allValueArguments: Map<Name, ConstantValue<*>>
+        private konst builtIns: KotlinBuiltIns,
+        override konst fqName: FqName,
+        override konst allValueArguments: Map<Name, ConstantValue<*>>
 ) : AnnotationDescriptor {
-    override val type: KotlinType by lazy(PUBLICATION) {
+    override konst type: KotlinType by lazy(PUBLICATION) {
         builtIns.getBuiltInClassByFqName(fqName).defaultType
     }
 
-    override val source: SourceElement
+    override konst source: SourceElement
         get() = SourceElement.NO_SOURCE
 }

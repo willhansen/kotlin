@@ -20,9 +20,9 @@ fun tryRenderStructOrUnion(def: StructDef): String? = when (def.kind) {
  * Empty inner records (ie offsetBytes == null) does not affect `packed` heuristic and shall be ignored here.
  * Unsupported members (ie BitField and IncompleteField) to be ignored too but won't be compiled anyway.
  */
-private val StructDef.isPacked: Boolean
+private konst StructDef.isPacked: Boolean
     get() {
-        val baseOffset = fields.firstOrNull()?.offsetBytes ?: return false
+        konst baseOffset = fields.firstOrNull()?.offsetBytes ?: return false
         return members.any { member ->
             when (member) {
                 is Field -> (member.offsetBytes - baseOffset) % member.typeAlign != 0L
@@ -35,26 +35,26 @@ private val StructDef.isPacked: Boolean
 
 private fun tryRenderStruct(def: StructDef): String? {
     // The only case when offset starts from non-zero is a inner anonymous struct or union
-    val baseOffset = def.fields.firstOrNull()?.offsetBytes ?: 0L
+    konst baseOffset = def.fields.firstOrNull()?.offsetBytes ?: 0L
     var offset = 0L
 
-    val isPackedStruct = def.isPacked
+    konst isPackedStruct = def.isPacked
 
     // The following is to deal with the case when a field has big alignment but occasionally its offset is naturally aligned,
     // so we can't guess it by heuristic. However the enclosing struct must be explicitly aligned.
-    val maxAlign = def.members.filterIsInstance<Field>().maxOfOrNull { it.typeAlign }
-    val forceAlign = maxAlign?.let { def.align > maxAlign }
+    konst maxAlign = def.members.filterIsInstance<Field>().maxOfOrNull { it.typeAlign }
+    konst forceAlign = maxAlign?.let { def.align > maxAlign }
             ?: (def.align > 1)  // Anonymous inner may be empty AND explicitly aligned
 
     return buildString {
         append("struct  { ")
 
         def.members.forEach { it ->
-            val decl = when (it) {
+            konst decl = when (it) {
                 is Field -> {
-                    val immediateOffset = it.offsetBytes - baseOffset
-                    val defaultAlignment = if (isPackedStruct) 1L else it.typeAlign
-                    val alignment = guessAlignment(offset, immediateOffset, defaultAlignment) ?: return null
+                    konst immediateOffset = it.offsetBytes - baseOffset
+                    konst defaultAlignment = if (isPackedStruct) 1L else it.typeAlign
+                    konst alignment = guessAlignment(offset, immediateOffset, defaultAlignment) ?: return null
                     offset = immediateOffset + it.typeSize
 
                     tryRenderVar(it.type, it.name)
@@ -88,15 +88,15 @@ private fun guessAlignment(offset: Long, paddedOffset: Long, defaultAlignment: L
 private fun alignUp(x: Long, alignment: Long): Long = (x + alignment - 1) and ((alignment - 1).inv())
 
 private fun tryRenderUnion(def: StructDef): String? {
-    val maxAlign = def.members.filterIsInstance<Field>().maxOfOrNull { it.typeAlign }
-    val forceAlign = maxAlign?.let { def.align > maxAlign }
+    konst maxAlign = def.members.filterIsInstance<Field>().maxOfOrNull { it.typeAlign }
+    konst forceAlign = maxAlign?.let { def.align > maxAlign }
             ?: (def.align > 1)  // Anonymous inner may be empty AND explicitly aligned
 
     return buildString {
         append("union { ")
         def.members.forEach { it ->
-            val name = it.name
-            val decl = when (it) {
+            konst name = it.name
+            konst decl = when (it) {
                 is Field -> tryRenderVar(it.type, name)
                 is BitField, is IncompleteField -> null
                 is AnonymousInnerRecord -> tryRenderStructOrUnion(it.def)
@@ -123,13 +123,13 @@ private fun tryRenderVar(type: Type, name: String): String? = when (type) {
     else -> null
 }
 
-private val Field.offsetBytes: Long
+private konst Field.offsetBytes: Long
     get() {
         require(this.offset % 8 == 0L)
         return this.offset / 8
     }
 
-private val AnonymousInnerRecord.offsetBytes: Long?
+private konst AnonymousInnerRecord.offsetBytes: Long?
     get() {
         return def.fields.firstOrNull()?.offsetBytes
     }

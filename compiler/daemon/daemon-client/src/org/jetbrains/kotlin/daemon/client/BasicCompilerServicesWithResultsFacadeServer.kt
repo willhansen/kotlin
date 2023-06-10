@@ -27,8 +27,8 @@ import java.rmi.server.UnicastRemoteObject
 
 
 open class BasicCompilerServicesWithResultsFacadeServer(
-        val messageCollector: MessageCollector,
-        val outputsCollector: ((File, List<File>) -> Unit)? = null,
+        konst messageCollector: MessageCollector,
+        konst outputsCollector: ((File, List<File>) -> Unit)? = null,
         port: Int = SOCKET_ANY_FREE_PORT
 ) : CompilerServicesFacadeBase,
     UnicastRemoteObject(port, LoopbackNetworkInterface.clientLoopbackSocketFactory, LoopbackNetworkInterface.serverLoopbackSocketFactory)
@@ -39,7 +39,7 @@ open class BasicCompilerServicesWithResultsFacadeServer(
 }
 
 fun MessageCollector.reportFromDaemon(outputsCollector: ((File, List<File>) -> Unit)?, category: Int, severity: Int, message: String?, attachment: Serializable?) {
-    val reportCategory = ReportCategory.fromCode(category)
+    konst reportCategory = ReportCategory.fromCode(category)
 
     when (reportCategory) {
         ReportCategory.OUTPUT_MESSAGE -> {
@@ -58,7 +58,7 @@ fun MessageCollector.reportFromDaemon(outputsCollector: ((File, List<File>) -> U
             report(CompilerMessageSeverity.EXCEPTION, message.orEmpty())
         }
         ReportCategory.COMPILER_MESSAGE -> {
-            val compilerSeverity = when (ReportSeverity.fromCode(severity)) {
+            konst compilerSeverity = when (ReportSeverity.fromCode(severity)) {
                 ReportSeverity.ERROR -> CompilerMessageSeverity.ERROR
                 ReportSeverity.WARNING -> CompilerMessageSeverity.WARNING
                 ReportSeverity.INFO -> CompilerMessageSeverity.INFO
@@ -87,7 +87,7 @@ fun MessageCollector.reportFromDaemon(outputsCollector: ((File, List<File>) -> U
 }
 
 private fun MessageCollector.reportUnexpected(category: Int, severity: Int, message: String?, attachment: Serializable?) {
-    val compilerMessageSeverity = when (ReportSeverity.fromCode(severity)) {
+    konst compilerMessageSeverity = when (ReportSeverity.fromCode(severity)) {
         ReportSeverity.ERROR -> CompilerMessageSeverity.ERROR
         ReportSeverity.WARNING -> CompilerMessageSeverity.WARNING
         ReportSeverity.INFO -> CompilerMessageSeverity.INFO

@@ -2,20 +2,20 @@
 // EXPECTED_REACHABLE_NODES: 1317
 package foo
 
-data class Holder<T>(val v: T)
+data class Holder<T>(konst v: T)
 
-data class Dat(val start: String, val end: String)
+data class Dat(konst start: String, konst end: String)
 
-class Obj(val start: String, val end: String)
+class Obj(konst start: String, konst end: String)
 
 fun box(): String {
-    val setD = HashSet<Holder<Dat>>()
+    konst setD = HashSet<Holder<Dat>>()
     setD.add(Holder(Dat("a", "b")))
     setD.add(Holder(Dat("a", "b")))
     setD.add(Holder(Dat("a", "b")))
     assertEquals(1, setD.size)
 
-    val setO = HashSet<Holder<Obj>>()
+    konst setO = HashSet<Holder<Obj>>()
     setO.add(Holder(Obj("a", "b")))
     setO.add(Holder(Obj("a", "b")))
     setO.add(Holder(Obj("a", "b")))

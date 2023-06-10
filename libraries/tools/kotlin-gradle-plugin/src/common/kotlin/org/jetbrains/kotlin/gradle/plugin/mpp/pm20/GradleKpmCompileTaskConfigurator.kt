@@ -13,7 +13,7 @@ interface GradleKpmCompileTaskConfigurator<in T : GradleKpmVariant> {
 
 object GradleKpmJvmCompileTaskConfigurator : GradleKpmCompileTaskConfigurator<GradleKpmJvmVariant> {
     override fun registerCompileTasks(variant: GradleKpmJvmVariant): TaskProvider<*> {
-        val compilationData = variant.compilationData
+        konst compilationData = variant.compilationData
         LifecycleTasksManager(variant.project).registerClassesTask(compilationData)
         return GradleKpmCompilationTaskConfigurator(variant.project).createKotlinJvmCompilationTask(variant, compilationData)
     }
@@ -21,7 +21,7 @@ object GradleKpmJvmCompileTaskConfigurator : GradleKpmCompileTaskConfigurator<Gr
 
 object GradleKpmNativeCompileTaskConfigurator : GradleKpmCompileTaskConfigurator<GradleKpmNativeVariantInternal> {
     override fun registerCompileTasks(variant: GradleKpmNativeVariantInternal): TaskProvider<*> {
-        val compilationData = variant.compilationData
+        konst compilationData = variant.compilationData
         LifecycleTasksManager(variant.project).registerClassesTask(compilationData)
         return GradleKpmCompilationTaskConfigurator(variant.project).createKotlinNativeCompilationTask(variant, compilationData)
     }

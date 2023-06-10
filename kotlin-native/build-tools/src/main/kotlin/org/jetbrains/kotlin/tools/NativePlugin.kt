@@ -62,9 +62,9 @@ abstract class ToolExecutionTask : DefaultTask() {
     }
 }
 
-class ToolPatternImpl(val extension: NativeToolsExtension, val output:String, vararg val input: String):ToolPattern {
-    val tool = mutableListOf<String>()
-    val args = mutableListOf<String>()
+class ToolPatternImpl(konst extension: NativeToolsExtension, konst output:String, vararg konst input: String):ToolPattern {
+    konst tool = mutableListOf<String>()
+    konst args = mutableListOf<String>()
     override fun ruleOut(): String = output
     override fun ruleInFirst(): String = input.first()
     override fun ruleInAll(): Array<String> = arrayOf(*input)
@@ -87,7 +87,7 @@ class ToolPatternImpl(val extension: NativeToolsExtension, val output:String, va
         task.dependsOn(":kotlin-native:dependencies:update")
         if (configureDepencies)
             task.input.forEach { task.dependsOn(it.name) }
-        val file = extension.project.file(output)
+        konst file = extension.project.file(output)
         file.parentFile.mkdirs()
         task.output = file
         task.cmd = tool.first()
@@ -96,11 +96,11 @@ class ToolPatternImpl(val extension: NativeToolsExtension, val output:String, va
 }
 
 open class SourceSet(
-    val sourceSets: SourceSets,
-    val name: String,
-    val initialDirectory: File = sourceSets.project.projectDir,
-    val initialSourceSet: SourceSet? = null,
-    val rule: Pair<String, String>? = null
+    konst sourceSets: SourceSets,
+    konst name: String,
+    konst initialDirectory: File = sourceSets.project.projectDir,
+    konst initialSourceSet: SourceSet? = null,
+    konst rule: Pair<String, String>? = null
 ) {
     var collection = sourceSets.project.objects.fileCollection() as FileCollection
     fun file(path: String) {
@@ -137,7 +137,7 @@ open class SourceSet(
                 sourceSets.project.file("${initialSourceSet.initialDirectory.path}/${it.first}") to sourceSets.project.file("${initialDirectory.path}/${it.second}")
             }.map {
                 sourceSets.project.tasks.register<ToolExecutionTask>(it.second.name, ToolExecutionTask::class.java) {
-                    val toolConfiguration = ToolPatternImpl(sourceSets.extension, it.second.path, it.first.path)
+                    konst toolConfiguration = ToolPatternImpl(sourceSets.extension, it.second.path, it.first.path)
                     sourceSets.extension.toolPatterns[rule]!!.invoke(toolConfiguration)
                     toolConfiguration.configure(this, initialSourceSet.rule != null)
                 }
@@ -145,7 +145,7 @@ open class SourceSet(
     }
 }
 
-class SourceSets(val project: Project, val extension: NativeToolsExtension, val sources: MutableMap<String, SourceSet>) :
+class SourceSets(konst project: Project, konst extension: NativeToolsExtension, konst sources: MutableMap<String, SourceSet>) :
     MutableMap<String, SourceSet> by sources {
     operator fun String.invoke(initialDirectory: File = project.projectDir, configuration: SourceSet.() -> Unit) {
         sources[this] = SourceSet(this@SourceSets, this, initialDirectory).also {
@@ -156,7 +156,7 @@ class SourceSets(val project: Project, val extension: NativeToolsExtension, val 
 
 
 interface Environment {
-    operator fun String.invoke(vararg values: String)
+    operator fun String.invoke(vararg konstues: String)
 }
 
 interface ToolPattern {
@@ -173,8 +173,8 @@ typealias ToolPatternConfiguration = ToolPattern.() -> Unit
 typealias EnvironmentConfiguration = Environment.() -> Unit
 
 class ToolConfigurationPatterns(
-    val extension: NativeToolsExtension,
-    val patterns: MutableMap<Pair<String, String>, ToolPatternConfiguration>
+    konst extension: NativeToolsExtension,
+    konst patterns: MutableMap<Pair<String, String>, ToolPatternConfiguration>
 ) : MutableMap<Pair<String, String>, ToolPatternConfiguration> by patterns {
     operator fun Pair<String, String>.invoke(configuration: ToolPatternConfiguration) {
         patterns[this] = configuration
@@ -182,10 +182,10 @@ class ToolConfigurationPatterns(
 }
 
 
-open class NativeToolsExtension(val project: Project) {
-    val sourceSets = SourceSets(project, this, mutableMapOf<String, SourceSet>())
-    val toolPatterns = ToolConfigurationPatterns(this, mutableMapOf<Pair<String, String>, ToolPatternConfiguration>())
-    val cleanupFiles = mutableListOf<String>()
+open class NativeToolsExtension(konst project: Project) {
+    konst sourceSets = SourceSets(project, this, mutableMapOf<String, SourceSet>())
+    konst toolPatterns = ToolConfigurationPatterns(this, mutableMapOf<Pair<String, String>, ToolPatternConfiguration>())
+    konst cleanupFiles = mutableListOf<String>()
     fun sourceSet(configuration: SourceSets.() -> Unit) {
         sourceSets.configuration()
     }
@@ -208,8 +208,8 @@ open class NativeToolsExtension(val project: Project) {
             objSet.forEach {
                 dependsOn(it.implicitTasks())
             }
-            val deps = objSet.flatMap { it.collection.files }.map { it.path }
-            val toolConfiguration = ToolPatternImpl(sourceSets.extension, "${project.buildDir.path}/$name", *deps.toTypedArray())
+            konst deps = objSet.flatMap { it.collection.files }.map { it.path }
+            konst toolConfiguration = ToolPatternImpl(sourceSets.extension, "${project.buildDir.path}/$name", *deps.toTypedArray())
             toolConfiguration.configuration()
             toolConfiguration.configure(this, false )
         }

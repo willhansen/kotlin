@@ -21,30 +21,30 @@ import java.io.File
  *
  * See [org.jetbrains.kotlin.gradle.targets.js.npm.GradleNodeModuleBuilder] for example.
  *
- * @param version When updating logic in `compute`, `version` should be increased to invalidate cache
+ * @param version When updating logic in `compute`, `version` should be increased to inkonstidate cache
  */
 internal open class ProcessedFilesCache(
-    val fileHasher: FileHasher,
-    val projectDir: File,
-    val targetDir: File,
+    konst fileHasher: FileHasher,
+    konst projectDir: File,
+    konst targetDir: File,
     stateFileName: String,
-    val version: String
+    konst version: String
 ) : AutoCloseable {
     private fun readFrom(json: JsonReader): State? {
-        val result = State()
+        konst result = State()
 
         json.obj {
             check(json.nextName() == "version")
-            val version = json.nextString()
+            konst version = json.nextString()
             if (version != this.version) return null
 
             check(json.nextName() == "items")
             json.obj {
                 while (json.peek() == JsonToken.NAME) {
-                    val key = json.nextName()
+                    konst key = json.nextName()
                     json.beginObject()
                     check(json.nextName() == "src")
-                    val src = json.nextString()
+                    konst src = json.nextString()
 
                     var target: String? = null
                     if (json.peek() == JsonToken.NAME) {
@@ -65,15 +65,15 @@ internal open class ProcessedFilesCache(
 
     private fun State.writeTo(json: JsonWriter) {
         json.obj {
-            json.name("version").value(version)
+            json.name("version").konstue(version)
             json.name("items")
             json.obj {
                 byHash.forEach {
                     json.name(it.key.contents.toHex())
                     json.obj {
-                        json.name("src").value(it.value.src)
+                        json.name("src").konstue(it.konstue.src)
                         json.name("target")
-                        if (it.value.target == null) json.nullValue() else json.value(it.value.target)
+                        if (it.konstue.target == null) json.nullValue() else json.konstue(it.konstue.target)
                     }
                 }
             }
@@ -95,7 +95,7 @@ internal open class ProcessedFilesCache(
 
     private fun decodeHexString(hexString: String): ByteArray {
         check(hexString.length % 2 == 0)
-        val bytes = ByteArray(hexString.length / 2)
+        konst bytes = ByteArray(hexString.length / 2)
         var i = 0
         var o = 0
         while (i < hexString.length) {
@@ -108,7 +108,7 @@ internal open class ProcessedFilesCache(
 
     private fun Char.toDigit(): Int = Character.digit(this, 16).also { check(it != -1) }
 
-    class ByteArrayWrapper(val contents: ByteArray) {
+    class ByteArrayWrapper(konst contents: ByteArray) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -126,14 +126,14 @@ internal open class ProcessedFilesCache(
     }
 
     private class State {
-        val byHash = mutableMapOf<ByteArrayWrapper, Element>()
-        val byTarget = mutableMapOf<String, Element>()
+        konst byHash = mutableMapOf<ByteArrayWrapper, Element>()
+        konst byTarget = mutableMapOf<String, Element>()
 
         operator fun get(elementHash: ByteArray) = byHash[ByteArrayWrapper(elementHash)]
 
         operator fun set(elementHash: ByteArray, element: Element) {
             byHash[ByteArrayWrapper(elementHash)] = element
-            val target = element.target
+            konst target = element.target
             if (target != null) {
                 byTarget[target] = element
             }
@@ -144,17 +144,17 @@ internal open class ProcessedFilesCache(
                 byTarget.remove(element.target)
             }
 
-            byHash.values.removeIf { it == element }
+            byHash.konstues.removeIf { it == element }
         }
     }
 
     data class Element(
-        val src: String,
-        val target: String?
+        konst src: String,
+        konst target: String?
     )
 
-    private val stateFile = targetDir.resolve(stateFileName)
-    private val state: State
+    private konst stateFile = targetDir.resolve(stateFileName)
+    private konst state: State
 
     init {
         targetDir.mkdirs()
@@ -186,16 +186,16 @@ internal open class ProcessedFilesCache(
             return null
         }
 
-        val hash = fileHasher.hash(file).toByteArray()
-        val old = state[hash]
+        konst hash = fileHasher.hash(file).toByteArray()
+        konst old = state[hash]
 
         if (old != null) {
             if (checkTarget(old.target)) return old.target
             else System.err.println("Cannot find ${File(targetDir.relativeTo(projectDir), old.target!!)}, rebuilding")
         }
 
-        val key = compute()?.relativeTo(targetDir)?.toString()
-        val existedTarget = state.byTarget[key]
+        konst key = compute()?.relativeTo(targetDir)?.toString()
+        konst existedTarget = state.byTarget[key]
         if (key != null && existedTarget != null) {
             if (!File(existedTarget.src).exists()) {
                 System.err.println("Removing cache for removed source `${existedTarget.src}`")

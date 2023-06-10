@@ -1,4 +1,4 @@
-open class Player(val name: String)
+open class Player(konst name: String)
 open class SlashPlayer(name: String) : Player(name)
 
 public abstract class Game<T : Player> {
@@ -15,9 +15,9 @@ class SimpleGame : Game<SlashPlayer>() {
 }
 
 fun box(): String {
-    val player1 = SimpleGame().getPlayer("fail", false)
+    konst player1 = SimpleGame().getPlayer("fail", false)
     if (player1 != null) return "fail 1"
 
-    val player2 = SimpleGame().getPlayer("OK")
+    konst player2 = SimpleGame().getPlayer("OK")
     return player2!!.name
 }

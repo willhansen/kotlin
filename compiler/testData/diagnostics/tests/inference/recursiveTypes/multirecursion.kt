@@ -12,7 +12,7 @@ class C2 : I4<C2>
 class Box<T>
 
 fun test(c1: C1<Box<Box<Box<Int>>>>, c2: C2) {
-    val v = select(c1, c2)
+    konst v = select(c1, c2)
     <!DEBUG_INFO_EXPRESSION_TYPE("{I1<*> & I2<*>}")!>v<!>
 }
 

@@ -38,9 +38,9 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import kotlin.test.fail
 
 abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
-    private val defaultRenderer = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES
+    private konst defaultRenderer = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES
 
-    open val defaultRendererOption: PrettyRendererOption? = null
+    open konst defaultRendererOption: PrettyRendererOption? = null
 
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
@@ -52,11 +52,11 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
     abstract fun KtAnalysisSession.collectSymbols(ktFile: KtFile, testServices: TestServices): SymbolsData
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val directives = module.directives
-        val directiveToIgnoreSymbolRestore = directives.doNotCheckSymbolRestoreDirective()
-        val directiveToIgnoreNonPsiSymbolRestore = directives.doNotCheckNonPsiSymbolRestoreDirective()
+        konst directives = module.directives
+        konst directiveToIgnoreSymbolRestore = directives.doNotCheckSymbolRestoreDirective()
+        konst directiveToIgnoreNonPsiSymbolRestore = directives.doNotCheckNonPsiSymbolRestoreDirective()
 
-        val prettyRenderer = buildList {
+        konst prettyRenderer = buildList {
             addIfNotNull(defaultRendererOption)
             addAll(directives[PRETTY_RENDERER_OPTION])
         }.fold(defaultRenderer) { acc, prettyRenderingMode ->
@@ -64,19 +64,19 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
         }
 
         fun KtAnalysisSession.safePointer(ktSymbol: KtSymbol): PointerWrapper? {
-            val regularPointer = ktSymbol.runCatching {
+            konst regularPointer = ktSymbol.runCatching {
                 createPointerForTest(disablePsiBasedSymbols = false)
             }.let {
                 if (directiveToIgnoreSymbolRestore == null) it.getOrThrow() else it.getOrNull()
             } ?: return null
 
             assertSymbolPointer(regularPointer, testServices)
-            val nonPsiPointer = ktSymbol.runCatching {
+            konst nonPsiPointer = ktSymbol.runCatching {
                 if (this is KtFileSymbol) return@runCatching null
                 createPointerForTest(disablePsiBasedSymbols = true)
             }
 
-            val pointerWithoutPsiAnchor = if (directiveToIgnoreSymbolRestore == null && directiveToIgnoreNonPsiSymbolRestore == null)
+            konst pointerWithoutPsiAnchor = if (directiveToIgnoreSymbolRestore == null && directiveToIgnoreNonPsiSymbolRestore == null)
                 nonPsiPointer.getOrThrow()
             else
                 nonPsiPointer.getOrNull()
@@ -88,11 +88,11 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
             return PointerWrapper(regularPointer = regularPointer, pointerWithoutPsiAnchor = pointerWithoutPsiAnchor)
         }
 
-        val pointersWithRendered = executeOnPooledThreadInReadAction {
+        konst pointersWithRendered = executeOnPooledThreadInReadAction {
             analyseForTest(ktFile) {
-                val (symbols, symbolForPrettyRendering) = collectSymbols(ktFile, testServices)
+                konst (symbols, symbolForPrettyRendering) = collectSymbols(ktFile, testServices)
 
-                val pointerWithRenderedSymbol = symbols
+                konst pointerWithRenderedSymbol = symbols
                     .asSequence()
                     .flatMap { symbol ->
                         sequenceOf(symbol to true) + symbol.withImplicitSymbols().map { implicitSymbol ->
@@ -109,7 +109,7 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
                     }
                     .toList()
 
-                val pointerWithPrettyRenderedSymbol = symbolForPrettyRendering.map { symbol ->
+                konst pointerWithPrettyRenderedSymbol = symbolForPrettyRendering.map { symbol ->
                     PointerWithRenderedSymbol(
                         safePointer(symbol),
                         when (symbol) {
@@ -160,7 +160,7 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
         KtPsiBasedSymbolPointer.withDisabledPsiBasedPointers(disable = disablePsiBasedSymbols) { createPointer() }
 
     private fun assertSymbolPointer(pointer: KtSymbolPointer<*>, testServices: TestServices) {
-        testServices.assertions.assertTrue(value = pointer.pointsToTheSameSymbolAs(pointer)) {
+        testServices.assertions.assertTrue(konstue = pointer.pointsToTheSameSymbolAs(pointer)) {
             "The symbol is not equal to itself: ${pointer::class}"
         }
     }
@@ -189,10 +189,10 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
         data: SymbolPointersData,
         testServices: TestServices,
     ) {
-        val actual = data.pointers.renderDeclarations()
+        konst actual = data.pointers.renderDeclarations()
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)
 
-        val actualPretty = data.pointersForPrettyRendering.renderDeclarations()
+        konst actualPretty = data.pointersForPrettyRendering.renderDeclarations()
         testServices.assertions.assertEqualsToTestDataFileSibling(actualPretty, extension = ".pretty.txt")
     }
 
@@ -212,20 +212,20 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
         directives: RegisteredDirectives,
     ) {
         var failed = false
-        val restoredPointers = mutableListOf<KtSymbolPointer<*>>()
+        konst restoredPointers = mutableListOf<KtSymbolPointer<*>>()
         try {
-            val restored = analyseForTest(ktFile) {
+            konst restored = analyseForTest(ktFile) {
                 pointersWithRendered.mapNotNull { (pointerWrapper, expectedRender, shouldBeRendered) ->
-                    val pointer = if (isRegularPointers) {
+                    konst pointer = if (isRegularPointers) {
                         pointerWrapper?.regularPointer
                     } else {
                         pointerWrapper?.pointerWithoutPsiAnchor
                     } ?: error("Symbol pointer for $expectedRender was not created")
 
-                    val restored = pointer.restoreSymbol() ?: error("Symbol $expectedRender was not restored")
+                    konst restored = pointer.restoreSymbol() ?: error("Symbol $expectedRender was not restored")
                     restoredPointers += pointer
 
-                    val actualRender = renderSymbolForComparison(restored, directives)
+                    konst actualRender = renderSymbolForComparison(restored, directives)
                     if (shouldBeRendered) {
                         actualRender
                     } else {
@@ -235,7 +235,7 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
                 }
             }
 
-            val actual = restored.renderAsDeclarations()
+            konst actual = restored.renderAsDeclarations()
             testServices.assertions.assertEqualsToTestDataFileSibling(actual)
         } catch (e: Throwable) {
             if (directiveToIgnore == null) throw e
@@ -265,18 +265,18 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
         if (restoredPointers.isEmpty()) return
 
         analyseForTest(ktFile) {
-            val symbolsToPointersMap = restoredPointers.groupByTo(mutableMapOf()) {
+            konst symbolsToPointersMap = restoredPointers.groupByTo(mutableMapOf()) {
                 it.restoreSymbol() ?: error("Unexpectedly non-restored symbol pointer: ${it::class}")
             }
 
-            val pointersToCheck = symbolsToPointersMap.map { (key, value) ->
-                value += if (isRegularPointers) {
+            konst pointersToCheck = symbolsToPointersMap.map { (key, konstue) ->
+                konstue += if (isRegularPointers) {
                     key.createPointerForTest(disablePsiBasedSymbols = false)
                 } else {
                     key.createPointerForTest(disablePsiBasedSymbols = true)
                 }
 
-                value
+                konstue
             }
 
             for (pointers in pointersToCheck) {
@@ -292,40 +292,40 @@ abstract class AbstractSymbolTest : AbstractAnalysisApiSingleFileTest() {
     }
 
     protected open fun KtAnalysisSession.renderSymbolForComparison(symbol: KtSymbol, directives: RegisteredDirectives): String {
-        val renderExpandedTypes = directives[PRETTY_RENDERER_OPTION].any { it == PrettyRendererOption.FULLY_EXPANDED_TYPES }
+        konst renderExpandedTypes = directives[PRETTY_RENDERER_OPTION].any { it == PrettyRendererOption.FULLY_EXPANDED_TYPES }
         return with(DebugSymbolRenderer(renderExtra = true, renderExpandedTypes = renderExpandedTypes)) { render(symbol) }
     }
 }
 
 object SymbolTestDirectives : SimpleDirectivesContainer() {
-    val DO_NOT_CHECK_SYMBOL_RESTORE by directive(
+    konst DO_NOT_CHECK_SYMBOL_RESTORE by directive(
         description = "Symbol restoring for some symbols in current test is not supported yet",
     )
 
-    val DO_NOT_CHECK_SYMBOL_RESTORE_K1 by directive(
+    konst DO_NOT_CHECK_SYMBOL_RESTORE_K1 by directive(
         description = "Symbol restoring for some symbols in current test is not supported yet in K1",
     )
 
-    val DO_NOT_CHECK_SYMBOL_RESTORE_K2 by directive(
+    konst DO_NOT_CHECK_SYMBOL_RESTORE_K2 by directive(
         description = "Symbol restoring for some symbols in current test is not supported yet in K2",
     )
 
-    val DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE by directive(
+    konst DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE by directive(
         description = "Symbol restoring w/o psi for some symbols in current test is not supported yet",
     )
 
-    val DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE_K1 by directive(
+    konst DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE_K1 by directive(
         description = "Symbol restoring w/o psi for some symbols in current test is not supported yet in K1",
     )
 
-    val DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE_K2 by directive(
+    konst DO_NOT_CHECK_NON_PSI_SYMBOL_RESTORE_K2 by directive(
         description = "Symbol restoring w/o psi for some symbols in current test is not supported yet in K2",
     )
 
-    val PRETTY_RENDERER_OPTION by enumDirective(description = "Explicit rendering mode") { PrettyRendererOption.valueOf(it) }
+    konst PRETTY_RENDERER_OPTION by enumDirective(description = "Explicit rendering mode") { PrettyRendererOption.konstueOf(it) }
 }
 
-enum class PrettyRendererOption(val transformation: (KtDeclarationRenderer) -> KtDeclarationRenderer) {
+enum class PrettyRendererOption(konst transformation: (KtDeclarationRenderer) -> KtDeclarationRenderer) {
     BODY_WITH_MEMBERS(
         { renderer ->
             renderer.with {
@@ -346,28 +346,28 @@ enum class PrettyRendererOption(val transformation: (KtDeclarationRenderer) -> K
 }
 
 data class SymbolsData(
-    val symbols: List<KtSymbol>,
-    val symbolsForPrettyRendering: List<KtSymbol> = symbols,
+    konst symbols: List<KtSymbol>,
+    konst symbolsForPrettyRendering: List<KtSymbol> = symbols,
 )
 
 private data class SymbolPointersData(
-    val pointers: List<PointerWithRenderedSymbol>,
-    val pointersForPrettyRendering: List<PointerWithRenderedSymbol>,
+    konst pointers: List<PointerWithRenderedSymbol>,
+    konst pointersForPrettyRendering: List<PointerWithRenderedSymbol>,
 )
 
 private data class PointerWithRenderedSymbol(
-    val pointer: PointerWrapper?,
-    val rendered: String,
-    val shouldBeRendered: Boolean = true,
+    konst pointer: PointerWrapper?,
+    konst rendered: String,
+    konst shouldBeRendered: Boolean = true,
 )
 
 private data class PointerWrapper(
-    val regularPointer: KtSymbolPointer<*>,
-    val pointerWithoutPsiAnchor: KtSymbolPointer<*>?,
+    konst regularPointer: KtSymbolPointer<*>,
+    konst pointerWithoutPsiAnchor: KtSymbolPointer<*>?,
 )
 
 private fun KtSymbol?.withImplicitSymbols(): Sequence<KtSymbol> {
-    val ktSymbol = this ?: return emptySequence()
+    konst ktSymbol = this ?: return emptySequence()
     return sequence {
         yield(ktSymbol)
 
@@ -383,7 +383,7 @@ private fun KtSymbol?.withImplicitSymbols(): Sequence<KtSymbol> {
         }
 
         if (ktSymbol is KtFunctionLikeSymbol) {
-            for (parameter in ktSymbol.valueParameters) {
+            for (parameter in ktSymbol.konstueParameters) {
                 yieldAll(parameter.withImplicitSymbols())
             }
         }

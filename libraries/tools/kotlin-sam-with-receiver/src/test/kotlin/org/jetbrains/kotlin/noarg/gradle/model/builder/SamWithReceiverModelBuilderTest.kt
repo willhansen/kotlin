@@ -13,7 +13,7 @@ import org.junit.Test
 class SamWithReceiverModelBuilderTest {
     @Test
     fun testCanBuild() {
-        val modelBuilder = SamWithReceiverModelBuilder()
+        konst modelBuilder = SamWithReceiverModelBuilder()
         assertTrue(modelBuilder.canBuild(SamWithReceiver::class.java.name))
         assertFalse(modelBuilder.canBuild("wrongModel"))
     }

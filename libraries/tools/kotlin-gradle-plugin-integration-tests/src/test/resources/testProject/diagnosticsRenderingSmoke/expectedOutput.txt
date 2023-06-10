@@ -14,7 +14,7 @@ w: [CommonMainWithDependsOnDiagnostic | WARNING] commonMain can't declare depend
 w: [CommonMainWithDependsOnDiagnostic | WARNING] commonMain can't declare dependsOn on other source sets
 #diagnostic-end
 
-w: [UnusedSourceSetsWarning | WARNING] The Kotlin source set unusedCreatedInAfterEvaluate was configured but not added to any Kotlin compilation.
+w: [UnusedSourceSetsWarning | WARNING] The Kotlin source set unusedCreatedInAfterEkonstuate was configured but not added to any Kotlin compilation.
 
 You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
 See https://kotl.in/connecting-source-sets

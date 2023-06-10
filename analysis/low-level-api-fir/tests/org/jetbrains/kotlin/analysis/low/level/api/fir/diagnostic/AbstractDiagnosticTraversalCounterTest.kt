@@ -40,7 +40,7 @@ import org.jetbrains.kotlin.test.services.assertions
  * Check that every declaration is visited exactly one time during diagnostic collection
  */
 abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
@@ -54,14 +54,14 @@ abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingl
             // we should get diagnostics before we resolve the whole file by  ktFile.getOrBuildFir
             ktFile.collectDiagnosticsForFile(firResolveSession, DiagnosticCheckerFilter.ONLY_COMMON_CHECKERS)
 
-            val firFile = ktFile.getOrBuildFirOfType<FirFile>(firResolveSession)
+            konst firFile = ktFile.getOrBuildFirOfType<FirFile>(firResolveSession)
 
-            val errorElements = collectErrorElements(firFile)
+            konst errorElements = collectErrorElements(firFile)
 
             if (errorElements.isNotEmpty()) {
-                val zeroElements = errorElements.filter { it.second == 0 }
-                val nonZeroElements = errorElements.filter { it.second > 1 }
-                val message = buildString {
+                konst zeroElements = errorElements.filter { it.second == 0 }
+                konst nonZeroElements = errorElements.filter { it.second > 1 }
+                konst message = buildString {
                     if (zeroElements.isNotEmpty()) {
                         appendLine(
                             """ |The following elements were not visited 
@@ -84,9 +84,9 @@ abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingl
     }
 
     private fun collectErrorElements(firFile: FirFile): List<Pair<FirElement, Int>> {
-        val handler = firFile.llFirSession.beforeElementDiagnosticCollectionHandler as BeforeElementTestDiagnosticCollectionHandler
-        val errorElements = mutableListOf<Pair<FirElement, Int>>()
-        val nonDuplicatingElements = findNonDuplicatingFirElements(firFile).filter { element ->
+        konst handler = firFile.llFirSession.beforeElementDiagnosticCollectionHandler as BeforeElementTestDiagnosticCollectionHandler
+        konst errorElements = mutableListOf<Pair<FirElement, Int>>()
+        konst nonDuplicatingElements = findNonDuplicatingFirElements(firFile).filter { element ->
             when {
                 element is FirTypeRef && element.source?.kind != KtRealSourceElementKind -> {
                     // AbstractDiagnosticCollectorVisitor do not visit such elements
@@ -101,7 +101,7 @@ abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingl
         firFile.accept(object : FirVisitorVoid() {
             override fun visitElement(element: FirElement) {
                 if (element !in nonDuplicatingElements) return
-                val visitedTimes = handler.visitedTimes[element] ?: 0
+                konst visitedTimes = handler.visitedTimes[element] ?: 0
                 if (visitedTimes != 1) {
                     errorElements += element to visitedTimes
                 }
@@ -116,9 +116,9 @@ abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingl
     private fun findNonDuplicatingFirElements(
         firFile: FirElement,
     ): Set<FirElement> {
-        val elementUsageCount = mutableMapOf<FirElement, Int>()
-        val sessionHolder = SessionHolderImpl((firFile as FirDeclaration).moduleData.session, ScopeSession())
-        val visitor = object : AbstractDiagnosticCollectorVisitor(
+        konst elementUsageCount = mutableMapOf<FirElement, Int>()
+        konst sessionHolder = SessionHolderImpl((firFile as FirDeclaration).moduleData.session, ScopeSession())
+        konst visitor = object : AbstractDiagnosticCollectorVisitor(
             PersistentCheckerContextFactory.createEmptyPersistenceCheckerContext(sessionHolder)
         ) {
             override fun visitNestedElements(element: FirElement) {
@@ -137,13 +137,13 @@ abstract class AbstractDiagnosticTraversalCounterTest : AbstractLowLevelApiSingl
     private class BeforeElementLLFirSessionConfigurator : LLFirSessionConfigurator {
         @OptIn(SessionConfiguration::class)
         override fun configure(session: LLFirSession) {
-            val handler = BeforeElementTestDiagnosticCollectionHandler()
+            konst handler = BeforeElementTestDiagnosticCollectionHandler()
             session.register(BeforeElementDiagnosticCollectionHandler::class, handler)
         }
     }
 
     class BeforeElementTestDiagnosticCollectionHandler : BeforeElementDiagnosticCollectionHandler() {
-        val visitedTimes = mutableMapOf<FirElement, Int>()
+        konst visitedTimes = mutableMapOf<FirElement, Int>()
         override fun beforeCollectingForElement(element: FirElement) {
             if (!visitedTimes.containsKey(element)) {
                 visitedTimes[element] = 1

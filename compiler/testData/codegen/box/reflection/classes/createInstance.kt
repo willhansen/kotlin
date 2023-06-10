@@ -8,11 +8,11 @@ import kotlin.test.fail
 // Good classes
 
 class Simple
-class PrimaryWithDefaults(val d1: String = "d1", val d2: Int = 2)
-class Secondary(val s: String) {
+class PrimaryWithDefaults(konst d1: String = "d1", konst d2: Int = 2)
+class Secondary(konst s: String) {
     constructor() : this("s")
 }
-class SecondaryWithDefaults(val s: String) {
+class SecondaryWithDefaults(konst s: String) {
     constructor(x: Int = 0) : this(x.toString())
 }
 class SecondaryWithDefaultsNoPrimary {
@@ -22,13 +22,13 @@ class SecondaryWithDefaultsNoPrimary {
 
 // Bad classes
 
-class NoNoArgConstructor(val s: String) {
+class NoNoArgConstructor(konst s: String) {
     constructor(x: Int) : this(x.toString())
 }
 class NoArgAndDefault() {
     constructor(x: Int = 0) : this()
 }
-class DefaultPrimaryAndDefaultSecondary(val s: String = "") {
+class DefaultPrimaryAndDefaultSecondary(konst s: String = "") {
     constructor(x: Int = 0) : this(x.toString())
 }
 class SeveralDefaultSecondaries {
@@ -42,7 +42,7 @@ object Object
 // -----------
 
 inline fun <reified T : Any> test() {
-    val instance = T::class.createInstance()
+    konst instance = T::class.createInstance()
     assertTrue(instance is T)
 }
 

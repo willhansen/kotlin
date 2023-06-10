@@ -26,14 +26,14 @@ internal open class KProperty1Proxy(
         }
     }
 
-    override val getter: KProperty1.Getter<Any?, Any?>
+    override konst getter: KProperty1.Getter<Any?, Any?>
         get() = object : Getter(state.property.getter!!), KProperty1.Getter<Any?, Any?> {
             override fun invoke(p1: Any?): Any? = call(p1)
 
             override fun call(vararg args: Any?): Any? {
                 checkArguments(1, args.size)
-                val receiverParameter = (getter.dispatchReceiverParameter ?: getter.extensionReceiverParameter)!!
-                val receiver = environment.convertToState(args[0], receiverParameter.getActualType())
+                konst receiverParameter = (getter.dispatchReceiverParameter ?: getter.extensionReceiverParameter)!!
+                konst receiver = environment.convertToState(args[0], receiverParameter.getActualType())
                 return callInterceptor.interceptProxy(getter, listOf(receiver))
             }
 
@@ -54,17 +54,17 @@ internal open class KProperty1Proxy(
 internal class KMutableProperty1Proxy(
     state: KPropertyState, callInterceptor: CallInterceptor
 ) : KProperty1Proxy(state, callInterceptor), KMutableProperty1<Any?, Any?> {
-    override val setter: KMutableProperty1.Setter<Any?, Any?>
+    override konst setter: KMutableProperty1.Setter<Any?, Any?>
         get() = object : Setter(state.property.setter!!), KMutableProperty1.Setter<Any?, Any?> {
             override fun invoke(p1: Any?, p2: Any?) = call(p1, p2)
 
             override fun call(vararg args: Any?) {
                 checkArguments(2, args.size)
-                val receiverParameter = (setter.dispatchReceiverParameter ?: setter.extensionReceiverParameter)!!
-                val receiver = environment.convertToState(args[0], receiverParameter.getActualType())
-                val valueParameter = setter.valueParameters.single()
-                val value = environment.convertToState(args[1], valueParameter.getActualType())
-                callInterceptor.interceptProxy(setter, listOf(receiver, value))
+                konst receiverParameter = (setter.dispatchReceiverParameter ?: setter.extensionReceiverParameter)!!
+                konst receiver = environment.convertToState(args[0], receiverParameter.getActualType())
+                konst konstueParameter = setter.konstueParameters.single()
+                konst konstue = environment.convertToState(args[1], konstueParameter.getActualType())
+                callInterceptor.interceptProxy(setter, listOf(receiver, konstue))
             }
 
             override fun callBy(args: Map<KParameter, Any?>) {
@@ -72,5 +72,5 @@ internal class KMutableProperty1Proxy(
             }
         }
 
-    override fun set(receiver: Any?, value: Any?) = setter.call(receiver, value)
+    override fun set(receiver: Any?, konstue: Any?) = setter.call(receiver, konstue)
 }

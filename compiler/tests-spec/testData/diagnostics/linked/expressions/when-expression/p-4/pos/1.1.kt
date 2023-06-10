@@ -23,18 +23,18 @@ enum JavaEnum {
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val z = JavaEnum.Val_1
-    val when1 = when (z) {
+    konst z = JavaEnum.Val_1
+    konst when1 = when (z) {
         JavaEnum.Val_1 -> { }
         JavaEnum.Val_2 -> { }
         <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> {}
     }
 
-    val when2 = when (z) {
+    konst when2 = when (z) {
         JavaEnum.Val_1 -> { }
         JavaEnum.Val_2 -> { }
     }
-    val when3 = when (z) {
+    konst when3 = when (z) {
         JavaEnum.Val_1 -> { }
         JavaEnum.Val_2 -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>JavaEnum.Val_2<!> -> { }
@@ -44,18 +44,18 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val b = false
-    val when1: Any = when (b) {
+    konst b = false
+    konst when1: Any = when (b) {
         false -> { }
         <!NON_TRIVIAL_BOOLEAN_CONSTANT!>!false<!> -> { }
         <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> { }
     }
 
-    val when2: Any = when (b) {
+    konst when2: Any = when (b) {
         false -> { }
         <!NON_TRIVIAL_BOOLEAN_CONSTANT!>!false<!> -> { }
     }
-    val when3: Any = when (b) {
+    konst when3: Any = when (b) {
         false -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>false<!> -> { }
         <!NON_TRIVIAL_BOOLEAN_CONSTANT!>!false<!> -> { }
@@ -65,17 +65,17 @@ fun case2() {
 // TESTCASE NUMBER: 3
 
 fun case3() {
-    val a = false
-    val when1: Any = when (a) {
+    konst a = false
+    konst when1: Any = when (a) {
         true -> { }
         false -> { }
         <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> { }
     }
-    val when2: Any = when (a) {
+    konst when2: Any = when (a) {
         true -> { }
         false -> { }
     }
-    val when3: Any = when (a) {
+    konst when3: Any = when (a) {
         true -> { }
         false -> { }
         <!DUPLICATE_LABEL_IN_WHEN!>false<!> -> { }
@@ -85,21 +85,21 @@ fun case3() {
 // TESTCASE NUMBER: 4
 
 fun case4() {
-    val x: SClass = SClass.B()
+    konst x: SClass = SClass.B()
 
-    val when1 = when (x){
+    konst when1 = when (x){
         is  SClass.A ->{ }
         is  SClass.B ->{ }
         is  SClass.C ->{ }
         <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> { }
     }
 
-    val when2 = when (x){
+    konst when2 = when (x){
         is  SClass.A ->{ }
         is  SClass.B ->{ }
         is  SClass.C ->{ }
     }
-    val when3 = when (x){
+    konst when3 = when (x){
         is  SClass.A ->{ }
         is  SClass.B ->{ }
         is  <!DUPLICATE_LABEL_IN_WHEN!>SClass.B<!> ->{ }

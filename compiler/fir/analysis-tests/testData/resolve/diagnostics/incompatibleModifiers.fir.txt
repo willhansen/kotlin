@@ -42,7 +42,7 @@ FILE: incompatibleModifiers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val i: R|kotlin/Int| = R|<local>/i|
+        public final konst i: R|kotlin/Int| = R|<local>/i|
             public get(): R|kotlin/Int|
 
         public final operator fun component1(): R|kotlin/Int|
@@ -55,7 +55,7 @@ FILE: incompatibleModifiers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val i: R|kotlin/Int| = R|<local>/i|
+        public final konst i: R|kotlin/Int| = R|<local>/i|
             public get(): R|kotlin/Int|
 
         public final operator fun component1(): R|kotlin/Int|
@@ -68,7 +68,7 @@ FILE: incompatibleModifiers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val i: R|kotlin/Int| = R|<local>/i|
+        public final konst i: R|kotlin/Int| = R|<local>/i|
             public get(): R|kotlin/Int|
 
         public final operator fun component1(): R|kotlin/Int|
@@ -81,10 +81,10 @@ FILE: incompatibleModifiers.kt
             super<R|kotlin/Any|>()
         }
 
-        private open val i1: R|kotlin/Int| = Int(0)
+        private open konst i1: R|kotlin/Int| = Int(0)
             private get(): R|kotlin/Int|
 
-        private abstract val i2: R|kotlin/Int|
+        private abstract konst i2: R|kotlin/Int|
             private get(): R|kotlin/Int|
 
     }
@@ -110,7 +110,7 @@ FILE: incompatibleModifiers.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val i: R|kotlin/Int| = R|<local>/i|
+            public final konst i: R|kotlin/Int| = R|<local>/i|
                 public get(): R|kotlin/Int|
 
             public final operator fun component1(): R|kotlin/Int|

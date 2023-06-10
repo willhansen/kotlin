@@ -27,7 +27,7 @@ public interface KtCallableSignatureRenderer {
                 },
                 { typeParametersRenderer.renderTypeParameters(symbol, printer) },
                 {
-                    val receiverSymbol = symbol.receiverParameter
+                    konst receiverSymbol = symbol.receiverParameter
                     if (receiverSymbol != null) {
                         withSuffix(".") { callableReceiverRenderer.renderReceiver(receiverSymbol, printer) }
                     }
@@ -39,7 +39,7 @@ public interface KtCallableSignatureRenderer {
             )
             " ".separated(
                 {
-                    valueParametersRenderer.renderValueParameters(symbol, printer)
+                    konstueParametersRenderer.renderValueParameters(symbol, printer)
                     withPrefix(": ") { returnTypeRenderer.renderReturnType(symbol, printer) }
                 },
                 { typeParametersRenderer.renderWhereClause(symbol, printer) },

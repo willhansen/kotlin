@@ -1,9 +1,9 @@
 // KT-3581
 
-open class A(val result: String = "OK") {
+open class A(konst result: String = "OK") {
 }
 
 fun box(): String {
-    val a = object : A() {}
+    konst a = object : A() {}
     return a.result
 }

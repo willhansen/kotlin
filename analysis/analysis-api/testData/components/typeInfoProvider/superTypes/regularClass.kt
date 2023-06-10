@@ -1,3 +1,3 @@
 class A
 
-val a = <expr>A()</expr>
+konst a = <expr>A()</expr>

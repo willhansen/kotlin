@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.testing.internal.KotlinTestReport
 import java.io.File
 
 internal class KotlinTestReportCompatibilityHelperG6(
-    private val objectFactory: ObjectFactory
+    private konst objectFactory: ObjectFactory
 ) : KotlinTestReportCompatibilityHelper {
     override fun getDestinationDirectory(kotlinTestReport: KotlinTestReport): DirectoryProperty =
         objectFactory.directoryProperty().fileValue(kotlinTestReport.destinationDir)

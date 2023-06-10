@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.konan.util
 // We store pretty cinterop messages because we want to access them in test infra as well.
 object CInteropHints {
     // It would be nice to mark this property as const when `trimIndent` becomes constexpr.
-    val fmodulesHint = """
+    konst fmodulesHint = """
             It seems that library is using clang modules. Try adding `-compiler-option -fmodules` to cinterop.
             For example, in case of cocoapods plugin:
             

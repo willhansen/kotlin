@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.commonizer.utils.isTopLevelDeprecatedFunction
 
 object CirTreeFunctionDeserializer {
     operator fun invoke(function: KmFunction, containingClass: CirContainingClass?, typeResolver: CirTypeResolver): CirFunction? {
-        val functionTypeResolver = typeResolver.create(function.typeParameters)
+        konst functionTypeResolver = typeResolver.create(function.typeParameters)
         if (function.isFakeOverride()
             || function.isKniBridgeFunction()
             || function.isTopLevelDeprecatedFunction(isTopLevel = containingClass !is CirClass)

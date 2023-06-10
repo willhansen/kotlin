@@ -20,8 +20,8 @@ interface Super {
 import a.*
 
 fun box(): String {
-    val declaredMethod = Super::class.java.getDeclaredMethod("foo", Rec::class.java)
-    val genericString = declaredMethod.toGenericString()
+    konst declaredMethod = Super::class.java.getDeclaredMethod("foo", Rec::class.java)
+    konst genericString = declaredMethod.toGenericString()
     if (genericString != "public abstract a.Rec<?, ?> a.Super.foo(a.Rec<?, ?>)") return "Fail: $genericString"
     return "OK"
 }

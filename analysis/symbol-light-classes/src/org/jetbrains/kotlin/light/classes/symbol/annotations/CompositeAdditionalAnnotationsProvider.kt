@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.light.classes.symbol.annotations
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiModifierList
 
-internal class CompositeAdditionalAnnotationsProvider(val providers: List<AdditionalAnnotationsProvider>) : AdditionalAnnotationsProvider {
+internal class CompositeAdditionalAnnotationsProvider(konst providers: List<AdditionalAnnotationsProvider>) : AdditionalAnnotationsProvider {
     constructor(vararg providers: AdditionalAnnotationsProvider) : this(providers.toList())
 
     override fun addAllAnnotations(

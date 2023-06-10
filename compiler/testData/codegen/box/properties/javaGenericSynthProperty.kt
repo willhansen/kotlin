@@ -73,15 +73,15 @@ public class JOuter<O1, O2> {
 
 fun box(): String {
 
-    val o = JOuter<String, String>("1", "2")
+    konst o = JOuter<String, String>("1", "2")
 
-    val r1 = o.instance("3", "4").foo
+    konst r1 = o.instance("3", "4").foo
     if (r1 != "13") return "FAIL1: $r1"
 
-    val r2 = o.instance("5", "6").bar
+    konst r2 = o.instance("5", "6").bar
     if (r2 != "26") return "FAIL2: $r2"
 
-    val r3 = o.staticInstance().qux
+    konst r3 = o.staticInstance().qux
     if (r3 != "12") return "FAIL3: $r3"
 
     return "OK"

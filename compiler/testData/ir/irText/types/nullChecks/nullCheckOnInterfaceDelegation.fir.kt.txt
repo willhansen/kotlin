@@ -31,7 +31,7 @@ class Delegated : IFoo {
     return <this>.#$$delegate_0.foo() /*!! String */
   }
 
-  private /* final field */ val $$delegate_0: Derived = Derived()
+  private /* final field */ konst $$delegate_0: Derived = Derived()
 
 }
 

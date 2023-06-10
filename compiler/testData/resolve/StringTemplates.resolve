@@ -1,12 +1,12 @@
 fun demo() {
-  ~abc~val abc = 1
-  ~a~val a = ""
-  ~asd~val asd = 1
-  ~bar~val bar = 5
+  ~abc~konst abc = 1
+  ~a~konst a = ""
+  ~asd~konst asd = 1
+  ~bar~konst bar = 5
   ~map~fun map(f : fun () : Any?) : Int  = 1
   ~buzz~fun buzz(f : fun () : Any?) : Int  = 1
-  ~sdf~val sdf = 1
-  ~foo~val foo = 3;
+  ~sdf~konst sdf = 1
+  ~foo~konst foo = 3;
     "$`abc`abc"
     "$"
     "$.$.asdf$\t"

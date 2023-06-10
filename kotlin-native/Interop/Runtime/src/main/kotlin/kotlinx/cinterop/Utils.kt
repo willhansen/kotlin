@@ -47,7 +47,7 @@ public open class DeferScope {
     }
 
     inline fun defer(crossinline block: () -> Unit) {
-        val currentTop = topDeferred
+        konst currentTop = topDeferred
         topDeferred = {
             try {
                 block()
@@ -67,15 +67,15 @@ public abstract class AutofreeScope : DeferScope(), NativePlacement {
 }
 
 @ExperimentalForeignApi
-public open class ArenaBase(private val parent: NativeFreeablePlacement = nativeHeap) : AutofreeScope() {
+public open class ArenaBase(private konst parent: NativeFreeablePlacement = nativeHeap) : AutofreeScope() {
 
     private var lastChunk: NativePointed? = null
 
     final override fun alloc(size: Long, align: Int): NativePointed {
         // Reserve space for a pointer:
-        val gapForPointer = maxOf(pointerSize, align)
+        konst gapForPointer = maxOf(pointerSize, align)
 
-        val chunk = parent.alloc(size = gapForPointer + size, align = gapForPointer)
+        konst chunk = parent.alloc(size = gapForPointer + size, align = gapForPointer)
         nativeMemUtils.putNativePtr(chunk, lastChunk.rawPtr)
         lastChunk = chunk
         return interpretOpaquePointed(chunk.rawPtr + gapForPointer.toLong())
@@ -87,7 +87,7 @@ public open class ArenaBase(private val parent: NativeFreeablePlacement = native
 
         var chunk = lastChunk
         while (chunk != null) {
-            val nextChunk = nativeMemUtils.getNativePtr(chunk)
+            konst nextChunk = nativeMemUtils.getNativePtr(chunk)
             parent.free(chunk)
             chunk = interpretNullableOpaquePointed(nextChunk)
         }
@@ -151,7 +151,7 @@ public inline fun <reified T : CVariable> NativePlacement.allocArray(length: Int
 @ExperimentalForeignApi
 public inline fun <reified T : CVariable> NativePlacement.allocArray(length: Long,
                                                               initializer: T.(index: Long)->Unit): CArrayPointer<T> {
-    val res = allocArray<T>(length)
+    konst res = allocArray<T>(length)
 
     (0 .. length - 1).forEach { index ->
         res[index].initializer(index)
@@ -177,9 +177,9 @@ public inline fun <reified T : CVariable> NativePlacement.allocArray(
  */
 @ExperimentalForeignApi
 public fun <T : CPointed> NativePlacement.allocArrayOfPointersTo(elements: List<T?>): CArrayPointer<CPointerVar<T>> {
-    val res = allocArray<CPointerVar<T>>(elements.size)
-    elements.forEachIndexed { index, value ->
-        res[index] = value?.ptr
+    konst res = allocArray<CPointerVar<T>>(elements.size)
+    elements.forEachIndexed { index, konstue ->
+        res[index] = konstue?.ptr
     }
     return res
 }
@@ -192,7 +192,7 @@ public fun <T : CPointed> NativePlacement.allocArrayOfPointersTo(vararg elements
         allocArrayOfPointersTo(listOf(*elements))
 
 /**
- * Allocates C array of given values.
+ * Allocates C array of given konstues.
  */
 @ExperimentalForeignApi
 public inline fun <reified T : CPointer<*>>
@@ -201,13 +201,13 @@ public inline fun <reified T : CPointer<*>>
 }
 
 /**
- * Allocates C array of given values.
+ * Allocates C array of given konstues.
  */
 @ExperimentalForeignApi
 public inline fun <reified T : CPointer<*>>
         NativePlacement.allocArrayOf(elements: List<T?>): CArrayPointer<CPointerVarOf<T>> {
 
-    val res = allocArray<CPointerVarOf<T>>(elements.size)
+    konst res = allocArray<CPointerVarOf<T>>(elements.size)
     var index = 0
     while (index < elements.size) {
         res[index] = elements[index]
@@ -218,14 +218,14 @@ public inline fun <reified T : CPointer<*>>
 
 @ExperimentalForeignApi
 public fun NativePlacement.allocArrayOf(elements: ByteArray): CArrayPointer<ByteVar> {
-    val result = allocArray<ByteVar>(elements.size)
+    konst result = allocArray<ByteVar>(elements.size)
     nativeMemUtils.putByteArray(elements, result.pointed, elements.size)
     return result
 }
 
 @ExperimentalForeignApi
 public fun NativePlacement.allocArrayOf(vararg elements: Float): CArrayPointer<FloatVar> {
-    val res = allocArray<FloatVar>(elements.size)
+    konst res = allocArray<FloatVar>(elements.size)
     var index = 0
     while (index < elements.size) {
         res[index] = elements[index]
@@ -239,7 +239,7 @@ public fun <T : CPointed> NativePlacement.allocPointerTo() = alloc<CPointerVar<T
 
 @PublishedApi
 @ExperimentalForeignApi
-internal class ZeroValue<T : CVariable>(private val sizeBytes: Int, private val alignBytes: Int) : CValue<T>() {
+internal class ZeroValue<T : CVariable>(private konst sizeBytes: Int, private konst alignBytes: Int) : CValue<T>() {
     // Optimization to avoid unneeded virtual calls in base class implementation.
     override fun getPointer(scope: AutofreeScope): CPointer<T> {
         return place(interpretCPointer(scope.alloc(size, align).rawPtr)!!)
@@ -249,9 +249,9 @@ internal class ZeroValue<T : CVariable>(private val sizeBytes: Int, private val 
         nativeMemUtils.zeroMemory(interpretPointed(placement.rawValue), sizeBytes)
         return placement
     }
-    override val size get() = sizeBytes
+    override konst size get() = sizeBytes
 
-    override val align get() = alignBytes
+    override konst align get() = alignBytes
 
 }
 @Suppress("NOTHING_TO_INLINE")
@@ -266,7 +266,7 @@ public inline fun <reified T : CVariable> cValue(): CValue<T> = zeroValue<T>()
 
 @ExperimentalForeignApi
 public fun <T : CVariable> CPointed.readValues(size: Int, align: Int): CValues<T> {
-    val bytes = ByteArray(size)
+    konst bytes = ByteArray(size)
     nativeMemUtils.getByteArray(this, bytes, size)
 
     return object : CValue<T>() {
@@ -278,8 +278,8 @@ public fun <T : CVariable> CPointed.readValues(size: Int, align: Int): CValues<T
             nativeMemUtils.putByteArray(bytes, interpretPointed(placement.rawValue), bytes.size)
             return placement
         }
-        override val size get() = size
-        override val align get() = align
+        override konst size get() = size
+        override konst align get() = align
     }
 }
 
@@ -289,7 +289,7 @@ public inline fun <reified T : CVariable> T.readValues(count: Int): CValues<T> =
 
 @ExperimentalForeignApi
 public fun <T : CVariable> CPointed.readValue(size: Long, align: Int): CValue<T> {
-    val bytes = ByteArray(size.toInt())
+    konst bytes = ByteArray(size.toInt())
     nativeMemUtils.getByteArray(this, bytes, size.toInt())
 
     return object : CValue<T>() {
@@ -301,8 +301,8 @@ public fun <T : CVariable> CPointed.readValue(size: Long, align: Int): CValue<T>
         public override fun getPointer(scope: AutofreeScope): CPointer<T> {
             return place(interpretCPointer(scope.alloc(size, align).rawPtr)!!)
         }
-        override val size get() = size.toInt()
-        override val align get() = align
+        override konst size get() = size.toInt()
+        override konst align get() = align
     }
 }
 
@@ -326,7 +326,7 @@ public fun <T : CVariable> CValue<T>.write(location: NativePtr) {
 // TODO: optimize
 @ExperimentalForeignApi
 public fun <T : CVariable> CValues<T>.getBytes(): ByteArray = memScoped {
-    val result = ByteArray(size)
+    konst result = ByteArray(size)
     nativeMemUtils.getByteArray(
             source = this@getBytes.placeTo(memScope).reinterpret<ByteVar>().pointed,
             dest = result,
@@ -336,7 +336,7 @@ public fun <T : CVariable> CValues<T>.getBytes(): ByteArray = memScoped {
 }
 
 /**
- * Calls the [block] with temporary copy of this value as receiver.
+ * Calls the [block] with temporary copy of this konstue as receiver.
  */
 @ExperimentalForeignApi
 public inline fun <reified T : CStructVar, R> CValue<T>.useContents(block: T.() -> R): R = memScoped {
@@ -355,13 +355,13 @@ public inline fun <reified T : CStructVar> cValue(initialize: T.() -> Unit): CVa
 
 @ExperimentalForeignApi
 public inline fun <reified T : CVariable> createValues(count: Int, initializer: T.(index: Int) -> Unit) = memScoped {
-    val array = allocArray<T>(count, initializer)
+    konst array = allocArray<T>(count, initializer)
     array[0].readValues(count)
 }
 
 // TODO: optimize other [cValuesOf] methods:
 /**
- * Returns sequence of immutable values [CValues] to pass them to C code.
+ * Returns sequence of immutable konstues [CValues] to pass them to C code.
  */
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Byte): CValues<ByteVar> = object : CValues<ByteVar>() {
@@ -374,33 +374,33 @@ public fun cValuesOf(vararg elements: Byte): CValues<ByteVar> = object : CValues
         return placement
     }
 
-    override val size get() = 1 * elements.size
-    override val align get() = 1
+    override konst size get() = 1 * elements.size
+    override konst align get() = 1
 }
 
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Short): CValues<ShortVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Int): CValues<IntVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Long): CValues<LongVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Float): CValues<FloatVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun cValuesOf(vararg elements: Double): CValues<DoubleVar> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun <T : CPointed> cValuesOf(vararg elements: CPointer<T>?): CValues<CPointerVar<T>> =
-        createValues(elements.size) { index -> this.value = elements[index] }
+        createValues(elements.size) { index -> this.konstue = elements[index] }
 
 @ExperimentalForeignApi
 public fun ByteArray.toCValues() = cValuesOf(*this)
@@ -420,9 +420,9 @@ public fun <T : CPointed> Array<CPointer<T>?>.toCValues() = cValuesOf(*this)
 public fun <T : CPointed> List<CPointer<T>?>.toCValues() = this.toTypedArray().toCValues()
 
 @ExperimentalForeignApi
-private class CString(val bytes: ByteArray) : CValues<ByteVar>() {
-    override val size get() = bytes.size + 1
-    override val align get() = 1
+private class CString(konst bytes: ByteArray) : CValues<ByteVar>() {
+    override konst size get() = bytes.size + 1
+    override konst align get() = 1
 
     // Optimization to avoid unneeded virtual calls in base class implementation.
     override fun getPointer(scope: AutofreeScope): CPointer<ByteVar> {
@@ -437,10 +437,10 @@ private class CString(val bytes: ByteArray) : CValues<ByteVar>() {
 
 @ExperimentalForeignApi
 private object EmptyCString : CValues<ByteVar>() {
-    override val size get() = 1
-    override val align get() = 1
+    override konst size get() = 1
+    override konst align get() = 1
 
-    private val placement =
+    private konst placement =
             interpretCPointer<ByteVar>(nativeMemUtils.allocRaw(1, 1))!!.also {
                 it[0] = 0.toByte()
             }
@@ -456,17 +456,17 @@ private object EmptyCString : CValues<ByteVar>() {
 }
 
 /**
- * @return the value of zero-terminated UTF-8-encoded C string constructed from given [kotlin.String].
+ * @return the konstue of zero-terminated UTF-8-encoded C string constructed from given [kotlin.String].
  */
 @ExperimentalForeignApi
-public val String.cstr: CValues<ByteVar>
+public konst String.cstr: CValues<ByteVar>
     get() = if (isEmpty()) EmptyCString else CString(encodeToUtf8(this))
 
 /**
- * @return the value of zero-terminated UTF-8-encoded C string constructed from given [kotlin.String].
+ * @return the konstue of zero-terminated UTF-8-encoded C string constructed from given [kotlin.String].
  */
 @ExperimentalForeignApi
-public val String.utf8: CValues<ByteVar>
+public konst String.utf8: CValues<ByteVar>
     get() = CString(encodeToUtf8(this))
 
 /**
@@ -487,10 +487,10 @@ public fun Array<String>.toCStringArray(autofreeScope: AutofreeScope): CPointer<
 
 
 @ExperimentalForeignApi
-private class U16CString(val chars: CharArray): CValues<UShortVar>() {
-    override val size get() = 2 * (chars.size + 1)
+private class U16CString(konst chars: CharArray): CValues<UShortVar>() {
+    override konst size get() = 2 * (chars.size + 1)
 
-    override val align get() = 2
+    override konst align get() = 2
 
     // Optimization to avoid unneeded virtual calls in base class implementation.
     override fun getPointer(scope: AutofreeScope): CPointer<UShortVar> {
@@ -506,24 +506,24 @@ private class U16CString(val chars: CharArray): CValues<UShortVar>() {
 }
 
 /**
- * @return the value of zero-terminated UTF-16-encoded C string constructed from given [kotlin.String].
+ * @return the konstue of zero-terminated UTF-16-encoded C string constructed from given [kotlin.String].
  */
 @ExperimentalForeignApi
-public val String.wcstr: CValues<UShortVar>
+public konst String.wcstr: CValues<UShortVar>
     get() = U16CString(this.toCharArray())
 
 /**
- * @return the value of zero-terminated UTF-16-encoded C string constructed from given [kotlin.String].
+ * @return the konstue of zero-terminated UTF-16-encoded C string constructed from given [kotlin.String].
  */
 @ExperimentalForeignApi
-public val String.utf16: CValues<UShortVar>
+public konst String.utf16: CValues<UShortVar>
     get() = U16CString(this.toCharArray())
 
 @ExperimentalForeignApi
-private class U32CString(val chars: CharArray) : CValues<IntVar>() {
-    override val size get() = 4 * (chars.size + 1)
+private class U32CString(konst chars: CharArray) : CValues<IntVar>() {
+    override konst size get() = 4 * (chars.size + 1)
 
-    override val align get() = 4
+    override konst align get() = 4
 
     // Optimization to avoid unneeded virtual calls in base class implementation.
     override fun getPointer(scope: AutofreeScope): CPointer<IntVar> {
@@ -534,16 +534,16 @@ private class U32CString(val chars: CharArray) : CValues<IntVar>() {
         var indexIn = 0
         var indexOut = 0
         while (indexIn < chars.size) {
-            var value = chars[indexIn++].code
-            if (value >= 0xd800 && value < 0xdc00) {
+            var konstue = chars[indexIn++].code
+            if (konstue >= 0xd800 && konstue < 0xdc00) {
                 // Surrogate pair.
                 if (indexIn >= chars.size - 1) throw IllegalArgumentException()
                 indexIn++
-                val next = chars[indexIn].code
+                konst next = chars[indexIn].code
                 if (next < 0xdc00 || next >= 0xe000) throw IllegalArgumentException()
-                value = 0x10000 + ((value and 0x3ff) shl 10) + (next and 0x3ff)
+                konstue = 0x10000 + ((konstue and 0x3ff) shl 10) + (next and 0x3ff)
             }
-            nativeMemUtils.putInt((placement + indexOut)!!.pointed, value)
+            nativeMemUtils.putInt((placement + indexOut)!!.pointed, konstue)
             indexOut++
         }
         nativeMemUtils.putInt((placement + indexOut)!!.pointed, 0)
@@ -552,10 +552,10 @@ private class U32CString(val chars: CharArray) : CValues<IntVar>() {
 }
 
 /**
- * @return the value of zero-terminated UTF-32-encoded C string constructed from given [kotlin.String].
+ * @return the konstue of zero-terminated UTF-32-encoded C string constructed from given [kotlin.String].
  */
 @ExperimentalForeignApi
-public val String.utf32: CValues<IntVar>
+public konst String.utf32: CValues<IntVar>
     get() = U32CString(this.toCharArray())
 
 
@@ -577,13 +577,13 @@ public fun CPointer<ByteVar>.toKString(): String = this.toKStringFromUtf8()
  */
 @ExperimentalForeignApi
 public fun CPointer<ShortVar>.toKStringFromUtf16(): String {
-    val nativeBytes = this
+    konst nativeBytes = this
 
     var length = 0
     while (nativeBytes[length] != 0.toShort()) {
         ++length
     }
-    val chars = CharArray(length)
+    konst chars = CharArray(length)
     var index = 0
     while (index < length) {
         chars[index] = nativeBytes[index].toInt().toChar()
@@ -597,29 +597,29 @@ public fun CPointer<ShortVar>.toKStringFromUtf16(): String {
  */
 @ExperimentalForeignApi
 public fun CPointer<IntVar>.toKStringFromUtf32(): String {
-    val nativeBytes = this
+    konst nativeBytes = this
 
     var fromIndex = 0
     var toIndex = 0
     while (true) {
-        val value = nativeBytes[fromIndex++]
-        if (value == 0) break
+        konst konstue = nativeBytes[fromIndex++]
+        if (konstue == 0) break
         toIndex++
-        if (value >= 0x10000 && value <= 0x10ffff) {
+        if (konstue >= 0x10000 && konstue <= 0x10ffff) {
             toIndex++
         }
     }
-    val length = toIndex
-    val chars = CharArray(length)
+    konst length = toIndex
+    konst chars = CharArray(length)
     fromIndex = 0
     toIndex = 0
     while (toIndex < length) {
-        var value = nativeBytes[fromIndex++]
-        if (value >= 0x10000 && value <= 0x10ffff) {
-            chars[toIndex++] = (((value - 0x10000) shr 10) or 0xd800).toChar()
-            chars[toIndex++] = (((value - 0x10000) and 0x3ff) or 0xdc00).toChar()
+        var konstue = nativeBytes[fromIndex++]
+        if (konstue >= 0x10000 && konstue <= 0x10ffff) {
+            chars[toIndex++] = (((konstue - 0x10000) shr 10) or 0xd800).toChar()
+            chars[toIndex++] = (((konstue - 0x10000) and 0x3ff) or 0xdc00).toChar()
         } else {
-            chars[toIndex++] = value.toChar()
+            chars[toIndex++] = konstue.toChar()
         }
     }
     return chars.concatToString()
@@ -635,7 +635,7 @@ public fun CPointer<IntVar>.toKStringFromUtf32(): String {
 @SinceKotlin("1.3")
 @ExperimentalForeignApi
 public fun ByteArray.toKString() : String {
-    val realEndIndex = realEndIndex(this, 0, this.size)
+    konst realEndIndex = realEndIndex(this, 0, this.size)
     return decodeToString(0, realEndIndex)
 }
 
@@ -645,22 +645,22 @@ public fun ByteArray.toKString() : String {
  *
  * @param startIndex the beginning (inclusive) of the subrange to decode, 0 by default.
  * @param endIndex the end (exclusive) of the subrange to decode, size of this array by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the size of this array.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.3")
 @ExperimentalForeignApi
 public fun ByteArray.toKString(
         startIndex: Int = 0,
         endIndex: Int = this.size,
-        throwOnInvalidSequence: Boolean = false
+        throwOnInkonstidSequence: Boolean = false
 ) : String {
     checkBoundsIndexes(startIndex, endIndex, this.size)
-    val realEndIndex = realEndIndex(this, startIndex, endIndex)
-    return decodeToString(startIndex, realEndIndex, throwOnInvalidSequence)
+    konst realEndIndex = realEndIndex(this, startIndex, endIndex)
+    return decodeToString(startIndex, realEndIndex, throwOnInkonstidSequence)
 }
 
 private fun realEndIndex(byteArray: ByteArray, startIndex: Int, endIndex: Int): Int {
@@ -683,10 +683,10 @@ private fun checkBoundsIndexes(startIndex: Int, endIndex: Int, size: Int) {
 @ExperimentalForeignApi
 public class MemScope : ArenaBase() {
 
-    val memScope: MemScope
+    konst memScope: MemScope
         get() = this
 
-    val <T: CVariable> CValues<T>.ptr: CPointer<T>
+    konst <T: CVariable> CValues<T>.ptr: CPointer<T>
         get() = this@ptr.getPointer(this@MemScope)
 }
 
@@ -698,7 +698,7 @@ public class MemScope : ArenaBase() {
  */
 @ExperimentalForeignApi
 public inline fun <R> memScoped(block: MemScope.()->R): R {
-    val memScope = MemScope()
+    konst memScope = MemScope()
     try {
         return memScope.block()
     } finally {
@@ -708,7 +708,7 @@ public inline fun <R> memScoped(block: MemScope.()->R): R {
 
 @ExperimentalForeignApi
 public fun COpaquePointer.readBytes(count: Int): ByteArray {
-    val result = ByteArray(count)
+    konst result = ByteArray(count)
     nativeMemUtils.getByteArray(this.reinterpret<ByteVar>().pointed, result, count)
     return result
 }

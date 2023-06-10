@@ -3,7 +3,7 @@ package foo
 
 var log = ""
 
-class T(val id: Int) {
+class T(konst id: Int) {
     operator fun component1(): Int {
         log += "($id).component1();"
         return 1

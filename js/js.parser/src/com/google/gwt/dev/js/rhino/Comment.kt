@@ -5,6 +5,6 @@
 
 package com.google.gwt.dev.js.rhino
 
-class Comment(val text: String, val isMultiLine: Boolean) {
+class Comment(konst text: String, konst isMultiLine: Boolean) {
     var next: Comment? = null;
 }

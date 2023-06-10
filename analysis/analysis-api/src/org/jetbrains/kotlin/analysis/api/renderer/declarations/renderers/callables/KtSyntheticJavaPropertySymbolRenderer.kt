@@ -18,7 +18,7 @@ public interface KtSyntheticJavaPropertySymbolRenderer {
     public object AS_SOURCE : KtSyntheticJavaPropertySymbolRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderSymbol(symbol: KtSyntheticJavaPropertySymbol, printer: PrettyPrinter): Unit = printer {
-            val mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
+            konst mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
             callableSignatureRenderer.renderCallableSignature(symbol, mutabilityKeyword, printer)
             variableInitializerRenderer.renderInitializer(symbol, printer)
             propertyAccessorsRenderer.renderAccessors(symbol, printer)

@@ -3,6 +3,6 @@
 package test
 
 interface A {
-    val v: String
+    konst v: String
         get() = "test"
 }

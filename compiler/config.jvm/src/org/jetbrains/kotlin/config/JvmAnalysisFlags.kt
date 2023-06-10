@@ -10,34 +10,34 @@ import kotlin.reflect.KProperty
 
 object JvmAnalysisFlags {
     @JvmStatic
-    val strictMetadataVersionSemantics by AnalysisFlag.Delegates.Boolean
+    konst strictMetadataVersionSemantics by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val javaTypeEnhancementState by Delegates.JavaTypeEnhancementStateWarnByDefault
+    konst javaTypeEnhancementState by Delegates.JavaTypeEnhancementStateWarnByDefault
 
     @JvmStatic
-    val jvmDefaultMode by Delegates.JvmDefaultModeDisabledByDefault
+    konst jvmDefaultMode by Delegates.JvmDefaultModeDisabledByDefault
 
     @JvmStatic
-    val inheritMultifileParts by AnalysisFlag.Delegates.Boolean
+    konst inheritMultifileParts by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val sanitizeParentheses by AnalysisFlag.Delegates.Boolean
+    konst sanitizeParentheses by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val suppressMissingBuiltinsError by AnalysisFlag.Delegates.Boolean
+    konst suppressMissingBuiltinsError by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val disableUltraLightClasses by AnalysisFlag.Delegates.Boolean
+    konst disableUltraLightClasses by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val enableJvmPreview by AnalysisFlag.Delegates.Boolean
+    konst enableJvmPreview by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val useIR by AnalysisFlag.Delegates.Boolean
+    konst useIR by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val generatePropertyAnnotationsMethods by AnalysisFlag.Delegates.Boolean
+    konst generatePropertyAnnotationsMethods by AnalysisFlag.Delegates.Boolean
 
     private object Delegates {
         object JavaTypeEnhancementStateWarnByDefault {

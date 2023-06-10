@@ -26,19 +26,19 @@ sourceSets {
     "test" {}
 }
 
-val generatorClasspath by configurations.creating
+konst generatorClasspath by configurations.creating
 
 dependencies {
     generatorClasspath(project("tree-generator"))
 }
 
-val generationRoot = projectDir.resolve("gen")
+konst generationRoot = projectDir.resolve("gen")
 
-val generateTree by tasks.registering(NoDebugJavaExec::class) {
+konst generateTree by tasks.registering(NoDebugJavaExec::class) {
 
-    val generatorRoot = "$projectDir/tree-generator/src/"
+    konst generatorRoot = "$projectDir/tree-generator/src/"
 
-    val generatorConfigurationFiles = fileTree(generatorRoot) {
+    konst generatorConfigurationFiles = fileTree(generatorRoot) {
         include("**/*.kt")
     }
 
@@ -52,7 +52,7 @@ val generateTree by tasks.registering(NoDebugJavaExec::class) {
     systemProperties["line.separator"] = "\n"
 }
 
-val compileKotlin by tasks
+konst compileKotlin by tasks
 
 compileKotlin.dependsOn(generateTree)
 

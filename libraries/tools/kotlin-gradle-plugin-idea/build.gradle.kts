@@ -6,14 +6,14 @@ plugins {
     kotlin("jvm")
     `java-test-fixtures`
     `maven-publish`
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator")
 }
 
 @Suppress("DEPRECATION")
 tasks.withType<KotlinCompilationTask<*>>().configureEach {
     compilerOptions {
-        apiVersion.value(KotlinVersion.KOTLIN_1_5).finalizeValueOnRead()
-        languageVersion.value(KotlinVersion.KOTLIN_1_5).finalizeValueOnRead()
+        apiVersion.konstue(KotlinVersion.KOTLIN_1_5).finalizeValueOnRead()
+        languageVersion.konstue(KotlinVersion.KOTLIN_1_5).finalizeValueOnRead()
         freeCompilerArgs.add("-Xsuppress-version-warnings")
     }
 }
@@ -53,7 +53,7 @@ publish(moduleMetadata = true) {
 
     suppressAllPomMetadataWarnings()
 
-    val kotlinLibraryComponent = components[ADHOC_COMPONENT_NAME] as AdhocComponentWithVariants
+    konst kotlinLibraryComponent = components[ADHOC_COMPONENT_NAME] as AdhocComponentWithVariants
 
     kotlinLibraryComponent.addVariantsFromConfiguration(configurations.testFixturesApiElements.get()) {
         skipUnpublishable()
@@ -77,14 +77,14 @@ apiValidation {
 
 tasks {
     apiBuild {
-        inputJar.value(jar.flatMap { it.archiveFile })
+        inputJar.konstue(jar.flatMap { it.archiveFile })
     }
 }
 
 //region Setup: Backwards compatibility tests
 
 run {
-    val compatibilityTestClasspath by configurations.creating {
+    konst compatibilityTestClasspath by configurations.creating {
         isCanBeResolved = true
         isCanBeConsumed = false
         attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
@@ -98,7 +98,7 @@ run {
     tasks.test {
         dependsOnKotlinGradlePluginInstall()
         dependsOn(compatibilityTestClasspath)
-        val conf: FileCollection = compatibilityTestClasspath
+        konst conf: FileCollection = compatibilityTestClasspath
         inputs.files(conf)
         doFirst { systemProperty("compatibilityTestClasspath", conf.files.joinToString(";") { it.absolutePath }) }
     }

@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 
 object FirConstructorCallChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol() ?: return
-        val declarationClass = constructorSymbol.resolvedReturnTypeRef.coneType.toRegularClassSymbol(context.session)
+        konst constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol() ?: return
+        konst declarationClass = constructorSymbol.resolvedReturnTypeRef.coneType.toRegularClassSymbol(context.session)
 
         if (declarationClass != null) {
             if (declarationClass.classKind == ClassKind.ANNOTATION_CLASS &&

@@ -11,7 +11,7 @@ interface Builder<T : Any> {
 }
 
 fun <T : Any> build(block: Builder<T>.() -> Unit): T {
-    val o = object : Builder<T> {
+    konst o = object : Builder<T> {
         override fun filter(filter: (T) -> Boolean) {
 
         }
@@ -23,7 +23,7 @@ fun <T : Any> build(block: Builder<T>.() -> Unit): T {
 }
 
 fun box(): String {
-    val r = build<Int> {
+    konst r = build<Int> {
         filter {
             it > 10
         }

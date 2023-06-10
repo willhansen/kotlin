@@ -3,15 +3,15 @@
 import kotlin.test.*
 
 fun box(): String {
-    val uintList = mutableListOf<UInt>()
-    val uintProgression = 1u until 11u
+    konst uintList = mutableListOf<UInt>()
+    konst uintProgression = 1u until 11u
     for (i in (uintProgression step 2).reversed() step 3) {
         uintList += i
     }
     assertEquals(listOf(9u, 6u, 3u), uintList)
 
-    val ulongList = mutableListOf<ULong>()
-    val ulongProgression = 1uL until 11uL
+    konst ulongList = mutableListOf<ULong>()
+    konst ulongProgression = 1uL until 11uL
     for (i in (ulongProgression step 2L).reversed() step 3L) {
         ulongList += i
     }

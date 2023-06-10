@@ -56,8 +56,8 @@ data class KotlinClassStringProperty(private var v: String) {
 }
 
 fun `should work with annotation on Java interface`(): String {
-    data class Task(val input: JavaStringProperty)
-    val task = Task(JavaStringProperty("Fail"))
+    data class Task(konst input: JavaStringProperty)
+    konst task = Task(JavaStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {
@@ -68,8 +68,8 @@ fun `should work with annotation on Java interface`(): String {
 }
 
 fun `should work with annotation on Java class`(): String {
-    data class Task(val input: JavaClassStringProperty)
-    val task = Task(JavaClassStringProperty("Fail"))
+    data class Task(konst input: JavaClassStringProperty)
+    konst task = Task(JavaClassStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {
@@ -80,8 +80,8 @@ fun `should work with annotation on Java class`(): String {
 }
 
 fun `should work with annotation on Kotlin interface`(): String {
-    data class Task(val input: KotlinStringProperty)
-    val task = Task(KotlinStringProperty("Fail"))
+    data class Task(konst input: KotlinStringProperty)
+    konst task = Task(KotlinStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {
@@ -92,8 +92,8 @@ fun `should work with annotation on Kotlin interface`(): String {
 }
 
 fun `should work with annotation on Kotlin class`(): String {
-    data class Task(val input: KotlinClassStringProperty)
-    val task = Task(KotlinClassStringProperty("Fail"))
+    data class Task(konst input: KotlinClassStringProperty)
+    konst task = Task(KotlinClassStringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {

@@ -17,9 +17,9 @@ package org.jetbrains.kotlin.load.kotlin
  * Once both these usages are dealt with, this class can be removed.
  */
 class JvmBytecodeBinaryVersion(vararg numbers: Int) {
-    val major: Int = numbers.getOrNull(0) ?: -1
-    val minor: Int = numbers.getOrNull(1) ?: -1
-    val patch: Int = numbers.getOrNull(2) ?: -1
+    konst major: Int = numbers.getOrNull(0) ?: -1
+    konst minor: Int = numbers.getOrNull(1) ?: -1
+    konst patch: Int = numbers.getOrNull(2) ?: -1
 
     fun toArray(): IntArray = intArrayOf(major, minor, patch)
 
@@ -33,6 +33,6 @@ class JvmBytecodeBinaryVersion(vararg numbers: Int) {
 
     companion object {
         @JvmField
-        val INSTANCE = JvmBytecodeBinaryVersion(1, 0, 3)
+        konst INSTANCE = JvmBytecodeBinaryVersion(1, 0, 3)
     }
 }

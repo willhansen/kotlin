@@ -15,7 +15,7 @@ fun <S> generate(g: suspend GenericController<S>.() -> Unit): List<S> = TODO()
 
 suspend fun <S> GenericController<List<S>>.yieldGenerate(g: suspend GenericController<S>.() -> Unit): Unit = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     // TODO: KT-15185
     yieldGenerate {
         yield(4)

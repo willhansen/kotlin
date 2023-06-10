@@ -18,16 +18,16 @@ import java.util.concurrent.atomic.AtomicInteger
 class LazyJVMTest {
 
     @Test fun synchronizedLazy() {
-        val counter = AtomicInteger(0)
-        val lazy = lazy {
-            val value = counter.incrementAndGet()
+        konst counter = AtomicInteger(0)
+        konst lazy = lazy {
+            konst konstue = counter.incrementAndGet()
             Thread.sleep(16)
-            value
+            konstue
         }
 
-        val threads = 3
-        val barrier = CyclicBarrier(threads)
-        val accessThreads = List(threads) { thread { barrier.await(); lazy.value } }
+        konst threads = 3
+        konst barrier = CyclicBarrier(threads)
+        konst accessThreads = List(threads) { thread { barrier.await(); lazy.konstue } }
         accessThreads.forEach { it.join() }
 
         assertEquals(1, counter.get())
@@ -35,31 +35,31 @@ class LazyJVMTest {
 
     @Test fun synchronizedLazyRace() {
         racyTest(initialize = {
-                    val counter = AtomicInteger(0)
+                    konst counter = AtomicInteger(0)
                     lazy { counter.incrementAndGet() }
                  },
-                 access = { lazy, _ -> lazy.value },
-                 validate = { result -> result.all { it == 1 } }
+                 access = { lazy, _ -> lazy.konstue },
+                 konstidate = { result -> result.all { it == 1 } }
         )
     }
 
     @Test fun externallySynchronizedLazy() {
-        val counter = AtomicInteger(0)
+        konst counter = AtomicInteger(0)
         var initialized: Boolean = false
-        val runs = ConcurrentHashMap<Int, Boolean>()
-        val lock = Any()
+        konst runs = ConcurrentHashMap<Int, Boolean>()
+        konst lock = Any()
 
-        val initializer = {
-            val value = counter.incrementAndGet()
-            runs += (value to initialized)
+        konst initializer = {
+            konst konstue = counter.incrementAndGet()
+            runs += (konstue to initialized)
             Thread.sleep(16)
             initialized = true
-            value
+            konstue
         }
-        val lazy1 = lazy(lock, initializer)
-        val lazy2 = lazy(lock, initializer)
+        konst lazy1 = lazy(lock, initializer)
+        konst lazy2 = lazy(lock, initializer)
 
-        val accessThreads = listOf(lazy1, lazy2).map { thread { it.value } }
+        konst accessThreads = listOf(lazy1, lazy2).map { thread { it.konstue } }
         accessThreads.forEach { it.join() }
 
         assertEquals(2, counter.get())
@@ -70,67 +70,67 @@ class LazyJVMTest {
     }
 
     @Test fun externallySynchronizedLazyRace() {
-        val threads = 3
+        konst threads = 3
         racyTest(threads,
                  initialize = {
-                     val counter = AtomicInteger(0)
+                     konst counter = AtomicInteger(0)
                      var initialized = false
-                     val initializer = {
+                     konst initializer = {
                          (counter.incrementAndGet() to initialized).also {
                              initialized = true
                          }
                      }
-                     val lock = Any()
+                     konst lock = Any()
 
                      List(threads) { lazy(lock, initializer) }
                  },
-                 access = { lazies, runnerIndex -> lazies[runnerIndex].value },
-                 validate = { result -> result.all { (id, initialized) -> initialized == (id != 1) } })
+                 access = { lazies, runnerIndex -> lazies[runnerIndex].konstue },
+                 konstidate = { result -> result.all { (id, initialized) -> initialized == (id != 1) } })
     }
 
     @Test fun publishOnceLazy() {
-        val counter = AtomicInteger(0)
-        val coreCount = Runtime.getRuntime().availableProcessors()
-        val threads = (coreCount / 2).coerceIn(2..3)
-        val values = Random().let { r -> List(threads) { 100 + r.nextInt(50) } }
+        konst counter = AtomicInteger(0)
+        konst coreCount = Runtime.getRuntime().availableProcessors()
+        konst threads = (coreCount / 2).coerceIn(2..3)
+        konst konstues = Random().let { r -> List(threads) { 100 + r.nextInt(50) } }
 
-        data class Run(val id: Int, val value: Int)
+        data class Run(konst id: Int, konst konstue: Int)
 
-        val runs = ConcurrentLinkedQueue<Run>()
+        konst runs = ConcurrentLinkedQueue<Run>()
 
-        val initializer = {
-            val id = counter.getAndIncrement()
-            val value = values[id]
-            runs += Run(id, value)
-            Thread.sleep(value.toLong())
-            value
+        konst initializer = {
+            konst id = counter.getAndIncrement()
+            konst konstue = konstues[id]
+            runs += Run(id, konstue)
+            Thread.sleep(konstue.toLong())
+            konstue
         }
-        val lazy = lazy(LazyThreadSafetyMode.PUBLICATION, initializer)
+        konst lazy = lazy(LazyThreadSafetyMode.PUBLICATION, initializer)
 
-        val barrier = CyclicBarrier(threads)
-        val accessThreads = List(threads) { thread { barrier.await(); lazy.value } }
-        val result = run { while (!lazy.isInitialized()) Thread.sleep(1); lazy.value }
+        konst barrier = CyclicBarrier(threads)
+        konst accessThreads = List(threads) { thread { barrier.await(); lazy.konstue } }
+        konst result = run { while (!lazy.isInitialized()) Thread.sleep(1); lazy.konstue }
         accessThreads.forEach { it.join() }
 
         assertEquals(threads, counter.get())
-        assertEquals(result, lazy.value, "Value must not change after isInitialized is set: $lazy, runs: $runs")
-        assertTrue(runs.any { it.value == result }, "Unexpected lazy result value: $result, runs: $runs")
+        assertEquals(result, lazy.konstue, "Value must not change after isInitialized is set: $lazy, runs: $runs")
+        assertTrue(runs.any { it.konstue == result }, "Unexpected lazy result konstue: $result, runs: $runs")
     }
 
     @Test fun publishOnceLazyRace() {
         racyTest(initialize = { lazy(LazyThreadSafetyMode.PUBLICATION) { Thread.currentThread().id } },
-                 access = { lazy, _ -> lazy.value },
-                 validate = { result -> result.all { v -> v == result[0] } })
+                 access = { lazy, _ -> lazy.konstue },
+                 konstidate = { result -> result.all { v -> v == result[0] } })
     }
 
     @Test fun lazyInitializationForcedOnSerialization() {
         for (mode in listOf(LazyThreadSafetyMode.SYNCHRONIZED, LazyThreadSafetyMode.PUBLICATION, LazyThreadSafetyMode.NONE)) {
-            val lazy = lazy(mode) { "initialized" }
+            konst lazy = lazy(mode) { "initialized" }
             assertFalse(lazy.isInitialized())
-            val lazy2 = serializeAndDeserialize(lazy)
+            konst lazy2 = serializeAndDeserialize(lazy)
             assertTrue(lazy.isInitialized())
             assertTrue(lazy2.isInitialized())
-            assertEquals(lazy.value, lazy2.value)
+            assertEquals(lazy.konstue, lazy2.konstue)
         }
     }
 
@@ -138,25 +138,25 @@ class LazyJVMTest {
         threads: Int = 3, runs: Int = 5000,
         initialize: () -> TState,
         access: (TState, runnerIndex: Int) -> TResult,
-        validate: (List<TResult>) -> Boolean
+        konstidate: (List<TResult>) -> Boolean
     ) {
 
-        val runResult = java.util.Collections.synchronizedList(mutableListOf<TResult>())
-        val invalidResults = mutableListOf<Pair<Int, List<TResult>>>()
+        konst runResult = java.util.Collections.synchronizedList(mutableListOf<TResult>())
+        konst inkonstidResults = mutableListOf<Pair<Int, List<TResult>>>()
         lateinit var state: TState
 
         var runId = -1
-        val barrier = CyclicBarrier(threads) {
+        konst barrier = CyclicBarrier(threads) {
             if (runId >= 0) {
-                if (!validate(runResult))
-                    invalidResults.add(runId to runResult.toList())
+                if (!konstidate(runResult))
+                    inkonstidResults.add(runId to runResult.toList())
                 runResult.clear()
             }
             state = initialize()
             runId += 1
         }
 
-        val runners = List(threads) { index ->
+        konst runners = List(threads) { index ->
             thread {
                 barrier.await()
                 repeat(runs) {
@@ -168,6 +168,6 @@ class LazyJVMTest {
 
         runners.forEach { it.join() }
 
-        assertTrue(invalidResults.isEmpty(), invalidResults.joinToString("\n") { (index, result) -> "At run #$index: $result" })
+        assertTrue(inkonstidResults.isEmpty(), inkonstidResults.joinToString("\n") { (index, result) -> "At run #$index: $result" })
     }
 }

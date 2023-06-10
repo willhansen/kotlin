@@ -1,5 +1,5 @@
 // KT-7753: attempt to call enum constructor explicitly
-enum class A(val c: Int) {
+enum class A(konst c: Int) {
     ONE(1) {
         override fun selfOrFriend(): A {
             return this

@@ -26,23 +26,23 @@ import org.jetbrains.kotlin.types.UnwrappedType
  * For class B with companion object B::companionM dispatchReceiver = BoundValueReference
  */
 class CallableReferenceResolutionCandidate(
-    val candidate: CallableDescriptor,
-    val dispatchReceiver: CallableReceiver?,
-    val extensionReceiver: CallableReceiver?,
-    val explicitReceiverKind: ExplicitReceiverKind,
-    val reflectionCandidateType: UnwrappedType,
-    val callableReferenceAdaptation: CallableReferenceAdaptation?,
-    val kotlinCall: CallableReferenceResolutionAtom,
-    val expectedType: UnwrappedType?,
-    override val callComponents: KotlinCallComponents,
-    override val scopeTower: ImplicitScopeTower,
-    override val resolutionCallbacks: KotlinResolutionCallbacks,
-    override val baseSystem: ConstraintStorage?
+    konst candidate: CallableDescriptor,
+    konst dispatchReceiver: CallableReceiver?,
+    konst extensionReceiver: CallableReceiver?,
+    konst explicitReceiverKind: ExplicitReceiverKind,
+    konst reflectionCandidateType: UnwrappedType,
+    konst callableReferenceAdaptation: CallableReferenceAdaptation?,
+    konst kotlinCall: CallableReferenceResolutionAtom,
+    konst expectedType: UnwrappedType?,
+    override konst callComponents: KotlinCallComponents,
+    override konst scopeTower: ImplicitScopeTower,
+    override konst resolutionCallbacks: KotlinResolutionCallbacks,
+    override konst baseSystem: ConstraintStorage?
 ) : ResolutionCandidate() {
-    override val variableCandidateIfInvoke: ResolutionCandidate? = null
-    override val knownTypeParametersResultingSubstitutor: TypeSubstitutor? = null // callable reference's rhs doesn't have type parameters
+    override konst variableCandidateIfInvoke: ResolutionCandidate? = null
+    override konst knownTypeParametersResultingSubstitutor: TypeSubstitutor? = null // callable reference's rhs doesn't have type parameters
 
-    override val resolvedCall = ResolvedCallableReferenceCallAtom(
+    override konst resolvedCall = ResolvedCallableReferenceCallAtom(
         kotlinCall.call, candidate, explicitReceiverKind,
         if (dispatchReceiver != null) ReceiverExpressionKotlinCallArgument(dispatchReceiver.receiver) else null,
         if (extensionReceiver != null) ReceiverExpressionKotlinCallArgument(extensionReceiver.receiver) else null,
@@ -56,5 +56,5 @@ class CallableReferenceResolutionCandidate(
     var freshVariablesSubstitutor: FreshVariableNewTypeSubstitutor? = null
         internal set
 
-    val numDefaults get() = callableReferenceAdaptation?.defaults ?: 0
+    konst numDefaults get() = callableReferenceAdaptation?.defaults ?: 0
 }

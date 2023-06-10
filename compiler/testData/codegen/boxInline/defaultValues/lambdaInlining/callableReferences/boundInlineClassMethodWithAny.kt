@@ -4,7 +4,7 @@
 // FILE: 1.kt
 package test
 
-inline class C(val x: Any?) {
+inline class C(konst x: Any?) {
     fun f() = x.toString()
 }
 

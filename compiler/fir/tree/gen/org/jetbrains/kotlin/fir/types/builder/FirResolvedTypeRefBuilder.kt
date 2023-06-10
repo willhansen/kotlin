@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirResolvedTypeRefBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var type: ConeKotlinType
     var delegatedTypeRef: FirTypeRef? = null
     var isFromStubType: Boolean = false
@@ -59,7 +59,7 @@ inline fun buildResolvedTypeRefCopy(original: FirResolvedTypeRef, init: FirResol
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirResolvedTypeRefBuilder()
+    konst copyBuilder = FirResolvedTypeRefBuilder()
     copyBuilder.source = original.source
     copyBuilder.annotations.addAll(original.annotations)
     copyBuilder.type = original.type

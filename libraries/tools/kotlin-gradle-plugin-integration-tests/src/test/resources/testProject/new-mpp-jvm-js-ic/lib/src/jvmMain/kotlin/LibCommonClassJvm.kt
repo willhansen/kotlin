@@ -4,5 +4,5 @@
  */
 
 actual class LibCommonClass {
-    actual val platform = "jvm"
+    actual konst platform = "jvm"
 }

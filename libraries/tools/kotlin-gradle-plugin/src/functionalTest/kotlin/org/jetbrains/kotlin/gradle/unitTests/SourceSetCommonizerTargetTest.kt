@@ -44,19 +44,19 @@ class SourceSetCommonizerTargetTest {
         kotlin.linuxX64("linux")
         kotlin.macosX64("macos")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val macosMain = kotlin.sourceSets.getByName("macosMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val macosTest = kotlin.sourceSets.getByName("macosTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst macosMain = kotlin.sourceSets.getByName("macosMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst macosTest = kotlin.sourceSets.getByName("macosTest")
 
         assertEquals(CommonizerTarget(LINUX_X64), inferCommonizerTarget(linuxMain))
         assertEquals(CommonizerTarget(LINUX_X64), inferCommonizerTarget(linuxTest))
         assertEquals(CommonizerTarget(MACOS_X64), inferCommonizerTarget(macosMain))
         assertEquals(CommonizerTarget(MACOS_X64), inferCommonizerTarget(macosTest))
 
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(commonMain))
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(commonTest))
     }
@@ -66,13 +66,13 @@ class SourceSetCommonizerTargetTest {
         kotlin.linuxX64("linux")
         kotlin.macosX64("macos")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val macosMain = kotlin.sourceSets.getByName("macosMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val macosTest = kotlin.sourceSets.getByName("macosTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst macosMain = kotlin.sourceSets.getByName("macosMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst macosTest = kotlin.sourceSets.getByName("macosTest")
 
         nativeMain.dependsOn(commonMain)
         linuxMain.dependsOn(nativeMain)
@@ -86,7 +86,7 @@ class SourceSetCommonizerTargetTest {
 
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(nativeMain))
 
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(commonMain))
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(commonTest))
     }
@@ -96,13 +96,13 @@ class SourceSetCommonizerTargetTest {
         kotlin.linuxX64("linuxA")
         kotlin.linuxX64("linuxB")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxAMain = kotlin.sourceSets.getByName("linuxAMain")
-        val linuxBMain = kotlin.sourceSets.getByName("linuxBMain")
-        val linuxATest = kotlin.sourceSets.getByName("linuxATest")
-        val linuxBTest = kotlin.sourceSets.getByName("linuxBTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxAMain = kotlin.sourceSets.getByName("linuxAMain")
+        konst linuxBMain = kotlin.sourceSets.getByName("linuxBMain")
+        konst linuxATest = kotlin.sourceSets.getByName("linuxATest")
+        konst linuxBTest = kotlin.sourceSets.getByName("linuxBTest")
 
         nativeMain.dependsOn(commonMain)
         linuxAMain.dependsOn(nativeMain)
@@ -115,7 +115,7 @@ class SourceSetCommonizerTargetTest {
 
         assertEquals(LeafCommonizerTarget(LINUX_X64), inferCommonizerTarget(nativeMain))
 
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(LeafCommonizerTarget(LINUX_X64), inferCommonizerTarget(commonMain))
         assertEquals(LeafCommonizerTarget(LINUX_X64), inferCommonizerTarget(commonTest))
     }
@@ -127,18 +127,18 @@ class SourceSetCommonizerTargetTest {
         kotlin.iosX64("iosX64")
         kotlin.iosArm64("iosArm64")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val iosMain = kotlin.sourceSets.create("iosMain")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val macosMain = kotlin.sourceSets.getByName("macosMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val macosTest = kotlin.sourceSets.getByName("macosTest")
-        val iosX64Main = kotlin.sourceSets.getByName("iosX64Main")
-        val iosX64Test = kotlin.sourceSets.getByName("iosX64Test")
-        val iosArm64Main = kotlin.sourceSets.getByName("iosArm64Main")
-        val iosArm64Test = kotlin.sourceSets.getByName("iosArm64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst iosMain = kotlin.sourceSets.create("iosMain")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst macosMain = kotlin.sourceSets.getByName("macosMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst macosTest = kotlin.sourceSets.getByName("macosTest")
+        konst iosX64Main = kotlin.sourceSets.getByName("iosX64Main")
+        konst iosX64Test = kotlin.sourceSets.getByName("iosX64Test")
+        konst iosArm64Main = kotlin.sourceSets.getByName("iosArm64Main")
+        konst iosArm64Test = kotlin.sourceSets.getByName("iosArm64Test")
 
         nativeMain.dependsOn(commonMain)
         linuxMain.dependsOn(nativeMain)
@@ -162,7 +162,7 @@ class SourceSetCommonizerTargetTest {
             inferCommonizerTarget(nativeMain)
         )
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             CommonizerTarget(IOS_X64, IOS_ARM64, MACOS_X64, LINUX_X64),
@@ -181,15 +181,15 @@ class SourceSetCommonizerTargetTest {
         kotlin.macosX64("macos")
         kotlin.jvm("jvm")
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val macosMain = kotlin.sourceSets.getByName("macosMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val macosTest = kotlin.sourceSets.getByName("macosTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst macosMain = kotlin.sourceSets.getByName("macosMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst macosTest = kotlin.sourceSets.getByName("macosTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
 
         nativeMain.dependsOn(commonMain)
         linuxMain.dependsOn(nativeMain)
@@ -204,17 +204,17 @@ class SourceSetCommonizerTargetTest {
 
         assertEquals(CommonizerTarget(LINUX_X64, MACOS_X64), inferCommonizerTarget(nativeMain))
 
-        project.evaluate()
+        project.ekonstuate()
         assertNull(inferCommonizerTarget(commonMain), "Expected commonMain to have no commonizer target")
         assertNull(inferCommonizerTarget(commonTest), "Expected commonTest to have no commonizer target")
     }
 
     @Test
     fun `nativeMain with non hmpp workaround`() {
-        val linux1 = kotlin.linuxX64("linux1")
-        val linux2 = kotlin.linuxArm64("linux2")
+        konst linux1 = kotlin.linuxX64("linux1")
+        konst linux2 = kotlin.linuxArm64("linux2")
 
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
 
         listOf(linux1, linux2).forEach { target ->
             @Suppress("DEPRECATION")
@@ -229,12 +229,12 @@ class SourceSetCommonizerTargetTest {
 
     @Test
     fun `orphan source sets are ignored`() {
-        val linux1 = kotlin.linuxX64("linux1")
-        val linux2 = kotlin.linuxArm64("linux2")
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val linux1Main = kotlin.sourceSets.getByName("linux1Main")
-        val linux2Main = kotlin.sourceSets.getByName("linux2Main")
-        val orphan = kotlin.sourceSets.create("orphan")
+        konst linux1 = kotlin.linuxX64("linux1")
+        konst linux2 = kotlin.linuxArm64("linux2")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst linux1Main = kotlin.sourceSets.getByName("linux1Main")
+        konst linux2Main = kotlin.sourceSets.getByName("linux2Main")
+        konst orphan = kotlin.sourceSets.create("orphan")
 
         linux1Main.dependsOn(nativeMain)
         linux2Main.dependsOn(nativeMain)
@@ -245,9 +245,9 @@ class SourceSetCommonizerTargetTest {
 
     @Test
     fun `orphan source sets only`() {
-        val nativeMain = kotlin.sourceSets.create("nativeMain")
-        val orphan1 = kotlin.sourceSets.create("orphan1")
-        val orphan2 = kotlin.sourceSets.create("orphan2")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain")
+        konst orphan1 = kotlin.sourceSets.create("orphan1")
+        konst orphan2 = kotlin.sourceSets.create("orphan2")
 
         orphan1.dependsOn(nativeMain)
         orphan2.dependsOn(nativeMain)

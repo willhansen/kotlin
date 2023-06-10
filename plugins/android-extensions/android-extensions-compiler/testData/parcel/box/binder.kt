@@ -23,19 +23,19 @@ class MockIInterface : IInterface, Parcelable {
 
 @Parcelize
 class ServiceContainer(
-    val binder: MockBinder,
-    val iinterface: MockIInterface,
-    val binderArray: Array<IBinder>,
-    val binderList: List<IBinder>
+    konst binder: MockBinder,
+    konst iinterface: MockIInterface,
+    konst binderArray: Array<IBinder>,
+    konst binderList: List<IBinder>
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = ServiceContainer(MockBinder(), MockIInterface(), arrayOf(MockBinder()), listOf(MockBinder()))
+    konst test = ServiceContainer(MockBinder(), MockIInterface(), arrayOf(MockBinder()), listOf(MockBinder()))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<ServiceContainer>(parcel)
+    konst test2 = readFromParcel<ServiceContainer>(parcel)
 }

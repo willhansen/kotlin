@@ -9,9 +9,9 @@
 package foo
 
 fun test1() : Int {
-    val inlineX = My(111)
+    konst inlineX = My(111)
     var result = 0
-    val res = inlineX.perform<My, Int>{
+    konst res = inlineX.perform<My, Int>{
 
         try {
             throw RuntimeException()
@@ -25,8 +25,8 @@ fun test1() : Int {
 }
 
 fun test11() : Int {
-    val inlineX = My(111)
-    val res = inlineX.perform<My, Int>{
+    konst inlineX = My(111)
+    konst res = inlineX.perform<My, Int>{
         try {
             throw RuntimeException()
         } catch (e: RuntimeException) {
@@ -39,9 +39,9 @@ fun test11() : Int {
 
 fun test2() : Int {
     try {
-        val inlineX = My(111)
+        konst inlineX = My(111)
         var result = 0
-        val res = inlineX.perform<My, Int>{
+        konst res = inlineX.perform<My, Int>{
             try {
                 throw RuntimeExceptionWithValue("-1")
             } catch (e: RuntimeException) {
@@ -50,7 +50,7 @@ fun test2() : Int {
         }
         return result
     } catch (e: RuntimeExceptionWithValue) {
-        return e.value.toInt2()!!
+        return e.konstue.toInt2()!!
     }
 }
 
@@ -65,7 +65,7 @@ fun box(): String {
 // FILE: b.kt
 package foo
 
-class My(val value: Int)
+class My(konst konstue: Int)
 
 inline fun <T, R> T.perform(job: (T)-> R) : R {
     return job(this)
@@ -73,4 +73,4 @@ inline fun <T, R> T.perform(job: (T)-> R) : R {
 
 inline fun String.toInt2() : Int = this.toInt()
 
-class RuntimeExceptionWithValue(val value: String) : RuntimeException()
+class RuntimeExceptionWithValue(konst konstue: String) : RuntimeException()

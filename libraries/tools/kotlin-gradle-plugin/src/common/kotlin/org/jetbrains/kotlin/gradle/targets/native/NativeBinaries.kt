@@ -34,29 +34,29 @@ import java.io.File
  *
  */
 sealed class NativeBinary(
-    private val name: String,
+    private konst name: String,
     baseNameProvided: String,
-    val buildType: NativeBuildType,
+    konst buildType: NativeBuildType,
     @Transient
     var compilation: KotlinNativeCompilation
 ) : Named {
     open var baseName: String
         get() = baseNameProvider.get()
-        set(value) {
-            baseNameProvider = project.provider { value }
+        set(konstue) {
+            baseNameProvider = project.provider { konstue }
         }
     internal var baseNameProvider: Provider<String> = project.provider { baseNameProvided }
 
-    internal val konanTarget: KonanTarget
+    internal konst konanTarget: KonanTarget
         get() = compilation.konanTarget
 
-    val target: KotlinNativeTarget
+    konst target: KotlinNativeTarget
         get() = compilation.target
 
-    val project: Project
+    konst project: Project
         get() = target.project
 
-    abstract val outputKind: NativeOutputKind
+    abstract konst outputKind: NativeOutputKind
 
     // Configuration DSL.
     var debuggable: Boolean = buildType.debuggable
@@ -77,40 +77,40 @@ sealed class NativeBinary(
 
     var binaryOptions: MutableMap<String, String> = mutableMapOf()
 
-    fun binaryOption(name: String, value: String) {
+    fun binaryOption(name: String, konstue: String) {
         // TODO: report if $name is unknown?
-        binaryOptions[name] = value
+        binaryOptions[name] = konstue
     }
 
     /** Additional arguments passed to the Kotlin/Native compiler. */
     var freeCompilerArgs: List<String>
         get() = linkTask.kotlinOptions.freeCompilerArgs
-        set(value) {
-            linkTask.kotlinOptions.freeCompilerArgs = value
+        set(konstue) {
+            linkTask.kotlinOptions.freeCompilerArgs = konstue
         }
 
     // Link task access.
-    val linkTaskName: String
+    konst linkTaskName: String
         get() = lowerCamelCaseName("link", name, target.targetName)
 
-    val linkTask: KotlinNativeLink
+    konst linkTask: KotlinNativeLink
         get() = linkTaskProvider.get()
 
-    val linkTaskProvider: TaskProvider<out KotlinNativeLink>
+    konst linkTaskProvider: TaskProvider<out KotlinNativeLink>
         get() = project.tasks.withType(KotlinNativeLink::class.java).named(linkTaskName)
 
     // Output access.
     // TODO: Provide output configurations and integrate them with Gradle Native.
     var outputDirectory: File
         get() = outputDirectoryProperty.get().asFile
-        set(value) = outputDirectoryProperty.set(value)
+        set(konstue) = outputDirectoryProperty.set(konstue)
 
-    val outputDirectoryProperty: DirectoryProperty = with(project) {
-        val targetSubDirectory = target.disambiguationClassifier?.let { "$it/" }.orEmpty()
+    konst outputDirectoryProperty: DirectoryProperty = with(project) {
+        konst targetSubDirectory = target.disambiguationClassifier?.let { "$it/" }.orEmpty()
         objects.directoryProperty().convention(layout.buildDirectory.dir("bin/$targetSubDirectory${this@NativeBinary.name}"))
     }
 
-    val outputFile: File by lazy {
+    konst outputFile: File by lazy {
         linkTask.outputFile.get()
     }
 
@@ -132,13 +132,13 @@ class Executable constructor(
     compilation: KotlinNativeCompilation
 ) : AbstractExecutable(name, baseName, buildType, compilation) {
 
-    override val outputKind: NativeOutputKind
+    override konst outputKind: NativeOutputKind
         get() = NativeOutputKind.EXECUTABLE
 
     override var baseName: String
         get() = super.baseName
-        set(value) {
-            super.baseName = value
+        set(konstue) {
+            super.baseName = konstue
             runTaskProvider?.configure {
                 it.executable = outputFile.absolutePath
             }
@@ -170,7 +170,7 @@ class Executable constructor(
      * A name of a task running this executable.
      * Returns null if the executables's target is not a host one (macosArm64, macosX64, linuxX64 or mingw64).
      */
-    val runTaskName: String?
+    konst runTaskName: String?
         get() = if (konanTarget in listOf(KonanTarget.MACOS_ARM64, KonanTarget.MACOS_X64, KonanTarget.LINUX_X64, KonanTarget.MINGW_X64)) {
             lowerCamelCaseName("run", name, compilation.target.targetName)
         } else {
@@ -181,10 +181,10 @@ class Executable constructor(
      * A task running this executable.
      * Returns null if the executables's target is not a host one (macosArm64, macosX64, linuxX64 or mingw64).
      */
-    val runTaskProvider: TaskProvider<AbstractExecTask<*>>?
+    konst runTaskProvider: TaskProvider<AbstractExecTask<*>>?
         get() = runTaskName?.let { project.tasks.withType(AbstractExecTask::class.java).named(it) }
 
-    val runTask: AbstractExecTask<*>?
+    konst runTask: AbstractExecTask<*>?
         get() = runTaskProvider?.get()
 }
 
@@ -195,7 +195,7 @@ class TestExecutable(
     compilation: KotlinNativeCompilation
 ) : AbstractExecutable(name, baseName, buildType, compilation) {
 
-    override val outputKind: NativeOutputKind
+    override konst outputKind: NativeOutputKind
         get() = NativeOutputKind.TEST
 }
 
@@ -206,7 +206,7 @@ abstract class AbstractNativeLibrary(
     compilation: KotlinNativeCompilation
 ) : NativeBinary(name, baseName, buildType, compilation) {
 
-    val exportConfigurationName: String
+    konst exportConfigurationName: String
         get() = target.disambiguateName(lowerCamelCaseName(name, "export"))
 
     /**
@@ -214,8 +214,8 @@ abstract class AbstractNativeLibrary(
      */
     var transitiveExport: Boolean
         get() = project.configurations.maybeCreate(exportConfigurationName).isTransitive
-        set(value) {
-            project.configurations.maybeCreate(exportConfigurationName).isTransitive = value
+        set(konstue) {
+            project.configurations.maybeCreate(exportConfigurationName).isTransitive = konstue
         }
 
     /**
@@ -248,7 +248,7 @@ class StaticLibrary(
     buildType: NativeBuildType,
     compilation: KotlinNativeCompilation
 ) : AbstractNativeLibrary(name, baseName, buildType, compilation) {
-    override val outputKind: NativeOutputKind
+    override konst outputKind: NativeOutputKind
         get() = NativeOutputKind.STATIC
 }
 
@@ -258,7 +258,7 @@ class SharedLibrary(
     buildType: NativeBuildType,
     compilation: KotlinNativeCompilation
 ) : AbstractNativeLibrary(name, baseName, buildType, compilation) {
-    override val outputKind: NativeOutputKind
+    override konst outputKind: NativeOutputKind
         get() = NativeOutputKind.DYNAMIC
 }
 
@@ -270,18 +270,18 @@ class Framework(
 ) : AbstractNativeLibrary(name, baseName, buildType, compilation), HasAttributes {
 
     @Transient // Is required configuration cache support for KotlinNative tasks that capture whole binary object as task state
-    private val attributeContainer = HierarchyAttributeContainer(parent = compilation.attributes)
+    private konst attributeContainer = HierarchyAttributeContainer(parent = compilation.attributes)
 
     override fun getAttributes() = attributeContainer
 
-    override val outputKind: NativeOutputKind
+    override konst outputKind: NativeOutputKind
         get() = NativeOutputKind.FRAMEWORK
 
     // Embedding bitcode.
     /**
      * Embed bitcode for the framework or not. See [BitcodeEmbeddingMode].
      */
-    val embedBitcodeMode = project.objects.property(org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode::class.java).apply {
+    konst embedBitcodeMode = project.objects.property(org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode::class.java).apply {
         convention(project.provider {
             Xcode?.defaultBitcodeEmbeddingMode(konanTarget, buildType)
                 ?: org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.DISABLE
@@ -291,8 +291,8 @@ class Framework(
     @Deprecated("Use 'embedBitcodeMode' property instead.")
     var embedBitcode: org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
         get() = embedBitcodeMode.get()
-        set(value) {
-            embedBitcodeMode.set(value)
+        set(konstue) {
+            embedBitcodeMode.set(konstue)
         }
 
     /**
@@ -312,7 +312,7 @@ class Framework(
      *     marker - Embed placeholder LLVM IR data as a marker.
      *              Has the same effect as the -Xembed-bitcode-marker command line option.
      */
-    fun embedBitcode(mode: String) = embedBitcode(org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.valueOf(mode.toUpperCaseAsciiOnly()))
+    fun embedBitcode(mode: String) = embedBitcode(org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.konstueOf(mode.toUpperCaseAsciiOnly()))
 
     /**
      * Specifies if the framework is linked as a static library (false by default).
@@ -320,13 +320,13 @@ class Framework(
     var isStatic = false
 
     object BitcodeEmbeddingMode {
-        val DISABLE = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.DISABLE
-        val BITCODE = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.BITCODE
-        val MARKER = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.MARKER
+        konst DISABLE = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.DISABLE
+        konst BITCODE = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.BITCODE
+        konst MARKER = org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.MARKER
     }
 
     companion object {
-        val frameworkTargets: Attribute<Set<*>> = Attribute.of(
+        konst frameworkTargets: Attribute<Set<*>> = Attribute.of(
             "org.jetbrains.kotlin.native.framework.targets",
             Set::class.java
         )

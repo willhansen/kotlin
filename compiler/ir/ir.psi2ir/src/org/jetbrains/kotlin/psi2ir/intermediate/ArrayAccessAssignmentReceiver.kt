@@ -40,40 +40,40 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.checker.KotlinTypeChecker
 
 internal class ArrayAccessAssignmentReceiver(
-    private val irArray: IrExpression,
-    private val ktIndexExpressions: List<KtExpression>,
-    private val irIndexExpressions: List<IrExpression>,
-    private val indexedGetResolvedCall: ResolvedCall<FunctionDescriptor>?,
-    private val indexedSetResolvedCall: ResolvedCall<FunctionDescriptor>?,
-    private val indexedGetCall: () -> CallBuilder?,
-    private val indexedSetCall: () -> CallBuilder?,
-    private val callGenerator: CallGenerator,
-    private val startOffset: Int,
-    private val endOffset: Int,
-    private val origin: IrStatementOrigin
+    private konst irArray: IrExpression,
+    private konst ktIndexExpressions: List<KtExpression>,
+    private konst irIndexExpressions: List<IrExpression>,
+    private konst indexedGetResolvedCall: ResolvedCall<FunctionDescriptor>?,
+    private konst indexedSetResolvedCall: ResolvedCall<FunctionDescriptor>?,
+    private konst indexedGetCall: () -> CallBuilder?,
+    private konst indexedSetCall: () -> CallBuilder?,
+    private konst callGenerator: CallGenerator,
+    private konst startOffset: Int,
+    private konst endOffset: Int,
+    private konst origin: IrStatementOrigin
 ) : AssignmentReceiver {
 
-    private val indexedGetDescriptor = indexedGetResolvedCall?.resultingDescriptor
-    private val indexedSetDescriptor = indexedSetResolvedCall?.resultingDescriptor
+    private konst indexedGetDescriptor = indexedGetResolvedCall?.resultingDescriptor
+    private konst indexedSetDescriptor = indexedSetResolvedCall?.resultingDescriptor
 
     private class CompoundAssignmentInfo {
-        val indexVariables = LinkedHashSet<IrVariable>()
+        konst indexVariables = LinkedHashSet<IrVariable>()
     }
 
-    private val descriptor =
+    private konst descriptor =
         indexedGetDescriptor
             ?: indexedSetDescriptor
             ?: throw AssertionError("Array access should have either indexed-get call or indexed-set call")
 
     override fun assign(withLValue: (LValue) -> IrExpression): IrExpression {
-        val kotlinType: KotlinType =
+        konst kotlinType: KotlinType =
             indexedGetDescriptor?.returnType
-                ?: indexedSetDescriptor?.run { valueParameters.last().type }
+                ?: indexedSetDescriptor?.run { konstueParameters.last().type }
                 ?: throw AssertionError("Array access should have either indexed-get call or indexed-set call")
 
-        val hasResult = origin.isAssignmentOperatorWithResult()
-        val resultType = if (hasResult) kotlinType else (callGenerator.context.irBuiltIns as IrBuiltInsOverDescriptors).unit
-        val irResultType = callGenerator.translateType(resultType)
+        konst hasResult = origin.isAssignmentOperatorWithResult()
+        konst resultType = if (hasResult) kotlinType else (callGenerator.context.irBuiltIns as IrBuiltInsOverDescriptors).unit
+        konst irResultType = callGenerator.translateType(resultType)
 
         if (indexedGetDescriptor?.isDynamic() != false && indexedSetDescriptor?.isDynamic() != false) {
             return withLValue(
@@ -83,16 +83,16 @@ internal class ArrayAccessAssignmentReceiver(
             )
         }
 
-        val irBlock = IrBlockImpl(startOffset, endOffset, irResultType, origin)
+        konst irBlock = IrBlockImpl(startOffset, endOffset, irResultType, origin)
 
-        val irArrayValue = callGenerator.scope.createTemporaryVariableInBlock(callGenerator.context, irArray, irBlock, "array")
+        konst irArrayValue = callGenerator.scope.createTemporaryVariableInBlock(callGenerator.context, irArray, irBlock, "array")
 
-        val compoundAssignmentInfo = CompoundAssignmentInfo()
+        konst compoundAssignmentInfo = CompoundAssignmentInfo()
 
         irBlock.inlineStatement(
             withLValue(
                 createLValue(kotlinType, irArrayValue) { i, irIndex ->
-                    val irIndexVar = callGenerator.scope.createTemporaryVariable(irIndex, "index$i")
+                    konst irIndexVar = callGenerator.scope.createTemporaryVariable(irIndex, "index$i")
                     compoundAssignmentInfo.indexVariables.add(irIndexVar)
                     irBlock.statements.add(irIndexVar)
                     VariableLValue(callGenerator.context, irIndexVar)
@@ -108,27 +108,27 @@ internal class ArrayAccessAssignmentReceiver(
         irBlock: IrBlock,
         compoundAssignmentInfo: CompoundAssignmentInfo
     ) {
-        val samConversionsCollector = SamConversionsCollector(compoundAssignmentInfo)
+        konst samConversionsCollector = SamConversionsCollector(compoundAssignmentInfo)
         irBlock.acceptChildrenVoid(samConversionsCollector)
 
         if (samConversionsCollector.samConversionsPerVariable.isEmpty()) return
 
-        val samConvertedVars = hashMapOf<IrVariable, IrVariable>()
+        konst samConvertedVars = hashMapOf<IrVariable, IrVariable>()
         for ((irIndexVar, samConversions) in samConversionsCollector.samConversionsPerVariable) {
             var mostSpecificSamConversion: IrTypeOperatorCall = samConversions.first()
             for (samConversion in samConversions) {
                 if (samConversion === mostSpecificSamConversion) continue
-                val lastType = mostSpecificSamConversion.operandKotlinType
-                val nextType = samConversion.operandKotlinType
+                konst lastType = mostSpecificSamConversion.operandKotlinType
+                konst nextType = samConversion.operandKotlinType
                 if (KotlinTypeChecker.DEFAULT.isSubtypeOf(nextType, lastType)) {
                     mostSpecificSamConversion = samConversion
                 } else if (!KotlinTypeChecker.DEFAULT.isSubtypeOf(lastType, nextType)) {
                     throw AssertionError("Unrelated types in SAM conversion for index variable: $lastType, $nextType")
                 }
             }
-            val irSamConvertedVarInitializer = createSamConvertedVarInitializer(irIndexVar, mostSpecificSamConversion)
-            val irSamConvertedVar = callGenerator.scope.createTemporaryVariable(irSamConvertedVarInitializer, "sam")
-            val index = irBlock.statements.indexOf(irIndexVar)
+            konst irSamConvertedVarInitializer = createSamConvertedVarInitializer(irIndexVar, mostSpecificSamConversion)
+            konst irSamConvertedVar = callGenerator.scope.createTemporaryVariable(irSamConvertedVarInitializer, "sam")
+            konst index = irBlock.statements.indexOf(irIndexVar)
             irBlock.statements[index] = irSamConvertedVar
             samConvertedVars[irIndexVar] = irSamConvertedVar
         }
@@ -137,11 +137,11 @@ internal class ArrayAccessAssignmentReceiver(
     }
 
     private fun createSamConvertedVarInitializer(irIndexVar: IrVariable, mostSpecificSamConversion: IrTypeOperatorCall): IrExpression {
-        val irIndexVarInitializer = irIndexVar.initializer!!
-        val startOffset = irIndexVarInitializer.startOffset
-        val endOffset = irIndexVarInitializer.endOffset
+        konst irIndexVarInitializer = irIndexVar.initializer!!
+        konst startOffset = irIndexVarInitializer.startOffset
+        konst endOffset = irIndexVarInitializer.endOffset
 
-        val implicitCast = mostSpecificSamConversion.argument as IrTypeOperatorCall
+        konst implicitCast = mostSpecificSamConversion.argument as IrTypeOperatorCall
 
         return IrTypeOperatorCallImpl(
             startOffset, endOffset,
@@ -158,13 +158,13 @@ internal class ArrayAccessAssignmentReceiver(
         )
     }
 
-    private val IrTypeOperatorCall.operandKotlinType
+    private konst IrTypeOperatorCall.operandKotlinType
         get() = typeOperand.originalKotlinType!!
 
     private class SamConversionsCollector(
-        private val compoundAssignmentInfo: CompoundAssignmentInfo
+        private konst compoundAssignmentInfo: CompoundAssignmentInfo
     ) : IrElementVisitorVoid {
-        val samConversionsPerVariable = HashMap<IrVariable, MutableList<IrTypeOperatorCall>>()
+        konst samConversionsPerVariable = HashMap<IrVariable, MutableList<IrTypeOperatorCall>>()
 
         override fun visitElement(element: IrElement) {
             element.acceptChildrenVoid(this)
@@ -172,28 +172,28 @@ internal class ArrayAccessAssignmentReceiver(
 
         override fun visitTypeOperator(expression: IrTypeOperatorCall) {
             expression.acceptChildrenVoid(this)
-            val irGetVar = expression.getSamConvertedGetValue()
+            konst irGetVar = expression.getSamConvertedGetValue()
             if (irGetVar != null) {
-                val valueDeclaration = irGetVar.symbol.owner
-                if (valueDeclaration is IrVariable && valueDeclaration in compoundAssignmentInfo.indexVariables) {
-                    samConversionsPerVariable.getOrPut(valueDeclaration) { ArrayList() }.add(expression)
+                konst konstueDeclaration = irGetVar.symbol.owner
+                if (konstueDeclaration is IrVariable && konstueDeclaration in compoundAssignmentInfo.indexVariables) {
+                    samConversionsPerVariable.getOrPut(konstueDeclaration) { ArrayList() }.add(expression)
                 }
             }
         }
     }
 
     private class SamConversionsRewriter(
-        private val replacementVars: Map<IrVariable, IrVariable>
+        private konst replacementVars: Map<IrVariable, IrVariable>
     ) : IrElementTransformerVoid() {
         override fun visitElement(element: IrElement): IrElement {
             return element.apply { transformChildrenVoid() }
         }
 
         override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
-            val irGetVar = expression.getSamConvertedGetValue()
+            konst irGetVar = expression.getSamConvertedGetValue()
             if (irGetVar != null) {
-                val valueDeclaration = irGetVar.symbol.owner
-                val replacementVar = replacementVars[valueDeclaration]
+                konst konstueDeclaration = irGetVar.symbol.owner
+                konst replacementVar = replacementVars[konstueDeclaration]
                 if (replacementVar != null) {
                     return IrGetValueImpl(expression.startOffset, expression.endOffset, replacementVar.symbol, null)
                 }
@@ -203,7 +203,7 @@ internal class ArrayAccessAssignmentReceiver(
         }
 
         override fun visitGetValue(expression: IrGetValue): IrExpression {
-            val symbol = expression.symbol
+            konst symbol = expression.symbol
             if (symbol.owner in replacementVars) {
                 throw AssertionError(
                     "SAM-converted index variable ${symbol.descriptor} is present in get/set calls in non-converted"
@@ -218,7 +218,7 @@ internal class ArrayAccessAssignmentReceiver(
         irArrayValue: IntermediateValue,
         createIndexValue: (Int, IrExpression) -> IntermediateValue
     ): LValueWithGetterAndSetterCalls {
-        val ktExpressionToIrIndexValue = HashMap<KtExpression, IntermediateValue>()
+        konst ktExpressionToIrIndexValue = HashMap<KtExpression, IntermediateValue>()
         for ((i, irIndex) in irIndexExpressions.withIndex()) {
             ktExpressionToIrIndexValue[ktIndexExpressions[i]] =
                 createIndexValue(i, irIndex)
@@ -234,10 +234,10 @@ internal class ArrayAccessAssignmentReceiver(
         )
     }
 
-    override fun assign(value: IrExpression): IrExpression {
-        val call = indexedSetCall() ?: throw AssertionError("Array access without indexed-get call")
-        val ktExpressionToIrIndexExpression = ktIndexExpressions.zip(irIndexExpressions.map { OnceExpressionValue(it) }).toMap()
-        call.fillArguments(OnceExpressionValue(irArray), indexedSetResolvedCall!!, ktExpressionToIrIndexExpression, value)
+    override fun assign(konstue: IrExpression): IrExpression {
+        konst call = indexedSetCall() ?: throw AssertionError("Array access without indexed-get call")
+        konst ktExpressionToIrIndexExpression = ktIndexExpressions.zip(irIndexExpressions.map { OnceExpressionValue(it) }).toMap()
+        call.fillArguments(OnceExpressionValue(irArray), indexedSetResolvedCall!!, ktExpressionToIrIndexExpression, konstue)
         return callGenerator.generateCall(startOffset, endOffset, call, IrStatementOrigin.EQ)
     }
 
@@ -245,23 +245,23 @@ internal class ArrayAccessAssignmentReceiver(
         arrayValue: IntermediateValue,
         resolvedCall: ResolvedCall<FunctionDescriptor>,
         ktExpressionToIrIndexValue: Map<KtExpression, IntermediateValue>,
-        value: IrExpression?
+        konstue: IrExpression?
     ) = apply {
         setExplicitReceiverValue(arrayValue)
         callGenerator.statementGenerator.pregenerateValueArgumentsUsing(this, resolvedCall) { ktExpression ->
             ktExpressionToIrIndexValue[ktExpression]?.load()
         }
-        value?.let { lastArgument = it }
+        konstue?.let { lastArgument = it }
         callGenerator.statementGenerator.generateSamConversionForValueArgumentsIfRequired(this, resolvedCall)
     }
 
     companion object {
         internal fun IrTypeOperatorCall.getSamConvertedGetValue(): IrGetValue? {
             if (operator != IrTypeOperator.SAM_CONVERSION) return null
-            val arg0 = argument
+            konst arg0 = argument
             if (arg0 !is IrTypeOperatorCall) return null
             if (arg0.operator != IrTypeOperator.IMPLICIT_CAST) return null
-            val arg1 = arg0.argument
+            konst arg1 = arg0.argument
             if (arg1 !is IrGetValue) return null
             if (arg1.symbol.owner !is IrVariable) return null
             return arg1

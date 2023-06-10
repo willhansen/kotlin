@@ -7,7 +7,7 @@ abstract class KACharSequence : JACharSequence()
 class Test(s: String) : JCharSequence(s)
 
 fun box(): String {
-    val t = Test("OK")
+    konst t = Test("OK")
     return "" + t[0] + t[1]
 }
 

@@ -19,15 +19,15 @@ import org.jetbrains.kotlin.ir.util.getSimpleFunction
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /** Builds a [HeaderInfo] for Sequences not handled by more specialized handlers. */
-internal class DefaultSequenceHandler(private val context: CommonBackendContext) : HeaderInfoHandler<IrExpression, Nothing?> {
-    private val sequenceClassSymbol = context.ir.symbols.sequence
+internal class DefaultSequenceHandler(private konst context: CommonBackendContext) : HeaderInfoHandler<IrExpression, Nothing?> {
+    private konst sequenceClassSymbol = context.ir.symbols.sequence
 
     override fun matchIterable(expression: IrExpression): Boolean =
         sequenceClassSymbol != null && expression.type.isSubtypeOfClass(sequenceClassSymbol)
 
     override fun build(expression: IrExpression, data: Nothing?, scopeOwner: IrSymbol): HeaderInfo =
         with(context.createIrBuilder(scopeOwner, expression.startOffset, expression.endOffset)) {
-            val iteratorFun =
+            konst iteratorFun =
                 sequenceClassSymbol!!.getSimpleFunction(OperatorNameConventions.ITERATOR.asString())!!.owner
             IterableHeaderInfo(
                 scope.createTmpVariable(irCall(iteratorFun).apply { dispatchReceiver = expression }, nameHint = "iterator")

@@ -11,26 +11,26 @@ import java.io.File
 import java.io.Serializable
 
 data class ReportingSettings(
-    val buildReportOutputs: List<BuildReportType> = emptyList(),
-    val buildReportMode: BuildReportMode = BuildReportMode.NONE,
-    val buildReportLabel: String? = null,
-    val fileReportSettings: FileReportSettings? = null,
-    val httpReportSettings: HttpReportSettings? = null,
-    val buildScanReportSettings: BuildScanSettings? = null,
-    val singleOutputFile: File? = null,
-    val experimentalTryK2ConsoleOutput: Boolean = false,
-    val includeCompilerArguments: Boolean = false,
+    konst buildReportOutputs: List<BuildReportType> = emptyList(),
+    konst buildReportMode: BuildReportMode = BuildReportMode.NONE,
+    konst buildReportLabel: String? = null,
+    konst fileReportSettings: FileReportSettings? = null,
+    konst httpReportSettings: HttpReportSettings? = null,
+    konst buildScanReportSettings: BuildScanSettings? = null,
+    konst singleOutputFile: File? = null,
+    konst experimentalTryK2ConsoleOutput: Boolean = false,
+    konst includeCompilerArguments: Boolean = false,
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 1
+        const konst serialVersionUID: Long = 1
     }
 }
 
 data class BuildScanSettings(
-    val customValueLimit: Int,
-    val metrics: Set<String>?
+    konst customValueLimit: Int,
+    konst metrics: Set<String>?
 ): Serializable {
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 }

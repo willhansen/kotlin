@@ -7,7 +7,7 @@ fun box(): String {
     var res1 = "fail"
     var res2 = "fail2"
 
-    val en: En = En.A
+    konst en: En = En.A
     when (en) {
         En.A -> {res1 = ""}
         En.B -> {}
@@ -22,7 +22,7 @@ fun box(): String {
 
 
     // nullable variable
-    val en2: Any? = En.A
+    konst en2: Any? = En.A
     if (en2 is En) {
         when (en2) {
             En.A -> {res1 += "K"}
@@ -39,7 +39,7 @@ fun box(): String {
 
 
     // not nullable variable
-    val en1: Any = En.A
+    konst en1: Any = En.A
     if (en1 is En) {
         when (en1) {
             En.A -> {res2 += "O"}

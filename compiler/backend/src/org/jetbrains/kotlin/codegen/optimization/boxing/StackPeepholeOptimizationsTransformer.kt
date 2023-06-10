@@ -30,10 +30,10 @@ class StackPeepholeOptimizationsTransformer : MethodTransformer() {
     }
 
     private fun transformOnce(methodNode: MethodNode): Boolean {
-        val instructions = methodNode.instructions
+        konst instructions = methodNode.instructions
         var changed = false
 
-        val isMergeNode = FastMethodAnalyzer.findMergeNodes(methodNode)
+        konst isMergeNode = FastMethodAnalyzer.findMergeNodes(methodNode)
 
         fun AbstractInsnNode.previousMeaningful() =
             findPreviousOrNull {
@@ -47,7 +47,7 @@ class StackPeepholeOptimizationsTransformer : MethodTransformer() {
             insn = next
             next = insn.next
 
-            val prev = insn.previousMeaningful() ?: continue
+            konst prev = insn.previousMeaningful() ?: continue
             when (insn.opcode) {
                 Opcodes.POP -> {
                     when {
@@ -65,7 +65,7 @@ class StackPeepholeOptimizationsTransformer : MethodTransformer() {
                 }
 
                 Opcodes.SWAP -> {
-                    val prev2 = prev.previousMeaningful() ?: continue
+                    konst prev2 = prev.previousMeaningful() ?: continue
                     if (prev.isPurePushOfSize1() && prev2.isPurePushOfSize1()) {
                         instructions.set(insn, InsnNode(Opcodes.NOP))
                         instructions.set(prev, prev2.clone(emptyMap()))
@@ -95,7 +95,7 @@ class StackPeepholeOptimizationsTransformer : MethodTransformer() {
                         instructions.set(prev, InsnNode(Opcodes.NOP))
                         changed = true
                     } else {
-                        val prev2 = prev.previousMeaningful() ?: continue
+                        konst prev2 = prev.previousMeaningful() ?: continue
                         if (prev.isEliminatedByPop() && prev2.isEliminatedByPop()) {
                             instructions.set(insn, InsnNode(Opcodes.NOP))
                             instructions.set(prev, InsnNode(Opcodes.NOP))

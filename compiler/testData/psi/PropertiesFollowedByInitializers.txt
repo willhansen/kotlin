@@ -16,7 +16,7 @@ KtFile: PropertiesFollowedByInitializers.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
@@ -110,7 +110,7 @@ KtFile: PropertiesFollowedByInitializers.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b2')
         PsiWhiteSpace(' ')
@@ -133,7 +133,7 @@ KtFile: PropertiesFollowedByInitializers.kt
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b3')
         PsiWhiteSpace(' ')
@@ -165,7 +165,7 @@ KtFile: PropertiesFollowedByInitializers.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('b4')
         PsiWhiteSpace(' ')
@@ -482,7 +482,7 @@ KtFile: PropertiesFollowedByInitializers.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('now')
     PsiElement(COLON)(':')

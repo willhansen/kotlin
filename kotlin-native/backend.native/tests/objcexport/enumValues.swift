@@ -1,41 +1,41 @@
 import Kt
 
 private func testEnumValues() throws {
-    let values = EnumLeftRightUpDown.values()
+    let konstues = EnumLeftRightUpDown.konstues()
 
-    try assertEquals(actual: values.size, expected: 4)
+    try assertEquals(actual: konstues.size, expected: 4)
 
-    try assertSame(actual: values.get(index: 0) as AnyObject, expected: EnumLeftRightUpDown.left)
-    try assertSame(actual: values.get(index: 1) as AnyObject, expected: EnumLeftRightUpDown.right)
-    try assertSame(actual: values.get(index: 2) as AnyObject, expected: EnumLeftRightUpDown.up)
-    try assertSame(actual: values.get(index: 3) as AnyObject, expected: EnumLeftRightUpDown.down)
+    try assertSame(actual: konstues.get(index: 0) as AnyObject, expected: EnumLeftRightUpDown.left)
+    try assertSame(actual: konstues.get(index: 1) as AnyObject, expected: EnumLeftRightUpDown.right)
+    try assertSame(actual: konstues.get(index: 2) as AnyObject, expected: EnumLeftRightUpDown.up)
+    try assertSame(actual: konstues.get(index: 3) as AnyObject, expected: EnumLeftRightUpDown.down)
 }
 
 private func testEnumValuesMangled() throws {
-    let values = EnumOneTwoThreeValues.values_()
+    let konstues = EnumOneTwoThreeValues.konstues_()
 
-    try assertEquals(actual: values.size, expected: 5)
+    try assertEquals(actual: konstues.size, expected: 5)
 
-    try assertSame(actual: values.get(index: 0) as AnyObject, expected: EnumOneTwoThreeValues.one)
-    try assertSame(actual: values.get(index: 1) as AnyObject, expected: EnumOneTwoThreeValues.two)
-    try assertSame(actual: values.get(index: 2) as AnyObject, expected: EnumOneTwoThreeValues.three)
-    try assertSame(actual: values.get(index: 3) as AnyObject, expected: EnumOneTwoThreeValues.values)
-    try assertSame(actual: values.get(index: 4) as AnyObject, expected: EnumOneTwoThreeValues.entries)
+    try assertSame(actual: konstues.get(index: 0) as AnyObject, expected: EnumOneTwoThreeValues.one)
+    try assertSame(actual: konstues.get(index: 1) as AnyObject, expected: EnumOneTwoThreeValues.two)
+    try assertSame(actual: konstues.get(index: 2) as AnyObject, expected: EnumOneTwoThreeValues.three)
+    try assertSame(actual: konstues.get(index: 3) as AnyObject, expected: EnumOneTwoThreeValues.konstues)
+    try assertSame(actual: konstues.get(index: 4) as AnyObject, expected: EnumOneTwoThreeValues.entries)
 }
 
 private func testEnumValuesMangledTwice() throws {
-    let values = EnumValuesValues_.values__()
+    let konstues = EnumValuesValues_.konstues__()
 
-    try assertEquals(actual: values.size, expected: 4)
+    try assertEquals(actual: konstues.size, expected: 4)
 
-    try assertSame(actual: values.get(index: 0) as AnyObject, expected: EnumValuesValues_.values)
-    try assertSame(actual: values.get(index: 1) as AnyObject, expected: EnumValuesValues_.values_)
-    try assertSame(actual: values.get(index: 2) as AnyObject, expected: EnumValuesValues_.entries)
-    try assertSame(actual: values.get(index: 3) as AnyObject, expected: EnumValuesValues_.entries_)
+    try assertSame(actual: konstues.get(index: 0) as AnyObject, expected: EnumValuesValues_.konstues)
+    try assertSame(actual: konstues.get(index: 1) as AnyObject, expected: EnumValuesValues_.konstues_)
+    try assertSame(actual: konstues.get(index: 2) as AnyObject, expected: EnumValuesValues_.entries)
+    try assertSame(actual: konstues.get(index: 3) as AnyObject, expected: EnumValuesValues_.entries_)
 }
 
 private func testEnumValuesEmpty() throws {
-    try assertEquals(actual: EmptyEnum.values().size, expected: 0)
+    try assertEquals(actual: EmptyEnum.konstues().size, expected: 0)
 }
 
 extension NSObject {
@@ -50,7 +50,7 @@ extension NSObject {
        for i in 0 ..< Int(propertiesCount) {
           if let property = propertiesInAClass?[i],
              let strKey = NSString(utf8String: sel_getName(method_getName(property))) as String? {
-               propertiesDictionary[strKey] = value(forKey: strKey)
+               propertiesDictionary[strKey] = konstue(forKey: strKey)
           }
        }
        return propertiesDictionary
@@ -82,7 +82,7 @@ private func testEnumEntriesMangled() throws {
     try assertSame(actual: entries[0] as AnyObject, expected: EnumOneTwoThreeValues.one)
     try assertSame(actual: entries[1] as AnyObject, expected: EnumOneTwoThreeValues.two)
     try assertSame(actual: entries[2] as AnyObject, expected: EnumOneTwoThreeValues.three)
-    try assertSame(actual: entries[3] as AnyObject, expected: EnumOneTwoThreeValues.values)
+    try assertSame(actual: entries[3] as AnyObject, expected: EnumOneTwoThreeValues.konstues)
     try assertSame(actual: entries[4] as AnyObject, expected: EnumOneTwoThreeValues.entries)
 }
 
@@ -91,8 +91,8 @@ private func testEnumEntriesMangledTwice() throws {
 
     try assertEquals(actual: entries.count, expected: 4)
 
-    try assertSame(actual: entries[0] as AnyObject, expected: EnumValuesValues_.values)
-    try assertSame(actual: entries[1] as AnyObject, expected: EnumValuesValues_.values_)
+    try assertSame(actual: entries[0] as AnyObject, expected: EnumValuesValues_.konstues)
+    try assertSame(actual: entries[1] as AnyObject, expected: EnumValuesValues_.konstues_)
     try assertSame(actual: entries[2] as AnyObject, expected: EnumValuesValues_.entries)
     try assertSame(actual: entries[3] as AnyObject, expected: EnumValuesValues_.entries_)
 }

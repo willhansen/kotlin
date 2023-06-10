@@ -11,8 +11,8 @@ import java.lang.reflect.Array as JavaArray
 import java.lang.NullPointerException as JavaNPE
 import java.util.Arrays
 
-private val EMPTY = emptyArray<Any?>() // shared empty array
-private const val MAX_SIZE = Int.MAX_VALUE - 2 // empirically maximal array size that can be allocated without exceeding VM limits
+private konst EMPTY = emptyArray<Any?>() // shared empty array
+private const konst MAX_SIZE = Int.MAX_VALUE - 2 // empirically maximal array size that can be allocated without exceeding VM limits
 
 @JvmName("toArray")
 fun collectionToArray(collection: Collection<*>): Array<Any?> =
@@ -54,9 +54,9 @@ private inline fun toArrayImpl(
     alloc: (Int) -> Array<Any?>,
     trim: (Array<Any?>, Int) -> Array<Any?>
 ): Array<Any?> {
-    val size = collection.size
+    konst size = collection.size
     if (size == 0) return empty() // quick path on zero size
-    val iter = collection.iterator() // allocate iterator for non-empty collection
+    konst iter = collection.iterator() // allocate iterator for non-empty collection
     if (!iter.hasNext()) return empty() // size was > 0, but no actual elements
     var result = alloc(size) // use size as a guess to allocate result array
     var i = 0

@@ -9,7 +9,7 @@ FILE: inlineClassDeclaration.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val x: R|kotlin/Int| = R|<local>/x|
+            public final konst x: R|kotlin/Int| = R|<local>/x|
                 public get(): R|kotlin/Int|
 
         }
@@ -20,7 +20,7 @@ FILE: inlineClassDeclaration.kt
                     super<R|kotlin/Any|>()
                 }
 
-                public final val x: R|kotlin/Int| = R|<local>/x|
+                public final konst x: R|kotlin/Int| = R|<local>/x|
                     public get(): R|kotlin/Int|
 
             }
@@ -32,7 +32,7 @@ FILE: inlineClassDeclaration.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val x: R|kotlin/Int| = R|<local>/x|
+            public final konst x: R|kotlin/Int| = R|<local>/x|
                 public get(): R|kotlin/Int|
 
         }
@@ -43,7 +43,7 @@ FILE: inlineClassDeclaration.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -52,7 +52,7 @@ FILE: inlineClassDeclaration.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -61,7 +61,7 @@ FILE: inlineClassDeclaration.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -70,7 +70,7 @@ FILE: inlineClassDeclaration.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -79,7 +79,7 @@ FILE: inlineClassDeclaration.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -94,7 +94,7 @@ FILE: inlineClassDeclaration.kt
             super<R|Test|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -105,7 +105,7 @@ FILE: inlineClassDeclaration.kt
 
         private final field $$delegate_0: R|kotlin/Comparable<kotlin/Int>| = R|<local>/x|
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }

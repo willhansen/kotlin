@@ -2,11 +2,11 @@
 // WITH_REFLECT
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Simple(val value: String)
+annotation class Simple(konst konstue: String)
 
 @property:Simple("OK")
-val foo: Int = 0
+konst foo: Int = 0
 
 fun box(): String {
-    return (::foo.annotations.single() as Simple).value
+    return (::foo.annotations.single() as Simple).konstue
 }

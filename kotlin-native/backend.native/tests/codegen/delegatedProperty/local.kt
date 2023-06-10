@@ -17,7 +17,7 @@ fun foo(): Int {
         }
     }
 
-    val x: Int by Delegate()
+    konst x: Int by Delegate()
 
     return x
 }

@@ -1,7 +1,7 @@
 // KJS_WITH_FULL_RUNTIME
 
 fun box() : String {
-  val array = ArrayList<String>()
+  konst array = ArrayList<String>()
   array.add("0")
   array.add("1")
   array.add("2")
@@ -11,7 +11,7 @@ fun box() : String {
 
 var <T> ArrayList<T>.length : Int
     get() = size
-    set(value: Int) = throw Error()
+    set(konstue: Int) = throw Error()
 
 var <T> ArrayList<T>.last : T
     get() = get(size-1)!!

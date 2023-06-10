@@ -27,7 +27,7 @@ class RunnerFactoryWithMuteInDatabase : ParametersRunnerFactory {
     override fun createRunnerForTestWithParameters(testWithParameters: TestWithParameters?): Runner {
         return object : BlockJUnit4ClassRunnerWithParameters(testWithParameters) {
             override fun isIgnored(child: FrameworkMethod): Boolean {
-                val methodWithParametersKey = parametrizedMethodKey(child, name)
+                konst methodWithParametersKey = parametrizedMethodKey(child, name)
 
                 return super.isIgnored(child)
                         || isMutedInDatabaseWithLog(child.declaringClass, child.name)
@@ -35,7 +35,7 @@ class RunnerFactoryWithMuteInDatabase : ParametersRunnerFactory {
             }
 
             override fun runChild(method: FrameworkMethod, notifier: RunNotifier) {
-                val testKey = testKey(method.declaringClass, parametrizedMethodKey(method, name))
+                konst testKey = testKey(method.declaringClass, parametrizedMethodKey(method, name))
                 notifier.withAutoMuteListener(testKey) {
                     super.runChild(method, notifier)
                 }
@@ -51,27 +51,27 @@ class RunnerFactoryWithMuteInDatabase : ParametersRunnerFactory {
 }
 
 class MethodInvokerWithMutedTests(
-    val method: FrameworkMethod,
-    val test: Any?,
-    val mainMethodKey: String? = null
+    konst method: FrameworkMethod,
+    konst test: Any?,
+    konst mainMethodKey: String? = null
 ) : InvokeMethod(method, test) {
-    override fun evaluate() {
-        val methodClass = method.declaringClass
-        val mutedTest =
+    override fun ekonstuate() {
+        konst methodClass = method.declaringClass
+        konst mutedTest =
             mainMethodKey?.let { getMutedTest(methodClass, it) }
                 ?: getMutedTest(methodClass, method.method.name)
 
         if (mutedTest != null && isPresentedInDatabaseWithoutFailMarker(mutedTest)) {
             if (mutedTest.isFlaky) {
-                super.evaluate()
+                super.ekonstuate()
                 return
             } else {
-                val testKey = testKey(methodClass, mutedTest.methodKey)
-                invertMutedTestResultWithLog({ super.evaluate() }, testKey)
+                konst testKey = testKey(methodClass, mutedTest.methodKey)
+                invertMutedTestResultWithLog({ super.ekonstuate() }, testKey)
                 return
             }
         }
-        super.evaluate()
+        super.ekonstuate()
     }
 }
 
@@ -81,7 +81,7 @@ class RunnerWithMuteInDatabase(klass: Class<*>?) : BlockJUnit4ClassRunner(klass)
     }
 
     override fun runChild(method: FrameworkMethod, notifier: RunNotifier) {
-        val testKey = testKey(method.declaringClass, method.name)
+        konst testKey = testKey(method.declaringClass, method.name)
         notifier.withAutoMuteListener(testKey) {
             super.runChild(method, notifier)
         }
@@ -108,28 +108,28 @@ annotation class WithMutedInDatabaseRunTest
 @ExtendWith(MuteInCondition::class, MuteInTestWatcher::class, MuteInInvocationInterceptor::class)
 annotation class WithMuteInDatabase
 
-private val ExtensionContext.testClassNullable get() = testClass.orElseGet { null }
-private val ExtensionContext.testMethodNullable get() = testMethod.orElseGet { null }
+private konst ExtensionContext.testClassNullable get() = testClass.orElseGet { null }
+private konst ExtensionContext.testMethodNullable get() = testMethod.orElseGet { null }
 
 class MuteInCondition : ExecutionCondition {
-    override fun evaluateExecutionCondition(
+    override fun ekonstuateExecutionCondition(
         context: ExtensionContext
-    ): ConditionEvaluationResult {
-        val testClass = context.testClassNullable
-        val testMethod = context.testMethodNullable
+    ): ConditionEkonstuationResult {
+        konst testClass = context.testClassNullable
+        konst testMethod = context.testMethodNullable
 
         return if (testClass != null &&
             testMethod != null &&
             isMutedInDatabaseWithLog(testClass, testMethod.name)
         ) {
-            ConditionEvaluationResult.disabled("Muted")
+            ConditionEkonstuationResult.disabled("Muted")
         } else {
             enabled
         }
     }
 
     companion object {
-        private val enabled = ConditionEvaluationResult.enabled("Not found in mute-in database")
+        private konst enabled = ConditionEkonstuationResult.enabled("Not found in mute-in database")
     }
 }
 
@@ -138,8 +138,8 @@ class MuteInTestWatcher : TestWatcher {
         context: ExtensionContext,
         cause: Throwable
     ) {
-        val testClass = context.testClassNullable
-        val testMethod = context.testMethodNullable
+        konst testClass = context.testClassNullable
+        konst testMethod = context.testMethodNullable
         if (testClass != null &&
             testMethod != null
         ) {
@@ -171,12 +171,12 @@ class MuteInInvocationInterceptor : InvocationInterceptor {
         invocation: InvocationInterceptor.Invocation<Void>,
         extensionContext: ExtensionContext
     ) {
-        val testClass = extensionContext.testClassNullable
-        val testMethod = extensionContext.testMethodNullable
+        konst testClass = extensionContext.testClassNullable
+        konst testMethod = extensionContext.testMethodNullable
         if (testClass != null &&
             testMethod != null
         ) {
-            val mutedTest = getMutedTest(testClass, testMethod.name)
+            konst mutedTest = getMutedTest(testClass, testMethod.name)
             if (mutedTest != null &&
                 isPresentedInDatabaseWithoutFailMarker(mutedTest)
             ) {

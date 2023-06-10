@@ -1,4 +1,4 @@
 package a
 
-val a : Int = <!UNINITIALIZED_VARIABLE!>b<!>
-val b : Int = a
+konst a : Int = <!UNINITIALIZED_VARIABLE!>b<!>
+konst b : Int = a

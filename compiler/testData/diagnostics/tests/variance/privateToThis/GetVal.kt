@@ -1,7 +1,7 @@
 fun <T> getT(): T = null!!
 
 class Test<in I, out O> {
-    private val i: I = getT()
+    private konst i: I = getT()
 
     init {
         apply(i)

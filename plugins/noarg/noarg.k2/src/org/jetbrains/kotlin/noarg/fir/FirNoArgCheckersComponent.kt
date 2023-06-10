@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirRegularClassChe
 import org.jetbrains.kotlin.fir.analysis.extensions.FirAdditionalCheckersExtension
 
 class FirNoArgCheckers(session: FirSession) : FirAdditionalCheckersExtension(session) {
-    override val declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
-        override val regularClassCheckers: Set<FirRegularClassChecker> = setOf(FirNoArgDeclarationChecker)
+    override konst declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
+        override konst regularClassCheckers: Set<FirRegularClassChecker> = setOf(FirNoArgDeclarationChecker)
     }
 }

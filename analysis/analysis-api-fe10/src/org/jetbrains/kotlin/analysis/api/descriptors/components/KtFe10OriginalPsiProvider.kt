@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class KtFe10OriginalPsiProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtOriginalPsiProvider(), Fe10KtAnalysisSessionComponent {
     override fun getOriginalDeclaration(declaration: KtDeclaration): KtDeclaration? = null
 

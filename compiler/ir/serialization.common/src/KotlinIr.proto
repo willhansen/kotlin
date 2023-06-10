@@ -150,7 +150,7 @@ message IrBlock {
 message MemberAccessCommon {
   optional IrExpression dispatch_receiver = 1;
   optional IrExpression extension_receiver = 2;
-  repeated NullableIrExpression value_argument = 3;
+  repeated NullableIrExpression konstue_argument = 3;
   repeated int32 type_argument = 4 [packed=true];
 }
 
@@ -203,7 +203,7 @@ message IrClassReference {
 }
 
 message IrConst {
-  oneof value {
+  oneof konstue {
     bool null = 1;
     bool boolean = 2;
     int32 char = 3;
@@ -211,7 +211,7 @@ message IrConst {
     int32 short = 5;
     int32 int = 6;
     int64 long = 7;
-    fixed32 float_bits = 8;  // float/double is stored via fixed 32/64 bit value to avoid raw bit conversion
+    fixed32 float_bits = 8;  // float/double is stored via fixed 32/64 bit konstue to avoid raw bit conversion
     fixed64 double_bits = 9;
     int32 string = 10;
   }
@@ -278,18 +278,18 @@ message Loop {
 
 message IrReturn {
   required int64 return_target = 1;
-  required IrExpression value = 2;
+  required IrExpression konstue = 2;
 }
 
 message IrSetField {
   required FieldAccessCommon field_access = 1;
-  required IrExpression value = 2;
+  required IrExpression konstue = 2;
   optional int32 origin_name = 3;
 }
 
 message IrSetValue {
   required int64 symbol = 1;
-  required IrExpression value = 2;
+  required IrExpression konstue = 2;
   optional int32 origin_name = 3;
 }
 
@@ -303,7 +303,7 @@ message IrStringConcat {
 }
 
 message IrThrow {
-  required IrExpression value = 1;
+  required IrExpression konstue = 1;
 }
 
 message IrTry {
@@ -351,7 +351,7 @@ message IrErrorExpression {
 message IrErrorCallExpression {
   required int32 description = 1;
   optional IrExpression receiver = 2;
-  repeated IrExpression value_argument = 3;
+  repeated IrExpression konstue_argument = 3;
 }
 
 /* ------ Dynamic expression --------------------------------------------- */
@@ -418,15 +418,15 @@ message IrOperation {
     IrEnumConstructorCall enum_constructor_call = 10;
     IrFunctionReference function_reference = 11;
     IrGetClass get_class = 12;
-    IrGetEnumValue get_enum_value = 13;
+    IrGetEnumValue get_enum_konstue = 13;
     IrGetField get_field = 14;
     IrGetObject get_object = 15;
-    IrGetValue get_value = 16;
+    IrGetValue get_konstue = 16;
     IrInstanceInitializerCall instance_initializer_call = 17;
     IrPropertyReference property_reference = 18;
     IrReturn return = 19;
     IrSetField set_field = 20;
-    IrSetValue set_value = 21;
+    IrSetValue set_konstue = 21;
     IrStringConcat string_concat = 22;
     IrThrow throw = 23;
     IrTry try = 24;
@@ -487,7 +487,7 @@ message IrFunctionBase {
   optional IrValueParameter dispatch_receiver = 4;
   optional IrValueParameter extension_receiver = 5;
   optional int32 context_receiver_parameters_count = 8;
-  repeated IrValueParameter value_parameter = 6;
+  repeated IrValueParameter konstue_parameter = 6;
   optional int32 body = 7;
 }
 
@@ -533,7 +533,7 @@ message IrValueParameter {
   required IrDeclarationBase base = 1;
   required int64 name_type = 2;
   optional int32 vararg_element_type = 3;
-  optional int32 default_value = 4;
+  optional int32 default_konstue = 4;
 }
 
 message IrTypeParameter {
@@ -550,7 +550,7 @@ message IrClass {
   repeated IrDeclaration declaration = 5;
   repeated int32 super_type = 6 [packed=true];
   optional IrInlineClassRepresentation inline_class_representation = 7;
-  optional IrMultiFieldValueClassRepresentation multi_field_value_class_representation = 9;
+  optional IrMultiFieldValueClassRepresentation multi_field_konstue_class_representation = 9;
   repeated int64 sealed_subclass = 8 [packed=true];
 }
 
@@ -590,7 +590,7 @@ message IrDeclaration {
     IrProperty ir_property = 7;
     IrTypeParameter ir_type_parameter = 8;
     IrVariable ir_variable = 9;
-    IrValueParameter ir_value_parameter = 10;
+    IrValueParameter ir_konstue_parameter = 10;
     IrLocalDelegatedProperty ir_local_delegated_property = 11;
     IrTypeAlias ir_type_alias = 12;
     IrErrorDeclaration ir_error_declaration = 13;

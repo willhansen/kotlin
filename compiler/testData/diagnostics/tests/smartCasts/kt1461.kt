@@ -2,7 +2,7 @@
 //KT-1461 Front-end complains on overload resolution when superclass property is accessed from string template and implicit type cast is performed
 package f
 
-open class Super(val property : String) {}
+open class Super(konst property : String) {}
 
 class Sub(str : String) : Super(str) {}
 

@@ -14,7 +14,7 @@ interface C<A : Any, B : Any> {
 }
 
 
-data class A(val s: String) {
+data class A(konst s: String) {
     companion object : C<A, String> by C.inlinefun(
         fooParam = { it.s }
     )
@@ -24,7 +24,7 @@ class OtherB {
     var a: String? = null
 }
 
-data class B(val a: A?) {
+data class B(konst a: A?) {
     companion object : C<B, OtherB> by C.inlinefun(
         fooParam = {
             OtherB().apply {
@@ -35,6 +35,6 @@ data class B(val a: A?) {
 }
 
 fun box(): String {
-    val b = B(A("OK"))
+    konst b = B(A("OK"))
     return B.foo(b).a ?: "fail"
 }

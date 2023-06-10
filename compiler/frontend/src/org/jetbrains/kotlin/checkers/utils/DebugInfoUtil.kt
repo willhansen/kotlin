@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.util.slicedMap.WritableSlice
 import java.util.HashMap
 
 object DebugInfoUtil {
-    private val MAY_BE_UNRESOLVED = TokenSet.create(KtTokens.IN_KEYWORD, KtTokens.NOT_IN)
-    private val EXCLUDED = TokenSet.create(
+    private konst MAY_BE_UNRESOLVED = TokenSet.create(KtTokens.IN_KEYWORD, KtTokens.NOT_IN)
+    private konst EXCLUDED = TokenSet.create(
         KtTokens.COLON,
         KtTokens.AS_KEYWORD,
         KtTokens.`AS_SAFE`,
@@ -47,15 +47,15 @@ object DebugInfoUtil {
         bindingContext: BindingContext,
         debugInfoReporter: DebugInfoReporter
     ) {
-        val markedWithErrorElements: MutableMap<KtReferenceExpression, DiagnosticFactory<*>?> = HashMap()
+        konst markedWithErrorElements: MutableMap<KtReferenceExpression, DiagnosticFactory<*>?> = HashMap()
         for (diagnostic in bindingContext.diagnostics) {
-            val factory = diagnostic.factory
+            konst factory = diagnostic.factory
             if (Errors.UNRESOLVED_REFERENCE_DIAGNOSTICS.contains(diagnostic.factory)) {
                 markedWithErrorElements[diagnostic.psiElement as KtReferenceExpression] = factory
             } else if (factory === Errors.SUPER_IS_NOT_AN_EXPRESSION
                 || factory === Errors.SUPER_NOT_AVAILABLE
             ) {
-                val superExpression = diagnostic.psiElement as KtSuperExpression
+                konst superExpression = diagnostic.psiElement as KtSuperExpression
                 markedWithErrorElements[superExpression.instanceReference] = factory
             } else if (factory === Errors.EXPRESSION_EXPECTED_PACKAGE_FOUND) {
                 markedWithErrorElements[diagnostic.psiElement as KtSimpleNameExpression] = factory
@@ -70,7 +70,7 @@ object DebugInfoUtil {
         }
         root.acceptChildren(object : KtTreeVisitorVoid() {
             override fun visitForExpression(expression: KtForExpression) {
-                val range = expression.loopRange
+                konst range = expression.loopRange
                 if (range != null) {
                     reportIfDynamicCall(range, range, BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL)
                     reportIfDynamicCall(range, range, BindingContext.LOOP_RANGE_HAS_NEXT_RESOLVED_CALL)
@@ -87,8 +87,8 @@ object DebugInfoUtil {
             }
 
             override fun visitProperty(property: KtProperty) {
-                val descriptor = bindingContext.get(BindingContext.VARIABLE, property)
-                val delegate = property.delegate
+                konst descriptor = bindingContext.get(BindingContext.VARIABLE, property)
+                konst delegate = property.delegate
                 if (descriptor is PropertyDescriptor && delegate != null) {
                     reportIfDynamicCall(delegate, descriptor, BindingContext.PROVIDE_DELEGATE_RESOLVED_CALL)
                     reportIfDynamicCall(delegate, descriptor.getter, BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL)
@@ -98,7 +98,7 @@ object DebugInfoUtil {
             }
 
             override fun visitThisExpression(expression: KtThisExpression) {
-                val resolvedCall = expression.getResolvedCall(bindingContext)
+                konst resolvedCall = expression.getResolvedCall(bindingContext)
                 if (resolvedCall != null) {
                     reportIfDynamic(expression, resolvedCall.resultingDescriptor, debugInfoReporter)
                 }
@@ -112,7 +112,7 @@ object DebugInfoUtil {
                 }
                 var referencedNameElementType: IElementType? = null
                 if (expression is KtSimpleNameExpression) {
-                    val elementType = expression.getNode().elementType
+                    konst elementType = expression.getNode().elementType
                     if (elementType === KtNodeTypes.OPERATION_REFERENCE) {
                         referencedNameElementType = expression.getReferencedNameElementType()
                         if (EXCLUDED.contains(referencedNameElementType)) {
@@ -127,25 +127,25 @@ object DebugInfoUtil {
                 }
                 debugInfoReporter.preProcessReference(expression)
                 var target: String? = null
-                val declarationDescriptor = bindingContext.get(BindingContext.REFERENCE_TARGET, expression)
+                konst declarationDescriptor = bindingContext.get(BindingContext.REFERENCE_TARGET, expression)
                 if (declarationDescriptor != null) {
                     target = declarationDescriptor.toString()
                     reportIfDynamic(expression, declarationDescriptor, debugInfoReporter)
                 }
                 if (target == null) {
-                    val labelTarget = bindingContext.get(BindingContext.LABEL_TARGET, expression)
+                    konst labelTarget = bindingContext.get(BindingContext.LABEL_TARGET, expression)
                     if (labelTarget != null) {
                         target = labelTarget.text
                     }
                 }
                 if (target == null) {
-                    val declarationDescriptors = bindingContext.get(BindingContext.AMBIGUOUS_REFERENCE_TARGET, expression)
+                    konst declarationDescriptors = bindingContext.get(BindingContext.AMBIGUOUS_REFERENCE_TARGET, expression)
                     if (declarationDescriptors != null) {
                         target = "[" + declarationDescriptors.size + " descriptors]"
                     }
                 }
                 if (target == null) {
-                    val labelTargets = bindingContext.get(BindingContext.AMBIGUOUS_LABEL_TARGET, expression)
+                    konst labelTargets = bindingContext.get(BindingContext.AMBIGUOUS_LABEL_TARGET, expression)
                     if (labelTargets != null) {
                         target = "[" + labelTargets.size + " elements]"
                     }
@@ -153,7 +153,7 @@ object DebugInfoUtil {
                 if (MAY_BE_UNRESOLVED.contains(referencedNameElementType) || (expression is KtNameReferenceExpression && expression.isPlaceholder)) {
                     return
                 }
-                val resolved = target != null
+                konst resolved = target != null
                 var markedWithError = markedWithErrorElements.containsKey(expression)
                 if (expression is KtArrayAccessExpression &&
                     markedWithErrorElements.containsKey(expression.arrayExpression)
@@ -161,8 +161,8 @@ object DebugInfoUtil {
                     // if 'foo' in 'foo[i]' is unresolved it means 'foo[i]' is unresolved (otherwise 'foo[i]' is marked as 'missing unresolved')
                     markedWithError = true
                 }
-                val expressionType = bindingContext.getType(expression)
-                val factory = markedWithErrorElements[expression]
+                konst expressionType = bindingContext.getType(expression)
+                konst factory = markedWithErrorElements[expression]
                 if (declarationDescriptor != null &&
                     (ErrorUtils.isError(declarationDescriptor) || ErrorUtils.containsErrorType(expressionType))
                 ) {
@@ -184,7 +184,7 @@ object DebugInfoUtil {
                 key: K,
                 slice: WritableSlice<K, ResolvedCall<D>>
             ): Boolean {
-                val resolvedCall = bindingContext[slice, key]
+                konst resolvedCall = bindingContext[slice, key]
                 return if (resolvedCall != null) {
                     reportIfDynamic(element, resolvedCall.resultingDescriptor, debugInfoReporter)
                 } else false

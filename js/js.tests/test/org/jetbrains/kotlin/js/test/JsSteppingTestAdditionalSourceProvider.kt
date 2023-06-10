@@ -35,9 +35,9 @@ class JsSteppingTestAdditionalSourceProvider(testServices: TestServices) : Addit
     }
 
     companion object {
-        private const val HELPERS_DIR = "compiler/testData/debug/jsTestHelpers"
-        private const val COMMON_HELPER_PATH = "$HELPERS_DIR/jsCommonTestHelpers.kt"
-        private const val MINIMAL_HELPER_PATH = "$HELPERS_DIR/jsMinimalTestHelpers.kt"
-        private const val WITH_STDLIB_HELPER_PATH = "$HELPERS_DIR/jsWithStdlibTestHelpers.kt"
+        private const konst HELPERS_DIR = "compiler/testData/debug/jsTestHelpers"
+        private const konst COMMON_HELPER_PATH = "$HELPERS_DIR/jsCommonTestHelpers.kt"
+        private const konst MINIMAL_HELPER_PATH = "$HELPERS_DIR/jsMinimalTestHelpers.kt"
+        private const konst WITH_STDLIB_HELPER_PATH = "$HELPERS_DIR/jsWithStdlibTestHelpers.kt"
     }
 }

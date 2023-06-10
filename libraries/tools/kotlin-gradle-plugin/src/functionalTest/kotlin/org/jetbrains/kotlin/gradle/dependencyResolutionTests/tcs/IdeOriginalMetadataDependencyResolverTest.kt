@@ -22,7 +22,7 @@ class IdeOriginalMetadataDependencyResolverTest {
 
     @Test
     fun `test kotlin-stdlib-common`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDependencyVerification(false)
             enableDefaultStdlibDependency(true)
             applyMultiplatformPlugin()
@@ -30,7 +30,7 @@ class IdeOriginalMetadataDependencyResolverTest {
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.linuxX64()
@@ -38,9 +38,9 @@ class IdeOriginalMetadataDependencyResolverTest {
 
         kotlin.targetHierarchy.default()
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val stdlibCommonSourceSets = listOf("commonMain", "commonTest").map(kotlin.sourceSets::getByName)
+        konst stdlibCommonSourceSets = listOf("commonMain", "commonTest").map(kotlin.sourceSets::getByName)
 
         for (sourceSet in stdlibCommonSourceSets) {
             IdeOriginalMetadataDependencyResolver.resolve(sourceSet).assertMatches(
@@ -51,7 +51,7 @@ class IdeOriginalMetadataDependencyResolverTest {
 
     @Test
     fun `test legacy metadata dependency`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDependencyVerification(false)
             enableDefaultStdlibDependency(false)
             applyMultiplatformPlugin()
@@ -59,20 +59,20 @@ class IdeOriginalMetadataDependencyResolverTest {
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.linuxX64()
 
         kotlin.targetHierarchy.default()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
 
         commonMain.dependencies {
             implementation("io.ktor:ktor-client-core:1.0.1")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         IdeOriginalMetadataDependencyResolver.resolve(commonMain).assertMatches(
             binaryCoordinates("io.ktor:ktor-client-core:1.0.1"),

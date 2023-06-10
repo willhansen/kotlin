@@ -4,4 +4,4 @@
 package simple
 
 @Repeatable
-annotation class One(val value: String)
+annotation class One(konst konstue: String)

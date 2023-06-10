@@ -18,19 +18,19 @@ fun topLevel(): List<String> = listOf()
 fun Any.extension(): List<String> = listOf()
 
 fun assertGenericType(type: KType) {
-    val javaType = type.javaType
+    konst javaType = type.javaType
     if (javaType !is ParameterizedType) {
         throw AssertionError("Type should be a parameterized type, but was $javaType (${javaType.javaClass})")
     }
 }
 
 fun box(): String {
-    val foo = A::class.members.single { it.name == "foo" } as KMutableProperty<*>
+    konst foo = A::class.members.single { it.name == "foo" } as KMutableProperty<*>
     assertGenericType(foo.returnType)
     assertGenericType(foo.getter.returnType)
     assertGenericType(foo.setter.parameters.last().type)
 
-    val bar = O::class.members.single { it.name == "bar" } as KMutableProperty<*>
+    konst bar = O::class.members.single { it.name == "bar" } as KMutableProperty<*>
     assertGenericType(bar.returnType)
     assertGenericType(bar.getter.returnType)
     assertGenericType(bar.setter.parameters.last().type)

@@ -23,11 +23,11 @@ internal class SymbolLightParameter(
     parameterSymbol: KtValueParameterSymbol,
     containingMethod: SymbolLightMethodBase
 ) : SymbolLightParameterCommon(ktAnalysisSession, parameterSymbol, containingMethod) {
-    private val isConstructorParameterSymbol = containingMethod.isConstructor
+    private konst isConstructorParameterSymbol = containingMethod.isConstructor
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             annotationsBox = GranularAnnotationsBox(

@@ -5,10 +5,10 @@ annotation class AllOpen
 @AllOpen
 class Base {
     fun method() {}
-    val property = "hello"
+    konst property = "hello"
 }
 
 class Derived : Base() {
     override fun method() {}
-    override val property = "world"
+    override konst property = "world"
 }

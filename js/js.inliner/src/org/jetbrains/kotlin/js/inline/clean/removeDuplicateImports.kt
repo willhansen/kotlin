@@ -30,8 +30,8 @@ fun removeDuplicateImports(node: JsNode) {
 }
 
 private fun removeDuplicateImports(statements: MutableList<JsStatement>) {
-    val existingImports = mutableMapOf<String, JsName>()
-    val replacements = mutableMapOf<JsName, JsExpression>()
+    konst existingImports = mutableMapOf<String, JsName>()
+    konst replacements = mutableMapOf<JsName, JsExpression>()
     removeDuplicateImports(statements, existingImports, replacements)
 
     for (statement in statements) {
@@ -46,12 +46,12 @@ private fun removeDuplicateImports(
 ) {
     var index = 0
     while (index < statements.size) {
-        val statement = statements[index]
+        konst statement = statements[index]
         if (statement is JsVars) {
-            val importTag = getImportTag(statement)
+            konst importTag = getImportTag(statement)
             if (importTag != null) {
-                val name = statement.vars[0].name
-                val existingName = existingImports[importTag]
+                konst name = statement.vars[0].name
+                konst existingName = existingImports[importTag]
                 if (existingName != null) {
                     replacements[name] = existingName.makeRef()
                     statements.removeAt(index)

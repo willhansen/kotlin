@@ -9,28 +9,28 @@ import platform.posix.size_tVar
 
 fun main(args: Array<String>) {
 
-    val sourceByteArray = "Hello!".encodeToByteArray()
+    konst sourceByteArray = "Hello!".encodeToByteArray()
 
-    val golden = listOf(0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x21)
+    konst golden = listOf(0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x21)
 
     memScoped {
 
-        val sourceLength = alloc<size_tVar>()
-        val destLength = alloc<size_tVar>()
+        konst sourceLength = alloc<size_tVar>()
+        konst destLength = alloc<size_tVar>()
 
-        val sourceBytes = allocArrayOf(sourceByteArray)
-        val destBytes = allocArray<ByteVar>(golden.size)
+        konst sourceBytes = allocArrayOf(sourceByteArray)
+        konst destBytes = allocArray<ByteVar>(golden.size)
 
-        val sourcePtr = alloc<CArrayPointerVar<ByteVar>>()
-        sourcePtr.value = sourceBytes
+        konst sourcePtr = alloc<CArrayPointerVar<ByteVar>>()
+        sourcePtr.konstue = sourceBytes
 
-        val destPtr = alloc<CArrayPointerVar<ByteVar>>()
-        destPtr.value = destBytes
+        konst destPtr = alloc<CArrayPointerVar<ByteVar>>()
+        destPtr.konstue = destBytes
 
-        sourceLength.value = sourceByteArray.size.convert()
-        destLength.value = golden.size.convert()
+        sourceLength.konstue = sourceByteArray.size.convert()
+        destLength.konstue = golden.size.convert()
 
-        val conversion = iconv_open("UTF-8", "LATIN1")
+        konst conversion = iconv_open("UTF-8", "LATIN1")
 
         iconv(conversion, sourcePtr.ptr, sourceLength.ptr, destPtr.ptr, destLength.ptr)
 

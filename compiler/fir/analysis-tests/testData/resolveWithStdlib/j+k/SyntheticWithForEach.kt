@@ -12,12 +12,12 @@ public interface Call<D> {
 // FILE: test.kt
 
 fun <D : Any> Call<D>.testForEach() {
-    arguments.forEach { key, value ->
+    arguments.forEach { key, konstue ->
         key.length
-        value.length
+        konstue.length
     }
     arguments.forEach {
         it.key.length
-        it.value.length
+        it.konstue.length
     }
 }

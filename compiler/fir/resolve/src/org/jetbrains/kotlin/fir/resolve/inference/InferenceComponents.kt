@@ -16,25 +16,25 @@ import org.jetbrains.kotlin.resolve.calls.inference.components.*
 import org.jetbrains.kotlin.resolve.calls.inference.model.NewConstraintSystemImpl
 
 @NoMutableState
-class InferenceComponents(val session: FirSession) : FirSessionComponent {
-    private val typeContext: ConeInferenceContext = session.typeContext
-    private val approximator = session.typeApproximator
+class InferenceComponents(konst session: FirSession) : FirSessionComponent {
+    private konst typeContext: ConeInferenceContext = session.typeContext
+    private konst approximator = session.typeApproximator
 
-    val trivialConstraintTypeInferenceOracle = TrivialConstraintTypeInferenceOracle.create(typeContext)
-    private val incorporator = ConstraintIncorporator(approximator, trivialConstraintTypeInferenceOracle, ConeConstraintSystemUtilContext)
-    private val injector = ConstraintInjector(
+    konst trivialConstraintTypeInferenceOracle = TrivialConstraintTypeInferenceOracle.create(typeContext)
+    private konst incorporator = ConstraintIncorporator(approximator, trivialConstraintTypeInferenceOracle, ConeConstraintSystemUtilContext)
+    private konst injector = ConstraintInjector(
         incorporator,
         approximator,
         session.languageVersionSettings,
     )
-    val resultTypeResolver = ResultTypeResolver(approximator, trivialConstraintTypeInferenceOracle, session.languageVersionSettings)
-    val variableFixationFinder = VariableFixationFinder(trivialConstraintTypeInferenceOracle, session.languageVersionSettings)
-    val postponedArgumentInputTypesResolver =
+    konst resultTypeResolver = ResultTypeResolver(approximator, trivialConstraintTypeInferenceOracle, session.languageVersionSettings)
+    konst variableFixationFinder = VariableFixationFinder(trivialConstraintTypeInferenceOracle, session.languageVersionSettings)
+    konst postponedArgumentInputTypesResolver =
         PostponedArgumentInputTypesResolver(
             resultTypeResolver, variableFixationFinder, ConeConstraintSystemUtilContext, session.languageVersionSettings
         )
 
-    val constraintSystemFactory = ConstraintSystemFactory()
+    konst constraintSystemFactory = ConstraintSystemFactory()
 
     fun createConstraintSystem(): NewConstraintSystemImpl {
         return NewConstraintSystemImpl(injector, typeContext, session.languageVersionSettings)
@@ -47,4 +47,4 @@ class InferenceComponents(val session: FirSession) : FirSessionComponent {
     }
 }
 
-val FirSession.inferenceComponents: InferenceComponents by FirSession.sessionComponentAccessor()
+konst FirSession.inferenceComponents: InferenceComponents by FirSession.sessionComponentAccessor()

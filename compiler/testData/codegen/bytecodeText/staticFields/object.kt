@@ -1,5 +1,5 @@
 object A {
-    val r: Int = 1
+    konst r: Int = 1
 }
 
 // JVM_TEMPLATES

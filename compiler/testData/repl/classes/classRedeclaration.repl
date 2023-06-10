@@ -1,7 +1,7 @@
 >>> class A {
 ...     fun foo() = "Old"
 ... }
->>> val oldA = A()
+>>> konst oldA = A()
 >>> class A {
 ...     fun foo() = "New"
 ... }

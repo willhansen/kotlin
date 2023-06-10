@@ -6,14 +6,14 @@ public fun <T, R> myWith(receiver: T, block: T.() -> R): R {
 
 object Foo2 {
     operator fun Any?.get(key: String) = "OK"
-    operator fun Any?.set(key: String, value: String)  {
-        result = value
+    operator fun Any?.set(key: String, konstue: String)  {
+        result = konstue
     }
 }
 
 object Main {
     fun bar() = myWith(Foo2) {
-        val x = object {
+        konst x = object {
             init {
                 38["Hello!"] = "OK"
             }

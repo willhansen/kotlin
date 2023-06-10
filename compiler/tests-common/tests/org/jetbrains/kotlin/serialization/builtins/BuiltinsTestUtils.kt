@@ -17,7 +17,7 @@ import java.util.regex.Pattern
 
 object BuiltinsTestUtils {
     fun compileBuiltinsModule(environment: KotlinCoreEnvironment): ModuleDescriptor {
-        val files = KotlinTestUtils.loadToKtFiles(
+        konst files = KotlinTestUtils.loadToKtFiles(
             environment, ContainerUtil.concat<File>(
                 allFilesUnder("core/builtins/native"),
                 allFilesUnder("core/builtins/src"),
@@ -29,7 +29,7 @@ object BuiltinsTestUtils {
     }
 
     @JvmField
-    val BUILTIN_PACKAGE_NAMES = listOf(
+    konst BUILTIN_PACKAGE_NAMES = listOf(
         StandardNames.BUILT_INS_PACKAGE_FQ_NAME,
         StandardNames.COLLECTIONS_PACKAGE_FQ_NAME,
         StandardNames.RANGES_PACKAGE_FQ_NAME

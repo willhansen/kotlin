@@ -21,16 +21,16 @@ import org.junit.jupiter.api.Assumptions
 import java.io.File
 
 internal abstract class ArtifactBuilder<T>(
-    val test: AbstractNativeSimpleTest,
-    val rootDir: File,
-    val targetSrc: String,
+    konst test: AbstractNativeSimpleTest,
+    konst rootDir: File,
+    konst targetSrc: String,
     dependencies: List<TestCompilationArtifact.KLIB>
 ) {
-    private val buildDir = test.buildDir
+    private konst buildDir = test.buildDir
     var outputDir: String = ""
 
-    private val sources = mutableListOf<Pair<String, String>>()
-    private val dependencies = dependencies.toMutableList()
+    private konst sources = mutableListOf<Pair<String, String>>()
+    private konst dependencies = dependencies.toMutableList()
 
     infix fun String.copyTo(to: String) {
         sources.add(Pair(this, to))
@@ -43,13 +43,13 @@ internal abstract class ArtifactBuilder<T>(
     protected abstract fun build(sourcesDir: File, outputDir: File, dependencies: List<TestCompilationArtifact.KLIB>): T
 
     fun build(): T {
-        val targetSrc = buildDir.resolve(targetSrc)
+        konst targetSrc = buildDir.resolve(targetSrc)
         targetSrc.deleteRecursively()
         targetSrc.mkdirs()
-        val outputDir = if (outputDir == "") buildDir else buildDir.resolve(outputDir)
+        konst outputDir = if (outputDir == "") buildDir else buildDir.resolve(outputDir)
         sources.forEach {
-            val source = rootDir.resolve(it.first)
-            val target = targetSrc.resolve(it.second)
+            konst source = rootDir.resolve(it.first)
+            konst target = targetSrc.resolve(it.second)
             target.mkdirs()
             if (source.isFile)
                 source.copyTo(target, true)
@@ -83,7 +83,7 @@ internal class ExecutableBuilder(
     targetSrc: String,
     dependencies: List<TestCompilationArtifact.KLIB>
 ) : ArtifactBuilder<CompiledExecutable>(test, rootDir, targetSrc, dependencies) {
-    private val freeCompilerArgs = mutableListOf<String>()
+    private konst freeCompilerArgs = mutableListOf<String>()
 
     operator fun String.unaryPlus() {
         freeCompilerArgs.add(this)
@@ -97,8 +97,8 @@ internal class ExecutableBuilder(
         )
 }
 
-internal val AbstractNativeSimpleTest.buildDir: File get() = testRunSettings.get<Binaries>().testBinariesDir
-internal val AbstractNativeSimpleTest.targets: KotlinNativeTargets get() = testRunSettings.get()
+internal konst AbstractNativeSimpleTest.buildDir: File get() = testRunSettings.get<Binaries>().testBinariesDir
+internal konst AbstractNativeSimpleTest.targets: KotlinNativeTargets get() = testRunSettings.get()
 
 internal fun TestCompilationArtifact.KLIB.asLibraryDependency() =
     ExistingDependency(this, TestCompilationDependencyType.Library)
@@ -127,8 +127,8 @@ internal fun AbstractNativeSimpleTest.compileToLibrary(
     freeCompilerArgs: TestCompilerArgs,
     dependencies: List<TestCompilationArtifact.KLIB>
 ): TestCompilationArtifact.KLIB {
-    val testCase: TestCase = generateTestCaseWithSingleModule(sourcesDir, freeCompilerArgs)
-    val compilationResult = compileToLibrary(testCase, outputDir, dependencies.map { it.asLibraryDependency() })
+    konst testCase: TestCase = generateTestCaseWithSingleModule(sourcesDir, freeCompilerArgs)
+    konst compilationResult = compileToLibrary(testCase, outputDir, dependencies.map { it.asLibraryDependency() })
     return compilationResult.resultingArtifact
 }
 
@@ -138,7 +138,7 @@ internal fun AbstractNativeSimpleTest.cinteropToLibrary(
     outputDir: File,
     freeCompilerArgs: TestCompilerArgs
 ): TestCompilationResult<out TestCompilationArtifact.KLIB> {
-    val testCase: TestCase = generateCInteropTestCaseFromSingleDefFile(defFile, freeCompilerArgs)
+    konst testCase: TestCase = generateCInteropTestCaseFromSingleDefFile(defFile, freeCompilerArgs)
     return CInteropCompilation(
         classLoader = testRunSettings.get(),
         targets = targets,
@@ -149,12 +149,12 @@ internal fun AbstractNativeSimpleTest.cinteropToLibrary(
 }
 
 internal class CompiledExecutable(
-    val testCase: TestCase,
-    val compilationResult: TestCompilationResult.Success<out TestCompilationArtifact.Executable>
+    konst testCase: TestCase,
+    konst compilationResult: TestCompilationResult.Success<out TestCompilationArtifact.Executable>
 ) {
-    val executableFile: File get() = compilationResult.resultingArtifact.executableFile
+    konst executableFile: File get() = compilationResult.resultingArtifact.executableFile
 
-    val testExecutable by lazy { TestExecutable.fromCompilationResult(testCase, compilationResult) }
+    konst testExecutable by lazy { TestExecutable.fromCompilationResult(testCase, compilationResult) }
 }
 
 internal fun AbstractNativeSimpleTest.compileToExecutable(
@@ -168,8 +168,8 @@ internal fun AbstractNativeSimpleTest.compileToExecutable(
     freeCompilerArgs: TestCompilerArgs,
     dependencies: List<TestCompilationArtifact.KLIB>
 ): CompiledExecutable {
-    val testCase: TestCase = generateTestCaseWithSingleModule(sourcesDir, freeCompilerArgs)
-    val compilationResult = compileToExecutable(testCase, dependencies.map { it.asLibraryDependency() })
+    konst testCase: TestCase = generateTestCaseWithSingleModule(sourcesDir, freeCompilerArgs)
+    konst compilationResult = compileToExecutable(testCase, dependencies.map { it.asLibraryDependency() })
     return CompiledExecutable(testCase, compilationResult.assertSuccess())
 }
 
@@ -181,7 +181,7 @@ internal fun AbstractNativeSimpleTest.compileToStaticCache(
     cacheDir: File,
     vararg dependencies: TestCompilationArtifact.KLIBStaticCache
 ): TestCompilationArtifact.KLIBStaticCache {
-    val compilation = StaticCacheCompilation(
+    konst compilation = StaticCacheCompilation(
         settings = testRunSettings,
         freeCompilerArgs = TestCompilerArgs.EMPTY,
         StaticCacheCompilation.Options.Regular,
@@ -199,8 +199,8 @@ internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleModule(
     moduleDir: File?,
     freeCompilerArgs: TestCompilerArgs = TestCompilerArgs.EMPTY
 ): TestCase {
-    val moduleName: String = moduleDir?.name ?: LAUNCHER_MODULE_NAME
-    val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
+    konst moduleName: String = moduleDir?.name ?: LAUNCHER_MODULE_NAME
+    konst module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
 
     moduleDir?.walkTopDown()
         ?.filter { it.isFile && it.extension == "kt" }
@@ -225,8 +225,8 @@ internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleFile(
     testKind: TestKind = TestKind.STANDALONE,
     extras: TestCase.Extras = TestCase.WithTestRunnerExtras(TestRunnerType.DEFAULT)
 ): TestCase {
-    val moduleName: String = sourceFile.name ?: LAUNCHER_MODULE_NAME
-    val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
+    konst moduleName: String = sourceFile.name ?: LAUNCHER_MODULE_NAME
+    konst module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
     module.files += TestFile.createCommitted(sourceFile, module)
 
     return TestCase(
@@ -246,8 +246,8 @@ internal fun AbstractNativeSimpleTest.generateCInteropTestCaseFromSingleDefFile(
     defFile: File,
     freeCompilerArgs: TestCompilerArgs,
 ): TestCase {
-    val moduleName: String = defFile.name
-    val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
+    konst moduleName: String = defFile.name
+    konst module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
     module.files += TestFile.createCommitted(defFile, module)
 
     return TestCase(
@@ -268,7 +268,7 @@ private fun AbstractNativeSimpleTest.compileToLibrary(
     outputDir: File,
     dependencies: List<TestCompilationDependency<*>>
 ): TestCompilationResult.Success<out TestCompilationArtifact.KLIB> {
-    val compilation = LibraryCompilation(
+    konst compilation = LibraryCompilation(
         settings = testRunSettings,
         freeCompilerArgs = testCase.freeCompilerArgs,
         sourceModules = testCase.modules,
@@ -282,7 +282,7 @@ private fun AbstractNativeSimpleTest.compileToExecutable(
     testCase: TestCase,
     dependencies: List<TestCompilationDependency<*>>
 ): TestCompilationResult<out TestCompilationArtifact.Executable> {
-    val compilation = ExecutableCompilation(
+    konst compilation = ExecutableCompilation(
         settings = testRunSettings,
         freeCompilerArgs = testCase.freeCompilerArgs,
         sourceModules = testCase.modules,
@@ -304,8 +304,8 @@ private fun directiveValues(testDataFileContents: String, directive: String) =
 
 internal fun AbstractNativeSimpleTest.muteTestIfNecessary(testDataFile: File) = muteTestIfNecessary(FileUtil.loadFile(testDataFile))
 internal fun AbstractNativeSimpleTest.muteTestIfNecessary(testDataFileContents: String) {
-    val pipelineType = testRunSettings.get<PipelineType>()
-    val mutedWhenValues = directiveValues(testDataFileContents, TestDirectives.MUTED_WHEN.name)
+    konst pipelineType = testRunSettings.get<PipelineType>()
+    konst mutedWhenValues = directiveValues(testDataFileContents, TestDirectives.MUTED_WHEN.name)
     Assumptions.assumeFalse(mutedWhenValues.any { it == pipelineType.mutedOption.name })
 }
 

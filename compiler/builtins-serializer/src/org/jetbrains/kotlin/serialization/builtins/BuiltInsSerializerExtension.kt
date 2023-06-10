@@ -31,21 +31,21 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.typeUtil.isUnresolvedType
 
 class BuiltInsSerializerExtension : KotlinSerializerExtensionBase(BuiltInSerializerProtocol) {
-    private val shortNameToClassId = mapOf(
+    private konst shortNameToClassId = mapOf(
         "IntRange" to "kotlin/ranges/IntRange",
         "LongRange" to "kotlin/ranges/LongRange",
         "CharRange" to "kotlin/ranges/CharRange",
         "ExperimentalStdlibApi" to "kotlin/ExperimentalStdlibApi",
     )
 
-    private val ignoredAnnotationShortNames = setOf(
+    private konst ignoredAnnotationShortNames = setOf(
         "JvmStatic", "JvmField", "OptIn",
     )
 
     override fun createAnnotationSerializer(): AnnotationSerializer = object : AnnotationSerializer(stringTable) {
         override fun getAnnotationClassId(annotation: AnnotationDescriptor): ClassId? {
-            val type = annotation.type
-            val annotationClass = annotation.annotationClass ?: error("Annotation type is not a class: $type")
+            konst type = annotation.type
+            konst annotationClass = annotation.annotationClass ?: error("Annotation type is not a class: $type")
             if (ErrorUtils.isError(annotationClass)) {
                 if (type.presentableName in ignoredAnnotationShortNames) return null
                 return ClassId.fromString(resolveUnresolvedType(type))
@@ -55,13 +55,13 @@ class BuiltInsSerializerExtension : KotlinSerializerExtensionBase(BuiltInSeriali
         }
     }
 
-    override val metadataVersion: BinaryVersion
+    override konst metadataVersion: BinaryVersion
         get() = BuiltInsBinaryVersion.INSTANCE
 
     override fun shouldUseTypeTable(): Boolean = true
 
     override fun serializeErrorType(type: KotlinType, builder: ProtoBuf.Type.Builder) {
-        val className = resolveUnresolvedType(type)
+        konst className = resolveUnresolvedType(type)
         builder.className = stringTable.getQualifiedClassNameIndex(className, false)
     }
 
@@ -72,9 +72,9 @@ class BuiltInsSerializerExtension : KotlinSerializerExtensionBase(BuiltInSeriali
                         "Consider adding it to `BuiltInsSerializerExtension.shortNameToClassId`."
             )
 
-    private val KotlinType.presentableName: String
+    private konst KotlinType.presentableName: String
         get() {
-            val unwrapped = unwrap()
+            konst unwrapped = unwrap()
             if (!isUnresolvedType(unwrapped)) {
                 throw UnsupportedOperationException("Error types which are not unresolved type instances are not supported here: $unwrapped")
             }

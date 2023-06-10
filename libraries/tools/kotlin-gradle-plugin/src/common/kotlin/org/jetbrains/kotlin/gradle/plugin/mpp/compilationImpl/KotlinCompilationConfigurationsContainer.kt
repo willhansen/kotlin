@@ -13,29 +13,29 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.mpp.DefaultKotlinDependencyHandler
 
 interface KotlinCompilationConfigurationsContainer {
-    val deprecatedCompileConfiguration: Configuration?
-    val deprecatedRuntimeConfiguration: Configuration?
-    val apiConfiguration: Configuration
-    val implementationConfiguration: Configuration
-    val compileOnlyConfiguration: Configuration
-    val runtimeOnlyConfiguration: Configuration
-    val compileDependencyConfiguration: Configuration
-    val runtimeDependencyConfiguration: Configuration?
-    val hostSpecificMetadataConfiguration: Configuration?
-    val pluginConfiguration: Configuration
+    konst deprecatedCompileConfiguration: Configuration?
+    konst deprecatedRuntimeConfiguration: Configuration?
+    konst apiConfiguration: Configuration
+    konst implementationConfiguration: Configuration
+    konst compileOnlyConfiguration: Configuration
+    konst runtimeOnlyConfiguration: Configuration
+    konst compileDependencyConfiguration: Configuration
+    konst runtimeDependencyConfiguration: Configuration?
+    konst hostSpecificMetadataConfiguration: Configuration?
+    konst pluginConfiguration: Configuration
 }
 
 internal class DefaultKotlinCompilationConfigurationsContainer(
-    override val deprecatedCompileConfiguration: Configuration?,
-    override val deprecatedRuntimeConfiguration: Configuration?,
-    override val apiConfiguration: Configuration,
-    override val implementationConfiguration: Configuration,
-    override val compileOnlyConfiguration: Configuration,
-    override val runtimeOnlyConfiguration: Configuration,
-    override val compileDependencyConfiguration: Configuration,
-    override val runtimeDependencyConfiguration: Configuration?,
-    override val hostSpecificMetadataConfiguration: Configuration?,
-    override val pluginConfiguration: Configuration
+    override konst deprecatedCompileConfiguration: Configuration?,
+    override konst deprecatedRuntimeConfiguration: Configuration?,
+    override konst apiConfiguration: Configuration,
+    override konst implementationConfiguration: Configuration,
+    override konst compileOnlyConfiguration: Configuration,
+    override konst runtimeOnlyConfiguration: Configuration,
+    override konst compileDependencyConfiguration: Configuration,
+    override konst runtimeDependencyConfiguration: Configuration?,
+    override konst hostSpecificMetadataConfiguration: Configuration?,
+    override konst pluginConfiguration: Configuration
 ) : KotlinCompilationConfigurationsContainer
 
 internal fun HasKotlinDependencies(
@@ -47,15 +47,15 @@ internal fun HasKotlinDependencies(
     override fun dependencies(configure: Action<KotlinDependencyHandler>) =
         dependencies { configure.execute(this) }
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = compilationDependencyContainer.apiConfiguration.name
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = compilationDependencyContainer.implementationConfiguration.name
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = compilationDependencyContainer.compileOnlyConfiguration.name
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = compilationDependencyContainer.runtimeOnlyConfiguration.name
 }

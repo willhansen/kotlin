@@ -35,16 +35,16 @@ public class IntegralConstantsSwitchCodegen extends SwitchCodegen {
 
     @Override
     protected void processConstant(@NotNull ConstantValue<?> constant, @NotNull Label entryLabel, @NotNull KtWhenEntry entry) {
-        assert constant.getValue() != null : "constant value should not be null";
-        int value = (constant.getValue() instanceof Number)
+        assert constant.getValue() != null : "constant konstue should not be null";
+        int konstue = (constant.getValue() instanceof Number)
                     ? ((Number) constant.getValue()).intValue()
                     : ((Character) constant.getValue()).charValue();
 
-        putTransitionOnce(value, entryLabel);
+        putTransitionOnce(konstue, entryLabel);
     }
 
     @Override
     protected void generateSubjectValueToIndex() {
-        // Do nothing: subject is an int value
+        // Do nothing: subject is an int konstue
     }
 }

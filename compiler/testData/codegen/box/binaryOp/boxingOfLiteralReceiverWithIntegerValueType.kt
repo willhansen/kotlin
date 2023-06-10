@@ -9,9 +9,9 @@
 
 import kotlin.reflect.KClass
 
-class K<L>(val type: KClass<out Number>) {
+class K<L>(konst type: KClass<out Number>) {
     fun check(o: L, description: String, expected: KClass<out Number> = Int::class) {
-        val x = o as Any
+        konst x = o as Any
         if (x::class != expected) {
             throw AssertionError("Fail K<${type.simpleName}> $description: " +
                                          "expected ${expected.qualifiedName}, actual ${x::class.qualifiedName}")
@@ -20,7 +20,7 @@ class K<L>(val type: KClass<out Number>) {
 }
 
 fun box(): String {
-    val kl = K<Long>(Long::class)
+    konst kl = K<Long>(Long::class)
     kl.check(1.plus(2), "plus", Int::class)
     kl.check(1.minus(2), "minus", Int::class)
     kl.check(1.times(2), "times", Int::class)
@@ -50,7 +50,7 @@ fun box(): String {
     kl.check(1 or 2, "or infix", Long::class)
     kl.check(1 xor 2, "xor infix", Long::class)
 
-    val ks = K<Short>(Short::class)
+    konst ks = K<Short>(Short::class)
     ks.check(1.plus(2), "plus", Int::class)
     ks.check(1.minus(2), "minus", Int::class)
     ks.check(1.times(2), "times", Int::class)
@@ -80,7 +80,7 @@ fun box(): String {
     ks.check(1 or 2, "or infix", Short::class)
     ks.check(1 xor 2, "xor infix", Short::class)
 
-    val kb = K<Byte>(Byte::class)
+    konst kb = K<Byte>(Byte::class)
     kb.check(1.plus(2), "plus", Int::class)
     kb.check(1.minus(2), "minus", Int::class)
     kb.check(1.times(2), "times", Int::class)
@@ -110,7 +110,7 @@ fun box(): String {
     kb.check(1 or 2, "or infix", Byte::class)
     kb.check(1 xor 2, "xor infix", Byte::class)
 
-    val jl = J<Long>(Long::class)
+    konst jl = J<Long>(Long::class)
     jl.check(1.plus(2), "plus", Int::class)
     jl.check(1.minus(2), "minus", Int::class)
     jl.check(1.times(2), "times", Int::class)
@@ -140,7 +140,7 @@ fun box(): String {
     jl.check(1 or 2, "or infix", Long::class)
     jl.check(1 xor 2, "xor infix", Long::class)
 
-    val js = J<Short>(Short::class)
+    konst js = J<Short>(Short::class)
     js.check(1.plus(2), "plus", Int::class)
     js.check(1.minus(2), "minus", Int::class)
     js.check(1.times(2), "times", Int::class)
@@ -170,7 +170,7 @@ fun box(): String {
     js.check(1 or 2, "or infix", Short::class)
     js.check(1 xor 2, "xor infix", Short::class)
 
-    val jb = J<Byte>(Byte::class)
+    konst jb = J<Byte>(Byte::class)
     jb.check(1.plus(2), "plus", Int::class)
     jb.check(1.minus(2), "minus", Int::class)
     jb.check(1.times(2), "times", Int::class)

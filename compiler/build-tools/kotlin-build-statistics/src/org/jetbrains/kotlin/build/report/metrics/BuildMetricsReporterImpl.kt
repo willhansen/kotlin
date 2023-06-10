@@ -9,15 +9,15 @@ import java.io.Serializable
 import java.util.*
 
 class BuildMetricsReporterImpl : BuildMetricsReporter, Serializable {
-    private val myBuildTimeStartNs: EnumMap<BuildTime, Long> =
+    private konst myBuildTimeStartNs: EnumMap<BuildTime, Long> =
         EnumMap(
             BuildTime::class.java
         )
-    private val myGcPerformance = HashMap<String, GcMetric>()
-    private val myBuildTimes = BuildTimes()
-    private val myBuildMetrics = BuildPerformanceMetrics()
-    private val myBuildAttributes = BuildAttributes()
-    private val myGcMetrics = GcMetrics()
+    private konst myGcPerformance = HashMap<String, GcMetric>()
+    private konst myBuildTimes = BuildTimes()
+    private konst myBuildMetrics = BuildPerformanceMetrics()
+    private konst myBuildAttributes = BuildAttributes()
+    private konst myGcMetrics = GcMetrics()
 
     override fun startMeasure(time: BuildTime) {
         if (time in myBuildTimeStartNs) {
@@ -27,21 +27,21 @@ class BuildMetricsReporterImpl : BuildMetricsReporter, Serializable {
     }
 
     override fun endMeasure(time: BuildTime) {
-        val startNs = myBuildTimeStartNs.remove(time) ?: error("$time finished before it started")
-        val durationNs = System.nanoTime() - startNs
+        konst startNs = myBuildTimeStartNs.remove(time) ?: error("$time finished before it started")
+        konst durationNs = System.nanoTime() - startNs
         myBuildTimes.addTimeNs(time, durationNs)
     }
 
-    override fun startGcMetric(name: String, value: GcMetric) {
+    override fun startGcMetric(name: String, konstue: GcMetric) {
         if (name in myGcPerformance) {
             error("$name was restarted before it finished")
         }
-        myGcPerformance[name] = value
+        myGcPerformance[name] = konstue
     }
 
-    override fun endGcMetric(name: String, value: GcMetric) {
-        val startValue = myGcPerformance.remove(name) ?: error("$name finished before it started")
-        val diff = value - startValue
+    override fun endGcMetric(name: String, konstue: GcMetric) {
+        konst startValue = myGcPerformance.remove(name) ?: error("$name finished before it started")
+        konst diff = konstue - startValue
         myGcMetrics.add(name, diff)
     }
 
@@ -49,8 +49,8 @@ class BuildMetricsReporterImpl : BuildMetricsReporter, Serializable {
         myBuildTimes.addTimeNs(time, durationNs)
     }
 
-    override fun addMetric(metric: BuildPerformanceMetric, value: Long) {
-        myBuildMetrics.add(metric, value)
+    override fun addMetric(metric: BuildPerformanceMetric, konstue: Long) {
+        myBuildMetrics.add(metric, konstue)
     }
 
     override fun addTimeMetric(metric: BuildPerformanceMetric) {
@@ -63,8 +63,8 @@ class BuildMetricsReporterImpl : BuildMetricsReporter, Serializable {
 
     }
 
-    override fun addGcMetric(metric: String, value: GcMetric) {
-        myGcMetrics.add(metric, value)
+    override fun addGcMetric(metric: String, konstue: GcMetric) {
+        myGcMetrics.add(metric, konstue)
     }
 
     override fun addAttribute(attribute: BuildAttribute) {

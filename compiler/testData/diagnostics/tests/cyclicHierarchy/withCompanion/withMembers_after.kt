@@ -8,7 +8,7 @@ object WithFunctionInBase {
     class Data
 
     public class C {
-        val data: Data = Data()
+        konst data: Data = Data()
 
         open class Base() {
             fun foo(): Int = 42
@@ -28,10 +28,10 @@ object WithPropertyInBase {
     public class C {
 
         open class Base() {
-            val foo: Int = 42
+            konst foo: Int = 42
         }
 
-        val data: Data = Data()
+        konst data: Data = Data()
 
         companion object : DerivedAbstract()
     }
@@ -47,10 +47,10 @@ object WithPropertyInBaseDifferentOrder {
     class Data
 
     public class C {
-        val data: Data = Data()
+        konst data: Data = Data()
 
         open class Base() {
-            val foo: Int = 42
+            konst foo: Int = 42
 
         }
 

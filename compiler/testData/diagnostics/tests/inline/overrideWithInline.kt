@@ -18,7 +18,7 @@ class CDerived : IBase {
         <!OVERRIDE_BY_INLINE!>override inline final fun <<!REIFIED_TYPE_PARAMETER_IN_OVERRIDE!>reified<!> T> qux(x: T)<!> {}
     }
 
-    val anObject = object : IBase {
+    konst anObject = object : IBase {
         <!OVERRIDE_BY_INLINE!>override inline final fun foo()<!> {}
         <!OVERRIDE_BY_INLINE!>override inline fun bar()<!> {}
         <!OVERRIDE_BY_INLINE!>override inline final fun <<!REIFIED_TYPE_PARAMETER_IN_OVERRIDE!>reified<!> T> qux(x: T)<!> {}
@@ -44,7 +44,7 @@ open class COpen : IBase {
         <!OVERRIDE_BY_INLINE!>override inline final fun <<!REIFIED_TYPE_PARAMETER_IN_OVERRIDE!>reified<!> T> qux(x: T)<!> {}
     }
 
-    val anObject = object : IBase {
+    konst anObject = object : IBase {
         <!OVERRIDE_BY_INLINE!>override inline final fun foo()<!> {}
         <!OVERRIDE_BY_INLINE!>override inline fun bar()<!> {}
         <!OVERRIDE_BY_INLINE!>override inline final fun <<!REIFIED_TYPE_PARAMETER_IN_OVERRIDE!>reified<!> T> qux(x: T)<!> {}

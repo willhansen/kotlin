@@ -2,9 +2,9 @@
 package
 
 public expect interface My {
-    public expect abstract val abstractVal: kotlin.Int
-    public expect open val openValNegative: kotlin.Int
-    public expect open val openValPositive: kotlin.Int
+    public expect abstract konst abstractVal: kotlin.Int
+    public expect open konst openValNegative: kotlin.Int
+    public expect open konst openValPositive: kotlin.Int
     public abstract expect fun abstractFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -17,9 +17,9 @@ public expect interface My {
 package
 
 public actual interface My {
-    public actual abstract val abstractVal: kotlin.Int
-    public actual abstract val openValNegative: kotlin.Int
-    public actual open val openValPositive: kotlin.Int
+    public actual abstract konst abstractVal: kotlin.Int
+    public actual abstract konst openValNegative: kotlin.Int
+    public actual open konst openValPositive: kotlin.Int
     public abstract actual fun abstractFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

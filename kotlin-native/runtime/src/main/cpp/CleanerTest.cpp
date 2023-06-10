@@ -55,13 +55,13 @@ TEST_F(CleanerTest, ConcurrentCreation) {
     while (atomicGet(&startedThreads) != threadCount) {
     }
     atomicSet(&allowRunning, true);
-    std_support::vector<KInt> values;
+    std_support::vector<KInt> konstues;
     for (auto& future : futures) {
-        values.push_back(future.get());
+        konstues.push_back(future.get());
     }
 
-    ASSERT_THAT(values.size(), threadCount);
-    EXPECT_THAT(values, testing::Each(workerId));
+    ASSERT_THAT(konstues.size(), threadCount);
+    EXPECT_THAT(konstues, testing::Each(workerId));
 }
 
 TEST_F(CleanerTest, ShutdownWithoutCreation) {

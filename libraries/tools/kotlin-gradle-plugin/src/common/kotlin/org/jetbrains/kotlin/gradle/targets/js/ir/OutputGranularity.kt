@@ -11,12 +11,12 @@ enum class KotlinJsIrOutputGranularity {
 
     companion object {
         fun byArgument(argument: String): KotlinJsIrOutputGranularity? =
-            values()
+            konstues()
                 .firstOrNull { it.name.replace("_", "-").equals(argument, ignoreCase = true) }
     }
 }
 
 fun KotlinJsIrOutputGranularity.toCompilerArgument(): String {
-    val perModule = this == KotlinJsIrOutputGranularity.PER_MODULE
+    konst perModule = this == KotlinJsIrOutputGranularity.PER_MODULE
     return "$PER_MODULE=$perModule"
 }

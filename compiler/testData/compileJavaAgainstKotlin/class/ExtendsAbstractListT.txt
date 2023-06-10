@@ -7,7 +7,7 @@ public/*package*/ open class ExtendsAbstractListT {
 public abstract class Mine</*0*/ T> : java.util.AbstractList<T> {
     public constructor Mine</*0*/ T>()
     protected/*protected and package*/ final /*fake_override*/ var modCount: kotlin.Int
-    public abstract /*fake_override*/ val size: kotlin.Int
+    public abstract /*fake_override*/ konst size: kotlin.Int
     public open /*fake_override*/ fun add(/*0*/ T!): kotlin.Boolean
     public open /*fake_override*/ fun add(/*0*/ kotlin.Int, /*1*/ T!): kotlin.Unit
     public open /*fake_override*/ fun addAll(/*0*/ kotlin.Int, /*1*/ kotlin.collections.Collection<T!>): kotlin.Boolean

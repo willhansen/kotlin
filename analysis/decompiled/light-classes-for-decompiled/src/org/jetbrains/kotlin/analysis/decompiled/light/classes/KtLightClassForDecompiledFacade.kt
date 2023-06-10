@@ -20,11 +20,11 @@ internal class KtLightClassForDecompiledFacade(
     clsParent: PsiElement,
     file: KtClsFile,
     kotlinOrigin: KtClassOrObject?,
-    override val files: Collection<KtFile>,
+    override konst files: Collection<KtFile>,
 ) : KtLightClassForDecompiledDeclaration(clsDelegate, clsParent, file, kotlinOrigin), KtLightClassForFacade {
     override fun getName(): String = super<KtLightClassForFacade>.getName()
-    override val facadeClassFqName: FqName get() = file.javaFileFacadeFqName
-    override val originKind: LightClassOriginKind get() = LightClassOriginKind.BINARY
+    override konst facadeClassFqName: FqName get() = file.javaFileFacadeFqName
+    override konst originKind: LightClassOriginKind get() = LightClassOriginKind.BINARY
 
-    override val multiFileClass: Boolean = false
+    override konst multiFileClass: Boolean = false
 }

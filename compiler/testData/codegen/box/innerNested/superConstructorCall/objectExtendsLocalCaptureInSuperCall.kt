@@ -1,10 +1,10 @@
-open class A(val s: String)
+open class A(konst s: String)
 
 fun box(): String {
     class B {
-        val result = "OK"
+        konst result = "OK"
 
-        val f = object : A(result) {}.s
+        konst f = object : A(result) {}.s
     }
 
     return B().f

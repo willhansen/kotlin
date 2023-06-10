@@ -1,11 +1,11 @@
 // IGNORE_BACKEND: JS, JS_IR, JS_IR_ES6, WASM
 // FILE: lib.kt
-val x: String = computeX()
+konst x: String = computeX()
 
 fun computeX(): String = throw IllegalStateException("1")
 
 // FILE: lib2.kt
-val y: String = computeY()
+konst y: String = computeY()
 
 fun computeY(): String = throw Error("2")
 
@@ -16,7 +16,7 @@ fun box() : String {
         x
         return "FAIL 1"
     } catch(t: Error) {
-        val cause = t.cause
+        konst cause = t.cause
         if (cause !is IllegalStateException) return "FAIL 2"
         if (cause.message != "1") return "FAIL 3"
     }

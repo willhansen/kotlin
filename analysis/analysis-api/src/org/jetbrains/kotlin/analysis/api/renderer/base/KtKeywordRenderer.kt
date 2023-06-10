@@ -24,7 +24,7 @@ public interface KtKeywordRenderer {
     public object AS_WORD : KtKeywordRenderer {
         context(KtAnalysisSession)
         override fun renderKeyword(keyword: KtKeywordToken, owner: KtAnnotated, printer: PrettyPrinter) {
-            printer.append(keyword.value)
+            printer.append(keyword.konstue)
         }
     }
 

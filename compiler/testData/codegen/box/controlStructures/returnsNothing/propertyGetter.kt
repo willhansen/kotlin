@@ -1,11 +1,11 @@
 var flag = true
 
 object Test {
-    val magic: Nothing get() = null!!
+    konst magic: Nothing get() = null!!
 }
 
 fun box(): String {
-    val a: String
+    konst a: String
     if (flag) {
         a = "OK"
     }

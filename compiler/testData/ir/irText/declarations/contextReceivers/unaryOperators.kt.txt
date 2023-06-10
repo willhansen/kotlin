@@ -5,7 +5,7 @@ data class Result {
 
   }
 
-  val i: Int
+  konst i: Int
     field = i
     get
 
@@ -32,7 +32,7 @@ data class Result {
     when {
       other !is Result -> return false
     }
-    val tmp0_other_with_cast: Result = other as Result
+    konst tmp0_other_with_cast: Result = other as Result
     when {
       EQEQ(arg0 = <this>.#i, arg1 = tmp0_other_with_cast.#i).not() -> return false
     }
@@ -81,19 +81,19 @@ fun box(): String {
   var result: Result = Result(i = 0)
   with<Int, Result>(receiver = 1, block = local fun Int.<anonymous>(): Result {
     { // BLOCK
-      val tmp0: Result = result
+      konst tmp0: Result = result
       result = tmp0.inc($context_receiver_0 = $this$with)
       tmp0
     } /*~> Unit */
     { // BLOCK
-      val tmp1: Result = result
+      konst tmp1: Result = result
       result = tmp1.inc($context_receiver_0 = $this$with)
       tmp1
     } /*~> Unit */
     result.unaryMinus($context_receiver_0 = $this$with) /*~> Unit */
     result.unaryPlus($context_receiver_0 = $this$with) /*~> Unit */
     return { // BLOCK
-      val tmp2: Result = result
+      konst tmp2: Result = result
       result = tmp2.dec($context_receiver_0 = $this$with)
       tmp2
     }

@@ -6,12 +6,12 @@ FILE fqName:<root> fileName:/delegatedImplementationOfJavaInterface.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test modality:FINAL visibility:public superTypes:[<root>.J]'
-    PROPERTY name:j visibility:private modality:FINAL [val]
+    PROPERTY name:j visibility:private modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:j type:<root>.J visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'j: <root>.J declared in <root>.Test.<init>' type=<root>.J origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-j> visibility:private modality:FINAL <> ($this:<root>.Test) returnType:<root>.J
-        correspondingProperty: PROPERTY name:j visibility:private modality:FINAL [val]
+        correspondingProperty: PROPERTY name:j visibility:private modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='private final fun <get-j> (): <root>.J declared in <root>.Test'
@@ -19,7 +19,7 @@ FILE fqName:<root> fileName:/delegatedImplementationOfJavaInterface.kt
               receiver: GET_VAR '<this>: <root>.Test declared in <root>.Test.<get-j>' type=<root>.Test origin=null
     FUN DELEGATED_MEMBER name:returnNotNull visibility:public modality:OPEN <> ($this:<root>.Test) returnType:@[EnhancedNullability] kotlin.String
       annotations:
-        NotNull(value = <null>)
+        NotNull(konstue = <null>)
       overridden:
         public abstract fun returnNotNull (): @[EnhancedNullability] kotlin.String declared in <root>.J
       $this: VALUE_PARAMETER name:<this> type:<root>.Test
@@ -30,7 +30,7 @@ FILE fqName:<root> fileName:/delegatedImplementationOfJavaInterface.kt
               receiver: GET_VAR '<this>: <root>.Test declared in <root>.Test.returnNotNull' type=<root>.Test origin=null
     FUN DELEGATED_MEMBER name:returnNullable visibility:public modality:OPEN <> ($this:<root>.Test) returnType:@[EnhancedNullability] kotlin.String?
       annotations:
-        Nullable(value = <null>)
+        Nullable(konstue = <null>)
       overridden:
         public abstract fun returnNullable (): @[EnhancedNullability] kotlin.String? declared in <root>.J
       $this: VALUE_PARAMETER name:<this> type:<root>.Test
@@ -64,7 +64,7 @@ FILE fqName:<root> fileName:/delegatedImplementationOfJavaInterface.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.Test
       VALUE_PARAMETER name:x index:0 type:@[EnhancedNullability] kotlin.String
         annotations:
-          NotNull(value = <null>)
+          NotNull(konstue = <null>)
       BLOCK_BODY
         CALL 'public abstract fun takeNotNull (x: @[EnhancedNullability] kotlin.String): kotlin.Unit declared in <root>.J' type=kotlin.Unit origin=null
           $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:j type:<root>.J visibility:private [final]' type=<root>.J origin=null
@@ -76,7 +76,7 @@ FILE fqName:<root> fileName:/delegatedImplementationOfJavaInterface.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.Test
       VALUE_PARAMETER name:x index:0 type:@[EnhancedNullability] kotlin.String?
         annotations:
-          Nullable(value = <null>)
+          Nullable(konstue = <null>)
       BLOCK_BODY
         CALL 'public abstract fun takeNullable (x: @[EnhancedNullability] kotlin.String?): kotlin.Unit declared in <root>.J' type=kotlin.Unit origin=null
           $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:j type:<root>.J visibility:private [final]' type=<root>.J origin=null

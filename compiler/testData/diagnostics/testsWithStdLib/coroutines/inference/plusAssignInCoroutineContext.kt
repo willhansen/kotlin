@@ -5,7 +5,7 @@ class Bar
 fun <T> materialize() = null as T
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow<T>

@@ -14,7 +14,7 @@ fun foo(a: A, k: Int): A {
 }
 
 fun main() {
-    val a = A()
+    konst a = A()
     a.f = A()
     println(foo(a, 1))
 }

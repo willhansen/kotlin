@@ -8,11 +8,11 @@ package codegen.inlineClass.secondaryConstructorWithGenerics
 import kotlin.test.*
 
 // Based on KT-42649.
-inline class IC<T>(val value: List<T>) {
-    constructor(value: T) : this(listOf(value))
+inline class IC<T>(konst konstue: List<T>) {
+    constructor(konstue: T) : this(listOf(konstue))
 }
 
 @Test
 fun runTest() {
-    assertEquals("abc", IC("abc").value.singleOrNull())
+    assertEquals("abc", IC("abc").konstue.singleOrNull())
 }

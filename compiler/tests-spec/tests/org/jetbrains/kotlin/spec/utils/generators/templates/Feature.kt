@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.spec.utils.generators.templates
 
-enum class Feature(val config: FeatureTemplatesConfig) {
+enum class Feature(konst config: FeatureTemplatesConfig) {
     IDENTIFIERS(
         FeatureTemplatesConfig(
             FeatureTemplatesType.AS_FILE,
@@ -22,7 +22,7 @@ enum class Feature(val config: FeatureTemplatesConfig) {
         FeatureTemplatesConfig(
             FeatureTemplatesType.AS_STRING,
             templates = mapOf("trueWithBacktick" to "`true`", "falseWithBacktick" to "`false`"),
-            validationTransformer = TemplateValidationTransformerType.TRIM_BACKTICKS
+            konstidationTransformer = TemplateValidationTransformerType.TRIM_BACKTICKS
         )
     )
 }

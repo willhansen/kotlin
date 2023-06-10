@@ -49,16 +49,16 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.replaceAnnotations
 
 open class JvmGeneratorExtensionsImpl(
-    private val configuration: CompilerConfiguration,
-    private val generateFacades: Boolean = true,
+    private konst configuration: CompilerConfiguration,
+    private konst generateFacades: Boolean = true,
 ) : GeneratorExtensions(), JvmGeneratorExtensions {
-    override val classNameOverride: MutableMap<IrClass, JvmClassName> = mutableMapOf()
+    override konst classNameOverride: MutableMap<IrClass, JvmClassName> = mutableMapOf()
 
-    override val irDeserializationEnabled: Boolean = configuration.get(JVMConfigurationKeys.SERIALIZE_IR) != JvmSerializeIrMode.NONE
+    override konst irDeserializationEnabled: Boolean = configuration.get(JVMConfigurationKeys.SERIALIZE_IR) != JvmSerializeIrMode.NONE
 
-    override val cachedFields = CachedFieldsForObjectInstances(IrFactoryImpl, configuration.languageVersionSettings)
+    override konst cachedFields = CachedFieldsForObjectInstances(IrFactoryImpl, configuration.languageVersionSettings)
 
-    override val samConversion: SamConversion = JvmSamConversion()
+    override konst samConversion: SamConversion = JvmSamConversion()
 
     inner class JvmSamConversion : SamConversion() {
         override fun isPlatformSamType(type: KotlinType): Boolean =
@@ -90,7 +90,7 @@ open class JvmGeneratorExtensionsImpl(
         stubGenerator: DeclarationStubGenerator
     ): IrClass? {
         if (!generateFacades || deserializedSource !is FacadeClassSource) return null
-        val facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
+        konst facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
         return JvmFileFacadeClass(
             if (deserializedSource.facadeClassName != null) IrDeclarationOrigin.JVM_MULTIFILE_CLASS else IrDeclarationOrigin.FILE_CLASS,
             facadeName.fqNameForTopLevelClassMaybeWithDollars.shortName(),
@@ -118,7 +118,7 @@ open class JvmGeneratorExtensionsImpl(
                 (descriptor.hasJvmStaticAnnotation() ||
                         descriptor is PropertyAccessorDescriptor && descriptor.correspondingProperty.hasJvmStaticAnnotation())
 
-    override val enhancedNullability: EnhancedNullability
+    override konst enhancedNullability: EnhancedNullability
         get() = JvmEnhancedNullability
 
     open class JvmEnhancedNullability : EnhancedNullability() {
@@ -141,13 +141,13 @@ open class JvmGeneratorExtensionsImpl(
     override fun getParentClassStaticScope(descriptor: ClassDescriptor): MemberScope? =
         descriptor.getParentJavaStaticClassScope()
 
-    private val kotlinIrInternalPackage =
+    private konst kotlinIrInternalPackage =
         IrExternalPackageFragmentImpl(DescriptorlessExternalPackageFragmentSymbol(), IrBuiltIns.KOTLIN_INTERNAL_IR_FQN)
 
-    private val kotlinJvmInternalPackage =
+    private konst kotlinJvmInternalPackage =
         IrExternalPackageFragmentImpl(DescriptorlessExternalPackageFragmentSymbol(), JvmAnnotationNames.KOTLIN_JVM_INTERNAL)
 
-    private val specialAnnotationConstructors = mutableListOf<IrConstructor>()
+    private konst specialAnnotationConstructors = mutableListOf<IrConstructor>()
 
     private fun createSpecialAnnotationClass(fqn: FqName, parent: IrPackageFragment) =
         IrFactoryImpl.createSpecialAnnotationClass(fqn, parent).apply {
@@ -161,12 +161,12 @@ open class JvmGeneratorExtensionsImpl(
     ): IrDelegatingConstructorCall? {
         if (!descriptor.isJvmRecord()) return null
 
-        val recordClass =
+        konst recordClass =
             // We assume j.l.Record is in the classpath because otherwise it should be a compile time error
             descriptor.module.resolveTopLevelClass(JAVA_LANG_RECORD_FQ_NAME, NoLookupLocation.FROM_BACKEND)
                 ?: error("Class not found: $JAVA_LANG_RECORD_FQ_NAME")
 
-        val recordConstructor = recordClass.constructors.single()
+        konst recordConstructor = recordClass.constructors.single()
         // OptIn is needed for the same as for Any constructor at BodyGenerator::generateAnySuperConstructorCall
         @OptIn(ObsoleteDescriptorBasedAPI::class)
         return IrDelegatingConstructorCallImpl.fromSymbolDescriptor(
@@ -177,33 +177,33 @@ open class JvmGeneratorExtensionsImpl(
     }
 
     override fun registerDeclarations(symbolTable: SymbolTable) {
-        val signatureComputer = PublicIdSignatureComputer(JvmIrMangler)
+        konst signatureComputer = PublicIdSignatureComputer(JvmIrMangler)
         specialAnnotationConstructors.forEach { constructor ->
             symbolTable.declareConstructorWithSignature(signatureComputer.composePublicIdSignature(constructor, false), constructor.symbol)
         }
         super.registerDeclarations(symbolTable)
     }
 
-    override val shouldPreventDeprecatedIntegerValueTypeLiteralConversion: Boolean
+    override konst shouldPreventDeprecatedIntegerValueTypeLiteralConversion: Boolean
         get() = true
 
-    private val rawTypeAnnotationClass =
+    private konst rawTypeAnnotationClass =
         createSpecialAnnotationClass(JvmSymbols.RAW_TYPE_ANNOTATION_FQ_NAME, kotlinIrInternalPackage)
 
     // NB Class 'kotlin.jvm.internal.EnhancedNullability' doesn't exist anywhere in descriptors or in bytecode
-    private val enhancedNullabilityAnnotationClass =
+    private konst enhancedNullabilityAnnotationClass =
         createSpecialAnnotationClass(JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION, kotlinJvmInternalPackage)
 
-    override val flexibleNullabilityAnnotationConstructor: IrConstructor =
+    override konst flexibleNullabilityAnnotationConstructor: IrConstructor =
         createSpecialAnnotationClass(JvmSymbols.FLEXIBLE_NULLABILITY_ANNOTATION_FQ_NAME, kotlinIrInternalPackage).constructors.single()
 
-    override val flexibleMutabilityAnnotationConstructor: IrConstructor =
+    override konst flexibleMutabilityAnnotationConstructor: IrConstructor =
         createSpecialAnnotationClass(JvmSymbols.FLEXIBLE_MUTABILITY_ANNOTATION_FQ_NAME, kotlinIrInternalPackage).constructors.single()
 
-    override val enhancedNullabilityAnnotationConstructor: IrConstructor =
+    override konst enhancedNullabilityAnnotationConstructor: IrConstructor =
         enhancedNullabilityAnnotationClass.constructors.single()
 
-    override val rawTypeAnnotationConstructor: IrConstructor =
+    override konst rawTypeAnnotationConstructor: IrConstructor =
         rawTypeAnnotationClass.constructors.single()
 
     override fun unwrapSyntheticJavaProperty(descriptor: PropertyDescriptor): Pair<FunctionDescriptor, FunctionDescriptor?>? {
@@ -213,9 +213,9 @@ open class JvmGeneratorExtensionsImpl(
         return null
     }
 
-    override val parametersAreAssignable: Boolean
+    override konst parametersAreAssignable: Boolean
         get() = true
 
-    override val debugInfoOnlyOnVariablesInDestructuringDeclarations: Boolean
+    override konst debugInfoOnlyOnVariablesInDestructuringDeclarations: Boolean
         get() = true
 }

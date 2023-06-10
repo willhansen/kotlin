@@ -9,7 +9,7 @@ fun box(): String {
 }
 
 fun testReversed() {
-    val arr = intArrayOf(6, 7, 8, 9)
+    konst arr = intArrayOf(6, 7, 8, 9)
     var result = ""
     for (i in arr.reversed()) {
         arr[0] = 0
@@ -19,7 +19,7 @@ fun testReversed() {
 }
 
 fun testReversedArray() {
-    val arr = intArrayOf(6, 7, 8, 9)
+    konst arr = intArrayOf(6, 7, 8, 9)
     var result = ""
     for (i in arr.reversedArray()) {
         arr[0] = 0

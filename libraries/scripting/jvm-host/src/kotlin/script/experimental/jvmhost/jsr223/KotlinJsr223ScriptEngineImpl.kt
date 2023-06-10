@@ -17,37 +17,37 @@ import kotlin.script.experimental.jvm.baseClassLoader
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.jvm.jvm
 import kotlin.script.experimental.jvmhost.repl.JvmReplCompiler
-import kotlin.script.experimental.jvmhost.repl.JvmReplEvaluator
-import kotlin.script.experimental.jvmhost.repl.JvmReplEvaluatorState
+import kotlin.script.experimental.jvmhost.repl.JvmReplEkonstuator
+import kotlin.script.experimental.jvmhost.repl.JvmReplEkonstuatorState
 
 // TODO: reimplement without legacy REPL infrastructure
 
 class KotlinJsr223ScriptEngineImpl(
     factory: ScriptEngineFactory,
     baseCompilationConfiguration: ScriptCompilationConfiguration,
-    baseEvaluationConfiguration: ScriptEvaluationConfiguration,
-    val getScriptArgs: (context: ScriptContext) -> ScriptArgsWithTypes?
+    baseEkonstuationConfiguration: ScriptEkonstuationConfiguration,
+    konst getScriptArgs: (context: ScriptContext) -> ScriptArgsWithTypes?
 ) : KotlinJsr223JvmScriptEngineBase(factory), KotlinJsr223InvocableScriptEngine {
 
     @Volatile
     private var lastScriptContext: ScriptContext? = null
 
-    val jsr223HostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
-        val weakThis = WeakReference(this@KotlinJsr223ScriptEngineImpl)
+    konst jsr223HostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+        konst weakThis = WeakReference(this@KotlinJsr223ScriptEngineImpl)
         jsr223 {
             getScriptContext { weakThis.get()?.let { it.lastScriptContext ?: it.getContext() } }
         }
     }
 
-    val compilationConfiguration by lazy {
+    konst compilationConfiguration by lazy {
         ScriptCompilationConfiguration(baseCompilationConfiguration) {
             hostConfiguration.update { it.withDefaultsFrom(jsr223HostConfiguration) }
             repl {
-                // Snippet classes should be named uniquely, to avoid classloading clashes in the "eval in eval" scenario
+                // Snippet classes should be named uniquely, to avoid classloading clashes in the "ekonst in ekonst" scenario
                 // TODO: consider applying the logic for any REPL, alternatively - develop other naming scheme to avoid clashes
                 makeSnippetIdentifier { configuration, snippetId ->
-                    val scriptContext: ScriptContext? = configuration[ScriptCompilationConfiguration.jsr223.getScriptContext]?.invoke()
-                    val engineState = scriptContext?.let {
+                    konst scriptContext: ScriptContext? = configuration[ScriptCompilationConfiguration.jsr223.getScriptContext]?.invoke()
+                    konst engineState = scriptContext?.let {
                         it.getBindings(ScriptContext.ENGINE_SCOPE)?.get(KOTLIN_SCRIPT_STATE_BINDINGS_KEY)
                     }
                     if (engineState == null) makeDefaultSnippetIdentifier(snippetId)
@@ -57,42 +57,42 @@ class KotlinJsr223ScriptEngineImpl(
         }
     }
 
-    val evaluationConfiguration by lazy {
-        ScriptEvaluationConfiguration(baseEvaluationConfiguration) {
+    konst ekonstuationConfiguration by lazy {
+        ScriptEkonstuationConfiguration(baseEkonstuationConfiguration) {
             hostConfiguration.update { it.withDefaultsFrom(jsr223HostConfiguration) }
         }
     }
 
-    override val replCompiler: ReplCompilerWithoutCheck by lazy {
+    override konst replCompiler: ReplCompilerWithoutCheck by lazy {
         JvmReplCompiler(compilationConfiguration)
     }
 
-    private val localEvaluator by lazy {
-        GenericReplCompilingEvaluatorBase(replCompiler, JvmReplEvaluator(evaluationConfiguration))
+    private konst localEkonstuator by lazy {
+        GenericReplCompilingEkonstuatorBase(replCompiler, JvmReplEkonstuator(ekonstuationConfiguration))
     }
 
-    override val replEvaluator: ReplFullEvaluator get() = localEvaluator
+    override konst replEkonstuator: ReplFullEkonstuator get() = localEkonstuator
 
-    val state: IReplStageState<*> get() = getCurrentState(getContext())
+    konst state: IReplStageState<*> get() = getCurrentState(getContext())
 
-    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEvaluator.createState(lock)
+    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEkonstuator.createState(lock)
 
     override fun overrideScriptArgs(context: ScriptContext): ScriptArgsWithTypes? = getScriptArgs(context)
 
-    override val invokeWrapper: InvokeWrapper?
+    override konst invokeWrapper: InvokeWrapper?
         get() = null
 
-    override val backwardInstancesHistory: Sequence<Any>
-        get() = getCurrentState(getContext()).asState(JvmReplEvaluatorState::class.java).history.asReversed().asSequence().map { it.item.second }.filterNotNull()
+    override konst backwardInstancesHistory: Sequence<Any>
+        get() = getCurrentState(getContext()).asState(JvmReplEkonstuatorState::class.java).history.asReversed().asSequence().map { it.item.second }.filterNotNull()
 
-    override val baseClassLoader: ClassLoader
-        get() = evaluationConfiguration[ScriptEvaluationConfiguration.jvm.baseClassLoader]!!
+    override konst baseClassLoader: ClassLoader
+        get() = ekonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.baseClassLoader]!!
 
-    override fun compileAndEval(script: String, context: ScriptContext): Any? {
-        // TODO: find a way to pass context to evaluation directly and avoid this hack
+    override fun compileAndEkonst(script: String, context: ScriptContext): Any? {
+        // TODO: find a way to pass context to ekonstuation directly and avoid this hack
         lastScriptContext = context
         return try {
-            super.compileAndEval(script, context)
+            super.compileAndEkonst(script, context)
         } finally {
             lastScriptContext = null
         }

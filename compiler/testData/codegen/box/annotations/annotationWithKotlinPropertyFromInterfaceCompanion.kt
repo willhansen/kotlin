@@ -9,13 +9,13 @@ public class JavaClass {
 
     @Retention(RetentionPolicy.RUNTIME)
     @interface Foo {
-        int value();
+        int konstue();
     }
 
     @Foo(KotlinInterface.FOO_INT)
     public String test() throws NoSuchMethodException {
         return KotlinInterface.FOO_STRING +
-               JavaClass.class.getMethod("test").getAnnotation(Foo.class).value();
+               JavaClass.class.getMethod("test").getAnnotation(Foo.class).konstue();
     }
 }
 
@@ -23,12 +23,12 @@ public class JavaClass {
 
 interface KotlinInterface {
     companion object {
-        const val FOO_INT: Int = 10
-        const  val FOO_STRING: String = "OK"
+        const konst FOO_INT: Int = 10
+        const  konst FOO_STRING: String = "OK"
     }
 }
 
 fun box(): String {
-    val test = JavaClass().test()
+    konst test = JavaClass().test()
     return if (test == "OK10") "OK" else "fail : $test"
 }

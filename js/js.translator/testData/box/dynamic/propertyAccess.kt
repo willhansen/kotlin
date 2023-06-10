@@ -29,8 +29,8 @@ fun box(): String {
     bar.str0 = "new str"
     assertEquals("new str", bar.str0)
 
-    bar.obj.noname = "noname value"
-    assertEquals("noname value", bar.obj.noname)
+    bar.obj.noname = "noname konstue"
+    assertEquals("noname konstue", bar.obj.noname)
 
     baz.boo = "baz"
     assertEquals("baz", baz.boo)

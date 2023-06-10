@@ -16,12 +16,12 @@ open class AbstractAnnotationDeserializerWithTypeAnnotations(
     session: FirSession, protocol: SerializerExtensionProtocol
 ) : AbstractAnnotationDeserializer(session, protocol) {
     override fun loadTypeAnnotations(typeProto: ProtoBuf.Type, nameResolver: NameResolver): List<FirAnnotation> {
-        val annotations = typeProto.getExtension(protocol.typeAnnotation).orEmpty()
+        konst annotations = typeProto.getExtension(protocol.typeAnnotation).orEmpty()
         return annotations.map { deserializeAnnotation(it, nameResolver) }
     }
 
     override fun loadTypeParameterAnnotations(typeParameterProto: ProtoBuf.TypeParameter, nameResolver: NameResolver): List<FirAnnotation> {
-        val annotations = typeParameterProto.getExtension(protocol.typeParameterAnnotation).orEmpty()
+        konst annotations = typeParameterProto.getExtension(protocol.typeParameterAnnotation).orEmpty()
         return annotations.map { deserializeAnnotation(it, nameResolver) }
     }
 }

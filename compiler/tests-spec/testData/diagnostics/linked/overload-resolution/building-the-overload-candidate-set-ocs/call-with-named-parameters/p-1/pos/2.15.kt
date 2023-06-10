@@ -66,7 +66,7 @@ class A {
 package libPackageCase2
 import testsCase2.*
 
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 fun <T> listOf(vararg elements1: T): List<T> = TODO()
@@ -82,7 +82,7 @@ package testsCase2
 fun <T> Case2.listOf(vararg elements1: T): List<T> = TODO()
 
 public fun <T> listOf(vararg elements1: T): List<T> = TODO()
-val Case2.listOf: A
+konst Case2.listOf: A
     get() = A()
 
 // FILE: TestCase3.kt
@@ -116,7 +116,7 @@ public fun <T> listOf(vararg elements1: T): List<T> = TODO()
 // FILE: LibtestsPack3.kt
 package testsCase3
 
-val Case3.listOf: A
+konst Case3.listOf: A
     get() = A()
 
 private fun <T> Case3.listOf(vararg elements1: T): List<T> = TODO()

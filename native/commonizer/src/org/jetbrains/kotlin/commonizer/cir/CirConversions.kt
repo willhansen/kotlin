@@ -15,7 +15,7 @@ internal fun CirProvided.ClassOrTypeAliasType.toCirClassOrTypeAliasTypeOrNull(cl
 }
 
 internal fun CirProvided.TypeAliasType.toCirTypeAliasTypeOrNull(classifiers: CirProvidedClassifiers): CirTypeAliasType? {
-    val typeAlias = classifiers.classifier(classifierId) as? CirProvided.TypeAlias ?: return null
+    konst typeAlias = classifiers.classifier(classifierId) as? CirProvided.TypeAlias ?: return null
     return CirTypeAliasType.createInterned(
         typeAliasId = classifierId,
         isMarkedNullable = isMarkedNullable,
@@ -45,7 +45,7 @@ internal fun CirProvided.RegularTypeProjection.toCirRegularTypeProjectionOrNull(
 ): CirRegularTypeProjection? {
     return CirRegularTypeProjection(
         projectionKind = variance,
-        type = when (val type = type) {
+        type = when (konst type = type) {
             is CirProvided.ClassOrTypeAliasType -> type.toCirClassOrTypeAliasTypeOrNull(classifiers) ?: return null
             is CirProvided.TypeParameterType -> CirTypeParameterType.createInterned(type.index, type.isMarkedNullable)
         }

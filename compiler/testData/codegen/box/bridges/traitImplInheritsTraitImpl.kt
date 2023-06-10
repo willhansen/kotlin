@@ -9,9 +9,9 @@ interface B : A {
 class C : B
 
 fun box(): String {
-    val c = C()
-    val b: B = c
-    val a: A = c
+    konst c = C()
+    konst b: B = c
+    konst a: A = c
     var r = c.foo() + b.foo() + a.foo()
     return if (r == "BBB") "OK" else "Fail: $r"
 }

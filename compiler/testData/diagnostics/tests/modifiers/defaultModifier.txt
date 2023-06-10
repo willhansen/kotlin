@@ -19,7 +19,7 @@ public final class A {
 
 public final class B {
     public constructor B()
-    public final val c: kotlin.Int = 1
+    public final konst c: kotlin.Int = 1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -73,8 +73,8 @@ public final enum class Enum : kotlin.Enum<Enum> {
     enum entry E2
 
     private constructor Enum()
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: Enum): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -91,9 +91,9 @@ public final enum class Enum : kotlin.Enum<Enum> {
     }
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<Enum>
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): Enum
-    public final /*synthesized*/ fun values(): kotlin.Array<Enum>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<Enum>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): Enum
+    public final /*synthesized*/ fun konstues(): kotlin.Array<Enum>
 }
 
 public object G {
@@ -146,7 +146,7 @@ public final class J {
 
 public final class Z {
     public constructor Z(/*0*/ c: kotlin.Int)
-    public final val c: kotlin.Int
+    public final konst c: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -23,19 +23,19 @@ internal class LLFirJavaFacadeForBinaries(
     session: FirSession,
     builtinTypes: BuiltinTypes,
     classFinder: JavaClassFinder,
-    private val binaryDependenciesModuleDataProvider: ModuleDataProvider,
+    private konst binaryDependenciesModuleDataProvider: ModuleDataProvider,
 ) : FirJavaFacade(session, builtinTypes, classFinder) {
     override fun getModuleDataForClass(javaClass: JavaClass): FirModuleData {
         requireIsInstance<VirtualFileBoundJavaClass>(javaClass)
-        val path = getBinaryPath(javaClass)
+        konst path = getBinaryPath(javaClass)
         return binaryDependenciesModuleDataProvider.getModuleData(path)
             ?: error("No module data found for ${javaClass.classId} with path $path and virtual file ${javaClass.virtualFile?.path}")
     }
 
     private fun getBinaryPath(javaClass: VirtualFileBoundJavaClass): Path {
-        val virtualFile = javaClass.virtualFile
+        konst virtualFile = javaClass.virtualFile
             ?: error("no virtual file for ${javaClass.classId}")
-        val path = virtualFile.path
+        konst path = virtualFile.path
         return when {
             JAR_DELIMITER in path ->
                 Paths.get(path.substringBefore(JAR_SEPARATOR))
@@ -57,6 +57,6 @@ internal class LLFirJavaFacadeForBinaries(
     }
 
     companion object {
-        const val JAR_DELIMITER = ".jar$JAR_SEPARATOR"
+        const konst JAR_DELIMITER = ".jar$JAR_SEPARATOR"
     }
 }

@@ -2,7 +2,7 @@
 
 fun foo() {
     var x: String? = ""
-    val y = x
+    konst y = x
     x = null
     if (y != null) {
         x<!UNSAFE_CALL!>.<!>hashCode()
@@ -11,7 +11,7 @@ fun foo() {
 
 fun foo2() {
     var x: String? = ""
-    val y = x
+    konst y = x
     if (y != null) {
         x.hashCode()
     }
@@ -19,7 +19,7 @@ fun foo2() {
 
 fun bar(s: String?) {
     var ss = s
-    val hashCode = ss?.hashCode()
+    konst hashCode = ss?.hashCode()
     ss = null
     if (hashCode != null) {
         ss<!UNSAFE_CALL!>.<!>hashCode()
@@ -28,7 +28,7 @@ fun bar(s: String?) {
 
 fun bar2(s: String?) {
     var ss = s
-    val hashCode = ss?.hashCode()
+    konst hashCode = ss?.hashCode()
     if (hashCode != null) {
         ss.hashCode()
     }
@@ -37,7 +37,7 @@ fun bar2(s: String?) {
 class Some(var s: String?)
 
 fun baz(arg: Some?) {
-    val ss = arg?.s
+    konst ss = arg?.s
     if (ss != null) {
         arg.hashCode()
         arg.s<!UNSAFE_CALL!>.<!>hashCode()

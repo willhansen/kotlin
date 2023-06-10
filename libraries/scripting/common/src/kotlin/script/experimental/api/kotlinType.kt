@@ -13,9 +13,9 @@ import kotlin.reflect.KType
  * The Kotlin type representation for using in the scripting API
  */
 class KotlinType private constructor(
-    val typeName: String,
-    @Transient val fromClass: KClass<*>?,
-    val isNullable: Boolean
+    konst typeName: String,
+    @Transient konst fromClass: KClass<*>?,
+    konst isNullable: Boolean
     // TODO: copy properties from KType
 ) : Serializable {
     /**
@@ -45,6 +45,6 @@ class KotlinType private constructor(
     fun withNullability(isNullable: Boolean): KotlinType = KotlinType(typeName, fromClass, isNullable)
 
     companion object {
-        private const val serialVersionUID: Long = 2L
+        private const konst serialVersionUID: Long = 2L
     }
 }

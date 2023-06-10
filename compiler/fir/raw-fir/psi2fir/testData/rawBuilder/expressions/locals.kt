@@ -1,15 +1,15 @@
 fun withLocals(p: Int): Int {
-    class Local(val pp: Int) {
+    class Local(konst pp: Int) {
         fun diff() = pp - p
     }
 
-    val x = Local(42).diff()
+    konst x = Local(42).diff()
 
     fun sum(y: Int, z: Int, f: (Int, Int) -> Int): Int {
         return x + f(y, z)
     }
 
-    val code = (object : Any() {
+    konst code = (object : Any() {
         fun foo() = hashCode()
     }).foo()
 

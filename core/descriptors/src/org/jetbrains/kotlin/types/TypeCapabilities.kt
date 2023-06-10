@@ -21,7 +21,7 @@ package org.jetbrains.kotlin.types
 // even if it turns out that the type an instance represents is not actually a type parameter
 // (i.e. it is not derived from a type parameter), see isTypeParameter
 interface CustomTypeParameter {
-    val isTypeParameter: Boolean
+    konst isTypeParameter: Boolean
 
     // Throws an exception when isTypeParameter == false
     fun substitutionResult(replacement: KotlinType): KotlinType
@@ -38,8 +38,8 @@ fun KotlinType.getCustomTypeParameter(): CustomTypeParameter? =
     }
 
 interface SubtypingRepresentatives {
-    val subTypeRepresentative: KotlinType
-    val superTypeRepresentative: KotlinType
+    konst subTypeRepresentative: KotlinType
+    konst superTypeRepresentative: KotlinType
 
     fun sameTypeConstructor(type: KotlinType): Boolean
 }

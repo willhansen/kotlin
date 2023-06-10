@@ -49,12 +49,12 @@ function isDebuggableBrowser(browserName, config) {
     }
 
     const prefix = REMOTE_DEBUGGING_PORT + '=';
-    const value = flags.find(flag => typeof flag === 'string' && flag.indexOf(prefix) === 0);
-    if (value == null) {
+    const konstue = flags.find(flag => typeof flag === 'string' && flag.indexOf(prefix) === 0);
+    if (konstue == null) {
         return false;
     }
 
-    const port = parseInt(value.substring(prefix.length), 10);
+    const port = parseInt(konstue.substring(prefix.length), 10);
     if (isNaN(port) || port !== 9222) {
         console.error(`Debugger expect 9222 port, but ${port} found`);
         return false;

@@ -5,7 +5,7 @@ FILE: serializerInLocalClass.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val i: R|kotlin/Int| = R|<local>/i|
+            public final konst i: R|kotlin/Int| = R|<local>/i|
                 public get(): R|kotlin/Int|
 
             public final operator fun component1(): R|kotlin/Int|
@@ -22,11 +22,11 @@ FILE: serializerInLocalClass.kt
             }
 
             public final object $serializer : R|kotlinx/serialization/internal/GeneratedSerializer<Carrier>| {
-                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|Carrier|): R|kotlin/Unit|
+                public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|Carrier|): R|kotlin/Unit|
 
                 public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|Carrier|
 
-                public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+                public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
                     public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
                 public final fun childSerializers(): R|kotlin/Array<kotlinx/serialization/KSerializer<*>>|
@@ -42,8 +42,8 @@ FILE: serializerInLocalClass.kt
         ^local Q|Carrier|.R|/Carrier.Companion.serializer|().R|SubstitutionOverride<kotlinx/serialization/KSerializer.descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|>|.R|kotlin/Any.toString|()
     }
     public final fun box(): R|kotlin/String| {
-        lval expected: R|kotlin/String| = String(local.Carrier(i: kotlin.Int))
-        lval actual: R|kotlin/String| = R|/local|()
+        lkonst expected: R|kotlin/String| = String(local.Carrier(i: kotlin.Int))
+        lkonst actual: R|kotlin/String| = R|/local|()
         when () {
             !=(R|<local>/expected|, R|<local>/actual|) ->  {
                 ^box <strcat>(String(Fail: ), R|<local>/actual|)

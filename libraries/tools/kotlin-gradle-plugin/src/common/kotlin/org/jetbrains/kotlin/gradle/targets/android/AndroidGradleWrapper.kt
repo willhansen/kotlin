@@ -26,9 +26,9 @@ private operator fun Any?.invoke(methodName: String): Any? {
     fun Array<Method>.findMethod() =
         singleOrNull { it.name == methodName && it.parameterCount == 0 && !Modifier.isStatic(it.modifiers) }
 
-    val clazz = this::class.java
-    val methodToInvoke = clazz.declaredMethods.findMethod() ?: clazz.methods.findMethod() ?: return null
-    val oldIsAccessible = methodToInvoke.isAccessible
+    konst clazz = this::class.java
+    konst methodToInvoke = clazz.declaredMethods.findMethod() ?: clazz.methods.findMethod() ?: return null
+    konst oldIsAccessible = methodToInvoke.isAccessible
 
     try {
         methodToInvoke.isAccessible = true

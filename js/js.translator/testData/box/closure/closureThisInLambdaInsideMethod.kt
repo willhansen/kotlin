@@ -7,7 +7,7 @@ fun String.foo() = { this }
 
 class A {
     fun foo() = { this }
-    val ok = "OK"
+    konst ok = "OK"
 }
 
 fun box(): String {

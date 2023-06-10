@@ -3,15 +3,15 @@
 import kotlin.reflect.*
 
 annotation class Ann(
-        val kc1: KClass<*>,
-        val kc2: KClass<*>,
-        val kc3: KClass<*>,
-        val c: Int,
-        val cc: Int,
-        val cn: Int,
-        val ci: Int,
-        val t1: Int,
-        val t2: Int
+        konst kc1: KClass<*>,
+        konst kc2: KClass<*>,
+        konst kc3: KClass<*>,
+        konst c: Int,
+        konst cc: Int,
+        konst cn: Int,
+        konst ci: Int,
+        konst t1: Int,
+        konst t2: Int
 )
 
 @Ann(
@@ -29,7 +29,7 @@ class A {
 
     class Nested {
         companion object {
-            const val CONST = 2
+            const konst CONST = 2
         }
     }
 
@@ -37,15 +37,15 @@ class A {
 
     interface Interface {
         companion object {
-            const val CONST = 3
+            const konst CONST = 3
         }
     }
 
-    val a = 1
+    konst a = 1
     fun b() = 2
 
     companion object {
-        const val CONST = 1
+        const konst CONST = 1
         fun foo(): Nested = null!!
     }
 }

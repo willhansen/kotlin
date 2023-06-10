@@ -14,19 +14,19 @@ import org.jetbrains.kotlin.fir.declarations.FirFunction
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirValueParameterSymbolPointer(
-    private val ownerPointer: KtSymbolPointer<KtFunctionLikeSymbol>,
-    private val name: Name,
-    private val index: Int,
+    private konst ownerPointer: KtSymbolPointer<KtFunctionLikeSymbol>,
+    private konst name: Name,
+    private konst index: Int,
 ) : KtSymbolPointer<KtValueParameterSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtValueParameterSymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val ownerSymbol = with(analysisSession) {
+        konst ownerSymbol = with(analysisSession) {
             ownerPointer.restoreSymbol() ?: return null
         }
 
-        val function = ownerSymbol.firSymbol.fir as? FirFunction ?: return null
-        val firValueParameterSymbol = function.valueParameters.getOrNull(index)?.symbol?.takeIf { it.name == name } ?: return null
+        konst function = ownerSymbol.firSymbol.fir as? FirFunction ?: return null
+        konst firValueParameterSymbol = function.konstueParameters.getOrNull(index)?.symbol?.takeIf { it.name == name } ?: return null
         return analysisSession.firSymbolBuilder.variableLikeBuilder.buildValueParameterSymbol(firValueParameterSymbol)
     }
 

@@ -19,7 +19,7 @@ import testPackCase1.B
 import LibPackCase1.a.*
 
 inline operator fun B?.plusAssign( c: ()->C) { //(2)
-    val x = {1}
+    konst x = {1}
     <!DEBUG_INFO_CALL("fqName: LibPackCase1.a.plusAssign; typeCall: inline operator extension function")!>this += x<!> //to (1)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>this += x<!>
 }

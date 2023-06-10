@@ -55,12 +55,12 @@ public interface KtMemberSymbolProviderMixin : KtAnalysisSessionMixIn {
      * Such situation can also happen for intersection symbols (in case of multiple super types containing symbols with identical signature
      * after specialization) and delegation.
      */
-    public val KtCallableSymbol.unwrapFakeOverrides: KtCallableSymbol
+    public konst KtCallableSymbol.unwrapFakeOverrides: KtCallableSymbol
         get() = withValidityAssertion { analysisSession.overrideInfoProvider.unwrapFakeOverrides(this) }
 
     /**
      * Gets the class symbol where the given callable symbol is declared. See [unwrapFakeOverrides] for more details.
      */
-    public val KtCallableSymbol.originalContainingClassForOverride: KtClassOrObjectSymbol?
+    public konst KtCallableSymbol.originalContainingClassForOverride: KtClassOrObjectSymbol?
         get() = withValidityAssertion { analysisSession.overrideInfoProvider.getOriginalContainingClassForOverride(this) }
 }

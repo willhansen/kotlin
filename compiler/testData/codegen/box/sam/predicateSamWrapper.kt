@@ -31,8 +31,8 @@ fun box(): String {
         return "Fail 3: sam wrapper not found"
     }
 
-    val stringPredicateWrapperClass = wrapStringPredicate { true }::class.java
-    val intPredicateWrapperClass = wrapIntPredicate { false }::class.java
+    konst stringPredicateWrapperClass = wrapStringPredicate { true }::class.java
+    konst intPredicateWrapperClass = wrapIntPredicate { false }::class.java
     if (stringPredicateWrapperClass !== intPredicateWrapperClass)
         return "Fail 4: sam wrapper not cached"
 

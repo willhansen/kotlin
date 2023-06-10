@@ -7,8 +7,8 @@ object D {
 
 enum class A {
     GOO;
-    val a by D
-    val b = a
+    konst a by D
+    konst b = a
 }
 
 fun box() = A.GOO.b

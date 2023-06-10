@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.utils.getOrPut
 
 
-internal val Project.kotlinIdeMultiplatformImportStatistics: IdeMultiplatformImportStatistics
+internal konst Project.kotlinIdeMultiplatformImportStatistics: IdeMultiplatformImportStatistics
     get() = extensions.extraProperties.getOrPut(IdeMultiplatformImportStatistics::class.java.name) {
         IdeMultiplatformImportStatistics()
     }
@@ -20,7 +20,7 @@ internal val Project.kotlinIdeMultiplatformImportStatistics: IdeMultiplatformImp
  */
 internal class IdeMultiplatformImportStatistics {
 
-    private val times = mutableMapOf<Class<*>, Long>()
+    private konst times = mutableMapOf<Class<*>, Long>()
 
     fun addExecutionTime(clazz: Class<*>, timeInMillis: Long) {
         times[clazz] = times.getOrDefault(clazz, 0) + timeInMillis

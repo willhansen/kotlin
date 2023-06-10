@@ -1,7 +1,7 @@
 // See also KT-10992: we should have no errors for all unsafe hashCode() calls
 
 fun foo(arg: Any?) {
-    val x = arg <!USELESS_CAST!>as? Any<!> ?: return
+    konst x = arg <!USELESS_CAST!>as? Any<!> ?: return
     <!DEBUG_INFO_SMARTCAST!>arg<!>.hashCode()
     x.hashCode()
 }

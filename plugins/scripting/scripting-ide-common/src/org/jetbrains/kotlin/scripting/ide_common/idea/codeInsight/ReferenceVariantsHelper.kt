@@ -43,11 +43,11 @@ import java.util.*
 
 @OptIn(FrontendInternals::class)
 class ReferenceVariantsHelper(
-    private val bindingContext: BindingContext,
-    private val resolutionFacade: ResolutionFacade,
-    private val moduleDescriptor: ModuleDescriptor,
-    private val visibilityFilter: (DeclarationDescriptor) -> Boolean,
-    private val notProperties: Set<FqNameUnsafe> = setOf()
+    private konst bindingContext: BindingContext,
+    private konst resolutionFacade: ResolutionFacade,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst visibilityFilter: (DeclarationDescriptor) -> Boolean,
+    private konst notProperties: Set<FqNameUnsafe> = setOf()
 ) {
     fun getReferenceVariants(
         expression: KtSimpleNameExpression,
@@ -94,14 +94,14 @@ class ReferenceVariantsHelper(
     }
 
     fun <TDescriptor : DeclarationDescriptor> filterOutJavaGettersAndSetters(variants: Collection<TDescriptor>): Collection<TDescriptor> {
-        val accessorMethodsToRemove = HashSet<FunctionDescriptor>()
-        val filteredVariants = variants.filter { it !is SyntheticJavaPropertyDescriptor || !it.suppressedByNotPropertyList(notProperties) }
+        konst accessorMethodsToRemove = HashSet<FunctionDescriptor>()
+        konst filteredVariants = variants.filter { it !is SyntheticJavaPropertyDescriptor || !it.suppressedByNotPropertyList(notProperties) }
 
         for (variant in filteredVariants) {
             if (variant is SyntheticJavaPropertyDescriptor) {
                 accessorMethodsToRemove.add(variant.getMethod.original)
 
-                val setter = variant.setMethod
+                konst setter = variant.setMethod
                 if (setter != null && setter.returnType?.isUnit() == true) { // we do not filter out non-Unit setters
                     accessorMethodsToRemove.add(setter.original)
                 }
@@ -117,7 +117,7 @@ class ReferenceVariantsHelper(
         contextElement: PsiElement
     ): Collection<DeclarationDescriptor> {
         for (element in contextElement.parentsWithSelf) {
-            val parent = element.parent
+            konst parent = element.parent
             if (parent is KtVariableDeclaration && element == parent.initializer) {
                 return variants.filter { it.findPsi() != parent }
             }
@@ -133,12 +133,12 @@ class ReferenceVariantsHelper(
         callTypeAndReceiver: CallTypeAndReceiver<*, *>,
         useReceiverType: KotlinType?
     ): Collection<DeclarationDescriptor> {
-        val callType = callTypeAndReceiver.callType
+        konst callType = callTypeAndReceiver.callType
 
         @Suppress("NAME_SHADOWING")
-        val kindFilter = kindFilter.intersect(callType.descriptorKindFilter)
+        konst kindFilter = kindFilter.intersect(callType.descriptorKindFilter)
 
-        val receiverExpression: KtExpression?
+        konst receiverExpression: KtExpression?
         when (callTypeAndReceiver) {
             is CallTypeAndReceiver.IMPORT_DIRECTIVE -> {
                 return getVariantsForImportOrPackageDirective(callTypeAndReceiver.receiver, kindFilter, nameFilter)
@@ -170,18 +170,18 @@ class ReferenceVariantsHelper(
             else -> throw RuntimeException() //TODO: see KT-9394
         }
 
-        val resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
-        val dataFlowInfo = bindingContext.getDataFlowInfoBefore(contextElement)
-        val containingDeclaration = resolutionScope.ownerDescriptor
+        konst resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
+        konst dataFlowInfo = bindingContext.getDataFlowInfoBefore(contextElement)
+        konst containingDeclaration = resolutionScope.ownerDescriptor
 
-        val smartCastManager = resolutionFacade.frontendService<SmartCastManager>()
-        val languageVersionSettings = resolutionFacade.frontendService<LanguageVersionSettings>()
+        konst smartCastManager = resolutionFacade.frontendService<SmartCastManager>()
+        konst languageVersionSettings = resolutionFacade.frontendService<LanguageVersionSettings>()
 
-        val implicitReceiverTypes = resolutionScope.getImplicitReceiversWithInstance(
+        konst implicitReceiverTypes = resolutionScope.getImplicitReceiversWithInstance(
             languageVersionSettings.supportsFeature(LanguageFeature.DslMarkersSupport)
         ).flatMap {
             smartCastManager.getSmartCastVariantsWithLessSpecificExcluded(
-                it.value,
+                it.konstue,
                 bindingContext,
                 containingDeclaration,
                 dataFlowInfo,
@@ -190,16 +190,16 @@ class ReferenceVariantsHelper(
             )
         }.toSet()
 
-        val descriptors = LinkedHashSet<DeclarationDescriptor>()
+        konst descriptors = LinkedHashSet<DeclarationDescriptor>()
 
-        val filterWithoutExtensions = kindFilter exclude DescriptorKindExclude.Extensions
+        konst filterWithoutExtensions = kindFilter exclude DescriptorKindExclude.Extensions
         if (receiverExpression != null) {
-            val qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression]
+            konst qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression]
             if (qualifier != null) {
                 descriptors.addAll(qualifier.staticScope.collectStaticMembers(resolutionFacade, filterWithoutExtensions, nameFilter))
             }
 
-            val explicitReceiverTypes = if (useReceiverType != null) {
+            konst explicitReceiverTypes = if (useReceiverType != null) {
                 listOf(useReceiverType)
             } else {
                 callTypeAndReceiver.receiverTypes(
@@ -249,10 +249,10 @@ class ReferenceVariantsHelper(
         nameFilter: (Name) -> Boolean
     ): Collection<DeclarationDescriptor> {
         if (receiverExpression != null) {
-            val qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression] ?: return emptyList()
+            konst qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression] ?: return emptyList()
             return qualifier.staticScope.collectStaticMembers(resolutionFacade, kindFilter, nameFilter)
         } else {
-            val scope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
+            konst scope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
             return scope.collectDescriptorsFiltered(kindFilter, nameFilter, changeNamesForAliased = true)
         }
     }
@@ -264,15 +264,15 @@ class ReferenceVariantsHelper(
         kindFilter: DescriptorKindFilter,
         nameFilter: (Name) -> Boolean
     ): Collection<DeclarationDescriptor> {
-        val descriptors = LinkedHashSet<DeclarationDescriptor>()
+        konst descriptors = LinkedHashSet<DeclarationDescriptor>()
 
-        val resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
+        konst resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
 
-        val receiver = callTypeAndReceiver.receiver
+        konst receiver = callTypeAndReceiver.receiver
         if (receiver != null) {
-            val isStatic = bindingContext[BindingContext.DOUBLE_COLON_LHS, receiver] is DoubleColonLHS.Type
+            konst isStatic = bindingContext[BindingContext.DOUBLE_COLON_LHS, receiver] is DoubleColonLHS.Type
 
-            val explicitReceiverTypes = if (useReceiverType != null) {
+            konst explicitReceiverTypes = if (useReceiverType != null) {
                 listOf(useReceiverType)
             } else {
                 callTypeAndReceiver.receiverTypes(
@@ -284,7 +284,7 @@ class ReferenceVariantsHelper(
                 )!!
             }
 
-            val constructorFilter = { descriptor: ClassDescriptor -> if (isStatic) true else descriptor.isInner }
+            konst constructorFilter = { descriptor: ClassDescriptor -> if (isStatic) true else descriptor.isInner }
             descriptors.addNonExtensionMembers(explicitReceiverTypes, kindFilter, nameFilter, constructorFilter)
 
             descriptors.addScopeAndSyntheticExtensions(
@@ -317,15 +317,15 @@ class ReferenceVariantsHelper(
         nameFilter: (Name) -> Boolean
     ): Collection<DeclarationDescriptor> {
         if (receiverExpression != null) {
-            val qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression] ?: return emptyList()
-            val staticDescriptors = qualifier.staticScope.collectStaticMembers(resolutionFacade, kindFilter, nameFilter)
+            konst qualifier = bindingContext[BindingContext.QUALIFIER, receiverExpression] ?: return emptyList()
+            konst staticDescriptors = qualifier.staticScope.collectStaticMembers(resolutionFacade, kindFilter, nameFilter)
 
-            val objectDescriptor =
+            konst objectDescriptor =
                 (qualifier as? ClassQualifier)?.descriptor?.takeIf { it.kind == ClassKind.OBJECT } ?: return staticDescriptors
 
             return staticDescriptors + objectDescriptor.defaultType.memberScope.getDescriptorsFiltered(kindFilter, nameFilter)
         } else {
-            val rootPackage = resolutionFacade.moduleDescriptor.getPackage(FqName.ROOT)
+            konst rootPackage = resolutionFacade.moduleDescriptor.getPackage(FqName.ROOT)
             return rootPackage.memberScope.getDescriptorsFiltered(kindFilter, nameFilter)
         }
     }
@@ -350,7 +350,7 @@ class ReferenceVariantsHelper(
         kindFilter: DescriptorKindFilter,
         nameFilter: (Name) -> Boolean
     ) {
-        val memberFilter = kindFilter exclude DescriptorKindExclude.NonExtensions
+        konst memberFilter = kindFilter exclude DescriptorKindExclude.NonExtensions
         for (dispatchReceiverType in dispatchReceiverTypes) {
             for (member in dispatchReceiverType.memberScope.getDescriptorsFiltered(memberFilter, nameFilter)) {
                 addAll((member as CallableDescriptor).substituteExtensionIfCallable(extensionReceiverTypes, callType))
@@ -435,9 +435,9 @@ class ReferenceVariantsHelper(
             process(descriptor as CallableDescriptor)
         }
 
-        val syntheticScopes = resolutionFacade.getFrontendService(SyntheticScopes::class.java).forceEnableSamAdapters()
+        konst syntheticScopes = resolutionFacade.getFrontendService(SyntheticScopes::class.java).forceEnableSamAdapters()
         if (kindFilter.acceptsKinds(DescriptorKindFilter.VARIABLES_MASK)) {
-            val lookupLocation = (scope.ownerDescriptor.toSourceElement.getPsi() as? KtElement)?.let { KotlinLookupLocation(it) }
+            konst lookupLocation = (scope.ownerDescriptor.toSourceElement.getPsi() as? KtElement)?.let { KotlinLookupLocation(it) }
                 ?: NoLookupLocation.FROM_IDE
 
             for (extension in syntheticScopes.collectSyntheticExtensionProperties(receiverTypes, lookupLocation)) {
@@ -471,9 +471,9 @@ fun ResolutionScope.collectSyntheticStaticMembersAndConstructors(
     kindFilter: DescriptorKindFilter,
     nameFilter: (Name) -> Boolean
 ): List<FunctionDescriptor> {
-    val syntheticScopes = resolutionFacade.getFrontendService(SyntheticScopes::class.java)
-    val functionDescriptors = getContributedDescriptors(DescriptorKindFilter.FUNCTIONS)
-    val classifierDescriptors = getContributedDescriptors(DescriptorKindFilter.CLASSIFIERS)
+    konst syntheticScopes = resolutionFacade.getFrontendService(SyntheticScopes::class.java)
+    konst functionDescriptors = getContributedDescriptors(DescriptorKindFilter.FUNCTIONS)
+    konst classifierDescriptors = getContributedDescriptors(DescriptorKindFilter.CLASSIFIERS)
     return (syntheticScopes.forceEnableSamAdapters().collectSyntheticStaticFunctions(functionDescriptors) +
             syntheticScopes.collectSyntheticConstructors(classifierDescriptors))
         .filter { kindFilter.accepts(it) && nameFilter(it.name) }
@@ -489,6 +489,6 @@ fun SyntheticScopes.forceEnableSamAdapters(): SyntheticScopes {
         this
     else
         object : SyntheticScopes {
-            override val scopes: Collection<SyntheticScope> = this@forceEnableSamAdapters.scopesWithForceEnabledSamAdapters
+            override konst scopes: Collection<SyntheticScope> = this@forceEnableSamAdapters.scopesWithForceEnabledSamAdapters
         }
 }

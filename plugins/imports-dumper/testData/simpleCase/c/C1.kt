@@ -7,10 +7,10 @@ import b.nestedB.bar
 import b.nestedB.foo
 
 class C1 {
-    val x = foo(TODO())
-    val y = bar(TODO())
+    konst x = foo(TODO())
+    konst y = bar(TODO())
 
-    val z: A1? = null
-    val t: A2? = a2
+    konst z: A1? = null
+    konst t: A2? = a2
 
 }

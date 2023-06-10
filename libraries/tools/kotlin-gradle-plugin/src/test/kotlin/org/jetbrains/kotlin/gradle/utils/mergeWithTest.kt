@@ -17,7 +17,7 @@ class MergeWithTest {
         assertEquals(expected.prettyStringForDiff(), actual.prettyStringForDiff())
     }
 
-    private val sample = mapOf(
+    private konst sample = mapOf(
         "a" to setOf(1, 2),
         "b" to setOf(3, 4),
         "c" to emptySet(),
@@ -26,19 +26,19 @@ class MergeWithTest {
 
     @Test
     fun basicTest() {
-        val a = mapOf(
+        konst a = mapOf(
             "a" to setOf(1, 2),
             "b" to setOf(3, 4)
         )
 
-        val b = mapOf(
+        konst b = mapOf(
             "b" to setOf(3, 5),
             "c" to setOf(6),
             "d" to emptySet(),
         )
 
-        val actual = a mergeWith b
-        val expected = mapOf(
+        konst actual = a mergeWith b
+        konst expected = mapOf(
             "a" to setOf(1, 2),
             "b" to setOf(3, 4, 5),
             "c" to setOf(6),

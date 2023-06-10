@@ -192,7 +192,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalClassConstructor.kt
                 super<R|kotlin/Any|>()
             }
 
-            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val u: UsedClass = R|<local>/u|
+            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst u: UsedClass = R|<local>/u|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] get(): UsedClass
 
         }
@@ -222,7 +222,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalClassConstructor.kt
                 super<R|kotlin/Any|>()
             }
 
-            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val u: UsedClass = R|<local>/u|
+            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst u: UsedClass = R|<local>/u|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] get(): UsedClass
 
         }
@@ -252,7 +252,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalClassConstructor.kt
                 super<R|kotlin/Any|>()
             }
 
-            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val u: UsedClass = R|<local>/u|
+            public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst u: UsedClass = R|<local>/u|
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] get(): UsedClass
 
         }
@@ -282,7 +282,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalClassConstructor.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val u: R|one/two/UsedClass| = R|<local>/u|
+            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst u: R|one/two/UsedClass| = R|<local>/u|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Local] get(): R|one/two/UsedClass|
 
         }
@@ -312,7 +312,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalClassConstructor.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val u: R|one/two/UsedClass| = R|<local>/u|
+            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst u: R|one/two/UsedClass| = R|<local>/u|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Local] get(): R|one/two/UsedClass|
 
         }

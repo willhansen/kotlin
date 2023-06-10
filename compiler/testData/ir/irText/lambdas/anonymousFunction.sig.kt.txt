@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}anonymous
 //   Public signature: /anonymous|-1633601112294415930[0]
-val anonymous: Function0<Unit>
+konst anonymous: Function0<Unit>
   field
     // CHECK JVM_IR:
     //   Mangled name (compatible mode: false): {}anonymous#<no name provided>#static(){}

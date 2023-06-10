@@ -1,6 +1,6 @@
 
 class MyThrowable : Throwable {
-    val x: String
+    konst x: String
 
     constructor(x: String, message: String, cause: Throwable? = null) : super(x + message, cause) {
         this.x = x

@@ -12,9 +12,9 @@ import kotlin.coroutines.intrinsics.*
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object: Continuation<Unit> {
-        override val context: CoroutineContext get() = EmptyCoroutineContext
-        override fun resumeWith(value: Result<Unit>) {
-            value.getOrThrow()
+        override konst context: CoroutineContext get() = EmptyCoroutineContext
+        override fun resumeWith(konstue: Result<Unit>) {
+            konstue.getOrThrow()
         }
     })
 }

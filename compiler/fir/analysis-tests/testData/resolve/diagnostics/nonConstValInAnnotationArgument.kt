@@ -1,8 +1,8 @@
-annotation class Ann(val a: Array<String>)
+annotation class Ann(konst a: Array<String>)
 
-val foo = ""
+konst foo = ""
 var bar = 1
-const val cnst = 2
+const konst cnst = 2
 
 @Ann(
     <!NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION!>arrayOf(
@@ -12,10 +12,10 @@ const val cnst = 2
 )
 fun test() {}
 
-const val A = "foo"
-const val B = 100
+const konst A = "foo"
+const konst B = 100
 
-annotation class S(val s: String)
+annotation class S(konst s: String)
 
 @S(A + B)
 fun foo() {}

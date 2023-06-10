@@ -5,11 +5,11 @@ class Flaf {
 
   }
 
-  val javaName: String
+  konst javaName: String
     field = javaName
     get
 
-  private val INSTANCES: MutableMap<String, Flaf>
+  private konst INSTANCES: MutableMap<String, Flaf>
     field = mutableMapOf<String, Flaf>()
     private get
 
@@ -23,7 +23,7 @@ class Flaf {
             result = Flaf(javaName = javaName)
           }
         }
-        <this>.<get-INSTANCES>().set<String, Flaf>(key = javaName, value = result)
+        <this>.<get-INSTANCES>().set<String, Flaf>(key = javaName, konstue = result)
       }
     }
     return result

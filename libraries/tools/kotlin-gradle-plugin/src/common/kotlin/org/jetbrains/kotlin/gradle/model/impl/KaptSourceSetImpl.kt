@@ -13,14 +13,14 @@ import java.io.Serializable
  * Implementation of the [KaptSourceSet] interface.
  */
 data class KaptSourceSetImpl(
-    override val name: String,
-    override val type: KaptSourceSet.KaptSourceSetType,
-    override val generatedSourcesDirectory: File,
-    override val generatedKotlinSourcesDirectory: File,
-    override val generatedClassesDirectory: File
+    override konst name: String,
+    override konst type: KaptSourceSet.KaptSourceSetType,
+    override konst generatedSourcesDirectory: File,
+    override konst generatedKotlinSourcesDirectory: File,
+    override konst generatedClassesDirectory: File
 ) : KaptSourceSet, Serializable {
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

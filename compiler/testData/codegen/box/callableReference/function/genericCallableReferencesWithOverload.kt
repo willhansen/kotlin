@@ -13,9 +13,9 @@ inline fun <reified T> bar(f: (T) -> Unit, tType: String): T? {
 }
 
 fun box(): String {
-    val a1: Int? = bar(::foo, "Int")
-    val a2: String? = bar(::foo, "String")
-    val a3: Boolean? = bar<Boolean>(::foo, "Boolean")
+    konst a1: Int? = bar(::foo, "Int")
+    konst a2: String? = bar(::foo, "String")
+    konst a3: Boolean? = bar<Boolean>(::foo, "Boolean")
 
     return "OK"
 }

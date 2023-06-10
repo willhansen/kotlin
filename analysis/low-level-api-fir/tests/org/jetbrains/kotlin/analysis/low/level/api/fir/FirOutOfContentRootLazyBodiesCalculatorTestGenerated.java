@@ -184,9 +184,9 @@ public class FirOutOfContentRootLazyBodiesCalculatorTestGenerated extends Abstra
         }
 
         @Test
-        @TestMetadata("invalidDestructing.kt")
-        public void testInvalidDestructing() throws Exception {
-            runTest("compiler/fir/raw-fir/psi2fir/testData/rawBuilder/declarations/invalidDestructing.kt");
+        @TestMetadata("inkonstidDestructing.kt")
+        public void testInkonstidDestructing() throws Exception {
+            runTest("compiler/fir/raw-fir/psi2fir/testData/rawBuilder/declarations/inkonstidDestructing.kt");
         }
 
         @Test

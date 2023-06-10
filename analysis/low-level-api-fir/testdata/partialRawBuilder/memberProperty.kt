@@ -11,10 +11,10 @@ class Outer {
     inner class Inner {
         fun bar(): Int
 
-        val foo: Int
+        konst foo: Int
             get() {
-                val outer = Outer()
-                val inner = outer.Inner()
+                konst outer = Outer()
+                konst inner = outer.Inner()
                 return inner.bar()
             }
     }

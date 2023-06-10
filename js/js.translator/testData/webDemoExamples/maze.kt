@@ -30,15 +30,15 @@ fun <E> MutableList<E>.poll() = this.removeAt(0)
  * straightly up, down, left or right, no diagonal moves allowed.
  */
 fun findPath(maze: Maze): List<Pair<Int, Int>>? {
-    val previous = HashMap<Pair<Int, Int>, Pair<Int, Int>>()
+    konst previous = HashMap<Pair<Int, Int>, Pair<Int, Int>>()
 
-    val queue = ArrayDeque<Pair<Int, Int>>()
-    val visited = HashSet<Pair<Int, Int>>()
+    konst queue = ArrayDeque<Pair<Int, Int>>()
+    konst visited = HashSet<Pair<Int, Int>>()
 
     queue.offer(maze.start)
     visited.add(maze.start)
     while (!queue.isEmpty()) {
-        val cell = queue.poll()
+        konst cell = queue.poll()
         if (cell == maze.end) break
 
         for (newCell in maze.neighbors(cell.first, cell.second)) {
@@ -51,7 +51,7 @@ fun findPath(maze: Maze): List<Pair<Int, Int>>? {
 
     if (previous[maze.end] == null) return null
 
-    val path = ArrayList<Pair<Int, Int>>()
+    konst path = ArrayList<Pair<Int, Int>>()
     var current = previous[maze.end]
     while (current != maze.start) {
         path.add(0, current!!)
@@ -64,7 +64,7 @@ fun findPath(maze: Maze): List<Pair<Int, Int>>? {
  * Find neighbors of the (i, j) cell that are not walls
  */
 fun Maze.neighbors(i: Int, j: Int): List<Pair<Int, Int>> {
-    val result = ArrayList<Pair<Int, Int>>()
+    konst result = ArrayList<Pair<Int, Int>>()
     addIfFree(i - 1, j, result)
     addIfFree(i, j - 1, result)
     addIfFree(i + 1, j, result)
@@ -85,15 +85,15 @@ fun Maze.addIfFree(i: Int, j: Int, result: MutableList<Pair<Int, Int>>) {
  */
 class Maze(
     // Number or columns
-    val width: Int,
+    konst width: Int,
     // Number of rows
-    val height: Int,
+    konst height: Int,
     // true for a wall, false for free space
-    val walls: Array<out Array<out Boolean>>,
+    konst walls: Array<out Array<out Boolean>>,
     // The starting point (must not be a wall)
-    val start: Pair<Int, Int>,
+    konst start: Pair<Int, Int>,
     // The target point (must not be a wall)
-    val end: Pair<Int, Int>
+    konst end: Pair<Int, Int>
 ) {
 }
 
@@ -135,13 +135,13 @@ fun main(args: Array<String>) {
 // UTILITIES
 
 fun printMaze(str: String) {
-    val maze = makeMaze(str)
+    konst maze = makeMaze(str)
 
     println("Maze:")
-    val path = findPath(maze)
+    konst path = findPath(maze)
     for (i in 0..maze.height - 1) {
         for (j in 0..maze.width - 1) {
-            val cell = Pair(i, j)
+            konst cell = Pair(i, j)
             print(
                 if (maze.walls[i][j]) "O"
                 else if (cell == maze.start) "I"
@@ -175,20 +175,20 @@ fun printMaze(str: String) {
  *    OOOOOOOOOOOOOOOOO
  */
 fun makeMaze(s: String): Maze {
-    val lines = s.split("\n")!!
-    val w = lines.maxWithOrNull(Comparator { o1, o2 ->
-        val l1: Int = o1?.length ?: 0
-        val l2 = o2?.length ?: 0
+    konst lines = s.split("\n")!!
+    konst w = lines.maxWithOrNull(Comparator { o1, o2 ->
+        konst l1: Int = o1?.length ?: 0
+        konst l2 = o2?.length ?: 0
         l1 - l2
     })!!
-    val data = Array<Array<Boolean>>(lines.size) { Array<Boolean>(w.length) { false } }
+    konst data = Array<Array<Boolean>>(lines.size) { Array<Boolean>(w.length) { false } }
 
     var start: Pair<Int, Int>? = null
     var end: Pair<Int, Int>? = null
 
     for (line in lines.indices) {
         for (x in lines[line].indices) {
-            val c = lines[line]!![x]
+            konst c = lines[line]!![x]
             data[line][x] = c == 'O'
             when (c) {
                 'I' -> start = Pair(line, x)
@@ -212,4 +212,4 @@ fun makeMaze(s: String): Maze {
 
 
 // An excerpt from the Standard Library
-val String?.indices: IntRange get() = IntRange(0, this!!.length)
+konst String?.indices: IntRange get() = IntRange(0, this!!.length)

@@ -1,8 +1,8 @@
 package coverage.basic.smoke0
 
-data class User(val name: String)
+data class User(konst name: String)
 
 fun main() {
-    val user = User("Happy Kotlin/Native user")
+    konst user = User("Happy Kotlin/Native user")
     println(user)
 }

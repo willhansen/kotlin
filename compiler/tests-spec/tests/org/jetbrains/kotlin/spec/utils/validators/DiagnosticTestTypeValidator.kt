@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec.utils.validators
+package org.jetbrains.kotlin.spec.utils.konstidators
 
 import org.jetbrains.kotlin.checkers.BaseDiagnosticsTest
 import org.jetbrains.kotlin.diagnostics.Diagnostic
@@ -16,31 +16,31 @@ import java.io.File
 class DiagnosticTestTypeValidator(
     testFiles: List<BaseDiagnosticsTest.TestFile>,
     testDataFile: File,
-    private val testInfo: AbstractSpecTest
+    private konst testInfo: AbstractSpecTest
 ) : AbstractTestValidator(testInfo, testDataFile) {
-    private val diagnostics = mutableListOf<Diagnostic>()
-    private val diagnosticStats = mutableMapOf<String, Int>()
-    private val diagnosticSeverityStats = mutableMapOf<Int, MutableMap<Severity, Int>>()
+    private konst diagnostics = mutableListOf<Diagnostic>()
+    private konst diagnosticStats = mutableMapOf<String, Int>()
+    private konst diagnosticSeverityStats = mutableMapOf<Int, MutableMap<Severity, Int>>()
 
     init {
         collectDiagnostics(testFiles)
     }
 
     private fun findTestCases(diagnostic: Diagnostic): TestCasesByNumbers {
-        val ranges = diagnostic.textRanges
-        val filename = diagnostic.psiFile.name
-        val foundTestCases = testInfo.cases.byRanges[filename]!!.floorEntry(ranges[0].startOffset)
+        konst ranges = diagnostic.textRanges
+        konst filename = diagnostic.psiFile.name
+        konst foundTestCases = testInfo.cases.byRanges[filename]!!.floorEntry(ranges[0].startOffset)
 
         if (foundTestCases != null)
-            return foundTestCases.value
+            return foundTestCases.konstue
 
         throw SpecTestValidationException(SpecTestValidationFailedReason.INVALID_TEST_CASES_STRUCTURE)
     }
 
     private fun collectDiagnosticStatistic() {
         diagnostics.forEach {
-            val testCases = findTestCases(it)
-            val severity = it.factory.severity
+            konst testCases = findTestCases(it)
+            konst severity = it.factory.severity
 
             for ((caseNumber, _) in testCases) {
                 diagnosticSeverityStats.putIfAbsent(caseNumber, mutableMapOf())
@@ -52,7 +52,7 @@ class DiagnosticTestTypeValidator(
     private fun collectDiagnostics(files: List<BaseDiagnosticsTest.TestFile>) {
         files.forEach { file ->
             file.actualDiagnostics.forEach {
-                val diagnosticName = it.diagnostic.factory.name
+                konst diagnosticName = it.diagnostic.factory.name
                 diagnosticStats.run { put(diagnosticName, getOrDefault(diagnosticName, 0) + 1) }
                 diagnostics.add(it.diagnostic)
             }
@@ -61,11 +61,11 @@ class DiagnosticTestTypeValidator(
     }
 
     override fun computeTestTypes() = diagnosticSeverityStats.mapValues {
-        if (Severity.ERROR in it.value) TestType.NEGATIVE else TestType.POSITIVE
+        if (Severity.ERROR in it.konstue) TestType.NEGATIVE else TestType.POSITIVE
     }
 
     fun printDiagnosticStatistic() {
-        val diagnostics = if (diagnosticStats.isNotEmpty()) "$diagnosticSeverityStats | $diagnosticStats" else "does not contain"
+        konst diagnostics = if (diagnosticStats.isNotEmpty()) "$diagnosticSeverityStats | $diagnosticStats" else "does not contain"
         println("DIAGNOSTICS: $diagnostics")
     }
 }

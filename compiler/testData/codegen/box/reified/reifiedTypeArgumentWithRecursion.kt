@@ -9,7 +9,7 @@ import kotlin.reflect.typeOf
 
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 inline fun <reified T> T.causeBug() {
-    val x = this
+    konst x = this
     x is T
     x as T
     T::class

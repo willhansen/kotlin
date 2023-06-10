@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.resolve.checkers.DeclarationChecker
 import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 
-class JsBuiltinNameClashChecker(private val nameSuggestion: JsNameSuggestion) : DeclarationChecker {
+class JsBuiltinNameClashChecker(private konst nameSuggestion: JsNameSuggestion) : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (AnnotationsUtils.isNativeObject(descriptor)) return
         if (descriptor.containingDeclaration !is ClassDescriptor) return
 
-        val suggestedName = nameSuggestion.suggest(descriptor, context.trace.bindingContext)!!
+        konst suggestedName = nameSuggestion.suggest(descriptor, context.trace.bindingContext)!!
         if (!suggestedName.stable) return
-        val simpleName = suggestedName.names.single()
+        konst simpleName = suggestedName.names.single()
 
         if (descriptor is ClassDescriptor) {
             if (simpleName in PROHIBITED_STATIC_NAMES) {
@@ -48,9 +48,9 @@ class JsBuiltinNameClashChecker(private val nameSuggestion: JsNameSuggestion) : 
 
     companion object {
         @JvmField
-        val PROHIBITED_STATIC_NAMES = setOf("prototype", "length", "\$metadata\$")
+        konst PROHIBITED_STATIC_NAMES = setOf("prototype", "length", "\$metadata\$")
 
         @JvmField
-        val PROHIBITED_MEMBER_NAMES = setOf("constructor")
+        konst PROHIBITED_MEMBER_NAMES = setOf("constructor")
     }
 }

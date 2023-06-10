@@ -31,8 +31,8 @@ class LanguageVersionSettingsBuilder {
     var languageVersion: LanguageVersion = LanguageVersion.LATEST_STABLE
     var apiVersion: ApiVersion = ApiVersion.LATEST_STABLE
 
-    private val specificFeatures: MutableMap<LanguageFeature, LanguageFeature.State> = mutableMapOf()
-    private val analysisFlags: MutableMap<AnalysisFlag<*>, Any?> = mutableMapOf()
+    private konst specificFeatures: MutableMap<LanguageFeature, LanguageFeature.State> = mutableMapOf()
+    private konst analysisFlags: MutableMap<AnalysisFlag<*>, Any?> = mutableMapOf()
 
     fun enable(feature: LanguageFeature) {
         specificFeatures[feature] = LanguageFeature.State.ENABLED
@@ -46,8 +46,8 @@ class LanguageVersionSettingsBuilder {
         specificFeatures[feature] = LanguageFeature.State.DISABLED
     }
 
-    fun <T> withFlag(flag: AnalysisFlag<T>, value: T) {
-        analysisFlags[flag] = value
+    fun <T> withFlag(flag: AnalysisFlag<T>, konstue: T) {
+        analysisFlags[flag] = konstue
     }
 
     fun configureUsingDirectives(
@@ -56,14 +56,14 @@ class LanguageVersionSettingsBuilder {
         targetBackend: TargetBackend?,
         useK2: Boolean
     ) {
-        val apiVersion = directives.singleOrZeroValue(LanguageSettingsDirectives.API_VERSION)
+        konst apiVersion = directives.singleOrZeroValue(LanguageSettingsDirectives.API_VERSION)
         if (apiVersion != null) {
             this.apiVersion = apiVersion
-            val languageVersion = maxOf(LanguageVersion.LATEST_STABLE, LanguageVersion.fromVersionString(apiVersion.versionString)!!)
+            konst languageVersion = maxOf(LanguageVersion.LATEST_STABLE, LanguageVersion.fromVersionString(apiVersion.versionString)!!)
             this.languageVersion = languageVersion
         }
-        val languageVersionDirective = directives.singleOrZeroValue(LanguageSettingsDirectives.LANGUAGE_VERSION)
-        val allowDangerousLanguageVersionTesting =
+        konst languageVersionDirective = directives.singleOrZeroValue(LanguageSettingsDirectives.LANGUAGE_VERSION)
+        konst allowDangerousLanguageVersionTesting =
             directives.contains(LanguageSettingsDirectives.ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING)
         if (languageVersionDirective != null) {
             if (!allowDangerousLanguageVersionTesting) {
@@ -97,7 +97,7 @@ class LanguageVersionSettingsBuilder {
             !useK2 && this.languageVersion > LanguageVersion.KOTLIN_1_9 -> this.languageVersion = LanguageVersion.KOTLIN_1_9
         }
 
-        val analysisFlags = listOfNotNull(
+        konst analysisFlags = listOfNotNull(
             analysisFlag(AnalysisFlags.optIn, directives[LanguageSettingsDirectives.OPT_IN].takeIf { it.isNotEmpty() }),
             analysisFlag(AnalysisFlags.ignoreDataFlowInAssert, trueOrNull(LanguageSettingsDirectives.IGNORE_DATA_FLOW_IN_ASSERT in directives)),
             analysisFlag(AnalysisFlags.allowResultReturnType, trueOrNull(LanguageSettingsDirectives.ALLOW_RESULT_RETURN_TYPE in directives)),
@@ -118,8 +118,8 @@ class LanguageVersionSettingsBuilder {
         analysisFlags.forEach { withFlag(it.first, it.second) }
 
         environmentConfigurators.forEach {
-            it.provideAdditionalAnalysisFlags(directives, languageVersion).entries.forEach { (flag, value) ->
-                withFlag(flag, value)
+            it.provideAdditionalAnalysisFlags(directives, languageVersion).entries.forEach { (flag, konstue) ->
+                withFlag(flag, konstue)
             }
         }
 
@@ -131,7 +131,7 @@ class LanguageVersionSettingsBuilder {
     }
 
     private fun parseLanguageFeature(featureString: String) {
-        val matcher = LANGUAGE_FEATURE_PATTERN.matcher(featureString)
+        konst matcher = LANGUAGE_FEATURE_PATTERN.matcher(featureString)
         if (!matcher.find()) {
             error(
                 """Wrong syntax in the '// !${LanguageSettingsDirectives.LANGUAGE.name}: ...' directive:
@@ -141,20 +141,20 @@ class LanguageVersionSettingsBuilder {
                    and language feature names are names of enum entries in LanguageFeature enum class"""
             )
         }
-        val mode = when (val mode = matcher.group(1)) {
+        konst mode = when (konst mode = matcher.group(1)) {
             "+" -> LanguageFeature.State.ENABLED
             "-" -> LanguageFeature.State.DISABLED
             "warn:" -> LanguageFeature.State.ENABLED_WITH_WARNING
             else -> error("Unknown mode for language feature: $mode")
         }
-        val name = matcher.group(2)
-        val feature = LanguageFeature.fromString(name) ?: error("Language feature with name \"$name\" not found")
+        konst name = matcher.group(2)
+        konst feature = LanguageFeature.fromString(name) ?: error("Language feature with name \"$name\" not found")
         specificFeatures[feature] = mode
     }
 
     @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE", "HIDDEN")
-    private fun <T : Any> analysisFlag(flag: AnalysisFlag<T>, value: @kotlin.internal.NoInfer T?): Pair<AnalysisFlag<T>, T>? =
-        value?.let(flag::to)
+    private fun <T : Any> analysisFlag(flag: AnalysisFlag<T>, konstue: @kotlin.internal.NoInfer T?): Pair<AnalysisFlag<T>, T>? =
+        konstue?.let(flag::to)
 
     private fun trueOrNull(condition: Boolean): Boolean? = runIf(condition) { true }
 

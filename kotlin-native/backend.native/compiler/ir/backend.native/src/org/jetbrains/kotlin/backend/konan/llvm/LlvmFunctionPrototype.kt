@@ -47,11 +47,11 @@ private object DummyLlvmFunctionAttributeProvider : LlvmFunctionAttributeProvide
  * This is useful when the [externalFunction] is declared in the another LLVM module,
  * and we want to create an external declaration for it.
  */
-private class LlvmFunctionAttributesCopier(private val externalFunction: LLVMValueRef) : LlvmFunctionAttributeProvider {
+private class LlvmFunctionAttributesCopier(private konst externalFunction: LLVMValueRef) : LlvmFunctionAttributeProvider {
 
-    private val paramsCount: Int by lazy { LLVMCountParams(externalFunction) }
+    private konst paramsCount: Int by lazy { LLVMCountParams(externalFunction) }
 
-    private val attributesForCallSite: List<List<LLVMAttributeRef>> by lazy {
+    private konst attributesForCallSite: List<List<LLVMAttributeRef>> by lazy {
         attributesForFunctionDeclaration.map {
             // We don't need attributes like correctly-rounded-divide-sqrt-fp-math or less-precise-fpmad at callsites.
             // So let's take only enum and integer attributes, should be enough to generate correct calls.
@@ -62,12 +62,12 @@ private class LlvmFunctionAttributesCopier(private val externalFunction: LLVMVal
         }
     }
 
-    private val attributesForFunctionDeclaration: List<List<LLVMAttributeRef>> by lazy {
+    private konst attributesForFunctionDeclaration: List<List<LLVMAttributeRef>> by lazy {
         memScoped {
-            val result = mutableListOf<List<LLVMAttributeRef>>()
+            konst result = mutableListOf<List<LLVMAttributeRef>>()
             for (index in LLVMAttributeFunctionIndex..paramsCount) {
-                val count = LLVMGetAttributeCountAtIndex(externalFunction, index)
-                val attributesBuffer = allocArray<LLVMAttributeRefVar>(count)
+                konst count = LLVMGetAttributeCountAtIndex(externalFunction, index)
+                konst attributesBuffer = allocArray<LLVMAttributeRefVar>(count)
                 LLVMGetAttributesAtIndex(externalFunction, index, attributesBuffer)
                 result += (0 until count).map { attributesBuffer[it]!! }
             }
@@ -94,14 +94,14 @@ private class LlvmFunctionAttributesCopier(private val externalFunction: LLVMVal
 
 private fun addCallSiteAttributesAtIndex(context: LLVMContextRef, callSite: LLVMValueRef, index: Int, attributes: List<LlvmAttribute>) {
     attributes.forEach { attribute ->
-        val llvmAttributeRef = createLlvmEnumAttribute(context, attribute.asAttributeKindId())
+        konst llvmAttributeRef = createLlvmEnumAttribute(context, attribute.asAttributeKindId())
         LLVMAddCallSiteAttribute(callSite, index, llvmAttributeRef)
     }
 }
 
 private fun addDeclarationAttributesAtIndex(context: LLVMContextRef, function: LLVMValueRef, index: Int, attributes: List<LlvmAttribute>) {
     attributes.forEach { attribute ->
-        val llvmAttributeRef = createLlvmEnumAttribute(context, attribute.asAttributeKindId())
+        konst llvmAttributeRef = createLlvmEnumAttribute(context, attribute.asAttributeKindId())
         LLVMAddAttributeAtIndex(function, index, llvmAttributeRef)
     }
 }
@@ -110,10 +110,10 @@ private fun addDeclarationAttributesAtIndex(context: LLVMContextRef, function: L
  * LLVM function's signature, enriched with attributes.
  */
 internal open class LlvmFunctionSignature(
-        val returnType: LlvmRetType,
-        val parameterTypes: List<LlvmParamType> = emptyList(),
-        val isVararg: Boolean = false,
-        val functionAttributes: List<LlvmFunctionAttribute> = emptyList(),
+        konst returnType: LlvmRetType,
+        konst parameterTypes: List<LlvmParamType> = emptyList(),
+        konst isVararg: Boolean = false,
+        konst functionAttributes: List<LlvmFunctionAttribute> = emptyList(),
 ) : LlvmFunctionAttributeProvider {
 
     constructor(irFunction: IrFunction, contextUtils: ContextUtils) : this(
@@ -123,13 +123,13 @@ internal open class LlvmFunctionSignature(
             isVararg = false,
     )
 
-    val llvmFunctionType by lazy {
+    konst llvmFunctionType by lazy {
         functionType(returnType.llvmType, isVararg, parameterTypes.map { it.llvmType })
     }
 
     override fun addCallSiteAttributes(callSite: LLVMValueRef) {
-        val caller = LLVMGetBasicBlockParent(LLVMGetInstructionParent(callSite))
-        val llvmContext = LLVMGetModuleContext(LLVMGetGlobalParent(caller))!!
+        konst caller = LLVMGetBasicBlockParent(LLVMGetInstructionParent(callSite))
+        konst llvmContext = LLVMGetModuleContext(LLVMGetGlobalParent(caller))!!
         addCallSiteAttributesAtIndex(llvmContext, callSite, LLVMAttributeFunctionIndex, functionAttributes)
         addCallSiteAttributesAtIndex(llvmContext, callSite, LLVMAttributeReturnIndex, returnType.attributes)
         repeat(parameterTypes.count()) {
@@ -138,7 +138,7 @@ internal open class LlvmFunctionSignature(
     }
 
     override fun addFunctionAttributes(function: LLVMValueRef) {
-        val llvmContext = LLVMGetModuleContext(LLVMGetGlobalParent(function))!!
+        konst llvmContext = LLVMGetModuleContext(LLVMGetGlobalParent(function))!!
         addDeclarationAttributesAtIndex(llvmContext, function, LLVMAttributeFunctionIndex, functionAttributes)
         addDeclarationAttributesAtIndex(llvmContext, function, LLVMAttributeReturnIndex, returnType.attributes)
         repeat(parameterTypes.count()) {
@@ -150,7 +150,7 @@ internal open class LlvmFunctionSignature(
 sealed class FunctionOrigin {
     object FromNativeRuntime : FunctionOrigin()
 
-    class OwnedBy(val declaration: IrDeclaration) : FunctionOrigin()
+    class OwnedBy(konst declaration: IrDeclaration) : FunctionOrigin()
 }
 
 
@@ -158,11 +158,11 @@ sealed class FunctionOrigin {
  * Prototype of a LLVM function that is not tied to a specific LLVM module.
  */
 internal class LlvmFunctionProto(
-      val name: String,
-      val signature: LlvmFunctionSignature,
-      val origin: FunctionOrigin?,
-      val linkage: LLVMLinkage,
-      val independent: Boolean = false,
+      konst name: String,
+      konst signature: LlvmFunctionSignature,
+      konst origin: FunctionOrigin?,
+      konst linkage: LLVMLinkage,
+      konst independent: Boolean = false,
 ) {
     constructor(irFunction: IrFunction, symbolName: String, contextUtils: ContextUtils, linkage: LLVMLinkage) : this(
             name = symbolName,
@@ -173,7 +173,7 @@ internal class LlvmFunctionProto(
     )
 
     fun createLlvmFunction(context: Context, llvmModule: LLVMModuleRef): LlvmCallable {
-        val function = LLVMAddFunction(llvmModule, name, signature.llvmFunctionType)!!
+        konst function = LLVMAddFunction(llvmModule, name, signature.llvmFunctionType)!!
         addDefaultLlvmFunctionAttributes(context, function)
         addTargetCpuAndFeaturesAttributes(context, function)
         signature.addFunctionAttributes(function)

@@ -8,9 +8,9 @@ public fun <T> listOf(t: T): List<T> = TODO()
 
 
 fun usage(c: List<String>) {
-    val cn = c.ifEmpty { null }
+    konst cn = c.ifEmpty { null }
     cn checkType { _<List<String>?>() }
 
-    val cs = c.ifEmpty { listOf("x") }
+    konst cs = c.ifEmpty { listOf("x") }
     cs checkType { _<List<String>>() }
 }

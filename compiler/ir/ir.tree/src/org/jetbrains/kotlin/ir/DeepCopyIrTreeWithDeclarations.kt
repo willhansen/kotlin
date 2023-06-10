@@ -13,10 +13,10 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 @Suppress("UNCHECKED_CAST")
 fun <T : IrElement> T.deepCopyWithVariables(): T {
-    val symbolsRemapper = DeepCopySymbolRemapper(NullDescriptorsRemapper)
+    konst symbolsRemapper = DeepCopySymbolRemapper(NullDescriptorsRemapper)
     acceptVoid(symbolsRemapper)
 
-    val typesRemapper = DeepCopyTypeRemapper(symbolsRemapper)
+    konst typesRemapper = DeepCopyTypeRemapper(symbolsRemapper)
 
     return this.transform(DeepCopyIrTreeWithSymbols(symbolsRemapper, typesRemapper), null) as T
 }

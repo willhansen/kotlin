@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.FirTypeRef
 import org.jetbrains.kotlin.fir.visitors.FirDefaultVisitor
 
-fun FirElement.validate() {
+fun FirElement.konstidate() {
     accept(FirGeneratedElementsValidator, null)
 }
 
 /*
  * TODO's:
  *  - add proper error messages to all `require`
- *  - add validation of declaration origin and resolve phase for all declarations
+ *  - add konstidation of declaration origin and resolve phase for all declarations
  */
 object FirGeneratedElementsValidator : FirDefaultVisitor<Unit, Any?>() {
     override fun visitElement(element: FirElement, data: Any?) {

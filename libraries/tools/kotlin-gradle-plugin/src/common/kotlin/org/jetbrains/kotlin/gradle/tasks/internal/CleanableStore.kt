@@ -25,9 +25,9 @@ interface CleanableStore : Serializable {
     fun markUsed()
 
     companion object {
-        private val mutableStores = mutableMapOf<String, CleanableStore>()
+        private konst mutableStores = mutableMapOf<String, CleanableStore>()
 
-        val stores: Map<String, CleanableStore>
+        konst stores: Map<String, CleanableStore>
             get() = mutableStores.toMap()
 
         operator fun get(path: String): CleanableStore =

@@ -16,7 +16,7 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertSame() {
-        val instance: Any = object {}
+        konst instance: Any = object {}
         assertSame(instance, instance)
     }
 
@@ -36,7 +36,7 @@ class BasicAssertionsTest {
         assertTrue(true) // at least one assertion required for qunit
 
         withDefaultAsserter run@{
-            val rootCause = IllegalArgumentException()
+            konst rootCause = IllegalArgumentException()
             try {
                 assertFailsWith<IllegalStateException> { throw rootCause }
             } catch (e: AssertionError) {
@@ -65,8 +65,8 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertFailsWithClassFails() {
-        val rootCause = IllegalStateException()
-        val actual = checkFailedAssertion {
+        konst rootCause = IllegalStateException()
+        konst actual = checkFailedAssertion {
             assertFailsWith(IllegalArgumentException::class) { throw rootCause }
         }
         assertSame(rootCause, actual.cause, "Expected to fail with correct cause")
@@ -83,8 +83,8 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertSameFails() {
-        val instance1: Any = object {}
-        val instance2: Any = object {}
+        konst instance1: Any = object {}
+        konst instance2: Any = object {}
         checkFailedAssertion { assertSame(instance1, instance2) }
     }
 
@@ -101,7 +101,7 @@ class BasicAssertionsTest {
         assertEquals(-0.0, 0.0, -0.0)
 
         // NaN
-        val nans = doubleArrayOf(Double.NaN, Double.fromBits(0xFFF80000L shl 32))
+        konst nans = doubleArrayOf(Double.NaN, Double.fromBits(0xFFF80000L shl 32))
         for (nan1 in nans) {
             assertTrue(nan1.isNaN())
             for (nan2 in nans) {
@@ -145,7 +145,7 @@ class BasicAssertionsTest {
         assertEquals(-0.0f, 0.0f, -0.0f)
 
         // NaN
-        val nans = floatArrayOf(Float.NaN, Float.fromBits(0xFFC00000.toInt()))
+        konst nans = floatArrayOf(Float.NaN, Float.fromBits(0xFFC00000.toInt()))
         for (nan1 in nans) {
             assertTrue(nan1.isNaN())
             for (nan2 in nans) {
@@ -243,8 +243,8 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertNotSame() {
-        val instance1: Any = object {}
-        val instance2: Any = object {}
+        konst instance1: Any = object {}
+        konst instance2: Any = object {}
         assertNotSame(instance1, instance2)
     }
 
@@ -255,7 +255,7 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertNotSameFails() {
-        val instance: Any = object {}
+        konst instance: Any = object {}
         checkFailedAssertion { assertNotSame(instance, instance) }
     }
 
@@ -277,8 +277,8 @@ class BasicAssertionsTest {
     @Test
     fun testAssertNotNullLambdaFails() {
         checkFailedAssertion {
-            val value: String? = null
-            assertNotNull(value) {
+            konst konstue: String? = null
+            assertNotNull(konstue) {
                 it.substring(0, 0)
             }
         }
@@ -296,16 +296,16 @@ class BasicAssertionsTest {
 
     @Test()
     fun testFail() {
-        val message = "should fail"
-        val actual = checkFailedAssertion { fail(message) }
+        konst message = "should fail"
+        konst actual = checkFailedAssertion { fail(message) }
         assertEquals(message, actual.message)
     }
 
     @Test
     fun testFailWithCause() {
-        val message = "should fail due to"
-        val cause = IllegalStateException()
-        val actual = checkFailedAssertion { fail(message, cause) }
+        konst message = "should fail due to"
+        konst cause = IllegalStateException()
+        konst actual = checkFailedAssertion { fail(message, cause) }
         assertEquals(message, actual.message)
         assertSame(cause, actual.cause)
     }
@@ -322,8 +322,8 @@ class BasicAssertionsTest {
 
     @Test
     fun testAssertIsOfType() {
-        val s: Any = "test"
-        val result = assertIs<String>(s)
+        konst s: Any = "test"
+        konst result = assertIs<String>(s)
         assertEquals(4, s.length)
         assertEquals(s, result)
         assertEquals(4, result.length)
@@ -332,10 +332,10 @@ class BasicAssertionsTest {
     @OptIn(ExperimentalStdlibApi::class)
     @Test
     fun testAssertIsOfTypeFails() {
-        val error = checkFailedAssertion { assertIs<Int>("test") }
-        val message = assertNotNull(error.message)
-        val onFailure = "Actual message: $message"
-        assertTrue(message.startsWith("Expected value to be of type"), onFailure)
+        konst error = checkFailedAssertion { assertIs<Int>("test") }
+        konst message = assertNotNull(error.message)
+        konst onFailure = "Actual message: $message"
+        assertTrue(message.startsWith("Expected konstue to be of type"), onFailure)
         assertTrue(message.contains(typeOf<Int>().toString()), onFailure)
         assertTrue(message.contains("String"), onFailure)
     }
@@ -348,17 +348,17 @@ class BasicAssertionsTest {
     @Test
     @OptIn(ExperimentalStdlibApi::class)
     fun testAssertIsNotOfTypeFails() {
-        val error = checkFailedAssertion { assertIsNot<Int>(1) }
-        val message = assertNotNull(error.message)
-        val onFailure = "Actual message: $message"
-        assertTrue(message.startsWith("Expected value to not be of type"), onFailure)
+        konst error = checkFailedAssertion { assertIsNot<Int>(1) }
+        konst message = assertNotNull(error.message)
+        konst onFailure = "Actual message: $message"
+        assertTrue(message.startsWith("Expected konstue to not be of type"), onFailure)
         assertTrue(message.contains(typeOf<Int>().toString()), onFailure)
     }
 }
 
 
 internal fun testFailureMessage(expected: String, block: () -> Unit) {
-    val exception = checkFailedAssertion(block)
+    konst exception = checkFailedAssertion(block)
     assertEquals(expected, exception.message, "Wrong assertion message")
 }
 
@@ -367,7 +367,7 @@ internal fun checkFailedAssertion(assertion: () -> Unit): AssertionError {
 }
 
 private fun withDefaultAsserter(block: () -> Unit) {
-    val current = overrideAsserter(DefaultAsserter)
+    konst current = overrideAsserter(DefaultAsserter)
     try {
         block()
     } finally {

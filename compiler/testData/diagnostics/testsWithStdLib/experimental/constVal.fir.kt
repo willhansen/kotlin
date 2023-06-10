@@ -9,9 +9,9 @@ package api
 annotation class ExperimentalAPI
 
 @ExperimentalAPI
-const val MEANING = 42
+const konst MEANING = 42
 
-annotation class Anno(val value: Int)
+annotation class Anno(konst konstue: Int)
 
 // FILE: usage-propagate.kt
 

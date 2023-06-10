@@ -1,6 +1,6 @@
 package testing
 
-annotation class Annotation<T>(val clazz: Class<T>)
+annotation class Annotation<T>(konst clazz: Class<T>)
 class ATest
 
 class A<T>

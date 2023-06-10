@@ -4,7 +4,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -29,7 +29,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -59,7 +59,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -115,7 +115,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -178,7 +178,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -265,7 +265,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -329,7 +329,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -396,7 +396,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
   PsiComment(EOL_COMMENT)('// Error recovery:')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')
@@ -462,7 +462,7 @@ KtFile: PropertiesWithFunctionReceivers.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       PsiElement(LPAR)('(')

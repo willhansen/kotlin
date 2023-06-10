@@ -31,18 +31,18 @@ internal fun <T : CommonToolArguments> toArgumentStrings(
     shortArgumentKeys: Boolean,
     compactArgumentValues: Boolean
 ): List<String> = ArrayList<String>().apply {
-    val defaultArguments = type.newArgumentsInstance()
+    konst defaultArguments = type.newArgumentsInstance()
     type.memberProperties.forEach { property ->
-        val argumentAnnotation = property.findAnnotation<Argument>() ?: return@forEach
-        val rawPropertyValue = property.get(thisArguments)
-        val rawDefaultValue = property.get(defaultArguments)
+        konst argumentAnnotation = property.findAnnotation<Argument>() ?: return@forEach
+        konst rawPropertyValue = property.get(thisArguments)
+        konst rawDefaultValue = property.get(defaultArguments)
 
-        /* Default value can be omitted */
+        /* Default konstue can be omitted */
         if (rawPropertyValue == rawDefaultValue) {
             return@forEach
         }
 
-        val argumentStringValues = when {
+        konst argumentStringValues = when {
             property.returnType.classifier == Boolean::class -> listOf(rawPropertyValue?.toString() ?: false.toString())
 
             (property.returnType.classifier as? KClass<*>)?.java?.isArray == true ->
@@ -54,8 +54,8 @@ internal fun <T : CommonToolArguments> toArgumentStrings(
             else -> listOf(rawPropertyValue.toString())
         }
 
-        val argumentName = if (shortArgumentKeys && argumentAnnotation.shortName.isNotEmpty()) argumentAnnotation.shortName
-        else argumentAnnotation.value
+        konst argumentName = if (shortArgumentKeys && argumentAnnotation.shortName.isNotEmpty()) argumentAnnotation.shortName
+        else argumentAnnotation.konstue
 
         argumentStringValues.forEach { argumentStringValue ->
 
@@ -81,15 +81,15 @@ internal fun <T : CommonToolArguments> toArgumentStrings(
     addAll(thisArguments.internalArguments.map { it.stringRepresentation })
 }
 
-private fun getArgumentStringValue(argumentAnnotation: Argument, values: Array<*>?, compactArgumentValues: Boolean): List<String> {
-    if (values.isNullOrEmpty()) return emptyList()
-    val delimiter = argumentAnnotation.resolvedDelimiter
-    return if (delimiter.isNullOrEmpty() || !compactArgumentValues) values.map { it.toString() }
-    else listOf(values.joinToString(delimiter))
+private fun getArgumentStringValue(argumentAnnotation: Argument, konstues: Array<*>?, compactArgumentValues: Boolean): List<String> {
+    if (konstues.isNullOrEmpty()) return emptyList()
+    konst delimiter = argumentAnnotation.resolvedDelimiter
+    return if (delimiter.isNullOrEmpty() || !compactArgumentValues) konstues.map { it.toString() }
+    else listOf(konstues.joinToString(delimiter))
 }
 
 private fun <T : CommonToolArguments> KClass<T>.newArgumentsInstance(): T {
-    val argumentConstructor = constructors.find { it.parameters.isEmpty() } ?: throw IllegalArgumentException(
+    konst argumentConstructor = constructors.find { it.parameters.isEmpty() } ?: throw IllegalArgumentException(
         "$qualifiedName has no empty constructor"
     )
     return argumentConstructor.call()

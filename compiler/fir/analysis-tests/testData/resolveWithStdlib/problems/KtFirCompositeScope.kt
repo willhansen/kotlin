@@ -10,7 +10,7 @@ inline fun <R> withValidityAssertion(action: () -> R): R {
     return action()
 }
 
-class KtFirCompositeScope(val subScopes: List<KtScope>) {
+class KtFirCompositeScope(konst subScopes: List<KtScope>) {
     fun getAllNames(): Set<String> = withValidityAssertion {
         buildSet {
             subScopes.flatMapTo(this) { it.getAllNames() }

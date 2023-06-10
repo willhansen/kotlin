@@ -3,13 +3,13 @@ package foo
 
 var global: String = ""
 
-fun bar(s: String, value: Boolean): Boolean {
+fun bar(s: String, konstue: Boolean): Boolean {
     global += s
-    return value
+    return konstue
 }
 
 fun box(): String {
-    val a =  if (true || if(bar("A", false)) {2} else {3} == 0) true else false
+    konst a =  if (true || if(bar("A", false)) {2} else {3} == 0) true else false
     assertEquals("", global)
 
     true || if(bar("A", false)) {2} else {3} == 0

@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.resolve.jvm.AsmTypes.OBJECT_TYPE
 import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature
 import org.jetbrains.org.objectweb.asm.Opcodes
 
-class MonitorInstruction private constructor(private val opcode: Int) : IntrinsicMethod() {
+class MonitorInstruction private constructor(private konst opcode: Int) : IntrinsicMethod() {
     companion object {
         @JvmField
-        val MONITOR_ENTER: MonitorInstruction = MonitorInstruction(Opcodes.MONITORENTER)
+        konst MONITOR_ENTER: MonitorInstruction = MonitorInstruction(Opcodes.MONITORENTER)
 
         @JvmField
-        val MONITOR_EXIT: MonitorInstruction = MonitorInstruction(Opcodes.MONITOREXIT)
+        konst MONITOR_EXIT: MonitorInstruction = MonitorInstruction(Opcodes.MONITOREXIT)
     }
 
     /*TODO void return type*/

@@ -9,7 +9,7 @@ public @interface Ann {}
 
 // FILE: box.kt
 fun box(): String {
-    class C(val x: String, val y: String) {
+    class C(konst x: String, konst y: String) {
         @Ann
         constructor(v: String): this(v, v)
     }

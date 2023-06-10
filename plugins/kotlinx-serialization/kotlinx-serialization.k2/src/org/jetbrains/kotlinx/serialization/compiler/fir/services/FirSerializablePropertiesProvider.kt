@@ -28,7 +28,7 @@ import org.jetbrains.kotlinx.serialization.compiler.fir.isInternalSerializable
 import org.jetbrains.kotlinx.serialization.compiler.resolve.ISerializableProperty
 
 class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessionComponent(session) {
-    private val cache: FirCache<FirClassSymbol<*>, FirSerializableProperties, Nothing?> =
+    private konst cache: FirCache<FirClassSymbol<*>, FirSerializableProperties, Nothing?> =
         session.firCachesFactory.createCache(this::createSerializableProperties)
 
     fun getSerializablePropertiesForClass(classSymbol: FirClassSymbol<*>): FirSerializableProperties {
@@ -40,7 +40,7 @@ class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessi
     }
 
     private fun createSerializableProperties(classSymbol: FirClassSymbol<*>): FirSerializableProperties {
-        val allPropertySymbols = buildList {
+        konst allPropertySymbols = buildList {
             classSymbol
                 .declaredMemberScope(session, memberRequiredPhase = null)
                 .processAllProperties {
@@ -48,12 +48,12 @@ class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessi
                 }
         }
 
-        val primaryConstructorProperties = allPropertySymbols.mapNotNull {
-            val parameterSymbol = it.correspondingValueParameterFromPrimaryConstructor ?: return@mapNotNull null
+        konst primaryConstructorProperties = allPropertySymbols.mapNotNull {
+            konst parameterSymbol = it.correspondingValueParameterFromPrimaryConstructor ?: return@mapNotNull null
             it to parameterSymbol.hasDefaultValue
         }.toMap().withDefault { false }
 
-        val isInternalSerializable = with(session) { classSymbol.isInternalSerializable }
+        konst isInternalSerializable = with(session) { classSymbol.isInternalSerializable }
 
         fun isPropertySerializable(propertySymbol: FirPropertySymbol): Boolean {
             return when {
@@ -63,10 +63,10 @@ class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessi
             }
         }
 
-        val serializableProperties: List<FirSerializableProperty> = allPropertySymbols.asSequence()
+        konst serializableProperties: List<FirSerializableProperty> = allPropertySymbols.asSequence()
             .filter { isPropertySerializable(it) }
             .map {
-                val declaresDefaultValue = it.declaresDefaultValue()
+                konst declaresDefaultValue = it.declaresDefaultValue()
                 FirSerializableProperty(
                     session,
                     it,
@@ -77,7 +77,7 @@ class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessi
             .filterNot { it.transient }
             .partition { it.propertySymbol in primaryConstructorProperties }
             .let { (fromConstructor, standalone) ->
-                val superClassSymbol = classSymbol.getSuperClassNotAny(session)
+                konst superClassSymbol = classSymbol.getSuperClassNotAny(session)
                 buildList {
                     if (superClassSymbol != null && with(session) { superClassSymbol.isInternalSerializable }) {
                         addAll(getSerializablePropertiesForClass(superClassSymbol).serializableProperties)
@@ -88,17 +88,17 @@ class FirSerializablePropertiesProvider(session: FirSession) : FirExtensionSessi
             }
             .let { restoreCorrectOrderFromClassProtoExtension(classSymbol, it) }
 
-        val isExternallySerializable = classSymbol.isEnumClass ||
-                primaryConstructorProperties.size == (classSymbol.primaryConstructorSymbol()?.valueParameterSymbols?.size ?: 0)
+        konst isExternallySerializable = classSymbol.isEnumClass ||
+                primaryConstructorProperties.size == (classSymbol.primaryConstructorSymbol()?.konstueParameterSymbols?.size ?: 0)
 
-        val (serializableConstructorProperties, serializableStandaloneProperties) = serializableProperties.partition { it.propertySymbol in primaryConstructorProperties }
+        konst (serializableConstructorProperties, serializableStandaloneProperties) = serializableProperties.partition { it.propertySymbol in primaryConstructorProperties }
         return FirSerializableProperties(
             serializableProperties, isExternallySerializable, serializableConstructorProperties, serializableStandaloneProperties
         )
     }
 }
 
-val FirSession.serializablePropertiesProvider: FirSerializablePropertiesProvider by FirSession.sessionComponentAccessor()
+konst FirSession.serializablePropertiesProvider: FirSerializablePropertiesProvider by FirSession.sessionComponentAccessor()
 
 fun FirPropertySymbol.declaresDefaultValue(): Boolean {
     if (hasInitializer) return true

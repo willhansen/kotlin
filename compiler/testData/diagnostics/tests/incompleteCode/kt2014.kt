@@ -5,7 +5,7 @@ class Foo {
     fun prop() : Int = 1
     fun bar(i: Int) : Int = i
 
-    val a : Int = 1
+    konst a : Int = 1
 }
 
 fun x(f : Foo) {

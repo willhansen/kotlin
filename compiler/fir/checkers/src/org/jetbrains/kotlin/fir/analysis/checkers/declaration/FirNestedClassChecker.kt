@@ -22,7 +22,7 @@ object FirNestedClassChecker : FirRegularClassChecker() {
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         // Local enums / objects / companion objects are handled with different diagnostic codes.
         if ((declaration.classKind.isSingleton || declaration.classKind == ClassKind.ENUM_CLASS) && declaration.isLocal) return
-        val containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
+        konst containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
 
         when (containingDeclaration) {
             is FirRegularClass -> {
@@ -43,7 +43,7 @@ object FirNestedClassChecker : FirRegularClassChecker() {
 
     // Note: here we don't differentiate anonymous object like in FE1.0
     // (org.jetbrains.kotlin.resolve.ModifiersChecker.DetailedClassKind) because this case has been ruled out in the first place.
-    private val FirRegularClass.description: String
+    private konst FirRegularClass.description: String
         get() = when (classKind) {
             ClassKind.CLASS -> "Class"
             ClassKind.INTERFACE -> "Interface"

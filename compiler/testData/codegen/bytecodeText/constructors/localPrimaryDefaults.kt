@@ -1,6 +1,6 @@
-class A(val s: String) {
+class A(konst s: String) {
     fun f(): Int {
-        class B(val x: Int = 0) {
+        class B(konst x: Int = 0) {
             fun f(): Int = x
         }
         return B().f()

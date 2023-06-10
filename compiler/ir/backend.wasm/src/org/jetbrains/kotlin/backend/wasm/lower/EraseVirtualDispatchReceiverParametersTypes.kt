@@ -49,7 +49,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  *
  *  Related issue: [https://github.com/WebAssembly/gc/issues/29]
  */
-class EraseVirtualDispatchReceiverParametersTypes(val context: CommonBackendContext) : FileLoweringPass {
+class EraseVirtualDispatchReceiverParametersTypes(konst context: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -68,20 +68,20 @@ class EraseVirtualDispatchReceiverParametersTypes(val context: CommonBackendCont
         if (irFunction !is IrSimpleFunction) return
         if (!irFunction.isOverridableOrOverrides) return
 
-        val oldReceiver = irFunction.dispatchReceiverParameter!!
-        val originalReceiverType = oldReceiver.type
+        konst oldReceiver = irFunction.dispatchReceiverParameter!!
+        konst originalReceiverType = oldReceiver.type
 
         // Interfaces in Wasm are erased to Any, so they already have appropriate type
         if (originalReceiverType.isInterface() || originalReceiverType.isAny()) return
 
-        val builder = context.createIrBuilder(irFunction.symbol)
-        val newReceiver = oldReceiver.copyTo(irFunction, type = context.irBuiltIns.anyType)
+        konst builder = context.createIrBuilder(irFunction.symbol)
+        konst newReceiver = oldReceiver.copyTo(irFunction, type = context.irBuiltIns.anyType)
         irFunction.dispatchReceiverParameter = newReceiver
 
-        val blockBody = irFunction.body as? IrBlockBody ?: return
-        val classThisReceiverSymbol = irFunction.parentAsClass.thisReceiver?.symbol
+        konst blockBody = irFunction.body as? IrBlockBody ?: return
+        konst classThisReceiverSymbol = irFunction.parentAsClass.thisReceiver?.symbol
 
-        val lazyCastedThis = lazy(LazyThreadSafetyMode.NONE) {
+        konst lazyCastedThis = lazy(LazyThreadSafetyMode.NONE) {
             builder.buildStatement(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
                 scope.createTemporaryVariable(
                     builder.irImplicitCast(builder.irGet(newReceiver), originalReceiverType),
@@ -95,12 +95,12 @@ class EraseVirtualDispatchReceiverParametersTypes(val context: CommonBackendCont
             override fun visitGetValue(expression: IrGetValue): IrExpression {
                 if (expression.type.isAny()) return expression
                 if (expression.symbol != oldReceiver.symbol && expression.symbol != classThisReceiverSymbol) return expression
-                return builder.irGet(lazyCastedThis.value)
+                return builder.irGet(lazyCastedThis.konstue)
             }
         })
 
         if (lazyCastedThis.isInitialized()) {
-            blockBody.statements.add(0, lazyCastedThis.value)
+            blockBody.statements.add(0, lazyCastedThis.konstue)
         }
     }
 }

@@ -24,12 +24,12 @@ import org.jetbrains.kotlin.diagnostics.rendering.Renderers.RENDER_TYPE
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers.RENDER_TYPE_WITH_ANNOTATIONS
 
 object DefaultErrorMessagesAndroid : DefaultErrorMessages.Extension {
-    private val MAP = DiagnosticFactoryToRendererMap("Android")
+    private konst MAP = DiagnosticFactoryToRendererMap("Android")
     override fun getMap() = MAP
 
     init {
         MAP.put(ErrorsAndroid.SYNTHETIC_INVALID_WIDGET_TYPE,
-                "Widget has an invalid type ''{0}''. Please specify the fully qualified widget class name in XML",
+                "Widget has an inkonstid type ''{0}''. Please specify the fully qualified widget class name in XML",
                 Renderers.TO_STRING)
 
         MAP.put(ErrorsAndroid.SYNTHETIC_UNRESOLVED_WIDGET_TYPE,
@@ -70,7 +70,7 @@ object DefaultErrorMessagesAndroid : DefaultErrorMessages.Extension {
                 "The primary constructor is empty, no data will be serialized to 'Parcel'")
 
         MAP.put(ErrorsAndroid.PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR,
-                "'Parcelable' constructor parameter should be 'val' or 'var'")
+                "'Parcelable' constructor parameter should be 'konst' or 'var'")
 
         MAP.put(ErrorsAndroid.PROPERTY_WONT_BE_SERIALIZED,
                 "Property would not be serialized into a 'Parcel'. Add '@IgnoredOnParcel' annotation to remove the warning")

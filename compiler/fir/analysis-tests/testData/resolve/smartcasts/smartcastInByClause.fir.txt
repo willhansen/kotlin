@@ -4,10 +4,10 @@ FILE: smartcastInByClause.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val path: R|kotlin/String?| = R|<local>/path|
+        public final konst path: R|kotlin/String?| = R|<local>/path|
             public get(): R|kotlin/String?|
 
-        public final val index: R|kotlin/Int| = R|<local>/index|
+        public final konst index: R|kotlin/Int| = R|<local>/index|
             public get(): R|kotlin/Int|
 
     }
@@ -18,12 +18,12 @@ FILE: smartcastInByClause.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val index: R|kotlin/Int| = R|<local>/index|
+        public final konst index: R|kotlin/Int| = R|<local>/index|
             public get(): R|kotlin/Int|
 
     }
     public final fun test(a: R|A?|): R|Base?| {
-        lval path: R|kotlin/String| = R|<local>/a|?.{ $subj$.R|/A.path| } ?: ^test Null(null)
+        lkonst path: R|kotlin/String| = R|<local>/a|?.{ $subj$.R|/A.path| } ?: ^test Null(null)
         R|/takeInt|(R|<local>/a|.R|/A.index|)
         ^test object : R|Base| {
             private constructor(): R|<anonymous>| {
@@ -32,7 +32,7 @@ FILE: smartcastInByClause.kt
 
             private final field $$delegate_0: R|Base| = R|/Derived.Derived|(R|<local>/a|.R|/A.index|)
 
-            public final val x: R|kotlin/Int| = R|<local>/a|.R|/A.index|
+            public final konst x: R|kotlin/Int| = R|<local>/a|.R|/A.index|
                 public get(): R|kotlin/Int|
 
             public final fun foo(): R|kotlin/Unit| {

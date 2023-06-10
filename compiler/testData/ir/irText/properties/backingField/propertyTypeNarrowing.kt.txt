@@ -5,7 +5,7 @@ class A {
 
   }
 
-  val it: Int
+  konst it: Int
     field = 4
     get
 
@@ -13,7 +13,7 @@ class A {
     return <this>.<get-it>().plus(other = 3)
   }
 
-  val p: Int
+  konst p: Int
     field = 5
     get(): Int {
       return <this>.#p
@@ -22,7 +22,7 @@ class A {
 }
 
 fun test() {
-  val d: Unit = test()
-  val b: Int = A().<get-p>().plus(other = 2)
+  konst d: Unit = test()
+  konst b: Int = A().<get-p>().plus(other = 2)
 }
 

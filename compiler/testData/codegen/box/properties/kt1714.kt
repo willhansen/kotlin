@@ -6,18 +6,18 @@
 // IGNORE_BACKEND: JS, NATIVE
 
 interface A {
-    val method : (() -> Unit )?
-    val test : Integer
+    konst method : (() -> Unit )?
+    konst test : Integer
 }
 
 class AImpl : A {
-    override val method : (() -> Unit )? = {
+    override konst method : (() -> Unit )? = {
     }
-    override val test : Integer = Integer(777)
+    override konst test : Integer = Integer(777)
 }
 
 fun test(a : A) {
-    val method = a.method
+    konst method = a.method
     if (method != null) {
         method()
     }

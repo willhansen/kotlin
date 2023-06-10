@@ -11,9 +11,9 @@
 
 @Repeatable
 @JvmRepeatable(As::class)
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
-annotation class As(val value: Array<A>)
+annotation class As(konst konstue: Array<A>)
 
 @A("O")
 @A("")
@@ -21,15 +21,15 @@ annotation class As(val value: Array<A>)
 class Z
 
 fun box(): String {
-    val annotations = Z::class.java.annotations.filter { it.annotationClass != Metadata::class }
-    val aa = annotations.singleOrNull() ?: return "Fail 1: $annotations"
+    konst annotations = Z::class.java.annotations.filter { it.annotationClass != Metadata::class }
+    konst aa = annotations.singleOrNull() ?: return "Fail 1: $annotations"
     if (aa !is As) return "Fail 2: $aa"
 
-    val a = aa.value.asList()
+    konst a = aa.konstue.asList()
     if (a.size != 3) return "Fail 3: $a"
 
-    val bytype = Z::class.java.getAnnotationsByType(A::class.java)
+    konst bytype = Z::class.java.getAnnotationsByType(A::class.java)
     if (a.toList() != bytype.toList()) return "Fail 4: ${a.toList()} != ${bytype.toList()}"
 
-    return a.fold("") { acc, it -> acc + it.value }
+    return a.fold("") { acc, it -> acc + it.konstue }
 }

@@ -21,15 +21,15 @@ abstract class BuildMetaInfo {
             return "Compiler arguments version was changed"
         }
 
-        val changedCompilerArguments = currentCompilerArgumentsMap.mapNotNull {
-            val key = it.key
-            val previousValue = previousCompilerArgsMap[it.key] ?: return@mapNotNull key
-            val currentValue = it.value
+        konst changedCompilerArguments = currentCompilerArgumentsMap.mapNotNull {
+            konst key = it.key
+            konst previousValue = previousCompilerArgsMap[it.key] ?: return@mapNotNull key
+            konst currentValue = it.konstue
             return@mapNotNull if (compareIsChanged(key, currentValue, previousValue)) key else null
         }
 
         if (changedCompilerArguments.isNotEmpty()) {
-            val rebuildReason = when (changedCompilerArguments.size) {
+            konst rebuildReason = when (changedCompilerArguments.size) {
                 1 -> "One of compiler arguments was changed: "
                 else -> "Some compiler arguments were changed: "
             } + changedCompilerArguments.joinToReadableString()
@@ -55,7 +55,7 @@ abstract class BuildMetaInfo {
             return previousValue == "true" && currentValue != "true"
         }
 
-        // compare all other change-sensitive values
+        // compare all other change-sensitive konstues
         if (previousValue != currentValue) {
             return true
         }
@@ -68,19 +68,19 @@ abstract class BuildMetaInfo {
     }
 
     open fun createPropertiesMapFromCompilerArguments(args: CommonCompilerArguments): Map<String, String> {
-        val resultMap = transformClassToPropertiesMap(args, excludedProperties).toMutableMap()
-        val languageVersion = args.languageVersion?.let { LanguageVersion.fromVersionString(it) }
+        konst resultMap = transformClassToPropertiesMap(args, excludedProperties).toMutableMap()
+        konst languageVersion = args.languageVersion?.let { LanguageVersion.fromVersionString(it) }
             ?: LanguageVersion.LATEST_STABLE
-        val languageVersionSting = languageVersion.versionString
+        konst languageVersionSting = languageVersion.versionString
         resultMap[CustomKeys.LANGUAGE_VERSION_STRING.name] = languageVersionSting
 
-        val isEAP = !languageVersion.isStable
+        konst isEAP = !languageVersion.isStable
         resultMap[CustomKeys.IS_EAP.name] = isEAP.toString()
 
-        val apiVersionString = args.apiVersion ?: languageVersionSting
+        konst apiVersionString = args.apiVersion ?: languageVersionSting
         resultMap[CustomKeys.API_VERSION_STRING.name] = apiVersionString
 
-        val pluginClasspaths = PluginClasspaths(args.pluginClasspaths).serialize()
+        konst pluginClasspaths = PluginClasspaths(args.pluginClasspaths).serialize()
         resultMap[CustomKeys.PLUGIN_CLASSPATHS.name] = pluginClasspaths
 
         return resultMap
@@ -91,10 +91,10 @@ abstract class BuildMetaInfo {
         .filter(String::isNotBlank)
         .associate { it.substringBefore("=") to it.substringAfter("=") }
 
-    private fun serializeMapToString(myList: Map<String, String>) = myList.map { "${it.key}=${it.value}" }.joinToString("\n")
+    private fun serializeMapToString(myList: Map<String, String>) = myList.map { "${it.key}=${it.konstue}" }.joinToString("\n")
     fun serializeArgsToString(args: CommonCompilerArguments) = serializeMapToString(createPropertiesMapFromCompilerArguments(args))
 
-    open val excludedProperties = listOf(
+    open konst excludedProperties = listOf(
         "languageVersion",
         "apiVersion",
         "pluginClasspaths",
@@ -122,7 +122,7 @@ abstract class BuildMetaInfo {
         "version"
     )
 
-    open val argumentsListForSpecialCheck = listOf(
+    open konst argumentsListForSpecialCheck = listOf(
         "allowAnyScriptsInSourceRoots",
         "allowKotlinPackage",
         "allowResultReturnType",

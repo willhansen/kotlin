@@ -23,7 +23,7 @@ import com.intellij.psi.search.LocalSearchScope
 
 class KtLabeledExpression(node: ASTNode) : KtExpressionWithLabel(node), PsiNameIdentifierOwner {
     @get:IfNotParsed
-    val baseExpression: KtExpression?
+    konst baseExpression: KtExpression?
         get() = findChildByClass(KtExpression::class.java)
 
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitLabeledExpression(this, data)

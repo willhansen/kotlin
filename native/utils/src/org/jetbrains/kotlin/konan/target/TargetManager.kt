@@ -6,20 +6,20 @@
 package org.jetbrains.kotlin.konan.target
 
 interface TargetManager {
-    val target: KonanTarget
-    val targetName: String
+    konst target: KonanTarget
+    konst targetName: String
     fun list()
 }
 
-internal class TargetManagerImpl(val userRequest: String?, val hostManager: HostManager) : TargetManager {
-    override val target = determineCurrent()
-    override val targetName
+internal class TargetManagerImpl(konst userRequest: String?, konst hostManager: HostManager) : TargetManager {
+    override konst target = determineCurrent()
+    override konst targetName
         get() = target.visibleName
 
     override fun list() {
         hostManager.enabled.forEach {
-            val isDefault = if (it == target) " (default)" else ""
-            val isDeprecated = if (it in KonanTarget.deprecatedTargets) " (deprecated)" else ""
+            konst isDefault = if (it == target) " (default)" else ""
+            konst isDeprecated = if (it in KonanTarget.deprecatedTargets) " (deprecated)" else ""
             println("${it.visibleName}$isDefault$isDeprecated")
         }
     }
@@ -28,7 +28,7 @@ internal class TargetManagerImpl(val userRequest: String?, val hostManager: Host
         return if (userRequest == null || userRequest == "host") {
             HostManager.host
         } else {
-            val resolvedAlias = HostManager.resolveAlias(userRequest)
+            konst resolvedAlias = HostManager.resolveAlias(userRequest)
             hostManager.targets.getValue(hostManager.known(resolvedAlias))
         }
     }

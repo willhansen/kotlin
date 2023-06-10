@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1296
 open class A {
-    val foo = "foo"
+    konst foo = "foo"
     var bar = "bar"
 
-    open val boo = "A.boo"
+    open konst boo = "A.boo"
 }
 
 class B : A() {
-    override val boo = "B.boo"
+    override konst boo = "B.boo"
 
     fun test(): String {
         var r = ""
@@ -24,7 +24,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val r = B().test()
+    konst r = B().test()
     if (r != "foo;bar;baz;A.boo;B.boo;") return "fail: $r"
 
     return "OK"

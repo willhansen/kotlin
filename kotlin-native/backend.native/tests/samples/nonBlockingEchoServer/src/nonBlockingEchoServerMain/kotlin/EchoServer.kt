@@ -16,13 +16,13 @@ fun main(args: Array<String>) {
         return
     }
 
-    val port = args[0].toShort()
+    konst port = args[0].toShort()
 
     memScoped {
 
-        val serverAddr = alloc<sockaddr_in>()
+        konst serverAddr = alloc<sockaddr_in>()
 
-        val listenFd = socket(AF_INET, SOCK_STREAM, 0)
+        konst listenFd = socket(AF_INET, SOCK_STREAM, 0)
                 .ensureUnixCallResult { !it.isMinusOne() }
 
         with(serverAddr) {
@@ -44,14 +44,14 @@ fun main(args: Array<String>) {
         var connectionId = 0
         acceptClientsAndRun(listenFd) {
             memScoped {
-                val bufferLength = 100uL
-                val buffer = allocArray<ByteVar>(bufferLength.toLong())
-                val connectionIdString = "#${++connectionId}: ".cstr
-                val connectionIdBytes = connectionIdString.ptr
+                konst bufferLength = 100uL
+                konst buffer = allocArray<ByteVar>(bufferLength.toLong())
+                konst connectionIdString = "#${++connectionId}: ".cstr
+                konst connectionIdBytes = connectionIdString.ptr
 
                 try {
                     while (true) {
-                        val length = read(buffer, bufferLength)
+                        konst length = read(buffer, bufferLength)
 
                         if (length == 0uL)
                             break
@@ -70,18 +70,18 @@ fun main(args: Array<String>) {
 sealed class WaitingFor {
     class Accept : WaitingFor()
 
-    class Read(val data: CArrayPointer<ByteVar>,
-               val length: ULong,
-               val continuation: Continuation<ULong>) : WaitingFor()
+    class Read(konst data: CArrayPointer<ByteVar>,
+               konst length: ULong,
+               konst continuation: Continuation<ULong>) : WaitingFor()
 
-    class Write(val data: CArrayPointer<ByteVar>,
-                val length: ULong,
-                val continuation: Continuation<Unit>) : WaitingFor()
+    class Write(konst data: CArrayPointer<ByteVar>,
+                konst length: ULong,
+                konst continuation: Continuation<Unit>) : WaitingFor()
 }
 
-class Client(val clientFd: Int, val waitingList: MutableMap<Int, WaitingFor>) {
+class Client(konst clientFd: Int, konst waitingList: MutableMap<Int, WaitingFor>) {
     suspend fun read(data: CArrayPointer<ByteVar>, dataLength: ULong): ULong {
-        val length = read(clientFd, data, dataLength)
+        konst length = read(clientFd, data, dataLength)
         if (length >= 0)
             return length.toULong()
         if (posix_errno() != EWOULDBLOCK)
@@ -93,7 +93,7 @@ class Client(val clientFd: Int, val waitingList: MutableMap<Int, WaitingFor>) {
     }
 
     suspend fun write(data: CArrayPointer<ByteVar>, length: ULong) {
-        val written = write(clientFd, data, length)
+        konst written = write(clientFd, data, length)
         if (written >= 0)
             return
         if (posix_errno() != EWOULDBLOCK)
@@ -105,17 +105,17 @@ class Client(val clientFd: Int, val waitingList: MutableMap<Int, WaitingFor>) {
     }
 }
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
 
 fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
     memScoped {
-        val waitingList = mutableMapOf<Int, WaitingFor>(serverFd to WaitingFor.Accept())
-        val readfds = alloc<fd_set>()
-        val writefds = alloc<fd_set>()
-        val errorfds = alloc<fd_set>()
+        konst waitingList = mutableMapOf<Int, WaitingFor>(serverFd to WaitingFor.Accept())
+        konst readfds = alloc<fd_set>()
+        konst writefds = alloc<fd_set>()
+        konst errorfds = alloc<fd_set>()
         var maxfd = serverFd
         while (true) {
             posix_FD_ZERO(readfds.ptr)
@@ -132,8 +132,8 @@ fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
             pselect(maxfd + 1, readfds.ptr, writefds.ptr, errorfds.ptr, null, null)
                     .ensureUnixCallResult { it >= 0 }
             loop@for (socketFd in 0..maxfd) {
-                val waitingFor = waitingList[socketFd]
-                val errorOccured = posix_FD_ISSET(socketFd, errorfds.ptr) != 0
+                konst waitingFor = waitingList[socketFd]
+                konst errorOccured = posix_FD_ISSET(socketFd, errorfds.ptr) != 0
                 if (posix_FD_ISSET(socketFd, readfds.ptr) != 0
 		    || posix_FD_ISSET(socketFd, writefds.ptr) != 0
 		    || errorOccured) {
@@ -143,7 +143,7 @@ fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
                                 throw Error("Socket has been closed externally")
 
                             // Accept new client.
-                            val clientFd = accept(serverFd, null, null)
+                            konst clientFd = accept(serverFd, null, null)
                             if (clientFd.isMinusOne()) {
                                 if (posix_errno() != EWOULDBLOCK)
                                     throw Error(getUnixError())
@@ -161,7 +161,7 @@ fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
 
                             // Resume reading operation.
                             waitingList.remove(socketFd)
-                            val length = read(socketFd, waitingFor.data, waitingFor.length)
+                            konst length = read(socketFd, waitingFor.data, waitingFor.length)
                             if (length < 0) // Read error.
                                 waitingFor.continuation.resumeWithException(IOException(getUnixError()))
                             waitingFor.continuation.resume(length.toULong())
@@ -172,7 +172,7 @@ fun acceptClientsAndRun(serverFd: Int, block: suspend Client.() -> Unit) {
 
                             // Resume writing operation.
                             waitingList.remove(socketFd)
-                            val written = write(socketFd, waitingFor.data, waitingFor.length)
+                            konst written = write(socketFd, waitingFor.data, waitingFor.length)
                             if (written < 0) // Write error.
                                 waitingFor.continuation.resumeWithException(IOException(getUnixError()))
                             waitingFor.continuation.resume(Unit)

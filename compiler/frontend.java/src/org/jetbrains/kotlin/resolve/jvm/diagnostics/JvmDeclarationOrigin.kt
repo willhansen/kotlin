@@ -17,20 +17,20 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind.*
 
 enum class MemberKind { FIELD, METHOD }
 
-data class RawSignature(val name: String, val desc: String, val kind: MemberKind)
+data class RawSignature(konst name: String, konst desc: String, konst kind: MemberKind)
 
 open class JvmDeclarationOrigin(
-    val originKind: JvmDeclarationOriginKind,
-    val element: PsiElement?,
-    val descriptor: DeclarationDescriptor?,
-    val parametersForJvmOverload: List<KtParameter?>? = null
+    konst originKind: JvmDeclarationOriginKind,
+    konst element: PsiElement?,
+    konst descriptor: DeclarationDescriptor?,
+    konst parametersForJvmOverload: List<KtParameter?>? = null
 ) {
     override fun toString(): String =
         if (this == NO_ORIGIN) "NO_ORIGIN" else "origin=$originKind element=${element?.javaClass?.simpleName} descriptor=$descriptor"
 
     companion object {
         @JvmField
-        val NO_ORIGIN: JvmDeclarationOrigin = JvmDeclarationOrigin(OTHER, null, null)
+        konst NO_ORIGIN: JvmDeclarationOrigin = JvmDeclarationOrigin(OTHER, null, null)
     }
 }
 
@@ -77,7 +77,7 @@ fun SamDelegation(descriptor: FunctionDescriptor): JvmDeclarationOrigin = JvmDec
 fun Synthetic(element: PsiElement?, descriptor: DeclarationDescriptor): JvmDeclarationOrigin =
     JvmDeclarationOrigin(SYNTHETIC, element, descriptor)
 
-val CollectionStub = JvmDeclarationOrigin(COLLECTION_STUB, null, null)
+konst CollectionStub = JvmDeclarationOrigin(COLLECTION_STUB, null, null)
 
 fun AugmentedBuiltInApi(descriptor: CallableDescriptor): JvmDeclarationOrigin =
     JvmDeclarationOrigin(AUGMENTED_BUILTIN_API, null, descriptor)

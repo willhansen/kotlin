@@ -18,7 +18,7 @@ class JvmFileFacadeClass(
     origin: IrDeclarationOrigin,
     name: Name,
     source: SourceElement,
-    private val deserializeIr: (IrClass) -> Boolean,
+    private konst deserializeIr: (IrClass) -> Boolean,
 ) : IrClassImpl(
     UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin,
     IrClassSymbolImpl(), name, ClassKind.CLASS, DescriptorVisibilities.PUBLIC, Modality.FINAL,

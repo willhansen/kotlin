@@ -1,5 +1,5 @@
 package lib
 
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 inline fun a() = A("OK")

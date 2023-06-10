@@ -26,7 +26,7 @@ abstract class AbstractFrontendModularizedTest : AbstractModularizedTest() {
         configureFlags: MutableMap<AnalysisFlag<*>, Any?>.() -> Unit = {},
         configureFeatures: MutableMap<LanguageFeature, LanguageFeature.State>.() -> Unit = {}
     ) {
-        val originalArguments = moduleData.arguments as? K2JVMCompilerArguments
+        konst originalArguments = moduleData.arguments as? K2JVMCompilerArguments
 
         configuration.languageVersionSettings = LanguageVersionSettingsImpl(
             languageVersion,
@@ -49,14 +49,14 @@ abstract class AbstractFrontendModularizedTest : AbstractModularizedTest() {
     fun createDefaultConfiguration(
         moduleData: ModuleData
     ): CompilerConfiguration {
-        val configuration = KotlinTestUtils.newConfiguration()
-        val originalArguments = moduleData.arguments as? K2JVMCompilerArguments
+        konst configuration = KotlinTestUtils.newConfiguration()
+        konst originalArguments = moduleData.arguments as? K2JVMCompilerArguments
 
         moduleData.javaSourceRoots.forEach {
             configuration.addJavaSourceRoot(it.path, it.packagePrefix)
         }
 
-        val isJava9Module = moduleData.javaSourceRoots.any { (file, packagePrefix) ->
+        konst isJava9Module = moduleData.javaSourceRoots.any { (file, packagePrefix) ->
             packagePrefix == null &&
                     (file.name == PsiJavaModule.MODULE_INFO_FILE ||
                             (file.isDirectory && file.listFiles()!!.any { it.name == PsiJavaModule.MODULE_INFO_FILE }))
@@ -69,7 +69,7 @@ abstract class AbstractFrontendModularizedTest : AbstractModularizedTest() {
             configuration.add(CLIConfigurationKeys.CONTENT_ROOTS, JvmClasspathRoot(rootPath))
         }
 
-        val jdkHome =
+        konst jdkHome =
             moduleData.modularJdkRoot
                 ?: moduleData.jdkHome?.absoluteFile
                 ?: originalArguments?.jdkHome?.fixPath()?.absoluteFile

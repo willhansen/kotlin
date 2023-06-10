@@ -30,7 +30,7 @@ fun inLongRange3(x: Long) = x in 1L until 10L
 fun inLongRange4(x: Long) = 1L.rangeTo(10L).contains(x)
 
 fun check(x: Int, inRangeTo: Boolean, inUntil: Boolean): String? {
-    val p = if (inRangeTo) "!" else ""
+    konst p = if (inRangeTo) "!" else ""
     if (inRange(x) != inRangeTo) return "fail: $x ${p}in 1..10"
     if (inRange2(x) != inRangeTo) return "fail: $x ${p}in 1.rangeTo(10)"
     if (inRange4(x) != inRangeTo) return "fail: ${p}1.rangeTo(10).contains($x)"
@@ -41,7 +41,7 @@ fun check(x: Int, inRangeTo: Boolean, inUntil: Boolean): String? {
 }
 
 fun check(x: Long, inRangeTo: Boolean, inUntil: Boolean): String? {
-    val p = if (inRangeTo) "!" else ""
+    konst p = if (inRangeTo) "!" else ""
     if (inLongRange(x) != inRangeTo) return "fail: ${x}L ${p}in 1L..10L"
     if (inLongRange2(x) != inRangeTo) return "fail: ${x}L ${p}in 1L.rangeTo(10L)"
     if (inLongRange4(x) != inRangeTo) return "fail: ${p}1L.rangeTo(10L).contains(${x}L)"

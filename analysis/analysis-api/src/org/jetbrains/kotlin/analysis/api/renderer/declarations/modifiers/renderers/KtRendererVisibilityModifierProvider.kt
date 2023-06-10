@@ -20,7 +20,7 @@ public interface KtRendererVisibilityModifierProvider {
     public fun onlyIf(
         condition: context(KtAnalysisSession) (symbol: KtSymbolWithVisibility) -> Boolean
     ): KtRendererVisibilityModifierProvider {
-        val self = this
+        konst self = this
         return object : KtRendererVisibilityModifierProvider {
             context(KtAnalysisSession)
             override fun getVisibilityModifier(symbol: KtSymbolWithVisibility): KtModifierKeywordToken? =

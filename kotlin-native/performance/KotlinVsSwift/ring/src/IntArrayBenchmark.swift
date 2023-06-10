@@ -50,8 +50,8 @@ class IntArrayBenchmark {
         var list: [String] = []
         for it in data {
             if (filterLoad(it)) {
-                let value = mapLoad(it)
-                list.append(value)
+                let konstue = mapLoad(it)
+                list.append(konstue)
             }
         }
         return list

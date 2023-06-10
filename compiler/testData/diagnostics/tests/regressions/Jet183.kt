@@ -12,5 +12,5 @@ enum class ProtocolState {
 }
 
 fun box() {
-   val x: ProtocolState = ProtocolState.WAITING
+   konst x: ProtocolState = ProtocolState.WAITING
 }

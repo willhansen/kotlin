@@ -14,19 +14,19 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.*
 import java.io.File
 
-class CompiledClassesManager(val testServices: TestServices) : TestService {
-    private val compiledKotlinCache = mutableMapOf<TestModule, File>()
-    private val compiledJavaCache = mutableMapOf<TestModule, File>()
+class CompiledClassesManager(konst testServices: TestServices) : TestService {
+    private konst compiledKotlinCache = mutableMapOf<TestModule, File>()
+    private konst compiledJavaCache = mutableMapOf<TestModule, File>()
 
     fun getCompiledKotlinDirForModule(module: TestModule, classFileFactory: ClassFileFactory? = null): File {
         return compiledKotlinCache.getOrPut(module) {
-            val outputDir = testServices.getOrCreateTempDirectory("module_${module.name}_kotlin-classes")
+            konst outputDir = testServices.getOrCreateTempDirectory("module_${module.name}_kotlin-classes")
 
             @Suppress("NAME_SHADOWING")
-            val classFileFactory = classFileFactory
+            konst classFileFactory = classFileFactory
                 ?: testServices.dependencyProvider.getArtifact(module, ArtifactKinds.Jvm).classFileFactory
-            val outputFileCollection = SimpleOutputFileCollection(classFileFactory.currentOutput)
-            val messageCollector = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+            konst outputFileCollection = SimpleOutputFileCollection(classFileFactory.currentOutput)
+            konst messageCollector = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
                 .getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
             outputFileCollection.writeAll(outputDir, messageCollector, reportOutputFiles = false)
             outputDir
@@ -44,4 +44,4 @@ class CompiledClassesManager(val testServices: TestServices) : TestService {
     }
 }
 
-val TestServices.compiledClassesManager: CompiledClassesManager by TestServices.testServiceAccessor()
+konst TestServices.compiledClassesManager: CompiledClassesManager by TestServices.testServiceAccessor()

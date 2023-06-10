@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.backend.konan.driver.PhaseEngine
 import org.jetbrains.kotlin.backend.konan.firSerializer
 import org.jetbrains.kotlin.backend.konan.fir2IrSerializer
 
-internal val FirSerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, FirOutput, SerializerOutput?>(
+internal konst FirSerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, FirOutput, SerializerOutput?>(
         "FirSerializer", "Fir serializer",
         outputIfNotEnabled = { _, _, _, _ -> SerializerOutput(null, null, null, listOf()) }
 ) { context: PhaseContext, input: FirOutput ->
     context.firSerializer(input)
 }
 
-internal val Fir2IrSerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, Fir2IrOutput, SerializerOutput>(
+internal konst Fir2IrSerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, Fir2IrOutput, SerializerOutput>(
         "Fir2IrSerializer", "Fir2Ir serializer",
         outputIfNotEnabled = { _, _, _, _ -> SerializerOutput(null, null, null, listOf()) }
 ) { context: PhaseContext, input: Fir2IrOutput ->

@@ -7,7 +7,7 @@
 // 0 java/lang/invoke/LambdaMetafactory
 // 1 class GenericFunInterfaceWithInlineAnyKt\$box\$t\$1
 
-inline class Z(val value: Any)
+inline class Z(konst konstue: Any)
 
 fun interface IFoo<T> {
     fun foo(x: T): T
@@ -16,8 +16,8 @@ fun interface IFoo<T> {
 fun foo1(fs: IFoo<Z>) = fs.foo(Z(1))
 
 fun box(): String {
-    val t = foo1 { Z((it.value as Int) + 41) }
-    if (t.value != 42) return "Failed: t=$t"
+    konst t = foo1 { Z((it.konstue as Int) + 41) }
+    if (t.konstue != 42) return "Failed: t=$t"
 
     return "OK"
 }

@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.light.classes.symbol.classes.SymbolLightClassBase
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 internal abstract class SymbolLightMemberBase<T : PsiMember>(
-    override val lightMemberOrigin: LightMemberOrigin?,
-    private val containingClass: SymbolLightClassBase,
+    override konst lightMemberOrigin: LightMemberOrigin?,
+    private konst containingClass: SymbolLightClassBase,
 ) : KtLightElementBase(containingClass), PsiMember, KtLightMember<T> {
-    val ktModule: KtModule get() = containingClass.ktModule
+    konst ktModule: KtModule get() = containingClass.ktModule
 
     override fun hasModifierProperty(name: String): Boolean = modifierList?.hasModifierProperty(name) ?: false
 
@@ -31,7 +31,7 @@ internal abstract class SymbolLightMemberBase<T : PsiMember>(
 
     abstract override fun getNameIdentifier(): PsiIdentifier?
 
-    override val kotlinOrigin: KtDeclaration? get() = lightMemberOrigin?.originalElement
+    override konst kotlinOrigin: KtDeclaration? get() = lightMemberOrigin?.originalElement
 
     override fun getDocComment(): PsiDocComment? = null //TODO()
 
@@ -41,7 +41,7 @@ internal abstract class SymbolLightMemberBase<T : PsiMember>(
 
     override fun isValid(): Boolean = parent.isValid && lightMemberOrigin?.isValid() != false
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean = basicIsEquivalentTo(this, another as? PsiMethod)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean = basicIsEquikonstentTo(this, another as? PsiMethod)
 
     abstract override fun hashCode(): Int
 

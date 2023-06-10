@@ -3,12 +3,12 @@ CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB ENUM_CLASS name:JEnum modality:FINAL vis
   ENUM_ENTRY IR_EXTERNAL_JAVA_DECLARATION_STUB name:ONE
   ENUM_ENTRY IR_EXTERNAL_JAVA_DECLARATION_STUB name:TWO
   ENUM_ENTRY IR_EXTERNAL_JAVA_DECLARATION_STUB name:THREE
-  FUN IR_EXTERNAL_JAVA_DECLARATION_STUB name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.JEnum>
-  FUN IR_EXTERNAL_JAVA_DECLARATION_STUB name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.JEnum
-    VALUE_PARAMETER name:value index:0 type:kotlin.String
-  PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:entries visibility:public modality:FINAL [val]
+  FUN IR_EXTERNAL_JAVA_DECLARATION_STUB name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.JEnum>
+  FUN IR_EXTERNAL_JAVA_DECLARATION_STUB name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.JEnum
+    VALUE_PARAMETER name:konstue index:0 type:kotlin.String
+  PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:entries visibility:public modality:FINAL [konst]
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.JEnum>
-      correspondingProperty: PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:entries visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY IR_EXTERNAL_JAVA_DECLARATION_STUB name:entries visibility:public modality:FINAL [konst]
   FUN FAKE_OVERRIDE name:clone visibility:protected modality:FINAL <> ($this:<root>.JEnum) returnType:kotlin.Any [fake_override]
     overridden:
       protected final fun clone (): kotlin.Any declared in kotlin.Enum
@@ -31,23 +31,23 @@ CLASS IR_EXTERNAL_JAVA_DECLARATION_STUB ENUM_CLASS name:JEnum modality:FINAL vis
     overridden:
       public open fun toString (): kotlin.String declared in kotlin.Enum
     $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:<root>.JEnum
-  PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+  PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
     annotations:
-      IntrinsicConstEvaluation
+      IntrinsicConstEkonstuation
     overridden:
-      public final name: kotlin.String [val]
+      public final name: kotlin.String [konst]
     FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:<root>.JEnum) returnType:kotlin.String [fake_override]
       annotations:
-        IntrinsicConstEvaluation
-      correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        IntrinsicConstEkonstuation
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final fun <get-name> (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:<root>.JEnum
-  PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+  PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
     overridden:
-      public final ordinal: kotlin.Int [val]
+      public final ordinal: kotlin.Int [konst]
     FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:<root>.JEnum) returnType:kotlin.Int [fake_override]
-      correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+      correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
       $this: VALUE_PARAMETER FAKE_OVERRIDE name:<this> type:<root>.JEnum

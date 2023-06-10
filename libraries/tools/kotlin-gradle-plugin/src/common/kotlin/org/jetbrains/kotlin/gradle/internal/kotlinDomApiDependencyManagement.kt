@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrCompilation
 import org.jetbrains.kotlin.gradle.targets.js.npm.SemVer
 
-private const val KOTLIN_DOM_API_MODULE_NAME = "kotlin-dom-api-compat"
+private const konst KOTLIN_DOM_API_MODULE_NAME = "kotlin-dom-api-compat"
 
-private val Dependency.isKotlinDomApiDependency: Boolean
+private konst Dependency.isKotlinDomApiDependency: Boolean
     get() = group == KOTLIN_MODULE_GROUP && (name == KOTLIN_DOM_API_MODULE_NAME)
 
-private val kotlin190Version = SemVer(1.toBigInteger(), 9.toBigInteger(), 0.toBigInteger())
+private konst kotlin190Version = SemVer(1.toBigInteger(), 9.toBigInteger(), 0.toBigInteger())
 
 private fun isAtLeast1_9_0(version: String) = SemVer.fromGradleRichVersion(version) >= kotlin190Version
 
@@ -63,7 +63,7 @@ private fun addKotlinDomApiToKpmProject(
             when (variant.platformType) {
                 KotlinPlatformType.common -> error("variants are not expected to be common")
                 KotlinPlatformType.js -> {
-                    val dependencyHandler = project.dependencies
+                    konst dependencyHandler = project.dependencies
                     variant.dependencies {
                         api(dependencyHandler.kotlinDomApiDependency(coreLibrariesVersion.get()))
                     }
@@ -88,13 +88,13 @@ private fun KotlinTarget.addKotlinDomApiDependency(
         if (compilation !is KotlinJsIrCompilation) return@configureEach
 
         compilation.allKotlinSourceSets.forEach { kotlinSourceSet ->
-            val scopeConfiguration = configurations
+            konst scopeConfiguration = configurations
                 .sourceSetDependencyConfigurationByScope(kotlinSourceSet, KotlinDependencyScope.API_SCOPE)
 
             scopeConfiguration.withDependencies { dependencySet ->
                 if (isKotlinDomApiAddedByUser(configurations, kotlinSourceSet)) return@withDependencies
 
-                val stdlibDependency = KotlinDependencyScope.values()
+                konst stdlibDependency = KotlinDependencyScope.konstues()
                     .map { scope ->
                         configurations.sourceSetDependencyConfigurationByScope(kotlinSourceSet, scope)
                     }
@@ -104,7 +104,7 @@ private fun KotlinTarget.addKotlinDomApiDependency(
                     }
 
                 if (stdlibDependency != null) {
-                    val depVersion = stdlibDependency.version ?: coreLibrariesVersion.get()
+                    konst depVersion = stdlibDependency.version ?: coreLibrariesVersion.get()
                     if (!isAtLeast1_9_0(depVersion)) return@withDependencies
                 }
 
@@ -127,7 +127,7 @@ private fun isKotlinDomApiAddedByUser(
     return sourceSets
         .asSequence()
         .flatMap { sourceSet ->
-            KotlinDependencyScope.values().map { scope ->
+            KotlinDependencyScope.konstues().map { scope ->
                 configurations.sourceSetDependencyConfigurationByScope(sourceSet, scope)
             }.asSequence()
         }

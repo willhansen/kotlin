@@ -8,8 +8,8 @@
 // with compiler built from your changes if you are not sure.
 
 object Host {
-    const val M = 1
-    const val N = 4
+    const konst M = 1
+    const konst N = 4
 }
 
 fun test(): Int {

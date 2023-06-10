@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirStarProjectionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
 ) : FirStarProjection() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

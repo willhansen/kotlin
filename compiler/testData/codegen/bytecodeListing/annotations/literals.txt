@@ -1,23 +1,23 @@
 @kotlin.annotation.Target(allowedTargets=[CLASS])
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Target(value=[TYPE])
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Target(konstue=[TYPE])
 @kotlin.Metadata
 public annotation class ClsAnn {
     // source: 'literals.kt'
 }
 
 @kotlin.annotation.Target(allowedTargets=[EXPRESSION])
-@kotlin.annotation.Retention(value=SOURCE)
-@java.lang.annotation.Retention(value=SOURCE)
-@java.lang.annotation.Target(value=[])
+@kotlin.annotation.Retention(konstue=SOURCE)
+@java.lang.annotation.Retention(konstue=SOURCE)
+@java.lang.annotation.Target(konstue=[])
 @kotlin.Metadata
 public annotation class ExprAnn {
     // source: 'literals.kt'
 }
 
 @kotlin.annotation.Target(allowedTargets=[FUNCTION])
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Target(value=[METHOD])
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Target(konstue=[METHOD])
 @kotlin.Metadata
 public annotation class FunAnn {
     // source: 'literals.kt'

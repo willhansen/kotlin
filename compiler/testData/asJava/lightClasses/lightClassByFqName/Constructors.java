@@ -1,5 +1,5 @@
 public final class Constructors /* Constructors*/ {
-  private final int valInPrimary;
+  private final int konstInPrimary;
 
   private  Constructors();//  .ctor()
 

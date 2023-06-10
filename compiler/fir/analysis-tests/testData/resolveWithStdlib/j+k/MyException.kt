@@ -12,17 +12,17 @@ class MyException : Exception()
 fun test(e: MyException, stream: PrintStream) {
     e.printStackTrace() // Cannot be resolved with early J2K mapping due deriving of kotlin.Throwable instead of java.lang.Throwable
     e.printStackTrace(stream)
-    val result = e.getLocalizedMessage()
+    konst result = e.getLocalizedMessage()
 }
 
 fun test(<!EXPOSED_PARAMETER_TYPE!>e: YourException<!>, stream: PrintStream) {
     e.printStackTrace()
     e.printStackTrace(stream)
-    val result = e.getLocalizedMessage()
+    konst result = e.getLocalizedMessage()
 }
 
 fun test(e: Exception, stream: PrintStream) {
     e.printStackTrace()
     e.printStackTrace(stream)
-    val result = e.getLocalizedMessage()
+    konst result = e.getLocalizedMessage()
 }

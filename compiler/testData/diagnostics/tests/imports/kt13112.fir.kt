@@ -24,7 +24,7 @@ import anotherpackage.IInterfaceOutput
 
 class Foo() {
     class FooNest {
-        val bar = Bar()
+        konst bar = Bar()
 
         fun myFun(): List<Baz> {
             return <!UNRESOLVED_REFERENCE!>listOf<!>(bar.doSomething())
@@ -43,4 +43,4 @@ class Bar() : IInterfaceInput<Baz>, IInterfaceOutput<Baz> {
 
 }
 
-data class Baz(val myField: Int)
+data class Baz(konst myField: Int)

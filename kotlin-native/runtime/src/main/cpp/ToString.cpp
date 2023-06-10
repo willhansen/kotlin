@@ -28,30 +28,30 @@
 
 namespace {
 
-char int_to_digit(uint32_t value) {
-  if (value < 10) {
-    return '0' + value;
+char int_to_digit(uint32_t konstue) {
+  if (konstue < 10) {
+    return '0' + konstue;
   } else {
-    return 'a' + (value - 10);
+    return 'a' + (konstue - 10);
   }
 }
 
 // Radix is checked on the Kotlin side.
-template <typename T> OBJ_GETTER(Kotlin_toStringRadix, T value, KInt radix) {
-  if (value == 0) {
+template <typename T> OBJ_GETTER(Kotlin_toStringRadix, T konstue, KInt radix) {
+  if (konstue == 0) {
     RETURN_RESULT_OF(CreateStringFromCString, "0");
   }
   // In the worst case, we convert to binary, with sign.
   char cstring[sizeof(T) * CHAR_BIT + 2];
-  bool negative = (value < 0);
+  bool negative = (konstue < 0);
   if  (!negative) {
-    value = -value;
+    konstue = -konstue;
   }
 
   int32_t length = 0;
-  while (value < 0) {
-    cstring[length++] = int_to_digit(-(value % radix));
-    value /= radix;
+  while (konstue < 0) {
+    cstring[length++] = int_to_digit(-(konstue % radix));
+    konstue /= radix;
   }
   if (negative) {
     cstring[length++] = '-';
@@ -69,47 +69,47 @@ template <typename T> OBJ_GETTER(Kotlin_toStringRadix, T value, KInt radix) {
 
 extern "C" {
 
-OBJ_GETTER(Kotlin_Byte_toString, KByte value) {
+OBJ_GETTER(Kotlin_Byte_toString, KByte konstue) {
   char cstring[8];
-  konan::snprintf(cstring, sizeof(cstring), "%d", value);
+  konan::snprintf(cstring, sizeof(cstring), "%d", konstue);
   RETURN_RESULT_OF(CreateStringFromCString, cstring);
 }
 
-OBJ_GETTER(Kotlin_Char_toString, KChar value) {
+OBJ_GETTER(Kotlin_Char_toString, KChar konstue) {
   ArrayHeader* result = AllocArrayInstance(theStringTypeInfo, 1, OBJ_RESULT)->array();
-  *CharArrayAddressOfElementAt(result, 0) = value;
+  *CharArrayAddressOfElementAt(result, 0) = konstue;
   RETURN_OBJ(result->obj());
 }
 
-OBJ_GETTER(Kotlin_Short_toString, KShort value) {
+OBJ_GETTER(Kotlin_Short_toString, KShort konstue) {
   char cstring[8];
-  konan::snprintf(cstring, sizeof(cstring), "%d", value);
+  konan::snprintf(cstring, sizeof(cstring), "%d", konstue);
   RETURN_RESULT_OF(CreateStringFromCString, cstring);
 }
 
-OBJ_GETTER(Kotlin_Int_toString, KInt value) {
+OBJ_GETTER(Kotlin_Int_toString, KInt konstue) {
   char cstring[16];
-  konan::snprintf(cstring, sizeof(cstring), "%d", value);
+  konan::snprintf(cstring, sizeof(cstring), "%d", konstue);
   RETURN_RESULT_OF(CreateStringFromCString, cstring);
 }
 
-OBJ_GETTER(Kotlin_Int_toStringRadix, KInt value, KInt radix) {
-  RETURN_RESULT_OF(Kotlin_toStringRadix<KInt>, value, radix)
+OBJ_GETTER(Kotlin_Int_toStringRadix, KInt konstue, KInt radix) {
+  RETURN_RESULT_OF(Kotlin_toStringRadix<KInt>, konstue, radix)
 }
 
-OBJ_GETTER(Kotlin_Long_toString, KLong value) {
+OBJ_GETTER(Kotlin_Long_toString, KLong konstue) {
   char cstring[32];
-  konan::snprintf(cstring, sizeof(cstring), "%lld", static_cast<long long>(value));
+  konan::snprintf(cstring, sizeof(cstring), "%lld", static_cast<long long>(konstue));
   RETURN_RESULT_OF(CreateStringFromCString, cstring);
 }
 
-OBJ_GETTER(Kotlin_Long_toStringRadix, KLong value, KInt radix) {
-  RETURN_RESULT_OF(Kotlin_toStringRadix<KLong>, value, radix)
+OBJ_GETTER(Kotlin_Long_toStringRadix, KLong konstue, KInt radix) {
+  RETURN_RESULT_OF(Kotlin_toStringRadix<KLong>, konstue, radix)
 }
 
-OBJ_GETTER(Kotlin_DurationValue_formatToExactDecimals, KDouble value, KInt decimals) {
+OBJ_GETTER(Kotlin_DurationValue_formatToExactDecimals, KDouble konstue, KInt decimals) {
   char cstring[40]; // log(2^62*1_000_000) + 2 (sign, decimal point) + 12 (max decimals)
-  konan::snprintf(cstring, sizeof(cstring), "%.*f", decimals, value);
+  konan::snprintf(cstring, sizeof(cstring), "%.*f", decimals, konstue);
   RETURN_RESULT_OF(CreateStringFromCString, cstring)
 }
 

@@ -17,8 +17,8 @@ fun ProtoBuf.Annotation.readAnnotation(strings: NameResolver): KmAnnotation =
     KmAnnotation(
         strings.getClassName(id),
         argumentList.mapNotNull { argument ->
-            argument.value.readAnnotationArgument(strings)?.let { value ->
-                strings.getString(argument.nameId) to value
+            argument.konstue.readAnnotationArgument(strings)?.let { konstue ->
+                strings.getString(argument.nameId) to konstue
             }
         }.toMap()
     )
@@ -30,7 +30,7 @@ fun ProtoBuf.Annotation.Argument.Value.readAnnotationArgument(strings: NameResol
             SHORT -> KmAnnotationArgument.UShortValue(intValue.toShort().toUShort())
             INT -> KmAnnotationArgument.UIntValue(intValue.toInt().toUInt())
             LONG -> KmAnnotationArgument.ULongValue(intValue.toULong())
-            else -> error("Cannot read value of unsigned type: $type")
+            else -> error("Cannot read konstue of unsigned type: $type")
         }
     }
 
@@ -58,6 +58,6 @@ fun ProtoBuf.Annotation.Argument.Value.readAnnotationArgument(strings: NameResol
 }
 
 internal fun NameResolver.getClassName(index: Int): ClassName {
-    val name = getQualifiedClassName(index)
+    konst name = getQualifiedClassName(index)
     return if (isLocalClassName(index)) ".$name" else name
 }

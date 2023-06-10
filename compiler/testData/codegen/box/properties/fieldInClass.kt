@@ -1,5 +1,5 @@
 class My {
-    val my: String = "O"
+    konst my: String = "O"
         get() = field + "K"
 }
 

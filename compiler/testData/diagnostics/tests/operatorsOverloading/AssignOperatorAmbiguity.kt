@@ -2,7 +2,7 @@
 //KT-1820 Write test for ASSIGN_OPERATOR_AMBIGUITY
 package kt1820
 
-class MyInt(val i: Int) {
+class MyInt(konst i: Int) {
     operator fun plus(m: MyInt) : MyInt = MyInt(m.i + i)
 }
 

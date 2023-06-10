@@ -13,18 +13,18 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
  */
 class FlexiblePhaseConfig(
     disabled: Set<String>,
-    private val verbose: Set<String>,
-    private val toDumpStateBefore: PhaseSet,
-    private val toDumpStateAfter: PhaseSet,
-    private val toValidateStateBefore: PhaseSet,
-    private val toValidateStateAfter: PhaseSet,
-    override val dumpToDirectory: String? = null,
-    override val dumpOnlyFqName: String? = null,
-    override val needProfiling: Boolean = false,
-    override val checkConditions: Boolean = false,
-    override val checkStickyConditions: Boolean = false
+    private konst verbose: Set<String>,
+    private konst toDumpStateBefore: PhaseSet,
+    private konst toDumpStateAfter: PhaseSet,
+    private konst toValidateStateBefore: PhaseSet,
+    private konst toValidateStateAfter: PhaseSet,
+    override konst dumpToDirectory: String? = null,
+    override konst dumpOnlyFqName: String? = null,
+    override konst needProfiling: Boolean = false,
+    override konst checkConditions: Boolean = false,
+    override konst checkStickyConditions: Boolean = false
 ) : PhaseConfigurationService {
-    private val disabledMut = disabled.toMutableSet()
+    private konst disabledMut = disabled.toMutableSet()
 
     override fun isEnabled(phase: AnyNamedPhase): Boolean =
         phase.name !in disabledMut
@@ -54,7 +54,7 @@ sealed class PhaseSet {
 
     abstract operator fun plus(phaseSet: PhaseSet): PhaseSet
 
-    class Enum(val phases: Set<String>) : PhaseSet() {
+    class Enum(konst phases: Set<String>) : PhaseSet() {
         override fun contains(phase: AnyNamedPhase): Boolean =
             phase.name.toLowerCaseAsciiOnly() in phases
 

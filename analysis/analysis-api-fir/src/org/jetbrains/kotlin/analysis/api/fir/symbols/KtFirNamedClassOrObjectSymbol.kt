@@ -29,18 +29,18 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirNamedClassOrObjectSymbol(
-    override val firSymbol: FirRegularClassSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirRegularClassSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtFirNamedClassOrObjectSymbolBase() {
-    override val token: KtLifetimeToken get() = builder.token
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
 
-    override val classIdIfNonLocal: ClassId?
+    override konst classIdIfNonLocal: ClassId?
         get() = withValidityAssertion { firSymbol.getClassIdIfNonLocal() }
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion {
             firSymbol.optionallyResolvedStatus.modality
                 ?: when (classKind) { // default modality
@@ -49,16 +49,16 @@ internal class KtFirNamedClassOrObjectSymbol(
                 }
         }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion {
             // TODO: We should use resolvedStatus, because it can be altered by status-transforming compiler plugins. See KT-58572
-            when (val possiblyRawVisibility = firSymbol.fir.visibility) {
+            when (konst possiblyRawVisibility = firSymbol.fir.visibility) {
                 Visibilities.Unknown -> if (firSymbol.fir.isLocal) Visibilities.Local else Visibilities.Public
                 else -> possiblyRawVisibility
             }
         }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -66,31 +66,31 @@ internal class KtFirNamedClassOrObjectSymbol(
         )
     }
 
-    override val isInner: Boolean get() = withValidityAssertion { firSymbol.isInner }
-    override val isData: Boolean get() = withValidityAssertion { firSymbol.isData }
-    override val isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
-    override val isFun: Boolean get() = withValidityAssertion { firSymbol.isFun }
-    override val isExternal: Boolean get() = withValidityAssertion { firSymbol.isExternal }
+    override konst isInner: Boolean get() = withValidityAssertion { firSymbol.isInner }
+    override konst isData: Boolean get() = withValidityAssertion { firSymbol.isData }
+    override konst isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
+    override konst isFun: Boolean get() = withValidityAssertion { firSymbol.isFun }
+    override konst isExternal: Boolean get() = withValidityAssertion { firSymbol.isExternal }
 
-    override val contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { firSymbol.createContextReceivers(builder) }
+    override konst contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { firSymbol.createContextReceivers(builder) }
 
-    override val companionObject: KtFirNamedClassOrObjectSymbol? by cached {
+    override konst companionObject: KtFirNamedClassOrObjectSymbol? by cached {
         firSymbol.companionObjectSymbol?.let {
             builder.classifierBuilder.buildNamedClassOrObjectSymbol(it)
         }
     }
 
-    override val typeParameters = withValidityAssertion {
+    override konst typeParameters = withValidityAssertion {
         firSymbol.createRegularKtTypeParameters(builder)
     }
 
     @OptIn(KtAnalysisApiInternals::class)
-    override val classKind: KtClassKind
+    override konst classKind: KtClassKind
         get() = withValidityAssertion {
             firSymbol.classKind.toKtClassKind(isCompanionObject = firSymbol.isCompanion)
         }
 
-    override val symbolKind: KtSymbolKind get() = withValidityAssertion { getSymbolKind() }
+    override konst symbolKind: KtSymbolKind get() = withValidityAssertion { getSymbolKind() }
 
     /**
      * We can use [FirRegularClassSymbol.rawStatus] to avoid unnecessary resolve unless there are status transformers present.
@@ -99,13 +99,13 @@ internal class KtFirNamedClassOrObjectSymbol(
      *
      * TODO This optimization should become obsolete after KT-56551 is fixed.
      */
-    private val FirRegularClassSymbol.optionallyResolvedStatus: FirDeclarationStatus
+    private konst FirRegularClassSymbol.optionallyResolvedStatus: FirDeclarationStatus
         get() = if (statusTransformersPresent) {
             resolvedStatus
         } else {
             rawStatus
         }
 
-    private val statusTransformersPresent: Boolean
+    private konst statusTransformersPresent: Boolean
         get() = analysisSession.useSiteSession.extensionService.statusTransformerExtensions.isNotEmpty()
 }

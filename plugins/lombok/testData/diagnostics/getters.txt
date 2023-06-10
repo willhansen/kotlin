@@ -7,8 +7,8 @@ public open class GetterTest {
     public constructor GetterTest()
     @lombok.Getter private final var age: kotlin.Int
     @lombok.Getter private final var boxedBoolean: kotlin.Boolean!
-    @lombok.Getter(value = AccessLevel.NONE) private final var invisible: kotlin.Boolean!
-    @lombok.Getter(value = AccessLevel.PROTECTED) private final var name: kotlin.String!
+    @lombok.Getter(konstue = AccessLevel.NONE) private final var invisible: kotlin.Boolean!
+    @lombok.Getter(konstue = AccessLevel.PROTECTED) private final var name: kotlin.String!
     @lombok.Getter private final var primitiveBoolean: kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open /*synthesized*/ fun getAge(): kotlin.Int
@@ -24,8 +24,8 @@ public final class OverridenGetterTest : GetterTest {
     public constructor OverridenGetterTest()
     @lombok.Getter invisible_fake final override /*1*/ /*fake_override*/ var age: kotlin.Int
     @lombok.Getter invisible_fake final override /*1*/ /*fake_override*/ var boxedBoolean: kotlin.Boolean!
-    @lombok.Getter(value = AccessLevel.NONE) invisible_fake final override /*1*/ /*fake_override*/ var invisible: kotlin.Boolean!
-    @lombok.Getter(value = AccessLevel.PROTECTED) invisible_fake final override /*1*/ /*fake_override*/ var name: kotlin.String!
+    @lombok.Getter(konstue = AccessLevel.NONE) invisible_fake final override /*1*/ /*fake_override*/ var invisible: kotlin.Boolean!
+    @lombok.Getter(konstue = AccessLevel.PROTECTED) invisible_fake final override /*1*/ /*fake_override*/ var name: kotlin.String!
     @lombok.Getter invisible_fake final override /*1*/ /*fake_override*/ var primitiveBoolean: kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun getAge(): kotlin.Int

@@ -10,19 +10,19 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 object X {
-    var value: Int = 0
+    var konstue: Int = 0
 }
 
 @Test fun runTest() {
     if (Platform.memoryModel == MemoryModel.STRICT) {
         assertTrue(X.isFrozen)
-        assertFailsWith<InvalidMutabilityException> {
-            X.value = 42
+        assertFailsWith<InkonstidMutabilityException> {
+            X.konstue = 42
         }
-        assertEquals(0, X.value)
+        assertEquals(0, X.konstue)
     } else {
         assertFalse(X.isFrozen)
-        X.value = 42
-        assertEquals(42, X.value)
+        X.konstue = 42
+        assertEquals(42, X.konstue)
     }
 }

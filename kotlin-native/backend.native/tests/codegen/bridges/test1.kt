@@ -21,7 +21,7 @@ open class B : A() {
 }
 
 @Test fun runTest() {
-    val z1: A = B()
+    konst z1: A = B()
     println((z1.foo(1) + 1000).toString())
 }
 

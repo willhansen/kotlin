@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-open class Base(val x: Int, val y: Int)
+open class Base(konst x: Int, konst y: Int)
 
 class Test1(xx: Int, yy: Int) : Base(y = yy, x = xx)
 

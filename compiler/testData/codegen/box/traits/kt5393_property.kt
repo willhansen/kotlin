@@ -3,7 +3,7 @@ var result = "Fail"
 interface A {
     var foo: String
         get() = result
-        set(value) { result = value }
+        set(konstue) { result = konstue }
 }
 
 interface B : A
@@ -11,7 +11,7 @@ interface B : A
 class C : B {
     override var foo: String
         get() = super.foo
-        set(value) { super.foo = value }
+        set(konstue) { super.foo = konstue }
 }
 
 fun box(): String {

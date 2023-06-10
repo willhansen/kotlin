@@ -19,7 +19,7 @@ enum class C : Base {
 object D : Base
 
 fun test_1(base: Base) {
-    val x = when (base) {
+    konst x = when (base) {
         is A -> 1
         is B -> 2
         is C -> 3
@@ -28,7 +28,7 @@ fun test_1(base: Base) {
 }
 
 fun test_2(base: Base) {
-    val x = when (base) {
+    konst x = when (base) {
         is A -> 1
         is B.First -> 2
         is B.Second -> 3

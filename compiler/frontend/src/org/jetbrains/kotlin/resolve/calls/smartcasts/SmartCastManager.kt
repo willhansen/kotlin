@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.types.typeUtil.expandIntersectionTypeIfNecessary
 import org.jetbrains.kotlin.util.slicedMap.WritableSlice
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
+class SmartCastManager(private konst argumentTypeResolver: ArgumentTypeResolver) {
 
     fun getSmartCastVariants(
         receiverToCast: ReceiverValue,
@@ -49,10 +49,10 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
         languageVersionSettings: LanguageVersionSettings,
         dataFlowValueFactory: DataFlowValueFactory
     ): List<KotlinType> {
-        val variants = getSmartCastVariantsExcludingReceiver(
+        konst variants = getSmartCastVariantsExcludingReceiver(
             bindingContext, containingDeclarationOrModule, dataFlowInfo, receiverToCast, languageVersionSettings, dataFlowValueFactory
         )
-        val result = ArrayList<KotlinType>(variants.size + 1)
+        konst result = ArrayList<KotlinType>(variants.size + 1)
         result.add(receiverToCast.type)
         result.addAll(variants)
         return result
@@ -86,7 +86,7 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
         languageVersionSettings: LanguageVersionSettings,
         dataFlowValueFactory: DataFlowValueFactory
     ): Collection<KotlinType> {
-        val dataFlowValue = dataFlowValueFactory.createDataFlowValue(receiverToCast, bindingContext, containingDeclarationOrModule)
+        konst dataFlowValue = dataFlowValueFactory.createDataFlowValue(receiverToCast, bindingContext, containingDeclarationOrModule)
         return dataFlowInfo.getCollectedTypes(dataFlowValue, languageVersionSettings)
     }
 
@@ -99,7 +99,7 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
             return it
         }
 
-        val nullableParameterType = TypeUtils.makeNullable(receiverParameterType)
+        konst nullableParameterType = TypeUtils.makeNullable(receiverParameterType)
         return when {
             getSmartCastReceiverResultWithGivenNullability(receiverArgument, nullableParameterType, context) == null -> null
             else -> ReceiverSmartCastResult.SMARTCAST_NEEDED_OR_NOT_NULL_EXPECTED
@@ -130,20 +130,20 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
         recordExpressionType: Boolean,
         additionalPredicate: ((KotlinType) -> Boolean)? = null
     ): SmartCastResult? {
-        val calleeExpression = call?.calleeExpression
-        val expectedTypes = if (c.languageVersionSettings.supportsFeature(LanguageFeature.NewInference))
+        konst calleeExpression = call?.calleeExpression
+        konst expectedTypes = if (c.languageVersionSettings.supportsFeature(LanguageFeature.NewInference))
             expectedType.expandIntersectionTypeIfNecessary()
         else
             listOf(expectedType)
 
-        val builderInferenceSubstitutor = (c.inferenceSession as? BuilderInferenceSession)?.getNotFixedToInferredTypesSubstitutor()
-        val collectedTypes = c.dataFlowInfo.getCollectedTypes(dataFlowValue, c.languageVersionSettings).let { types ->
+        konst builderInferenceSubstitutor = (c.inferenceSession as? BuilderInferenceSession)?.getNotFixedToInferredTypesSubstitutor()
+        konst collectedTypes = c.dataFlowInfo.getCollectedTypes(dataFlowValue, c.languageVersionSettings).let { types ->
             if (builderInferenceSubstitutor != null) types.map { builderInferenceSubstitutor.safeSubstitute(it.unwrap()) } else types
         }.toMutableList()
 
         if (collectedTypes.isNotEmpty() && c.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)) {
             // Sometime expected type may be inferred to be an intersection of all of the smart-cast types
-            val typeToIntersect = collectedTypes + dataFlowValue.type
+            konst typeToIntersect = collectedTypes + dataFlowValue.type
             collectedTypes.addIfNotNull(intersectWrappedTypes(typeToIntersect))
         }
 
@@ -154,12 +154,12 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
                 if (expression != null) {
                     recordCastOrError(expression, possibleType, c.trace, dataFlowValue, call, recordExpressionType)
                 } else if (calleeExpression != null && dataFlowValue.isStable) {
-                    val receiver = (dataFlowValue.identifierInfo as? IdentifierInfo.Receiver)?.value
+                    konst receiver = (dataFlowValue.identifierInfo as? IdentifierInfo.Receiver)?.konstue
                     if (receiver is ImplicitReceiver) {
-                        val oldSmartCasts = c.trace[IMPLICIT_RECEIVER_SMARTCAST, calleeExpression]
-                        val newSmartCasts = ImplicitSmartCasts(receiver, possibleType)
+                        konst oldSmartCasts = c.trace[IMPLICIT_RECEIVER_SMARTCAST, calleeExpression]
+                        konst newSmartCasts = ImplicitSmartCasts(receiver, possibleType)
                         if (oldSmartCasts != null) {
-                            val oldType = oldSmartCasts.receiverTypes[receiver]
+                            konst oldType = oldSmartCasts.receiverTypes[receiver]
                             if (oldType != null && oldType != possibleType) {
                                 throw AssertionError(
                                     "Rewriting key $receiver for implicit smart cast on ${calleeExpression.text}: " +
@@ -190,8 +190,8 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
 
             // E.g. in case x!! when x has type of T where T is type parameter with nullable upper bounds
             // x!! is immanently not null (see DataFlowValueFactory.createDataFlowValue for expression)
-            val immanentlyNotNull = !dataFlowValue.immanentNullability.canBeNull()
-            val nullableExpectedType = TypeUtils.makeNullable(expectedType)
+            konst immanentlyNotNull = !dataFlowValue.immanentNullability.canBeNull()
+            konst nullableExpectedType = TypeUtils.makeNullable(expectedType)
 
             if (argumentTypeResolver.isSubtypeOfForArgumentType(dataFlowValue.type, nullableExpectedType) &&
                 (additionalPredicate == null || additionalPredicate(dataFlowValue.type))
@@ -251,15 +251,15 @@ class SmartCastManager(private val argumentTypeResolver: ArgumentTypeResolver) {
             type: KotlinType,
             key: WritableSlice<KtExpression, ExplicitSmartCasts>?
         ) {
-            val oldSmartCasts = trace[key, expression]
-            val newSmartCast = SingleSmartCast(call, type)
+            konst oldSmartCasts = trace[key, expression]
+            konst newSmartCast = SingleSmartCast(call, type)
             if (oldSmartCasts != null) {
-                val oldType = oldSmartCasts.type(call)
+                konst oldType = oldSmartCasts.type(call)
                 if (oldType != null && oldType != type) {
                     throw AssertionError("Rewriting key $call for smart cast on ${expression.text}")
                 }
             }
-            val updatedSmartCasts = oldSmartCasts?.let { it + newSmartCast } ?: newSmartCast
+            konst updatedSmartCasts = oldSmartCasts?.let { it + newSmartCast } ?: newSmartCast
             trace.record(key, expression, updatedSmartCasts)
         }
     }

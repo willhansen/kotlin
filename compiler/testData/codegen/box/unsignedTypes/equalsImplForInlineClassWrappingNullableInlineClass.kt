@@ -1,8 +1,8 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Z(val x: Int)
-inline class NZ1(val nz: Z?)
-inline class NZ2(val nz: NZ1)
+inline class Z(konst x: Int)
+inline class NZ1(konst nz: Z?)
+inline class NZ2(konst nz: NZ1)
 
 fun box(): String {
     if (NZ2(NZ1(null)) != NZ2(NZ1(null))) throw AssertionError()

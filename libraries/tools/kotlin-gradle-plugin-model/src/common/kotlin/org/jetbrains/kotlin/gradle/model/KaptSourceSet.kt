@@ -26,33 +26,33 @@ interface KaptSourceSet {
      *
      * @return the source set name.
      */
-    val name: String
+    konst name: String
 
     /**
      * Return the type of the source set.
      *
      * @return the type of the source set.
      */
-    val type: KaptSourceSetType
+    konst type: KaptSourceSetType
 
     /**
      * Return generated sources directory.
      *
      * @return generated sources directory.
      */
-    val generatedSourcesDirectory: File
+    konst generatedSourcesDirectory: File
 
     /**
      * Return Kotlin generated sources directory.
      *
      * @return Kotlin generated sources directory.
      */
-    val generatedKotlinSourcesDirectory: File
+    konst generatedKotlinSourcesDirectory: File
 
     /**
      * Return Kotlin generated classes directory.
      *
      * @return Kotlin generated classes directory.
      */
-    val generatedClassesDirectory: File
+    konst generatedClassesDirectory: File
 }

@@ -11,7 +11,7 @@ class A(var x: Int) {
 object B {
     private var holder = A(42)
 
-    val foo: A
+    konst foo: A
         get() = holder
 }
 

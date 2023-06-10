@@ -17,6 +17,6 @@ object Runner {
 }
 
 fun box(): String {
-    val s = Runner.run<SomeImplementation, _>() // T is inferred to String
+    konst s = Runner.run<SomeImplementation, _>() // T is inferred to String
     return "OK"
 }

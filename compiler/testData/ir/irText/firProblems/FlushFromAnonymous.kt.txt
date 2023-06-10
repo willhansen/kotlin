@@ -6,7 +6,7 @@ class Serializer {
   }
 
   fun serialize() {
-    val messageCollector: <no name provided> = <this>.createMessageCollector()
+    konst messageCollector: <no name provided> = <this>.createMessageCollector()
     try { // BLOCK
     }
     catch (e: Throwable){ // BLOCK

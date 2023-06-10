@@ -1,4 +1,4 @@
-class Foo(val bar: String?)
+class Foo(konst bar: String?)
 
 fun main() {
     try {

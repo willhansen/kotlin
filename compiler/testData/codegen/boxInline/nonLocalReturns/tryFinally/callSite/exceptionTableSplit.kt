@@ -2,17 +2,17 @@
 // FILE: 1.kt
 package test
 
-public class Holder(var value: String = "") {
+public class Holder(var konstue: String = "") {
 
     operator fun plusAssign(s: String?) {
-        if (value.length != 0) {
-            value += " -> "
+        if (konstue.length != 0) {
+            konstue += " -> "
         }
-        value += s
+        konstue += s
     }
 
     override fun toString(): String {
-        return value
+        return konstue
     }
 
 }
@@ -40,10 +40,10 @@ import test.*
 import kotlin.test.*
 
 fun test1(): Holder {
-    val h = Holder("")
+    konst h = Holder("")
 
     try {
-        val internalResult = doCall(h) {
+        konst internalResult = doCall(h) {
             h += "in lambda body"
             return h
         }
@@ -57,9 +57,9 @@ fun test1(): Holder {
 }
 
 fun test1Lambda(): Holder {
-    val h = Holder("")
+    konst h = Holder("")
 
-    val internalResult = doCall(h) {
+    konst internalResult = doCall(h) {
         try {
             h += "in lambda body"
             return h
@@ -76,7 +76,7 @@ fun test1Lambda(): Holder {
 
 fun test2(h: Holder): Holder {
     try {
-        val internalResult = doCallWithException(h) {
+        konst internalResult = doCallWithException(h) {
             h += "in lambda body"
             return h
         }
@@ -91,7 +91,7 @@ fun test2(h: Holder): Holder {
 
 fun test2Lambda(h: Holder): Holder {
 
-    val internalResult = doCallWithException(h) {
+    konst internalResult = doCallWithException(h) {
         try {
             h += "in lambda body"
             return h
@@ -106,11 +106,11 @@ fun test2Lambda(h: Holder): Holder {
 }
 
 fun box(): String {
-    val test = test1()
-    if (test.value != "in lambda body -> inline fun finally -> in call site finally") return "fail 1: $test"
+    konst test = test1()
+    if (test.konstue != "in lambda body -> inline fun finally -> in call site finally") return "fail 1: $test"
 
-    val testLambda = test1Lambda()
-    if (testLambda.value != "in lambda body -> in lambda finally -> inline fun finally") return "fail 1 lambda: $testLambda"
+    konst testLambda = test1Lambda()
+    if (testLambda.konstue != "in lambda body -> in lambda finally -> inline fun finally") return "fail 1 lambda: $testLambda"
 
     var h = Holder()
     assertError(2, h, "in lambda body -> inline fun finally -> in call site finally") {
@@ -132,6 +132,6 @@ inline fun assertError(index: Int, h: Holder, expected: String, l: (h: Holder) -
         fail("fail $index: no error")
     }
     catch (e: Exception) {
-        assertEquals(expected, h.value, "failed on $index")
+        assertEquals(expected, h.konstue, "failed on $index")
     }
 }

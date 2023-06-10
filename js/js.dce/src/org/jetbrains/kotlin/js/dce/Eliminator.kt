@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.js.dce
 
 import org.jetbrains.kotlin.js.backend.ast.*
 
-class Eliminator(private val analysisResult: AnalysisResult) : JsVisitorWithContextImpl() {
+class Eliminator(private konst analysisResult: AnalysisResult) : JsVisitorWithContextImpl() {
     override fun visit(x: JsVars.JsVar, ctx: JsContext<*>): Boolean = removeIfNecessary(x, ctx)
 
     override fun visit(x: JsExpressionStatement, ctx: JsContext<*>): Boolean = removeIfNecessary(x, ctx)
@@ -30,7 +30,7 @@ class Eliminator(private val analysisResult: AnalysisResult) : JsVisitorWithCont
             ctx.removeMe()
             return false
         }
-        val node = analysisResult.nodeMap[x]?.original
+        konst node = analysisResult.nodeMap[x]?.original
         return if (!isUsed(node)) {
             ctx.removeMe()
             false

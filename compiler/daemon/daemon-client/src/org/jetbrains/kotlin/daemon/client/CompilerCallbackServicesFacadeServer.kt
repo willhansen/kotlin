@@ -30,14 +30,14 @@ import java.io.File
 import java.rmi.server.UnicastRemoteObject
 
 open class CompilerCallbackServicesFacadeServer(
-    val incrementalCompilationComponents: IncrementalCompilationComponents? = null,
-    val lookupTracker: LookupTracker? = null,
-    val compilationCanceledStatus: CompilationCanceledStatus? = null,
-    val expectActualTracker: ExpectActualTracker? = null,
-    val inlineConstTracker: InlineConstTracker? = null,
-    val enumWhenTracker: EnumWhenTracker? = null,
-    val incrementalResultsConsumer: IncrementalResultsConsumer? = null,
-    val incrementalDataProvider: IncrementalDataProvider? = null,
+    konst incrementalCompilationComponents: IncrementalCompilationComponents? = null,
+    konst lookupTracker: LookupTracker? = null,
+    konst compilationCanceledStatus: CompilationCanceledStatus? = null,
+    konst expectActualTracker: ExpectActualTracker? = null,
+    konst inlineConstTracker: InlineConstTracker? = null,
+    konst enumWhenTracker: EnumWhenTracker? = null,
+    konst incrementalResultsConsumer: IncrementalResultsConsumer? = null,
+    konst incrementalDataProvider: IncrementalDataProvider? = null,
     port: Int = SOCKET_ANY_FREE_PORT
 ) : @Suppress("DEPRECATION") CompilerCallbackServicesFacade,
     UnicastRemoteObject(
@@ -92,14 +92,14 @@ open class CompilerCallbackServicesFacadeServer(
     override fun lookupTracker_requiresPosition() = lookupTracker!!.requiresPosition
 
     override fun lookupTracker_record(lookups: Collection<LookupInfo>) {
-        val lookupTracker = lookupTracker!!
+        konst lookupTracker = lookupTracker!!
 
         for (it in lookups) {
             lookupTracker.record(it.filePath, it.position, it.scopeFqName, it.scopeKind, it.name)
         }
     }
 
-    private val lookupTracker_isDoNothing: Boolean = lookupTracker === LookupTracker.DO_NOTHING
+    private konst lookupTracker_isDoNothing: Boolean = lookupTracker === LookupTracker.DO_NOTHING
 
     override fun lookupTracker_isDoNothing(): Boolean = lookupTracker_isDoNothing
 
@@ -155,7 +155,7 @@ open class CompilerCallbackServicesFacadeServer(
 
     override fun incrementalDataProvider_getCompiledPackageParts() =
         incrementalDataProvider!!.compiledPackageParts.entries.map {
-            CompiledPackagePart(it.key.path, it.value.metadata, it.value.binaryAst, it.value.inlineData)
+            CompiledPackagePart(it.key.path, it.konstue.metadata, it.konstue.binaryAst, it.konstue.inlineData)
         }
 
     override fun incrementalDataProvider_getPackageMetadata(): Collection<PackageMetadata> =

@@ -2,4 +2,4 @@
 
 class A
 
-val test = A()
+konst test = A()

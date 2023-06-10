@@ -26,13 +26,13 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
 class CallableReferenceCompatibilityChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val typeInferenceForCallableReferencesFeature = LanguageFeature.TypeInferenceOnGenericsForCallableReferences
+        konst typeInferenceForCallableReferencesFeature = LanguageFeature.TypeInferenceOnGenericsForCallableReferences
         if (context.languageVersionSettings.supportsFeature(typeInferenceForCallableReferencesFeature)) return
 
-        for ((_, resolvedArgument) in resolvedCall.valueArguments) {
+        for ((_, resolvedArgument) in resolvedCall.konstueArguments) {
             inner@ for (argument in resolvedArgument.arguments) {
-                val argumentExpression = argument.getArgumentExpression() as? KtCallableReferenceExpression ?: continue@inner
-                val callableReferenceResolvedCall =
+                konst argumentExpression = argument.getArgumentExpression() as? KtCallableReferenceExpression ?: continue@inner
+                konst callableReferenceResolvedCall =
                     argumentExpression.callableReference.getResolvedCall(context.trace.bindingContext) ?: continue@inner
                 if (callableReferenceResolvedCall.call.isCallableReference() &&
                     callableReferenceResolvedCall.candidateDescriptor.typeParameters.isNotEmpty()) {

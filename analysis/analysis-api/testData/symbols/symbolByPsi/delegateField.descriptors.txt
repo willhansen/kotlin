@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: MyColor
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -59,7 +59,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -162,7 +162,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -265,7 +265,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -370,7 +370,7 @@ KtAnonymousFunctionSymbol:
     type: MyColor
   symbolKind: LOCAL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null
 
@@ -414,7 +414,7 @@ KtKotlinPropertySymbol:
       type: MyColor
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -471,7 +471,7 @@ KtAnonymousFunctionSymbol:
     type: MyColor
   symbolKind: LOCAL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null
 
@@ -525,7 +525,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Lazy<MyColor>
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -613,7 +613,7 @@ KtKotlinPropertySymbol:
       type: MyColor
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []

@@ -29,9 +29,9 @@ class ErasedInlineClassBodyCodegen(
     parentCodegen: MemberCodegen<*>?
 ) : ClassBodyCodegen(aClass, context, v, state, parentCodegen) {
 
-    private val classAsmType = typeMapper.mapClass(descriptor)
+    private konst classAsmType = typeMapper.mapClass(descriptor)
 
-    private val constructorCodegen = ConstructorCodegen(
+    private konst constructorCodegen = ConstructorCodegen(
         descriptor, context, functionCodegen, this, this, state, kind, v, classAsmType, aClass, bindingContext
     )
 
@@ -40,7 +40,7 @@ class ErasedInlineClassBodyCodegen(
     override fun done() {}
 
     override fun generateConstructors() {
-        val delegationFieldsInfo = DelegationFieldsInfo(classAsmType, descriptor, state, bindingContext)
+        konst delegationFieldsInfo = DelegationFieldsInfo(classAsmType, descriptor, state, bindingContext)
 
         constructorCodegen.generatePrimaryConstructor(delegationFieldsInfo, AsmTypes.OBJECT_TYPE)
 
@@ -72,7 +72,7 @@ class ErasedInlineClassBodyCodegen(
     }
 
     private fun generateUnboxMethod() {
-        val boxMethodDescriptor = InlineClassDescriptorResolver.createBoxFunctionDescriptor(descriptor)
+        konst boxMethodDescriptor = InlineClassDescriptorResolver.createBoxFunctionDescriptor(descriptor)
 
         functionCodegen.generateMethod(
             Synthetic(null, boxMethodDescriptor), boxMethodDescriptor, object : FunctionGenerationStrategy.CodegenBased(state) {
@@ -88,10 +88,10 @@ class ErasedInlineClassBodyCodegen(
                 }
 
                 override fun doGenerateBody(codegen: ExpressionCodegen, signature: JvmMethodSignature) {
-                    val iv = codegen.v
-                    val wrapperType = signature.returnType
-                    val baseValueType = signature.valueParameters.single().asmType
-                    val constructor = typeMapper.mapToCallableMethod(descriptor.unsubstitutedPrimaryConstructor!!, false)
+                    konst iv = codegen.v
+                    konst wrapperType = signature.returnType
+                    konst baseValueType = signature.konstueParameters.single().asmType
+                    konst constructor = typeMapper.mapToCallableMethod(descriptor.unsubstitutedPrimaryConstructor!!, false)
                     iv.anew(wrapperType)
                     iv.dup()
                     iv.load(0, baseValueType)
@@ -103,7 +103,7 @@ class ErasedInlineClassBodyCodegen(
     }
 
     private fun generateSpecializedEqualsStub() {
-        val specializedEqualsDescriptor = InlineClassDescriptorResolver.createSpecializedEqualsDescriptor(descriptor)
+        konst specializedEqualsDescriptor = InlineClassDescriptorResolver.createSpecializedEqualsDescriptor(descriptor)
 
         functionCodegen.generateMethod(
             Synthetic(null, specializedEqualsDescriptor), specializedEqualsDescriptor, object : FunctionGenerationStrategy.CodegenBased(state) {
@@ -119,11 +119,11 @@ class ErasedInlineClassBodyCodegen(
 
 
                 override fun doGenerateBody(codegen: ExpressionCodegen, signature: JvmMethodSignature) {
-                    val firstIndex = codegen.frameMap.getIndex(specializedEqualsDescriptor.valueParameters[0])
-                    val secondIndex = codegen.frameMap.getIndex(specializedEqualsDescriptor.valueParameters[1])
-                    val asmType = signature.valueParameters[0].asmType
-                    val left = StackValue.local(firstIndex, asmType)
-                    val right = StackValue.local(secondIndex, asmType)
+                    konst firstIndex = codegen.frameMap.getIndex(specializedEqualsDescriptor.konstueParameters[0])
+                    konst secondIndex = codegen.frameMap.getIndex(specializedEqualsDescriptor.konstueParameters[1])
+                    konst asmType = signature.konstueParameters[0].asmType
+                    konst left = StackValue.local(firstIndex, asmType)
+                    konst right = StackValue.local(secondIndex, asmType)
                     genTotalOrderEqualsForExpressionOnStack(left, right, asmType).put(Type.BOOLEAN_TYPE, codegen.v)
                     codegen.v.areturn(Type.BOOLEAN_TYPE)
                 }

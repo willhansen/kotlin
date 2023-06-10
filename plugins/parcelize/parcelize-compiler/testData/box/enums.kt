@@ -12,16 +12,16 @@ enum class Color {
 }
 
 @Parcelize
-data class Test(val name: String, val color: Color) : Parcelable
+data class Test(konst name: String, konst color: Color) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = Test("John", Color.WHITE)
+    konst test = Test("John", Color.WHITE)
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<Test>().createFromParcel(parcel)
     assert(test == test2)
 }

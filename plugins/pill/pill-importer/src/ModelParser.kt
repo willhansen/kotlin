@@ -34,49 +34,49 @@ import kotlin.collections.HashMap
 typealias OutputDir = String
 typealias GradleProjectPath = String
 
-class ModelParser(private val variant: Variant, private val modulePrefix: String) {
+class ModelParser(private konst variant: Variant, private konst modulePrefix: String) {
     fun parse(project: Project): PProject {
         if (project != project.rootProject) {
             error("$project is not a root project")
         }
 
         fun Project.matchesSelectedVariant(): Boolean {
-            val extension = this.findPillExtensionMirror() ?: return true
-            val projectVariant = extension.variant ?: Variant.BASE
+            konst extension = this.findPillExtensionMirror() ?: return true
+            konst projectVariant = extension.variant ?: Variant.BASE
             return projectVariant in variant.includes
         }
 
-        val (includedProjects, excludedProjects) = project.allprojects
+        konst (includedProjects, excludedProjects) = project.allprojects
             .partition { it.plugins.hasPlugin("jps-compatible") && it.matchesSelectedVariant() }
 
-        val modules = includedProjects.flatMap { parseModules(it, excludedProjects) }
-        val artifacts = parseArtifacts(project)
+        konst modules = includedProjects.flatMap { parseModules(it, excludedProjects) }
+        konst artifacts = parseArtifacts(project)
 
         return PProject("Kotlin", project.projectDir, modules, emptyList(), artifacts)
     }
 
     private fun parseArtifacts(rootProject: Project): Map<String, List<GradleProjectPath>> {
-        val artifacts = HashMap<OutputDir, List<GradleProjectPath>>()
-        val additionalOutputs = HashMap<OutputDir, List<OutputDir>>()
+        konst artifacts = HashMap<OutputDir, List<GradleProjectPath>>()
+        konst additionalOutputs = HashMap<OutputDir, List<OutputDir>>()
 
         for (project in rootProject.allprojects) {
-            val sourceSets = project.sourceSets?.toList() ?: emptyList()
+            konst sourceSets = project.sourceSets?.toList() ?: emptyList()
 
             for (sourceSet in sourceSets) {
-                val path = makePath(project, sourceSet.name)
+                konst path = makePath(project, sourceSet.name)
 
                 for (output in sourceSet.output.toList()) {
                     artifacts[output.absolutePath] = listOf(path)
                 }
 
-                val jarTask = project.tasks.findByName(sourceSet.jarTaskName) as? Jar ?: continue
-                val embeddedTask = findEmbeddableTask(project, sourceSet)
+                konst jarTask = project.tasks.findByName(sourceSet.jarTaskName) as? Jar ?: continue
+                konst embeddedTask = findEmbeddableTask(project, sourceSet)
 
                 for (task in listOfNotNull(jarTask, embeddedTask)) {
-                    val archiveFile = task.archiveFile.get().asFile
+                    konst archiveFile = task.archiveFile.get().asFile
                     artifacts[archiveFile.absolutePath] = listOf(path)
 
-                    val additionalOutputsForSourceSet = mutableListOf<File>()
+                    konst additionalOutputsForSourceSet = mutableListOf<File>()
                     fun process(spec: CopySpecInternal) {
                         spec.children.forEach { process(it) }
                         if (spec is SingleParentCopySpec) {
@@ -95,8 +95,8 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
         }
 
         for ((sourceSetOutputDir, additionalOutputsForSourceSet) in additionalOutputs) {
-            val projectPaths = artifacts[sourceSetOutputDir] ?: error("Unknown artifact $sourceSetOutputDir")
-            val newPaths = projectPaths + additionalOutputsForSourceSet.mapNotNull { artifacts[it] }.flatten()
+            konst projectPaths = artifacts[sourceSetOutputDir] ?: error("Unknown artifact $sourceSetOutputDir")
+            konst newPaths = projectPaths + additionalOutputsForSourceSet.mapNotNull { artifacts[it] }.flatten()
             artifacts[sourceSetOutputDir] = newPaths.distinct()
         }
 
@@ -104,9 +104,9 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun findEmbeddableTask(project: Project, sourceSet: SourceSet): Jar? {
-        val jarName = sourceSet.jarTaskName
-        val embeddable = "embeddable"
-        val embeddedName = if (jarName == "jar") embeddable else jarName.dropLast("jar".length) +
+        konst jarName = sourceSet.jarTaskName
+        konst embeddable = "embeddable"
+        konst embeddedName = if (jarName == "jar") embeddable else jarName.dropLast("jar".length) +
                 embeddable.replaceFirstChar { it.uppercase() }
         return project.tasks.findByName(embeddedName) as? Jar
     }
@@ -116,21 +116,21 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun parseModules(project: Project, excludedProjects: List<Project>): List<PModule> {
-        val modules = mutableListOf<PModule>()
+        konst modules = mutableListOf<PModule>()
 
         fun getModuleFile(name: String): File {
-            val relativePath = File(project.projectDir, "$modulePrefix$name.iml").toRelativeString(project.rootProject.projectDir)
+            konst relativePath = File(project.projectDir, "$modulePrefix$name.iml").toRelativeString(project.rootProject.projectDir)
             return File(project.rootProject.projectDir, ".idea/modules/$relativePath")
         }
 
-        val embeddedDependencies = project.configurations.findByName(EMBEDDED_CONFIGURATION_NAME)
+        konst embeddedDependencies = project.configurations.findByName(EMBEDDED_CONFIGURATION_NAME)
             ?.let { parseDependencies(it) } ?: emptyList()
 
-        val javaLanguageVersion = getJavaLanguageVersion(project)
+        konst javaLanguageVersion = getJavaLanguageVersion(project)
 
-        val sourceSets = parseSourceSets(project).sortedBy { it.forTests }
+        konst sourceSets = parseSourceSets(project).sortedBy { it.forTests }
         for (sourceSet in sourceSets) {
-            val sourceRoots = mutableListOf<PSourceRoot>()
+            konst sourceRoots = mutableListOf<PSourceRoot>()
 
             for (dir in sourceSet.sourceDirectories) {
                 sourceRoots += PSourceRoot(dir, if (sourceSet.forTests) Kind.TEST else Kind.PRODUCTION)
@@ -144,17 +144,17 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
                 continue
             }
 
-            val productionModule = if (sourceSet.forTests) modules.firstOrNull { !it.forTests } else null
+            konst productionModule = if (sourceSet.forTests) modules.firstOrNull { !it.forTests } else null
 
-            val contentRoots = sourceRoots.map { PContentRoot(it.directory, listOf(it), emptyList()) }
+            konst contentRoots = sourceRoots.map { PContentRoot(it.directory, listOf(it), emptyList()) }
 
             var orderRoots = parseDependencies(project, sourceSet)
             if (productionModule != null) {
-                val productionModuleDependency = PDependency.Module(productionModule.name)
+                konst productionModuleDependency = PDependency.Module(productionModule.name)
                 orderRoots = listOf(POrderRoot(productionModuleDependency, Scope.COMPILE, true)) + orderRoots
             }
 
-            val name = project.pillModuleName + "." + sourceSet.name
+            konst name = project.pillModuleName + "." + sourceSet.name
 
             modules += PModule(
                 name = modulePrefix + name,
@@ -171,7 +171,7 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
             )
         }
 
-        val mainModuleFileRelativePath = when (project) {
+        konst mainModuleFileRelativePath = when (project) {
             project.rootProject -> File(project.rootProject.projectDir, modulePrefix + project.rootProject.name + ".iml")
             else -> getModuleFile(project.pillModuleName)
         }
@@ -194,8 +194,8 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun getJavaLanguageVersion(project: Project): Int? {
-        val javaPluginExtension = project.extensions.findByType<JavaPluginExtension>() ?: return null
-        val javaToolchainService = project.extensions.findByType<JavaToolchainService>() ?: return null
+        konst javaPluginExtension = project.extensions.findByType<JavaPluginExtension>() ?: return null
+        konst javaToolchainService = project.extensions.findByType<JavaToolchainService>() ?: return null
         return javaToolchainService.launcherFor(javaPluginExtension.toolchain).orNull?.metadata?.languageVersion?.asInt()
     }
 
@@ -214,32 +214,32 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
             return emptyList()
         }
 
-        val kotlinTasksBySourceSet = project.tasks.names
+        konst kotlinTasksBySourceSet = project.tasks.names
             .filter { it.startsWith("compile") && it.endsWith("Kotlin") }
             .map { project.tasks.getByName(it) }
             .associateBy { (it.invokeInternal("getSourceSetName") as Property<*>).get() as String }
 
-        val gradleSourceSets = project.sourceSets?.toList() ?: emptyList()
-        val sourceSets = mutableListOf<PSourceSet>()
+        konst gradleSourceSets = project.sourceSets?.toList() ?: emptyList()
+        konst sourceSets = mutableListOf<PSourceSet>()
 
         for (sourceSet in gradleSourceSets) {
-            val kotlinCompileTask = kotlinTasksBySourceSet[sourceSet.name]
+            konst kotlinCompileTask = kotlinTasksBySourceSet[sourceSet.name]
 
             fun Any.getKotlin(): SourceDirectorySet {
-                val kotlinMethod = javaClass.getMethod("getKotlin")
+                konst kotlinMethod = javaClass.getMethod("getKotlin")
                 kotlinMethod.isAccessible = true
                 return kotlinMethod(this) as SourceDirectorySet
             }
 
-            val kotlinSourceDirectories = (sourceSet as HasConvention).convention
+            konst kotlinSourceDirectories = (sourceSet as HasConvention).convention
                 .plugins["kotlin"]?.getKotlin()?.srcDirs ?: emptySet()
 
-            val sourceDirectories = (sourceSet.java.sourceDirectories.files + kotlinSourceDirectories).toList()
+            konst sourceDirectories = (sourceSet.java.sourceDirectories.files + kotlinSourceDirectories).toList()
 
-            val resourceDirectoriesFromSourceSet = sourceSet.resources.sourceDirectories.files
-            val resourceDirectoriesFromTask = parseResourceRootsProcessedByProcessResourcesTask(project, sourceSet)
+            konst resourceDirectoriesFromSourceSet = sourceSet.resources.sourceDirectories.files
+            konst resourceDirectoriesFromTask = parseResourceRootsProcessedByProcessResourcesTask(project, sourceSet)
 
-            val resourceDirectories = (resourceDirectoriesFromSourceSet + resourceDirectoriesFromTask)
+            konst resourceDirectories = (resourceDirectoriesFromSourceSet + resourceDirectoriesFromTask)
                 .distinct().filter { it !in sourceDirectories }
 
             sourceSets += PSourceSet(
@@ -257,15 +257,15 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun parseResourceRootsProcessedByProcessResourcesTask(project: Project, sourceSet: SourceSet): List<File> {
-        val isMainSourceSet = sourceSet.name == SourceSet.MAIN_SOURCE_SET_NAME
+        konst isMainSourceSet = sourceSet.name == SourceSet.MAIN_SOURCE_SET_NAME
 
-        val taskNameBase = "processResources"
-        val taskName = if (isMainSourceSet) taskNameBase else sourceSet.name + taskNameBase.replaceFirstChar {
+        konst taskNameBase = "processResources"
+        konst taskName = if (isMainSourceSet) taskNameBase else sourceSet.name + taskNameBase.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
         }
-        val task = project.tasks.findByName(taskName) as? ProcessResources ?: return emptyList()
+        konst task = project.tasks.findByName(taskName) as? ProcessResources ?: return emptyList()
 
-        val roots = mutableListOf<File>()
+        konst roots = mutableListOf<File>()
         fun collectRoots(spec: CopySpecInternal) {
             if (spec is SingleParentCopySpec && spec.children.none()) {
                 roots += spec.sourcePaths.map { File(project.projectDir, it.toString()) }.filter { it.exists() }
@@ -279,16 +279,16 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun getKotlinOptions(kotlinCompileTask: Any, project: Project): PSourceRootKotlinOptions {
-        val compileArguments = run {
-            val method = kotlinCompileTask::class.java.getMethod("getSerializedCompilerArguments")
+        konst compileArguments = run {
+            konst method = kotlinCompileTask::class.java.getMethod("getSerializedCompilerArguments")
             method.isAccessible = true
             @Suppress("UNCHECKED_CAST")
             method.invoke(kotlinCompileTask) as List<String>
         }
 
-        val extraArguments = getExtraArguments(compileArguments)
+        konst extraArguments = getExtraArguments(compileArguments)
 
-        val pluginClasspath = mutableListOf<String>()
+        konst pluginClasspath = mutableListOf<String>()
         if (project.plugins.hasPlugin("org.jetbrains.kotlin.plugin.serialization")) {
             pluginClasspath += "\$KOTLIN_BUNDLED\$/lib/kotlinx-serialization-compiler-plugin.jar"
         }
@@ -309,10 +309,10 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 
     private fun parseDependencies(project: Project, sourceSet: PSourceSet): List<POrderRoot> {
-        val roots = mutableListOf<POrderRoot>()
+        konst roots = mutableListOf<POrderRoot>()
 
         fun process(name: String, scope: Scope) {
-            val configuration = project.configurations.findByName(name) ?: return
+            konst configuration = project.configurations.findByName(name) ?: return
             roots += parseDependencies(configuration).map { POrderRoot(it, scope) }
         }
 
@@ -328,29 +328,29 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
 
     private fun parseDependencies(configuration: Configuration): List<PDependency> {
         return configuration.resolve().map { file ->
-            val library = PLibrary(file.name, listOf(file))
+            konst library = PLibrary(file.name, listOf(file))
             return@map PDependency.ModuleLibrary(library)
         }
     }
 
     private companion object {
-        private val SKIPPED_STANDALONE_ARGUMENTS =
+        private konst SKIPPED_STANDALONE_ARGUMENTS =
             listOf("-no-stdlib", "-no-reflect", "-Xfriend-paths=", "-Xbuild-file=", "-Xplugin=")
 
-        private val SKIPPED_ARGUMENTS_WITH_VALUE =
+        private konst SKIPPED_ARGUMENTS_WITH_VALUE =
             listOf("-classpath", "-d", "-module-name", "-api-version", "-language-version", "-jvm-target", "-P")
 
         private fun getExtraArguments(args: List<String>): List<String> {
-            val result = mutableListOf<String>()
+            konst result = mutableListOf<String>()
             var index = 0
             while (index < args.size) {
-                val arg = args[index]
+                konst arg = args[index]
 
                 if (SKIPPED_STANDALONE_ARGUMENTS.any { arg.startsWith(it) }) {
                     index += 1
                     continue
                 } else if (SKIPPED_ARGUMENTS_WITH_VALUE.any { arg.startsWith(it) }) {
-                    index += 2 // Skip also the value
+                    index += 2 // Skip also the konstue
                     continue
                 }
 
@@ -362,7 +362,7 @@ class ModelParser(private val variant: Variant, private val modulePrefix: String
     }
 }
 
-private val SourceSet.isTestSourceSet: Boolean
+private konst SourceSet.isTestSourceSet: Boolean
     get() = name == SourceSet.TEST_SOURCE_SET_NAME
             || name == "testFixtures"
             || name.endsWith("Test")
@@ -370,16 +370,16 @@ private val SourceSet.isTestSourceSet: Boolean
             || (extra.has("jpsKind") && extra.get("jpsKind") == SourceSet.TEST_SOURCE_SET_NAME)
 
 private fun Any.invokeInternal(name: String, instance: Any = this): Any? {
-    val method = javaClass.methods.single { it.name.startsWith(name) && it.parameterTypes.isEmpty() }
+    konst method = javaClass.methods.single { it.name.startsWith(name) && it.parameterTypes.isEmpty() }
     method.isAccessible = true
     return method.invoke(instance)
 }
 
-val Project.pillModuleName: String
+konst Project.pillModuleName: String
     get() = path.removePrefix(":").replace(':', '.')
 
-val Project.sourceSets: SourceSetContainer?
+konst Project.sourceSets: SourceSetContainer?
     get() {
-        val javaExtension = project.extensions.findByType<JavaPluginExtension>() ?: return null
+        konst javaExtension = project.extensions.findByType<JavaPluginExtension>() ?: return null
         return javaExtension.sourceSets
     }

@@ -16,12 +16,12 @@ kotlin {
     }
 }
 
-val unimplementedNativeBuiltIns =
+konst unimplementedNativeBuiltIns =
     (file("$rootDir/core/builtins/native/kotlin/").list().toSortedSet() - file("$rootDir/libraries/stdlib/js-ir/builtins/").list())
         .map { "core/builtins/native/kotlin/$it" }
 
 // Required to compile native builtins with the rest of runtime
-val builtInsHeader = """@file:Suppress(
+konst builtInsHeader = """@file:Suppress(
     "NON_ABSTRACT_FUNCTION_WITH_NO_BODY",
     "MUST_BE_INITIALIZED_OR_BE_ABSTRACT",
     "EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE",
@@ -31,10 +31,10 @@ val builtInsHeader = """@file:Suppress(
 )
 """
 
-val commonMainSources by task<Sync> {
+konst commonMainSources by task<Sync> {
     dependsOn(":prepare:build.version:writeStdlibVersion")
 
-    val sources = listOf(
+    konst sources = listOf(
         "libraries/stdlib/common/src/",
         "libraries/stdlib/src/kotlin/",
         "libraries/stdlib/unsigned/"
@@ -49,14 +49,14 @@ val commonMainSources by task<Sync> {
     into("$buildDir/commonMainSources")
 }
 
-val jsMainSources by task<Sync> {
-    val sources = listOf(
+konst jsMainSources by task<Sync> {
+    konst sources = listOf(
         "core/builtins/src/kotlin/",
         "libraries/stdlib/js/src/",
         "libraries/stdlib/js/runtime/"
     ) + unimplementedNativeBuiltIns
 
-    val excluded = listOf(
+    konst excluded = listOf(
         // stdlib/js/src/generated is used exclusively for current `js-v1` backend.
         "libraries/stdlib/js/src/generated/**",
         "libraries/stdlib/js/src/kotlin/browser",
@@ -79,20 +79,20 @@ val jsMainSources by task<Sync> {
 
     into("$buildDir/jsMainSources")
 
-    val unimplementedNativeBuiltIns = unimplementedNativeBuiltIns
-    val buildDir = buildDir
-    val builtInsHeader = builtInsHeader
+    konst unimplementedNativeBuiltIns = unimplementedNativeBuiltIns
+    konst buildDir = buildDir
+    konst builtInsHeader = builtInsHeader
     doLast {
         unimplementedNativeBuiltIns.forEach { path ->
-            val file = File("$buildDir/jsMainSources/$path")
-            val sourceCode = builtInsHeader + file.readText()
+            konst file = File("$buildDir/jsMainSources/$path")
+            konst sourceCode = builtInsHeader + file.readText()
             file.writeText(sourceCode)
         }
     }
 }
 
-val commonTestSources by task<Sync> {
-    val sources = listOf(
+konst commonTestSources by task<Sync> {
+    konst sources = listOf(
         "libraries/stdlib/test/",
         "libraries/stdlib/common/test/"
     )
@@ -106,29 +106,29 @@ val commonTestSources by task<Sync> {
     into("$buildDir/commonTestSources")
 }
 
-val jsTestSources by task<Sync> {
+konst jsTestSources by task<Sync> {
     from("$rootDir/libraries/stdlib/js/test/")
     into("$buildDir/jsTestSources")
 }
 
 kotlin {
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             kotlin.srcDir(files(commonMainSources.map { it.destinationDir }))
         }
-        val jsMain by getting {
+        konst jsMain by getting {
             kotlin.srcDir(files(jsMainSources.map { it.destinationDir }))
             kotlin.srcDir("builtins")
             kotlin.srcDir("runtime")
             kotlin.srcDir("src")
         }
-        val commonTest by getting {
+        konst commonTest by getting {
             dependencies {
                 api(project(":kotlin-test:kotlin-test-js-ir"))
             }
             kotlin.srcDir(files(commonTestSources.map { it.destinationDir }))
         }
-        val jsTest by getting {
+        konst jsTest by getting {
             dependencies {
                 api(project(":kotlin-test:kotlin-test-js-ir"))
             }
@@ -150,7 +150,7 @@ tasks.withType<KotlinCompile<*>>().configureEach {
     )
 }
 
-val compileKotlinJs by tasks.existing(KotlinCompile::class) {
+konst compileKotlinJs by tasks.existing(KotlinCompile::class) {
     kotlinOptions.freeCompilerArgs += "-Xir-module-name=kotlin"
 
     if (!kotlinBuildProperties.disableWerror) {
@@ -158,8 +158,8 @@ val compileKotlinJs by tasks.existing(KotlinCompile::class) {
     }
 }
 
-val compileTestKotlinJs by tasks.existing(KotlinCompile::class) {
-    val sources: FileCollection = kotlin.sourceSets["commonTest"].kotlin
+konst compileTestKotlinJs by tasks.existing(KotlinCompile::class) {
+    konst sources: FileCollection = kotlin.sourceSets["commonTest"].kotlin
     doFirst {
         // Note: common test sources are copied to the actual source directory by commonMainSources task,
         // so can't do this at configuration time:
@@ -167,16 +167,16 @@ val compileTestKotlinJs by tasks.existing(KotlinCompile::class) {
     }
 }
 
-val packFullRuntimeKLib by tasks.registering(Jar::class) {
+konst packFullRuntimeKLib by tasks.registering(Jar::class) {
     dependsOn(compileKotlinJs)
     from(buildDir.resolve("classes/kotlin/js/main"))
     destinationDirectory.set(rootProject.buildDir.resolve("js-ir-runtime"))
     archiveFileName.set("full-runtime.klib")
 }
 
-val sourcesJar by tasks.registering(Jar::class) {
+konst sourcesJar by tasks.registering(Jar::class) {
     dependsOn(jsMainSources)
-    val jsMainSourcesDir = jsMainSources.get().destinationDir
+    konst jsMainSourcesDir = jsMainSources.get().destinationDir
     archiveClassifier.set("sources")
     includeEmptyDirs = false
     duplicatesStrategy = DuplicatesStrategy.FAIL

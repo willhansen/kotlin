@@ -24,12 +24,12 @@ object AbstractStrictEqualityTypeChecker {
     private fun TypeSystemContext.strictEqualTypesInternal(a: KotlinTypeMarker, b: KotlinTypeMarker): Boolean {
         if (a === b) return true
 
-        val simpleA = a.asSimpleType()
-        val simpleB = b.asSimpleType()
+        konst simpleA = a.asSimpleType()
+        konst simpleB = b.asSimpleType()
         if (simpleA != null && simpleB != null) return strictEqualSimpleTypes(simpleA, simpleB)
 
-        val flexibleA = a.asFlexibleType()
-        val flexibleB = b.asFlexibleType()
+        konst flexibleA = a.asFlexibleType()
+        konst flexibleB = b.asFlexibleType()
         if (flexibleA != null && flexibleB != null) {
             return strictEqualSimpleTypes(flexibleA.lowerBound(), flexibleB.lowerBound()) &&
                     strictEqualSimpleTypes(flexibleA.upperBound(), flexibleB.upperBound())
@@ -49,8 +49,8 @@ object AbstractStrictEqualityTypeChecker {
         if (identicalArguments(a, b)) return true
 
         for (i in 0 until a.argumentsCount()) {
-            val aArg = a.getArgument(i)
-            val bArg = b.getArgument(i)
+            konst aArg = a.getArgument(i)
+            konst bArg = b.getArgument(i)
             if (aArg.isStarProjection() != bArg.isStarProjection()) return false
 
             // both non-star

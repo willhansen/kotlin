@@ -15,23 +15,23 @@ open class D() : B() {
     override fun test(): <!RETURN_TYPE_MISMATCH_ON_OVERRIDE!>Char<!> = '\n'
 }
 
-class E<T : <!FINAL_UPPER_BOUND!>Double<!>>(val value: T) : B() {
-    override fun test(): T = value
+class E<T : <!FINAL_UPPER_BOUND!>Double<!>>(konst konstue: T) : B() {
+    override fun test(): T = konstue
 }
 
-open class F<T : Number>(val value: T) {
-    open fun rest(): T = value
+open class F<T : Number>(konst konstue: T) {
+    open fun rest(): T = konstue
 }
 
-class G<E : <!FINAL_UPPER_BOUND!>Double<!>>(val balue: E) : F<E>(balue) {
+class G<E : <!FINAL_UPPER_BOUND!>Double<!>>(konst balue: E) : F<E>(balue) {
     override fun rest(): E = balue
 }
 
-class H<E : <!FINAL_UPPER_BOUND!>String<!>>(val balue: E) : F<<!UPPER_BOUND_VIOLATED!>E<!>>(<!ARGUMENT_TYPE_MISMATCH!>balue<!>) {
+class H<E : <!FINAL_UPPER_BOUND!>String<!>>(konst balue: E) : F<<!UPPER_BOUND_VIOLATED!>E<!>>(<!ARGUMENT_TYPE_MISMATCH!>balue<!>) {
     override fun rest(): E = balue // no report because of INAPPLICABLE_CANDIDATE
 }
 
-class M<E : <!FINAL_UPPER_BOUND!>String<!>>(val balue: E) : F<Double>(3.14) {
+class M<E : <!FINAL_UPPER_BOUND!>String<!>>(konst balue: E) : F<Double>(3.14) {
     override fun rest(): <!RETURN_TYPE_MISMATCH_ON_OVERRIDE!>E<!> = balue
 }
 

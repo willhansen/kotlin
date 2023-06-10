@@ -1,13 +1,13 @@
 FILE: delegates.kt
-    public? final? val x: Intby LAZY_EXPRESSION
+    public? final? konst x: Intby LAZY_EXPRESSION
         public? get(): <implicit> {
             ^ D|/x|.getValue#(Null(null), ::R|/x|)
         }
-    public? final? val delegate: <implicit> = LAZY_EXPRESSION
+    public? final? konst delegate: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
-    public? final? val value: <implicit>by LAZY_EXPRESSION
+    public? final? konst konstue: <implicit>by LAZY_EXPRESSION
         public? get(): <implicit> {
-            ^ D|/value|.getValue#(Null(null), ::R|/value|)
+            ^ D|/konstue|.getValue#(Null(null), ::R|/konstue|)
         }
     public? final? var variable: <implicit>by LAZY_EXPRESSION
         public? get(): <implicit> {

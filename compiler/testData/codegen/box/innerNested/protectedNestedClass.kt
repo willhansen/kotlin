@@ -16,8 +16,8 @@ package b
 import a.A
 
 class B : A() {
-    protected val c = A.C()
-    val result: String get() = c.result()
+    protected konst c = A.C()
+    konst result: String get() = c.result()
 }
 
 fun box(): String {

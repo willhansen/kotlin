@@ -9,7 +9,7 @@ fun interface Foo {
 fun foo1(f: Foo) = f.invoke()
 
 inline fun bar1(): String {
-    val f: () -> String = { "O" }
+    konst f: () -> String = { "O" }
     return foo1(Foo(f))
 }
 
@@ -18,7 +18,7 @@ inline fun bar1(): String {
 fun foo2(f: Foo) = f.invoke()
 
 inline fun bar2(): String {
-    val f: () -> String = { "K" }
+    konst f: () -> String = { "K" }
     return foo2(Foo(f))
 }
 

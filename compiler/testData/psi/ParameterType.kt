@@ -14,11 +14,11 @@ fun test() {
     }
 }
 
-val a = fun (b) {}
-val a = fun (b = 4) {}
-val a = fun (b: Int) {}
+konst a = fun (b) {}
+konst a = fun (b = 4) {}
+konst a = fun (b: Int) {}
 
-val a: (A) -> Unit
-val a: (a: A) -> Unit
+konst a: (A) -> Unit
+konst a: (a: A) -> Unit
 
 class A(a: Int)

@@ -5,7 +5,7 @@ import kotlin.coroutines.*
 import helpers.*
 
 fun f(a: suspend () -> Unit) {
-    val f = a::invoke
+    konst f = a::invoke
     f.startCoroutine(EmptyContinuation())
 }
 

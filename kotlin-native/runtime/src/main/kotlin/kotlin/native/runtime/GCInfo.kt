@@ -18,13 +18,13 @@ import kotlin.system.*
  * This class represents statistics of memory usage in one memory pool.
  *
  * @property totalObjectsSizeBytes The total size of allocated objects. System allocator overhead is not included,
- *                                 so it can not perfectly match the value received by os tools.
+ *                                 so it can not perfectly match the konstue received by os tools.
  *                                 All alignment and auxiliary object headers are included.
  */
 @NativeRuntimeApi
 @SinceKotlin("1.9")
 public class MemoryUsage(
-        val totalObjectsSizeBytes: Long,
+        konst totalObjectsSizeBytes: Long,
 )
 
 /**
@@ -36,8 +36,8 @@ public class MemoryUsage(
 @NativeRuntimeApi
 @SinceKotlin("1.9")
 public class SweepStatistics(
-    val sweptCount: Long,
-    val keptCount: Long,
+    konst sweptCount: Long,
+    konst keptCount: Long,
 )
 
 /**
@@ -47,8 +47,8 @@ public class SweepStatistics(
  * @property threadLocalReferences The number of objects in global variables with `@ThreadLocal` annotation.
  *                                 Object is counted once per each thread it was initialized in.
  * @property stackReferences The number of objects referenced from the stack of any thread.
- *                           These are function local variables and different temporary values, as function call arguments and
- *                           return values. They would be automatically removed from the root set when a corresponding function
+ *                           These are function local variables and different temporary konstues, as function call arguments and
+ *                           return konstues. They would be automatically removed from the root set when a corresponding function
  *                           call is finished.
  * @property globalReferences The number of objects in global variables. The object is counted only if the variable is initialized.
  * @property stableReferences The number of objects referenced by [kotlinx.cinterop.StableRef]. It includes both explicit usage
@@ -57,10 +57,10 @@ public class SweepStatistics(
 @NativeRuntimeApi
 @SinceKotlin("1.9")
 public class RootSetStatistics(
-        val threadLocalReferences: Long,
-        val stackReferences: Long,
-        val globalReferences: Long,
-        val stableReferences: Long
+        konst threadLocalReferences: Long,
+        konst stackReferences: Long,
+        konst globalReferences: Long,
+        konst stableReferences: Long
 )
 
 /**
@@ -90,20 +90,20 @@ public class RootSetStatistics(
 @NativeRuntimeApi
 @SinceKotlin("1.9")
 public class GCInfo(
-        val epoch: Long,
-        val startTimeNs: Long,
-        val endTimeNs: Long,
-        val pauseStartTimeNs: Long,
-        val pauseEndTimeNs: Long,
-        val postGcCleanupTimeNs: Long?,
-        val rootSet: RootSetStatistics,
-        val markedCount: Long,
-        val sweepStatistics: Map<String, SweepStatistics>,
-        val memoryUsageBefore: Map<String, MemoryUsage>,
-        val memoryUsageAfter: Map<String, MemoryUsage>,
+        konst epoch: Long,
+        konst startTimeNs: Long,
+        konst endTimeNs: Long,
+        konst pauseStartTimeNs: Long,
+        konst pauseEndTimeNs: Long,
+        konst postGcCleanupTimeNs: Long?,
+        konst rootSet: RootSetStatistics,
+        konst markedCount: Long,
+        konst sweepStatistics: Map<String, SweepStatistics>,
+        konst memoryUsageBefore: Map<String, MemoryUsage>,
+        konst memoryUsageAfter: Map<String, MemoryUsage>,
 ) {
     internal companion object {
-        val lastGCInfo: GCInfo?
+        konst lastGCInfo: GCInfo?
             get() = getGcInfo(0)
 
         private fun getGcInfo(id: Int) = GCInfoBuilder().apply { fill(id) }.build();
@@ -126,33 +126,33 @@ private class GCInfoBuilder() {
     var memoryUsageAfter = mutableMapOf<String, MemoryUsage>()
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setEpoch")
-    private fun setEpoch(value: Long) {
-        epoch = value
+    private fun setEpoch(konstue: Long) {
+        epoch = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setStartTime")
-    private fun setStartTime(value: Long) {
-        startTimeNs = value
+    private fun setStartTime(konstue: Long) {
+        startTimeNs = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setEndTime")
-    private fun setEndTime(value: Long) {
-        endTimeNs = value
+    private fun setEndTime(konstue: Long) {
+        endTimeNs = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setPauseStartTime")
-    private fun setPauseStartTime(value: Long) {
-        pauseStartTimeNs = value
+    private fun setPauseStartTime(konstue: Long) {
+        pauseStartTimeNs = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setPauseEndTime")
-    private fun setPauseEndTime(value: Long) {
-        pauseEndTimeNs = value
+    private fun setPauseEndTime(konstue: Long) {
+        pauseEndTimeNs = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setPostGcCleanupTime")
-    private fun setFinalizersDoneTime(value: Long) {
-        postGcCleanupTimeNs = value
+    private fun setFinalizersDoneTime(konstue: Long) {
+        postGcCleanupTimeNs = konstue
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setRootSet")
@@ -167,22 +167,22 @@ private class GCInfoBuilder() {
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setSweepStats")
     private fun setSweepStats(name: NativePtr, keptCount: Long, sweptCount: Long) {
-        val nameString = interpretCPointer<ByteVar>(name)!!.toKString()
-        val stats = SweepStatistics(sweptCount, keptCount)
+        konst nameString = interpretCPointer<ByteVar>(name)!!.toKString()
+        konst stats = SweepStatistics(sweptCount, keptCount)
         sweepStatistics[nameString] = stats
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setMemoryUsageBefore")
     private fun setMemoryUsageBefore(name: NativePtr, totalObjectsSize: Long) {
-        val nameString = interpretCPointer<ByteVar>(name)!!.toKString()
-        val memoryUsage = MemoryUsage(totalObjectsSize)
+        konst nameString = interpretCPointer<ByteVar>(name)!!.toKString()
+        konst memoryUsage = MemoryUsage(totalObjectsSize)
         memoryUsageBefore[nameString] = memoryUsage
     }
 
     @ExportForCppRuntime("Kotlin_Internal_GC_GCInfoBuilder_setMemoryUsageAfter")
     private fun setMemoryUsageAfter(name: NativePtr, totalObjectsSize: Long) {
-        val nameString = interpretCPointer<ByteVar>(name)!!.toKString()
-        val memoryUsage = MemoryUsage(totalObjectsSize)
+        konst nameString = interpretCPointer<ByteVar>(name)!!.toKString()
+        konst memoryUsage = MemoryUsage(totalObjectsSize)
         memoryUsageAfter[nameString] = memoryUsage
     }
 

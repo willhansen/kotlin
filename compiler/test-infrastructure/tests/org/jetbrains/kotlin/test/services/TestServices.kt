@@ -15,8 +15,8 @@ import kotlin.reflect.KClass
 interface TestService
 
 data class ServiceRegistrationData(
-    val kClass: KClass<out TestService>,
-    val serviceConstructor: (TestServices) -> TestService
+    konst kClass: KClass<out TestService>,
+    konst serviceConstructor: (TestServices) -> TestService
 )
 
 inline fun <reified T : TestService> service(
@@ -26,7 +26,7 @@ inline fun <reified T : TestService> service(
 }
 
 class TestServices : ComponentArrayOwner<TestService, TestService>(){
-    override val typeRegistry: TypeRegistry<TestService, TestService>
+    override konst typeRegistry: TypeRegistry<TestService, TestService>
         get() = Companion
 
     companion object : ConeTypeRegistry<TestService, TestService>() {

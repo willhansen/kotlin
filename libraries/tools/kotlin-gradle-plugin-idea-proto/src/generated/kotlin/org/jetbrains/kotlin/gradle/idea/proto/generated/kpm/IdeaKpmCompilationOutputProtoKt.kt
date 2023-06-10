@@ -10,7 +10,7 @@ object IdeaKpmCompilationOutputProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -32,58 +32,58 @@ object IdeaKpmCompilationOutputProtoKt {
      * <code>repeated string classes_dirs = 1;</code>
      * @return A list containing the classesDirs.
      */
-     val classesDirs: com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>
+     konst classesDirs: com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getClassesDirsList()
       )
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param value The classesDirs to add.
+     * @param konstue The classesDirs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addClassesDirs")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.add(value: kotlin.String) {
-      _builder.addClassesDirs(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.add(konstue: kotlin.String) {
+      _builder.addClassesDirs(konstue)
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param value The classesDirs to add.
+     * @param konstue The classesDirs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignClassesDirs")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param values The classesDirs to add.
+     * @param konstues The classesDirs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllClassesDirs")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllClassesDirs(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllClassesDirs(konstues)
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param values The classesDirs to add.
+     * @param konstues The classesDirs to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllClassesDirs")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param index The index to set the value at.
-     * @param value The classesDirs to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The classesDirs to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setClassesDirs")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setClassesDirs(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, ClassesDirsProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setClassesDirs(index, konstue)
     }/**
      * <code>repeated string classes_dirs = 1;</code>
      */
@@ -99,8 +99,8 @@ object IdeaKpmCompilationOutputProtoKt {
       @JvmName("getResourcesDir")
       get() = _builder.getResourcesDir()
       @JvmName("setResourcesDir")
-      set(value) {
-        _builder.setResourcesDir(value)
+      set(konstue) {
+        _builder.setResourcesDir(konstue)
       }
     /**
      * <code>optional string resources_dir = 2;</code>

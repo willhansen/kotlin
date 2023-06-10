@@ -10,10 +10,10 @@ inline fun readInlinedRemovedProperty() = removedProperty
 
 class C2 : C() {
     override fun removedOpenFunction(): String = "O" // does not call super
-    override val removedOpenProperty: String get() = "O" // does not call super
+    override konst removedOpenProperty: String get() = "O" // does not call super
 }
 
 class I2 : I {
     override fun removedOpenFunction(): String = "K" // does not call super
-    override val removedOpenProperty: String get() = "K" // does not call super
+    override konst removedOpenProperty: String get() = "K" // does not call super
 }

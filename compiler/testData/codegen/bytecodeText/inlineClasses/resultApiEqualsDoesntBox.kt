@@ -2,8 +2,8 @@
 // WITH_STDLIB
 // FILE: test.kt
 fun test() {
-    val result = Result.success("yes!")
-    val other = Result.success("nope")
+    konst result = Result.success("yes!")
+    konst other = Result.success("nope")
     if (result == other) println("==")
     if (result != other) println("!=")
 }

@@ -27,22 +27,22 @@ import kotlin.test.assertTrue
 class PrepareKotlinIdeaImportTaskTest {
 
     private companion object {
-        const val prepareKotlinIdeaImportTaskName = "prepareKotlinIdeaImport"
+        const konst prepareKotlinIdeaImportTaskName = "prepareKotlinIdeaImport"
     }
 
     @Test
     fun `test prepareKotlinIdeaImport task depending on commonizer and cinterop tasks`() {
-        val rootProject = ProjectBuilder.builder().build() as ProjectInternal
-        val subproject = ProjectBuilder.builder().withParent(rootProject).withName("subproject").build() as ProjectInternal
+        konst rootProject = ProjectBuilder.builder().build() as ProjectInternal
+        konst subproject = ProjectBuilder.builder().withParent(rootProject).withName("subproject").build() as ProjectInternal
         rootProject.enableCInteropCommonization()
         subproject.enableCInteropCommonization()
 
-        val kotlin = subproject.applyMultiplatformPlugin()
+        konst kotlin = subproject.applyMultiplatformPlugin()
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        rootProject.evaluate()
-        subproject.evaluate()
+        rootProject.ekonstuate()
+        subproject.ekonstuate()
 
         assertTrue(
             prepareKotlinIdeaImportTaskName in subproject.tasks.names,
@@ -55,24 +55,24 @@ class PrepareKotlinIdeaImportTaskTest {
 
     @Test
     fun `test declaring dependsOnIdeaImport`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
 
         assertNull(
             project.tasks.findByName(prepareKotlinIdeaImportTaskName),
             "Expected task $prepareKotlinIdeaImportTaskName to not be registered when no task declares a dependency"
         )
 
-        val testTaskA = project.tasks.register("testTaskA")
+        konst testTaskA = project.tasks.register("testTaskA")
         project.ideaImportDependsOn(testTaskA)
 
-        val prepareKotlinIdeaImportTask = assertNotNull(
+        konst prepareKotlinIdeaImportTask = assertNotNull(
             project.tasks.findByName(prepareKotlinIdeaImportTaskName),
             "Expected task $prepareKotlinIdeaImportTaskName to be registered after $testTaskA declared dependency"
         )
 
         prepareKotlinIdeaImportTask.assertTaskDependenciesEquals(setOf(testTaskA.get()))
 
-        val testTaskB = project.tasks.register("testTaskB")
+        konst testTaskB = project.tasks.register("testTaskB")
         project.ideaImportDependsOn(testTaskB)
 
         prepareKotlinIdeaImportTask.assertTaskDependenciesEquals(setOf(testTaskA.get(), testTaskB.get()))

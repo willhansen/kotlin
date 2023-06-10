@@ -1,4 +1,4 @@
 fun foo() {
-    val arr = arrayOfNulls<List<*>>(10)
+    konst arr = arrayOfNulls<List<*>>(10)
     <expr>arr</expr>[0] = emptyList<Any>()
 }

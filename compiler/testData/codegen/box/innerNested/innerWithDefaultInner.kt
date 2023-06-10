@@ -3,22 +3,22 @@
 // KT-40686
 
 
-class Outer(val o: String, val oo: String) {
-    inner class InnerArg(val i: String) {
-        val result: String get() = o + i
+class Outer(konst o: String, konst oo: String) {
+    inner class InnerArg(konst i: String) {
+        konst result: String get() = o + i
     }
 
-    inner class InnerParam(val i: InnerArg = InnerArg("B")) {
+    inner class InnerParam(konst i: InnerArg = InnerArg("B")) {
         fun foo() = i.result + oo
     }
 }
 
 
 fun box(): String {
-    val o = Outer("A", "C")
-    val i = o.InnerParam()
+    konst o = Outer("A", "C")
+    konst i = o.InnerParam()
 
-    val rr = i.foo()
+    konst rr = i.foo()
     if (rr != "ABC") return "FAIL: $rr"
 
     return "OK"

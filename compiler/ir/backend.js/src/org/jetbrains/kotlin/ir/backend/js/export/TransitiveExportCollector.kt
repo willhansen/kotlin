@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.ir.types.superTypes
 
 private typealias SubstitutionMap = Map<IrTypeParameterSymbol, IrType>
 
-class TransitiveExportCollector(val context: JsIrBackendContext) {
-    private val typesCaches = hashMapOf<ClassWithAppliedArguments, Set<IrType>>()
+class TransitiveExportCollector(konst context: JsIrBackendContext) {
+    private konst typesCaches = hashMapOf<ClassWithAppliedArguments, Set<IrType>>()
 
     fun collectSuperTypesTransitiveHierarchyFor(type: IrSimpleType): Set<IrType> {
-        val classSymbol = type.classOrNull ?: return emptySet()
+        konst classSymbol = type.classOrNull ?: return emptySet()
 
         return typesCaches.getOrPut(ClassWithAppliedArguments(classSymbol, type.arguments)) {
             type.collectSuperTypesTransitiveHierarchy(type.calculateTypeSubstitutionMap(emptyMap()))
@@ -30,7 +30,7 @@ class TransitiveExportCollector(val context: JsIrBackendContext) {
     }
 
     private fun IrSimpleType.collectSuperTypesTransitiveHierarchy(typeSubstitutionMap: SubstitutionMap): Set<IrType> {
-        val classifier = classOrNull ?: return emptySet()
+        konst classifier = classOrNull ?: return emptySet()
 
         return classifier.superTypes()
             .flatMap { (it as? IrSimpleType)?.collectTransitiveHierarchy(typeSubstitutionMap) ?: emptySet() }
@@ -38,7 +38,7 @@ class TransitiveExportCollector(val context: JsIrBackendContext) {
     }
 
     private fun IrSimpleType.findNearestExportedClass(typeSubstitutionMap: SubstitutionMap): IrSimpleType? {
-        val classifier = classifier as? IrClassSymbol ?: return null
+        konst classifier = classifier as? IrClassSymbol ?: return null
         if (classifier.owner.isExported(context)) return substitute(typeSubstitutionMap) as IrSimpleType
 
         return classifier.superTypes()
@@ -46,8 +46,8 @@ class TransitiveExportCollector(val context: JsIrBackendContext) {
     }
 
     private fun IrSimpleType.collectTransitiveHierarchy(typeSubstitutionMap: SubstitutionMap): Set<IrType> {
-        val owner = classifier.owner as? IrClass ?: return emptySet()
-        val substitutionMap = calculateTypeSubstitutionMap(typeSubstitutionMap)
+        konst owner = classifier.owner as? IrClass ?: return emptySet()
+        konst substitutionMap = calculateTypeSubstitutionMap(typeSubstitutionMap)
 
         return when {
             isBuiltInClass(owner) || isStdLibClass(owner) -> emptySet()
@@ -70,12 +70,12 @@ class TransitiveExportCollector(val context: JsIrBackendContext) {
     }
 
     private fun IrSimpleType.calculateTypeSubstitutionMap(typeSubstitutionMap: SubstitutionMap): SubstitutionMap {
-        val classifier = classOrNull ?: error("Unexpected classifier $classifier for collecting transitive hierarchy")
+        konst classifier = classOrNull ?: error("Unexpected classifier $classifier for collecting transitive hierarchy")
 
         return typeSubstitutionMap + classifier.owner.typeParameters.zip(arguments).associate {
             it.first.symbol to it.second.getSubstitution(typeSubstitutionMap)
         }
     }
 
-    private data class ClassWithAppliedArguments(val classSymbol: IrClassSymbol, val appliedArguments: List<IrTypeArgument>)
+    private data class ClassWithAppliedArguments(konst classSymbol: IrClassSymbol, konst appliedArguments: List<IrTypeArgument>)
 }

@@ -30,7 +30,7 @@ public final class FileEntry extends
   private FileEntry(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -82,10 +82,10 @@ public final class FileEntry extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -106,7 +106,7 @@ public final class FileEntry extends
     public FileEntry parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new FileEntry(input, extensionRegistry);
     }
   };
@@ -254,23 +254,23 @@ public final class FileEntry extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parseFrom(java.io.InputStream input)
@@ -411,7 +411,7 @@ public final class FileEntry extends
       org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.FileEntry) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -467,12 +467,12 @@ public final class FileEntry extends
      * <code>required string name = 1;</code>
      */
     public Builder setName(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-      name_ = value;
+      name_ = konstue;
       
       return this;
     }
@@ -489,12 +489,12 @@ public final class FileEntry extends
      * <code>required string name = 1;</code>
      */
     public Builder setNameBytes(
-        org.jetbrains.kotlin.protobuf.ByteString value) {
-      if (value == null) {
+        org.jetbrains.kotlin.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-      name_ = value;
+      name_ = konstue;
       
       return this;
     }
@@ -529,18 +529,18 @@ public final class FileEntry extends
      * <code>repeated int32 line_start_offset = 2 [packed = true];</code>
      */
     public Builder setLineStartOffset(
-        int index, int value) {
+        int index, int konstue) {
       ensureLineStartOffsetIsMutable();
-      lineStartOffset_.set(index, value);
+      lineStartOffset_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 line_start_offset = 2 [packed = true];</code>
      */
-    public Builder addLineStartOffset(int value) {
+    public Builder addLineStartOffset(int konstue) {
       ensureLineStartOffsetIsMutable();
-      lineStartOffset_.add(value);
+      lineStartOffset_.add(konstue);
       
       return this;
     }
@@ -548,10 +548,10 @@ public final class FileEntry extends
      * <code>repeated int32 line_start_offset = 2 [packed = true];</code>
      */
     public Builder addAllLineStartOffset(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureLineStartOffsetIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, lineStartOffset_);
+          konstues, lineStartOffset_);
       
       return this;
     }

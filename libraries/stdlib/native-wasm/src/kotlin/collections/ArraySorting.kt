@@ -8,8 +8,8 @@ package kotlin.collections
 
 private fun <T: Comparable<T>> mergeSort(array: Array<T>, start: Int, endInclusive: Int) {
     @Suppress("UNCHECKED_CAST")
-    val buffer = arrayOfNulls<Any?>(array.size) as Array<T>
-    val result = mergeSort(array, buffer, start, endInclusive)
+    konst buffer = arrayOfNulls<Any?>(array.size) as Array<T>
+    konst result = mergeSort(array, buffer, start, endInclusive)
     if (result !== array) {
         for (i in start..endInclusive) array[i] = result[i]
     }
@@ -21,11 +21,11 @@ private fun <T: Comparable<T>> mergeSort(array: Array<T>, buffer: Array<T>, star
         return array
     }
 
-    val median = (start + end) / 2
-    val left = mergeSort(array, buffer, start, median)
-    val right = mergeSort(array, buffer, median + 1, end)
+    konst median = (start + end) / 2
+    konst left = mergeSort(array, buffer, start, median)
+    konst right = mergeSort(array, buffer, median + 1, end)
 
-    val target = if (left === buffer) array else buffer
+    konst target = if (left === buffer) array else buffer
 
     // Merge.
     var leftIndex = start
@@ -33,8 +33,8 @@ private fun <T: Comparable<T>> mergeSort(array: Array<T>, buffer: Array<T>, star
     for (i in start..end) {
         when {
             leftIndex <= median && rightIndex <= end -> {
-                val leftValue = left[leftIndex]
-                val rightValue = right[rightIndex]
+                konst leftValue = left[leftIndex]
+                konst rightValue = right[rightIndex]
 
                 if (leftValue <= rightValue) {
                     target[i] = leftValue
@@ -61,8 +61,8 @@ private fun <T: Comparable<T>> mergeSort(array: Array<T>, buffer: Array<T>, star
 // Sort with comparator.
 private fun <T> mergeSort(array: Array<T>, start: Int, endInclusive: Int, comparator: Comparator<T>) {
     @Suppress("UNCHECKED_CAST")
-    val buffer = arrayOfNulls<Any?>(array.size) as Array<T>
-    val result = mergeSort(array, buffer, start, endInclusive, comparator)
+    konst buffer = arrayOfNulls<Any?>(array.size) as Array<T>
+    konst result = mergeSort(array, buffer, start, endInclusive, comparator)
     if (result !== array) {
         for (i in start..endInclusive) array[i] = result[i]
     }
@@ -74,11 +74,11 @@ private fun <T> mergeSort(array: Array<T>, buffer: Array<T>, start: Int, end: In
         return array
     }
 
-    val median = (start + end) / 2
-    val left = mergeSort(array, buffer, start, median, comparator)
-    val right = mergeSort(array, buffer, median + 1, end, comparator)
+    konst median = (start + end) / 2
+    konst left = mergeSort(array, buffer, start, median, comparator)
+    konst right = mergeSort(array, buffer, median + 1, end, comparator)
 
-    val target = if (left === buffer) array else buffer
+    konst target = if (left === buffer) array else buffer
 
     // Merge.
     var leftIndex = start
@@ -86,8 +86,8 @@ private fun <T> mergeSort(array: Array<T>, buffer: Array<T>, start: Int, end: In
     for (i in start..end) {
         when {
             leftIndex <= median && rightIndex <= end -> {
-                val leftValue = left[leftIndex]
-                val rightValue = right[rightIndex]
+                konst leftValue = left[leftIndex]
+                konst rightValue = right[rightIndex]
 
                 if (comparator.compare(leftValue, rightValue) <= 0) {
                     target[i] = leftValue
@@ -116,14 +116,14 @@ private fun partition(
         array: ByteArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -135,7 +135,7 @@ private fun partition(
 
 private fun quickSort(
         array: ByteArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -147,14 +147,14 @@ private fun partition(
         array: ShortArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -166,7 +166,7 @@ private fun partition(
 
 private fun quickSort(
         array: ShortArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -178,14 +178,14 @@ private fun partition(
         array: IntArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -197,7 +197,7 @@ private fun partition(
 
 private fun quickSort(
         array: IntArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -209,14 +209,14 @@ private fun partition(
         array: LongArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -228,7 +228,7 @@ private fun partition(
 
 private fun quickSort(
         array: LongArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -240,14 +240,14 @@ private fun partition(
         array: CharArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -259,7 +259,7 @@ private fun partition(
 
 private fun quickSort(
         array: CharArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -271,14 +271,14 @@ private fun partition(
         array: FloatArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i].compareTo(pivot) < 0)
             i++
         while (array[j].compareTo(pivot) > 0)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -290,7 +290,7 @@ private fun partition(
 
 private fun quickSort(
         array: FloatArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -302,14 +302,14 @@ private fun partition(
         array: DoubleArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i].compareTo(pivot) < 0)
             i++
         while (array[j].compareTo(pivot) > 0)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -321,7 +321,7 @@ private fun partition(
 
 private fun quickSort(
         array: DoubleArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -333,14 +333,14 @@ private fun partition(
         array: BooleanArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -352,7 +352,7 @@ private fun partition(
 
 private fun quickSort(
         array: BooleanArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)

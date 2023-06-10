@@ -47,7 +47,7 @@ public:
     void Commit() noexcept;
     // Clear storage. Can only be called after `Commit`.
     void Clear() noexcept;
-    // Lookup value in storage. Can only be called after `Commit`.
+    // Lookup konstue in storage. Can only be called after `Commit`.
     ObjHeader** Lookup(Key key, int index) noexcept;
 
     Iterator begin() noexcept { return Iterator(storage_.begin()); }

@@ -1,5 +1,5 @@
 open class A(init: A.() -> Unit) {
-    val prop: String = ""
+    konst prop: String = ""
 }
 
 object B : A({})

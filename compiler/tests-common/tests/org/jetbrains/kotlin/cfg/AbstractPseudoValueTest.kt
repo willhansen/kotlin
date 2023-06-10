@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.builtins.DefaultBuiltIns
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 import org.jetbrains.kotlin.cfg.pseudocode.PseudocodeImpl
 import org.jetbrains.kotlin.cfg.pseudocode.TypePredicate
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.InstructionWithValue
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.InstructionWithValue
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTreeVisitorVoid
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -28,17 +28,17 @@ import java.util.*
 
 abstract class AbstractPseudoValueTest : AbstractPseudocodeTest() {
     override fun dumpInstructions(pseudocode: PseudocodeImpl, out: StringBuilder, bindingContext: BindingContext) {
-        val expectedTypePredicateMap = HashMap<PseudoValue, TypePredicate>()
+        konst expectedTypePredicateMap = HashMap<PseudoValue, TypePredicate>()
 
         fun getElementToValueMap(pseudocode: PseudocodeImpl): Map<KtElement, PseudoValue> {
-            val elementToValues = LinkedHashMap<KtElement, PseudoValue>()
+            konst elementToValues = LinkedHashMap<KtElement, PseudoValue>()
             pseudocode.correspondingElement.accept(object : KtTreeVisitorVoid() {
                 override fun visitKtElement(element: KtElement) {
                     super.visitKtElement(element)
 
-                    val value = pseudocode.getElementValue(element)
-                    if (value != null) {
-                        elementToValues.put(element, value)
+                    konst konstue = pseudocode.getElementValue(element)
+                    if (konstue != null) {
+                        elementToValues.put(element, konstue)
                     }
                 }
             })
@@ -48,51 +48,51 @@ abstract class AbstractPseudoValueTest : AbstractPseudocodeTest() {
         fun elementText(element: KtElement?): String =
                 element?.text?.replace("\\s+".toRegex(), " ") ?: ""
 
-        fun valueDecl(value: PseudoValue): String {
-            val typePredicate = expectedTypePredicateMap.getOrPut(value) {
-                getExpectedTypePredicate(value, bindingContext, DefaultBuiltIns.Instance)
+        fun konstueDecl(konstue: PseudoValue): String {
+            konst typePredicate = expectedTypePredicateMap.getOrPut(konstue) {
+                getExpectedTypePredicate(konstue, bindingContext, DefaultBuiltIns.Instance)
             }
-            return "${value.debugName}: $typePredicate"
+            return "${konstue.debugName}: $typePredicate"
         }
 
-        fun valueDescription(element: KtElement?, value: PseudoValue): String {
+        fun konstueDescription(element: KtElement?, konstue: PseudoValue): String {
             return when {
-                value.element != element -> "COPY"
-                else -> value.createdAt?.let { "NEW: $it" } ?: ""
+                konstue.element != element -> "COPY"
+                else -> konstue.createdAt?.let { "NEW: $it" } ?: ""
             }
         }
 
-        val elementToValues = getElementToValueMap(pseudocode)
-        val unboundValues = pseudocode.instructions
+        konst elementToValues = getElementToValueMap(pseudocode)
+        konst unboundValues = pseudocode.instructions
                 .mapNotNull { (it as? InstructionWithValue)?.outputValue }
                 .filter { it.element == null }
                 .sortedBy { it.debugName }
-        val allValues = elementToValues.values + unboundValues
+        konst allValues = elementToValues.konstues + unboundValues
         if (allValues.isEmpty()) return
 
-        val valueDescriptions = LinkedHashMap<Pair<PseudoValue, KtElement?>, String>()
-        for (value in unboundValues) {
-            valueDescriptions[value to null] = valueDescription(null, value)
+        konst konstueDescriptions = LinkedHashMap<Pair<PseudoValue, KtElement?>, String>()
+        for (konstue in unboundValues) {
+            konstueDescriptions[konstue to null] = konstueDescription(null, konstue)
         }
-        for ((element, value) in elementToValues.entries) {
-            valueDescriptions[value to element] = valueDescription(element, value)
+        for ((element, konstue) in elementToValues.entries) {
+            konstueDescriptions[konstue to element] = konstueDescription(element, konstue)
         }
 
-        val elementColumnWidth = elementToValues.keys.maxOfOrNull { elementText(it).length } ?: 1
-        val valueColumnWidth = allValues.maxOf { valueDecl(it).length }
-        val valueDescColumnWidth = valueDescriptions.values.maxOf { it.length }
+        konst elementColumnWidth = elementToValues.keys.maxOfOrNull { elementText(it).length } ?: 1
+        konst konstueColumnWidth = allValues.maxOf { konstueDecl(it).length }
+        konst konstueDescColumnWidth = konstueDescriptions.konstues.maxOf { it.length }
 
-        for ((ve, description) in valueDescriptions.entries) {
-            val (value, element) = ve
-            val line =
+        for ((ve, description) in konstueDescriptions.entries) {
+            konst (konstue, element) = ve
+            konst line =
                     "%1$-${elementColumnWidth}s".format(elementText(element)) +
                      "   " +
-                     "%1$-${valueColumnWidth}s".format(valueDecl(value)) +
+                     "%1$-${konstueColumnWidth}s".format(konstueDecl(konstue)) +
                      "   " +
-                     "%1$-${valueDescColumnWidth}s".format(description)
+                     "%1$-${konstueDescColumnWidth}s".format(description)
             out.appendLine(line.trimEnd())
         }
     }
 
-    override fun getDataFileExtension(): String? = "values"
+    override fun getDataFileExtension(): String? = "konstues"
 }

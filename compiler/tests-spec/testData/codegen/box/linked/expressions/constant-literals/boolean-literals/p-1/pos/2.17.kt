@@ -10,15 +10,15 @@
  */
 
 open class A {
-    val x1 = true
+    konst x1 = true
 }
 
 final object `true` {
-    val x1 = false
+    konst x1 = false
 }
 
 object `false` : A() {
-    val x2 = false
+    konst x2 = false
 }
 
 fun box(): String? {

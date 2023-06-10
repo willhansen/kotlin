@@ -37,7 +37,7 @@ public actual external fun println()
  *
  * LF or CRLF is treated as the line terminator. Line terminator is not included in the returned string.
  *
- * The input is interpreted as UTF-8. Invalid bytes are replaced by the replacement character '\uFFFD'.
+ * The input is interpreted as UTF-8. Inkonstid bytes are replaced by the replacement character '\uFFFD'.
  */
 @SinceKotlin("1.6")
 public actual fun readln(): String = readlnOrNull() ?: throw ReadAfterEOFException("EOF has already been reached")
@@ -48,7 +48,7 @@ public actual fun readln(): String = readlnOrNull() ?: throw ReadAfterEOFExcepti
  *
  * LF or CRLF is treated as the line terminator. Line terminator is not included in the returned string.
  *
- * The input is interpreted as UTF-8. Invalid bytes are replaced by the replacement character '\uFFFD'.
+ * The input is interpreted as UTF-8. Inkonstid bytes are replaced by the replacement character '\uFFFD'.
  */
 @SinceKotlin("1.6")
 @GCUnsafeCall("Kotlin_io_Console_readlnOrNull")

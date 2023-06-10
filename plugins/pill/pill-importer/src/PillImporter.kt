@@ -10,15 +10,15 @@ import java.io.File
 
 @Suppress("unused")
 object PillImporter {
-    private val TASKS = mapOf(
+    private konst TASKS = mapOf(
         "pill" to JpsCompatiblePluginTasks::pill,
         "unpill" to JpsCompatiblePluginTasks::unpill
     )
 
     @JvmStatic
     fun run(rootProject: Project, taskName: String, platformDir: File, resourcesDir: File, isIdePluginAttached: Boolean) {
-        val tasks = JpsCompatiblePluginTasks(rootProject, platformDir, resourcesDir, isIdePluginAttached)
-        val task = TASKS[taskName] ?: error("Unknown task $taskName, available tasks: " + TASKS.keys.joinToString())
+        konst tasks = JpsCompatiblePluginTasks(rootProject, platformDir, resourcesDir, isIdePluginAttached)
+        konst task = TASKS[taskName] ?: error("Unknown task $taskName, available tasks: " + TASKS.keys.joinToString())
         task(tasks)
     }
 }

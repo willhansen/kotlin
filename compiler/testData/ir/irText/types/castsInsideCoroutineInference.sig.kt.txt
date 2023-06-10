@@ -21,7 +21,7 @@ class SafeCollector<T : Any?> : FlowCollector<T> {
   // CHECK:
   //   Mangled name: SafeCollector{}collector
   //   Public signature: /SafeCollector.collector|4340129746635199588[0]
-  internal val collector: FlowCollector<T>
+  internal konst collector: FlowCollector<T>
     // CHECK JVM_IR:
     //   Mangled name: SafeCollector#<get-collector>(){}FlowCollector<1:0>
     //   Public signature: /SafeCollector.collector.<get-collector>|7868666490655551038[0]
@@ -38,7 +38,7 @@ class SafeCollector<T : Any?> : FlowCollector<T> {
   // CHECK:
   //   Mangled name: SafeCollector#emit(1:0){}
   //   Public signature: /SafeCollector.emit|-8401228374452471444[0]
-  override suspend fun emit(value: T): Unit
+  override suspend fun emit(konstue: T): Unit
 
 }
 
@@ -69,7 +69,7 @@ interface FlowCollector<in T : Any?> {
   // CHECK:
   //   Mangled name: FlowCollector#emit(1:0){}
   //   Public signature: /FlowCollector.emit|-8401228374452471444[0]
-  abstract suspend fun emit(value: T): Unit
+  abstract suspend fun emit(konstue: T): Unit
 
 }
 
@@ -86,7 +86,7 @@ interface ProducerScope<in E : Any?> : CoroutineScope, SendChannel<E> {
   // CHECK:
   //   Mangled name: ProducerScope{}channel
   //   Public signature: /ProducerScope.channel|1234507572828696339[0]
-  abstract val channel: SendChannel<E>
+  abstract konst channel: SendChannel<E>
     // CHECK JVM_IR:
     //   Mangled name: ProducerScope#<get-channel>(){}SendChannel<1:0>
     //   Public signature: /ProducerScope.channel.<get-channel>|6405133005890607699[0]

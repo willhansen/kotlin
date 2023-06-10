@@ -2,7 +2,7 @@ package
 
 public open class Base {
     public constructor Base(/*0*/ s: kotlin.String)
-    public final val s: kotlin.String
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -10,7 +10,7 @@ public open class Base {
 
 @NoArg public final class Derived : Base {
     public constructor Derived(/*0*/ s: kotlin.String)
-    public final override /*1*/ /*fake_override*/ val s: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

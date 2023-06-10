@@ -1,4 +1,4 @@
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 class A {
     private var foo = 1
@@ -10,7 +10,7 @@ class A {
     fun `access$getFoo$cp`(): Int = 1
     fun `access$setFoo$cp`(d: Int) {}
 
-    val bar = 0
+    konst bar = 0
         get() = { field }()
 
     //synthetic field convention accessor
@@ -22,7 +22,7 @@ class A {
             get() = field
 
         fun test() {
-            eval {
+            ekonst {
                 foo = 2
                 foo
             }
@@ -33,7 +33,7 @@ class A {
     }
 
     fun test() {
-        eval {
+        ekonst {
             foo = 2;
             foo + bar
         }

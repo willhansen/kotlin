@@ -30,9 +30,9 @@ class TempFiles(pathToTemporaryDir: String? = null) {
         }
     }
 
-    val deleteOnExit = pathToTemporaryDir == null || pathToTemporaryDir.isEmpty()
+    konst deleteOnExit = pathToTemporaryDir == null || pathToTemporaryDir.isEmpty()
 
-    private val dir by lazy {
+    private konst dir by lazy {
         if (deleteOnExit) {
             createTempDir("konan_temp")
         } else {

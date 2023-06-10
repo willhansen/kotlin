@@ -3,8 +3,8 @@
 // MODULE: lib
 // FILE: 2.kt
 abstract class A {
-    protected val value = "O"
-    fun f(k: String = "K") = value + k
+    protected konst konstue = "O"
+    fun f(k: String = "K") = konstue + k
 }
 
 abstract class B : A()
@@ -20,8 +20,8 @@ fun box(): String = D().f()
 
 // FILE: 2.kt
 abstract class A {
-    protected val value = "O"
-    fun f(k: String = "K") = value + k
+    protected konst konstue = "O"
+    fun f(k: String = "K") = konstue + k
 }
 
 abstract class B : A()

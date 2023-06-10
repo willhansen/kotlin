@@ -12,7 +12,7 @@ public interface A {
 // FILE: K.kt
 
 open class K : A {
-    val a = ""
+    konst a = ""
     fun foo() {}
     fun foo(i: Int) {}
     fun baz(i: Int) {}

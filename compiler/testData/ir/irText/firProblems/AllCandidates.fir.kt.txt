@@ -14,7 +14,7 @@ class MyCandidate {
 
   }
 
-  val resolvedCall: ResolvedCall<*>
+  konst resolvedCall: ResolvedCall<*>
     field = resolvedCall
     get
 

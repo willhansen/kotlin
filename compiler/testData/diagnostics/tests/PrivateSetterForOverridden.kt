@@ -2,13 +2,13 @@
 // See KT-10325: private setters are allowed for overridden properties in final class
 
 interface A {
-    val a: Int
+    konst a: Int
 
     var b: Int
 }
 
 abstract class AA {
-    abstract val c: Int
+    abstract konst c: Int
 
     abstract var d: Int
 }

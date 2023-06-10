@@ -16,16 +16,16 @@ import java.io.File
 import java.io.FileWriter
 
 internal class OneToManyMappingsGenerator private constructor(
-    private val outputFile: File,
-    private val mappingsBuilder: OneToManyMappingsBuilder,
-    private val mappingsWriter: OneToManyMappingsWriter
+    private konst outputFile: File,
+    private konst mappingsBuilder: OneToManyMappingsBuilder,
+    private konst mappingsWriter: OneToManyMappingsWriter
 ) {
     fun appendLine(line: SpecialCasingLine) {
         mappingsBuilder.append(line)
     }
 
     fun generate() {
-        val mappings = mappingsBuilder.build()
+        konst mappings = mappingsBuilder.build()
 
         FileWriter(outputFile).use { writer ->
             writer.writeHeader(outputFile, "kotlin.text")
@@ -39,20 +39,20 @@ internal class OneToManyMappingsGenerator private constructor(
 
     companion object {
         fun forUppercase(outputFile: File, target: KotlinTarget, bmpUnicodeDataLines: List<UnicodeDataLine>): OneToManyMappingsGenerator {
-            val builder = OneToManyUppercaseMappingsBuilder(bmpUnicodeDataLines)
-            val writer = OneToManyUppercaseMappingsWriter(RangesWritingStrategy.of(target, "OneToManyUppercase"))
+            konst builder = OneToManyUppercaseMappingsBuilder(bmpUnicodeDataLines)
+            konst writer = OneToManyUppercaseMappingsWriter(RangesWritingStrategy.of(target, "OneToManyUppercase"))
             return OneToManyMappingsGenerator(outputFile, builder, writer)
         }
 
         fun forLowercase(outputFile: File, target: KotlinTarget, bmpUnicodeDataLines: List<UnicodeDataLine>): OneToManyMappingsGenerator {
-            val builder = OneToManyLowercaseMappingsBuilder(bmpUnicodeDataLines)
-            val writer = OneToManyLowercaseMappingsWriter(RangesWritingStrategy.of(target, "OneToManyLowercase"))
+            konst builder = OneToManyLowercaseMappingsBuilder(bmpUnicodeDataLines)
+            konst writer = OneToManyLowercaseMappingsWriter(RangesWritingStrategy.of(target, "OneToManyLowercase"))
             return OneToManyMappingsGenerator(outputFile, builder, writer)
         }
 
         fun forTitlecase(outputFile: File, bmpUnicodeDataLines: List<UnicodeDataLine>): OneToManyMappingsGenerator {
-            val builder = OneToManyTitlecaseMappingsBuilder(bmpUnicodeDataLines)
-            val writer = OneToManyTitlecaseMappingsWriter()
+            konst builder = OneToManyTitlecaseMappingsBuilder(bmpUnicodeDataLines)
+            konst writer = OneToManyTitlecaseMappingsWriter()
             return OneToManyMappingsGenerator(outputFile, builder, writer)
         }
     }

@@ -15,9 +15,9 @@ class Derived : BaseJava() {
 }
 
 fun box(): String {
-    val first = Derived().a
+    konst first = Derived().a
     if (first != "OK") return first
-    val d = Derived()
+    konst d = Derived()
     if (d::a.get() != "OK") return d::a.get()
     d.a = "12"
     if (d.a != "12") return "Error writing: ${d.a}"

@@ -64,12 +64,12 @@ fun <T> Flow<T>.flatMap(mapper: suspend (T) -> Flow<T>): Flow<T> = TODO()
 fun <T> flow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = TODO()
 
 @OptIn(ExperimentalTypeInference::class)
-inline fun <T, R> Flow<T>.flatMapLatest(crossinline transform: suspend (value: T) -> Flow<R>): Flow<R> = TODO()
+inline fun <T, R> Flow<T>.flatMapLatest(crossinline transform: suspend (konstue: T) -> Flow<R>): Flow<R> = TODO()
 
 interface Flow<out T>
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 fun box(): String {

@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
 
 internal class CandidateFactoriesAndCollectors(
     // Common calls
-    val candidateFactory: CandidateFactory,
-    val resultCollector: CandidateCollector,
+    konst candidateFactory: CandidateFactory,
+    konst resultCollector: CandidateCollector,
 )
 
 
@@ -33,7 +33,7 @@ internal class TowerLevelHandler {
         towerLevel: TowerScopeLevel
     ): ProcessResult {
         processResult = ProcessResult.SCOPE_EMPTY
-        val processor =
+        konst processor =
             TowerScopeLevelProcessor(
                 info,
                 explicitReceiverKind,
@@ -70,11 +70,11 @@ internal class TowerLevelHandler {
 }
 
 private class TowerScopeLevelProcessor(
-    val callInfo: CallInfo,
-    val explicitReceiverKind: ExplicitReceiverKind,
-    val resultCollector: CandidateCollector,
-    val candidateFactory: CandidateFactory,
-    val group: TowerGroup
+    konst callInfo: CallInfo,
+    konst explicitReceiverKind: ExplicitReceiverKind,
+    konst resultCollector: CandidateCollector,
+    konst candidateFactory: CandidateFactory,
+    konst group: TowerGroup
 ) : TowerScopeLevel.TowerScopeLevelProcessor<FirBasedSymbol<*>> {
     override fun consumeCandidate(
         symbol: FirBasedSymbol<*>,
@@ -99,6 +99,6 @@ private class TowerScopeLevelProcessor(
     }
 
     companion object {
-        val defaultPackage = Name.identifier("kotlin")
+        konst defaultPackage = Name.identifier("kotlin")
     }
 }

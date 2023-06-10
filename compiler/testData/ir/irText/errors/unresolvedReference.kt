@@ -3,11 +3,11 @@
 // IGNORE_BACKEND: JS_IR_ES6
 // !IGNORE_ERRORS
 
-val test1 = unresolved
+konst test1 = unresolved
 
-val test2: Unresolved =
+konst test2: Unresolved =
         unresolved()
 
-val test3 = 42.unresolved(56)
+konst test3 = 42.unresolved(56)
 
-val test4 = 42 *
+konst test4 = 42 *

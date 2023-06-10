@@ -48,12 +48,12 @@ private fun Project.ideModuleVersion(forIde: Boolean) = when (IdeVersionConfigur
 }
 
 fun Project.intellijSdkVersionForIde(): String? {
-    val majorVersion = kotlinBuildProperties.getOrNull("attachedIntellijVersion") as? String ?: return null
+    konst majorVersion = kotlinBuildProperties.getOrNull("attachedIntellijVersion") as? String ?: return null
     return rootProject.findProperty("versions.intellijSdk.forIde.$majorVersion") as? String
 }
 
 fun RepositoryHandler.kotlinBuildLocalRepo(project: Project): IvyArtifactRepository = ivy {
-    val baseDir = project.kotlinBuildLocalRepoDir()
+    konst baseDir = project.kotlinBuildLocalRepoDir()
     url = baseDir.toURI()
 
     patternLayout {

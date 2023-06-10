@@ -1,5 +1,5 @@
 class A {
-    private class AInnerPrivate(val str: String) {
+    private class AInnerPrivate(konst str: String) {
 
     }
 
@@ -8,7 +8,7 @@ class A {
         B
     }
 
-    public class AInnerPublic(val str: String) {
+    public class AInnerPublic(konst str: String) {
 
     }
 }

@@ -19,6 +19,6 @@ public class JavaSuperClass implements JavaInterface {
 class KtClass: JavaInterface by JavaSuperClass()
 
 fun test() {
-    val ktInstance = KtClass()
+    konst ktInstance = KtClass()
     ktInstance.foo(<!NAMED_ARGUMENTS_NOT_ALLOWED!>javaName<!> = 1)
 }

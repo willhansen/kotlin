@@ -23,9 +23,9 @@ class MeasureTimeTest {
 
     @Test
     fun measureTimeOfCalc() {
-        val someResult: String
+        konst someResult: String
 
-        val elapsed = measureTime {
+        konst elapsed = measureTime {
             someResult = longRunningCalc()
         }
 
@@ -37,12 +37,12 @@ class MeasureTimeTest {
 
     @Test
     fun measureTimeAndResult() {
-        val someResult: String
+        konst someResult: String
 
-        val measured: TimedValue<String> = measureTimedValue { longRunningCalc().also { someResult = it } }
+        konst measured: TimedValue<String> = measureTimedValue { longRunningCalc().also { someResult = it } }
         println("measured: $measured")
 
-        val (result, elapsed) = measured
+        konst (result, elapsed) = measured
 
         assertEquals(someResult, result)
         assertTrue(elapsed > Duration.ZERO)
@@ -51,17 +51,17 @@ class MeasureTimeTest {
 
     @Test
     fun measureTimeTestClock() {
-        val timeSource = TestTimeSource()
-        val expectedNs = Random.nextLong(1_000_000_000L)
-        val elapsed = timeSource.measureTime {
+        konst timeSource = TestTimeSource()
+        konst expectedNs = Random.nextLong(1_000_000_000L)
+        konst elapsed = timeSource.measureTime {
             timeSource += expectedNs.nanoseconds
         }
 
         assertEquals(expectedNs.nanoseconds, elapsed)
 
-        val expectedResult: Long
+        konst expectedResult: Long
 
-        val (result, elapsed2) = timeSource.measureTimedValue {
+        konst (result, elapsed2) = timeSource.measureTimedValue {
             timeSource += expectedNs.nanoseconds
             expectedResult = expectedNs
             expectedNs

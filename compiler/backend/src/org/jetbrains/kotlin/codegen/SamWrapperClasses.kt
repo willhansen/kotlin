@@ -25,11 +25,11 @@ import org.jetbrains.kotlin.resolve.inline.InlineUtil
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.kotlin.backend.common.SamType
 
-class SamWrapperClasses(private val state: GenerationState) {
+class SamWrapperClasses(private konst state: GenerationState) {
 
-    private data class WrapperKey(val samType: SamType, val file: KtFile, val insideInline: Boolean)
+    private data class WrapperKey(konst samType: SamType, konst file: KtFile, konst insideInline: Boolean)
 
-    private val samInterfaceToWrapperClass = hashMapOf<WrapperKey, Type>()
+    private konst samInterfaceToWrapperClass = hashMapOf<WrapperKey, Type>()
 
     fun getSamWrapperClass(
         samType: SamType,
@@ -37,8 +37,8 @@ class SamWrapperClasses(private val state: GenerationState) {
         expressionCodegen: ExpressionCodegen,
         contextDescriptor: CallableMemberDescriptor
     ): Type {
-        val parentContext = expressionCodegen.context
-        val isInsideInline = InlineUtil.isInPublicInlineScope(parentContext.contextDescriptor)
+        konst parentContext = expressionCodegen.context
+        konst isInsideInline = InlineUtil.isInPublicInlineScope(parentContext.contextDescriptor)
         return samInterfaceToWrapperClass.getOrPut(WrapperKey(samType, file, isInsideInline)) {
             SamWrapperCodegen(state, samType, expressionCodegen.parentCodegen, parentContext, isInsideInline)
                 .genWrapper(file, contextDescriptor)

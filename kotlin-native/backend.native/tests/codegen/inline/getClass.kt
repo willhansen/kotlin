@@ -8,8 +8,8 @@ package codegen.inline.getClass
 import kotlin.test.*
 
 fun foo() {
-    val cls1: Any? = Int
-    val cls2: Any? = null
+    konst cls1: Any? = Int
+    konst cls2: Any? = null
 
     cls1?.let {
         cls2?.let {

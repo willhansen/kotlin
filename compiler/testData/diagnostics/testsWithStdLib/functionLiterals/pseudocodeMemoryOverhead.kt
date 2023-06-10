@@ -16,28 +16,28 @@ private fun <A, B> binaryOperation(
         checker: Function2<BigInteger, BigInteger, BigInteger>
 ) = BinaryOperationKey(a, b, functionName) to Pair(operation, checker) <!UNCHECKED_CAST!>as Pair<Function2<Any?, Any?, Any>, Function2<BigInteger, BigInteger, BigInteger>><!>
 
-private data class UnaryOperationKey<A>(val f: CompileTimeType<out A>, val functionName: String)
+private data class UnaryOperationKey<A>(konst f: CompileTimeType<out A>, konst functionName: String)
 //HashMap<BinaryOperationKey<*, *>, Pair<Function2<Any?, Any?, Any>, Function2<BigInteger, BigInteger, BigInteger>>>
-private data class BinaryOperationKey<A, B>(val f: CompileTimeType<out A>, val g: CompileTimeType<out B>, val functionName: String)
+private data class BinaryOperationKey<A, B>(konst f: CompileTimeType<out A>, konst g: CompileTimeType<out B>, konst functionName: String)
 
 private class CompileTimeType<T>
 
-private val BYTE = CompileTimeType<Byte>()
-private val CHAR = CompileTimeType<Char>()
-private val BOOLEAN = CompileTimeType<Boolean>()
-private val DOUBLE = CompileTimeType<Double>()
-private val FLOAT = CompileTimeType<Float>()
-private val INT = CompileTimeType<Int>()
-private val LONG = CompileTimeType<Long>()
-private val SHORT = CompileTimeType<Short>()
-private val STRING = CompileTimeType<String>()
-private val ANY = CompileTimeType<Any>()
+private konst BYTE = CompileTimeType<Byte>()
+private konst CHAR = CompileTimeType<Char>()
+private konst BOOLEAN = CompileTimeType<Boolean>()
+private konst DOUBLE = CompileTimeType<Double>()
+private konst FLOAT = CompileTimeType<Float>()
+private konst INT = CompileTimeType<Int>()
+private konst LONG = CompileTimeType<Long>()
+private konst SHORT = CompileTimeType<Short>()
+private konst STRING = CompileTimeType<String>()
+private konst ANY = CompileTimeType<Any>()
 
 
-private val emptyBinaryFun: Function2<BigInteger, BigInteger, BigInteger> = { a, b -> BigInteger("0") }
-private val emptyUnaryFun: Function1<Long, Long> = { a -> 1.toLong() }
+private konst emptyBinaryFun: Function2<BigInteger, BigInteger, BigInteger> = { a, b -> BigInteger("0") }
+private konst emptyUnaryFun: Function1<Long, Long> = { a -> 1.toLong() }
 
-private val unaryOperations: HashMap<UnaryOperationKey<*>, Pair<Function1<Any?, Any>, Function1<Long, Long>>>
+private konst unaryOperations: HashMap<UnaryOperationKey<*>, Pair<Function1<Any?, Any>, Function1<Long, Long>>>
         = hashMapOf<UnaryOperationKey<*>, Pair<Function1<Any?, Any>, Function1<Long, Long>>>(
         unaryOperation(BOOLEAN, "not!", { a -> a.not() }, emptyUnaryFun),
         unaryOperation(BYTE, "toInt", { a -> a.toInt() }, emptyUnaryFun),
@@ -107,7 +107,7 @@ private val unaryOperations: HashMap<UnaryOperationKey<*>, Pair<Function1<Any?, 
         unaryOperation(STRING, "toString", { a -> a.toString() }, emptyUnaryFun)
 )
 
-private val binaryOperations: HashMap<BinaryOperationKey<*, *>, Pair<Function2<Any?, Any?, Any>, Function2<BigInteger, BigInteger, BigInteger>>>
+private konst binaryOperations: HashMap<BinaryOperationKey<*, *>, Pair<Function2<Any?, Any?, Any>, Function2<BigInteger, BigInteger, BigInteger>>>
         = hashMapOf<BinaryOperationKey<*, *>, Pair<Function2<Any?, Any?, Any>, Function2<BigInteger, BigInteger, BigInteger>>>(
         binaryOperation(BOOLEAN, BOOLEAN, "xor", { a, b -> a.xor(b) }, emptyBinaryFun),
         binaryOperation(BOOLEAN, BOOLEAN, "or", { a, b -> a.or(b) }, emptyBinaryFun),
@@ -360,7 +360,7 @@ private val binaryOperations: HashMap<BinaryOperationKey<*, *>, Pair<Function2<A
 )
 
 //from library
-class BigInteger(val value: String) {
+class BigInteger(konst konstue: String) {
     fun add(o: BigInteger): BigInteger = o
     fun divide(o: BigInteger): BigInteger = o
     fun rem(o: BigInteger): BigInteger = o

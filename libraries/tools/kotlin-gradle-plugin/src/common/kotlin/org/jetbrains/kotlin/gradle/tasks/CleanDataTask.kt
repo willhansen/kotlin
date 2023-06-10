@@ -34,14 +34,14 @@ open class CleanDataTask : DefaultTask() {
     @Suppress("unused")
     @TaskAction
     fun exec() {
-        val expirationDate = Instant.now().minus(Duration.ofDays(timeToLiveInDays))
+        konst expirationDate = Instant.now().minus(Duration.ofDays(timeToLiveInDays))
 
         cleanableStoreProvider.get().cleanDir(expirationDate)
 
     }
 
     companion object {
-        const val NAME_SUFFIX: String = "KotlinClean"
+        const konst NAME_SUFFIX: String = "KotlinClean"
     }
 
 }

@@ -7,15 +7,15 @@
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class Annotation(val str: String)
+annotation class Annotation(konst str: String)
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AnnotationWithAnnotation(val anno: Annotation)
+annotation class AnnotationWithAnnotation(konst anno: Annotation)
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AnnotationWithAnnotationWithAnnotation(val anno: AnnotationWithAnnotation)
+annotation class AnnotationWithAnnotationWithAnnotation(konst anno: AnnotationWithAnnotation)
 
 @AnnotationWithAnnotation(Annotation("Str" <!EVALUATED("String")!>+ "ing"<!>))
 class A

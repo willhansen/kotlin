@@ -13,11 +13,11 @@ import kotlin.internal.AccessibleLateinitPropertyLiteral
 import kotlin.reflect.KProperty0
 
 /**
- * Returns `true` if this lateinit property has been assigned a value, and `false` otherwise.
+ * Returns `true` if this lateinit property has been assigned a konstue, and `false` otherwise.
  *
  * Cannot be used in an inline function, to avoid binary compatibility issues.
  */
 @SinceKotlin("1.2")
 @InlineOnly
-inline val @receiver:AccessibleLateinitPropertyLiteral KProperty0<*>.isInitialized: Boolean
+inline konst @receiver:AccessibleLateinitPropertyLiteral KProperty0<*>.isInitialized: Boolean
     get() = throw NotImplementedError("Implementation is intrinsic")

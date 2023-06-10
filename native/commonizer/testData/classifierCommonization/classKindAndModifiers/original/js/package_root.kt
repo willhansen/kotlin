@@ -104,13 +104,13 @@ class CC3 {
     companion object DD3
 }
 
-inline class EE1(val value: String)
-inline class EE2(val value: String)
+inline class EE1(konst konstue: String)
+inline class EE2(konst konstue: String)
 
-external class FF1(val property1: String) {
-    val property2 = property1
-    val property3 get() = property1
-    val property4: String
+external class FF1(konst property1: String) {
+    konst property2 = property1
+    konst property3 get() = property1
+    konst property4: String
 
     fun function1() = property1
     fun function2(): String
@@ -133,17 +133,17 @@ enum class II1
 enum class II2 { FOO, BAR }
 
 interface JJ {
-    val property: String
+    konst property: String
     fun function(): String
 }
 
-class KK1(override val property: String) : JJ {
+class KK1(override konst property: String) : JJ {
     override fun function() = property
 }
 
-class KK2(private val wrapped: JJ) : JJ by wrapped
+class KK2(private konst wrapped: JJ) : JJ by wrapped
 
-data class LL1(val value: String)
-data class LL2(val value: String)
+data class LL1(konst konstue: String)
+data class LL2(konst konstue: String)
 
 external class ExternalClass

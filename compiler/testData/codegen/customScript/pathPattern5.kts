@@ -3,6 +3,6 @@
 
 // param: World
 
-val res = "Hello $name2"
+konst res = "Hello $name2"
 
 // expected: res=Hello World

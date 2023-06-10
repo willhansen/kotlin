@@ -15,14 +15,14 @@ kotlin {
         browser {
         }
         binaries.executable()
-        val main by compilations.getting
+        konst main by compilations.getting
         main.binaries
             .matching { it.mode == KotlinJsBinaryMode.DEVELOPMENT }
             .matching { it is JsIrBinary }
             .all  {
                 this as JsIrBinary
                 linkTask.configure {
-                    val rootCacheDir = rootCacheDirectory.get()
+                    konst rootCacheDir = rootCacheDirectory.get()
                     rootCacheDirectory.set(rootCacheDir)
                 }
             }

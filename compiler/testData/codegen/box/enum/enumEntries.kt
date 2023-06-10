@@ -10,7 +10,7 @@ enum class MyEnum {
 
 @OptIn(ExperimentalStdlibApi::class)
 fun box(): String {
-    val entries = MyEnum.entries
-    val entry = entries[0]
+    konst entries = MyEnum.entries
+    konst entry = entries[0]
     return entry.toString()
 }

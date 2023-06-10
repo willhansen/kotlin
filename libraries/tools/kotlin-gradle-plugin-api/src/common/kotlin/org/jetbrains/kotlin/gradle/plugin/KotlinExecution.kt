@@ -23,11 +23,11 @@ interface KotlinExecution<out SourceType : ExecutionSource> : Named {
      * The source of the executable code that this execution runs from. It is usually set via members of  execution source support
      * interfaces, such as [CompilationExecutionSourceSupport] or [ClasspathTestRunSourceSupport], or `setExecutionSourceFrom*` functions.
      */
-    val executionSource: SourceType
+    konst executionSource: SourceType
 }
 
 interface KotlinTargetExecution<out SourceType : ExecutionSource> : KotlinExecution<SourceType> {
-    val target: KotlinTarget
+    konst target: KotlinTarget
 }
 
 /**
@@ -36,7 +36,7 @@ interface KotlinTargetExecution<out SourceType : ExecutionSource> : KotlinExecut
  * See also: [CompilationExecutionSourceSupport].
  */
 interface CompilationExecutionSource<CompilationType : KotlinCompilation<*>> : ExecutionSource {
-    val compilation: CompilationType
+    konst compilation: CompilationType
 }
 
 @Suppress("deprecation")
@@ -53,5 +53,5 @@ interface CompilationExecutionSourceSupport<in T : KotlinCompilationToRunnableFi
 }
 
 interface ExecutionTaskHolder<T : Task> {
-    val executionTask: TaskProvider<T>
+    konst executionTask: TaskProvider<T>
 }

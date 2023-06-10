@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
 class C {
-    val plainField: Int = 1
+    konst plainField: Int = 1
     @delegate:Transient
-    val lazy by lazy { 1 }
+    konst lazy by lazy { 1 }
 }

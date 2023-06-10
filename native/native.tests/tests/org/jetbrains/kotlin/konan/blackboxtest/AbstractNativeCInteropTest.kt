@@ -24,30 +24,30 @@ import org.junit.jupiter.api.Tag
 import java.io.File
 
 abstract class AbstractNativeCInteropFModulesTest : AbstractNativeCInteropTest() {
-    override val fmodules = true
+    override konst fmodules = true
 
-    override val defFileName: String = "pod1.def"
+    override konst defFileName: String = "pod1.def"
 }
 
 abstract class AbstractNativeCInteropNoFModulesTest : AbstractNativeCInteropTest() {
-    override val fmodules = false
+    override konst fmodules = false
 
-    override val defFileName: String = "pod1.def"
+    override konst defFileName: String = "pod1.def"
 }
 
 abstract class AbstractNativeCInteropIncludeCategoriesTest : AbstractNativeCInteropTest() {
-    override val fmodules: Boolean
+    override konst fmodules: Boolean
         get() = false
 
-    override val defFileName: String
+    override konst defFileName: String
         get() = "dependency.def"
 }
 
 @Tag("cinterop")
 abstract class AbstractNativeCInteropTest : AbstractNativeCInteropBaseTest() {
-    abstract val fmodules: Boolean
+    abstract konst fmodules: Boolean
 
-    abstract val defFileName: String
+    abstract konst defFileName: String
 
     @Synchronized
     protected fun runTest(@TestDataFile testPath: String) {
@@ -57,38 +57,38 @@ abstract class AbstractNativeCInteropTest : AbstractNativeCInteropBaseTest() {
             this is AbstractNativeCInteropFModulesTest &&
                     targets.testTarget.family == Family.ANDROID
         )
-        val testPathFull = getAbsoluteFile(testPath)
-        val testDataDir = testPathFull.parentFile.parentFile
-        val includeFolder = testDataDir.resolve("include")
-        val defFile = testPathFull.resolve(defFileName)
-        val defContents = defFile.readText().split("\n").map { it.trim() }
-        val defHasObjC = defContents.any { it.endsWith("Objective-C") }
+        konst testPathFull = getAbsoluteFile(testPath)
+        konst testDataDir = testPathFull.parentFile.parentFile
+        konst includeFolder = testDataDir.resolve("include")
+        konst defFile = testPathFull.resolve(defFileName)
+        konst defContents = defFile.readText().split("\n").map { it.trim() }
+        konst defHasObjC = defContents.any { it.endsWith("Objective-C") }
         Assumptions.assumeFalse(defHasObjC && !targets.testTarget.family.isAppleFamily)
 
-        val defHasHeaders = defContents.any { it.startsWith("headers") }
+        konst defHasHeaders = defContents.any { it.startsWith("headers") }
         Assumptions.assumeFalse(fmodules && defHasHeaders)
 
-        val goldenFile = if (testDataDir.name == "builtins")
+        konst goldenFile = if (testDataDir.name == "builtins")
             getBuiltinsGoldenFile(testPathFull)
         else
             getGoldenFile(testPathFull)
-        val fmodulesArgs = if (fmodules) TestCompilerArgs("-compiler-option", "-fmodules") else TestCompilerArgs.EMPTY
-        val includeArgs = if (testDataDir.name.startsWith("framework"))
+        konst fmodulesArgs = if (fmodules) TestCompilerArgs("-compiler-option", "-fmodules") else TestCompilerArgs.EMPTY
+        konst includeArgs = if (testDataDir.name.startsWith("framework"))
             TestCompilerArgs("-compiler-option", "-F${testDataDir.canonicalPath}")
         else
             TestCompilerArgs("-compiler-option", "-I${includeFolder.canonicalPath}")
 
-        val testCompilationResult = cinteropToLibrary(targets, defFile, buildDir, includeArgs + fmodulesArgs)
+        konst testCompilationResult = cinteropToLibrary(targets, defFile, buildDir, includeArgs + fmodulesArgs)
         // If we are running fmodules-specific test without -fmodules then we want to be sure that cinterop fails the way we want it to.
         if (!fmodules && testPath.endsWith("FModules/")) {
-            val loggedData = (testCompilationResult as TestCompilationResult.CompilationToolFailure).loggedData
-            val prettyMessage = CInteropHints.fmodulesHint
+            konst loggedData = (testCompilationResult as TestCompilationResult.CompilationToolFailure).loggedData
+            konst prettyMessage = CInteropHints.fmodulesHint
             assertTrue(loggedData.toString().contains(prettyMessage)) {
                 "Test failed. CInterop compilation result was: $testCompilationResult"
             }
         } else {
-            val klibContents = testCompilationResult.assertSuccess().resultingArtifact.getContents(kotlinNativeClassLoader.classLoader)
-            val expectedContents = goldenFile.readText()
+            konst klibContents = testCompilationResult.assertSuccess().resultingArtifact.getContents(kotlinNativeClassLoader.classLoader)
+            konst expectedContents = goldenFile.readText()
             assertEquals(StringUtilRt.convertLineSeparators(expectedContents), StringUtilRt.convertLineSeparators(klibContents)) {
                 "Test failed. CInterop compilation result was: $testCompilationResult"
             }
@@ -100,7 +100,7 @@ abstract class AbstractNativeCInteropTest : AbstractNativeCInteropBaseTest() {
     }
 
     private fun getBuiltinsGoldenFile(testPathFull: File): File {
-        val goldenFilePart = when (targets.testTarget) {
+        konst goldenFilePart = when (targets.testTarget) {
             KonanTarget.ANDROID_ARM32 -> "ARM32"
             KonanTarget.ANDROID_ARM64 -> "ARM64"
             KonanTarget.ANDROID_X64 -> "X64"

@@ -10,11 +10,11 @@ inline fun <T> myRun(block: () -> T) = block()
 import test.*
 
 fun box(): String {
-    val x = myRun {
+    konst x = myRun {
         fun foo() = "OK"
 
-        val o = object {
-            val f = ::foo
+        konst o = object {
+            konst f = ::foo
             fun bar() = f()
         }
         o

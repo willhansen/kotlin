@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.resolve.calls.NewCommonSuperTypeCalculator
 import org.jetbrains.kotlin.resolve.calls.commonSuperType
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.checkers.PrimitiveNumericComparisonInfo
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.intersectTypes
 import org.jetbrains.kotlin.types.typeUtil.isPrimitiveNumberType
@@ -62,9 +62,9 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         )
 
     fun generatePrefixExpression(expression: KtPrefixExpression): IrExpression {
-        val ktOperator = expression.operationReference.getReferencedNameElementType()
+        konst ktOperator = expression.operationReference.getReferencedNameElementType()
 
-        return when (val irOperator = getPrefixOperator(ktOperator)) {
+        return when (konst irOperator = getPrefixOperator(ktOperator)) {
             null -> throw AssertionError("Unexpected prefix operator: $ktOperator")
 
             in INCREMENT_DECREMENT_OPERATORS ->
@@ -77,9 +77,9 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     fun generatePostfixExpression(expression: KtPostfixExpression): IrExpression {
-        val ktOperator = expression.operationReference.getReferencedNameElementType()
+        konst ktOperator = expression.operationReference.getReferencedNameElementType()
 
-        return when (val irOperator = getPostfixOperator(ktOperator)) {
+        return when (konst irOperator = getPostfixOperator(ktOperator)) {
             null -> throw AssertionError("Unexpected postfix operator: $ktOperator")
 
             in INCREMENT_DECREMENT_OPERATORS ->
@@ -92,11 +92,11 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     fun generateCastExpression(expression: KtBinaryExpressionWithTypeRHS): IrExpression {
-        val ktOperator = expression.operationReference.getReferencedNameElementType()
-        val irOperator = getIrTypeOperator(ktOperator)
-        val rhsType = getOrFail(BindingContext.TYPE, expression.right!!)
+        konst ktOperator = expression.operationReference.getReferencedNameElementType()
+        konst irOperator = getIrTypeOperator(ktOperator)
+        konst rhsType = getOrFail(BindingContext.TYPE, expression.right!!)
 
-        val resultType = when (irOperator) {
+        konst resultType = when (irOperator) {
             IrTypeOperator.CAST ->
                 rhsType
             IrTypeOperator.SAFE_CAST ->
@@ -112,9 +112,9 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     fun generateInstanceOfExpression(expression: KtIsExpression): IrStatement {
-        val ktOperator = expression.operationReference.getReferencedNameElementType()
-        val irOperator = getIrTypeOperator(ktOperator)!!
-        val againstType = getOrFail(BindingContext.TYPE, expression.typeReference)
+        konst ktOperator = expression.operationReference.getReferencedNameElementType()
+        konst irOperator = getIrTypeOperator(ktOperator)!!
+        konst againstType = getOrFail(BindingContext.TYPE, expression.typeReference)
 
         return IrTypeOperatorCallImpl(
             expression.startOffsetSkippingComments, expression.endOffset, context.irBuiltIns.booleanType, irOperator,
@@ -124,12 +124,12 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     fun generateBinaryExpression(expression: KtBinaryExpression): IrExpression {
-        val ktOperator = expression.operationReference.getReferencedNameElementType()
+        konst ktOperator = expression.operationReference.getReferencedNameElementType()
         if (ktOperator == KtTokens.IDENTIFIER) {
             return generateBinaryOperatorAsCall(expression, null)
         }
 
-        return when (val irOperator = getInfixOperator(ktOperator)) {
+        return when (konst irOperator = getInfixOperator(ktOperator)) {
             null -> throw AssertionError("Unexpected infix operator: $ktOperator")
             IrStatementOrigin.EQ -> AssignmentGenerator(statementGenerator).generateAssignment(expression, irOperator)
             in AUGMENTED_ASSIGNMENTS -> AssignmentGenerator(statementGenerator).generateAugmentedAssignment(expression, irOperator)
@@ -145,21 +145,21 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun isDynamicUnaryOperator(ktUnaryExpression: KtUnaryExpression): Boolean {
-        val arg = ktUnaryExpression.baseExpression ?: return false
-        val argType = context.bindingContext.getType(arg) ?: return false
+        konst arg = ktUnaryExpression.baseExpression ?: return false
+        konst argType = context.bindingContext.getType(arg) ?: return false
         return argType.isDynamic()
     }
 
     private fun isDynamicBinaryOperator(ktExpression: KtBinaryExpression): Boolean {
-        val lhs = ktExpression.left ?: return false
-        val lhsType = context.bindingContext.getType(lhs) ?: return false
+        konst lhs = ktExpression.left ?: return false
+        konst lhsType = context.bindingContext.getType(lhs) ?: return false
         return lhsType.isDynamic()
     }
 
     private fun generateDynamicUnaryExpression(ktExpression: KtUnaryExpression): IrExpression {
-        val ktArg = ktExpression.baseExpression ?: throw AssertionError("No arg in ${ktExpression.text}")
-        val kotlinType = context.bindingContext.getType(ktExpression) ?: throw AssertionError("No type for ${ktExpression.text}")
-        val operator = ktExpression.getDynamicOperator()
+        konst ktArg = ktExpression.baseExpression ?: throw AssertionError("No arg in ${ktExpression.text}")
+        konst kotlinType = context.bindingContext.getType(ktExpression) ?: throw AssertionError("No type for ${ktExpression.text}")
+        konst operator = ktExpression.getDynamicOperator()
         return IrDynamicOperatorExpressionImpl(
             ktExpression.startOffsetSkippingComments,
             ktExpression.endOffset,
@@ -171,20 +171,20 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun generateDynamicBinaryExpression(ktExpression: KtBinaryExpression): IrExpression {
-        val ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
-        val ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
+        konst ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
+        konst ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
 
-        val kotlinType = context.bindingContext.getType(ktExpression) ?: throw AssertionError("No type for ${ktExpression.text}")
+        konst kotlinType = context.bindingContext.getType(ktExpression) ?: throw AssertionError("No type for ${ktExpression.text}")
 
-        val startOffset = ktExpression.startOffsetSkippingComments
-        val endOffset = ktExpression.endOffset
-        val irType = kotlinType.toIrType()
+        konst startOffset = ktExpression.startOffsetSkippingComments
+        konst endOffset = ktExpression.endOffset
+        konst irType = kotlinType.toIrType()
 
         if (ktExpression.operationToken == KtTokens.IDENTIFIER) {
             return generateCall(getResolvedCall(ktExpression)!!, ktExpression, null)
         }
 
-        val operator = ktExpression.getDynamicOperator()
+        konst operator = ktExpression.getDynamicOperator()
 
         return IrDynamicOperatorExpressionImpl(startOffset, endOffset, irType, operator).apply {
             left = ktLeft.genExpr()
@@ -193,11 +193,11 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun getResultTypeForElvis(expression: KtExpression): KotlinType {
-        val binaryExpression = KtPsiUtil.safeDeparenthesize(expression)
-        val expressionType = context.bindingContext.getType(binaryExpression)!!
+        konst binaryExpression = KtPsiUtil.safeDeparenthesize(expression)
+        konst expressionType = context.bindingContext.getType(binaryExpression)!!
         if (binaryExpression !is KtBinaryExpression || binaryExpression.operationToken != KtTokens.ELVIS) return expressionType
 
-        val inferredType = getResolvedCall(binaryExpression)!!.resultingDescriptor.returnType!!
+        konst inferredType = getResolvedCall(binaryExpression)!!.resultingDescriptor.returnType!!
 
         // OI has a rather complex bug with constraint system for special call for '?:' that breaks IR-based back-ends.
         // In NI this bug is fixed.
@@ -206,19 +206,19 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         if (!inferredType.isError) return inferredType
 
         // Infer type for elvis manually. Take into account possibly nested elvises.
-        val rightType = getResultTypeForElvis(binaryExpression.right!!).unwrap()
-        val leftType = getResultTypeForElvis(binaryExpression.left!!).unwrap()
-        val leftNNType = intersectTypes(listOf(leftType, (context.irBuiltIns as IrBuiltInsOverDescriptors).any))
+        konst rightType = getResultTypeForElvis(binaryExpression.right!!).unwrap()
+        konst leftType = getResultTypeForElvis(binaryExpression.left!!).unwrap()
+        konst leftNNType = intersectTypes(listOf(leftType, (context.irBuiltIns as IrBuiltInsOverDescriptors).any))
         return NewCommonSuperTypeCalculator.commonSuperType(listOf(rightType, leftNNType))
     }
 
     private fun generateElvis(expression: KtBinaryExpression): IrExpression {
-        val resultType = getResultTypeForElvis(expression).toIrType()
-        val irArgument0 = expression.left!!.genExpr()
-        val irArgument1 = expression.right!!.genExpr()
+        konst resultType = getResultTypeForElvis(expression).toIrType()
+        konst irArgument0 = expression.left!!.genExpr()
+        konst irArgument1 = expression.right!!.genExpr()
 
         return irBlock(expression.startOffsetSkippingComments, expression.endOffset, IrStatementOrigin.ELVIS, resultType) {
-            val temporary = irTemporary(irArgument0, "elvis_lhs")
+            konst temporary = irTemporary(irArgument0, "elvis_lhs")
             +irIfNull(
                 resultType,
                 irGet(temporary.type, temporary.symbol),
@@ -231,14 +231,14 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     private fun generateBinaryBooleanOperator(ktExpression: KtBinaryExpression, irOperator: IrStatementOrigin): IrExpression {
         if (isDynamicBinaryOperator(ktExpression)) return generateDynamicBinaryExpression(ktExpression)
 
-        val ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
-        val ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
+        konst ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
+        konst ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
 
-        val irArgument0 = ktLeft.genExpr()
-        val irArgument1 = ktRight.genExpr()
+        konst irArgument0 = ktLeft.genExpr()
+        konst irArgument1 = ktRight.genExpr()
 
-        val startOffset = ktExpression.startOffsetSkippingComments
-        val endOffset = ktExpression.endOffset
+        konst startOffset = ktExpression.startOffsetSkippingComments
+        konst endOffset = ktExpression.endOffset
 
         return when (irOperator) {
             IrStatementOrigin.OROR ->
@@ -251,9 +251,9 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun generateInOperator(expression: KtBinaryExpression, irOperator: IrStatementOrigin): IrExpression {
-        val containsCall = getResolvedCall(expression)!!
+        konst containsCall = getResolvedCall(expression)!!
 
-        val irContainsCall = generateCall(containsCall, expression, irOperator)
+        konst irContainsCall = generateCall(containsCall, expression, irOperator)
 
         return when (irOperator) {
             IrStatementOrigin.IN ->
@@ -275,10 +275,10 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     private fun generateIdentityOperator(expression: KtBinaryExpression, irOperator: IrStatementOrigin): IrExpression {
         if (isDynamicBinaryOperator(expression)) return generateDynamicBinaryExpression(expression)
 
-        val irArgument0 = expression.left!!.genExpr()
-        val irArgument1 = expression.right!!.genExpr()
+        konst irArgument0 = expression.left!!.genExpr()
+        konst irArgument1 = expression.right!!.genExpr()
 
-        val irIdentityEquals = primitiveOp2(
+        konst irIdentityEquals = primitiveOp2(
             expression.startOffsetSkippingComments, expression.endOffset,
             context.irBuiltIns.eqeqeqSymbol,
             context.irBuiltIns.booleanType,
@@ -313,14 +313,14 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     private fun generateEqualityOperator(expression: KtBinaryExpression, irOperator: IrStatementOrigin): IrExpression {
         if (isDynamicBinaryOperator(expression)) return generateDynamicBinaryExpression(expression)
 
-        val comparisonInfo = getPrimitiveNumericComparisonInfo(expression)
-        val comparisonType = comparisonInfo?.comparisonType
+        konst comparisonInfo = getPrimitiveNumericComparisonInfo(expression)
+        konst comparisonType = comparisonInfo?.comparisonType
 
-        val eqeqSymbol =
+        konst eqeqSymbol =
             context.irBuiltIns.ieee754equalsFunByOperandType[kotlinTypeToIrType(comparisonType)?.classifierOrNull]
                 ?: context.irBuiltIns.eqeqSymbol
 
-        val irEquals = primitiveOp2(
+        konst irEquals = primitiveOp2(
             expression.startOffsetSkippingComments, expression.endOffset,
             eqeqSymbol,
             context.irBuiltIns.booleanType,
@@ -354,8 +354,8 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         comparisonInfo: PrimitiveNumericComparisonInfo?
     ): IrExpression =
         if (comparisonInfo != null) {
-            val comparisonType = comparisonInfo.comparisonType
-            val eqeqSymbol =
+            konst comparisonType = comparisonInfo.comparisonType
+            konst eqeqSymbol =
                 context.irBuiltIns.ieee754equalsFunByOperandType[kotlinTypeToIrType(comparisonType)?.classifierOrNull] ?: context.irBuiltIns
                     .eqeqSymbol
             primitiveOp2(
@@ -380,9 +380,9 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         if (targetType == null) return this
         if (operandType == null) throw AssertionError("operandType should be non-null")
 
-        val operandNNType = operandType.makeNotNullable()
+        konst operandNNType = operandType.makeNotNullable()
 
-        val conversionFunction = operandNNType.findConversionFunctionTo(targetType)
+        konst conversionFunction = operandNNType.findConversionFunctionTo(targetType)
 
         return when {
             !operandNNType.isPrimitiveNumberType() ->
@@ -416,7 +416,7 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         functionDescriptor: FunctionDescriptor,
         receiver: IrExpression
     ): IrExpression {
-        val originalSymbol = context.symbolTable.referenceSimpleFunction(functionDescriptor.original)
+        konst originalSymbol = context.symbolTable.referenceSimpleFunction(functionDescriptor.original)
         return IrCallImpl.fromSymbolDescriptor(
             startOffset,
             endOffset,
@@ -431,11 +431,11 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun KotlinType.findConversionFunctionTo(targetType: KotlinType): FunctionDescriptor? {
-        val targetTypeName = targetType.constructor.declarationDescriptor?.name?.asString() ?: return null
+        konst targetTypeName = targetType.constructor.declarationDescriptor?.name?.asString() ?: return null
         return memberScope.findSingleFunction(Name.identifier("to$targetTypeName"))
     }
 
-    private val primitiveTypeMapping: Map<SimpleType, IrType> =
+    private konst primitiveTypeMapping: Map<SimpleType, IrType> =
         (context.irBuiltIns as IrBuiltInsOverDescriptors).run { primitiveTypes.zip(primitiveIrTypes).toMap() }
 
     private fun kotlinTypeToIrType(kotlinType: KotlinType?) = kotlinType?.let { primitiveTypeMapping[it] }
@@ -443,16 +443,16 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     private fun generateComparisonOperator(ktExpression: KtBinaryExpression, origin: IrStatementOrigin): IrExpression {
         if (isDynamicBinaryOperator(ktExpression)) return generateDynamicBinaryExpression(ktExpression)
 
-        val startOffset = ktExpression.startOffsetSkippingComments
-        val endOffset = ktExpression.endOffset
+        konst startOffset = ktExpression.startOffsetSkippingComments
+        konst endOffset = ktExpression.endOffset
 
-        val comparisonInfo = getPrimitiveNumericComparisonInfo(ktExpression)
+        konst comparisonInfo = getPrimitiveNumericComparisonInfo(ktExpression)
 
-        val ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
-        val ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
+        konst ktLeft = ktExpression.left ?: throw AssertionError("No LHS in ${ktExpression.text}")
+        konst ktRight = ktExpression.right ?: throw AssertionError("No RHS in ${ktExpression.text}")
 
         return if (comparisonInfo != null) {
-            val comparisonType = comparisonInfo.comparisonType
+            konst comparisonType = comparisonInfo.comparisonType
             primitiveOp2(
                 startOffset, endOffset,
                 getComparisonOperatorSymbol(
@@ -465,7 +465,7 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
                 ktRight.generateAsPrimitiveNumericComparisonOperand(comparisonInfo.rightPrimitiveType, comparisonInfo.comparisonType)
             )
         } else {
-            val resolvedCall = getResolvedCall(ktExpression)
+            konst resolvedCall = getResolvedCall(ktExpression)
                 ?: throw AssertionError("No resolved call for comparison operator ${ktExpression.text}")
 
             primitiveOp2(
@@ -496,26 +496,26 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         }[primitiveNumericType.classifierOrFail]!!
 
     private fun generateExclExclOperator(expression: KtPostfixExpression, origin: IrStatementOrigin): IrExpression {
-        val ktArgument = KtPsiUtil.deparenthesize(expression.baseExpression!!)!!
-        val irArgument = ktArgument.genExpr()
-        val ktOperator = expression.operationReference
+        konst ktArgument = KtPsiUtil.deparenthesize(expression.baseExpression!!)!!
+        konst irArgument = ktArgument.genExpr()
+        konst ktOperator = expression.operationReference
 
-        val argumentType = context.bindingContext.getType(ktArgument)
+        konst argumentType = context.bindingContext.getType(ktArgument)
             ?: throw AssertionError("No type for !! argument")
 
-        val expressionType = context.extensions.enhancedNullability.stripEnhancedNullability(argumentType.makeNotNullable())
+        konst expressionType = context.extensions.enhancedNullability.stripEnhancedNullability(argumentType.makeNotNullable())
 
-        val checkNotNull = context.irBuiltIns.checkNotNullSymbol.descriptor
-        val checkNotNullSubstituted =
+        konst checkNotNull = context.irBuiltIns.checkNotNullSymbol.descriptor
+        konst checkNotNullSubstituted =
             checkNotNull.substitute(
                 TypeSubstitutor.create(
                     mapOf(checkNotNull.typeParameters[0].typeConstructor to TypeProjectionImpl(argumentType))
                 )
             ) ?: throw AssertionError("Substitution failed for $checkNotNull: T=$argumentType")
 
-        val expressionIrType = expressionType.toIrType()
+        konst expressionIrType = expressionType.toIrType()
 
-        val checkNotNullSymbol = context.irBuiltIns.checkNotNullSymbol
+        konst checkNotNullSymbol = context.irBuiltIns.checkNotNullSymbol
         return IrCallImpl.fromSymbolDescriptor(
             ktOperator.startOffsetSkippingComments, ktOperator.endOffset,
             expressionIrType,
@@ -532,7 +532,7 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
         if (isDynamicBinaryOperator(expression)) {
             return generateDynamicBinaryExpression(expression)
         }
-        val callBuilder = statementGenerator.pregenerateCall(getResolvedCall(expression)!!)
+        konst callBuilder = statementGenerator.pregenerateCall(getResolvedCall(expression)!!)
         return CallGenerator(statementGenerator).generateFunctionCall(
             callBuilder.descriptor as? FunctionDescriptor
                 ?: throw AssertionError("Operator call resolved to a non-function: ${callBuilder.descriptor}"),
@@ -543,11 +543,11 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     private fun generatePrefixOperatorAsCall(expression: KtPrefixExpression, origin: IrStatementOrigin): IrExpression {
-        val resolvedCall = getResolvedCall(expression)!!
+        konst resolvedCall = getResolvedCall(expression)!!
 
         if (expression.baseExpression is KtConstantExpression) {
-            ConstantExpressionEvaluator.getConstant(expression, context.bindingContext)?.let { constant ->
-                val receiverType = resolvedCall.dispatchReceiver?.type
+            ConstantExpressionEkonstuator.getConstant(expression, context.bindingContext)?.let { constant ->
+                konst receiverType = resolvedCall.dispatchReceiver?.type
                 if (receiverType != null && KotlinBuiltIns.isPrimitiveType(receiverType)) {
                     return statementGenerator.generateConstantExpression(expression, constant)
                 }
@@ -560,10 +560,10 @@ internal class OperatorExpressionGenerator(statementGenerator: StatementGenerato
     }
 
     fun generateDynamicArrayAccess(ktArrayAccessExpression: KtArrayAccessExpression): IrExpression {
-        val startOffset = ktArrayAccessExpression.startOffsetSkippingComments
-        val endOffset = ktArrayAccessExpression.endOffset
+        konst startOffset = ktArrayAccessExpression.startOffsetSkippingComments
+        konst endOffset = ktArrayAccessExpression.endOffset
 
-        val kotlinType = context.bindingContext.getType(ktArrayAccessExpression)
+        konst kotlinType = context.bindingContext.getType(ktArrayAccessExpression)
             ?: throw AssertionError("No type for ${ktArrayAccessExpression.text}")
 
         return IrDynamicOperatorExpressionImpl(

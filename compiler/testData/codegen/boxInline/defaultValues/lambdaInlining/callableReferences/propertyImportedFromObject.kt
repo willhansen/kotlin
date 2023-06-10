@@ -3,7 +3,7 @@
 package test
 
 object A {
-    val ok = "OK"
+    konst ok = "OK"
 }
 inline fun stub() {}
 

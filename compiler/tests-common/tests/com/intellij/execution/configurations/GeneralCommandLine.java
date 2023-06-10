@@ -127,7 +127,7 @@ public class GeneralCommandLine implements UserDataHolder {
     }
 
     /**
-     * Note: the map returned is forgiving to passing null values into putAll().
+     * Note: the map returned is forgiving to passing null konstues into putAll().
      */
     @NotNull
     public Map<String, String> getEnvironment() {
@@ -143,8 +143,8 @@ public class GeneralCommandLine implements UserDataHolder {
     }
 
     @NotNull
-    public GeneralCommandLine withEnvironment(@NonNls @NotNull String key, @NonNls @NotNull String value) {
-        getEnvironment().put(key, value);
+    public GeneralCommandLine withEnvironment(@NonNls @NotNull String key, @NonNls @NotNull String konstue) {
+        getEnvironment().put(key, konstue);
         return this;
     }
 
@@ -335,7 +335,7 @@ public class GeneralCommandLine implements UserDataHolder {
             LOG.debug("  charset: " + myCharset);
         }
 
-        List<String> commands = validateAndPrepareCommandLine();
+        List<String> commands = konstidateAndPrepareCommandLine();
         try {
             return startProcess(commands);
         }
@@ -346,12 +346,12 @@ public class GeneralCommandLine implements UserDataHolder {
     }
 
     public @NotNull ProcessBuilder toProcessBuilder() throws ExecutionException {
-        List<String> escapedCommands = validateAndPrepareCommandLine();
+        List<String> escapedCommands = konstidateAndPrepareCommandLine();
         return toProcessBuilderInternal(escapedCommands);
     }
 
     @NotNull
-    private List<String> validateAndPrepareCommandLine() throws ExecutionException {
+    private List<String> konstidateAndPrepareCommandLine() throws ExecutionException {
         try {
             if (myWorkDirectory != null) {
                 if (!myWorkDirectory.exists()) {
@@ -373,9 +373,9 @@ public class GeneralCommandLine implements UserDataHolder {
 
         for (Map.Entry<String, String> entry : myEnvParams.entrySet()) {
             String name = entry.getKey();
-            String value = entry.getValue();
-            if (!EnvironmentUtil.isValidName(name)) throw new IllegalEnvVarException("run.configuration.invalid.env.name: " + name);
-            if (!EnvironmentUtil.isValidValue(value)) throw new IllegalEnvVarException("run.configuration.invalid.env.value: " + name + ", " + value);
+            String konstue = entry.getValue();
+            if (!EnvironmentUtil.isValidName(name)) throw new IllegalEnvVarException("run.configuration.inkonstid.env.name: " + name);
+            if (!EnvironmentUtil.isValidValue(konstue)) throw new IllegalEnvVarException("run.configuration.inkonstid.env.konstue: " + name + ", " + konstue);
         }
 
         String exePath = myExePath;
@@ -398,7 +398,7 @@ public class GeneralCommandLine implements UserDataHolder {
      * @implNote for subclasses:
      * <p>On Windows the escapedCommands argument must never be modified or augmented in any way.
      * Windows command line handling is extremely fragile and vague, and the exact escaping of a particular argument may vary
-     * depending on values of the preceding arguments.
+     * depending on konstues of the preceding arguments.
      * <pre>
      *   [foo] [^] -> [foo] [^^]
      * </pre>
@@ -496,12 +496,12 @@ public class GeneralCommandLine implements UserDataHolder {
     }
 
     @Override
-    public <T> void putUserData(@NotNull Key<T> key, @Nullable T value) {
+    public <T> void putUserData(@NotNull Key<T> key, @Nullable T konstue) {
         if (myUserData == null) {
-            if (value == null) return;
+            if (konstue == null) return;
             myUserData = new HashMap<>();
         }
-        myUserData.put(key, value);
+        myUserData.put(key, konstue);
     }
 
     private static final class MyMap extends Object2ObjectOpenCustomHashMap<String, String> {

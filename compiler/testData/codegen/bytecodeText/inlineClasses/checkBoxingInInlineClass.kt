@@ -1,5 +1,5 @@
 // !LANGUAGE: +InlineClasses
 
-inline class AsAny(val s: Any?)
+inline class AsAny(konst s: Any?)
 
 // 1 INVOKESPECIAL AsAny.<init>

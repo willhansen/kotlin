@@ -8,7 +8,7 @@ fun testIt() =
         "ghi"
 
 fun box(): String {
-    val test = testIt()
+    konst test = testIt()
     if (test != "abcdefghi") return "Failed, test==$test"
 
     return "OK"

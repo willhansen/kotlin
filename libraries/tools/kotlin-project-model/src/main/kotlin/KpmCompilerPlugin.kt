@@ -37,44 +37,44 @@ interface KpmCompilerPlugin {
  * Plugin data can be used for changing some compilation request
  */
 data class PluginData(
-    val pluginId: String,
-    val artifact: ArtifactCoordinates,
-    val options: List<PluginOption>
+    konst pluginId: String,
+    konst artifact: ArtifactCoordinates,
+    konst options: List<PluginOption>
 ) {
     // FIXME: (?) Is it common thing or gradle/maven centric?
     data class ArtifactCoordinates(
-        val group: String,
-        val artifact: String,
-        val version: String? = null
+        konst group: String,
+        konst artifact: String,
+        konst version: String? = null
     )
 }
 
 sealed class PluginOption {
-    abstract val key: String
+    abstract konst key: String
 
     /**
-     * Indicates whether value of [PluginOption] should be stored for incremental build checks.
-     * Value changes of non-transient [PluginOption] will invalidate incremental caches.
+     * Indicates whether konstue of [PluginOption] should be stored for incremental build checks.
+     * Value changes of non-transient [PluginOption] will inkonstidate incremental caches.
      */
-    abstract val isTransient: Boolean
+    abstract konst isTransient: Boolean
 }
 
 data class StringOption(
-    override val key: String,
-    val value: String,
-    override val isTransient: Boolean = false
+    override konst key: String,
+    konst konstue: String,
+    override konst isTransient: Boolean = false
 ) : PluginOption()
 
 data class FilesOption(
-    override val key: String,
-    val files: List<File>,
+    override konst key: String,
+    konst files: List<File>,
     /**
      * Indicates whether FilesOption is used as input or output during compilation
      * false means input
      * true means output
      */
-    val isOutput: Boolean = false,
-    override val isTransient: Boolean = false
+    konst isOutput: Boolean = false,
+    override konst isTransient: Boolean = false
 ) : PluginOption()
 
 // TODO: It should be part of "Compilation Process": KotlinModule.compilationRequestFor(METADATA | PLATFORM) -> CompilationRequest
@@ -100,13 +100,13 @@ fun KpmVariant.platformCompilationPluginData(): List<PluginData> =
  */
 abstract class BasicKpmCompilerPlugin : KpmCompilerPlugin {
 
-    abstract val pluginId: String
+    abstract konst pluginId: String
 
     protected abstract fun commonPluginArtifact(): PluginData.ArtifactCoordinates?
 
     protected abstract fun nativePluginArtifact(): PluginData.ArtifactCoordinates?
 
-    protected abstract val pluginOptions: List<PluginOption>
+    protected abstract konst pluginOptions: List<PluginOption>
 
     override fun forMetadataCompilation(fragment: KpmFragment) = pluginDataOrNull(commonPluginArtifact())
 

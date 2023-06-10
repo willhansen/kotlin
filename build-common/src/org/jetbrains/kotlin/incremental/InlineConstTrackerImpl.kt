@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.incremental.components.InlineConstTracker
 
 @Suppress("unused")
 class InlineConstTrackerImpl : InlineConstTracker {
-    private val inlineConst = hashMapOf<String, MutableSet<ConstantRef>>()
+    private konst inlineConst = hashMapOf<String, MutableSet<ConstantRef>>()
 
-    val inlineConstMap: Map<String, Collection<ConstantRef>>
+    konst inlineConstMap: Map<String, Collection<ConstantRef>>
         get() = inlineConst
 
     override fun report(filePath: String, owner: String, name: String, constType: String) {

@@ -30,7 +30,7 @@ public final class IrDeclaration extends
   private IrDeclaration(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -224,10 +224,10 @@ public final class IrDeclaration extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -245,7 +245,7 @@ public final class IrDeclaration extends
     public IrDeclaration parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDeclaration(input, extensionRegistry);
     }
   };
@@ -274,12 +274,12 @@ public final class IrDeclaration extends
     IR_TYPE_ALIAS(12),
     IR_ERROR_DECLARATION(13),
     DECLARATOR_NOT_SET(0);
-    private int value = 0;
-    private DeclaratorCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private DeclaratorCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static DeclaratorCase valueOf(int value) {
-      switch (value) {
+    public static DeclaratorCase konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return IR_ANONYMOUS_INIT;
         case 2: return IR_CLASS;
         case 3: return IR_CONSTRUCTOR;
@@ -299,13 +299,13 @@ public final class IrDeclaration extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public DeclaratorCase
   getDeclaratorCase() {
-    return DeclaratorCase.valueOf(
+    return DeclaratorCase.konstueOf(
         declaratorCase_);
   }
 
@@ -464,13 +464,13 @@ public final class IrDeclaration extends
 
   public static final int IR_VALUE_PARAMETER_FIELD_NUMBER = 10;
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
    */
   public boolean hasIrValueParameter() {
     return declaratorCase_ == 10;
   }
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getIrValueParameter() {
     if (declaratorCase_ == 10) {
@@ -737,23 +737,23 @@ public final class IrDeclaration extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parseFrom(java.io.InputStream input)
@@ -1039,7 +1039,7 @@ public final class IrDeclaration extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -1053,7 +1053,7 @@ public final class IrDeclaration extends
     private java.lang.Object declarator_;
     public DeclaratorCase
         getDeclaratorCase() {
-      return DeclaratorCase.valueOf(
+      return DeclaratorCase.konstueOf(
           declaratorCase_);
     }
 
@@ -1083,11 +1083,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit ir_anonymous_init = 1;</code>
      */
-    public Builder setIrAnonymousInit(org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit value) {
-      if (value == null) {
+    public Builder setIrAnonymousInit(org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 1;
       return this;
@@ -1105,13 +1105,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit ir_anonymous_init = 1;</code>
      */
-    public Builder mergeIrAnonymousInit(org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit value) {
+    public Builder mergeIrAnonymousInit(org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit konstue) {
       if (declaratorCase_ == 1 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrAnonymousInit) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 1;
@@ -1147,11 +1147,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrClass ir_class = 2;</code>
      */
-    public Builder setIrClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrClass value) {
-      if (value == null) {
+    public Builder setIrClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrClass konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 2;
       return this;
@@ -1169,13 +1169,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrClass ir_class = 2;</code>
      */
-    public Builder mergeIrClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrClass value) {
+    public Builder mergeIrClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrClass konstue) {
       if (declaratorCase_ == 2 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrClass.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrClass.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrClass) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 2;
@@ -1211,11 +1211,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor ir_constructor = 3;</code>
      */
-    public Builder setIrConstructor(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor value) {
-      if (value == null) {
+    public Builder setIrConstructor(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 3;
       return this;
@@ -1233,13 +1233,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor ir_constructor = 3;</code>
      */
-    public Builder mergeIrConstructor(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor value) {
+    public Builder mergeIrConstructor(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor konstue) {
       if (declaratorCase_ == 3 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructor) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 3;
@@ -1275,11 +1275,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry ir_enum_entry = 4;</code>
      */
-    public Builder setIrEnumEntry(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry value) {
-      if (value == null) {
+    public Builder setIrEnumEntry(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 4;
       return this;
@@ -1297,13 +1297,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry ir_enum_entry = 4;</code>
      */
-    public Builder mergeIrEnumEntry(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry value) {
+    public Builder mergeIrEnumEntry(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry konstue) {
       if (declaratorCase_ == 4 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumEntry) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 4;
@@ -1339,11 +1339,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrField ir_field = 5;</code>
      */
-    public Builder setIrField(org.jetbrains.kotlin.backend.common.serialization.proto.IrField value) {
-      if (value == null) {
+    public Builder setIrField(org.jetbrains.kotlin.backend.common.serialization.proto.IrField konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 5;
       return this;
@@ -1361,13 +1361,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrField ir_field = 5;</code>
      */
-    public Builder mergeIrField(org.jetbrains.kotlin.backend.common.serialization.proto.IrField value) {
+    public Builder mergeIrField(org.jetbrains.kotlin.backend.common.serialization.proto.IrField konstue) {
       if (declaratorCase_ == 5 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrField.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrField.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrField) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 5;
@@ -1403,11 +1403,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction ir_function = 6;</code>
      */
-    public Builder setIrFunction(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction value) {
-      if (value == null) {
+    public Builder setIrFunction(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 6;
       return this;
@@ -1425,13 +1425,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction ir_function = 6;</code>
      */
-    public Builder mergeIrFunction(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction value) {
+    public Builder mergeIrFunction(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction konstue) {
       if (declaratorCase_ == 6 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrFunction) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 6;
@@ -1467,11 +1467,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty ir_property = 7;</code>
      */
-    public Builder setIrProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty value) {
-      if (value == null) {
+    public Builder setIrProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 7;
       return this;
@@ -1489,13 +1489,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty ir_property = 7;</code>
      */
-    public Builder mergeIrProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty value) {
+    public Builder mergeIrProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty konstue) {
       if (declaratorCase_ == 7 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrProperty) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 7;
@@ -1531,11 +1531,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter ir_type_parameter = 8;</code>
      */
-    public Builder setIrTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+    public Builder setIrTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 8;
       return this;
@@ -1553,13 +1553,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter ir_type_parameter = 8;</code>
      */
-    public Builder mergeIrTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
+    public Builder mergeIrTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
       if (declaratorCase_ == 8 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 8;
@@ -1595,11 +1595,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable ir_variable = 9;</code>
      */
-    public Builder setIrVariable(org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable value) {
-      if (value == null) {
+    public Builder setIrVariable(org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 9;
       return this;
@@ -1617,13 +1617,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable ir_variable = 9;</code>
      */
-    public Builder mergeIrVariable(org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable value) {
+    public Builder mergeIrVariable(org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable konstue) {
       if (declaratorCase_ == 9 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrVariable) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 9;
@@ -1642,13 +1642,13 @@ public final class IrDeclaration extends
     }
 
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
     public boolean hasIrValueParameter() {
       return declaratorCase_ == 10;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getIrValueParameter() {
       if (declaratorCase_ == 10) {
@@ -1657,19 +1657,19 @@ public final class IrDeclaration extends
       return org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance();
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
-    public Builder setIrValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+    public Builder setIrValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 10;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
     public Builder setIrValueParameter(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.Builder builderForValue) {
@@ -1679,22 +1679,22 @@ public final class IrDeclaration extends
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
-    public Builder mergeIrValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
+    public Builder mergeIrValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
       if (declaratorCase_ == 10 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 10;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_value_parameter = 10;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter ir_konstue_parameter = 10;</code>
      */
     public Builder clearIrValueParameter() {
       if (declaratorCase_ == 10) {
@@ -1723,11 +1723,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty ir_local_delegated_property = 11;</code>
      */
-    public Builder setIrLocalDelegatedProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty value) {
-      if (value == null) {
+    public Builder setIrLocalDelegatedProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 11;
       return this;
@@ -1745,13 +1745,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty ir_local_delegated_property = 11;</code>
      */
-    public Builder mergeIrLocalDelegatedProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty value) {
+    public Builder mergeIrLocalDelegatedProperty(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty konstue) {
       if (declaratorCase_ == 11 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedProperty) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 11;
@@ -1787,11 +1787,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias ir_type_alias = 12;</code>
      */
-    public Builder setIrTypeAlias(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias value) {
-      if (value == null) {
+    public Builder setIrTypeAlias(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 12;
       return this;
@@ -1809,13 +1809,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias ir_type_alias = 12;</code>
      */
-    public Builder mergeIrTypeAlias(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias value) {
+    public Builder mergeIrTypeAlias(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias konstue) {
       if (declaratorCase_ == 12 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAlias) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 12;
@@ -1851,11 +1851,11 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration ir_error_declaration = 13;</code>
      */
-    public Builder setIrErrorDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration value) {
-      if (value == null) {
+    public Builder setIrErrorDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      declarator_ = value;
+      declarator_ = konstue;
 
       declaratorCase_ = 13;
       return this;
@@ -1873,13 +1873,13 @@ public final class IrDeclaration extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration ir_error_declaration = 13;</code>
      */
-    public Builder mergeIrErrorDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration value) {
+    public Builder mergeIrErrorDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration konstue) {
       if (declaratorCase_ == 13 &&
           declarator_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration.getDefaultInstance()) {
         declarator_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorDeclaration) declarator_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        declarator_ = value;
+        declarator_ = konstue;
       }
 
       declaratorCase_ = 13;

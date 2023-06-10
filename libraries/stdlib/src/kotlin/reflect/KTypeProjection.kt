@@ -24,11 +24,11 @@ public data class KTypeProjection constructor(
     /**
      * The use-site variance specified in the projection, or `null` if this is a star projection.
      */
-    public val variance: KVariance?,
+    public konst variance: KVariance?,
     /**
      * The type specified in the projection, or `null` if this is a star projection.
      */
-    public val type: KType?
+    public konst type: KType?
 ) {
 
     init {
@@ -51,7 +51,7 @@ public data class KTypeProjection constructor(
         // provided for compiler access
         @JvmField
         @PublishedApi
-        internal val star: KTypeProjection = KTypeProjection(null, null)
+        internal konst star: KTypeProjection = KTypeProjection(null, null)
 
         /**
          * Star projection, denoted by the `*` character.
@@ -59,7 +59,7 @@ public data class KTypeProjection constructor(
          * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/generics.html#star-projections)
          * for more information.
          */
-        public val STAR: KTypeProjection get() = star
+        public konst STAR: KTypeProjection get() = star
 
         /**
          * Creates an invariant projection of a given type. Invariant projection is just the type itself,

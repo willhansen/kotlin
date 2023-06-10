@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.resolve.calls.inference.components.NewTypeSubstituto
 import org.jetbrains.kotlin.types.typeUtil.contains
 
 fun substituteAlternativesInPublicType(type: KotlinType): UnwrappedType {
-    val substitutor = object : NewTypeSubstitutor {
+    konst substitutor = object : NewTypeSubstitutor {
         override fun substituteNotNullTypeWithConstructor(constructor: TypeConstructor): UnwrappedType? {
             if (constructor is IntersectionTypeConstructor) {
                 constructor.getAlternativeType()?.let { alternative ->
@@ -20,7 +20,7 @@ fun substituteAlternativesInPublicType(type: KotlinType): UnwrappedType {
             return null
         }
 
-        override val isEmpty: Boolean by lazy {
+        override konst isEmpty: Boolean by lazy {
             !type.contains { it.constructor is IntersectionTypeConstructor }
         }
     }

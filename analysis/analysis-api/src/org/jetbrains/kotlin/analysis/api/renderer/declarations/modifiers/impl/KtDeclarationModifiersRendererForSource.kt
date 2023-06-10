@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.declarations.modifiers.KtDecla
 import org.jetbrains.kotlin.analysis.api.renderer.declarations.modifiers.renderers.*
 
 public object KtDeclarationModifiersRendererForSource {
-    public val NO_IMPLICIT_MODIFIERS: KtDeclarationModifiersRenderer = KtDeclarationModifiersRenderer {
+    public konst NO_IMPLICIT_MODIFIERS: KtDeclarationModifiersRenderer = KtDeclarationModifiersRenderer {
         modifierListRenderer = KtModifierListRenderer.AS_LIST
         modifierFilter = KtRendererModifierFilter.ALL
         modifiersSorter = KtModifiersSorter.CANONICAL

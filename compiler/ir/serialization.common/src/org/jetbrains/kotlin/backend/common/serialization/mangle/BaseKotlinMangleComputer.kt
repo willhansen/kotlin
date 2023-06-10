@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.types.model.*
  * @param Declaration A class representing a Kotlin declaration.
  * @param Type A class representing a Kotlin type.
  * @param TypeParameter A class representing a type parameter of a Kotlin class or function.
- * @param ValueParameter A class representing a value parameter declaration of a Kotlin function.
+ * @param ValueParameter A class representing a konstue parameter declaration of a Kotlin function.
  * @param TypeParameterContainer A class representing something that can have type parameters, like a Kotlin function or class declaration.
  * @param FunctionDeclaration A class representing a Kotlin function declaration.
  * @param Session An additional context used for type computations.
@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.types.model.*
  * in the current scope. This often happens in the lowered IR and should never happen in the IR emitted by the frontend.
  */
 abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueParameter, TypeParameterContainer, FunctionDeclaration, Session>(
-    protected val builder: StringBuilder,
-    protected val mode: MangleMode,
-    protected val allowOutOfScopeTypeParameters: Boolean = false,
+    protected konst builder: StringBuilder,
+    protected konst mode: MangleMode,
+    protected konst allowOutOfScopeTypeParameters: Boolean = false,
 ) : KotlinMangleComputer<Declaration>
         where Declaration : Any,
               Type : KotlinTypeMarker,
@@ -40,7 +40,7 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
      */
     protected abstract fun getTypeSystemContext(session: Session): TypeSystemContext
 
-    protected val typeParameterContainers = ArrayList<TypeParameterContainer>(4)
+    protected konst typeParameterContainers = ArrayList<TypeParameterContainer>(4)
 
     protected open fun FunctionDeclaration.platformSpecificFunctionName(): String? = null
 
@@ -99,7 +99,7 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
     }
 
     protected fun Declaration.mangleSimpleDeclaration(name: String) {
-        val l = builder.length
+        konst l = builder.length
         visitParent()
 
         if (builder.length != l) {
@@ -185,7 +185,7 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
         }
 
         getTypeParametersWithIndices(this, typeParameterContainer).collectForMangler(builder, MangleConstant.TYPE_PARAMETERS) {
-            mangleTypeParameter(this, it.value, it.index, session)
+            mangleTypeParameter(this, it.konstue, it.index, session)
         }
 
         getReturnType(this)?.let {
@@ -204,9 +204,9 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
 
     protected open fun mangleTypePlatformSpecific(type: Type, tBuilder: StringBuilder) {}
 
-    protected abstract fun isVararg(valueParameter: ValueParameter): Boolean
+    protected abstract fun isVararg(konstueParameter: ValueParameter): Boolean
 
-    protected abstract fun getValueParameterType(valueParameter: ValueParameter): Type
+    protected abstract fun getValueParameterType(konstueParameter: ValueParameter): Type
 
     protected abstract fun getIndexOfTypeParameter(typeParameter: TypeParameter, container: TypeParameterContainer): Int
 
@@ -218,8 +218,8 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
     protected abstract fun getTypeParameterName(typeParameter: TypeParameter): String
 
     protected fun StringBuilder.mangleTypeParameterReference(typeParameter: TypeParameter) {
-        val parent = getEffectiveParent(typeParameter)
-        val containerIndex = getContainerIndex(parent)
+        konst parent = getEffectiveParent(typeParameter)
+        konst containerIndex = getContainerIndex(parent)
         require(allowOutOfScopeTypeParameters || containerIndex >= 0) {
             "No container found for type parameter '${getTypeParameterName(typeParameter)}' of '${renderDeclaration(parent)}'"
         }
@@ -259,7 +259,7 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
 
     protected fun mangleTypeArguments(tBuilder: StringBuilder, type: Type, declarationSiteSession: Session) =
         with(getTypeSystemContext(declarationSiteSession)) {
-            val typeArguments = type.getArguments().zip(type.typeConstructor().getParameters())
+            konst typeArguments = type.getArguments().zip(type.typeConstructor().getParameters())
             if (typeArguments.isEmpty()) return
             @Suppress("UNUSED_DESTRUCTURED_PARAMETER_ENTRY")
             typeArguments.collectForMangler(tBuilder, MangleConstant.TYPE_ARGUMENTS) { (typeArgument, typeParameter) ->
@@ -269,7 +269,7 @@ abstract class BaseKotlinMangleComputer<Declaration, Type, TypeParameter, ValueP
                         // FIXME: Use effective variance here according to the klib spec: `org.jetbrains.kotlin.types.AbstractTypeChecker.effectiveVariance(typeParameter.getVariance(), typeArgument.getVariance())`
                         // NOTE: If we start using effective variance instead of declared variance, we must take into account
                         // binary compatibility implications.
-                        val variance = typeArgument.getVariance()
+                        konst variance = typeArgument.getVariance()
                         if (variance != TypeVariance.INV) {
                             appendSignature(variance.presentation)
                             appendSignature(MangleConstant.VARIANCE_SEPARATOR)

@@ -4,7 +4,7 @@
 
 import java.util.ArrayList
 
-class Pair<A, B>(val a: A, val b: B)
+class Pair<A, B>(konst a: A, konst b: B)
 
 class MyListOfPairs<T> : ArrayList<Pair<T, T>>() { }
 

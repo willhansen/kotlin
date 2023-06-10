@@ -35,7 +35,7 @@ class CompareTo : IntrinsicMethod() {
     }
 
     override fun toCallable(method: CallableMethod): Callable {
-        val parameterType = comparisonOperandType(
+        konst parameterType = comparisonOperandType(
                 method.dispatchReceiverType ?: method.extensionReceiverType,
                 method.parameterTypes.single()
         )

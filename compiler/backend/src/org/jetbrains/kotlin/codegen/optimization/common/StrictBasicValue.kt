@@ -26,28 +26,28 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 open class StrictBasicValue(type: Type?) : BasicValue(type) {
     companion object {
         @JvmField
-        val UNINITIALIZED_VALUE = StrictBasicValue(null)
+        konst UNINITIALIZED_VALUE = StrictBasicValue(null)
         @JvmField
-        val INT_VALUE = StrictBasicValue(Type.INT_TYPE)
+        konst INT_VALUE = StrictBasicValue(Type.INT_TYPE)
         @JvmField
-        val FLOAT_VALUE = StrictBasicValue(Type.FLOAT_TYPE)
+        konst FLOAT_VALUE = StrictBasicValue(Type.FLOAT_TYPE)
         @JvmField
-        val LONG_VALUE = StrictBasicValue(Type.LONG_TYPE)
+        konst LONG_VALUE = StrictBasicValue(Type.LONG_TYPE)
         @JvmField
-        val DOUBLE_VALUE = StrictBasicValue(Type.DOUBLE_TYPE)
+        konst DOUBLE_VALUE = StrictBasicValue(Type.DOUBLE_TYPE)
         @JvmField
-        val BOOLEAN_VALUE = StrictBasicValue(Type.BOOLEAN_TYPE)
+        konst BOOLEAN_VALUE = StrictBasicValue(Type.BOOLEAN_TYPE)
         @JvmField
-        val CHAR_VALUE = StrictBasicValue(Type.CHAR_TYPE)
+        konst CHAR_VALUE = StrictBasicValue(Type.CHAR_TYPE)
         @JvmField
-        val BYTE_VALUE = StrictBasicValue(Type.BYTE_TYPE)
+        konst BYTE_VALUE = StrictBasicValue(Type.BYTE_TYPE)
         @JvmField
-        val SHORT_VALUE = StrictBasicValue(Type.SHORT_TYPE)
+        konst SHORT_VALUE = StrictBasicValue(Type.SHORT_TYPE)
         @JvmField
-        val REFERENCE_VALUE = StrictBasicValue(Type.getObjectType("java/lang/Object"))
+        konst REFERENCE_VALUE = StrictBasicValue(Type.getObjectType("java/lang/Object"))
 
         @JvmField
-        val NULL_VALUE = StrictBasicValue(Type.getObjectType("java/lang/Object"))
+        konst NULL_VALUE = StrictBasicValue(Type.getObjectType("java/lang/Object"))
     }
 
     override fun equals(other: Any?): Boolean {
@@ -68,7 +68,7 @@ open class StrictBasicValue(type: Type?) : BasicValue(type) {
     override fun hashCode() = (type?.hashCode() ?: 0)
 
     override fun toString(): String {
-        val inner = when {
+        konst inner = when {
             this === REFERENCE_VALUE -> "R"
             this === NULL_VALUE -> "null"
             this === UNINITIALIZED_VALUE -> "."

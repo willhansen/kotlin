@@ -1,3 +1,3 @@
 public @interface Anno {
-    Class<?> value();
+    Class<?> konstue();
 }

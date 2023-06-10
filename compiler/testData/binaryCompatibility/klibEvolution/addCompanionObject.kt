@@ -13,7 +13,7 @@ class X {
     fun foo() = "with companion"
 
     companion object {
-        val bar = "this is a companion"
+        konst bar = "this is a companion"
     }
 }
 

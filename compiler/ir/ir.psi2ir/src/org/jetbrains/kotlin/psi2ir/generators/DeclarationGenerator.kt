@@ -36,9 +36,9 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.DescriptorToSourceUtils
 import org.jetbrains.kotlin.types.KotlinType
 
-class DeclarationGenerator(override val context: GeneratorContext) : Generator {
+class DeclarationGenerator(override konst context: GeneratorContext) : Generator {
 
-    private val typeTranslator = context.typeTranslator
+    private konst typeTranslator = context.typeTranslator
 
     fun KotlinType.toIrType() = typeTranslator.translateType(this)
 
@@ -74,7 +74,7 @@ class DeclarationGenerator(override val context: GeneratorContext) : Generator {
                 e is ErrorExpressionException ->
                     CodegenUtil.reportBackendException(e.cause ?: e, "psi2ir", PsiDiagnosticUtils.atLocation(e.ktElement), e.message)
                 else -> {
-                    val psiFile = ktDeclaration.containingKtFile
+                    konst psiFile = ktDeclaration.containingKtFile
                     CodegenUtil.reportBackendException(e, "psi2ir", psiFile.virtualFile?.path ?: psiFile.name)
                 }
             }
@@ -153,9 +153,9 @@ class DeclarationGenerator(override val context: GeneratorContext) : Generator {
         declareTypeParameter: (Int, Int, TypeParameterDescriptor) -> IrTypeParameter
     ) {
         irTypeParametersOwner.typeParameters += from.map { typeParameterDescriptor ->
-            val ktTypeParameterDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(typeParameterDescriptor)
-            val startOffset = ktTypeParameterDeclaration.startOffsetOrUndefined
-            val endOffset = ktTypeParameterDeclaration.endOffsetOrUndefined
+            konst ktTypeParameterDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(typeParameterDescriptor)
+            konst startOffset = ktTypeParameterDeclaration.startOffsetOrUndefined
+            konst endOffset = ktTypeParameterDeclaration.endOffsetOrUndefined
             declareTypeParameter(
                 startOffset,
                 endOffset,
@@ -194,8 +194,8 @@ class DeclarationGenerator(override val context: GeneratorContext) : Generator {
         FunctionGenerator(this).generateFakeOverrideFunction(functionDescriptor, ktElement)
 }
 
-abstract class DeclarationGeneratorExtension(val declarationGenerator: DeclarationGenerator) : Generator {
-    override val context: GeneratorContext get() = declarationGenerator.context
+abstract class DeclarationGeneratorExtension(konst declarationGenerator: DeclarationGenerator) : Generator {
+    override konst context: GeneratorContext get() = declarationGenerator.context
 
     inline fun <T : IrDeclaration> T.buildWithScope(builder: (T) -> Unit): T =
         also { irDeclaration ->

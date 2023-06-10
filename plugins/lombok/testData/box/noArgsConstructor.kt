@@ -14,8 +14,8 @@ public class ConstructorExample {
     @Getter(AccessLevel.PROTECTED) private String name;
 
     static void javaUsage() {
-        val existing = new ConstructorExample("existing");
-        val generated = new ConstructorExample();
+        konst existing = new ConstructorExample("existing");
+        konst generated = new ConstructorExample();
     }
 }
 
@@ -23,8 +23,8 @@ public class ConstructorExample {
 // FILE: test.kt
 
 fun box(): String {
-    val existing = ConstructorExample("existing")
-    val generated = ConstructorExample()
+    konst existing = ConstructorExample("existing")
+    konst generated = ConstructorExample()
     return "OK"
 }
 

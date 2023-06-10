@@ -24,9 +24,9 @@ public class ClassLevelGetterTest {
 // FILE: test.kt
 
 fun test() {
-    val obj = ClassLevelGetterTest()
-    val getter = obj.getAge()
-    val property = obj.age
+    konst obj = ClassLevelGetterTest()
+    konst getter = obj.getAge()
+    konst property = obj.age
 
     obj.isPrimitiveBoolean()
 

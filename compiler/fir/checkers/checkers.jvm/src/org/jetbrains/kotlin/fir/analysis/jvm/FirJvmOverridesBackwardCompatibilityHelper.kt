@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.fir.declarations.isJavaOrEnhancement
 object FirJvmOverridesBackwardCompatibilityHelper : FirOverridesBackwardCompatibilityHelper() {
     override fun additionalCheck(member: FirCallableDeclaration): Boolean? {
         if (!member.isJavaOrEnhancement) return false
-        val containingClassName = member.containingClassLookupTag()?.classId?.asSingleFqName()?.toUnsafe() ?: return false
+        konst containingClassName = member.containingClassLookupTag()?.classId?.asSingleFqName()?.toUnsafe() ?: return false
         // If the super class is mapped to a Kotlin built-in class, then we don't require `override` keyword.
         if (JavaToKotlinClassMap.mapKotlinToJava(containingClassName) != null) {
             return true

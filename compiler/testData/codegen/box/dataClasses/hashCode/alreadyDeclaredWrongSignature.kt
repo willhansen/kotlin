@@ -2,11 +2,11 @@
 
 // WITH_STDLIB
 
-data class A(val x: Int) {
+data class A(konst x: Int) {
   fun hashCode(other: Any): Int = 0
 }
 
-data class B(val x: Int) {
+data class B(konst x: Int) {
   fun hashCode(other: B, another: Any): Int = 0
 }
 

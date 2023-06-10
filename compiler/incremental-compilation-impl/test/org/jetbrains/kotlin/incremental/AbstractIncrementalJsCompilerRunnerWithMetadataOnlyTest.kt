@@ -15,6 +15,6 @@ abstract class AbstractIncrementalJsCompilerRunnerWithMetadataOnlyTest : Abstrac
             metadataOnly = true
         }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(isKlibEnabled = true)
 }

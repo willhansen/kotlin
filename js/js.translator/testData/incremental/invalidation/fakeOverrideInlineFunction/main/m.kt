@@ -1,12 +1,12 @@
 inline fun callIt(f: () -> Int) = f()
 
 fun box(stepId: Int): String {
-    val a = object : ClassA() {
+    konst a = object : ClassA() {
         override fun test1() = "object::test1".castTo<String>()
         override fun test2() = 2.castTo<String>()
     }
 
-    val b = ClassB()
+    konst b = ClassB()
 
     if (a.test1() != "object::test1") return "Fail 1"
     if (b.test1() != "ClassB::test1") return "Fail 2"

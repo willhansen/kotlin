@@ -2,16 +2,16 @@
 
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int): String = when {
+fun case_1(konstue_1: Int): String = when {
     <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
-    value_1 == 1 -> ""
+    konstue_1 == 1 -> ""
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Int): String = when {
-    value_1 == 1 -> ""
+fun case_2(konstue_1: Int): String = when {
+    konstue_1 == 1 -> ""
     <!ELSE_MISPLACED_IN_WHEN!>else<!> -> ""
-    value_1 == 2 -> ""
+    konstue_1 == 2 -> ""
 }
 
 // TESTCASE NUMBER: 3

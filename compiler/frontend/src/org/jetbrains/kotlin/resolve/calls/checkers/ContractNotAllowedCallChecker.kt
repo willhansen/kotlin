@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.resolve.scopes.LexicalScopeKind
 object ContractNotAllowedCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (reportOn !is KtElement) return
-        val descriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
+        konst descriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
         if (!descriptor.isContractCallDescriptor()) return
 
-        val allowedOnMembers = context.languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForNonOverridableMembers)
+        konst allowedOnMembers = context.languageVersionSettings.supportsFeature(LanguageFeature.AllowContractsForNonOverridableMembers)
 
-        val callElement = resolvedCall.call.callElement
+        konst callElement = resolvedCall.call.callElement
         var hasErrors = false
 
         fun contractNotAllowed(message: String) {
@@ -33,16 +33,16 @@ object ContractNotAllowedCallChecker : CallChecker {
             context.trace.report(Errors.CONTRACT_NOT_ALLOWED.on(reportOn, message))
         }
 
-        val scope = context.scope
-        val functionDescriptor = scope.ownerDescriptor as? FunctionDescriptor
+        konst scope = context.scope
+        konst functionDescriptor = scope.ownerDescriptor as? FunctionDescriptor
 
         if (functionDescriptor == null || functionDescriptor is PropertyAccessorDescriptor)
             contractNotAllowed("Contracts are allowed only for functions")
 
         var inFunctionBodyBlock = true
 
-        val declarationOwner = scope.ownerDescriptor.containingDeclaration
-        val acceptableParent = if (allowedOnMembers) {
+        konst declarationOwner = scope.ownerDescriptor.containingDeclaration
+        konst acceptableParent = if (allowedOnMembers) {
             var owner = declarationOwner
             var result = true
             while (owner !is PackageFragmentDescriptor) {
@@ -65,7 +65,7 @@ object ContractNotAllowedCallChecker : CallChecker {
                 contractNotAllowed("Contracts are allowed only in function body block")
                 inFunctionBodyBlock = false
             } else {
-                val message = if (allowedOnMembers)
+                konst message = if (allowedOnMembers)
                     "Contracts are allowed only for functions"
                 else
                     "Contracts are allowed only for top-level functions"

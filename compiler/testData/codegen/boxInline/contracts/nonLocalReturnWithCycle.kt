@@ -24,7 +24,7 @@ fun test(xs: List<String>): String {
 
     myrun L@ {
         for (x in xs) {
-            val y: String
+            konst y: String
             myrun {
                 y = x
                 if (y.length > 1) return@L

@@ -7,28 +7,28 @@ import Foundation
 import benchmark
 
 class SimpleCost: Cost {
-    let value: Int
+    let konstue: Int
 
     init(cost: Int) {
-        value = cost
+        konstue = cost
     }
 
     func plus(other: Cost) -> Cost {
         let otherInstance = other as! SimpleCost
-        return SimpleCost(cost: value + otherInstance.value)
+        return SimpleCost(cost: konstue + otherInstance.konstue)
     }
 
     func minus(other: Cost) -> Cost {
         let otherInstance = other as! SimpleCost
-        return SimpleCost(cost: value - otherInstance.value)
+        return SimpleCost(cost: konstue - otherInstance.konstue)
     }
 
     func compareTo(other: Cost) -> Int32 {
         let otherInstance = other as! SimpleCost
-        if (value < otherInstance.value) {
+        if (konstue < otherInstance.konstue) {
             return -1
         }
-        if (value == otherInstance.value) {
+        if (konstue == otherInstance.konstue) {
             return 0
         }
         return 1
@@ -90,9 +90,9 @@ class SwiftInteropBenchmarks {
     func initMultigraph(size: Int) {
         multigraph = Multigraph<NSNumber>()
         for i in 1...size {
-            multigraph.addEdge(from: NSNumber(value: i), to: NSNumber(value: i + 1), cost: SimpleCost(cost: (i + 1) % i ))
-            multigraph.addEdge(from: NSNumber(value: i), to: NSNumber(value: i * 2), cost: SimpleCost(cost: (i * 2) % i))
-            multigraph.addEdge(from: NSNumber(value: i + 5), to: NSNumber(value: i), cost: SimpleCost(cost: (i + 5) % i))
+            multigraph.addEdge(from: NSNumber(konstue: i), to: NSNumber(konstue: i + 1), cost: SimpleCost(cost: (i + 1) % i ))
+            multigraph.addEdge(from: NSNumber(konstue: i), to: NSNumber(konstue: i * 2), cost: SimpleCost(cost: (i * 2) % i))
+            multigraph.addEdge(from: NSNumber(konstue: i + 5), to: NSNumber(konstue: i), cost: SimpleCost(cost: (i + 5) % i))
         }
     }
 
@@ -135,7 +135,7 @@ class SwiftInteropBenchmarks {
             for _ in 0...SMALL_BENCHMARK_SIZE {
                 var vertexes = Array(multigraph.allVertexes)
                 var result = multigraph.searchRoutesWithLimits(start: 1,
-                                                               finish: NSNumber(value: SMALL_BENCHMARK_SIZE / 2 + SMALL_BENCHMARK_SIZE / 4),
+                                                               finish: NSNumber(konstue: SMALL_BENCHMARK_SIZE / 2 + SMALL_BENCHMARK_SIZE / 4),
                                                                limits: SimpleCost(cost: SMALL_BENCHMARK_SIZE / 5))
                 var count = result.map{ $0.count }.reduce(0, +)
             }

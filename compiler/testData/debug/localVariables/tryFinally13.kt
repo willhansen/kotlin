@@ -7,10 +7,10 @@ fun box(): String {
     try {
         for (i in 0 until 1) {
             try {
-                val x = "x"
+                konst x = "x"
                 throw RuntimeException(x)
             } catch (e: Exception) {
-                val y = "y"
+                konst y = "y"
                 return "FAIL1"
             } finally {
                 return "FAIL2"

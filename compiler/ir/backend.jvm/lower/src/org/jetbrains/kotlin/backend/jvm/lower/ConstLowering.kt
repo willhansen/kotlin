@@ -18,35 +18,35 @@ import org.jetbrains.kotlin.ir.util.classId
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-internal val constPhase1 = makeIrFilePhase(
+internal konst constPhase1 = makeIrFilePhase(
     ::ConstLowering,
     name = "Const1",
-    description = "Substitute calls to const properties with constant values"
+    description = "Substitute calls to const properties with constant konstues"
 )
 
-internal val constPhase2 = makeIrFilePhase(
+internal konst constPhase2 = makeIrFilePhase(
     ::ConstLowering,
     name = "Const2",
-    description = "Substitute calls to const properties with constant values"
+    description = "Substitute calls to const properties with constant konstues"
 )
 
-class ConstLowering(val context: JvmBackendContext) : FileLoweringPass {
-    val inlineConstTracker =
+class ConstLowering(konst context: JvmBackendContext) : FileLoweringPass {
+    konst inlineConstTracker =
         context.state.configuration[CommonConfigurationKeys.INLINE_CONST_TRACKER]
 
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid(JvmInlineConstTransformer(irFile, inlineConstTracker))
 }
 
-private class JvmInlineConstTransformer(val irFile: IrFile, val inlineConstTracker: InlineConstTracker?) : InlineConstTransformer() {
-    override val IrField.constantInitializer get() = constantValue()
-    override fun reportInlineConst(field: IrField, value: IrConst<*>) {
+private class JvmInlineConstTransformer(konst irFile: IrFile, konst inlineConstTracker: InlineConstTracker?) : InlineConstTransformer() {
+    override konst IrField.constantInitializer get() = constantValue()
+    override fun reportInlineConst(field: IrField, konstue: IrConst<*>) {
         if (inlineConstTracker == null) return
         if (field.origin != IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB) return
 
-        val path = irFile.path
-        val owner = field.parentAsClass.classId?.asString()?.replace(".", "$")?.replace("/", ".") ?: return
-        val name = field.name.asString()
-        val constType = value.kind.asString
+        konst path = irFile.path
+        konst owner = field.parentAsClass.classId?.asString()?.replace(".", "$")?.replace("/", ".") ?: return
+        konst name = field.name.asString()
+        konst constType = konstue.kind.asString
 
         inlineConstTracker.report(path, owner, name, constType)
     }

@@ -25,7 +25,7 @@ interface Right<K, V> : A<K, V> {
 
 
 internal class MyMap : Left<String, String>, Right<String, String> {
-    override val size: Int
+    override konst size: Int
         get() = null!!
 
     override fun isEmpty(): Boolean {
@@ -36,7 +36,7 @@ internal class MyMap : Left<String, String>, Right<String, String> {
         return false
     }
 
-    override fun containsValue(value: String): Boolean {
+    override fun containsValue(konstue: String): Boolean {
         return false
     }
 
@@ -44,8 +44,8 @@ internal class MyMap : Left<String, String>, Right<String, String> {
         TODO("Not yet implemented")
     }
 
-    override fun put(key: String, value: String): String? {
-        result += "$key=$value;"
+    override fun put(key: String, konstue: String): String? {
+        result += "$key=$konstue;"
         return null
     }
 
@@ -54,22 +54,22 @@ internal class MyMap : Left<String, String>, Right<String, String> {
 
     override fun clear() {}
 
-    override val keys: MutableSet<String>
+    override konst keys: MutableSet<String>
         get() = null!!
 
-    override val values: MutableCollection<String>
+    override konst konstues: MutableCollection<String>
         get() = null!!
 
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = null!!
 }
 
 fun box(): String {
-    val map = MyMap()
+    konst map = MyMap()
     map["O"] = "fail"
     map.remove("O")
 
-    val value = map.getOrDefault("O", "OK")
+    konst konstue = map.getOrDefault("O", "OK")
     if (result != "O=fail;O;O;") return "fail 3: $result"
-    return value
+    return konstue
 }

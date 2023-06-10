@@ -22,10 +22,10 @@ class Test : Simple {
 }
 
 fun box(): String {
-    val test = Test().test()
+    konst test = Test().test()
     if (test != "simple") return "fail $test"
 
-    val bar = Test().bar()
+    konst bar = Test().bar()
     if (bar != "simple") return "fail 2 $bar"
 
     return "OK"

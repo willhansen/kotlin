@@ -29,33 +29,33 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.psi.psiUtil.createSmartPointer
 import java.util.*
 
-class AndroidVariantData(val variant: AndroidVariant, val layouts: Map<String, List<PsiFile>>)
+class AndroidVariantData(konst variant: AndroidVariant, konst layouts: Map<String, List<PsiFile>>)
 
-class AndroidModuleData(val module: AndroidModule, val variants: List<AndroidVariantData>) {
+class AndroidModuleData(konst module: AndroidModule, konst variants: List<AndroidVariantData>) {
     companion object {
-        val EMPTY = AndroidModuleData(AndroidModule("android", listOf()), listOf())
+        konst EMPTY = AndroidModuleData(AndroidModule("android", listOf()), listOf())
     }
 }
 
-data class AndroidLayoutGroupData(val name: String, val layouts: List<PsiFile>)
+data class AndroidLayoutGroupData(konst name: String, konst layouts: List<PsiFile>)
 
-abstract class AndroidLayoutXmlFileManager(val project: Project) {
-    abstract val androidModule: AndroidModule?
+abstract class AndroidLayoutXmlFileManager(konst project: Project) {
+    abstract konst androidModule: AndroidModule?
 
     open fun propertyToXmlAttributes(propertyDescriptor: PropertyDescriptor): List<PsiElement> = listOf()
 
     open fun getModuleData(): AndroidModuleData {
-        val androidModule = androidModule ?: return AndroidModuleData.EMPTY
+        konst androidModule = androidModule ?: return AndroidModuleData.EMPTY
         return AndroidModuleData(androidModule, androidModule.variants.map { getVariantData(it) })
     }
 
     private fun getVariantData(variant: AndroidVariant): AndroidVariantData {
-        val psiManager = PsiManager.getInstance(project)
-        val fileManager = VirtualFileManager.getInstance()
+        konst psiManager = PsiManager.getInstance(project)
+        konst fileManager = VirtualFileManager.getInstance()
 
         fun VirtualFile.getAllChildren(): List<VirtualFile> {
-            val allChildren = arrayListOf<VirtualFile>()
-            val currentChildren = children ?: emptyArray()
+            konst allChildren = arrayListOf<VirtualFile>()
+            konst currentChildren = children ?: emptyArray()
             for (child in currentChildren) {
                 if (child.isDirectory) {
                     allChildren.addAll(child.getAllChildren())
@@ -67,21 +67,21 @@ abstract class AndroidLayoutXmlFileManager(val project: Project) {
             return allChildren
         }
 
-        val resDirectories = variant.resDirectories.map { fileManager.findFileByUrl("file://$it") }
-        val allChildren = resDirectories.flatMap { it?.getAllChildren() ?: listOf() }
+        konst resDirectories = variant.resDirectories.map { fileManager.findFileByUrl("file://$it") }
+        konst allChildren = resDirectories.flatMap { it?.getAllChildren() ?: listOf() }
 
-        val allLayoutFiles = allChildren.filter { it.parent.name.startsWith("layout") && it.name.lowercase().endsWith(".xml") }
-        val allLayoutPsiFiles = allLayoutFiles.fold(ArrayList<PsiFile>(allLayoutFiles.size)) { list, file ->
-            val psiFile = psiManager.findFile(file)
+        konst allLayoutFiles = allChildren.filter { it.parent.name.startsWith("layout") && it.name.lowercase().endsWith(".xml") }
+        konst allLayoutPsiFiles = allLayoutFiles.fold(ArrayList<PsiFile>(allLayoutFiles.size)) { list, file ->
+            konst psiFile = psiManager.findFile(file)
             if (psiFile?.parent != null) {
                 list += psiFile
             }
             list
         }
 
-        val layoutNameToXmlFiles = allLayoutPsiFiles
+        konst layoutNameToXmlFiles = allLayoutPsiFiles
                 .groupBy { it.name.substringBeforeLast('.') }
-                .mapValues { it.value.sortedBy { it.parent!!.name.length } }
+                .mapValues { it.konstue.sortedBy { it.parent!!.name.length } }
 
         return AndroidVariantData(variant, layoutNameToXmlFiles)
     }
@@ -93,7 +93,7 @@ abstract class AndroidLayoutXmlFileManager(val project: Project) {
     protected abstract fun doExtractResources(layoutGroup: AndroidLayoutGroupData, module: ModuleDescriptor): AndroidLayoutGroup
 
     protected fun parseAndroidResource(id: ResourceIdentifier, tag: String, sourceElement: PsiElement?): AndroidResource {
-        val sourceElementPointer = sourceElement?.createSmartPointer()
+        konst sourceElementPointer = sourceElement?.createSmartPointer()
         return when (tag) {
             "fragment" -> AndroidResource.Fragment(id, sourceElementPointer)
             "include" -> AndroidResource.Widget(id, AndroidConst.VIEW_FQNAME, sourceElementPointer)
@@ -102,20 +102,20 @@ abstract class AndroidLayoutXmlFileManager(val project: Project) {
     }
 
     private fun filterDuplicates(layoutGroup: AndroidLayoutGroup): List<AndroidResource> {
-        val resourceMap = linkedMapOf<String, AndroidResource>()
-        val resourcesToExclude = hashSetOf<String>()
+        konst resourceMap = linkedMapOf<String, AndroidResource>()
+        konst resourcesToExclude = hashSetOf<String>()
 
-        val resourcesByName = layoutGroup.layouts.flatMap { it.resources }.groupBy {
-            val id = it.id
+        konst resourcesByName = layoutGroup.layouts.flatMap { it.resources }.groupBy {
+            konst id = it.id
             if (id.packageName == null) id.name else id.packageName + "/" + id.name
         }
 
-        for (resources in resourcesByName.values) {
-            val isPartiallyDefined = resources.size < layoutGroup.layouts.size
+        for (resources in resourcesByName.konstues) {
+            konst isPartiallyDefined = resources.size < layoutGroup.layouts.size
 
             for (res in resources) {
                 if (res.id.name in resourceMap) {
-                    val existing = resourceMap[res.id.name]!!
+                    konst existing = resourceMap[res.id.name]!!
 
                     if (!res.sameClass(existing) || res.id.packageName != existing.id.packageName) {
                         resourcesToExclude.add(res.id.name)
@@ -123,7 +123,7 @@ abstract class AndroidLayoutXmlFileManager(val project: Project) {
                     else if (res is AndroidResource.Widget && existing is AndroidResource.Widget) {
                         // Widgets with the same id but different types exist.
                         if (res.xmlType != existing.xmlType && existing.xmlType != AndroidConst.VIEW_FQNAME) {
-                            val mergedWidget = AndroidResource.Widget(
+                            konst mergedWidget = AndroidResource.Widget(
                                     res.id, AndroidConst.VIEW_FQNAME, res.sourceElement, isPartiallyDefined)
                             resourceMap.put(res.id.name, mergedWidget)
                         }
@@ -139,13 +139,13 @@ abstract class AndroidLayoutXmlFileManager(val project: Project) {
         }
 
         resourceMap.keys.removeAll(resourcesToExclude)
-        return resourceMap.values.toList()
+        return resourceMap.konstues.toList()
     }
 
     companion object {
         fun getInstance(module: Module): AndroidLayoutXmlFileManager? {
             @Suppress("DEPRECATION")
-            val service = com.intellij.openapi.module.ModuleServiceManager.getService(module, AndroidLayoutXmlFileManager::class.java)
+            konst service = com.intellij.openapi.module.ModuleServiceManager.getService(module, AndroidLayoutXmlFileManager::class.java)
             return service ?: module.getComponent(AndroidLayoutXmlFileManager::class.java)
         }
     }

@@ -1,9 +1,9 @@
 package
 
-public val b1: B
-public val b2: B
-public val b3: B
-public val b4: B
+public konst b1: B
+public konst b2: B
+public konst b3: B
+public konst b4: B
 public fun </*0*/ T> array(/*0*/ vararg x: T /*kotlin.Array<out T>*/): kotlin.Array<T>
 
 public final class A : B {

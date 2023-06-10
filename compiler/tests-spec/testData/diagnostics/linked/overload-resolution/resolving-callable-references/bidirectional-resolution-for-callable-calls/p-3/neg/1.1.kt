@@ -28,7 +28,7 @@ class Case1() {
         Companion(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>x<!>)
     }
 
-    val x = ""
+    konst x = ""
     fun x() :CharSequence = ""
 
 }
@@ -44,7 +44,7 @@ class Case2() {
         Companion(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>x<!>)
     }
 
-    val x = C()
+    konst x = C()
     fun x() = B()
 
     interface A
@@ -64,7 +64,7 @@ class Case3() : I {
         operator fun invoke(y1: ()->CharSequence, y2: String = ""): Any { print(4); return "" } // (4)
     }
 
-    val x = ""
+    konst x = ""
     fun x() = "" as CharSequence
 
     fun case() {

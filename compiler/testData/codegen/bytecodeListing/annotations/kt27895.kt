@@ -1,9 +1,9 @@
 @Target(AnnotationTarget.FIELD)
 annotation class Anno
 
-data class C(val x: Int) {
+data class C(konst x: Int) {
     @Anno
-    val json: String = ""
+    konst json: String = ""
         get() = field
 
     fun copy() = this.also { json }

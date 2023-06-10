@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.util.*
 
 // An IR builder with access to AtomicSymbols and convenience methods to build IR constructions for atomicfu JVM/IR transformation.
 class AtomicfuIrBuilder internal constructor(
-    val atomicSymbols: AtomicSymbols,
+    konst atomicSymbols: AtomicSymbols,
     symbol: IrSymbol,
     startOffset: Int,
     endOffset: Int
@@ -26,8 +26,8 @@ class AtomicfuIrBuilder internal constructor(
         }
 
     // a$FU.get(obj)
-    fun atomicGetValue(valueType: IrType, receiver: IrExpression, obj: IrExpression) =
-        irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(atomicSymbols.getJucaAFUClass(valueType), "get")).apply {
+    fun atomicGetValue(konstueType: IrType, receiver: IrExpression, obj: IrExpression) =
+        irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(atomicSymbols.getJucaAFUClass(konstueType), "get")).apply {
             dispatchReceiver = receiver
             putValueArgument(0, obj)
         }
@@ -39,10 +39,10 @@ class AtomicfuIrBuilder internal constructor(
             putValueArgument(0, index)
         }
 
-    fun irCallWithArgs(symbol: IrSimpleFunctionSymbol, dispatchReceiver: IrExpression?, valueArguments: List<IrExpression?>) =
+    fun irCallWithArgs(symbol: IrSimpleFunctionSymbol, dispatchReceiver: IrExpression?, konstueArguments: List<IrExpression?>) =
         irCall(symbol).apply {
             this.dispatchReceiver = dispatchReceiver
-            valueArguments.forEachIndexed { i, arg ->
+            konstueArguments.forEachIndexed { i, arg ->
                 putValueArgument(i, arg)
             }
         }
@@ -53,13 +53,13 @@ class AtomicfuIrBuilder internal constructor(
         functionName: String,
         dispatchReceiver: IrExpression?,
         index: IrExpression,
-        valueArguments: List<IrExpression?>,
+        konstueArguments: List<IrExpression?>,
         isBooleanReceiver: Boolean
     ): IrCall {
-        val irCall = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(arrayClassSymbol, functionName)).apply {
+        konst irCall = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(arrayClassSymbol, functionName)).apply {
             this.dispatchReceiver = dispatchReceiver
             putValueArgument(0, index) // array element index
-            valueArguments.forEachIndexed { index, arg ->
+            konstueArguments.forEachIndexed { index, arg ->
                 putValueArgument(index + 1, arg) // function arguments
             }
         }
@@ -72,22 +72,22 @@ class AtomicfuIrBuilder internal constructor(
         functionName: String,
         dispatchReceiver: IrExpression?,
         obj: IrExpression?,
-        valueArguments: List<IrExpression?>,
+        konstueArguments: List<IrExpression?>,
         castType: IrType?,
         isBooleanReceiver: Boolean,
     ): IrExpression {
-        val irCall = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(fieldUpdaterSymbol, functionName)).apply {
+        konst irCall = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(fieldUpdaterSymbol, functionName)).apply {
             this.dispatchReceiver = dispatchReceiver
             putValueArgument(0, obj) // instance of the class, containing the field
-            valueArguments.forEachIndexed { index, arg ->
+            konstueArguments.forEachIndexed { index, arg ->
                 putValueArgument(index + 1, arg) // function arguments
             }
         }
-        if (functionName == "<get-value>" && castType != null) {
+        if (functionName == "<get-konstue>" && castType != null) {
             return irAs(irCall, castType)
         }
-        // j.u.c.a AtomicIntegerFieldUpdater is used to update boolean values,
-        // so cast return value to boolean if necessary
+        // j.u.c.a AtomicIntegerFieldUpdater is used to update boolean konstues,
+        // so cast return konstue to boolean if necessary
         return if (isBooleanReceiver && irCall.type.isInt()) irCall.toBoolean() else irCall
     }
 
@@ -97,26 +97,26 @@ class AtomicfuIrBuilder internal constructor(
         symbol: IrSimpleFunctionSymbol,
         dispatchReceiver: IrExpression?,
         syntheticValueArguments: List<IrExpression?>,
-        valueArguments: List<IrExpression?>
-    ) = irCallWithArgs(symbol, dispatchReceiver, syntheticValueArguments + valueArguments)
+        konstueArguments: List<IrExpression?>
+    ) = irCallWithArgs(symbol, dispatchReceiver, syntheticValueArguments + konstueArguments)
 
-    // val a$FU = j.u.c.a.AtomicIntegerFieldUpdater.newUpdater(A::class, "a")
+    // konst a$FU = j.u.c.a.AtomicIntegerFieldUpdater.newUpdater(A::class, "a")
     fun newUpdater(
         fieldUpdaterClass: IrClassSymbol,
         parentClass: IrClass,
-        valueType: IrType,
+        konstueType: IrType,
         fieldName: String
     ) = irCall(atomicSymbols.getNewUpdater(fieldUpdaterClass)).apply {
         putValueArgument(0, atomicSymbols.javaClassReference(parentClass.symbol.starProjectedType)) // tclass
         if (fieldUpdaterClass == atomicSymbols.atomicRefFieldUpdaterClass) {
-            putValueArgument(1, atomicSymbols.javaClassReference(valueType)) // vclass
+            putValueArgument(1, atomicSymbols.javaClassReference(konstueType)) // vclass
             putValueArgument(2, irString(fieldName)) // fieldName
         } else {
             putValueArgument(1, irString(fieldName)) // fieldName
         }
     }
 
-    // val atomicArr = j.u.c.a.AtomicIntegerArray(size)
+    // konst atomicArr = j.u.c.a.AtomicIntegerArray(size)
     fun newJucaAtomicArray(
         atomicArrayClass: IrClassSymbol,
         size: IrExpression,
@@ -129,22 +129,22 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun <T> atomicfu$loop(atomicfu$handler: AtomicIntegerFieldUpdater, atomicfu$action: (Int) -> Unit, dispatchReceiver: Any?) {
         while (true) {
-            val cur = atomicfu$handler.get()
+            konst cur = atomicfu$handler.get()
             atomicfu$action(cur)
         }
     }
     */
-    fun atomicfuLoopBody(valueType: IrType, valueParameters: List<IrValueParameter>) =
+    fun atomicfuLoopBody(konstueType: IrType, konstueParameters: List<IrValueParameter>) =
         irBlockBody {
             +irWhile().apply {
                 condition = irTrue()
                 body = irBlock {
-                    val cur = createTmpVariable(
-                        atomicGetValue(valueType, irGet(valueParameters[0]), irGet(valueParameters[2])),
+                    konst cur = createTmpVariable(
+                        atomicGetValue(konstueType, irGet(konstueParameters[0]), irGet(konstueParameters[2])),
                         "atomicfu\$cur", false
                     )
                     +irCall(atomicSymbols.invoke1Symbol).apply {
-                        dispatchReceiver = irGet(valueParameters[1])
+                        dispatchReceiver = irGet(konstueParameters[1])
                         putValueArgument(0, irGet(cur))
                     }
                 }
@@ -154,22 +154,22 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun <T> atomicfu$array$loop(atomicfu$handler: AtomicIntegerArray, index: Int, atomicfu$action: (Int) -> Unit) {
         while (true) {
-            val cur = atomicfu$handler.get(index)
+            konst cur = atomicfu$handler.get(index)
             atomicfu$action(cur)
         }
     }
     */
-    fun atomicfuArrayLoopBody(atomicArrayClass: IrClassSymbol, valueParameters: List<IrValueParameter>) =
+    fun atomicfuArrayLoopBody(atomicArrayClass: IrClassSymbol, konstueParameters: List<IrValueParameter>) =
         irBlockBody {
             +irWhile().apply {
                 condition = irTrue()
                 body = irBlock {
-                    val cur = createTmpVariable(
-                        atomicGetArrayElement(atomicArrayClass, irGet(valueParameters[0]), irGet(valueParameters[1])),
+                    konst cur = createTmpVariable(
+                        atomicGetArrayElement(atomicArrayClass, irGet(konstueParameters[0]), irGet(konstueParameters[1])),
                         "atomicfu\$cur", false
                     )
                     +irCall(atomicSymbols.invoke1Symbol).apply {
-                        dispatchReceiver = irGet(valueParameters[2])
+                        dispatchReceiver = irGet(konstueParameters[2])
                         putValueArgument(0, irGet(cur))
                     }
                 }
@@ -179,8 +179,8 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$update(atomicfu$handler: AtomicIntegerFieldUpdater, atomicfu$action: (Int) -> Int, dispatchReceiver: Any?) {
         while (true) {
-            val cur = atomicfu$handler.get()
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get()
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(cur, upd)) return
         }
     }
@@ -189,8 +189,8 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$getAndUpdate(atomicfu$handler: AtomicIntegerFieldUpdater, atomicfu$action: (Int) -> Int, dispatchReceiver: Any?) {
         while (true) {
-            val cur = atomicfu$handler.get()
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get()
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(cur, upd)) return cur
         }
     }
@@ -199,34 +199,34 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$updateAndGet(atomicfu$handler: AtomicIntegerFieldUpdater, atomicfu$action: (Int) -> Int, dispatchReceiver: Any?) {
         while (true) {
-            val cur = atomicfu$handler.get()
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get()
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(cur, upd)) return upd
         }
     }
     */
-    fun atomicfuUpdateBody(functionName: String, valueParameters: List<IrValueParameter>, valueType: IrType) =
+    fun atomicfuUpdateBody(functionName: String, konstueParameters: List<IrValueParameter>, konstueType: IrType) =
         irBlockBody {
             +irWhile().apply {
                 condition = irTrue()
                 body = irBlock {
-                    val cur = createTmpVariable(
-                        atomicGetValue(valueType, irGet(valueParameters[0]), irGet(valueParameters[2])),
+                    konst cur = createTmpVariable(
+                        atomicGetValue(konstueType, irGet(konstueParameters[0]), irGet(konstueParameters[2])),
                         "atomicfu\$cur", false
                     )
-                    val upd = createTmpVariable(
+                    konst upd = createTmpVariable(
                         irCall(atomicSymbols.invoke1Symbol).apply {
-                            dispatchReceiver = irGet(valueParameters[1])
+                            dispatchReceiver = irGet(konstueParameters[1])
                             putValueArgument(0, irGet(cur))
                         }, "atomicfu\$upd", false
                     )
                     +irIfThen(
                         type = atomicSymbols.irBuiltIns.unitType,
-                        condition = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(atomicSymbols.getJucaAFUClass(valueType), "compareAndSet")).apply {
-                            putValueArgument(0, irGet(valueParameters[2]))
+                        condition = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(atomicSymbols.getJucaAFUClass(konstueType), "compareAndSet")).apply {
+                            putValueArgument(0, irGet(konstueParameters[2]))
                             putValueArgument(1, irGet(cur))
                             putValueArgument(2, irGet(upd))
-                            dispatchReceiver = irGet(valueParameters[0])
+                            dispatchReceiver = irGet(konstueParameters[0])
                         },
                         thenPart = when (functionName) {
                             "update" -> irReturnUnit()
@@ -242,8 +242,8 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$array$update(atomicfu$handler: AtomicIntegerArray, index: Int, atomicfu$action: (Int) -> Int) {
         while (true) {
-            val cur = atomicfu$handler.get(index)
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get(index)
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(index, cur, upd)) return
         }
     }
@@ -252,8 +252,8 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$array$getAndUpdate(atomicfu$handler: AtomicIntegerArray, index: Int, atomicfu$action: (Int) -> Int) {
         while (true) {
-            val cur = atomicfu$handler.get(index)
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get(index)
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(index, cur, upd)) return cur
         }
     }
@@ -262,34 +262,34 @@ class AtomicfuIrBuilder internal constructor(
     /*
     inline fun atomicfu$array$updateAndGet(atomicfu$handler: AtomicIntegerArray, index: Int, atomicfu$action: (Int) -> Int) {
         while (true) {
-            val cur = atomicfu$handler.get(index)
-            val upd = atomicfu$action(cur)
+            konst cur = atomicfu$handler.get(index)
+            konst upd = atomicfu$action(cur)
             if (atomicfu$handler.CAS(index, cur, upd)) return upd
         }
     }
     */
-    fun atomicfuArrayUpdateBody(functionName: String, atomicArrayClass: IrClassSymbol, valueParameters: List<IrValueParameter>) =
+    fun atomicfuArrayUpdateBody(functionName: String, atomicArrayClass: IrClassSymbol, konstueParameters: List<IrValueParameter>) =
         irBlockBody {
             +irWhile().apply {
                 condition = irTrue()
                 body = irBlock {
-                    val cur = createTmpVariable(
-                        atomicGetArrayElement(atomicArrayClass, irGet(valueParameters[0]), irGet(valueParameters[1])),
+                    konst cur = createTmpVariable(
+                        atomicGetArrayElement(atomicArrayClass, irGet(konstueParameters[0]), irGet(konstueParameters[1])),
                         "atomicfu\$cur", false
                     )
-                    val upd = createTmpVariable(
+                    konst upd = createTmpVariable(
                         irCall(atomicSymbols.invoke1Symbol).apply {
-                            dispatchReceiver = irGet(valueParameters[2])
+                            dispatchReceiver = irGet(konstueParameters[2])
                             putValueArgument(0, irGet(cur))
                         }, "atomicfu\$upd", false
                     )
                     +irIfThen(
                         type = atomicSymbols.irBuiltIns.unitType,
                         condition = irCall(atomicSymbols.getAtomicHandlerFunctionSymbol(atomicArrayClass, "compareAndSet")).apply {
-                            putValueArgument(0, irGet(valueParameters[1])) // index
+                            putValueArgument(0, irGet(konstueParameters[1])) // index
                             putValueArgument(1, irGet(cur))
                             putValueArgument(2, irGet(upd))
-                            dispatchReceiver = irGet(valueParameters[0])
+                            dispatchReceiver = irGet(konstueParameters[0])
                         },
                         thenPart = when (functionName) {
                             "update" -> irReturnUnit()

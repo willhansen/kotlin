@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test package with dummy`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
 
             target("a") {
@@ -19,19 +19,19 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
                     source(
                         """
                         package pkg.abcd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "abcd.kt"
                     )
                     source(
                         """
                         package pkg.ab
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "ab.kt"
                     )
                     source(
                         """
                         package pkg.a
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "a.kt"
                     )
                 }
@@ -42,19 +42,19 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
                     source(
                         """
                         package pkg.abcd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "abcd.kt"
                     )
                     source(
                         """
                         package pkg.ab
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "ab.kt"
                     )
                     source(
                         """
                         package pkg.b
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "b.kt"
                     )
                 }
@@ -65,19 +65,19 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
                     source(
                         """
                         package pkg.abcd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "abcd.kt"
                     )
                     source(
                         """
                         package pkg.cd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "cd.kt"
                     )
                     source(
                         """
                         package pkg.c
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "c.kt"
                     )
                 }
@@ -88,19 +88,19 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
                     source(
                         """
                         package pkg.abcd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "abcd.kt"
                     )
                     source(
                         """
                         package pkg.cd
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "cd.kt"
                     )
                     source(
                         """
                         package pkg.d
-                        val dummy = "me"
+                        konst dummy = "me"
                     """, "d.kt"
                     )
                 }
@@ -111,13 +111,13 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
             source(
                 """
                 package pkg.abcd
-                expect val dummy: String
+                expect konst dummy: String
                 """, "abcd.kt"
             )
             source(
                 """
                 package pkg.ab
-                expect val dummy: String
+                expect konst dummy: String
                 """, "ab.kt"
             )
         }
@@ -126,13 +126,13 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
             source(
                 """
                 package pkg.abcd
-                expect val dummy: String
+                expect konst dummy: String
                 """, "abcd.kt"
             )
             source(
                 """
                 package pkg.cd
-                expect val dummy: String
+                expect konst dummy: String
                 """, "cd.kt"
             )
         }
@@ -141,7 +141,7 @@ class HierarchicalPackageCommonizationTest : AbstractInlineSourcesCommonizationT
             source(
                 """
                 package pkg.abcd
-                expect val dummy: String
+                expect konst dummy: String
                 """, "abcd.kt"
             )
         }

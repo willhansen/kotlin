@@ -8,7 +8,7 @@ package runtime.collections.sort1
 import kotlin.test.*
 
 @Test fun runTest() {
-    val foo = mutableListOf("x", "a", "b")
+    konst foo = mutableListOf("x", "a", "b")
     foo.sort()
     println(foo.toString())
 

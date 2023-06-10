@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.compilerRunner.KotlinLogger
 
 internal class GradlePrintingMessageCollector(
-    val logger: KotlinLogger,
-    private val allWarningsAsErrors: Boolean
+    konst logger: KotlinLogger,
+    private konst allWarningsAsErrors: Boolean
 ) :
     MessageCollector {
     constructor(logger: Logger, allWarningsAsErrors: Boolean) : this(GradleKotlinLogger(logger), allWarningsAsErrors)
 
     private var hasErrors = false
 
-    private val messageRenderer = GradleStyleMessageRenderer()
+    private konst messageRenderer = GradleStyleMessageRenderer()
 
     override fun hasErrors() = hasErrors
 
@@ -30,7 +30,7 @@ internal class GradlePrintingMessageCollector(
     }
 
     override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
-        val renderedMessage = messageRenderer.render(severity, message, location)
+        konst renderedMessage = messageRenderer.render(severity, message, location)
 
         @Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
         when (severity) {

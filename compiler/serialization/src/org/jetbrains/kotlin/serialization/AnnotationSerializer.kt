@@ -30,21 +30,21 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.annotationClass
 import org.jetbrains.kotlin.resolve.descriptorUtil.classId
 import org.jetbrains.kotlin.types.error.ErrorUtils
 
-open class AnnotationSerializer(private val stringTable: DescriptorAwareStringTable) {
+open class AnnotationSerializer(private konst stringTable: DescriptorAwareStringTable) {
     fun serializeAnnotation(annotation: AnnotationDescriptor): ProtoBuf.Annotation? = ProtoBuf.Annotation.newBuilder().apply {
-        val classId = getAnnotationClassId(annotation) ?: return null
+        konst classId = getAnnotationClassId(annotation) ?: return null
         id = stringTable.getQualifiedClassNameIndex(classId)
 
-        for ((name, value) in annotation.allValueArguments) {
-            val argument = ProtoBuf.Annotation.Argument.newBuilder()
+        for ((name, konstue) in annotation.allValueArguments) {
+            konst argument = ProtoBuf.Annotation.Argument.newBuilder()
             argument.nameId = stringTable.getStringIndex(name.asString())
-            argument.setValue(valueProto(value))
+            argument.setValue(konstueProto(konstue))
             addArgument(argument)
         }
     }.build()
 
     protected open fun getAnnotationClassId(annotation: AnnotationDescriptor): ClassId? {
-        val annotationClass = annotation.annotationClass ?: error("Annotation type is not a class: ${annotation.type}")
+        konst annotationClass = annotation.annotationClass ?: error("Annotation type is not a class: ${annotation.type}")
         if (ErrorUtils.isError(annotationClass)) {
             error("Unresolved annotation type: ${annotation.type} at ${annotation.source.containingFile}")
         }
@@ -52,64 +52,64 @@ open class AnnotationSerializer(private val stringTable: DescriptorAwareStringTa
         return annotationClass.classId
     }
 
-    fun valueProto(constant: ConstantValue<*>): Value.Builder = Value.newBuilder().apply {
+    fun konstueProto(constant: ConstantValue<*>): Value.Builder = Value.newBuilder().apply {
         constant.accept(object : AnnotationArgumentVisitor<Unit, Unit> {
-            override fun visitAnnotationValue(value: AnnotationValue, data: Unit) {
+            override fun visitAnnotationValue(konstue: AnnotationValue, data: Unit) {
                 type = Type.ANNOTATION
-                annotation = serializeAnnotation(value.value)
+                annotation = serializeAnnotation(konstue.konstue)
             }
 
-            override fun visitArrayValue(value: ArrayValue, data: Unit) {
+            override fun visitArrayValue(konstue: ArrayValue, data: Unit) {
                 type = Type.ARRAY
-                for (element in value.value) {
-                    addArrayElement(valueProto(element).build())
+                for (element in konstue.konstue) {
+                    addArrayElement(konstueProto(element).build())
                 }
             }
 
-            override fun visitBooleanValue(value: BooleanValue, data: Unit) {
+            override fun visitBooleanValue(konstue: BooleanValue, data: Unit) {
                 type = Type.BOOLEAN
-                intValue = if (value.value) 1 else 0
+                intValue = if (konstue.konstue) 1 else 0
             }
 
-            override fun visitByteValue(value: ByteValue, data: Unit) {
+            override fun visitByteValue(konstue: ByteValue, data: Unit) {
                 type = Type.BYTE
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
             }
 
-            override fun visitCharValue(value: CharValue, data: Unit) {
+            override fun visitCharValue(konstue: CharValue, data: Unit) {
                 type = Type.CHAR
-                intValue = value.value.code.toLong()
+                intValue = konstue.konstue.code.toLong()
             }
 
-            override fun visitDoubleValue(value: DoubleValue, data: Unit) {
+            override fun visitDoubleValue(konstue: DoubleValue, data: Unit) {
                 type = Type.DOUBLE
-                doubleValue = value.value
+                doubleValue = konstue.konstue
             }
 
-            override fun visitEnumValue(value: EnumValue, data: Unit) {
+            override fun visitEnumValue(konstue: EnumValue, data: Unit) {
                 type = Type.ENUM
-                classId = stringTable.getQualifiedClassNameIndex(value.enumClassId)
-                enumValueId = stringTable.getStringIndex(value.enumEntryName.asString())
+                classId = stringTable.getQualifiedClassNameIndex(konstue.enumClassId)
+                enumValueId = stringTable.getStringIndex(konstue.enumEntryName.asString())
             }
 
-            override fun visitErrorValue(value: ErrorValue, data: Unit) {
-                throw UnsupportedOperationException("Error value: $value")
+            override fun visitErrorValue(konstue: ErrorValue, data: Unit) {
+                throw UnsupportedOperationException("Error konstue: $konstue")
             }
 
-            override fun visitFloatValue(value: FloatValue, data: Unit) {
+            override fun visitFloatValue(konstue: FloatValue, data: Unit) {
                 type = Type.FLOAT
-                floatValue = value.value
+                floatValue = konstue.konstue
             }
 
-            override fun visitIntValue(value: IntValue, data: Unit) {
+            override fun visitIntValue(konstue: IntValue, data: Unit) {
                 type = Type.INT
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
             }
 
-            override fun visitKClassValue(value: KClassValue, data: Unit) {
+            override fun visitKClassValue(konstue: KClassValue, data: Unit) {
                 type = Type.CLASS
 
-                when (val classValue = value.value) {
+                when (konst classValue = konstue.konstue) {
                     is KClassValue.Value.NormalClass -> {
                         classId = stringTable.getQualifiedClassNameIndex(classValue.classId)
 
@@ -125,7 +125,7 @@ open class AnnotationSerializer(private val stringTable: DescriptorAwareStringTa
                             type = type.arguments.single().type
                         }
 
-                        val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor
+                        konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor
                             ?: error("Type parameters are not allowed in class literal annotation arguments: $classValue")
                         classId = stringTable.getFqNameIndex(descriptor)
 
@@ -136,46 +136,46 @@ open class AnnotationSerializer(private val stringTable: DescriptorAwareStringTa
                 }
             }
 
-            override fun visitLongValue(value: LongValue, data: Unit) {
+            override fun visitLongValue(konstue: LongValue, data: Unit) {
                 type = Type.LONG
-                intValue = value.value
+                intValue = konstue.konstue
             }
 
-            override fun visitNullValue(value: NullValue, data: Unit) {
+            override fun visitNullValue(konstue: NullValue, data: Unit) {
                 throw UnsupportedOperationException("Null should not appear in annotation arguments")
             }
 
-            override fun visitShortValue(value: ShortValue, data: Unit) {
+            override fun visitShortValue(konstue: ShortValue, data: Unit) {
                 type = Type.SHORT
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
             }
 
-            override fun visitStringValue(value: StringValue, data: Unit) {
+            override fun visitStringValue(konstue: StringValue, data: Unit) {
                 type = Type.STRING
-                stringValue = stringTable.getStringIndex(value.value)
+                stringValue = stringTable.getStringIndex(konstue.konstue)
             }
 
-            override fun visitUByteValue(value: UByteValue, data: Unit?) {
+            override fun visitUByteValue(konstue: UByteValue, data: Unit?) {
                 type = Type.BYTE
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
                 flags = Flags.IS_UNSIGNED.toFlags(true)
             }
 
-            override fun visitUShortValue(value: UShortValue, data: Unit?) {
+            override fun visitUShortValue(konstue: UShortValue, data: Unit?) {
                 type = Type.SHORT
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
                 flags = Flags.IS_UNSIGNED.toFlags(true)
             }
 
-            override fun visitUIntValue(value: UIntValue, data: Unit?) {
+            override fun visitUIntValue(konstue: UIntValue, data: Unit?) {
                 type = Type.INT
-                intValue = value.value.toLong()
+                intValue = konstue.konstue.toLong()
                 flags = Flags.IS_UNSIGNED.toFlags(true)
             }
 
-            override fun visitULongValue(value: ULongValue, data: Unit?) {
+            override fun visitULongValue(konstue: ULongValue, data: Unit?) {
                 type = Type.LONG
-                intValue = value.value
+                intValue = konstue.konstue
                 flags = Flags.IS_UNSIGNED.toFlags(true)
             }
         }, Unit)

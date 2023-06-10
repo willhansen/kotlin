@@ -44,27 +44,27 @@ import org.jetbrains.kotlin.types.typeUtil.defaultProjections
 import org.jetbrains.kotlin.types.typeUtil.isDefaultBound
 import java.util.*
 
-open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystemBuilderImpl.Mode.INFERENCE) : ConstraintSystem.Builder {
+open class ConstraintSystemBuilderImpl(private konst mode: Mode = ConstraintSystemBuilderImpl.Mode.INFERENCE) : ConstraintSystem.Builder {
     enum class Mode {
         INFERENCE,
         SPECIFICITY
     }
 
     internal data class Constraint(
-        val kind: ConstraintKind, val subtype: KotlinType, val superType: KotlinType, val position: ConstraintPosition
+        konst kind: ConstraintKind, konst subtype: KotlinType, konst superType: KotlinType, konst position: ConstraintPosition
     )
 
-    enum class ConstraintKind(val bound: TypeBounds.BoundKind) {
+    enum class ConstraintKind(konst bound: TypeBounds.BoundKind) {
         SUB_TYPE(UPPER_BOUND),
         EQUAL(EXACT_BOUND)
     }
 
-    internal val allTypeParameterBounds = LinkedHashMap<TypeVariable, TypeBoundsImpl>()
-    internal val usedInBounds = HashMap<TypeVariable, MutableList<TypeBounds.Bound>>()
-    internal val errors = ArrayList<ConstraintError>()
-    internal val initialConstraints = ArrayList<Constraint>()
+    internal konst allTypeParameterBounds = LinkedHashMap<TypeVariable, TypeBoundsImpl>()
+    internal konst usedInBounds = HashMap<TypeVariable, MutableList<TypeBounds.Bound>>()
+    internal konst errors = ArrayList<ConstraintError>()
+    internal konst initialConstraints = ArrayList<Constraint>()
 
-    override val typeVariableSubstitutors = LinkedHashMap<CallHandle, TypeSubstitutor>()
+    override konst typeVariableSubstitutors = LinkedHashMap<CallHandle, TypeSubstitutor>()
 
     private fun storeSubstitutor(call: CallHandle, substitutor: TypeSubstitutor): TypeSubstitutor {
         if (typeVariableSubstitutors.containsKey(call)) {
@@ -79,17 +79,17 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
     ): TypeSubstitutor {
         if (typeParameters.isEmpty()) return storeSubstitutor(call, TypeSubstitutor.EMPTY)
 
-        val typeVariables = if (external) {
+        konst typeVariables = if (external) {
             typeParameters.map {
                 TypeVariable(call, it, it, true)
             }
         } else {
-            val freshTypeParameters = ArrayList<TypeParameterDescriptor>(typeParameters.size)
+            konst freshTypeParameters = ArrayList<TypeParameterDescriptor>(typeParameters.size)
             DescriptorSubstitutor.substituteTypeParameters(
                 typeParameters.toList(), TypeSubstitution.EMPTY, typeParameters.first().containingDeclaration, freshTypeParameters
             )
             freshTypeParameters.zip(typeParameters).map {
-                val (fresh, original) = it
+                konst (fresh, original) = it
                 TypeVariable(call, fresh, original, external)
             }
         }
@@ -101,7 +101,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         for ((typeVariable, _) in allTypeParameterBounds) {
             for (declaredUpperBound in typeVariable.freshTypeParameter.upperBounds) {
                 if (declaredUpperBound.isDefaultBound()) continue //todo remove this line (?)
-                val context = ConstraintContext(TYPE_BOUND_POSITION.position(typeVariable.originalTypeParameter.index))
+                konst context = ConstraintContext(TYPE_BOUND_POSITION.position(typeVariable.originalTypeParameter.index))
                 addBound(typeVariable, declaredUpperBound, UPPER_BOUND, context)
             }
         }
@@ -137,14 +137,14 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         superType: KotlinType?,
         constraintContext: ConstraintContext
     ) {
-        val constraintPosition = constraintContext.position
+        konst constraintPosition = constraintContext.position
 
         // when processing nested constraints, `derivedFrom` information should be reset
-        val newConstraintContext = ConstraintContext(
+        konst newConstraintContext = ConstraintContext(
             constraintContext.position, derivedFrom = null, initial = false,
             initialReduction = constraintContext.initialReduction
         )
-        val typeCheckingProcedure = TypeCheckingProcedure(object : TypeCheckingProcedureCallbacks {
+        konst typeCheckingProcedure = TypeCheckingProcedure(object : TypeCheckingProcedureCallbacks {
             private var depth = 0
 
             override fun assertEqualTypes(a: KotlinType, b: KotlinType, typeCheckingProcedure: TypeCheckingProcedure): Boolean {
@@ -168,7 +168,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
 
             override fun capture(type: KotlinType, typeProjection: TypeProjection): Boolean {
                 if (isMyTypeVariable(typeProjection.type) || depth > 0) return false
-                val myTypeVariable = getMyTypeVariable(type)
+                konst myTypeVariable = getMyTypeVariable(type)
 
                 if (myTypeVariable != null && constraintPosition.isParameter()) {
                     generateTypeParameterCaptureConstraint(myTypeVariable, typeProjection, newConstraintContext, type.isMarkedNullable)
@@ -204,7 +204,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         constraintContext: ConstraintContext,
         typeCheckingProcedure: TypeCheckingProcedure
     ) {
-        val constraintPosition = constraintContext.position
+        konst constraintPosition = constraintContext.position
         if (isErrorOrSpecialType(subType, constraintPosition) || isErrorOrSpecialType(superType, constraintPosition)) return
         if (subType == null || superType == null) return
 
@@ -216,7 +216,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
 
         // function literal { x -> ... } goes without declaring receiver type
         // and can be considered as extension function if one is expected
-        val newSubType = if (constraintKind == SUB_TYPE && subType.isFunctionPlaceholder) {
+        konst newSubType = if (constraintKind == SUB_TYPE && subType.isFunctionPlaceholder) {
             if (isMyTypeVariable(superType)) {
                 // the constraint binds type parameter and a function type,
                 // we don't add it without knowing whether it's a function type or an extension function type
@@ -236,9 +236,9 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
                 generateTypeParameterBound(superType, subType, constraintKind.bound.reverse(), constraintContext)
                 return
             }
-            val subType2 = simplifyType(subType, constraintContext.initial)
-            val superType2 = simplifyType(superType, constraintContext.initial)
-            val result = if (constraintKind == EQUAL) {
+            konst subType2 = simplifyType(subType, constraintContext.initial)
+            konst superType2 = simplifyType(superType, constraintContext.initial)
+            konst result = if (constraintKind == EQUAL) {
                 typeCheckingProcedure.equalTypes(subType2, superType2)
             } else {
                 typeCheckingProcedure.isSubtypeOf(subType2, superType)
@@ -268,18 +268,18 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         kind: TypeBounds.BoundKind,
         constraintContext: ConstraintContext
     ) {
-        val bound = Bound(
+        konst bound = Bound(
             typeVariable, constrainingType, kind, constraintContext.position,
             constrainingType.isProper(), constraintContext.derivedFrom ?: emptySet()
         )
-        val typeBounds = getTypeBounds(typeVariable)
+        konst typeBounds = getTypeBounds(typeVariable)
         if (typeBounds.bounds.contains(bound)) return
 
         typeBounds.addBound(bound)
 
         if (!bound.isProper) {
             for (dependentTypeVariable in getNestedTypeVariables(bound.constrainingType)) {
-                val dependentBounds = usedInBounds.getOrPut(dependentTypeVariable) { arrayListOf() }
+                konst dependentBounds = usedInBounds.getOrPut(dependentTypeVariable) { arrayListOf() }
                 dependentBounds.add(bound)
             }
         }
@@ -293,20 +293,20 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         boundKind: TypeBounds.BoundKind,
         constraintContext: ConstraintContext
     ) {
-        val typeVariable = getMyTypeVariable(parameterType)!!
+        konst typeVariable = getMyTypeVariable(parameterType)!!
 
         var newConstrainingType = constrainingType
 
         // Here we are handling the case when T! gets a bound Foo (or Foo?)
         // In this case, type parameter T is supposed to get the bound Foo!
         // Example:
-        // val c: Collection<Foo> = Collections.singleton(null : Foo?)
+        // konst c: Collection<Foo> = Collections.singleton(null : Foo?)
         // Constraints for T are:
         //   Foo? <: T!
         //   Foo >: T!
         // both Foo and Foo? transform to Foo! here
         if (parameterType.isFlexible()) {
-            val customTypeParameter = parameterType.getCustomTypeParameter()
+            konst customTypeParameter = parameterType.getCustomTypeParameter()
             if (customTypeParameter != null) {
                 newConstrainingType = customTypeParameter.substitutionResult(constrainingType)
             }
@@ -321,7 +321,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
         // constraint T? = Int! should transform to T >: Int and T <: Int!
 
         // constraints T? >: Int?; T? >: Int! should transform to T >: Int
-        val notNullConstrainingType = TypeUtils.makeNotNullable(newConstrainingType)
+        konst notNullConstrainingType = TypeUtils.makeNotNullable(newConstrainingType)
         if (boundKind == EXACT_BOUND || boundKind == LOWER_BOUND) {
             addBound(typeVariable, notNullConstrainingType, LOWER_BOUND, constraintContext)
         }
@@ -341,12 +341,12 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
             constrainingTypeProjection.projectionKind == Variance.IN_VARIANCE) {
             errors.add(CannotCapture(constraintContext.position, typeVariable))
         }
-        val typeProjection = if (isTypeMarkedNullable) {
+        konst typeProjection = if (isTypeMarkedNullable) {
             TypeProjectionImpl(constrainingTypeProjection.projectionKind, TypeUtils.makeNotNullable(constrainingTypeProjection.type))
         } else {
             constrainingTypeProjection
         }
-        val capturedType = createCapturedType(typeProjection)
+        konst capturedType = createCapturedType(typeProjection)
         addBound(typeVariable, capturedType, EXACT_BOUND, constraintContext)
     }
 
@@ -378,16 +378,16 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
     }
 
     private fun fixVariable(typeVariable: TypeVariable) {
-        val typeBounds = getTypeBounds(typeVariable)
+        konst typeBounds = getTypeBounds(typeVariable)
         if (typeBounds.isFixed) return
         typeBounds.setFixed()
 
-        val nestedTypeVariables = typeBounds.bounds.flatMap { getNestedTypeVariables(it.constrainingType) }
+        konst nestedTypeVariables = typeBounds.bounds.flatMap { getNestedTypeVariables(it.constrainingType) }
         nestedTypeVariables.forEach { fixVariable(it) }
 
-        val value = typeBounds.value ?: return
+        konst konstue = typeBounds.konstue ?: return
 
-        addBound(typeVariable, value, TypeBounds.BoundKind.EXACT_BOUND, ConstraintContext(ConstraintPositionKind.FROM_COMPLETER.position()))
+        addBound(typeVariable, konstue, TypeBounds.BoundKind.EXACT_BOUND, ConstraintContext(ConstraintPositionKind.FROM_COMPLETER.position()))
     }
 
     override fun add(other: ConstraintSystem.Builder) {
@@ -416,7 +416,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
 
     override fun fixVariables() {
         // todo variables should be fixed in the right order
-        val (external, functionTypeParameters) = allTypeParameterBounds.keys.partition { it.isExternal }
+        konst (external, functionTypeParameters) = allTypeParameterBounds.keys.partition { it.isExternal }
         external.forEach { fixVariable(it) }
         functionTypeParameters.forEach { fixVariable(it) }
     }
@@ -427,7 +427,7 @@ open class ConstraintSystemBuilderImpl(private val mode: Mode = ConstraintSystem
 
     companion object {
         fun forSpecificity(): SimpleConstraintSystem = object : ConstraintSystemBuilderImpl(Mode.SPECIFICITY), SimpleConstraintSystem {
-            override val context: TypeSystemInferenceExtensionContext
+            override konst context: TypeSystemInferenceExtensionContext
                 get() = SimpleClassicTypeSystemContext
             var counter = 0
 
@@ -456,22 +456,22 @@ internal fun createTypeForFunctionPlaceholder(
 ): KotlinType {
     if (!functionPlaceholder.isFunctionPlaceholder) return functionPlaceholder
 
-    val functionPlaceholderTypeConstructor = functionPlaceholder.constructor as FunctionPlaceholderTypeConstructor
+    konst functionPlaceholderTypeConstructor = functionPlaceholder.constructor as FunctionPlaceholderTypeConstructor
 
-    val isExtension = expectedType.isBuiltinExtensionFunctionalType
-    val newArgumentTypes = if (!functionPlaceholderTypeConstructor.hasDeclaredArguments) {
-        val typeParamSize = expectedType.constructor.parameters.size
+    konst isExtension = expectedType.isBuiltinExtensionFunctionalType
+    konst newArgumentTypes = if (!functionPlaceholderTypeConstructor.hasDeclaredArguments) {
+        konst typeParamSize = expectedType.constructor.parameters.size
         // the first parameter is receiver (if present), the last one is return type,
         // the remaining are function arguments
-        val functionArgumentsSize = if (isExtension) typeParamSize - 2 else typeParamSize - 1
-        val result = arrayListOf<KotlinType>()
+        konst functionArgumentsSize = if (isExtension) typeParamSize - 2 else typeParamSize - 1
+        konst result = arrayListOf<KotlinType>()
         (1..functionArgumentsSize).forEach { result.add(DONT_CARE) }
         result
     } else {
         functionPlaceholderTypeConstructor.argumentTypes
     }
-    val receiverType = if (isExtension) DONT_CARE else null
-    val contextReceiverTypes = (0 until expectedType.contextFunctionTypeParamsCount()).map { DONT_CARE }
+    konst receiverType = if (isExtension) DONT_CARE else null
+    konst contextReceiverTypes = (0 until expectedType.contextFunctionTypeParamsCount()).map { DONT_CARE }
     return createFunctionType(
         functionPlaceholder.builtIns, Annotations.EMPTY, receiverType, contextReceiverTypes, newArgumentTypes, null, DONT_CARE,
         suspendFunction = expectedType.isSuspendFunctionType

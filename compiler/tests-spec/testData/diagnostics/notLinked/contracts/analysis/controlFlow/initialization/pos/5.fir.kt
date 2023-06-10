@@ -19,7 +19,7 @@ import contracts.*
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val value_1: Int
-    contracts.case_1 { value_1 = 10 }
-    value_1.inc()
+    konst konstue_1: Int
+    contracts.case_1 { konstue_1 = 10 }
+    konstue_1.inc()
 }

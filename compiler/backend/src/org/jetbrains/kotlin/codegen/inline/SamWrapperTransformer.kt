@@ -21,11 +21,11 @@ import org.jetbrains.org.objectweb.asm.ClassVisitor
 import org.jetbrains.org.objectweb.asm.Opcodes
 
 class SamWrapperTransformationInfo(
-    override val oldClassName: String,
-    private val inliningContext: InliningContext,
-    private val alreadyRegenerated: Boolean
+    override konst oldClassName: String,
+    private konst inliningContext: InliningContext,
+    private konst alreadyRegenerated: Boolean
 ) : TransformationInfo {
-    override val nameGenerator: NameGenerator
+    override konst nameGenerator: NameGenerator
         get() = object : NameGenerator("stub") {
             override fun getGeneratorClass(): String {
                 error("Shouldn't be called on $oldClassName transformation")
@@ -41,7 +41,7 @@ class SamWrapperTransformationInfo(
         }
 
     //TODO consider to use package class instead of inliningContext.root.callSiteInfo.ownerClassName
-    override val newClassName: String
+    override konst newClassName: String
         get() = inliningContext.root.callSiteInfo.ownerClassName + "\$inlined" + "\$sam$".run { this + oldClassName.substringAfter(this) }
 
     override fun shouldRegenerate(sameModule: Boolean) = !sameModule && !alreadyRegenerated
@@ -52,12 +52,12 @@ class SamWrapperTransformationInfo(
         SamWrapperTransformer(this, inliningContext)
 }
 
-class SamWrapperTransformer(transformationInfo: SamWrapperTransformationInfo, private val inliningContext: InliningContext) :
+class SamWrapperTransformer(transformationInfo: SamWrapperTransformationInfo, private konst inliningContext: InliningContext) :
     ObjectTransformer<SamWrapperTransformationInfo>(transformationInfo, inliningContext.state) {
 
     override fun doTransform(parentRemapper: FieldRemapper): InlineResult {
-        val classReader = createClassReader()
-        val classBuilder = createRemappingClassBuilderViaFactory(inliningContext)
+        konst classReader = createClassReader()
+        konst classBuilder = createRemappingClassBuilderViaFactory(inliningContext)
 
         classReader.accept(object : ClassVisitor(Opcodes.API_VERSION, classBuilder.visitor) {
             override fun visit(version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<String>) {

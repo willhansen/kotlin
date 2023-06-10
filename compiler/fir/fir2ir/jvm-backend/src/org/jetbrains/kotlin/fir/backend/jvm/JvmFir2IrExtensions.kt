@@ -26,24 +26,24 @@ import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 class JvmFir2IrExtensions(
     configuration: CompilerConfiguration,
-    private val irDeserializer: JvmIrDeserializer,
-    private val mangler: KotlinMangler.IrMangler,
+    private konst irDeserializer: JvmIrDeserializer,
+    private konst mangler: KotlinMangler.IrMangler,
 ) : Fir2IrExtensions, JvmGeneratorExtensions {
-    override val classNameOverride: MutableMap<IrClass, JvmClassName> = mutableMapOf()
-    override val cachedFields = CachedFieldsForObjectInstances(IrFactoryImpl, configuration.languageVersionSettings)
+    override konst classNameOverride: MutableMap<IrClass, JvmClassName> = mutableMapOf()
+    override konst cachedFields = CachedFieldsForObjectInstances(IrFactoryImpl, configuration.languageVersionSettings)
 
-    private val kotlinIrInternalPackage =
+    private konst kotlinIrInternalPackage =
         IrExternalPackageFragmentImpl(DescriptorlessExternalPackageFragmentSymbol(), IrBuiltIns.KOTLIN_INTERNAL_IR_FQN)
 
-    private val kotlinJvmInternalPackage =
+    private konst kotlinJvmInternalPackage =
         IrExternalPackageFragmentImpl(DescriptorlessExternalPackageFragmentSymbol(), JvmAnnotationNames.KOTLIN_JVM_INTERNAL)
 
-    private val specialAnnotationConstructors = mutableListOf<IrConstructor>()
+    private konst specialAnnotationConstructors = mutableListOf<IrConstructor>()
 
-    private val rawTypeAnnotationClass =
+    private konst rawTypeAnnotationClass =
         createSpecialAnnotationClass(JvmSymbols.RAW_TYPE_ANNOTATION_FQ_NAME, kotlinIrInternalPackage)
 
-    override val rawTypeAnnotationConstructor: IrConstructor =
+    override konst rawTypeAnnotationConstructor: IrConstructor =
         rawTypeAnnotationClass.constructors.single()
 
     init {
@@ -58,19 +58,19 @@ class JvmFir2IrExtensions(
         }
 
     override fun registerDeclarations(symbolTable: SymbolTable) {
-        val signatureComputer = PublicIdSignatureComputer(mangler)
+        konst signatureComputer = PublicIdSignatureComputer(mangler)
         specialAnnotationConstructors.forEach { constructor ->
             symbolTable.declareConstructorWithSignature(signatureComputer.composePublicIdSignature(constructor, false), constructor.symbol)
         }
     }
 
-    override val irNeedsDeserialization: Boolean =
+    override konst irNeedsDeserialization: Boolean =
         configuration.get(JVMConfigurationKeys.SERIALIZE_IR, JvmSerializeIrMode.NONE) != JvmSerializeIrMode.NONE
 
     override fun generateOrGetFacadeClass(declaration: IrMemberWithContainerSource, components: Fir2IrComponents): IrClass? {
-        val deserializedSource = declaration.containerSource ?: return null
+        konst deserializedSource = declaration.containerSource ?: return null
         if (deserializedSource !is FacadeClassSource) return null
-        val facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
+        konst facadeName = deserializedSource.facadeClassName ?: deserializedSource.className
         return JvmFileFacadeClass(
             if (deserializedSource.facadeClassName != null) IrDeclarationOrigin.JVM_MULTIFILE_CLASS else IrDeclarationOrigin.FILE_CLASS,
             facadeName.fqNameForTopLevelClassMaybeWithDollars.shortName(),

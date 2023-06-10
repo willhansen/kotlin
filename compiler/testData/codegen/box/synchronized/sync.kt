@@ -7,7 +7,7 @@ import java.util.concurrent.*
 import java.util.concurrent.atomic.*
 
 fun thread(block: ()->Unit ) {
-    val thread = object: Thread() {
+    konst thread = object: Thread() {
         override fun run() {
             block()
         }
@@ -16,14 +16,14 @@ fun thread(block: ()->Unit ) {
 }
 
 fun box() : String {
-   val mtref = AtomicInteger()
-   val cdl = CountDownLatch(11)
+   konst mtref = AtomicInteger()
+   konst cdl = CountDownLatch(11)
    for(i in 0..10) {
        thread {
           var current = 0
           do {
               current = synchronized(mtref) {
-                val v = mtref.get() + 1
+                konst v = mtref.get() + 1
                 if(v < 100)
                     mtref.set(v+1)
                 v

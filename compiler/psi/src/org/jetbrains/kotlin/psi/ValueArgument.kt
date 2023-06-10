@@ -37,11 +37,11 @@ interface ValueArgument {
 }
 
 interface FakePositionalValueArgumentForCallableReference : ValueArgument {
-    val index: Int
+    konst index: Int
 }
 
 interface FakeImplicitSpreadValueArgumentForCallableReference : ValueArgument {
-    val expression: ValueArgument
+    konst expression: ValueArgument
 }
 
 interface LambdaArgument : ValueArgument {
@@ -49,6 +49,6 @@ interface LambdaArgument : ValueArgument {
 }
 
 interface ValueArgumentName {
-    val asName: Name
-    val referenceExpression: KtSimpleNameExpression?
+    konst asName: Name
+    konst referenceExpression: KtSimpleNameExpression?
 }

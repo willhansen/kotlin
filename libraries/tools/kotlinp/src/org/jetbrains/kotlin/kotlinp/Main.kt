@@ -12,13 +12,13 @@ import kotlin.system.exitProcess
 
 object Main {
     private fun run(args: Array<String>) {
-        val paths = arrayListOf<String>()
+        konst paths = arrayListOf<String>()
         var verbose = false
         var sort = false
 
         var i = 0
         while (true) {
-            val arg = args.getOrNull(i++) ?: break
+            konst arg = args.getOrNull(i++) ?: break
 
             if (arg == "-help" || arg == "-h") {
                 printUsageAndExit()
@@ -35,13 +35,13 @@ object Main {
             }
         }
 
-        val kotlinp = Kotlinp(KotlinpSettings(isVerbose = verbose, sortDeclarations = sort))
+        konst kotlinp = Kotlinp(KotlinpSettings(isVerbose = verbose, sortDeclarations = sort))
 
         for (path in paths) {
-            val file = File(path)
+            konst file = File(path)
             if (!file.exists()) throw KotlinpException("file does not exist: $path")
 
-            val text = try {
+            konst text = try {
                 when (file.extension) {
                     "class" -> kotlinp.renderClassFile(kotlinp.readClassFile(file))
                     "kotlin_module" -> @OptIn(UnstableMetadataApi::class) kotlinp.renderModuleFile(kotlinp.readModuleFile(file))
@@ -86,7 +86,7 @@ where possible options include:
 
     private fun printVersionAndExit() {
         // TODO: get version from manifest
-        val version = "@snapshot@"
+        konst version = "@snapshot@"
 
         println("Kotlin version " + version + " (JRE " + System.getProperty("java.runtime.version") + ")")
         exitProcess(0)

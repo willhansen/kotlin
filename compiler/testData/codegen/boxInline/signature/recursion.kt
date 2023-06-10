@@ -16,9 +16,9 @@ import test.*
 import java.util.*
 
 
-class I<A>(val s: A)
-class A<T : Any>(val elements: List<I<T>>) {
-    val p = elements.sortedBy { it.hashCode() }
+class I<A>(konst s: A)
+class A<T : Any>(konst elements: List<I<T>>) {
+    konst p = elements.sortedBy { it.hashCode() }
 }
 
 fun box(): String {

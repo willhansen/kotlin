@@ -49,11 +49,11 @@ public inline fun KtTypeCreatorMixIn.buildTypeParameterType(
 public sealed class KtTypeBuilder : KtLifetimeOwner
 
 public sealed class KtClassTypeBuilder : KtTypeBuilder() {
-    private val _arguments = mutableListOf<KtTypeProjection>()
+    private konst _arguments = mutableListOf<KtTypeProjection>()
 
     public var nullability: KtTypeNullability = KtTypeNullability.NON_NULLABLE
 
-    public val arguments: List<KtTypeProjection> get() = withValidityAssertion { _arguments }
+    public konst arguments: List<KtTypeProjection> get() = withValidityAssertion { _arguments }
 
     public fun argument(argument: KtTypeProjection) {
         assertIsValidAndAccessible()
@@ -65,17 +65,17 @@ public sealed class KtClassTypeBuilder : KtTypeBuilder() {
         _arguments += KtTypeArgumentWithVariance(type, variance, type.token)
     }
 
-    public class ByClassId(public val classId: ClassId, override val token: KtLifetimeToken) : KtClassTypeBuilder()
-    public class BySymbol(private val _symbol: KtClassLikeSymbol, override val token: KtLifetimeToken) : KtClassTypeBuilder() {
-        public val symbol: KtClassLikeSymbol get() = withValidityAssertion { _symbol }
+    public class ByClassId(public konst classId: ClassId, override konst token: KtLifetimeToken) : KtClassTypeBuilder()
+    public class BySymbol(private konst _symbol: KtClassLikeSymbol, override konst token: KtLifetimeToken) : KtClassTypeBuilder() {
+        public konst symbol: KtClassLikeSymbol get() = withValidityAssertion { _symbol }
     }
 }
 
 public sealed class KtTypeParameterTypeBuilder : KtTypeBuilder() {
     public var nullability: KtTypeNullability = KtTypeNullability.NULLABLE
 
-    public class BySymbol(private val _symbol: KtTypeParameterSymbol, override val token: KtLifetimeToken) : KtTypeParameterTypeBuilder() {
-        public val symbol: KtTypeParameterSymbol get() = withValidityAssertion { _symbol }
+    public class BySymbol(private konst _symbol: KtTypeParameterSymbol, override konst token: KtLifetimeToken) : KtTypeParameterTypeBuilder() {
+        public konst symbol: KtTypeParameterSymbol get() = withValidityAssertion { _symbol }
     }
 }
 

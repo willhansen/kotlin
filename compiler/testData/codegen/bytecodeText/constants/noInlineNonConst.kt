@@ -1,7 +1,7 @@
-val x = 1
+konst x = 1
 
 class A {
-    val b = 2
+    konst b = 2
 }
 
 fun box(): Int {
@@ -12,7 +12,7 @@ fun box(): Int {
 
     if (x == 0) return 1
 
-    val a = A()
+    konst a = A()
     when ("cde".length) {
         a.b -> return 0
         else -> A()

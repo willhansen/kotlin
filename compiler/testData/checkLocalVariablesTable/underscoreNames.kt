@@ -1,18 +1,18 @@
 // LAMBDAS: CLASS
 
-data class A(val x: Double = 1.0, val y: String = "", val z: Char = '0')
+data class A(konst x: Double = 1.0, konst y: String = "", konst z: Char = '0')
 
 fun foo(a: A, block: (A, String, Int) -> String): String = block(a, "", 1)
 
-val arrayOfA: Array<A> = Array(1) { A() }
+konst arrayOfA: Array<A> = Array(1) { A() }
 
 fun box() {
 
     foo(A()) {
         (x, _, y), _, w ->
 
-        val (a, _, c) = A()
-        val (_, `_`, d) = A()
+        konst (a, _, c) = A()
+        konst (_, `_`, d) = A()
 
         for ((_, q) in arrayOfA) {
             Unit

@@ -37,25 +37,25 @@ import org.jetbrains.kotlin.storage.getValue
  */
 
 class AnnotationSplitter(
-    private val storageManager: StorageManager,
+    private konst storageManager: StorageManager,
     allAnnotations: Annotations,
     applicableTargets: Set<AnnotationUseSiteTarget>
 ) {
     companion object {
-        private val TARGET_PRIORITIES = setOf(CONSTRUCTOR_PARAMETER, PROPERTY, FIELD)
+        private konst TARGET_PRIORITIES = setOf(CONSTRUCTOR_PARAMETER, PROPERTY, FIELD)
     }
 
-    private val splitAnnotations = storageManager.createLazyValue {
-        val map = hashMapOf<AnnotationUseSiteTarget, MutableList<AnnotationDescriptor>>()
-        val other = arrayListOf<AnnotationDescriptor>()
-        val applicableTargetsWithoutUseSiteTarget = applicableTargets.intersect(TARGET_PRIORITIES)
+    private konst splitAnnotations = storageManager.createLazyValue {
+        konst map = hashMapOf<AnnotationUseSiteTarget, MutableList<AnnotationDescriptor>>()
+        konst other = arrayListOf<AnnotationDescriptor>()
+        konst applicableTargetsWithoutUseSiteTarget = applicableTargets.intersect(TARGET_PRIORITIES)
 
         outer@ for (annotation in allAnnotations) {
             for (target in TARGET_PRIORITIES) {
                 if (target !in applicableTargetsWithoutUseSiteTarget) continue
 
-                val declarationSiteTargetForCurrentTarget = KotlinTarget.USE_SITE_MAPPING[target] ?: continue
-                val applicableTargetsForAnnotation = AnnotationChecker.applicableTargetSet(annotation)
+                konst declarationSiteTargetForCurrentTarget = KotlinTarget.USE_SITE_MAPPING[target] ?: continue
+                konst applicableTargetsForAnnotation = AnnotationChecker.applicableTargetSet(annotation)
 
                 if (declarationSiteTargetForCurrentTarget in applicableTargetsForAnnotation) {
                     map.getOrPut(target) { arrayListOf() }.add(annotation)
@@ -81,10 +81,10 @@ class AnnotationSplitter(
 
     private inner class LazySplitAnnotations(
         storageManager: StorageManager,
-        val target: AnnotationUseSiteTarget?
+        konst target: AnnotationUseSiteTarget?
     ) : Annotations, LazyEntity {
-        private val annotations by storageManager.createLazyValue {
-            val (targeted, other) = this@AnnotationSplitter.splitAnnotations()
+        private konst annotations by storageManager.createLazyValue {
+            konst (targeted, other) = this@AnnotationSplitter.splitAnnotations()
 
             if (target != null) {
                 targeted[target]?.let(Annotations.Companion::create) ?: Annotations.EMPTY

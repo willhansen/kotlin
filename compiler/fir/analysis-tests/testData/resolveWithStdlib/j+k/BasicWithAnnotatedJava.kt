@@ -15,8 +15,8 @@ public class Annotated {
 
 class User : Annotated() {
     fun test() {
-        val x = foo("123")
-        val y = foo(null)
+        konst x = foo("123")
+        konst y = foo(null)
     }
 }
 

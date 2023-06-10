@@ -4,7 +4,7 @@ package test
 
 fun commonFun2() {}
 
-private val deletedVal2: Int = 20
+private konst deletedVal2: Int = 20
 
 private fun deletedFun2(): Int = 10
 

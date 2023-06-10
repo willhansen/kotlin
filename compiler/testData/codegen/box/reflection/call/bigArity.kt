@@ -13,11 +13,11 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
-    val o = A::foo.call(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, "O")
+    konst a = A()
+    konst o = A::foo.call(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, "O")
 
-    val foo = A::class.members.single { it.name == "foo" }
-    val k = foo.call(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, "K")
+    konst foo = A::class.members.single { it.name == "foo" }
+    konst k = foo.call(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, "K")
 
     return o + k
 }

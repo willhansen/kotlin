@@ -2,13 +2,13 @@
 package foo
 
 fun box(): String {
-    val a: Int? = null
-    val r = a == null
+    konst a: Int? = null
+    konst r = a == null
     if (!r || a != null)
         return "wrong result on simple nullable check"
 
     //force using Kotlin.equals
-    val t = null
+    konst t = null
     if (t != undefined)
         return "wrong result when compare null and undefined using Kotlin.equals"
 

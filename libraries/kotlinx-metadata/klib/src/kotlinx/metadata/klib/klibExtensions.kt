@@ -9,110 +9,110 @@ import kotlinx.metadata.*
 import kotlinx.metadata.internal.common.KmModuleFragment
 import kotlinx.metadata.klib.impl.klibExtensions
 
-val KmFunction.annotations: MutableList<KmAnnotation>
+konst KmFunction.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
 var KmFunction.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
 var KmFunction.file: KlibSourceFile?
     get() = klibExtensions.file
-    set(value) {
-        klibExtensions.file = value
+    set(konstue) {
+        klibExtensions.file = konstue
     }
 
-val KmClass.annotations: MutableList<KmAnnotation>
+konst KmClass.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
 var KmClass.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
 var KmClass.file: KlibSourceFile?
     get() = klibExtensions.file
-    set(value) {
-        klibExtensions.file = value
+    set(konstue) {
+        klibExtensions.file = konstue
     }
 
-val KmClass.klibEnumEntries: MutableList<KlibEnumEntry>
+konst KmClass.klibEnumEntries: MutableList<KlibEnumEntry>
     get() = klibExtensions.enumEntries
 
-val KmProperty.annotations: MutableList<KmAnnotation>
+konst KmProperty.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
-val KmProperty.setterAnnotations: MutableList<KmAnnotation>
+konst KmProperty.setterAnnotations: MutableList<KmAnnotation>
     get() = klibExtensions.setterAnnotations
 
-val KmProperty.getterAnnotations: MutableList<KmAnnotation>
+konst KmProperty.getterAnnotations: MutableList<KmAnnotation>
     get() = klibExtensions.getterAnnotations
 
 var KmProperty.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
 var KmProperty.file: Int?
     get() = klibExtensions.file
-    set(value) {
-        klibExtensions.file = value
+    set(konstue) {
+        klibExtensions.file = konstue
     }
 
 var KmProperty.compileTimeValue: KmAnnotationArgument?
     get() = klibExtensions.compileTimeValue
-    set(value) {
-        klibExtensions.compileTimeValue = value
+    set(konstue) {
+        klibExtensions.compileTimeValue = konstue
     }
 
-val KmType.annotations: MutableList<KmAnnotation>
+konst KmType.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
-val KmConstructor.annotations: MutableList<KmAnnotation>
+konst KmConstructor.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
 var KmConstructor.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
 var KmPackage.fqName: String?
     get() = klibExtensions.fqName
-    set(value) {
-        klibExtensions.fqName = value
+    set(konstue) {
+        klibExtensions.fqName = konstue
     }
 
 var KmModuleFragment.fqName: String?
     get() = klibExtensions.fqName
-    set(value) {
-        klibExtensions.fqName = value
+    set(konstue) {
+        klibExtensions.fqName = konstue
     }
 
-val KmModuleFragment.className: MutableList<ClassName>
+konst KmModuleFragment.className: MutableList<ClassName>
     get() = klibExtensions.className
 
-val KmModuleFragment.moduleFragmentFiles: MutableList<KlibSourceFile>
+konst KmModuleFragment.moduleFragmentFiles: MutableList<KlibSourceFile>
     get() = klibExtensions.moduleFragmentFiles
 
-val KmTypeParameter.annotations: MutableList<KmAnnotation>
+konst KmTypeParameter.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations
 
 var KmTypeParameter.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
 var KmTypeAlias.uniqId: UniqId?
     get() = klibExtensions.uniqId
-    set(value) {
-        klibExtensions.uniqId = value
+    set(konstue) {
+        klibExtensions.uniqId = konstue
     }
 
-val KmValueParameter.annotations: MutableList<KmAnnotation>
+konst KmValueParameter.annotations: MutableList<KmAnnotation>
     get() = klibExtensions.annotations

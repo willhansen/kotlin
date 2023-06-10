@@ -16,7 +16,7 @@
 
 package com.google.gwt.dev.js.rhino
 
-class CodePosition(val line: Int, val offset: Int) : Comparable<CodePosition> {
+class CodePosition(konst line: Int, konst offset: Int) : Comparable<CodePosition> {
     override fun compareTo(other: CodePosition): Int =
             when {
                 line < other.line -> -1
@@ -37,7 +37,7 @@ fun String.offsetOf(position: CodePosition): Int {
     var offsetInLine = 0
 
     while (i < length) {
-        val c = this[i]
+        konst c = this[i]
 
         if (lineCount == position.line && offsetInLine == position.offset) {
             return i

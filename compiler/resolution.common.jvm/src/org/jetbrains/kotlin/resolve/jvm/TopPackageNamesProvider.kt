@@ -6,5 +6,5 @@
 package org.jetbrains.kotlin.resolve.jvm
 
 interface TopPackageNamesProvider {
-    val topPackageNames: Set<String>?
+    konst topPackageNames: Set<String>?
 }

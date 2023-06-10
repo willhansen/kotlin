@@ -22,14 +22,14 @@ template <typename Clock = steady_clock>
 class RepeatedTimer : private Pinned {
 public:
     template <typename Rep, typename Period, typename F>
-    RepeatedTimer(std::string_view name, std::chrono::duration<Rep, Period> interval, F&& f) noexcept :
-        interval_(interval),
-        next_(Clock::now() + interval_),
+    RepeatedTimer(std::string_view name, std::chrono::duration<Rep, Period> interkonst, F&& f) noexcept :
+        interkonst_(interkonst),
+        next_(Clock::now() + interkonst_),
         thread_(ScopedThread::attributes().name(name), &RepeatedTimer::Run<F>, this, std::forward<F>(f)) {}
 
     template <typename Rep, typename Period, typename F>
-    RepeatedTimer(std::chrono::duration<Rep, Period> interval, F&& f) noexcept :
-        RepeatedTimer("Timer thread", interval, std::forward<F>(f)) {}
+    RepeatedTimer(std::chrono::duration<Rep, Period> interkonst, F&& f) noexcept :
+        RepeatedTimer("Timer thread", interkonst, std::forward<F>(f)) {}
 
     ~RepeatedTimer() {
         {
@@ -43,11 +43,11 @@ public:
     }
 
     template <typename Rep, typename Period>
-    void restart(std::chrono::duration<Rep, Period> interval) noexcept {
+    void restart(std::chrono::duration<Rep, Period> interkonst) noexcept {
         {
             std::unique_lock lock(mutex_);
-            interval_ = interval;
-            next_ = Clock::now() + interval_;
+            interkonst_ = interkonst;
+            next_ = Clock::now() + interkonst_;
             scheduledInterrupt_ = true;
         }
         wait_.notify_all();
@@ -66,14 +66,14 @@ private:
             lock.unlock();
             std::invoke(std::forward<F>(f));
             lock.lock();
-            next_ = Clock::now() + interval_;
+            next_ = Clock::now() + interkonst_;
         }
     }
 
     std::mutex mutex_;
     std::condition_variable wait_;
     bool run_ = true;
-    typename Clock::duration interval_;
+    typename Clock::duration interkonst_;
     std::chrono::time_point<Clock> next_;
     bool scheduledInterrupt_ = false;
     ScopedThread thread_;

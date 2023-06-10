@@ -9,19 +9,19 @@ import java.io.File
 
 object TransformersFunctions {
     @JvmStatic
-    val replaceOptionalJvmInlineAnnotationWithReal = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "@JvmInline")
+    konst replaceOptionalJvmInlineAnnotationWithReal = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "@JvmInline")
 
     @JvmStatic
-    val replaceOptionalJvmInlineAnnotationWithUniversal = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "@Suppress(\"OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE\") @kotlin.jvm.JvmInline")
+    konst replaceOptionalJvmInlineAnnotationWithUniversal = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "@Suppress(\"OPTIONAL_DECLARATION_USAGE_IN_NON_COMMON_SOURCE\") @kotlin.jvm.JvmInline")
 
     @JvmStatic
-    val removeOptionalJvmInlineAnnotation = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "")
+    konst removeOptionalJvmInlineAnnotation = ReplacingSourceTransformer("OPTIONAL_JVM_INLINE_ANNOTATION", "")
 
     object Android {
-        val forAll: List<(String) -> String> = listOf(
+        konst forAll: List<(String) -> String> = listOf(
             replaceOptionalJvmInlineAnnotationWithReal,
         )
-        val forSpecificFile: Map<File, (String) -> String> = mapOf(
+        konst forSpecificFile: Map<File, (String) -> String> = mapOf(
         )
     }
 }

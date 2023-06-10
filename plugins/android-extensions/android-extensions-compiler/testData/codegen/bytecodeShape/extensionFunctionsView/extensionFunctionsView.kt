@@ -4,8 +4,8 @@ import android.view.View
 import kotlinx.android.synthetic.main.layout.view.*
 
 fun View.a() {
-    val x = login
-    val y = this.login
+    konst x = login
+    konst y = this.login
 }
 
 // 2 GETSTATIC test/R\$id\.login

@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.moduleName
 import java.io.File
 
 class DefaultKotlinDependencyHandler(
-    val parent: HasKotlinDependencies,
-    override val project: Project
+    konst parent: HasKotlinDependencies,
+    override konst project: Project
 ) : KotlinDependencyHandler {
     override fun api(dependencyNotation: Any): Dependency? =
         addDependencyByAnyNotation(parent.apiConfigurationName, dependencyNotation)
@@ -71,7 +71,7 @@ class DefaultKotlinDependencyHandler(
         configurationName: String,
         dependencyNotation: Any
     ): Dependency? {
-        val dependency = when (dependencyNotation) {
+        konst dependency = when (dependencyNotation) {
             is GradleKpmModule -> project.dependencies.create(dependencyNotation.project).apply {
                 (this as ModuleDependency).capabilities {
                     if (dependencyNotation.moduleClassifier != null) {

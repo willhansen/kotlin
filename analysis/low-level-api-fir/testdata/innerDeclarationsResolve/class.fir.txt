@@ -8,7 +8,7 @@ FILE: [ResolvedTo(IMPORTS)] class.kt
         public final [ResolvedTo(BODY_RESOLVE)] fun q(): <ERROR TYPE REF: Symbol not found for C> {
         }
 
-        private final [ResolvedTo(BODY_RESOLVE)] val y: <ERROR TYPE REF: Symbol not found for C> = this@R|/B|.R|/B.q|()
+        private final [ResolvedTo(BODY_RESOLVE)] konst y: <ERROR TYPE REF: Symbol not found for C> = this@R|/B|.R|/B.q|()
             private [ResolvedTo(BODY_RESOLVE)] get(): <ERROR TYPE REF: Symbol not found for C>
 
         public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] a: <ERROR TYPE REF: Symbol not found for A>): <ERROR TYPE REF: Cannot infer argument for type parameter R> {

@@ -22,12 +22,12 @@ import java.util.*
  * new instance of particular [TypeCheckerState] should be created, with properly specified type system context
  */
 open class TypeCheckerState(
-    val isErrorTypeEqualsToAnything: Boolean,
-    val isStubTypeEqualsToAnything: Boolean,
-    val allowedTypeVariable: Boolean,
-    val typeSystemContext: TypeSystemContext,
-    val kotlinTypePreparator: AbstractTypePreparator,
-    val kotlinTypeRefiner: AbstractTypeRefiner
+    konst isErrorTypeEqualsToAnything: Boolean,
+    konst isStubTypeEqualsToAnything: Boolean,
+    konst allowedTypeVariable: Boolean,
+    konst typeSystemContext: TypeSystemContext,
+    konst kotlinTypePreparator: AbstractTypePreparator,
+    konst kotlinTypeRefiner: AbstractTypeRefiner
 ) {
     @OptIn(TypeRefinement::class)
     fun refineType(type: KotlinTypeMarker): KotlinTypeMarker {
@@ -48,7 +48,7 @@ open class TypeCheckerState(
         }
 
         argumentsDepth++
-        val result = f()
+        konst result = f()
         argumentsDepth--
         return result
     }
@@ -133,21 +133,21 @@ open class TypeCheckerState(
 
         initialize()
 
-        val deque = supertypesDeque!!
-        val visitedSupertypes = supertypesSet!!
+        konst deque = supertypesDeque!!
+        konst visitedSupertypes = supertypesSet!!
 
         deque.push(start)
         while (deque.isNotEmpty()) {
             if (visitedSupertypes.size > 1000) {
                 error("Too many supertypes for type: $start. Supertypes = ${visitedSupertypes.joinToString()}")
             }
-            val current = deque.pop()
+            konst current = deque.pop()
             if (!visitedSupertypes.add(current)) continue
 
-            val policy = supertypesPolicy(current).takeIf { it != SupertypesPolicy.None } ?: continue
-            val supertypes = with(typeSystemContext) { current.typeConstructor().supertypes() }
+            konst policy = supertypesPolicy(current).takeIf { it != SupertypesPolicy.None } ?: continue
+            konst supertypes = with(typeSystemContext) { current.typeConstructor().supertypes() }
             for (supertype in supertypes) {
-                val newType = policy.transformType(this, supertype)
+                konst newType = policy.transformType(this, supertype)
                 if (predicate(newType)) {
                     clear()
                     return true
@@ -249,9 +249,9 @@ object AbstractTypeChecker {
             if (a === b) return true
 
             if (isCommonDenotableType(a) && isCommonDenotableType(b)) {
-                val refinedA = state.prepareType(state.refineType(a))
-                val refinedB = state.prepareType(state.refineType(b))
-                val simpleA = refinedA.lowerBoundIfFlexible()
+                konst refinedA = state.prepareType(state.refineType(a))
+                konst refinedB = state.prepareType(state.refineType(b))
+                konst simpleA = refinedA.lowerBoundIfFlexible()
                 if (!areEqualTypeConstructors(refinedA.typeConstructor(), refinedB.typeConstructor())) return false
                 if (simpleA.argumentsCount() == 0) {
                     if (refinedA.hasFlexibleNullability() || refinedB.hasFlexibleNullability()) return true
@@ -270,8 +270,8 @@ object AbstractTypeChecker {
         superType: KotlinTypeMarker,
         isFromNullabilityConstraint: Boolean
     ): Boolean = with(state.typeSystemContext) {
-        val preparedSubType = state.prepareType(state.refineType(subType))
-        val preparedSuperType = state.prepareType(state.refineType(superType))
+        konst preparedSubType = state.prepareType(state.refineType(subType))
+        konst preparedSuperType = state.prepareType(state.refineType(superType))
 
         checkSubtypeForSpecialCases(state, preparedSubType.lowerBoundIfFlexible(), preparedSuperType.upperBoundIfFlexible())?.let {
             state.addSubtypeConstraint(preparedSubType, preparedSuperType, isFromNullabilityConstraint)
@@ -297,7 +297,7 @@ object AbstractTypeChecker {
             }
 
         fun isIntegerLiteralTypeInIntersectionComponents(type: SimpleTypeMarker): Boolean {
-            val typeConstructor = type.typeConstructor()
+            konst typeConstructor = type.typeConstructor()
 
             return typeConstructor is IntersectionTypeConstructorMarker
                     && typeConstructor.supertypes().any { it.asSimpleType()?.isIntegerLiteralType() == true }
@@ -305,7 +305,7 @@ object AbstractTypeChecker {
 
         fun isCapturedIntegerLiteralType(type: SimpleTypeMarker): Boolean {
             if (type !is CapturedTypeMarker) return false
-            val projection = type.typeConstructor().projection()
+            konst projection = type.typeConstructor().projection()
             return !projection.isStarProjection() && projection.getType().upperBoundIfFlexible().isIntegerLiteralType()
         }
 
@@ -335,7 +335,7 @@ object AbstractTypeChecker {
     }
 
     private fun hasNothingSupertype(state: TypeCheckerState, type: SimpleTypeMarker): Boolean = with(state.typeSystemContext) {
-        val typeConstructor = type.typeConstructor()
+        konst typeConstructor = type.typeConstructor()
         if (typeConstructor.isClassTypeConstructor()) {
             return typeConstructor.isNothingConstructor()
         }
@@ -369,30 +369,30 @@ object AbstractTypeChecker {
             return it
         }
 
-        val superConstructor = superType.typeConstructor()
+        konst superConstructor = superType.typeConstructor()
 
         if (areEqualTypeConstructors(subType.typeConstructor(), superConstructor) && superConstructor.parametersCount() == 0) return true
         if (superType.typeConstructor().isAnyConstructor()) return true
 
-        val supertypesWithSameConstructor = findCorrespondingSupertypes(state, subType, superConstructor)
+        konst supertypesWithSameConstructor = findCorrespondingSupertypes(state, subType, superConstructor)
             .map { state.prepareType(it).asSimpleType() ?: it }
         when (supertypesWithSameConstructor.size) {
             0 -> return hasNothingSupertype(state, subType) // todo Nothing & Array<Number> <: Array<String>
             1 -> return state.isSubtypeForSameConstructor(supertypesWithSameConstructor.first().asArgumentList(), superType)
 
             else -> { // at least 2 supertypes with same constructors. Such case is rare
-                val newArguments = ArgumentList(superConstructor.parametersCount())
+                konst newArguments = ArgumentList(superConstructor.parametersCount())
                 var anyNonOutParameter = false
                 for (index in 0 until superConstructor.parametersCount()) {
                     anyNonOutParameter = anyNonOutParameter || superConstructor.getParameter(index).getVariance() != TypeVariance.OUT
                     if (anyNonOutParameter) continue
-                    val allProjections = supertypesWithSameConstructor.map {
+                    konst allProjections = supertypesWithSameConstructor.map {
                         it.getArgumentOrNull(index)?.takeIf { it.getVariance() == TypeVariance.INV }?.getType()
                             ?: error("Incorrect type: $it, subType: $subType, superType: $superType")
                     }
 
                     // todo discuss
-                    val intersection = intersectTypes(allProjections).asTypeArgument()
+                    konst intersection = intersectTypes(allProjections).asTypeArgument()
                     newArguments.add(intersection)
                 }
 
@@ -412,7 +412,7 @@ object AbstractTypeChecker {
         superArgumentType: KotlinTypeMarker,
         selfConstructor: TypeConstructorMarker
     ): Boolean {
-        val simpleSubArgumentType = subArgumentType.asSimpleType()
+        konst simpleSubArgumentType = subArgumentType.asSimpleType()
 
         if (simpleSubArgumentType !is CapturedTypeMarker || simpleSubArgumentType.isOldCapturedType()
             || !simpleSubArgumentType.typeConstructor().projection().isStarProjection()
@@ -421,7 +421,7 @@ object AbstractTypeChecker {
         // that can lead to adding problematic constraints like UPPER(Nothing) given by CapturedType(*) <: TypeVariable(A)
         if (simpleSubArgumentType.captureStatus() != CaptureStatus.FOR_SUBTYPING) return false
 
-        val typeVariableConstructor = superArgumentType.typeConstructor() as? TypeVariableTypeConstructorMarker ?: return false
+        konst typeVariableConstructor = superArgumentType.typeConstructor() as? TypeVariableTypeConstructorMarker ?: return false
 
         return typeVariableConstructor.typeParameter?.hasRecursiveBounds(selfConstructor) == true
     }
@@ -433,31 +433,31 @@ object AbstractTypeChecker {
         // No way to check, as no index sometimes
         //if (capturedSubArguments === superType.arguments) return true
 
-        val superTypeConstructor = superType.typeConstructor()
+        konst superTypeConstructor = superType.typeConstructor()
 
         // Sometimes we can get two classes from different modules with different counts of type parameters
         // So for such situations we assume that those types are not sub type of each other
-        val argumentsCount = capturedSubArguments.size()
-        val parametersCount = superTypeConstructor.parametersCount()
+        konst argumentsCount = capturedSubArguments.size()
+        konst parametersCount = superTypeConstructor.parametersCount()
         if (argumentsCount != parametersCount || argumentsCount != superType.argumentsCount()) {
             return false
         }
 
         for (index in 0 until parametersCount) {
-            val superProjection = superType.getArgument(index) // todo error index
+            konst superProjection = superType.getArgument(index) // todo error index
 
             if (superProjection.isStarProjection()) continue // A<B> <: A<*>
 
-            val superArgumentType = superProjection.getType()
-            val subArgumentType = capturedSubArguments[index].let {
+            konst superArgumentType = superProjection.getType()
+            konst subArgumentType = capturedSubArguments[index].let {
                 assert(it.getVariance() == TypeVariance.INV) { "Incorrect sub argument: $it" }
                 it.getType()
             }
 
-            val variance = effectiveVariance(superTypeConstructor.getParameter(index).getVariance(), superProjection.getVariance())
+            konst variance = effectiveVariance(superTypeConstructor.getParameter(index).getVariance(), superProjection.getVariance())
                 ?: return isErrorTypeEqualsToAnything // todo exception?
 
-            val isTypeVariableAgainstStarProjectionForSelfType = if (variance == TypeVariance.INV) {
+            konst isTypeVariableAgainstStarProjectionForSelfType = if (variance == TypeVariance.INV) {
                 isTypeVariableAgainstStarProjectionForSelfType(subArgumentType, superArgumentType, superTypeConstructor) ||
                         isTypeVariableAgainstStarProjectionForSelfType(superArgumentType, subArgumentType, superTypeConstructor)
             } else false
@@ -472,7 +472,7 @@ object AbstractTypeChecker {
             if (isTypeVariableAgainstStarProjectionForSelfType)
                 continue
 
-            val correctArgument = runWithArgumentsSettings(subArgumentType) {
+            konst correctArgument = runWithArgumentsSettings(subArgumentType) {
                 when (variance) {
                     TypeVariance.INV -> equalTypes(this, subArgumentType, superArgumentType)
                     TypeVariance.OUT -> isSubtypeOf(this, subArgumentType, superArgumentType)
@@ -502,8 +502,8 @@ object AbstractTypeChecker {
     }
 
     private fun TypeSystemContext.isStubTypeSubtypeOfAnother(a: SimpleTypeMarker, b: SimpleTypeMarker): Boolean {
-        val originalA = a.asDefinitelyNotNullType()?.original() ?: a
-        val originalB = b.asDefinitelyNotNullType()?.original() ?: b
+        konst originalA = a.asDefinitelyNotNullType()?.original() ?: a
+        konst originalB = b.asDefinitelyNotNullType()?.original() ?: b
 
         if (originalA.typeConstructor() !== originalB.typeConstructor()) return false
         if (!a.isDefinitelyNotNullType() && b.isDefinitelyNotNullType()) return false
@@ -536,13 +536,13 @@ object AbstractTypeChecker {
             return state.isStubTypeEqualsToAnything
 
         // superType might be a definitely notNull type (see KT-42824)
-        val superOriginalType = superType.asDefinitelyNotNullType()?.original() ?: superType
-        val superTypeCaptured = superOriginalType.asCapturedType()
-        val lowerType = superTypeCaptured?.lowerType()
+        konst superOriginalType = superType.asDefinitelyNotNullType()?.original() ?: superType
+        konst superTypeCaptured = superOriginalType.asCapturedType()
+        konst lowerType = superTypeCaptured?.lowerType()
         if (superTypeCaptured != null && lowerType != null) {
             // If superType is nullable, e.g., to check if Foo? a subtype of Captured<in Foo>?, we check the LHS, Foo?,
             // against the nullable version of the lower type of RHS. See KT-42825
-            val nullableLowerType = if (superType.isMarkedNullable()) {
+            konst nullableLowerType = if (superType.isMarkedNullable()) {
                 lowerType.withNullability(true)
             } else {
                 if (superType.isDefinitelyNotNullType()) lowerType.makeDefinitelyNotNullOrNotNull() else lowerType
@@ -554,7 +554,7 @@ object AbstractTypeChecker {
             }
         }
 
-        val superTypeConstructor = superType.typeConstructor()
+        konst superTypeConstructor = superType.typeConstructor()
         if (superTypeConstructor.isIntersection()) {
             assert(!superType.isMarkedNullable()) { "Intersection type should not be marked nullable!: $superType" }
 
@@ -567,10 +567,10 @@ object AbstractTypeChecker {
          * so if CapturedType(out Bar) is the same as a type of Foo's argument and Foo is a self type, then subtyping should return true.
          * If we don't handle this case separately, subtyping may not converge due to the nature of the capturing.
          */
-        val subTypeConstructor = subType.typeConstructor()
+        konst subTypeConstructor = subType.typeConstructor()
         if (subType is CapturedTypeMarker
             || (subTypeConstructor.isIntersection() && subTypeConstructor.supertypes().all { it is CapturedTypeMarker })) {
-            val typeParameter =
+            konst typeParameter =
                 state.typeSystemContext.getTypeParameterForArgumentInBaseIfItEqualToTarget(baseType = superType, targetType = subType)
             if (typeParameter != null && typeParameter.hasRecursiveBounds(superType.typeConstructor())) {
                 return true
@@ -585,8 +585,8 @@ object AbstractTypeChecker {
         targetType: KotlinTypeMarker
     ): TypeParameterMarker? {
         for (i in 0 until baseType.argumentsCount()) {
-            val typeArgument = baseType.getArgument(i).takeIf { !it.isStarProjection() }?.getType() ?: continue
-            val areBothTypesCaptured = typeArgument.lowerBoundIfFlexible().originalIfDefinitelyNotNullable().isCapturedType() &&
+            konst typeArgument = baseType.getArgument(i).takeIf { !it.isStarProjection() }?.getType() ?: continue
+            konst areBothTypesCaptured = typeArgument.lowerBoundIfFlexible().originalIfDefinitelyNotNullable().isCapturedType() &&
                     targetType.lowerBoundIfFlexible().originalIfDefinitelyNotNullable().isCapturedType()
 
             if (typeArgument == targetType || (areBothTypesCaptured && typeArgument.typeConstructor() == targetType.typeConstructor())) {
@@ -617,11 +617,11 @@ object AbstractTypeChecker {
                 emptyList()
         }
 
-        val result: MutableList<SimpleTypeMarker> = SmartList()
+        konst result: MutableList<SimpleTypeMarker> = SmartList()
 
         state.anySupertype(subType, { false }) {
 
-            val current = captureFromArguments(it, CaptureStatus.FOR_SUBTYPING) ?: it
+            konst current = captureFromArguments(it, CaptureStatus.FOR_SUBTYPING) ?: it
 
             when {
                 areEqualTypeConstructors(current.typeConstructor(), superConstructor) -> {
@@ -664,7 +664,7 @@ object AbstractTypeChecker {
     ): List<SimpleTypeMarker> = with(state.typeSystemContext) {
         if (supertypes.size < 2) return supertypes
 
-        val allPureSupertypes = supertypes.filter {
+        konst allPureSupertypes = supertypes.filter {
             it.asArgumentList().all(this) { it.getType().asFlexibleType() == null }
         }
         return if (allPureSupertypes.isNotEmpty()) allPureSupertypes else supertypes
@@ -688,7 +688,7 @@ object AbstractTypeChecker {
         }
 
         // todo add tests
-        val classTypeSupertypes = SmartList<SimpleTypeMarker>()
+        konst classTypeSupertypes = SmartList<SimpleTypeMarker>()
         state.anySupertype(subType, { false }) {
             if (it.isClassType()) {
                 classTypeSupertypes.add(it)
@@ -815,7 +815,7 @@ object AbstractFlexibilityChecker {
         if (hasDifferentFlexibility(types)) return true
 
         for (i in 0 until types.first().argumentsCount()) {
-            val typeArgumentForOtherTypes = types.mapNotNull {
+            konst typeArgumentForOtherTypes = types.mapNotNull {
                 if (it.argumentsCount() > i && !it.getArgument(i).isStarProjection()) it.getArgument(i).getType() else null
             }
 
@@ -826,7 +826,7 @@ object AbstractFlexibilityChecker {
     }
 
     private fun TypeSystemCommonSuperTypesContext.hasDifferentFlexibility(types: Collection<KotlinTypeMarker>): Boolean {
-        val firstType = types.first()
+        konst firstType = types.first()
         if (types.all { it === firstType }) return false
 
         return !types.all { it.isFlexible() } && !types.all { !it.isFlexible() }

@@ -3,16 +3,16 @@
 
 class A {
     fun test1() {
-        val f = { }
-        val t1 = Runnable(f)
-        val t2 = Runnable(f)
+        konst f = { }
+        konst t1 = Runnable(f)
+        konst t2 = Runnable(f)
     }
 }
 
 class B {
     fun test2() {
-        val f = { }
-        val t1 = Runnable(f)
-        val t2 = Runnable(f)
+        konst f = { }
+        konst t1 = Runnable(f)
+        konst t2 = Runnable(f)
     }
 }

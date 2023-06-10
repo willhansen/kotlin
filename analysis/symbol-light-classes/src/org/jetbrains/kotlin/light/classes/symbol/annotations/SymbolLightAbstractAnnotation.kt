@@ -23,15 +23,15 @@ internal abstract class SymbolLightAbstractAnnotation(parent: PsiElement) :
 
     override fun getOwner() = parent as? PsiAnnotationOwner
 
-    private val KtExpression.nameReference: KtNameReferenceExpression?
+    private konst KtExpression.nameReference: KtNameReferenceExpression?
         get() = when (this) {
             is KtConstructorCalleeExpression -> constructorReferenceExpression as? KtNameReferenceExpression
             else -> this as? KtNameReferenceExpression
         }
 
-    private val _nameReferenceElement: PsiJavaCodeReferenceElement by lazyPub {
-        val ktElement = kotlinOrigin?.navigationElement ?: this
-        val reference = (kotlinOrigin as? KtAnnotationEntry)?.typeReference?.reference
+    private konst _nameReferenceElement: PsiJavaCodeReferenceElement by lazyPub {
+        konst ktElement = kotlinOrigin?.navigationElement ?: this
+        konst reference = (kotlinOrigin as? KtAnnotationEntry)?.typeReference?.reference
             ?: (kotlinOrigin?.calleeExpression?.nameReference)?.references?.firstOrNull()
 
         if (reference != null) SymbolLightPsiJavaCodeReferenceElementWithReference(ktElement, reference)
@@ -50,27 +50,27 @@ internal abstract class SymbolLightAbstractAnnotation(parent: PsiElement) :
 
     abstract override fun hashCode(): Int
 
-    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, value: T?) = cannotModify()
+    override fun <T : PsiAnnotationMemberValue?> setDeclaredAttributeValue(attributeName: String?, konstue: T?) = cannotModify()
 
     private fun getAttributeValue(name: String?, useDefault: Boolean): PsiAnnotationMemberValue? {
-        val attributeName = name ?: "value"
+        konst attributeName = name ?: "konstue"
         parameterList.attributes
             .find { it.name == attributeName }
-            ?.let { return it.value }
+            ?.let { return it.konstue }
 
         if (useDefault) {
-            val callElement = kotlinOrigin ?: return null
+            konst callElement = kotlinOrigin ?: return null
             return analyzeForLightClasses(callElement) {
-                val valueParameter = callElement.resolveCall()
+                konst konstueParameter = callElement.resolveCall()
                     .singleConstructorCallOrNull()
                     ?.symbol
-                    ?.valueParameters
+                    ?.konstueParameters
                     ?.find { it.name.identifierOrNullIfSpecial == attributeName }
 
-                when (val psi = valueParameter?.psi) {
+                when (konst psi = konstueParameter?.psi) {
                     is KtParameter -> {
                         psi.defaultValue?.let { defaultValue ->
-                            defaultValue.evaluateAsAnnotationValue()?.toAnnotationMemberValue(parameterList)
+                            defaultValue.ekonstuateAsAnnotationValue()?.toAnnotationMemberValue(parameterList)
                         }
                     }
                     is PsiAnnotationMethod -> psi.defaultValue

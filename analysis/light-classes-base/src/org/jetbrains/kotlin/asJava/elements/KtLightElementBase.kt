@@ -16,7 +16,7 @@ abstract class KtLightElementBase(private var parent: PsiElement) : LightElement
     override fun toString() = "${this.javaClass.simpleName} of $parent"
     override fun getParent(): PsiElement = parent
 
-    abstract val kotlinOrigin: KtElement?
+    abstract konst kotlinOrigin: KtElement?
 
     @Deprecated("Hack for ULC", level = DeprecationLevel.ERROR)
     fun setParent(newParent: PsiElement) {
@@ -34,13 +34,13 @@ abstract class KtLightElementBase(private var parent: PsiElement) : LightElement
     override fun getPresentation() = (kotlinOrigin ?: this).let { ItemPresentationProviders.getItemPresentation(it) }
     override fun isValid() = parent.isValid && (kotlinOrigin?.isValid != false)
     override fun findElementAt(offset: Int) = kotlinOrigin?.findElementAt(offset)
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        if (super.isEquivalentTo(another)) {
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        if (super.isEquikonstentTo(another)) {
             return true
         }
 
-        val origin = kotlinOrigin ?: return false
-        return origin.isEquivalentTo(another) ||
-                (another is KtLightElementBase && origin.isEquivalentTo(another.kotlinOrigin))
+        konst origin = kotlinOrigin ?: return false
+        return origin.isEquikonstentTo(another) ||
+                (another is KtLightElementBase && origin.isEquikonstentTo(another.kotlinOrigin))
     }
 }

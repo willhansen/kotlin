@@ -11,8 +11,8 @@ import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
 fun check(subCallable: KCallable<*>, superCallable: KCallable<*>, shouldBeSubtype: Boolean) {
-    val subtype = subCallable.returnType
-    val supertype = superCallable.returnType
+    konst subtype = subCallable.returnType
+    konst supertype = superCallable.returnType
     if (shouldBeSubtype) {
         assertTrue(subtype.isSubtypeOf(supertype))
         assertTrue(supertype.isSupertypeOf(subtype))

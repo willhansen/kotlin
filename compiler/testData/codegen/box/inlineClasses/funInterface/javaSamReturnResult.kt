@@ -19,6 +19,6 @@ fun doSmth(resultHandler: ResultHandler<Boolean>): Result<Boolean> {
 }
 
 fun box(): String {
-    val res = doSmth { Result.success(true) }
+    konst res = doSmth { Result.success(true) }
     return if (res.isSuccess) "OK" else "FAIL"
 }

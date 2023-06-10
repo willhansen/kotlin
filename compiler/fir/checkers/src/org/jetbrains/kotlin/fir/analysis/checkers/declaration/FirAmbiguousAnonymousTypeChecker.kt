@@ -37,10 +37,10 @@ object FirAmbiguousAnonymousTypeChecker : FirBasicDeclarationChecker() {
          * Here we want to check only cases when type of declaration was inferred from single-expression block
          * There are three possible cases for it:
          * 1. `fun foo() = ...`
-         * 2. `val x = ...`
-         * 3. `val x get() = ...`
+         * 2. `konst x = ...`
+         * 3. `konst x get() = ...`
          */
-        val typeRef = when (declaration) {
+        konst typeRef = when (declaration) {
             is FirProperty -> declaration.initializer?.typeRef ?: declaration.getter?.body?.singleExpressionType
             is FirFunction -> declaration.body?.singleExpressionType
             else -> error("Should not be there")
@@ -55,7 +55,7 @@ object FirAmbiguousAnonymousTypeChecker : FirBasicDeclarationChecker() {
         reporter: DiagnosticReporter,
         reportOn: KtSourceElement?
     ) {
-        val classSymbol = type.toSymbol(context.session)
+        konst classSymbol = type.toSymbol(context.session)
         if (classSymbol is FirAnonymousObjectSymbol && classSymbol.resolvedSuperTypeRefs.size > 1) {
             // Any anonymous object that has only one super type is already approximated to the super type by
             // org.jetbrains.kotlin.fir.types.TypeUtilsKt#hideLocalTypeIfNeeded. Hence, any remaining anonymous object must have more than
@@ -75,6 +75,6 @@ object FirAmbiguousAnonymousTypeChecker : FirBasicDeclarationChecker() {
         }
     }
 
-    private val FirBlock.singleExpressionType
+    private konst FirBlock.singleExpressionType
         get() = ((this as? FirSingleExpressionBlock)?.statement as? FirReturnExpression)?.result?.typeRef
 }

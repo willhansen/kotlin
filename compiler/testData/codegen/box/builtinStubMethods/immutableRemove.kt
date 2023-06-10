@@ -10,7 +10,7 @@ interface ImmutableCollection<out E> : Collection<E> {
 }
 
 class ImmutableCollectionmpl<E> : ImmutableCollection<E> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun contains(element: E): Boolean {
@@ -35,12 +35,12 @@ class ImmutableCollectionmpl<E> : ImmutableCollection<E> {
 }
 
 fun box(): String {
-    val c = ImmutableCollectionmpl<String>()
+    konst c = ImmutableCollectionmpl<String>()
     if (c.remove("") !== c) return "fail 1"
     if (c.add("") !== c) return "fail 2"
     if (c.addAll(java.util.ArrayList()) !== c) return "fail 3"
 
-    val method = c.javaClass.methods.single { it.name == "remove" && it.returnType == Boolean::class.javaPrimitiveType }
+    konst method = c.javaClass.methods.single { it.name == "remove" && it.returnType == Boolean::class.javaPrimitiveType }
 
     try {
         method.invoke(c, "")

@@ -13,7 +13,7 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Int): Controller {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.cResult = it
     })
@@ -30,7 +30,7 @@ inline fun foo(x: (Int) -> Unit) {
 fun box(): String {
     var result = ""
 
-    val controllerResult = builder {
+    konst controllerResult = builder {
         result += "-"
         foo {
             result += suspendHere(it).toString()

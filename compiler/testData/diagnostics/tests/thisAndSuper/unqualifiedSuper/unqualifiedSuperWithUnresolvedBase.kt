@@ -5,10 +5,10 @@ open class Base() {
 
     open fun ambiguous() {}
 
-    open val prop: Int
+    open konst prop: Int
         get() = 1234
 
-    open val ambiguousProp: Int
+    open konst ambiguousProp: Int
         get() = 111
 }
 
@@ -17,7 +17,7 @@ interface Interface {
 
     fun ambiguous() {}
 
-    val ambiguousProp: Int
+    konst ambiguousProp: Int
         get() = 222
 }
 
@@ -27,10 +27,10 @@ class ClassDerivedFromUnresolved : Base(), Interface, <!UNRESOLVED_REFERENCE!>Un
 
     override fun ambiguous() {}
 
-    override val ambiguousProp: Int
+    override konst ambiguousProp: Int
         get() = 333
 
-    override val prop: Int
+    override konst prop: Int
         get() = 4321
 
     fun callsFunFromSuperClass() {

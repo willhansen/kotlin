@@ -7,7 +7,7 @@ public interface KInterface {
         return "OK";
     }
 
-    val property: String
+    konst property: String
         get() = "OK"
 }
 
@@ -26,7 +26,7 @@ interface KotlinInterface : KInterface {
         }
     }
 
-    val propertyy: String
+    konst propertyy: String
         get() {
             super.test()
             super.property
@@ -54,7 +54,7 @@ interface KotlinInterfaceIndirectInheritance : KotlinInterface {
         }
     }
 
-    val propertyyy: String
+    konst propertyyy: String
         get() {
             super.test()
             super.property
@@ -82,7 +82,7 @@ open class KotlinClass : KInterface {
         }
     }
 
-    val xproperty: String
+    konst xproperty: String
         get() {
             super.test()
             super.property
@@ -112,7 +112,7 @@ class KotlinClassIndirectInheritance : KotlinClass() {
 
     }
 
-    val property2: String
+    konst property2: String
         get() {
             super.test()
             super.property
@@ -140,7 +140,7 @@ class KotlinClassIndirectInheritance2 : KotlinInterfaceIndirectInheritance {
         }
     }
 
-    val xproperty: String
+    konst xproperty: String
         get() {
             super.test()
             super.property

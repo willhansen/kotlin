@@ -21,10 +21,10 @@ import org.jetbrains.org.objectweb.asm.Type
 // This class exists only because it's used to box/unbox inline classes in the static method StackValue.coerce in the old backend, which
 // has no access to the correct type mapper instance, yet has a lot of call sites across the old backend, refactoring which would be costly.
 object StaticTypeMapperForOldBackend : KotlinTypeMapperBase() {
-    override val typeSystem: TypeSystemCommonBackendContext
+    override konst typeSystem: TypeSystemCommonBackendContext
         get() = SimpleClassicTypeSystemContext
 
-    private val staticTypeMappingConfiguration = object : TypeMappingConfiguration<Type> {
+    private konst staticTypeMappingConfiguration = object : TypeMappingConfiguration<Type> {
         override fun commonSupertype(types: Collection<KotlinType>): KotlinType {
             return CommonSupertypes.commonSupertype(types)
         }

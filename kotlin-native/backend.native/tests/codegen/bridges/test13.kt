@@ -24,8 +24,8 @@ open class B: A<Int>() {
 }
 
 @Test fun runTest() {
-    val b = B()
-    val a = A<Int>()
+    konst b = B()
+    konst a = A<Int>()
     b.bar(42)
     a.bar(42)
 }

@@ -4,7 +4,7 @@ FILE: noParameterTypRefInPrimaryConsturctorVal.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val x: <ERROR TYPE REF: No type for parameter> = R|<local>/x|
+        public? final? [IsFromPrimaryConstructor=true] konst x: <ERROR TYPE REF: No type for parameter> = R|<local>/x|
             public? [ContainingClassKey=X] get(): <ERROR TYPE REF: No type for parameter>
 
     }

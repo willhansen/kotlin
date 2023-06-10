@@ -1,13 +1,13 @@
 package
 
-public val asA: A
-public val correct1: A
-public val correct2: A
-public val correct3: A
-public val no2A: A
-public val receiverParenthesized: A
+public konst asA: A
+public konst correct1: A
+public konst correct2: A
+public konst correct3: A
+public konst no2A: A
+public konst receiverParenthesized: A
 public fun </*0*/ T> foo(): T
-public fun </*0*/ V> id(/*0*/ value: V): V
+public fun </*0*/ V> id(/*0*/ konstue: V): V
 
 public final class A {
     public constructor A()

@@ -1,14 +1,14 @@
 // -- Module: <common> --
 package
 
-public actual val commonProperty: kotlin.String
-public expect val commonProperty: kotlin.String
+public actual konst commonProperty: kotlin.String
+public expect konst commonProperty: kotlin.String
 public actual fun commonFun(): kotlin.Unit
 public expect fun commonFun(): kotlin.Unit
 
 public final actual class CommonClass {
     public constructor CommonClass()
-    public actual final val memberProp: kotlin.Int = 42
+    public actual final konst memberProp: kotlin.Int = 42
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final actual fun memberFun(): kotlin.Unit
@@ -30,7 +30,7 @@ public final actual class CommonClass {
 }
 
 public final expect class CommonClass {
-    public expect final val memberProp: kotlin.Int
+    public expect final konst memberProp: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final expect fun memberFun(): kotlin.Unit
@@ -52,14 +52,14 @@ public final expect class CommonClass {
 // -- Module: <intermediate> --
 package
 
-public actual val intermediateProperty: kotlin.String
-public expect val intermediateProperty: kotlin.String
+public actual konst intermediateProperty: kotlin.String
+public expect konst intermediateProperty: kotlin.String
 public actual fun intermediateFun(): kotlin.Unit
 public expect fun intermediateFun(): kotlin.Unit
 
 public final actual class IntermediateClass {
     public constructor IntermediateClass()
-    public actual final val memberProp: kotlin.Int = 42
+    public actual final konst memberProp: kotlin.Int = 42
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final actual fun memberFun(): kotlin.Unit
@@ -81,7 +81,7 @@ public final actual class IntermediateClass {
 }
 
 public final expect class IntermediateClass {
-    public expect final val memberProp: kotlin.Int
+    public expect final konst memberProp: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final expect fun memberFun(): kotlin.Unit
@@ -103,12 +103,12 @@ public final expect class IntermediateClass {
 // -- Module: <main> --
 package
 
-public actual val platformProperty: kotlin.String
+public actual konst platformProperty: kotlin.String
 public actual fun platformFun(): kotlin.Unit
 
 public final actual class PlatformClass {
     public constructor PlatformClass()
-    public actual final val memberProp: kotlin.Int = 42
+    public actual final konst memberProp: kotlin.Int = 42
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final actual fun memberFun(): kotlin.Unit

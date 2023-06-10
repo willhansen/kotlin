@@ -53,13 +53,13 @@ fun KtPsiFactory.createDestructuringDeclarationByPattern(
     reformat: Boolean = true
 ): KtDestructuringDeclaration = createByPattern(pattern, *args, reformat = reformat) { createDestructuringDeclaration(it) }
 
-private abstract class ArgumentType<T : Any>(val klass: Class<T>)
+private abstract class ArgumentType<T : Any>(konst klass: Class<T>)
 
-private class PlainTextArgumentType<T : Any>(klass: Class<T>, val toPlainText: (T) -> String) : ArgumentType<T>(klass)
+private class PlainTextArgumentType<T : Any>(klass: Class<T>, konst toPlainText: (T) -> String) : ArgumentType<T>(klass)
 
 private abstract class PsiElementPlaceholderArgumentType<T : Any, TPlaceholder : PsiElement>(
     klass: Class<T>,
-    val placeholderClass: Class<TPlaceholder>
+    konst placeholderClass: Class<TPlaceholder>
 ) : ArgumentType<T>(klass) {
     abstract fun replacePlaceholderElement(placeholder: TPlaceholder, argument: T, reformat: Boolean): PsiChildRange
 }
@@ -83,15 +83,15 @@ private class PsiElementArgumentType<T : PsiElement>(klass: Class<T>) : PsiEleme
 private object PsiChildRangeArgumentType :
     PsiElementPlaceholderArgumentType<PsiChildRange, KtElement>(PsiChildRange::class.java, KtElement::class.java) {
     override fun replacePlaceholderElement(placeholder: KtElement, argument: PsiChildRange, reformat: Boolean): PsiChildRange {
-        val project = placeholder.project
+        konst project = placeholder.project
 
         return if (!argument.isEmpty) {
-            val first = placeholder.parent.addRangeBefore(argument.first!!, argument.last!!, placeholder)
-            val last = placeholder.prevSibling
+            konst first = placeholder.parent.addRangeBefore(argument.first!!, argument.last!!, placeholder)
+            konst last = placeholder.prevSibling
             placeholder.delete()
 
             if (reformat) {
-                val codeStyleManager = CodeStyleManager.getInstance(project)
+                konst codeStyleManager = CodeStyleManager.getInstance(project)
                 codeStyleManager.reformatNewlyAddedElement(first.node.treeParent, first.node)
                 if (last != first) {
                     codeStyleManager.reformatNewlyAddedElement(last.node.treeParent, last.node)
@@ -105,7 +105,7 @@ private object PsiChildRangeArgumentType :
     }
 }
 
-private val SUPPORTED_ARGUMENT_TYPES = listOf(
+private konst SUPPORTED_ARGUMENT_TYPES = listOf(
     PsiElementArgumentType(KtExpression::class.java),
     PsiElementArgumentType(KtTypeReference::class.java),
     PlainTextArgumentType(String::class.java, toPlainText = { it }),
@@ -123,7 +123,7 @@ fun <TElement : KtElement> createByPattern(
     reformat: Boolean = true,
     factory: (String) -> TElement
 ): TElement {
-    val argumentTypes = args.map { arg ->
+    konst argumentTypes = args.map { arg ->
         SUPPORTED_ARGUMENT_TYPES.firstOrNull { it.klass.isInstance(arg) }
             ?: throw IllegalArgumentException(
                 "Unsupported argument type: ${arg::class.java}, should be one of: " +
@@ -133,8 +133,8 @@ fun <TElement : KtElement> createByPattern(
 
     // convert arguments that can be converted into plain text
     @Suppress("NAME_SHADOWING")
-    val args = args.zip(argumentTypes).map {
-        val (arg, type) = it
+    konst args = args.zip(argumentTypes).map {
+        konst (arg, type) = it
         if (type is PlainTextArgumentType)
             @Suppress("UNCHECKED_CAST") // Suppress compiler checks as types checks were done in runtime
             (type.toPlainText as Function1<Any, String>).invoke(arg)
@@ -142,49 +142,49 @@ fun <TElement : KtElement> createByPattern(
             arg
     }
 
-    val (processedText, allPlaceholders) = processPattern(pattern, args)
+    konst (processedText, allPlaceholders) = processPattern(pattern, args)
 
     var resultElement: KtElement = factory(processedText.trim())
-    val project = resultElement.project
+    konst project = resultElement.project
 
-    val start = resultElement.startOffset
+    konst start = resultElement.startOffset
 
-    val pointerManager = SmartPointerManager.getInstance(project)
+    konst pointerManager = SmartPointerManager.getInstance(project)
 
-    val pointers = HashMap<SmartPsiElementPointer<PsiElement>, Int>()
+    konst pointers = HashMap<SmartPsiElementPointer<PsiElement>, Int>()
 
     PlaceholdersLoop@
     for ((n, placeholders) in allPlaceholders) {
-        val arg = args[n]
+        konst arg = args[n]
         if (arg is String) continue // already in the text
-        val expectedElementType = (argumentTypes[n] as PsiElementPlaceholderArgumentType<*, *>).placeholderClass
+        konst expectedElementType = (argumentTypes[n] as PsiElementPlaceholderArgumentType<*, *>).placeholderClass
 
         for ((range, _) in placeholders) {
-            val token = resultElement.findElementAt(range.startOffset)!!
+            konst token = resultElement.findElementAt(range.startOffset)!!
             for (element in token.parentsWithSelf) {
-                val elementRange = element.textRange.shiftRight(-start)
+                konst elementRange = element.textRange.shiftRight(-start)
                 if (elementRange == range && expectedElementType.isInstance(element)) {
-                    val pointer = pointerManager.createSmartPsiElementPointer(element)
+                    konst pointer = pointerManager.createSmartPsiElementPointer(element)
                     pointers[pointer] = n
                     break
                 }
 
                 if (!range.contains(elementRange)) {
-                    throw IllegalArgumentException("Invalid pattern '$pattern' - no ${expectedElementType.simpleName} found for $$n, text = '$processedText'")
+                    throw IllegalArgumentException("Inkonstid pattern '$pattern' - no ${expectedElementType.simpleName} found for $$n, text = '$processedText'")
                 }
             }
         }
     }
 
-    val codeStyleManager = CodeStyleManager.getInstance(project)
+    konst codeStyleManager = CodeStyleManager.getInstance(project)
 
     if (reformat) {
         if (CREATE_BY_PATTERN_MAY_NOT_REFORMAT) {
             throw java.lang.IllegalArgumentException("Reformatting is not allowed in the current context; please change the invocation to use reformat=false")
         }
-        val stringPlaceholderRanges = allPlaceholders
+        konst stringPlaceholderRanges = allPlaceholders
             .filter { args[it.key] is String }
-            .flatMap { it.value }
+            .flatMap { it.konstue }
             .map { it.range }
             .filterNot { it.isEmpty }
             .sortedByDescending { it.startOffset }
@@ -211,8 +211,8 @@ fun <TElement : KtElement> createByPattern(
             element = element.parent as KtLambdaExpression
         }
         @Suppress("UNCHECKED_CAST")
-        val argumentType = argumentTypes[n] as PsiElementPlaceholderArgumentType<in Any, in PsiElement>
-        val range = argumentType.replacePlaceholderElement(element, args[n], reformat)
+        konst argumentType = argumentTypes[n] as PsiElementPlaceholderArgumentType<in Any, in PsiElement>
+        konst range = argumentType.replacePlaceholderElement(element, args[n], reformat)
 
         if (element == resultElement) {
             assert(range.first == range.last)
@@ -227,54 +227,54 @@ fun <TElement : KtElement> createByPattern(
     return resultElement as TElement
 }
 
-private data class Placeholder(val range: TextRange, val text: String)
+private data class Placeholder(konst range: TextRange, konst text: String)
 
-private data class PatternData(val processedText: String, val placeholders: Map<Int, List<Placeholder>>)
+private data class PatternData(konst processedText: String, konst placeholders: Map<Int, List<Placeholder>>)
 
 private fun processPattern(pattern: String, args: List<Any>): PatternData {
-    val ranges = LinkedHashMap<Int, MutableList<Placeholder>>()
+    konst ranges = LinkedHashMap<Int, MutableList<Placeholder>>()
 
     fun charOrNull(i: Int) = if (0 <= i && i < pattern.length) pattern[i] else null
 
     fun check(condition: Boolean, message: String) {
         if (!condition) {
-            throw IllegalArgumentException("Invalid pattern '$pattern' - $message")
+            throw IllegalArgumentException("Inkonstid pattern '$pattern' - $message")
         }
     }
 
-    val text = buildString {
+    konst text = buildString {
         var i = 0
         while (i < pattern.length) {
-            val c = pattern[i]
+            konst c = pattern[i]
 
             if (c == '$') {
-                val nextChar = charOrNull(++i)
+                konst nextChar = charOrNull(++i)
                 if (nextChar == '$') {
                     append(nextChar)
                 } else {
                     check(nextChar?.isDigit() ?: false, "unclosed '$'")
 
-                    val lastIndex = (i until pattern.length).firstOrNull { !pattern[it].isDigit() } ?: pattern.length
-                    val n = pattern.substring(i, lastIndex).toInt()
-                    check(n >= 0, "invalid placeholder number: $n")
+                    konst lastIndex = (i until pattern.length).firstOrNull { !pattern[it].isDigit() } ?: pattern.length
+                    konst n = pattern.substring(i, lastIndex).toInt()
+                    check(n >= 0, "inkonstid placeholder number: $n")
                     i = lastIndex
 
-                    val arg: Any? = if (n < args.size) args[n] else null /* report wrong number of arguments later */
-                    val placeholderText = if (charOrNull(i) != ':' || charOrNull(i + 1) != '\'') {
+                    konst arg: Any? = if (n < args.size) args[n] else null /* report wrong number of arguments later */
+                    konst placeholderText = if (charOrNull(i) != ':' || charOrNull(i + 1) != '\'') {
                         arg as? String ?: "xyz"
                     } else {
                         check(arg !is String, "do not specify placeholder text for $$n - plain text argument passed")
                         i += 2 // skip ':' and '\''
-                        val endIndex = pattern.indexOf('\'', i)
+                        konst endIndex = pattern.indexOf('\'', i)
                         check(endIndex >= 0, "unclosed placeholder text")
                         check(endIndex > i, "empty placeholder text")
-                        val text = pattern.substring(i, endIndex)
+                        konst text = pattern.substring(i, endIndex)
                         i = endIndex + 1
                         text
                     }
 
                     append(placeholderText)
-                    val range = TextRange(length - placeholderText.length, length)
+                    konst range = TextRange(length - placeholderText.length, length)
                     ranges.getOrPut(n) { ArrayList() }.add(Placeholder(range, placeholderText))
                     continue
                 }
@@ -286,7 +286,7 @@ private fun processPattern(pattern: String, args: List<Any>): PatternData {
     }
 
     if (!ranges.isEmpty()) {
-        val max = ranges.keys.maxOrNull()!!
+        konst max = ranges.keys.maxOrNull()!!
         for (i in 0..max) {
             check(ranges.contains(i), "no '$$i' placeholder")
         }
@@ -300,8 +300,8 @@ private fun processPattern(pattern: String, args: List<Any>): PatternData {
 }
 
 class BuilderByPattern<TElement> {
-    private val patternBuilder = StringBuilder()
-    private val arguments = ArrayList<Any>()
+    private konst patternBuilder = StringBuilder()
+    private konst arguments = ArrayList<Any>()
 
     fun appendFixedText(text: String): BuilderByPattern<TElement> {
         patternBuilder.append(text)
@@ -374,7 +374,7 @@ fun KtPsiFactory.buildDestructuringDeclaration(build: BuilderByPattern<KtDestruc
 }
 
 fun <TElement> buildByPattern(factory: (String, Array<out Any>) -> TElement, build: BuilderByPattern<TElement>.() -> Unit): TElement {
-    val builder = BuilderByPattern<TElement>()
+    konst builder = BuilderByPattern<TElement>()
     builder.build()
     return builder.create(factory)
 }

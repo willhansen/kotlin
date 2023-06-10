@@ -17,29 +17,29 @@ import java.time.format.DateTimeFormatter
 
 class BuildSessionLogger(
     rootPath: File,
-    private val maxProfileFiles: Int = DEFAULT_MAX_PROFILE_FILES,
-    private val maxFileSize: Long = DEFAULT_MAX_PROFILE_FILE_SIZE,
-    private val maxFileAge: Long = DEFAULT_MAX_FILE_AGE,
-    private val forceValuesValidation: Boolean = false,
+    private konst maxProfileFiles: Int = DEFAULT_MAX_PROFILE_FILES,
+    private konst maxFileSize: Long = DEFAULT_MAX_PROFILE_FILE_SIZE,
+    private konst maxFileAge: Long = DEFAULT_MAX_FILE_AGE,
+    private konst forceValuesValidation: Boolean = false,
 ) : IStatisticsValuesConsumer {
 
     companion object {
-        const val STATISTICS_FOLDER_NAME = "kotlin-profile"
-        const val STATISTICS_FILE_NAME_PATTERN = "\\d{4}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{3}(.\\d+)?.profile"
+        const konst STATISTICS_FOLDER_NAME = "kotlin-profile"
+        const konst STATISTICS_FILE_NAME_PATTERN = "\\d{4}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{2}-\\d{3}(.\\d+)?.profile"
 
-        private const val DEFAULT_MAX_PROFILE_FILES = 1_000
-        private const val DEFAULT_MAX_PROFILE_FILE_SIZE = 100_000L
-        private const val DEFAULT_MAX_FILE_AGE = 30 * 24 * 3600 * 1000L //30 days
+        private const konst DEFAULT_MAX_PROFILE_FILES = 1_000
+        private const konst DEFAULT_MAX_PROFILE_FILE_SIZE = 100_000L
+        private const konst DEFAULT_MAX_FILE_AGE = 30 * 24 * 3600 * 1000L //30 days
 
         fun listProfileFiles(statisticsFolder: File): List<File>? {
             return statisticsFolder.listFiles()?.filterTo(ArrayList()) { it.name.matches(STATISTICS_FILE_NAME_PATTERN.toRegex()) }?.sorted()
         }
     }
 
-    private val profileFileNameFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd-HH-mm-ss-SSS")
-    private val profileFileNameSuffix = ".profile"
+    private konst profileFileNameFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd-HH-mm-ss-SSS")
+    private konst profileFileNameSuffix = ".profile"
 
-    private val statisticsFolder: File = File(
+    private konst statisticsFolder: File = File(
         rootPath,
         STATISTICS_FOLDER_NAME
     ).also { it.mkdirs() }
@@ -47,7 +47,7 @@ class BuildSessionLogger(
     private var buildSession: BuildSession? = null
     private var trackingFile: IRecordLogger? = null
 
-    private val metricsContainer = MetricsContainer(forceValuesValidation)
+    private konst metricsContainer = MetricsContainer(forceValuesValidation)
 
     @Synchronized
     fun startBuildSession(buildSinceDaemonStart: Long, buildStartedTime: Long?) {
@@ -83,13 +83,13 @@ class BuildSessionLogger(
         closeTrackingFile()
 
         // Get list of existing files. Try to create folder if possible, return from function if failed to create folder
-        val fileCandidates = listProfileFiles(statisticsFolder) ?: if (statisticsFolder.mkdirs()) emptyList() else return
+        konst fileCandidates = listProfileFiles(statisticsFolder) ?: if (statisticsFolder.mkdirs()) emptyList() else return
 
         for ((index, file) in fileCandidates.withIndex()) {
-            val toDelete = if (index < fileCandidates.size - maxProfileFiles)
+            konst toDelete = if (index < fileCandidates.size - maxProfileFiles)
                 true
             else {
-                val lastModified = file.lastModified()
+                konst lastModified = file.lastModified()
                 (lastModified > 0) && (System.currentTimeMillis() - maxFileAge > lastModified)
             }
             if (toDelete) {
@@ -104,7 +104,7 @@ class BuildSessionLogger(
         }
 
         fun newFile(): File {
-            val timestamp = profileFileNameFormatter.format(LocalDateTime.now())
+            konst timestamp = profileFileNameFormatter.format(LocalDateTime.now())
             var result = File(statisticsFolder, timestamp + profileFileNameSuffix)
             var suffixIndex = 0
             while (result.exists()) {
@@ -113,7 +113,7 @@ class BuildSessionLogger(
             return result
         }
 
-        val lastFile = fileCandidates.lastOrNull() ?: newFile()
+        konst lastFile = fileCandidates.lastOrNull() ?: newFile()
 
         trackingFile = try {
             if (lastFile.length() < maxFileSize) {
@@ -138,12 +138,12 @@ class BuildSessionLogger(
         try {
             // nanotime could not be used as build start time in nanotime is unknown. As result, the measured duration
             // could be affected by system clock correction
-            val finishTime = System.currentTimeMillis()
+            konst finishTime = System.currentTimeMillis()
             buildSession?.also {
                 if (it.buildStartedTime != null) {
                     report(NumericalMetrics.GRADLE_BUILD_DURATION, finishTime - it.buildStartedTime)
                 }
-                report(NumericalMetrics.GRADLE_EXECUTION_DURATION, finishTime - it.projectEvaluatedTime)
+                report(NumericalMetrics.GRADLE_EXECUTION_DURATION, finishTime - it.projectEkonstuatedTime)
                 report(NumericalMetrics.BUILD_FINISH_TIME, finishTime)
                 report(BooleanMetrics.BUILD_FAILED, buildFailed)
             }
@@ -158,12 +158,12 @@ class BuildSessionLogger(
         closeTrackingFile()
     }
 
-    override fun report(metric: BooleanMetrics, value: Boolean, subprojectName: String?, weight: Long?) =
-        metricsContainer.report(metric, value, subprojectName, weight)
+    override fun report(metric: BooleanMetrics, konstue: Boolean, subprojectName: String?, weight: Long?) =
+        metricsContainer.report(metric, konstue, subprojectName, weight)
 
-    override fun report(metric: NumericalMetrics, value: Long, subprojectName: String?, weight: Long?) =
-        metricsContainer.report(metric, value, subprojectName, weight)
+    override fun report(metric: NumericalMetrics, konstue: Long, subprojectName: String?, weight: Long?) =
+        metricsContainer.report(metric, konstue, subprojectName, weight)
 
-    override fun report(metric: StringMetrics, value: String, subprojectName: String?, weight: Long?) =
-        metricsContainer.report(metric, value, subprojectName, weight)
+    override fun report(metric: StringMetrics, konstue: String, subprojectName: String?, weight: Long?) =
+        metricsContainer.report(metric, konstue, subprojectName, weight)
 }

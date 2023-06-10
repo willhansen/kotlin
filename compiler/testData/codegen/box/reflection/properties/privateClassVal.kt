@@ -7,13 +7,13 @@ import kotlin.reflect.full.*
 import kotlin.reflect.jvm.isAccessible
 
 class Result {
-    private val value = "OK"
+    private konst konstue = "OK"
 
     fun ref() = Result::class.memberProperties.single() as KProperty1<Result, String>
 }
 
 fun box(): String {
-    val p = Result().ref()
+    konst p = Result().ref()
     try {
         p.get(Result())
         return "Fail: private property is accessible by default"
@@ -21,7 +21,7 @@ fun box(): String {
 
     p.isAccessible = true
 
-    val r = p.get(Result())
+    konst r = p.get(Result())
 
     p.isAccessible = false
     try {

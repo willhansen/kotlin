@@ -7,14 +7,14 @@ scopes:
   LocalScope, index = 0
     classifiers: 0
     callables: 1
-      val localInX: kotlin.Int
+      konst localInX: kotlin.Int
 
   LocalScope, index = 1, empty
 
   SimpleTypeScope, index = 2
     classifiers: 0
     callables: 5
-      val propertyInY: kotlin.Int
+      konst propertyInY: kotlin.Int
       fun x()
       fun equals(other: kotlin.Any?): kotlin.Boolean
       fun hashCode(): kotlin.Int
@@ -24,7 +24,7 @@ scopes:
     classifiers: 1
       class Y
     callables: 1
-      val localInZ: kotlin.Int
+      konst localInZ: kotlin.Int
 
   LocalScope, index = 4, empty
 

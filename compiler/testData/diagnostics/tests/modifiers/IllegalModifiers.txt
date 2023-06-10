@@ -29,7 +29,7 @@ package illegal_modifiers {
 
     public final class FinalClass {
         public constructor FinalClass()
-        public final val i: kotlin.Int = 1
+        public final konst i: kotlin.Int = 1
         public final var j: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open fun foo(): kotlin.Unit
@@ -74,7 +74,7 @@ package illegal_modifiers {
 
     public final class IllegalModifiers4 {
         public constructor IllegalModifiers4(/*0*/ a: kotlin.Int, /*1*/ @illegal_modifiers.annotated(text = "a text") vararg v: kotlin.Int /*kotlin.IntArray*/)
-        public final val a: kotlin.Int
+        public final konst a: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -100,7 +100,7 @@ package illegal_modifiers {
 
     public open class IllegalModifiers7 {
         public constructor IllegalModifiers7()
-        public final val x: kotlin.Int = 1
+        public final konst x: kotlin.Int = 1
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -115,8 +115,8 @@ package illegal_modifiers {
 
         public abstract enum class constructor : kotlin.Enum<illegal_modifiers.IllegalModifiers8.constructor> {
             private constructor constructor()
-            @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-            public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+            @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+            public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
             protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
             public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: illegal_modifiers.IllegalModifiers8.constructor): kotlin.Int
             public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -126,9 +126,9 @@ package illegal_modifiers {
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
             // Static members
-            public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<illegal_modifiers.IllegalModifiers8.constructor>
-            public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): illegal_modifiers.IllegalModifiers8.constructor
-            public final /*synthesized*/ fun values(): kotlin.Array<illegal_modifiers.IllegalModifiers8.constructor>
+            public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<illegal_modifiers.IllegalModifiers8.constructor>
+            public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): illegal_modifiers.IllegalModifiers8.constructor
+            public final /*synthesized*/ fun konstues(): kotlin.Array<illegal_modifiers.IllegalModifiers8.constructor>
         }
     }
 
@@ -142,7 +142,7 @@ package illegal_modifiers {
 
     public final class LegalModifier {
         public constructor LegalModifier(/*0*/ a: kotlin.Int, /*1*/ @illegal_modifiers.annotated b: kotlin.String, /*2*/ @illegal_modifiers.annotated vararg v: kotlin.Int /*kotlin.IntArray*/)
-        public final val a: kotlin.Int
+        public final konst a: kotlin.Int
         private final var b: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -171,7 +171,7 @@ package illegal_modifiers {
 
     public final annotation class annotated : kotlin.Annotation {
         public constructor annotated(/*0*/ text: kotlin.String = ...)
-        public final val text: kotlin.String
+        public final konst text: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

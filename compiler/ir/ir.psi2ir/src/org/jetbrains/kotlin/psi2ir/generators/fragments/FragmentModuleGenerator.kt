@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.psi2ir.generators.*
 import org.jetbrains.kotlin.resolve.lazy.descriptors.findPackageFragmentForFile
 
 class FragmentModuleGenerator(
-    override val context: GeneratorContext,
-    private val fragmentInfo: EvaluatorFragmentInfo
+    override konst context: GeneratorContext,
+    private konst fragmentInfo: EkonstuatorFragmentInfo
 ) : ModuleGenerator(context, expectDescriptorToSymbol = null) {
 
     override fun generateModuleFragment(
@@ -27,7 +27,7 @@ class FragmentModuleGenerator(
             "Amongst all files passed to the FragmentModuleGenerator should be exactly one KtBlockCodeFragment"
         }
         return IrModuleFragmentImpl(context.moduleDescriptor, context.irBuiltIns).also { irModule ->
-            val irDeclarationGenerator = FragmentDeclarationGenerator(context, fragmentInfo)
+            konst irDeclarationGenerator = FragmentDeclarationGenerator(context, fragmentInfo)
             ktFiles.forEach { ktFile ->
                 irModule.files.add(
                     if (ktFile is KtBlockCodeFragment) {
@@ -48,11 +48,11 @@ class FragmentModuleGenerator(
     }
 
     private fun <T> generateInContextWithoutFragmentInfo(ktFile: KtFile, block: (GeneratorContext) -> T): T {
-        val symbolTableDecorator = context.symbolTable as FragmentCompilerSymbolTableDecorator
-        val fragmentInfo = symbolTableDecorator.fragmentInfo
+        konst symbolTableDecorator = context.symbolTable as FragmentCompilerSymbolTableDecorator
+        konst fragmentInfo = symbolTableDecorator.fragmentInfo
         symbolTableDecorator.fragmentInfo = null
 
-        val fileContext = context.createFileScopeContext(ktFile)
+        konst fileContext = context.createFileScopeContext(ktFile)
         fileContext.fragmentContext = null
 
         return block(fileContext).also {
@@ -62,8 +62,8 @@ class FragmentModuleGenerator(
     }
 
     private fun createEmptyIrFile(ktFile: KtFile): IrFileImpl {
-        val fileEntry = PsiIrFileEntry(ktFile)
-        val packageFragmentDescriptor = context.moduleDescriptor.findPackageFragmentForFile(ktFile)!!
+        konst fileEntry = PsiIrFileEntry(ktFile)
+        konst packageFragmentDescriptor = context.moduleDescriptor.findPackageFragmentForFile(ktFile)!!
         return IrFileImpl(fileEntry, packageFragmentDescriptor)
     }
 }

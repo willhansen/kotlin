@@ -14,12 +14,12 @@ enum class MyEnum {
             foo()
         }
 
-        val aLambda = {
+        konst aLambda = {
             counter = 1
             foo()
         }
 
-        val anObject = object {
+        konst anObject = object {
             init {
                 counter = 1
                 foo()

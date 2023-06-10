@@ -1,23 +1,23 @@
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     @Anno
-    val member: Int get() = x
+    konst member: Int get() = x
 }
 
 annotation class Anno
 
 @Anno
-val Z.topLevel: Int get() = 0
+konst Z.topLevel: Int get() = 0
 
 @Anno
-val returnType: Z get() = Z(0)
+konst returnType: Z get() = Z(0)
 
 class C {
     @Anno
-    val Z.memberExtension: Int get() = 0
+    konst Z.memberExtension: Int get() = 0
 
     @Anno
-    val returnType: Z get() = Z(0)
+    konst returnType: Z get() = Z(0)
 
     @Anno
-    internal val Z.internal: Int get() = 0
+    internal konst Z.internal: Int get() = 0
 }

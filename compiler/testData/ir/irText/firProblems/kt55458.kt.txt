@@ -1,7 +1,7 @@
 fun main() {
   // COMPOSITE {
-  val tmp0_container: Pair<Int, Int> = 1.to<Int, Int>(that = 2)
-  val a: Int = tmp0_container.component1()
+  konst tmp0_container: Pair<Int, Int> = 1.to<Int, Int>(that = 2)
+  konst a: Int = tmp0_container.component1()
   // }
   println(message = a)
 }

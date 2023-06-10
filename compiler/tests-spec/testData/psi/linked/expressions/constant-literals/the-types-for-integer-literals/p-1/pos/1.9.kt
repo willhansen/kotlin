@@ -4,22 +4,22 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, constant-literals, the-types-for-integer-literals -> paragraph 1 -> sentence 1
  * NUMBER: 9
- * DESCRIPTION: Various integer literals with long literal mark in not allowed lower case (but valid in opinion the parser).
+ * DESCRIPTION: Various integer literals with long literal mark in not allowed lower case (but konstid in opinion the parser).
  */
 
-val value = 1234567890l
-val value = 1l
-val value = 1_l
-val value = 1234_5678_90l
-val value = 0x0123456789abcdefl
-val value = 0x1l
-val value = 0Xal
-val value = 0xA0Al
-val value = 0xl
-val value = 0X4_______5_______d_______7l
-val value = 0x_l
-val value = 0b10101010101l
-val value = 0b000000009l
-val value = 0bl
-val value = 0B1_______0_______1_______0_l
-val value = 0B______________l
+konst konstue = 1234567890l
+konst konstue = 1l
+konst konstue = 1_l
+konst konstue = 1234_5678_90l
+konst konstue = 0x0123456789abcdefl
+konst konstue = 0x1l
+konst konstue = 0Xal
+konst konstue = 0xA0Al
+konst konstue = 0xl
+konst konstue = 0X4_______5_______d_______7l
+konst konstue = 0x_l
+konst konstue = 0b10101010101l
+konst konstue = 0b000000009l
+konst konstue = 0bl
+konst konstue = 0B1_______0_______1_______0_l
+konst konstue = 0B______________l

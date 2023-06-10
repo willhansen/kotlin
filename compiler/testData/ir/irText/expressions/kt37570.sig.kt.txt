@@ -5,7 +5,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}b
   //   Public signature: /A.b|772347207915745207[0]
-  val b: String
+  konst b: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-b>(){}kotlin.String
     //   Public signature: /A.b.<get-b>|5457451065030643294[0]

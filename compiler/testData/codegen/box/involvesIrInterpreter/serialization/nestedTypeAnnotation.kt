@@ -8,18 +8,18 @@
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
-annotation class TypeAnnotation(val str: String)
+annotation class TypeAnnotation(konst str: String)
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
-annotation class Nested(val a: TypeAnnotation)
+annotation class Nested(konst a: TypeAnnotation)
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
-annotation class NestedArray(val a: Array<TypeAnnotation>)
+annotation class NestedArray(konst a: Array<TypeAnnotation>)
 
-val a: @Nested(TypeAnnotation("Int" <!EVALUATED("IntAnno")!>+ "Anno"<!>)) Int = 1
-val b: @NestedArray([TypeAnnotation("Element1" <!EVALUATED("Element1Anno")!>+ "Anno"<!>), TypeAnnotation("Element2" <!EVALUATED("Element2Anno")!>+ "Anno"<!>)]) Int = 1
+konst a: @Nested(TypeAnnotation("Int" <!EVALUATED("IntAnno")!>+ "Anno"<!>)) Int = 1
+konst b: @NestedArray([TypeAnnotation("Element1" <!EVALUATED("Element1Anno")!>+ "Anno"<!>), TypeAnnotation("Element2" <!EVALUATED("Element2Anno")!>+ "Anno"<!>)]) Int = 1
 
 // MODULE: main
 // FILE: main.kt

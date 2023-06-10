@@ -3,7 +3,7 @@ interface B {
 }
 
 interface D {
-    val x: Int
+    konst x: Int
 }
 
 class C(d: D) : D by d, B {

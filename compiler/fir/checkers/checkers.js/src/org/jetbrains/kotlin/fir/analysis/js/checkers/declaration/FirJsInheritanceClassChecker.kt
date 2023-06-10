@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.fir.types.typeContext
 object FirJsInheritanceClassChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.symbol.isEffectivelyExternal(context)) {
-            val fakeOverriddenMethod = declaration.findFakeMethodOverridingExternalWithOptionalParams(context)
+            konst fakeOverriddenMethod = declaration.findFakeMethodOverridingExternalWithOptionalParams(context)
 
             if (fakeOverriddenMethod != null) {
                 reporter.reportOn(
@@ -57,12 +57,12 @@ object FirJsInheritanceClassChecker : FirClassChecker() {
     }
 
     private fun FirClass.findFakeMethodOverridingExternalWithOptionalParams(context: CheckerContext): FirNamedFunctionSymbol? {
-        val scope = symbol.unsubstitutedScope(context)
+        konst scope = symbol.unsubstitutedScope(context)
 
-        val members = scope.collectAllFunctions()
+        konst members = scope.collectAllFunctions()
             .filterIsInstance<FirIntersectionOverrideFunctionSymbol>()
             .filter {
-                val container = it.getContainingClassSymbol(context.session)
+                konst container = it.getContainingClassSymbol(context.session)
                 container == symbol && it.intersections.isNotEmpty()
             }
 

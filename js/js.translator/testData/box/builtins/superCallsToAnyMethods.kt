@@ -21,7 +21,7 @@ class E : D() {
 }
 
 fun testAnyBuiltins(x1: Any, x2: Any): String {
-    val s = x1.toString()
+    konst s = x1.toString()
     if (s != "[object Object]") return "toString fail: ${s}"
     if (!x1.equals(x1)) return "equals fail #1"
     if (x1.equals(x2) != x2.equals(x1)) return "equals fail #2"
@@ -32,13 +32,13 @@ fun testAnyBuiltins(x1: Any, x2: Any): String {
 
 
 fun box(): String {
-    val resultC = testAnyBuiltins(C(), C())
+    konst resultC = testAnyBuiltins(C(), C())
     if (resultC != "OK") return resultC
 
-    val resultD = testAnyBuiltins(D(), D())
+    konst resultD = testAnyBuiltins(D(), D())
     if (resultD != "OK") return resultD
 
-    val resultE = testAnyBuiltins(E(), E())
+    konst resultE = testAnyBuiltins(E(), E())
     if (resultE != "OK") return resultE
 
     return "OK"

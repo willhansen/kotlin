@@ -7,7 +7,7 @@ import kotlin.reflect.*
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated1(val kClass: KClass<*>)
+annotation class Associated1(konst kClass: KClass<*>)
 
 @Associated1(Bar::class)
 class Foo

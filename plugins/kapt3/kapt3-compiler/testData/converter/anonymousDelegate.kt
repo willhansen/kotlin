@@ -25,13 +25,13 @@ class Test {
         }
     }
 
-    private val lazyProp by lazy {
+    private konst lazyProp by lazy {
         object : Runnable {
             override fun run() {}
         }
     }
 
-    val concreteDelegate: Int by ConcreteDelegate()
+    konst concreteDelegate: Int by ConcreteDelegate()
 }
 
 var delegate by object {

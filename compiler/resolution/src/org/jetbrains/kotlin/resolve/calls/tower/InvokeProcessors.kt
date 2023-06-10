@@ -26,18 +26,18 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 import java.util.*
 
 abstract class AbstractInvokeTowerProcessor<C : Candidate>(
-    protected val factoryProviderForInvoke: CandidateFactoryProviderForInvoke<C>,
-    protected val variableProcessor: ScopeTowerProcessor<C>
+    protected konst factoryProviderForInvoke: CandidateFactoryProviderForInvoke<C>,
+    protected konst variableProcessor: ScopeTowerProcessor<C>
 ) : ScopeTowerProcessor<C> {
     // todo optimize it
-    private val previousData = ArrayList<TowerData>()
-    private val invokeProcessors: MutableList<Collection<VariableInvokeProcessor>> = ArrayList()
+    private konst previousData = ArrayList<TowerData>()
+    private konst invokeProcessors: MutableList<Collection<VariableInvokeProcessor>> = ArrayList()
 
     protected fun hasInvokeProcessors() = invokeProcessors.isNotEmpty()
 
     private inner class VariableInvokeProcessor(
         var variableCandidate: C,
-        val invokeProcessor: ScopeTowerProcessor<C>
+        konst invokeProcessor: ScopeTowerProcessor<C>
     ) : ScopeTowerProcessor<C> {
 
         override fun process(data: TowerData) = invokeProcessor.process(data).map { candidateGroup ->
@@ -58,7 +58,7 @@ abstract class AbstractInvokeTowerProcessor<C : Candidate>(
 
     override fun process(data: TowerData): List<Collection<C>> {
 
-        val candidateGroups = ArrayList<Collection<C>>(0)
+        konst candidateGroups = ArrayList<Collection<C>>(0)
 
         if (mayDataBeApplicable(data)) {
             previousData.add(data)
@@ -68,7 +68,7 @@ abstract class AbstractInvokeTowerProcessor<C : Candidate>(
         }
 
         for (variableCandidates in variableProcessor.process(data)) {
-            val variableProcessors = variableCandidates.mapNotNull {
+            konst variableProcessors = variableCandidates.mapNotNull {
                 if (it.isSuccessful) createVariableInvokeProcessor(it) else null
             }
 
@@ -97,8 +97,8 @@ abstract class AbstractInvokeTowerProcessor<C : Candidate>(
 
 // todo KT-9522 Allow invoke convention for synthetic property
 class InvokeTowerProcessor<C : Candidate>(
-    val scopeTower: ImplicitScopeTower,
-    val name: Name,
+    konst scopeTower: ImplicitScopeTower,
+    konst name: Name,
     factoryProviderForInvoke: CandidateFactoryProviderForInvoke<C>,
     explicitReceiver: DetailedReceiver?
 ) : AbstractInvokeTowerProcessor<C>(
@@ -113,7 +113,7 @@ class InvokeTowerProcessor<C : Candidate>(
 
     // todo filter by operator
     override fun createInvokeProcessor(variableCandidate: C): ScopeTowerProcessor<C>? {
-        val (variableReceiver, invokeContext) = factoryProviderForInvoke.factoryForInvoke(variableCandidate, useExplicitReceiver = false)
+        konst (variableReceiver, invokeContext) = factoryProviderForInvoke.factoryForInvoke(variableCandidate, useExplicitReceiver = false)
                 ?: return null
         return ExplicitReceiverScopeTowerProcessor(
             scopeTower,
@@ -138,10 +138,10 @@ class InvokeTowerProcessor<C : Candidate>(
 }
 
 class InvokeExtensionTowerProcessor<C : Candidate>(
-    val scopeTower: ImplicitScopeTower,
-    val name: Name,
+    konst scopeTower: ImplicitScopeTower,
+    konst name: Name,
     factoryProviderForInvoke: CandidateFactoryProviderForInvoke<C>,
-    private val explicitReceiver: ReceiverValueWithSmartCastInfo?
+    private konst explicitReceiver: ReceiverValueWithSmartCastInfo?
 ) : AbstractInvokeTowerProcessor<C>(
     factoryProviderForInvoke,
     createVariableAndObjectProcessor(
@@ -153,9 +153,9 @@ class InvokeExtensionTowerProcessor<C : Candidate>(
 ) {
 
     override fun createInvokeProcessor(variableCandidate: C): ScopeTowerProcessor<C>? {
-        val (variableReceiver, invokeContext) = factoryProviderForInvoke.factoryForInvoke(variableCandidate, useExplicitReceiver = true)
+        konst (variableReceiver, invokeContext) = factoryProviderForInvoke.factoryForInvoke(variableCandidate, useExplicitReceiver = true)
                 ?: return null
-        val invokeDescriptor = scopeTower.getExtensionInvokeCandidateDescriptor(variableReceiver)
+        konst invokeDescriptor = scopeTower.getExtensionInvokeCandidateDescriptor(variableReceiver)
                 ?: return null
         return InvokeExtensionScopeTowerProcessor(invokeContext, invokeDescriptor, explicitReceiver)
     }
@@ -169,8 +169,8 @@ class InvokeExtensionTowerProcessor<C : Candidate>(
 
 private class InvokeExtensionScopeTowerProcessor<C : Candidate>(
     context: CandidateFactory<C>,
-    private val invokeCandidateDescriptor: CandidateWithBoundDispatchReceiver,
-    private val explicitReceiver: ReceiverValueWithSmartCastInfo?
+    private konst invokeCandidateDescriptor: CandidateWithBoundDispatchReceiver,
+    private konst explicitReceiver: ReceiverValueWithSmartCastInfo?
 ) : AbstractSimpleScopeTowerProcessor<C>(context) {
 
     override fun simpleProcess(data: TowerData): Collection<C> {
@@ -205,12 +205,12 @@ private class InvokeExtensionScopeTowerProcessor<C : Candidate>(
 private fun ImplicitScopeTower.getExtensionInvokeCandidateDescriptor(
     extensionFunctionReceiver: ReceiverValueWithSmartCastInfo
 ): CandidateWithBoundDispatchReceiver? {
-    val type = extensionFunctionReceiver.receiverValue.type
+    konst type = extensionFunctionReceiver.receiverValue.type
     if (!type.isBuiltinExtensionFunctionalType) return null // todo: missing smart cast?
 
-    val invokeDescriptor = type.memberScope.getContributedFunctions(OperatorNameConventions.INVOKE, location).single()
-    val synthesizedInvokes = createSynthesizedInvokes(listOf(invokeDescriptor))
-    val synthesizedInvoke = synthesizedInvokes.singleOrNull()
+    konst invokeDescriptor = type.memberScope.getContributedFunctions(OperatorNameConventions.INVOKE, location).single()
+    konst synthesizedInvokes = createSynthesizedInvokes(listOf(invokeDescriptor))
+    konst synthesizedInvoke = synthesizedInvokes.singleOrNull()
             ?: error("No single synthesized invoke for $invokeDescriptor: $synthesizedInvokes")
 
     // here we don't add SynthesizedDescriptor diagnostic because it should has priority as member
@@ -224,7 +224,7 @@ fun <C : Candidate> createCallTowerProcessorForExplicitInvoke(
     expressionForInvoke: ReceiverValueWithSmartCastInfo,
     explicitReceiver: ReceiverValueWithSmartCastInfo?
 ): ScopeTowerProcessor<C> {
-    val invokeExtensionDescriptor = scopeTower.getExtensionInvokeCandidateDescriptor(expressionForInvoke)
+    konst invokeExtensionDescriptor = scopeTower.getExtensionInvokeCandidateDescriptor(expressionForInvoke)
     if (explicitReceiver != null) {
         return if (invokeExtensionDescriptor == null) {
             // case 1.(foo())(), where foo() isn't extension function
@@ -233,7 +233,7 @@ fun <C : Candidate> createCallTowerProcessorForExplicitInvoke(
             InvokeExtensionScopeTowerProcessor(functionContext, invokeExtensionDescriptor, explicitReceiver = explicitReceiver)
         }
     } else {
-        val usualInvoke = ExplicitReceiverScopeTowerProcessor(
+        konst usualInvoke = ExplicitReceiverScopeTowerProcessor(
             scopeTower,
             functionContext,
             expressionForInvoke

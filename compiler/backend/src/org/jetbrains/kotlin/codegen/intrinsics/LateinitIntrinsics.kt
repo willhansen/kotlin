@@ -28,16 +28,16 @@ import org.jetbrains.org.objectweb.asm.Type
 
 object LateinitIsInitialized : IntrinsicPropertyGetter() {
     override fun generate(resolvedCall: ResolvedCall<*>?, codegen: ExpressionCodegen, returnType: Type, receiver: StackValue): StackValue? {
-        val value = getStackValue(resolvedCall ?: return null, codegen) ?: return null
-        return StackValue.compareWithNull(value, Opcodes.IFNULL)
+        konst konstue = getStackValue(resolvedCall ?: return null, codegen) ?: return null
+        return StackValue.compareWithNull(konstue, Opcodes.IFNULL)
     }
 }
 
 private fun getStackValue(resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): StackValue? {
-    val expression =
+    konst expression =
             (resolvedCall.extensionReceiver as? ExpressionReceiver)?.expression as? KtCallableReferenceExpression ?: return null
-    val referenceResolvedCall = expression.callableReference.getResolvedCallWithAssert(codegen.bindingContext)
-    val receiver = codegen.generateCallableReferenceReceiver(referenceResolvedCall) ?: StackValue.none()
-    val target = referenceResolvedCall.resultingDescriptor as PropertyDescriptor
+    konst referenceResolvedCall = expression.callableReference.getResolvedCallWithAssert(codegen.bindingContext)
+    konst receiver = codegen.generateCallableReferenceReceiver(referenceResolvedCall) ?: StackValue.none()
+    konst target = referenceResolvedCall.resultingDescriptor as PropertyDescriptor
     return codegen.intermediateValueForProperty(target, true, false, null, false, receiver, null, true)
 }

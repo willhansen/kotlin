@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.backend.konan.driver.PhaseContext
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 
 internal open class DefaultLlvmDiagnosticHandler(
-        private val context: PhaseContext,
-        private val policy: Policy = Policy.Default
+        private konst context: PhaseContext,
+        private konst policy: Policy = Policy.Default
 ) : LlvmDiagnosticHandler {
     interface Policy {
         fun suppressWarning(diagnostic: LlvmDiagnostic): Boolean = false

@@ -2,8 +2,8 @@
 abstract class Base
 
 object Test : Base() {
-    val x = 1
-    val y: Int
+    konst x = 1
+    konst y: Int
     init {
         y = x
     }

@@ -22,7 +22,7 @@ class C : A() {
 
 @JsExport
 fun makeB(): A {
-    val b = B()
+    konst b = B()
     b.foo()
     return b
 }

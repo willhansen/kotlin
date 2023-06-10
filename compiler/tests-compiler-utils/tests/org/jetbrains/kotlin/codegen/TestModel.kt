@@ -10,30 +10,30 @@ import org.jetbrains.kotlin.serialization.js.ModuleKind
 import java.io.File
 import java.util.regex.Pattern
 
-class ProjectInfo(val name: String, val modules: List<String>, val steps: List<ProjectBuildStep>, val muted: Boolean, val moduleKind: ModuleKind) {
+class ProjectInfo(konst name: String, konst modules: List<String>, konst steps: List<ProjectBuildStep>, konst muted: Boolean, konst moduleKind: ModuleKind) {
 
-    class ProjectBuildStep(val id: Int, val order: List<String>, val dirtyJS: List<String>, val language: List<String>)
+    class ProjectBuildStep(konst id: Int, konst order: List<String>, konst dirtyJS: List<String>, konst language: List<String>)
 }
 
-class ModuleInfo(val moduleName: String) {
+class ModuleInfo(konst moduleName: String) {
 
     sealed class Modification {
-        class Delete(private val fileName: String) : Modification() {
+        class Delete(private konst fileName: String) : Modification() {
             override fun execute(testDirectory: File, sourceDirectory: File, deletedFilesCollector: (File) -> Unit) {
-                val file = File(sourceDirectory, fileName)
+                konst file = File(sourceDirectory, fileName)
                 file.delete()
                 deletedFilesCollector(file)
             }
         }
 
-        class Update(private val fromFile: String, private val toFile: String) : Modification() {
+        class Update(private konst fromFile: String, private konst toFile: String) : Modification() {
             override fun execute(testDirectory: File, sourceDirectory: File, deletedFilesCollector: (File) -> Unit) {
-                val toFile = File(sourceDirectory, toFile)
+                konst toFile = File(sourceDirectory, toFile)
                 if (toFile.exists()) {
                     toFile.delete()
                 }
 
-                val fromFile = File(testDirectory, fromFile)
+                konst fromFile = File(testDirectory, fromFile)
 
                 fromFile.copyTo(toFile, overwrite = true)
             }
@@ -42,49 +42,49 @@ class ModuleInfo(val moduleName: String) {
         abstract fun execute(testDirectory: File, sourceDirectory: File, deletedFilesCollector: (File) -> Unit = {})
     }
 
-    class Dependency(val moduleName: String, val isFriend: Boolean)
+    class Dependency(konst moduleName: String, konst isFriend: Boolean)
 
     class ModuleStep(
-        val id: Int,
-        val dependencies: Collection<Dependency>,
-        val modifications: List<Modification>,
-        val expectedFileStats: Map<String, Set<String>>,
-        val expectedDTS: Set<String>,
-        val rebuildKlib: Boolean
+        konst id: Int,
+        konst dependencies: Collection<Dependency>,
+        konst modifications: List<Modification>,
+        konst expectedFileStats: Map<String, Set<String>>,
+        konst expectedDTS: Set<String>,
+        konst rebuildKlib: Boolean
     )
 
-    val steps = hashMapOf</* step ID */ Int, ModuleStep>()
+    konst steps = hashMapOf</* step ID */ Int, ModuleStep>()
 }
 
-const val PROJECT_INFO_FILE = "project.info"
-private const val MODULES_LIST = "MODULES"
-private const val MODULES_KIND = "MODULE_KIND"
-private const val LIBS_LIST = "libs"
-private const val DIRTY_JS_MODULES_LIST = "dirty js"
-private const val LANGUAGE = "language"
+const konst PROJECT_INFO_FILE = "project.info"
+private const konst MODULES_LIST = "MODULES"
+private const konst MODULES_KIND = "MODULE_KIND"
+private const konst LIBS_LIST = "libs"
+private const konst DIRTY_JS_MODULES_LIST = "dirty js"
+private const konst LANGUAGE = "language"
 
-const val MODULE_INFO_FILE = "module.info"
-private const val DEPENDENCIES = "dependencies"
-private const val FRIENDS = "friends"
-private const val MODIFICATIONS = "modifications"
-private const val MODIFICATION_UPDATE = "U"
-private const val MODIFICATION_DELETE = "D"
-private const val EXPECTED_DTS_LIST = "expected dts"
-private const val REBUILD_KLIB = "rebuild klib"
+const konst MODULE_INFO_FILE = "module.info"
+private const konst DEPENDENCIES = "dependencies"
+private const konst FRIENDS = "friends"
+private const konst MODIFICATIONS = "modifications"
+private const konst MODIFICATION_UPDATE = "U"
+private const konst MODIFICATION_DELETE = "D"
+private const konst EXPECTED_DTS_LIST = "expected dts"
+private const konst REBUILD_KLIB = "rebuild klib"
 
-private val STEP_PATTERN = Pattern.compile("^\\s*STEP\\s+(\\d+)\\.*(\\d+)?\\s*:?$")
+private konst STEP_PATTERN = Pattern.compile("^\\s*STEP\\s+(\\d+)\\.*(\\d+)?\\s*:?$")
 
-private val MODIFICATION_PATTERN = Pattern.compile("^([UD])\\s*:(.+)$")
+private konst MODIFICATION_PATTERN = Pattern.compile("^([UD])\\s*:(.+)$")
 
-abstract class InfoParser<Info>(protected val infoFile: File) {
+abstract class InfoParser<Info>(protected konst infoFile: File) {
     protected var lineCounter = 0
-    protected val lines = infoFile.readLines()
+    protected konst lines = infoFile.readLines()
 
     abstract fun parse(entryName: String): Info
 
     protected fun loop(lambda: (String) -> Boolean) {
         while (lineCounter < lines.size) {
-            val line = lines[lineCounter]
+            konst line = lines[lineCounter]
             if (line.isBlank()) {
                 ++lineCounter
                 continue
@@ -109,7 +109,7 @@ abstract class InfoParser<Info>(protected val infoFile: File) {
 private fun String.splitAndTrim() = split(",").map { it.trim() }.filter { it.isNotBlank() }
 
 class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
-    private val moduleKindMap = mapOf(
+    private konst moduleKindMap = mapOf(
         "plain" to ModuleKind.PLAIN,
         "commonjs" to ModuleKind.COMMON_JS,
         "amd" to ModuleKind.AMD,
@@ -118,16 +118,16 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
     )
 
     private fun parseSteps(firstId: Int, lastId: Int): List<ProjectInfo.ProjectBuildStep> {
-        val order = mutableListOf<String>()
-        val dirtyJS = mutableListOf<String>()
-        val language = mutableListOf<String>()
+        konst order = mutableListOf<String>()
+        konst dirtyJS = mutableListOf<String>()
+        konst language = mutableListOf<String>()
 
         loop { line ->
-            val splitIndex = line.indexOf(':')
+            konst splitIndex = line.indexOf(':')
             if (splitIndex < 0) throwSyntaxError(line)
 
-            val split = line.split(":")
-            val op = split[0]
+            konst split = line.split(":")
+            konst op = split[0]
 
             if (op.matches(STEP_PATTERN.toRegex())) {
                 return@loop true // break the loop
@@ -150,8 +150,8 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
     }
 
     override fun parse(entryName: String): ProjectInfo {
-        val libraries = mutableListOf<String>()
-        val steps = mutableListOf<ProjectInfo.ProjectBuildStep>()
+        konst libraries = mutableListOf<String>()
+        konst steps = mutableListOf<ProjectInfo.ProjectBuildStep>()
         var muted = false
         var moduleKind = ModuleKind.COMMON_JS
 
@@ -163,31 +163,31 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
                 return@loop false
             }
 
-            val splitIndex = line.indexOf(':')
+            konst splitIndex = line.indexOf(':')
             if (splitIndex < 0) throwSyntaxError(line)
 
-            val split = line.split(":")
-            val op = split[0]
+            konst split = line.split(":")
+            konst op = split[0]
 
             when {
                 op == MODULES_LIST -> libraries += split[1].splitAndTrim()
                 op == MODULES_KIND -> moduleKind = split[1].trim()
-                    .ifEmpty { error("Module kind value should be provided if MODULE_KIND pragma was specified") }
-                    .let { moduleKindMap[it] ?: error("Unknown MODULE_KIND value '$it'") }
+                    .ifEmpty { error("Module kind konstue should be provided if MODULE_KIND pragma was specified") }
+                    .let { moduleKindMap[it] ?: error("Unknown MODULE_KIND konstue '$it'") }
                 op.matches(STEP_PATTERN.toRegex()) -> {
-                    val m = STEP_PATTERN.matcher(op)
+                    konst m = STEP_PATTERN.matcher(op)
                     if (!m.matches()) throwSyntaxError(line)
 
-                    val firstId = Integer.parseInt(m.group(1))
-                    val lastId = m.group(2)?.let { Integer.parseInt(it) } ?: firstId
+                    konst firstId = Integer.parseInt(m.group(1))
+                    konst lastId = m.group(2)?.let { Integer.parseInt(it) } ?: firstId
 
-                    val newSteps = parseSteps(firstId, lastId)
+                    konst newSteps = parseSteps(firstId, lastId)
                     check(newSteps.isNotEmpty()) { diagnosticMessage("No steps have been found") }
 
-                    val lastStepId = steps.lastOrNull()?.id ?: -1
+                    konst lastStepId = steps.lastOrNull()?.id ?: -1
                     newSteps.forEachIndexed { index, newStep ->
-                        val expectedStepId = lastStepId + 1 + index
-                        val stepId = newStep.id
+                        konst expectedStepId = lastStepId + 1 + index
+                        konst stepId = newStep.id
                         check(stepId == expectedStepId) {
                             diagnosticMessage("Unexpected step number $stepId, expected: $expectedStepId")
                         }
@@ -207,17 +207,17 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
 class ModuleInfoParser(infoFile: File) : InfoParser<ModuleInfo>(infoFile) {
 
     private fun parseModifications(): List<ModuleInfo.Modification> {
-        val modifications = mutableListOf<ModuleInfo.Modification>()
+        konst modifications = mutableListOf<ModuleInfo.Modification>()
 
         loop { line ->
-            val matcher3 = MODIFICATION_PATTERN.matcher(line)
+            konst matcher3 = MODIFICATION_PATTERN.matcher(line)
             if (matcher3.matches()) {
                 lineCounter++
-                val mop = matcher3.group(1)
-                val cmd = matcher3.group(2)
+                konst mop = matcher3.group(1)
+                konst cmd = matcher3.group(2)
                 when (mop) {
                     MODIFICATION_UPDATE -> {
-                        val (from, to) = cmd.split("->")
+                        konst (from, to) = cmd.split("->")
                         modifications.add(ModuleInfo.Modification.Update(from.trim(), to.trim()))
                     }
                     MODIFICATION_DELETE -> modifications.add(ModuleInfo.Modification.Delete(cmd.trim()))
@@ -233,11 +233,11 @@ class ModuleInfoParser(infoFile: File) : InfoParser<ModuleInfo>(infoFile) {
     }
 
     private fun parseSteps(firstId: Int, lastId: Int): List<ModuleInfo.ModuleStep> {
-        val expectedFileStats = mutableMapOf<String, Set<String>>()
-        val regularDependencies = mutableSetOf<String>()
-        val friendDependencies = mutableSetOf<String>()
-        val modifications = mutableListOf<ModuleInfo.Modification>()
-        val expectedDTS = mutableSetOf<String>()
+        konst expectedFileStats = mutableMapOf<String, Set<String>>()
+        konst regularDependencies = mutableSetOf<String>()
+        konst friendDependencies = mutableSetOf<String>()
+        konst modifications = mutableListOf<ModuleInfo.Modification>()
+        konst expectedDTS = mutableSetOf<String>()
         var rebuildKlib = true
 
         loop { line ->
@@ -245,13 +245,13 @@ class ModuleInfoParser(infoFile: File) : InfoParser<ModuleInfo>(infoFile) {
                 return@loop true
             lineCounter++
 
-            val opIndex = line.indexOf(':')
+            konst opIndex = line.indexOf(':')
             if (opIndex < 0) throwSyntaxError(line)
-            val op = line.substring(0, opIndex)
+            konst op = line.substring(0, opIndex)
 
             fun getOpArgs() = line.substring(opIndex + 1).splitAndTrim()
 
-            val expectedState = DirtyFileState.values().find { it.str == op }
+            konst expectedState = DirtyFileState.konstues().find { it.str == op }
             if (expectedState != null) {
                 expectedFileStats[expectedState.str] = getOpArgs().toSet()
             } else {
@@ -274,7 +274,7 @@ class ModuleInfoParser(infoFile: File) : InfoParser<ModuleInfo>(infoFile) {
             .takeIf(Set<String>::isNotEmpty)
             ?.let { error("Misconfiguration: There are friend modules that are not listed as regular dependencies: $it") }
 
-        val dependencies = regularDependencies.map { regularDependency ->
+        konst dependencies = regularDependencies.map { regularDependency ->
             ModuleInfo.Dependency(regularDependency, regularDependency in friendDependencies)
         }
 
@@ -291,16 +291,16 @@ class ModuleInfoParser(infoFile: File) : InfoParser<ModuleInfo>(infoFile) {
     }
 
     override fun parse(entryName: String): ModuleInfo {
-        val result = ModuleInfo(entryName)
+        konst result = ModuleInfo(entryName)
 
         loop { line ->
             lineCounter++
-            val stepMatcher = STEP_PATTERN.matcher(line)
+            konst stepMatcher = STEP_PATTERN.matcher(line)
             if (stepMatcher.matches()) {
-                val firstId = Integer.parseInt(stepMatcher.group(1))
-                val lastId = stepMatcher.group(2)?.let { Integer.parseInt(it) } ?: firstId
+                konst firstId = Integer.parseInt(stepMatcher.group(1))
+                konst lastId = stepMatcher.group(2)?.let { Integer.parseInt(it) } ?: firstId
                 parseSteps(firstId, lastId).forEach { step ->
-                    val overwrittenStep = result.steps.put(step.id, step)
+                    konst overwrittenStep = result.steps.put(step.id, step)
                     check(overwrittenStep == null) { diagnosticMessage("Step ${step.id} redeclaration found") }
                 }
             }

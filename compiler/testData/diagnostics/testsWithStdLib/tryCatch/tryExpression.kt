@@ -2,7 +2,7 @@
 
 class ExcA : Exception()
 
-class ExcB(val map: Map<Int, Int>) : Exception()
+class ExcB(konst map: Map<Int, Int>) : Exception()
 
 fun test0(): List<Int> = run {
     try {

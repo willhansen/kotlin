@@ -31,7 +31,7 @@ preparePublication {
 
         def repoId = rootNode.data.stagedRepositoryId.text()
         ext.repoUrl = "https://oss.sonatype.org/service/local/staging/deployByRepositoryId/$repoId/".toString()
-        println "##teamcity[setParameter name='system.deploy-url' value='${repoUrl}']"
+        println "##teamcity[setParameter name='system.deploy-url' konstue='${repoUrl}']"
     }
 }
 

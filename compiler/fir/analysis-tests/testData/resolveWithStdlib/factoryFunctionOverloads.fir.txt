@@ -2,7 +2,7 @@ FILE: factoryFunctionOverloads.kt
     public abstract interface B : R|kotlin/Any| {
     }
     public abstract interface C : R|kotlin/Any| {
-        public abstract val b: R|B|
+        public abstract konst b: R|B|
             public get(): R|B|
 
     }
@@ -17,15 +17,15 @@ FILE: factoryFunctionOverloads.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val b: R|B| = R|<local>/b|
+        public final konst b: R|B| = R|<local>/b|
             public get(): R|B|
 
-        public final val flag: R|kotlin/Boolean| = R|<local>/flag|
+        public final konst flag: R|kotlin/Boolean| = R|<local>/flag|
             public get(): R|kotlin/Boolean|
 
     }
     public final fun foo(c: R|C|, b: R|B|, bn: R|B?|): R|kotlin/Unit| {
-        lval x: R|A| = R|/A|(R|<local>/c|)
-        lval y: R|A| = R|/A.A|(R|<local>/b|)
-        lval z: R|A| = R|/A|(R|<local>/bn|)
+        lkonst x: R|A| = R|/A|(R|<local>/c|)
+        lkonst y: R|A| = R|/A.A|(R|<local>/b|)
+        lkonst z: R|A| = R|/A|(R|<local>/bn|)
     }

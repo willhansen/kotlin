@@ -87,12 +87,12 @@ FILE: flowFromTwoInplaceLambdas.kt
         R|<local>/p|?.{ $subj$.R|kotlin/String.length| }
     }
     public abstract interface I1 : R|kotlin/Any| {
-        public abstract val x: R|kotlin/Int|
+        public abstract konst x: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }
     public abstract interface I2 : R|kotlin/Any| {
-        public abstract val y: R|kotlin/Int|
+        public abstract konst y: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }
@@ -129,7 +129,7 @@ FILE: flowFromTwoInplaceLambdas.kt
         R|<local>/p|?.{ $subj$.R|kotlin/String.length| }
     }
     public final fun test6(): R|kotlin/Unit| {
-        lval x: R|kotlin/String|
+        lkonst x: R|kotlin/String|
         R|/run2|<R|kotlin/Int|>(run2@fun <anonymous>(): R|kotlin/Int| <inline=NoInline, kind=EXACTLY_ONCE>  {
             R|<local>/x| = String()
             ^ R|<local>/x|.R|kotlin/String.length|
@@ -141,8 +141,8 @@ FILE: flowFromTwoInplaceLambdas.kt
         R|<local>/x|.R|kotlin/String.length|
     }
     public final fun test7(): R|kotlin/Unit| {
-        lval x: R|kotlin/Any?| = String()
-        lval y: R|kotlin/Any?|
+        lkonst x: R|kotlin/Any?| = String()
+        lkonst y: R|kotlin/Any?|
         R|/run2|<R|kotlin/Unit|>(run2@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline, kind=EXACTLY_ONCE>  {
             R|<local>/y| = R|<local>/x|
         }

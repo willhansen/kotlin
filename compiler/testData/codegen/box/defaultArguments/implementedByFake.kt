@@ -1,5 +1,5 @@
 interface I<T> {
-    val prop: T
+    konst prop: T
 
     fun f(x: String = "1"): String
 
@@ -17,20 +17,20 @@ open class A<T> {
 }
 
 class B : A<String>(), I<String> {
-    override val prop
+    override konst prop
         get() = "3"
 }
 
 fun box(): String {
-    val i: I<String> = B()
+    konst i: I<String> = B()
     var result = i.f() + i.g() + i.h()
     if (result != "123") return "fail1: $result"
 
-    val b = B()
+    konst b = B()
     result = b.f() + b.g() + b.h()
     if (result != "123") return "fail2: $result"
 
-    val a: A<String> = B()
+    konst a: A<String> = B()
     result = a.f("q") + a.g("w") + a.h("e")
     if (result != "qwe") return "fail3: $result"
 

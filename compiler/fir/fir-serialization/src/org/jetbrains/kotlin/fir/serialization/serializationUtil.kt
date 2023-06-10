@@ -29,13 +29,13 @@ class TypeApproximatorForMetadataSerializer(session: FirSession) :
 
 fun ConeKotlinType.suspendFunctionTypeToFunctionTypeWithContinuation(session: FirSession, continuationClassId: ClassId): ConeClassLikeType {
     require(this.isSuspendOrKSuspendFunctionType(session))
-    val kind =
+    konst kind =
         if (isReflectFunctionType(session)) FunctionTypeKind.KFunction
         else FunctionTypeKind.Function
-    val fullyExpandedType = type.fullyExpandedType(session)
-    val typeArguments = fullyExpandedType.typeArguments
-    val functionTypeId = ClassId(kind.packageFqName, kind.numberedClassName(typeArguments.size))
-    val lastTypeArgument = typeArguments.last()
+    konst fullyExpandedType = type.fullyExpandedType(session)
+    konst typeArguments = fullyExpandedType.typeArguments
+    konst functionTypeId = ClassId(kind.packageFqName, kind.numberedClassName(typeArguments.size))
+    konst lastTypeArgument = typeArguments.last()
     return ConeClassLikeTypeImpl(
         functionTypeId.toLookupTag(),
         typeArguments = (typeArguments.dropLast(1) + continuationClassId.toLookupTag().constructClassType(

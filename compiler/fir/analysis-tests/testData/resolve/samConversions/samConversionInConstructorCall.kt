@@ -1,7 +1,7 @@
 // FILE: Condition.java
 
 public interface Condition {
-    boolean value(boolean t);
+    boolean konstue(boolean t);
 }
 
 // FILE: Foo.java

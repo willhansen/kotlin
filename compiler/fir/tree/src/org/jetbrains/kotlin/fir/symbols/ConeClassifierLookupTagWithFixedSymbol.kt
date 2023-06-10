@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.fir.symbols
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassifierSymbol
 
 abstract class ConeClassifierLookupTagWithFixedSymbol : ConeClassifierLookupTag() {
-    abstract val symbol: FirClassifierSymbol<*>
+    abstract konst symbol: FirClassifierSymbol<*>
 }

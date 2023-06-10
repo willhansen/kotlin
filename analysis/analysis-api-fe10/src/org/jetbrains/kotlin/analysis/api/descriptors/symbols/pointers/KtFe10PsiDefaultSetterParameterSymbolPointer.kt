@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtPsiBasedSymbolPointe
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 
 class KtFe10PsiDefaultSetterParameterSymbolPointer(
-    private val propertySymbolPointer: KtPsiBasedSymbolPointer<KtPropertySetterSymbol>,
+    private konst propertySymbolPointer: KtPsiBasedSymbolPointer<KtPropertySetterSymbol>,
 ) : KtSymbolPointer<KtValueParameterSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtValueParameterSymbol? {
-        val property = with(analysisSession) { propertySymbolPointer.restoreSymbol() }
+        konst property = with(analysisSession) { propertySymbolPointer.restoreSymbol() }
         return property?.parameter
     }
 

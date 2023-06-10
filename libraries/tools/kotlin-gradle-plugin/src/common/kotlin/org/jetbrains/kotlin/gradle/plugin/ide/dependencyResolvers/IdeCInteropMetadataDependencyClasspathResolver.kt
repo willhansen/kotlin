@@ -23,10 +23,10 @@ internal object IdeCInteropMetadataDependencyClasspathResolver : IdeDependencyRe
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         if (sourceSet !is DefaultKotlinSourceSet) return emptySet()
 
-        val project = sourceSet.project
+        konst project = sourceSet.project
         project.locateDependencyTask(sourceSet) ?: return emptySet()
 
-        val cinteropFiles = project.createCInteropMetadataDependencyClasspathForIde(sourceSet)
+        konst cinteropFiles = project.createCInteropMetadataDependencyClasspathForIde(sourceSet)
         return project.resolveCInteropDependencies(cinteropFiles)
     }
 

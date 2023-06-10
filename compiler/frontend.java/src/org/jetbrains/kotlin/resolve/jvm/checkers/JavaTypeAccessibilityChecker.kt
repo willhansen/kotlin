@@ -42,14 +42,14 @@ class JavaTypeAccessibilityChecker : AdditionalTypeChecker {
 
         if (c.isDebuggerContext) return
 
-        val inaccessibleClasses = findInaccessibleJavaClasses(expressionType, c)
+        konst inaccessibleClasses = findInaccessibleJavaClasses(expressionType, c)
         if (inaccessibleClasses.isNotEmpty()) {
             c.trace.report(Errors.INACCESSIBLE_TYPE.on(expression, expressionType, inaccessibleClasses))
             return
         }
 
         if (expressionTypeWithSmartCast != expressionType) {
-            val inaccessibleClassesWithSmartCast = findInaccessibleJavaClasses(expressionTypeWithSmartCast, c)
+            konst inaccessibleClassesWithSmartCast = findInaccessibleJavaClasses(expressionTypeWithSmartCast, c)
             if (inaccessibleClassesWithSmartCast.isNotEmpty()) {
                 c.trace.report(Errors.INACCESSIBLE_TYPE.on(expression, expressionType, inaccessibleClassesWithSmartCast))
             }
@@ -57,8 +57,8 @@ class JavaTypeAccessibilityChecker : AdditionalTypeChecker {
     }
 
     private fun findInaccessibleJavaClasses(type: KotlinType, c: ResolutionContext<*>): Collection<ClassDescriptor> {
-        val scopeOwner = c.scope.ownerDescriptor
-        val inaccessibleJavaClasses = LinkedHashSet<ClassDescriptor>()
+        konst scopeOwner = c.scope.ownerDescriptor
+        konst inaccessibleJavaClasses = LinkedHashSet<ClassDescriptor>()
         findInaccessibleJavaClassesRec(type, scopeOwner, inaccessibleJavaClasses, c.languageVersionSettings)
         return inaccessibleJavaClasses
     }
@@ -69,7 +69,7 @@ class JavaTypeAccessibilityChecker : AdditionalTypeChecker {
             inaccessibleClasses: MutableCollection<ClassDescriptor>,
             languageVersionSettings: LanguageVersionSettings
     ) {
-        val declarationDescriptor = type.constructor.declarationDescriptor
+        konst declarationDescriptor = type.constructor.declarationDescriptor
 
         if (declarationDescriptor is JavaClassDescriptor) {
             if (!DescriptorVisibilityUtils.isVisibleIgnoringReceiver(declarationDescriptor, scopeOwner, languageVersionSettings)) {

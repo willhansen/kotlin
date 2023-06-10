@@ -38,7 +38,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
 
     @Test
     fun testMultiplatformCompile() {
-        val project = Project("multiplatformProject")
+        konst project = Project("multiplatformProject")
 
         project.build("build") {
             assertSuccessful()
@@ -67,7 +67,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
 
     @Test
     fun testDeprecatedImplementWarning() {
-        val project = Project("multiplatformProject")
+        konst project = Project("multiplatformProject")
 
         project.build("build") {
             assertSuccessful()
@@ -145,22 +145,22 @@ class MultiplatformGradleIT : BaseGradleIT() {
     // todo: also make incremental compilation test
     @Test
     fun testIncrementalBuild(): Unit = Project("multiplatformProject").run {
-        val compileCommonTask = ":lib:compileKotlinCommon"
-        val compileJvmTask = ":libJvm:compileKotlin"
-        val allKotlinTasks = listOf(compileCommonTask, compileJvmTask)
+        konst compileCommonTask = ":lib:compileKotlinCommon"
+        konst compileJvmTask = ":libJvm:compileKotlin"
+        konst allKotlinTasks = listOf(compileCommonTask, compileJvmTask)
 
         build("build") {
             assertSuccessful()
         }
 
-        val commonProjectDir = File(projectDir, "lib")
+        konst commonProjectDir = File(projectDir, "lib")
         commonProjectDir.getFileByName("PlatformClass.kt").modify { it + "\n" }
         build("build") {
             assertSuccessful()
             assertTasksExecuted(allKotlinTasks)
         }
 
-        val jvmProjectDir = File(projectDir, "libJvm")
+        konst jvmProjectDir = File(projectDir, "libJvm")
         jvmProjectDir.getFileByName("PlatformClass.kt").modify { it + "\n" }
         build("build") {
             assertSuccessful()
@@ -174,24 +174,24 @@ class MultiplatformGradleIT : BaseGradleIT() {
         build("build") {
             assertSuccessful()
 
-            val sourceSets = listOf("", "Test")
-            val commonTasks = listOf("libA", "libB").flatMap { module ->
+            konst sourceSets = listOf("", "Test")
+            konst commonTasks = listOf("libA", "libB").flatMap { module ->
                 sourceSets.map { sourceSet -> ":$module:compile${sourceSet}KotlinCommon" }
             }
-            val platformTasks = listOf("libJvm" to "").flatMap { (module, platformSuffix) ->
+            konst platformTasks = listOf("libJvm" to "").flatMap { (module, platformSuffix) ->
                 sourceSets.map { sourceSet -> ":$module:compile${sourceSet}Kotlin$platformSuffix" }
             }
             assertTasksExecuted(commonTasks + platformTasks)
 
-            val expectedJvmMainClasses =
+            konst expectedJvmMainClasses =
                 listOf("PlatformClassB", "PlatformClassA", "JavaLibUseKt", "CommonClassB", "CommonClassA").map { "foo/$it" }
-            val jvmMainClassesDir = File(projectDir, kotlinClassesDir(subproject = "libJvm"))
+            konst jvmMainClassesDir = File(projectDir, kotlinClassesDir(subproject = "libJvm"))
             expectedJvmMainClasses.forEach { className ->
                 assertTrue(File(jvmMainClassesDir, className + ".class").isFile, "Class $className should be compiled for JVM.")
             }
 
-            val expectedJvmTestClasses = listOf("PlatformTestB", "PlatformTestA", "CommonTestB", "CommonTestA").map { "foo/$it" }
-            val jvmTestClassesDir = File(projectDir, kotlinClassesDir(subproject = "libJvm", sourceSet = "test"))
+            konst expectedJvmTestClasses = listOf("PlatformTestB", "PlatformTestA", "CommonTestB", "CommonTestA").map { "foo/$it" }
+            konst jvmTestClassesDir = File(projectDir, kotlinClassesDir(subproject = "libJvm", sourceSet = "test"))
             expectedJvmTestClasses.forEach { className ->
                 assertTrue(File(jvmTestClassesDir, className + ".class").isFile, "Class $className should be compiled for JVM.")
             }
@@ -202,7 +202,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
     fun testFreeCompilerArgsAssignment(): Unit = with(Project("multiplatformProject")) {
         setupWorkingDir()
 
-        val overrideCompilerArgs = "kotlinOptions.freeCompilerArgs = ['-verbose']"
+        konst overrideCompilerArgs = "kotlinOptions.freeCompilerArgs = ['-verbose']"
 
         gradleBuildScript("lib").appendText("\ncompileKotlinCommon.$overrideCompilerArgs")
         gradleBuildScript("libJvm").appendText("\ncompileKotlin.$overrideCompilerArgs")
@@ -240,7 +240,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
     fun testArchivesBaseNameAsCommonModuleName() = with(Project("multiplatformProject")) {
         setupWorkingDir()
 
-        val moduleName = "my_module_name"
+        konst moduleName = "my_module_name"
 
         gradleBuildScript("lib").appendText("\narchivesBaseName = '$moduleName'")
 
@@ -253,11 +253,11 @@ class MultiplatformGradleIT : BaseGradleIT() {
     @Test
     fun testKt23092() = with(Project("multiplatformProject")) {
         setupWorkingDir()
-        val successMarker = "Found JavaCompile task:"
+        konst successMarker = "Found JavaCompile task:"
 
         gradleBuildScript("lib").appendText(
             "\n" + """
-            afterEvaluate {
+            afterEkonstuate {
                 println('$successMarker ' + tasks.getByName('compileJava').path)
                 println('$successMarker ' + tasks.getByName('compileTestJava').path)
             }
@@ -275,8 +275,8 @@ class MultiplatformGradleIT : BaseGradleIT() {
     fun testCustomSourceSets() = with(Project("multiplatformProject")) {
         setupWorkingDir()
 
-        val sourceSetName = "foo"
-        val sourceSetDeclaration = "\nsourceSets { $sourceSetName { } }"
+        konst sourceSetName = "foo"
+        konst sourceSetDeclaration = "\nsourceSets { $sourceSetName { } }"
 
         listOf("lib", "libJvm").forEach { module ->
             gradleBuildScript(module).appendText(sourceSetDeclaration)
@@ -292,7 +292,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
             }
         }
 
-        val customSourceSetCompileTasks = listOf(":lib" to "Common", ":libJvm" to "")
+        konst customSourceSetCompileTasks = listOf(":lib" to "Common", ":libJvm" to "")
             .map { (module, platform) -> "$module:compile${sourceSetName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}Kotlin$platform" }
 
         build(*customSourceSetCompileTasks.toTypedArray()) {
@@ -323,7 +323,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
                 }
         }
 
-        val resDir = projectDir.resolve("src/jvmMain/resources").also { it.mkdirs() }
+        konst resDir = projectDir.resolve("src/jvmMain/resources").also { it.mkdirs() }
         resDir.resolve("test.properties").writeText(
             """
             one=true
@@ -351,7 +351,7 @@ class MultiplatformGradleIT : BaseGradleIT() {
             projectName = "kt-35942-android"
         )
     ) {
-        val currentGradleVersion = chooseWrapperVersionOrFinishTest()
+        konst currentGradleVersion = chooseWrapperVersionOrFinishTest()
         build(
             ":lib1:compileDebugUnitTestKotlin",
             options = defaultBuildOptions().copy(

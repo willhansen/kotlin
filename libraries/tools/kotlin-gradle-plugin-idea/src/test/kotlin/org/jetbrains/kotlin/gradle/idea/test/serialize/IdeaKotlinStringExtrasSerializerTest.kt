@@ -13,8 +13,8 @@ import kotlin.test.assertEquals
 
 class IdeaKotlinStringExtrasSerializerTest {
     @Test
-    fun `test - values`() {
-        val context = TestIdeaKotlinSerializationContext()
+    fun `test - konstues`() {
+        konst context = TestIdeaKotlinSerializationContext()
         assertEquals("Sunny", deserialize(context, serialize(context, "Sunny")))
         assertEquals("☀️", deserialize(context, serialize(context, "☀️")))
     }

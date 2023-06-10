@@ -29,11 +29,11 @@ import java.util.*
  * TODO expose Kotlin-specific API to the users, convert the user attributes to Gradle attributes internally
  */
 class HierarchyAttributeContainer(
-    val parent: AttributeContainer?,
-    val filterParentAttributes: (Attribute<*>) -> Boolean = { true }
+    konst parent: AttributeContainer?,
+    konst filterParentAttributes: (Attribute<*>) -> Boolean = { true }
 ) : AttributeContainer {
-    private val attributesMap = Collections.synchronizedMap(mutableMapOf<Attribute<*>, Any>())
-    private val lazyAttributesMap = Collections.synchronizedMap(mutableMapOf<Attribute<*>, Provider<out Any>>())
+    private konst attributesMap = Collections.synchronizedMap(mutableMapOf<Attribute<*>, Any>())
+    private konst lazyAttributesMap = Collections.synchronizedMap(mutableMapOf<Attribute<*>, Provider<out Any>>())
 
     private fun getFilteredParentAttribute(key: Attribute<*>) =
         if (parent != null && filterParentAttributes(key)) parent.getAttribute(key) else null
@@ -56,8 +56,8 @@ class HierarchyAttributeContainer(
             attributesMap.keys +
             parent?.keySet().orEmpty().filter(filterParentAttributes)
 
-    override fun <T : Any> attribute(key: Attribute<T>, value: T): AttributeContainer {
-        val checkedValue = requireNotNull(value as Any?) { "null values for attributes are not supported" }
+    override fun <T : Any> attribute(key: Attribute<T>, konstue: T): AttributeContainer {
+        konst checkedValue = requireNotNull(konstue as Any?) { "null konstues for attributes are not supported" }
         attributesMap[key] = checkedValue
         lazyAttributesMap.remove(key)
         return this

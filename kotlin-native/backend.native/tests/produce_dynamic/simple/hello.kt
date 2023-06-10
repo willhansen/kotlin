@@ -46,7 +46,7 @@ fun topLevelFunctionVoid(x1: Int, x2: Int?, x3: Unit?, pointer: COpaquePointer?)
 }
 
 // Enum.
-enum class Enum(val code: Int) {
+enum class Enum(konst code: Int) {
     ONE(1),
     TWO(2),
     HUNDRED(100)
@@ -68,7 +68,7 @@ interface Codeable {
     fun asCode(): Int
 }
 
-val an_object = object : Codeable {
+konst an_object = object : Codeable {
     override fun asCode() = 42
 }
 
@@ -80,12 +80,12 @@ class Child : Base() {
     override fun fooParam(arg0: String, arg1: Int, arg2: String?) =
             println("Child.fooParam: $arg0 $arg1 ${arg2 ?: "null"}")
 
-    val roProperty: Int
+    konst roProperty: Int
         get() = 42
 
     var rwProperty: Int = 0
         get() = field
-        set(value) { field = value + 1 }
+        set(konstue) { field = konstue + 1 }
 }
 
 // Interface.
@@ -106,14 +106,14 @@ class Impl2 : Impl1() {
     }
 }
 
-inline class IC1(val value: Int)
-inline class IC2(val value: String)
-inline class IC3(val value: Base?)
+inline class IC1(konst konstue: Int)
+inline class IC2(konst konstue: String)
+inline class IC3(konst konstue: Base?)
 
 fun useInlineClasses(ic1: IC1, ic2: IC2, ic3: IC3) {
-    assert(ic1.value == 42)
-    assert(ic2.value == "bar")
-    assert(ic3.value is Base)
+    assert(ic1.konstue == 42)
+    assert(ic2.konstue == "bar")
+    assert(ic3.konstue is Base)
 }
 
 fun testNullableWithNulls(arg1: Int?, arg2: Unit?) {

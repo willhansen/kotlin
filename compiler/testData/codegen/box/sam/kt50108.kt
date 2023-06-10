@@ -6,20 +6,20 @@ fun interface IFoo {
 }
 
 abstract class Base {
-    abstract val fn: () -> String
+    abstract konst fn: () -> String
 
     init {
         // This should throw a NPE, since the constructor of the IFoo
         // SAM wrapper expects a non-nullable function type.
         //
-        // In the JVM backend this expression evaluates to `null` instead,
-        // which isn't a valid result according to the type system.
+        // In the JVM backend this expression ekonstuates to `null` instead,
+        // which isn't a konstid result according to the type system.
         IFoo(fn)
     }
 }
 
 class Derived : Base() {
-    override val fn: () -> String = { "OK" }
+    override konst fn: () -> String = { "OK" }
 }
 
 fun box(): String {

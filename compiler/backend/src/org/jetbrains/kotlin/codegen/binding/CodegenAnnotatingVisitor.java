@@ -374,7 +374,7 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
         FunctionDescriptor functionDescriptor = (FunctionDescriptor) resultingDescriptor;
 
         // Callable reference is adapted if:
-        // - adapter arguments mapping is present in value arguments of corresponding resolved call;
+        // - adapter arguments mapping is present in konstue arguments of corresponding resolved call;
         // - return type is not Unit, and expected return type is Unit.
 
         if (!resolvedCall.getValueArguments().isEmpty()) return true;
@@ -398,7 +398,7 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
         ReceiverValue extensionReceiver = referencedFunction.getExtensionReceiver();
         ReceiverValue dispatchReceiver = referencedFunction.getDispatchReceiver();
 
-        // TransientReceiver corresponds to an unbound reference, other receiver values -- to bound references
+        // TransientReceiver corresponds to an unbound reference, other receiver konstues -- to bound references
         KotlinType receiverType =
                 dispatchReceiver != null && !(dispatchReceiver instanceof TransientReceiver) ? dispatchReceiver.getType() :
                 extensionReceiver != null && !(extensionReceiver instanceof TransientReceiver) ? extensionReceiver.getType() :
@@ -763,14 +763,14 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
         FunctionDescriptor original = SamCodegenUtil.getOriginalIfSamAdapter((FunctionDescriptor) descriptor);
         if (original == null) return;
 
-        // TODO we can just record SAM_VALUE on relevant value arguments as we do in recordSamValuesForNewInference
-        List<ValueParameterDescriptor> valueParametersWithSAMConversion = new SmartList<>();
-        for (ValueParameterDescriptor valueParameter : original.getValueParameters()) {
-            ValueParameterDescriptor adaptedParameter = descriptor.getValueParameters().get(valueParameter.getIndex());
-            if (KotlinTypeChecker.DEFAULT.equalTypes(adaptedParameter.getType(), valueParameter.getType())) continue;
-            valueParametersWithSAMConversion.add(valueParameter);
+        // TODO we can just record SAM_VALUE on relevant konstue arguments as we do in recordSamValuesForNewInference
+        List<ValueParameterDescriptor> konstueParametersWithSAMConversion = new SmartList<>();
+        for (ValueParameterDescriptor konstueParameter : original.getValueParameters()) {
+            ValueParameterDescriptor adaptedParameter = descriptor.getValueParameters().get(konstueParameter.getIndex());
+            if (KotlinTypeChecker.DEFAULT.equalTypes(adaptedParameter.getType(), konstueParameter.getType())) continue;
+            konstueParametersWithSAMConversion.add(konstueParameter);
         }
-        writeSamValueForValueParameters(valueParametersWithSAMConversion, call.getValueArgumentsByIndex());
+        writeSamValueForValueParameters(konstueParametersWithSAMConversion, call.getValueArgumentsByIndex());
     }
 
     private void recordSamValuesForNewInference(@NotNull ResolvedCall<?> call) {
@@ -778,18 +778,18 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
         if (!(newResolvedCall instanceof NewResolvedCallImpl<?>)) return;
 
         Map<ValueParameterDescriptor, ResolvedValueArgument> arguments = newResolvedCall.getValueArguments();
-        for (ValueParameterDescriptor valueParameter : arguments.keySet()) {
-            ResolvedValueArgument argument = arguments.get(valueParameter);
+        for (ValueParameterDescriptor konstueParameter : arguments.keySet()) {
+            ResolvedValueArgument argument = arguments.get(konstueParameter);
             if (argument instanceof ExpressionValueArgument) {
-                ValueArgument valueArgument = ((ExpressionValueArgument) argument).getValueArgument();
-                if (valueArgument != null && ((NewResolvedCallImpl<?>)newResolvedCall).getExpectedTypeForSamConvertedArgument(valueArgument) != null) {
-                    recordSamTypeOnArgumentExpression(valueParameter, valueArgument);
+                ValueArgument konstueArgument = ((ExpressionValueArgument) argument).getValueArgument();
+                if (konstueArgument != null && ((NewResolvedCallImpl<?>)newResolvedCall).getExpectedTypeForSamConvertedArgument(konstueArgument) != null) {
+                    recordSamTypeOnArgumentExpression(konstueParameter, konstueArgument);
                 }
             } else if (argument instanceof VarargValueArgument) {
                 VarargValueArgument varargValueArgument = (VarargValueArgument) argument;
-                for (ValueArgument valueArgument : varargValueArgument.getArguments()) {
-                    if (valueArgument != null && ((NewResolvedCallImpl<?>)newResolvedCall).getExpectedTypeForSamConvertedArgument(valueArgument) != null) {
-                        recordSamTypeOnArgumentExpression(valueParameter, valueArgument);
+                for (ValueArgument konstueArgument : varargValueArgument.getArguments()) {
+                    if (konstueArgument != null && ((NewResolvedCallImpl<?>)newResolvedCall).getExpectedTypeForSamConvertedArgument(konstueArgument) != null) {
+                        recordSamTypeOnArgumentExpression(konstueParameter, konstueArgument);
                     }
                 }
             }
@@ -816,41 +816,41 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
     }
 
     @Nullable
-    private SamType createSamTypeByValueParameter(ValueParameterDescriptor valueParameterDescriptor) {
-        KotlinType kotlinSamType = samTypeApproximator.getSamTypeForValueParameter(valueParameterDescriptor, false);
+    private SamType createSamTypeByValueParameter(ValueParameterDescriptor konstueParameterDescriptor) {
+        KotlinType kotlinSamType = samTypeApproximator.getSamTypeForValueParameter(konstueParameterDescriptor, false);
         if (kotlinSamType == null) return null;
         if (!JavaSingleAbstractMethodUtils.isSamType(kotlinSamType)) return null;
         return new SamType(kotlinSamType);
     }
 
     private void writeSamValueForValueParameters(
-            @NotNull Collection<ValueParameterDescriptor> valueParametersWithSAMConversion,
-            @Nullable List<ResolvedValueArgument> valueArguments
+            @NotNull Collection<ValueParameterDescriptor> konstueParametersWithSAMConversion,
+            @Nullable List<ResolvedValueArgument> konstueArguments
     ) {
-        if (valueArguments == null) return;
+        if (konstueArguments == null) return;
 
-        for (ValueParameterDescriptor valueParameter : valueParametersWithSAMConversion) {
-            SamType samType = createSamTypeByValueParameter(valueParameter);
+        for (ValueParameterDescriptor konstueParameter : konstueParametersWithSAMConversion) {
+            SamType samType = createSamTypeByValueParameter(konstueParameter);
             if (samType == null) continue;
 
-            ResolvedValueArgument resolvedValueArgument = valueArguments.get(valueParameter.getIndex());
+            ResolvedValueArgument resolvedValueArgument = konstueArguments.get(konstueParameter.getIndex());
             assert resolvedValueArgument instanceof ExpressionValueArgument : resolvedValueArgument;
-            ValueArgument valueArgument = ((ExpressionValueArgument) resolvedValueArgument).getValueArgument();
-            assert valueArgument != null;
-            recordSamTypeOnArgumentExpression(samType, valueArgument);
+            ValueArgument konstueArgument = ((ExpressionValueArgument) resolvedValueArgument).getValueArgument();
+            assert konstueArgument != null;
+            recordSamTypeOnArgumentExpression(samType, konstueArgument);
         }
     }
 
-    private void recordSamTypeOnArgumentExpression(ValueParameterDescriptor valueParameter, ValueArgument valueArgument) {
-        SamType samType = createSamTypeByValueParameter(valueParameter);
+    private void recordSamTypeOnArgumentExpression(ValueParameterDescriptor konstueParameter, ValueArgument konstueArgument) {
+        SamType samType = createSamTypeByValueParameter(konstueParameter);
         if (samType == null) return;
 
-        recordSamTypeOnArgumentExpression(samType, valueArgument);
+        recordSamTypeOnArgumentExpression(samType, konstueArgument);
     }
 
-    private void recordSamTypeOnArgumentExpression(SamType samType, ValueArgument valueArgument) {
-        KtExpression argumentExpression = valueArgument.getArgumentExpression();
-        assert argumentExpression != null : valueArgument.asElement().getText();
+    private void recordSamTypeOnArgumentExpression(SamType samType, ValueArgument konstueArgument) {
+        KtExpression argumentExpression = konstueArgument.getArgumentExpression();
+        assert argumentExpression != null : konstueArgument.asElement().getText();
 
         bindingTrace.record(CodegenBinding.SAM_VALUE, argumentExpression, samType);
     }
@@ -912,12 +912,12 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
         CallableDescriptor callableDescriptor = call.getResultingDescriptor();
         if (!(callableDescriptor.getOriginal() instanceof SamConstructorDescriptor)) return;
 
-        List<ResolvedValueArgument> valueArguments = call.getValueArgumentsByIndex();
-        if (valueArguments == null || valueArguments.size() != 1) return;
+        List<ResolvedValueArgument> konstueArguments = call.getValueArgumentsByIndex();
+        if (konstueArguments == null || konstueArguments.size() != 1) return;
 
-        ResolvedValueArgument valueArgument = valueArguments.get(0);
-        if (!(valueArgument instanceof ExpressionValueArgument)) return;
-        ValueArgument argument = ((ExpressionValueArgument) valueArgument).getValueArgument();
+        ResolvedValueArgument konstueArgument = konstueArguments.get(0);
+        if (!(konstueArgument instanceof ExpressionValueArgument)) return;
+        ValueArgument argument = ((ExpressionValueArgument) konstueArgument).getValueArgument();
         if (argument == null) return;
 
         KtExpression argumentExpression = argument.getArgumentExpression();
@@ -968,11 +968,11 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
 
         List<KtExpression> indexExpressions = expression.getIndexExpressions();
         List<ValueParameterDescriptor> parameters = original.getValueParameters();
-        for (ValueParameterDescriptor valueParameter : parameters) {
-            SamType samType = createSamTypeByValueParameter(valueParameter);
+        for (ValueParameterDescriptor konstueParameter : parameters) {
+            SamType samType = createSamTypeByValueParameter(konstueParameter);
             if (samType == null) continue;
 
-            if (isSetter && valueParameter.getIndex() == parameters.size() - 1) {
+            if (isSetter && konstueParameter.getIndex() == parameters.size() - 1) {
                 PsiElement parent = expression.getParent();
                 if (parent instanceof KtBinaryExpression && ((KtBinaryExpression) parent).getOperationToken() == EQ) {
                     KtExpression right = ((KtBinaryExpression) parent).getRight();
@@ -980,7 +980,7 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
                 }
             }
             else {
-                KtExpression indexExpression = indexExpressions.get(valueParameter.getIndex());
+                KtExpression indexExpression = indexExpressions.get(konstueParameter.getIndex());
                 bindingTrace.record(CodegenBinding.SAM_VALUE, indexExpression, samType);
             }
         }
@@ -1002,10 +1002,10 @@ class CodegenAnnotatingVisitor extends KtVisitorVoid {
 
         int fieldNumber = mappings.size();
 
-        assert expression.getSubjectExpression() != null : "subject expression should be not null in a valid when by enums";
+        assert expression.getSubjectExpression() != null : "subject expression should be not null in a konstid when by enums";
 
         KotlinType type = WhenChecker.whenSubjectType(expression, bindingContext);
-        assert type != null : "should not be null in a valid when by enums";
+        assert type != null : "should not be null in a konstid when by enums";
 
         ClassDescriptor classDescriptor = (ClassDescriptor) type.getConstructor().getDeclarationDescriptor();
         assert classDescriptor != null : "because it's enum";

@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.ir.interpreter.CallInterceptor
 import org.jetbrains.kotlin.ir.interpreter.proxy.reflection.KTypeProxy
 import kotlin.reflect.KType
 
-internal class KTypeParameterState(val irTypeParameter: IrTypeParameter, override val irClass: IrClass) : ReflectionState() {
+internal class KTypeParameterState(konst irTypeParameter: IrTypeParameter, override konst irClass: IrClass) : ReflectionState() {
     private var _upperBounds: List<KType>? = null
 
     fun getUpperBounds(callInterceptor: CallInterceptor): List<KType> {
         if (_upperBounds != null) return _upperBounds!!
-        val kTypeIrClass = callInterceptor.environment.kTypeClass.owner
+        konst kTypeIrClass = callInterceptor.environment.kTypeClass.owner
         _upperBounds = irTypeParameter.superTypes.map { KTypeProxy(KTypeState(it, kTypeIrClass), callInterceptor) }
         return _upperBounds!!
     }

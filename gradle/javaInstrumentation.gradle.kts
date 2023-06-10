@@ -4,21 +4,21 @@
  */
 
 allprojects {
-    afterEvaluate {
+    afterEkonstuate {
         configureJavaInstrumentation()
     }
 }
 
 // Hide window of instrumentation tasks
-val headlessOldValue: String? = System.setProperty("java.awt.headless", "true")
-logger.info("Setting java.awt.headless=true, old value was $headlessOldValue")
+konst headlessOldValue: String? = System.setProperty("java.awt.headless", "true")
+logger.info("Setting java.awt.headless=true, old konstue was $headlessOldValue")
 
 /**
  *  Configures instrumentation for all JavaCompile tasks in project
  */
 fun Project.configureJavaInstrumentation() {
     if (plugins.hasPlugin("org.gradle.java")) {
-        val javaInstrumentator by configurations.creating
+        konst javaInstrumentator by configurations.creating
         dependencies {
             javaInstrumentator("com.jetbrains.intellij.java:java-compiler-ant-tasks:${rootProject.extra["versions.intellijSdk"]}")
         }

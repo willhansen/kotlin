@@ -24,8 +24,8 @@ object MissingBuiltInDeclarationChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (context.languageVersionSettings.getFlag(JvmAnalysisFlags.suppressMissingBuiltinsError)) return
 
-        val descriptor = resolvedCall.resultingDescriptor
-        val error = diagnosticFor(descriptor, reportOn)
+        konst descriptor = resolvedCall.resultingDescriptor
+        konst error = diagnosticFor(descriptor, reportOn)
             ?: diagnosticFor(descriptor.returnType?.takeUnless(this::isComputingDeferredType)?.constructor?.declarationDescriptor, reportOn)
         error?.let(context.trace::report)
     }
@@ -33,10 +33,10 @@ object MissingBuiltInDeclarationChecker : CallChecker {
     private fun diagnosticFor(descriptor: DeclarationDescriptor?, reportOn: PsiElement): Diagnostic? {
         if (descriptor == null) return null
 
-        val containingClassOrPackage = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java)
+        konst containingClassOrPackage = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java)
 
         if (containingClassOrPackage is ClassDescriptor) {
-            val containingPackage = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java)
+            konst containingPackage = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java)
             if ((containingPackage as? BuiltInsPackageFragment)?.isFallback == true) {
                 return Errors.MISSING_BUILT_IN_DECLARATION.on(reportOn, containingClassOrPackage.fqNameSafe)
             }

@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.error.ErrorType
 
 internal class KtFe10ClassErrorType(
-    override val fe10Type: ErrorType,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: ErrorType,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtClassErrorType(), KtFe10Type {
     init {
         check(fe10Type.kind.isUnresolved) {
@@ -27,7 +27,7 @@ internal class KtFe10ClassErrorType(
         }
     }
 
-    override val qualifiers: List<KtClassTypeQualifier.KtUnresolvedClassTypeQualifier>
+    override konst qualifiers: List<KtClassTypeQualifier.KtUnresolvedClassTypeQualifier>
         get() = withValidityAssertion {
             fe10Type.formatParams.first().split('.').map {
                 KtClassTypeQualifier.KtUnresolvedClassTypeQualifier(Name.guessByFirstCharacter(it), emptyList(), token)
@@ -36,12 +36,12 @@ internal class KtFe10ClassErrorType(
 
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val errorMessage: String
+    override konst errorMessage: String
         get() = withValidityAssertion { fe10Type.debugMessage }
 
-    override val candidateClassSymbols: Collection<KtClassLikeSymbol>
+    override konst candidateClassSymbols: Collection<KtClassLikeSymbol>
         get() = withValidityAssertion { emptyList() }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 }

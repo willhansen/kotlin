@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.fir.lightTree.fir.modifier
 import com.intellij.psi.tree.IElementType
 import org.jetbrains.kotlin.lexer.KtTokens
 
-enum class ModifierFlag(val value: Long) {
+enum class ModifierFlag(konst konstue: Long) {
     NONE(0L),
     CLASS_ENUM(1L shl 0),
     CLASS_ANNOTATION(1L shl 1),
@@ -49,8 +49,8 @@ enum class ModifierFlag(val value: Long) {
     REIFICATION_REIFIED(1L shl 36);
 
     companion object {
-        val Values = values()
-        val ElementTypeToModifierFlagMap: Map<IElementType, ModifierFlag> = mutableMapOf(
+        konst Values = konstues()
+        konst ElementTypeToModifierFlagMap: Map<IElementType, ModifierFlag> = mutableMapOf(
             // Class
             KtTokens.ENUM_KEYWORD to CLASS_ENUM,
             KtTokens.ANNOTATION_KEYWORD to CLASS_ANNOTATION,

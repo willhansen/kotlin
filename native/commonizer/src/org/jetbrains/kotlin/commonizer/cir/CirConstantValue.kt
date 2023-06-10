@@ -7,39 +7,39 @@ package org.jetbrains.kotlin.commonizer.cir
 
 sealed class CirConstantValue {
     sealed class LiteralValue<out T> : CirConstantValue() {
-        abstract val value: T
+        abstract konst konstue: T
     }
 
-    data class StringValue(override val value: String) : LiteralValue<String>()
-    data class CharValue(override val value: Char) : LiteralValue<Char>()
+    data class StringValue(override konst konstue: String) : LiteralValue<String>()
+    data class CharValue(override konst konstue: Char) : LiteralValue<Char>()
 
-    data class ByteValue(override val value: Byte) : LiteralValue<Byte>()
-    data class ShortValue(override val value: Short) : LiteralValue<Short>()
-    data class IntValue(override val value: Int) : LiteralValue<Int>()
-    data class LongValue(override val value: Long) : LiteralValue<Long>()
+    data class ByteValue(override konst konstue: Byte) : LiteralValue<Byte>()
+    data class ShortValue(override konst konstue: Short) : LiteralValue<Short>()
+    data class IntValue(override konst konstue: Int) : LiteralValue<Int>()
+    data class LongValue(override konst konstue: Long) : LiteralValue<Long>()
 
     // TODO: remove @ExperimentalUnsignedTypes once bootstrap stdlib has stable unsigned types.
     @ExperimentalUnsignedTypes
-    data class UByteValue(override val value: UByte) : LiteralValue<UByte>()
+    data class UByteValue(override konst konstue: UByte) : LiteralValue<UByte>()
 
     @ExperimentalUnsignedTypes
-    data class UShortValue(override val value: UShort) : LiteralValue<UShort>()
+    data class UShortValue(override konst konstue: UShort) : LiteralValue<UShort>()
 
     @ExperimentalUnsignedTypes
-    data class UIntValue(override val value: UInt) : LiteralValue<UInt>()
+    data class UIntValue(override konst konstue: UInt) : LiteralValue<UInt>()
 
     @ExperimentalUnsignedTypes
-    data class ULongValue(override val value: ULong) : LiteralValue<ULong>()
+    data class ULongValue(override konst konstue: ULong) : LiteralValue<ULong>()
 
-    data class FloatValue(override val value: Float) : LiteralValue<Float>()
-    data class DoubleValue(override val value: Double) : LiteralValue<Double>()
-    data class BooleanValue(override val value: Boolean) : LiteralValue<Boolean>()
+    data class FloatValue(override konst konstue: Float) : LiteralValue<Float>()
+    data class DoubleValue(override konst konstue: Double) : LiteralValue<Double>()
+    data class BooleanValue(override konst konstue: Boolean) : LiteralValue<Boolean>()
 
-    data class EnumValue(val enumClassId: CirEntityId, val enumEntryName: CirName) : CirConstantValue()
+    data class EnumValue(konst enumClassId: CirEntityId, konst enumEntryName: CirName) : CirConstantValue()
 
-    data class ArrayValue(val elements: List<CirConstantValue>) : CirConstantValue()
+    data class ArrayValue(konst elements: List<CirConstantValue>) : CirConstantValue()
 
     object NullValue : CirConstantValue() {
-        override fun toString() = "NullValue(value=null)"
+        override fun toString() = "NullValue(konstue=null)"
     }
 }

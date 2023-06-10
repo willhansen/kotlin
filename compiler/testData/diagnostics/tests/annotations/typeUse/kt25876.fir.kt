@@ -2,7 +2,7 @@
 // ISSUE: KT-25876
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 fun foo(x: String): @Anno(<!UNRESOLVED_REFERENCE!>Lorem<!>, <!TOO_MANY_ARGUMENTS!><!UNRESOLVED_REFERENCE!>ipsum<!>::class<!>, <!TOO_MANY_ARGUMENTS!>"dolor"<!>, <!TOO_MANY_ARGUMENTS!><!UNRESOLVED_REFERENCE!>sit<!>-<!UNRESOLVED_REFERENCE!>amet<!><!>) String {  // OK
     return x

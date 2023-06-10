@@ -7,8 +7,8 @@ class A() {
 
 
 fun box() : String {
-    val p = 1
-    val s = "${p}${2}${3}${4L}${5.0}${6F}${7}${A()}"
+    konst p = 1
+    konst s = "${p}${2}${3}${4L}${5.0}${6F}${7}${A()}"
 
     return "OK"
 }

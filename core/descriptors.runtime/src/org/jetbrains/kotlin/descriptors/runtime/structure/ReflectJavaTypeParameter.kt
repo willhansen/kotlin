@@ -22,23 +22,23 @@ import java.lang.reflect.AnnotatedElement
 import java.lang.reflect.TypeVariable
 
 class ReflectJavaTypeParameter(
-    val typeVariable: TypeVariable<*>
+    konst typeVariable: TypeVariable<*>
 ) : ReflectJavaElement(), JavaTypeParameter, ReflectJavaAnnotationOwner {
-    override val upperBounds: List<ReflectJavaClassifierType>
+    override konst upperBounds: List<ReflectJavaClassifierType>
         get() {
-            val bounds = typeVariable.bounds.map(::ReflectJavaClassifierType)
+            konst bounds = typeVariable.bounds.map(::ReflectJavaClassifierType)
             if (bounds.singleOrNull()?.reflectType == Any::class.java) return emptyList()
             return bounds
         }
 
-    override val isFromSource: Boolean get() = false
+    override konst isFromSource: Boolean get() = false
 
     @Suppress("USELESS_CAST")
-    override val element: AnnotatedElement?
+    override konst element: AnnotatedElement?
         // TypeVariable is AnnotatedElement only in JDK8
         get() = typeVariable as? AnnotatedElement
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(typeVariable.name)
 
     override fun equals(other: Any?) = other is ReflectJavaTypeParameter && typeVariable == other.typeVariable

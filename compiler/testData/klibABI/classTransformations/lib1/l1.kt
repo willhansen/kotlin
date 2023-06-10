@@ -121,17 +121,17 @@ class InnerClassContainer {
     }
 }
 
-annotation class AnnotationClassWithChangedParameterType(val x: Int)
-annotation class AnnotationClassThatBecomesRegularClass(val x: Int)
-annotation class AnnotationClassThatDisappears(val x: Int)
-annotation class AnnotationClassWithRenamedParameters(val i: Int, val s: String)
-annotation class AnnotationClassWithReorderedParameters(val i: Int, val s: String)
-annotation class AnnotationClassWithNewParameter(val i: Int)
+annotation class AnnotationClassWithChangedParameterType(konst x: Int)
+annotation class AnnotationClassThatBecomesRegularClass(konst x: Int)
+annotation class AnnotationClassThatDisappears(konst x: Int)
+annotation class AnnotationClassWithRenamedParameters(konst i: Int, konst s: String)
+annotation class AnnotationClassWithReorderedParameters(konst i: Int, konst s: String)
+annotation class AnnotationClassWithNewParameter(konst i: Int)
 
-value class ValueToClass(val x: Int)
-class ClassToValue(val x: Int)
+konstue class ValueToClass(konst x: Int)
+class ClassToValue(konst x: Int)
 
-data class DataToClass(val x: Int, val y: Int)
+data class DataToClass(konst x: Int, konst y: Int)
 
 class ClassToAbstractClass {
     var name: String = "Alice"
@@ -153,9 +153,9 @@ interface XFunction1 { /*fun function1(): Int*/ }
 interface XFunction1Default { /*fun function1(): Int = 42*/ }
 interface XFunction2 { /*fun function2(): Int*/ }
 interface XFunction2Default { /*fun function2(): Int = -42*/ }
-interface XProperty1 { /*val property1: Int*/ }
-interface XProperty1Default { /*val property1: Int get() = 42*/ }
-interface XProperty2 { /*val property2: Int*/ }
-interface XProperty2Default { /*val property2: Int get() = 42*/ }
+interface XProperty1 { /*konst property1: Int*/ }
+interface XProperty1Default { /*konst property1: Int get() = 42*/ }
+interface XProperty2 { /*konst property2: Int*/ }
+interface XProperty2Default { /*konst property2: Int get() = 42*/ }
 
 fun interface FunctionalInterfaceToInterface : XAnswer

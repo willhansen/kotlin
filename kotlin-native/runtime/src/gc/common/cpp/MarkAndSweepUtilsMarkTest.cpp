@@ -205,7 +205,7 @@ TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleCharArray) {
     EXPECT_MARKED(stats, array);
 }
 
-TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInvalidFields) {
+TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInkonstidFields) {
     Object object;
     object->field1 = nullptr;
 
@@ -214,7 +214,7 @@ TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInvalidFields) {
     EXPECT_MARKED(stats, object);
 }
 
-TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectArrayWithInvalidFields) {
+TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectArrayWithInkonstidFields) {
     ObjectArray array;
     array.elements()[0] = nullptr;
 
@@ -291,7 +291,7 @@ TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleCharArrayWithWeakReference) {
     EXPECT_MARKED(stats, array, weakReference);
 }
 
-TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInvalidFieldsWithWeakReference) {
+TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInkonstidFieldsWithWeakReference) {
     test_support::RegularWeakReferenceImpl weakReference;
     Object object;
     object->field1 = nullptr;
@@ -302,7 +302,7 @@ TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectWithInvalidFieldsWithWeakRefer
     EXPECT_MARKED(stats, object, weakReference);
 }
 
-TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectArrayWithInvalidFieldsWithWeakReference) {
+TEST_F(MarkAndSweepUtilsMarkTest, MarkSingleObjectArrayWithInkonstidFieldsWithWeakReference) {
     test_support::RegularWeakReferenceImpl weakReference;
     ObjectArray array;
     array.elements()[0] = nullptr;

@@ -22,17 +22,17 @@ internal fun IdeaSerializationContext(
 }
 
 private class IdeaKotlinSerializationContextImpl(
-    override val extrasSerializationExtension: IdeaKotlinExtrasSerializationExtension,
-    override val logger: IdeaKotlinSerializationLogger
+    override konst extrasSerializationExtension: IdeaKotlinExtrasSerializationExtension,
+    override konst logger: IdeaKotlinSerializationLogger
 ) : IdeaKotlinSerializationContext
 
 /* Simple composite implementation, reporting conflicting extensions */
 private class IdeaKpmCompositeExtrasSerializationExtension(
-    private val logger: Logger,
-    private val extensions: List<IdeaKotlinExtrasSerializationExtension>
+    private konst logger: Logger,
+    private konst extensions: List<IdeaKotlinExtrasSerializationExtension>
 ) : IdeaKotlinExtrasSerializationExtension {
     override fun <T : Any> serializer(key: Extras.Key<T>): IdeaKotlinExtrasSerializer<T>? {
-        val serializers = extensions.mapNotNull { it.serializer(key) }
+        konst serializers = extensions.mapNotNull { it.serializer(key) }
 
         if (serializers.size == 1) {
             return serializers.single()
@@ -49,10 +49,10 @@ private class IdeaKpmCompositeExtrasSerializationExtension(
 
 /* Simple Gradle logger based implementation */
 private class IdeaKpmSerializationLoggerImpl(
-    private val logger: Logger,
+    private konst logger: Logger,
 ) : IdeaKotlinSerializationLogger {
     override fun report(severity: IdeaKotlinSerializationLogger.Severity, message: String, cause: Throwable?) {
-        val text = "[KPM] Serialization: $message"
+        konst text = "[KPM] Serialization: $message"
         when (severity) {
             IdeaKotlinSerializationLogger.Severity.WARNING -> logger.warn(text, cause)
             IdeaKotlinSerializationLogger.Severity.ERROR -> logger.error(text, cause)

@@ -25,14 +25,14 @@ external class A {
 
 external class B {
     <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-    val foo: Int = definedExternally
+    konst foo: Int = definedExternally
 
     <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
     object Obj1 {}
 
     companion object {
         <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-        val foo: Int = definedExternally
+        konst foo: Int = definedExternally
 
         <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
         object Obj2 {}

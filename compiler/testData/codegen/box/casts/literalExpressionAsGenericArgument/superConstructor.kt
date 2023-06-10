@@ -1,7 +1,7 @@
-open class Base<T>(val value: T)
+open class Base<T>(konst konstue: T)
 class Box(): Base<Long>(-1)
 
 fun box(): String {
-    val expected: Long? = -1L
-    return if (Box().value == expected) "OK" else "fail"
+    konst expected: Long? = -1L
+    return if (Box().konstue == expected) "OK" else "fail"
 }

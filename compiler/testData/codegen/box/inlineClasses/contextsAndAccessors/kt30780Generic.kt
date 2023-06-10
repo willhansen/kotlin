@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Test<T: Int>(val x: T) {
+konstue class Test<T: Int>(konst x: T) {
     private companion object {
-        private const val CONSTANT = "OK"
+        private const konst CONSTANT = "OK"
     }
 
     fun crash() = getInlineConstant()

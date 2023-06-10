@@ -4,4 +4,4 @@ fun a() {
 
 }
 
-val a = ""
+konst a = ""

@@ -3,16 +3,16 @@
 
 fun box() {
     foo({
-            val a = 1
+            konst a = 1
         })
 
     foo() {
-        val a = 1
+        konst a = 1
     }
 }
 
 inline fun foo(f: () -> Unit) {
-    val a = 1
+    konst a = 1
     f()
 }
 

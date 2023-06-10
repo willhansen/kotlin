@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
  */
 internal object DumpedTestListing {
     fun parse(listing: String): Collection<TestName> {
-        val lines = listing.lines()
+        konst lines = listing.lines()
         var emptyLineEncountered = false
 
         return lines.mapIndexedNotNull { index: Int, line: String ->
@@ -36,14 +36,14 @@ internal object DumpedTestListing {
                 emptyLineEncountered -> parseError("Unexpected empty line")
 
                 else -> {
-                    val (packageAndClass, functionName) = line.trim()
+                    konst (packageAndClass, functionName) = line.trim()
                         .split(':')
                         .takeIf { items -> items.size == 2 && items.none(String::isBlank) }
                         ?: parseError("Malformed test name")
 
                     with(packageAndClass.split('/')) {
-                        val classNames = last().split('.')
-                        val packageSegments = dropLast(1)
+                        konst classNames = last().split('.')
+                        konst packageSegments = dropLast(1)
                         TestName(packageSegments, classNames, functionName)
                     }
                 }
@@ -67,7 +67,7 @@ internal object GTestListing {
     fun parse(listing: String): Collection<TestName> = buildList {
         var state: ParseState = ParseState.Begin
 
-        val lines = listing.lines()
+        konst lines = listing.lines()
         lines.forEachIndexed { index, line ->
             fun parseError(message: String): Nothing = parseError(message, index, line, listing)
 
@@ -80,7 +80,7 @@ internal object GTestListing {
                 line[0].isWhitespace() -> when (state) {
                     is ParseState.NewTestSuite,
                     is ParseState.NewTest -> {
-                        val testSuite = state.testSuite
+                        konst testSuite = state.testSuite
                         this += TestName(testSuite.testSuiteNameWithDotSuffix + line.trim())
                         ParseState.NewTest(testSuite)
                     }
@@ -103,15 +103,15 @@ internal object GTestListing {
         object Begin : ParseState
         object End : ParseState
 
-        class NewTestSuite(val testSuiteNameWithDotSuffix: String) : ParseState
-        class NewTest(val testSuite: NewTestSuite) : ParseState
+        class NewTestSuite(konst testSuiteNameWithDotSuffix: String) : ParseState
+        class NewTest(konst testSuite: NewTestSuite) : ParseState
     }
 
-    private inline val ParseState.testSuite: ParseState.NewTestSuite
+    private inline konst ParseState.testSuite: ParseState.NewTestSuite
         get() = this as? ParseState.NewTestSuite ?: (this as ParseState.NewTest).testSuite
 
     // The very first line of stdlib test output may contain seed of Random. Such line should be ignored.
-    private const val STDLIB_TESTS_IGNORED_LINE_PREFIX = "Seed: "
+    private const konst STDLIB_TESTS_IGNORED_LINE_PREFIX = "Seed: "
 }
 
 private fun parseError(message: String, index: Int, line: String, listing: String): Nothing = fail {

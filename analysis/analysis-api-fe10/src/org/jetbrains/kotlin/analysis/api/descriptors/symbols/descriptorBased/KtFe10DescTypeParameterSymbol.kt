@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.types.typeUtil.isNullableAny
 
 internal class KtFe10DescTypeParameterSymbol(
-    override val descriptor: TypeParameterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: TypeParameterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtTypeParameterSymbol(), KtFe10DescSymbol<TypeParameterDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val upperBounds: List<KtType>
+    override konst upperBounds: List<KtType>
         get() = withValidityAssertion { descriptor.upperBounds.filterNot { it.isNullableAny() }.map { it.toKtType(analysisContext) } }
 
-    override val variance: Variance
+    override konst variance: Variance
         get() = withValidityAssertion { descriptor.variance }
 
-    override val isReified: Boolean
+    override konst isReified: Boolean
         get() = withValidityAssertion { descriptor.isReified }
 
     context(KtAnalysisSession)

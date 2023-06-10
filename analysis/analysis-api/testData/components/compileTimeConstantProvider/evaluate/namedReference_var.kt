@@ -3,6 +3,6 @@ class Test {
 }
 
 fun box() {
-    val t = Test()
+    konst t = Test()
     t.<expr>bar</expr>
 }

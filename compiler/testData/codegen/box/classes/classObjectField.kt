@@ -1,7 +1,7 @@
 class A() {
     companion object {
-        val value = 10
+        konst konstue = 10
     }
 }
 
-fun box() = if (A.value == 10) "OK" else "Fail ${A.value}"
+fun box() = if (A.konstue == 10) "OK" else "Fail ${A.konstue}"

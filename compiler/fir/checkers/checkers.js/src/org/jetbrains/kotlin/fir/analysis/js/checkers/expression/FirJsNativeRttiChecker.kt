@@ -25,7 +25,7 @@ object FirJsNativeRttiChecker : FirBasicExpressionChecker() {
     }
 
     private fun checkGetClassCall(expression: FirGetClassCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val declarationToCheck = expression.argument.typeRef.toRegularClassSymbol(context.session) ?: return
+        konst declarationToCheck = expression.argument.typeRef.toRegularClassSymbol(context.session) ?: return
 
         if (expression.arguments.firstOrNull() !is FirResolvedQualifier) {
             return
@@ -37,8 +37,8 @@ object FirJsNativeRttiChecker : FirBasicExpressionChecker() {
     }
 
     private fun checkTypeOperatorCall(expression: FirTypeOperatorCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val targetTypeRef = expression.conversionTypeRef
-        val declarationToCheck = targetTypeRef.toRegularClassSymbol(context.session) ?: return
+        konst targetTypeRef = expression.conversionTypeRef
+        konst declarationToCheck = targetTypeRef.toRegularClassSymbol(context.session) ?: return
 
         if (!declarationToCheck.isNativeInterface(context)) {
             return

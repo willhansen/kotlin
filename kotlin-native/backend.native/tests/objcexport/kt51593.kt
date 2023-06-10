@@ -5,15 +5,15 @@
 @file:MyCustomFileAspect(type = "kt")
 
 @Target(AnnotationTarget.FILE)
-annotation class MyCustomFileAspect(val type: String = "kt")
+annotation class MyCustomFileAspect(konst type: String = "kt")
 
 annotation class NoDoc
 @MustBeDocumented
 annotation class Foo
 @MustBeDocumented
 annotation class BugReport(
-        val assignedTo: String = "[none]",
-        val status: String = "open"
+        konst assignedTo: String = "[none]",
+        konst status: String = "open"
 )
 
 @NoDoc
@@ -43,12 +43,12 @@ class Bar {
      */
     @Foo
     @BugReport(assignedTo = "me", status = "open")
-    val greeting: String
+    konst greeting: String
         get() {
             return "Hello World!"
         }
 
     // Not a kDoc-formatted comment
-    protected val farewell: String
+    protected konst farewell: String
         get() { return "Bye bye!" }
 }

@@ -4,7 +4,7 @@ fun box() = foo()
 
 // FILE: 2.kt
 
-private val a = "OK"
+private konst a = "OK"
 fun foo() : String {
   return "${a}"
 }

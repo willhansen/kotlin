@@ -19,21 +19,21 @@ class KT58427ResolveJSCompilerArguments {
     @Suppress("DEPRECATION_ERROR")
     @Test
     fun `test - resolve js compiler arguments with CompilerArgumentsAware`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.repositories.mavenLocal()
         project.repositories.mavenCentralCacheRedirector()
-        val kotlin = project.multiplatformExtension
-        val js = kotlin.js(KotlinJsCompilerType.IR) { nodejs() }
+        konst kotlin = project.multiplatformExtension
+        konst js = kotlin.js(KotlinJsCompilerType.IR) { nodejs() }
 
         kotlin.sourceSets.all { sourceSet ->
             sourceSet.languageSettings.languageVersion = "1.7"
             sourceSet.languageSettings.apiVersion = "1.6"
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val jsCompileTask = js.compilations.main.compileTaskProvider.get()
-        val args = jsCompileTask.createCompilerArgs()
+        konst jsCompileTask = js.compilations.main.compileTaskProvider.get()
+        konst args = jsCompileTask.createCompilerArgs()
 
         /*
         Regression: Compiler Arguments used RegularImmutableList for freeArgs, so the 'copyBeanTo' function failed copying the list.

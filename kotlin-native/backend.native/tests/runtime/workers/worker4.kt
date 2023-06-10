@@ -12,7 +12,7 @@ import kotlin.concurrent.AtomicInt
 
 @Test fun runTest1() {
     withWorker {
-        val future = execute(TransferMode.SAFE, { 41 }) { input ->
+        konst future = execute(TransferMode.SAFE, { 41 }) { input ->
             input + 1
         }
         future.consume { result ->
@@ -24,17 +24,17 @@ import kotlin.concurrent.AtomicInt
 
 @Test fun runTest2() {
     withWorker {
-        val counter = AtomicInt(0)
+        konst counter = AtomicInt(0)
 
         executeAfter(0, {
             assertTrue(Worker.current.park(10_000_000, false))
-            assertEquals(counter.value, 0)
+            assertEquals(counter.konstue, 0)
             assertTrue(Worker.current.processQueue())
-            assertEquals(1, counter.value)
+            assertEquals(1, counter.konstue)
             // Let main proceed.
             counter.incrementAndGet()  // counter becomes 2 here.
             assertTrue(Worker.current.park(10_000_000, true))
-            assertEquals(3, counter.value)
+            assertEquals(3, counter.konstue)
         }.freeze())
 
         executeAfter(0, {
@@ -42,7 +42,7 @@ import kotlin.concurrent.AtomicInt
             Unit
         }.freeze())
 
-        while (counter.value < 2) {
+        while (counter.konstue < 2) {
             Worker.current.park(1_000)
         }
 
@@ -51,22 +51,22 @@ import kotlin.concurrent.AtomicInt
             Unit
         }.freeze())
 
-        while (counter.value == 2) {
+        while (counter.konstue == 2) {
             Worker.current.park(1_000)
         }
     }
 }
 
 @Test fun runTest3() {
-    val worker = Worker.start(name = "Lumberjack")
-    val counter = AtomicInt(0)
+    konst worker = Worker.start(name = "Lumberjack")
+    konst counter = AtomicInt(0)
     worker.executeAfter(0, {
         assertEquals("Lumberjack", Worker.current.name)
         counter.incrementAndGet()
         Unit
     }.freeze())
 
-    while (counter.value == 0) {
+    while (counter.konstue == 0) {
         Worker.current.park(1_000)
     }
     assertEquals("Lumberjack", worker.name)
@@ -77,18 +77,18 @@ import kotlin.concurrent.AtomicInt
 }
 
 @Test fun runTest4() {
-    val counter = AtomicInt(0)
+    konst counter = AtomicInt(0)
     Worker.current.executeAfter(10_000, {
         counter.incrementAndGet()
         Unit
     }.freeze())
     assertTrue(Worker.current.park(1_000_000, process = true))
-    assertEquals(1, counter.value)
+    assertEquals(1, counter.konstue)
 }
 
 @Test fun runTest5() {
-    val main = Worker.current
-    val counter = AtomicInt(0)
+    konst main = Worker.current
+    konst counter = AtomicInt(0)
     withWorker {
         executeAfter(1000, {
             main.executeAfter(1, {
@@ -97,7 +97,7 @@ import kotlin.concurrent.AtomicInt
             }.freeze())
         }.freeze())
         assertTrue(main.park(1000L * 1000 * 1000, process = true))
-        assertEquals(1, counter.value)
+        assertEquals(1, counter.konstue)
     }
 }
 
@@ -107,46 +107,46 @@ import kotlin.concurrent.AtomicInt
 }
 
 @Test fun runTest7() {
-    val counter = AtomicInt(0)
+    konst counter = AtomicInt(0)
     withWorker {
-        val f1 = execute(TransferMode.SAFE, { counter }) { counter ->
+        konst f1 = execute(TransferMode.SAFE, { counter }) { counter ->
             Worker.current.park(Long.MAX_VALUE / 1000L, process = true)
             counter.incrementAndGet()
         }
         // wait a bit
         Worker.current.park(10_000L)
         // submit a task
-        val f2 = execute(TransferMode.SAFE, { counter }) { counter ->
+        konst f2 = execute(TransferMode.SAFE, { counter }) { counter ->
             counter.incrementAndGet()
         }
         f1.consume {}
         f2.consume {}
-        assertEquals(2, counter.value)
+        assertEquals(2, counter.konstue)
     }
 }
 
 // This test checks that when multiple `executeAfter` jobs are submitted to `targetWorker` and have the
 // same scheduled execution time (in micros since an epoch), nether of them gets lost.
 @Test fun testExecuteAfterScheduledTimeClash() = withWorker {
-    val targetWorker = this
-    val mainWorker = Worker.current
+    konst targetWorker = this
+    konst mainWorker = Worker.current
 
     // Configuration of the test.
-    val numberOfSubmitters = 2
-    val numberOfTasks = 100
-    val delayInMicroseconds = 100L
+    konst numberOfSubmitters = 2
+    konst numberOfTasks = 100
+    konst delayInMicroseconds = 100L
 
-    val submitters = Array(numberOfSubmitters) { Worker.start() }
+    konst submitters = Array(numberOfSubmitters) { Worker.start() }
     try {
-        val readySubmittersCounter = AtomicInt(0)
-        val executedTasksCounter = AtomicInt(0)
-        val finishedBatchesCounter = AtomicInt(0)
+        konst readySubmittersCounter = AtomicInt(0)
+        konst executedTasksCounter = AtomicInt(0)
+        konst finishedBatchesCounter = AtomicInt(0)
 
         submitters.forEach {
             it.executeAfter(0L, {
                 readySubmittersCounter.incrementAndGet()
                 // Wait for other submitters, to make them all start at the same time:
-                while (readySubmittersCounter.value != numberOfSubmitters) {}
+                while (readySubmittersCounter.konstue != numberOfSubmitters) {}
 
                 // Concurrently submit tasks with matching scheduled execution time:
                 repeat(numberOfTasks) {
@@ -170,7 +170,7 @@ import kotlin.concurrent.AtomicInt
             }.freeze())
         }
 
-        while (finishedBatchesCounter.value != numberOfSubmitters) {
+        while (finishedBatchesCounter.konstue != numberOfSubmitters) {
             // Wait and allow processing the `finishedBatchesCounter.increment()` tasks above:
             Worker.current.park(delayInMicroseconds, process = true)
         }
@@ -178,7 +178,7 @@ import kotlin.concurrent.AtomicInt
         // Note: we could have just waited for the condition above to become true,
         // but this would mean that the test would hang in case of failure, which is not quite convenient.
 
-        assertEquals(numberOfSubmitters * numberOfTasks, executedTasksCounter.value)
+        assertEquals(numberOfSubmitters * numberOfTasks, executedTasksCounter.konstue)
     } finally {
         submitters.forEach { it.requestTermination().result }
     }

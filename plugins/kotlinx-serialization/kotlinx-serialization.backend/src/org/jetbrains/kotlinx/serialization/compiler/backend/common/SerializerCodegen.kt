@@ -17,14 +17,14 @@ import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationDesc
 import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 
 abstract class SerializerCodegen(
-    protected val serializerDescriptor: ClassDescriptor,
+    protected konst serializerDescriptor: ClassDescriptor,
     bindingContext: BindingContext,
     metadataPlugin: SerializationDescriptorSerializerPlugin?
 ) : AbstractSerialGenerator(bindingContext, serializerDescriptor) {
-    val serializableDescriptor: ClassDescriptor = getSerializableClassDescriptorBySerializer(serializerDescriptor)!!
-    protected val serialName: String = serializableDescriptor.serialName()
-    protected val properties = bindingContext.serializablePropertiesFor(serializableDescriptor, metadataPlugin)
-    protected val serializableProperties = properties.serializableProperties
+    konst serializableDescriptor: ClassDescriptor = getSerializableClassDescriptorBySerializer(serializerDescriptor)!!
+    protected konst serialName: String = serializableDescriptor.serialName()
+    protected konst properties = bindingContext.serializablePropertiesFor(serializableDescriptor, metadataPlugin)
+    protected konst serializableProperties = properties.serializableProperties
 
     private fun checkSerializability() {
         check(properties.isExternallySerializable) {
@@ -33,11 +33,11 @@ abstract class SerializerCodegen(
     }
 
     fun generate() {
-        val prop = generateSerializableClassPropertyIfNeeded()
+        konst prop = generateSerializableClassPropertyIfNeeded()
         if (prop)
             generateSerialDesc()
-        val save = generateSaveIfNeeded()
-        val load = generateLoadIfNeeded()
+        konst save = generateSaveIfNeeded()
+        konst load = generateLoadIfNeeded()
         generateMembersFromGeneratedSerializer()
         if (!prop && (save || load))
             generateSerialDesc()
@@ -63,11 +63,11 @@ abstract class SerializerCodegen(
 
     protected abstract fun generateChildSerializersGetter(function: FunctionDescriptor)
 
-    protected val generatedSerialDescPropertyDescriptor = getPropertyToGenerate(
+    protected konst generatedSerialDescPropertyDescriptor = getPropertyToGenerate(
         serializerDescriptor, SerialEntityNames.SERIAL_DESC_FIELD,
         serializerDescriptor::checkSerializableClassPropertyResult
     )
-    protected val anySerialDescProperty = getProperty(
+    protected konst anySerialDescProperty = getProperty(
         serializerDescriptor, SerialEntityNames.SERIAL_DESC_FIELD,
         serializerDescriptor::checkSerializableClassPropertyResult
     ) { true }
@@ -76,12 +76,12 @@ abstract class SerializerCodegen(
         protected set
 
     // Can be false if user specified inheritance from KSerializer explicitly
-    protected val isGeneratedSerializer = serializerDescriptor.typeConstructor.supertypes.any(::isGeneratedKSerializer)
+    protected konst isGeneratedSerializer = serializerDescriptor.typeConstructor.supertypes.any(::isGeneratedKSerializer)
 
     protected fun findLocalSerializersFieldDescriptors(): List<PropertyDescriptor> {
-        val count = serializableDescriptor.declaredTypeParameters.size
+        konst count = serializableDescriptor.declaredTypeParameters.size
         if (count == 0) return emptyList()
-        val propNames = (0 until count).map { "${SerialEntityNames.typeArgPrefix}$it" }
+        konst propNames = (0 until count).map { "${SerialEntityNames.typeArgPrefix}$it" }
         return propNames.mapNotNull { name ->
             getPropertyToGenerate(serializerDescriptor, name) { isKSerializer(it.returnType) }
         }
@@ -98,7 +98,7 @@ abstract class SerializerCodegen(
     protected abstract fun generateLoad(function: FunctionDescriptor)
 
     private fun generateSerializableClassPropertyIfNeeded(): Boolean {
-        val property = generatedSerialDescPropertyDescriptor
+        konst property = generatedSerialDescPropertyDescriptor
             ?: return false
         checkSerializability()
         generateSerializableClassProperty(property)
@@ -106,14 +106,14 @@ abstract class SerializerCodegen(
     }
 
     private fun generateSaveIfNeeded(): Boolean {
-        val function = getSyntheticSaveMember(serializerDescriptor) ?: return false
+        konst function = getSyntheticSaveMember(serializerDescriptor) ?: return false
         checkSerializability()
         generateSave(function)
         return true
     }
 
     private fun generateLoadIfNeeded(): Boolean {
-        val function = getSyntheticLoadMember(serializerDescriptor) ?: return false
+        konst function = getSyntheticLoadMember(serializerDescriptor) ?: return false
         checkSerializability()
         generateLoad(function)
         return true

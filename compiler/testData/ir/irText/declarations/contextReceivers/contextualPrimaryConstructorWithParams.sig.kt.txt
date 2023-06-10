@@ -5,7 +5,7 @@ class O {
   // CHECK:
   //   Mangled name: O{}o
   //   Public signature: /O.o|-5332571409865440260[0]
-  val o: String
+  konst o: String
     field
     // CHECK JVM_IR:
     //   Mangled name: O#<get-o>(){}kotlin.String
@@ -29,7 +29,7 @@ class OK {
   // CHECK:
   //   Mangled name: OK{}k
   //   Public signature: /OK.k|2162811783424158931[0]
-  val k: String
+  konst k: String
     field
     // CHECK JVM_IR:
     //   Mangled name: OK#<get-k>(){}kotlin.String
@@ -42,7 +42,7 @@ class OK {
   // CHECK:
   //   Mangled name: OK{}result
   //   Public signature: /OK.result|456251868630197251[0]
-  val result: String
+  konst result: String
     field
     // CHECK JVM_IR:
     //   Mangled name: OK#<get-result>(){}kotlin.String
@@ -62,7 +62,7 @@ class OK {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         OK.contextReceiverField0
   //   Mangled name computed from Descriptor: OK{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: O
+  private /* final field */ konst contextReceiverField0: O
 
 }
 

@@ -23,21 +23,21 @@ import org.jetbrains.kotlin.incremental.components.Position
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.doNotAnalyze
 
-class KotlinLookupLocation(val element: KtElement) : LookupLocation {
-    val cachedLocation : LocationInfo? by lazy {
-        val containingKtFile = element.containingKtFile
+class KotlinLookupLocation(konst element: KtElement) : LookupLocation {
+    konst cachedLocation : LocationInfo? by lazy {
+        konst containingKtFile = element.containingKtFile
 
         if (containingKtFile.doNotAnalyze != null)
             null
         else
             object : LocationInfo {
-            override val filePath = containingKtFile.virtualFilePath
+            override konst filePath = containingKtFile.virtualFilePath
 
-            override val position: Position
+            override konst position: Position
                 get() = getLineAndColumnInPsiFile(containingKtFile, element.textRange).let { Position(it.line, it.column) }
         }
     }
 
-    override val location: LocationInfo?
+    override konst location: LocationInfo?
         get() = cachedLocation
 }

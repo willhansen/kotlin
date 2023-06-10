@@ -10,8 +10,8 @@
  */
 
 fun box(): String {
-    val a = false
-    val when2 = when (a) {
+    konst a = false
+    konst when2 = when (a) {
         true -> { "NOK" }
         false -> { "OK" }
         false -> { "NOK" }

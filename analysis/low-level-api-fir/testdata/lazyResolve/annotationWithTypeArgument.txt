@@ -2,11 +2,11 @@ RAW_FIR:
 FILE: [ResolvedTo(RAW_FIR)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -16,11 +16,11 @@ IMPORTS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -30,11 +30,11 @@ COMPILER_REQUIRED_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -44,11 +44,11 @@ COMPANION_GENERATION:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -58,11 +58,11 @@ SUPER_TYPES:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -72,11 +72,11 @@ TYPES:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -86,11 +86,11 @@ STATUS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -100,11 +100,11 @@ EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -114,11 +114,11 @@ ARGUMENTS_OF_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -128,11 +128,11 @@ CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -143,11 +143,11 @@ IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public? final? [ResolvedTo(RAW_FIR)] annotation class Anno<[ResolvedTo(RAW_FIR)] T : Number> : R|kotlin/Annotation| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.value] value: KClass<T>): R|one/Anno<T>| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] constructor<[ResolvedTo(RAW_FIR)] T : Number>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=one/Anno.konstue] konstue: KClass<T>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val value: KClass<T> = R|<local>/value|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst konstue: KClass<T> = R|<local>/konstue|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): KClass<T>
 
     }
@@ -158,43 +158,43 @@ ANNOTATIONS_ARGUMENTS_MAPPING:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(STATUS)] annotation class Anno<[ResolvedTo(STATUS)] T : R|kotlin/Number|> : R|kotlin/Annotation| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] constructor<[ResolvedTo(STATUS)] T : R|kotlin/Number|>([ResolvedTo(STATUS)] [CorrespondingProperty=one/Anno.value] value: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] constructor<[ResolvedTo(STATUS)] T : R|kotlin/Number|>([ResolvedTo(STATUS)] [CorrespondingProperty=one/Anno.konstue] konstue: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/value|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst konstue: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/konstue|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for KClass>
 
     }
-    @R|one/Anno<kotlin/Int>|[Types](value = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] fun resolveMe(): R|kotlin/Unit| {
+    @R|one/Anno<kotlin/Int>|[Types](konstue = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] fun resolveMe(): R|kotlin/Unit| {
     }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(STATUS)] annotation class Anno<[ResolvedTo(STATUS)] T : R|kotlin/Number|> : R|kotlin/Annotation| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] constructor<[ResolvedTo(STATUS)] T : R|kotlin/Number|>([ResolvedTo(STATUS)] [CorrespondingProperty=one/Anno.value] value: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] constructor<[ResolvedTo(STATUS)] T : R|kotlin/Number|>([ResolvedTo(STATUS)] [CorrespondingProperty=one/Anno.konstue] konstue: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/value|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst konstue: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/konstue|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for KClass>
 
     }
-    @R|one/Anno<kotlin/Int>|[Types](value = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    @R|one/Anno<kotlin/Int>|[Types](konstue = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(IMPORTS)] annotationWithTypeArgument.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Number|> : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Number|>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/Anno.value] value: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Number|>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/Anno.konstue] konstue: <ERROR TYPE REF: Symbol not found for KClass>): R|one/Anno<T>| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val value: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/value|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst konstue: <ERROR TYPE REF: Symbol not found for KClass> = R|<local>/konstue|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for KClass>
 
     }
-    @R|one/Anno<kotlin/Int>|[Types](value = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    @R|one/Anno<kotlin/Int>|[Types](konstue = <getClass>(Q|kotlin/Int|)) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
     }

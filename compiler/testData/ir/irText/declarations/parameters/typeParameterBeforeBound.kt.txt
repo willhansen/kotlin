@@ -13,5 +13,5 @@ fun <T : U, U : Any?> test2() {
 var <T : U, U : Any?> Test1<T, U>.test3: Unit
   get() {
   }
-  set(value: Unit) {
+  set(konstue: Unit) {
   }

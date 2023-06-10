@@ -11,7 +11,7 @@ operator fun J?.component1() = 1
 private operator fun J.component2() = 2
 
 fun test() {
-    val (a, b) = J.j()
+    konst (a, b) = J.j()
 }
 
 // FILE: J.java

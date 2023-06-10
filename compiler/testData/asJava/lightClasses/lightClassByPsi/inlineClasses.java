@@ -2,10 +2,10 @@ public enum Foo /* Foo*/ {
   ;
 
   @org.jetbrains.annotations.NotNull()
-  public static Foo valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static Foo konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static Foo[] values();//  values()
+  public static Foo[] konstues();//  konstues()
 
   public final int getX();//  getX()
 }

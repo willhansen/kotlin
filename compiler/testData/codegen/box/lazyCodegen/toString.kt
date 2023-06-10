@@ -1,6 +1,6 @@
-class A (val p: String) {
+class A (konst p: String) {
 
-    val _kind: String = "$p"
+    konst _kind: String = "$p"
 
 }
 

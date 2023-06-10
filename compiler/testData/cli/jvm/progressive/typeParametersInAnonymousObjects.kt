@@ -1,3 +1,3 @@
 fun test() {
-    val x = object<T> { }
+    konst x = object<T> { }
 }

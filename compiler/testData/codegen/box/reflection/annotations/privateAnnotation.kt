@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // WITH_REFLECT
 
-annotation private class Ann(val name: String)
+annotation private class Ann(konst name: String)
 
 class A {
     @Ann("OK")
@@ -9,6 +9,6 @@ class A {
 }
 
 fun box(): String {
-    val ann = A::class.members.single { it.name == "foo" }.annotations.single() as Ann
+    konst ann = A::class.members.single { it.name == "foo" }.annotations.single() as Ann
     return ann.name
 }

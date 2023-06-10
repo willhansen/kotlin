@@ -19,5 +19,5 @@ package org.jetbrains.kotlin.asJava
 import org.jetbrains.kotlin.load.java.structure.LightClassOriginKind
 
 interface KtLightClassMarker {
-    val originKind: LightClassOriginKind
+    konst originKind: LightClassOriginKind
 }

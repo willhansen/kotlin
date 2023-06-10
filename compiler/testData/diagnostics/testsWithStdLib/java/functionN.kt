@@ -37,7 +37,7 @@ public class A implements KI {
 fun <T> any(): T = null!!
 
 fun main() {
-    val a: A = <!DEPRECATION_ERROR!>A<!>(null)
+    konst a: A = <!DEPRECATION_ERROR!>A<!>(null)
 
     a.<!DEPRECATION_ERROR!>field<!>.hashCode();
     a.<!DEPRECATION_ERROR!>field<!> = null;

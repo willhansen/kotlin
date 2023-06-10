@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.js.coroutine.finallyPath
 import org.jetbrains.kotlin.js.coroutine.targetBlock
 import org.jetbrains.kotlin.js.coroutine.targetExceptionBlock
 
-class CoroutineStateElimination(private val body: JsBlock) {
+class CoroutineStateElimination(private konst body: JsBlock) {
     fun apply(): Boolean {
         var changed = false
 
@@ -38,16 +38,16 @@ class CoroutineStateElimination(private val body: JsBlock) {
 
             private fun visitStatements(statements: MutableList<JsStatement>) {
                 class IndexHolder {
-                    var value: Int? = null
+                    var konstue: Int? = null
                 }
 
-                val indexesToRemove = mutableSetOf<Int>()
-                val lastTargetBlockIndex = IndexHolder()
-                val lastTargetExceptionBlockIndex = IndexHolder()
-                val lastFinallyPathIndex = IndexHolder()
+                konst indexesToRemove = mutableSetOf<Int>()
+                konst lastTargetBlockIndex = IndexHolder()
+                konst lastTargetExceptionBlockIndex = IndexHolder()
+                konst lastFinallyPathIndex = IndexHolder()
 
                 for ((index, statement) in statements.withIndex()) {
-                    val indexesToUpdate = mutableListOf<IndexHolder>()
+                    konst indexesToUpdate = mutableListOf<IndexHolder>()
                     if (statement is JsExpressionStatement) {
                         if (statement.targetBlock) {
                             indexesToUpdate += lastTargetBlockIndex
@@ -62,14 +62,14 @@ class CoroutineStateElimination(private val body: JsBlock) {
 
                     if (indexesToUpdate.isNotEmpty()) {
                         for (indexToUpdate in indexesToUpdate) {
-                            indexToUpdate.value?.let { indexesToRemove += it }
-                            indexToUpdate.value = index
+                            indexToUpdate.konstue?.let { indexesToRemove += it }
+                            indexToUpdate.konstue = index
                         }
                     }
                     else {
-                        lastTargetBlockIndex.value = null
-                        lastTargetExceptionBlockIndex.value = null
-                        lastFinallyPathIndex.value = null
+                        lastTargetBlockIndex.konstue = null
+                        lastTargetExceptionBlockIndex.konstue = null
+                        lastFinallyPathIndex.konstue = null
                     }
                 }
 

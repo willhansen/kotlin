@@ -36,9 +36,9 @@ public final class TypesProvider {
 
 public object case_1 {
     private constructor case_1()
-    public final val value_1: kotlin.Boolean
-    public const final val value_2: kotlin.Boolean = true
-    private const final val value_3: kotlin.Boolean = false
+    public final konst konstue_1: kotlin.Boolean
+    public const final konst konstue_2: kotlin.Boolean = true
+    private const final konst konstue_3: kotlin.Boolean = false
     public final fun case_1_1(): kotlin.Boolean?
     public final fun case_1_2(): kotlin.Boolean?
     public final fun case_1_3(): kotlin.Boolean
@@ -48,9 +48,9 @@ public object case_1 {
 }
 
 public final class case_2 {
-    public constructor case_2(/*0*/ value_5: kotlin.Boolean, /*1*/ value_1: kotlin.Boolean)
-    public final val value_1: kotlin.Boolean
-    public final val value_2: kotlin.Boolean
+    public constructor case_2(/*0*/ konstue_5: kotlin.Boolean, /*1*/ konstue_1: kotlin.Boolean)
+    public final konst konstue_1: kotlin.Boolean
+    public final konst konstue_2: kotlin.Boolean
     public final fun case_2_2(): kotlin.Boolean?
     public final fun case_2_3(): kotlin.Boolean
     public final fun case_2_4(): kotlin.Boolean
@@ -61,8 +61,8 @@ public final class case_2 {
 
     public companion object Companion {
         private constructor Companion()
-        public const final val value_3: kotlin.Boolean = false
-        private const final val value_4: kotlin.Boolean = true
+        public const final konst konstue_3: kotlin.Boolean = false
+        private const final konst konstue_4: kotlin.Boolean = true
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

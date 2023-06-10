@@ -1,4 +1,4 @@
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoArray {
 
@@ -10,7 +10,7 @@ public abstract @interface AnnoArray {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoBoolean {
 
@@ -22,7 +22,7 @@ public abstract @interface AnnoBoolean {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoChar {
 
@@ -34,7 +34,7 @@ public abstract @interface AnnoChar {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoClass {
 
@@ -46,7 +46,7 @@ public abstract @interface AnnoClass {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoDouble {
 
@@ -58,7 +58,7 @@ public abstract @interface AnnoDouble {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoEnum {
 
@@ -70,7 +70,7 @@ public abstract @interface AnnoEnum {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoFloat {
 
@@ -82,7 +82,7 @@ public abstract @interface AnnoFloat {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoInt {
 
@@ -94,7 +94,7 @@ public abstract @interface AnnoInt {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoIntArray {
 
@@ -106,7 +106,7 @@ public abstract @interface AnnoIntArray {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoLong {
 
@@ -118,7 +118,7 @@ public abstract @interface AnnoLong {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoLongArray {
 
@@ -130,7 +130,7 @@ public abstract @interface AnnoLongArray {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface AnnoString {
 
@@ -156,7 +156,7 @@ public enum Color {
 @kotlin.Metadata()
 public final class Test {
     @org.jetbrains.annotations.NotNull()
-    private final java.lang.String value = "";
+    private final java.lang.String konstue = "";
 
     public Test() {
         super();
@@ -167,9 +167,9 @@ public final class Test {
         return null;
     }
 
-    @lib.Anno(value = "1")
-    @lib.Anno(value = "2", construct = {"A", "B"})
-    @lib.Anno(value = "3", construct = {"C"})
+    @lib.Anno(konstue = "1")
+    @lib.Anno(konstue = "2", construct = {"A", "B"})
+    @lib.Anno(konstue = "3", construct = {"C"})
     @java.lang.Deprecated()
     public static void getValue$annotations() {
     }
@@ -204,7 +204,7 @@ public @interface Anno {
 
     String[] construct() default {};
 
-    String value();
+    String konstue();
 }
 
 ////////////////////

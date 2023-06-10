@@ -5,11 +5,11 @@
 package foo
 
 interface Holder {
-    val element: String
+    konst element: String
 }
 
 open class BasicHolder : Holder {
-    override val element: String
+    override konst element: String
         get() = field + field
 
     init {
@@ -18,7 +18,7 @@ open class BasicHolder : Holder {
 }
 
 class AdvancedHolder : BasicHolder() {
-    override val element: String
+    override konst element: String
 
     init {
         element = super.element + super.element

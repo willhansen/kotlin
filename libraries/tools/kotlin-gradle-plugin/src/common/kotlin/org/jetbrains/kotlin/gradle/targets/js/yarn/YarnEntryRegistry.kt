@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.includedRange
 import org.jetbrains.kotlin.gradle.targets.js.npm.intersect
 import java.io.File
 
-private const val SEPARATOR = "@"
+private const konst SEPARATOR = "@"
 
-private const val FILE_MARKER = "${SEPARATOR}$FILE_VERSION_PREFIX"
-private const val GITHUB_MARKER = "${SEPARATOR}github:"
+private const konst FILE_MARKER = "${SEPARATOR}$FILE_VERSION_PREFIX"
+private const konst GITHUB_MARKER = "${SEPARATOR}github:"

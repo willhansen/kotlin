@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.types.*
 
 class ProgressionIteratorBasicValue
 private constructor(
-    val iteratorCallInsn: AbstractInsnNode,
-    val nextMethodName: String,
+    konst iteratorCallInsn: AbstractInsnNode,
+    konst nextMethodName: String,
     iteratorType: Type,
-    private val primitiveElementType: Type,
-    val boxedElementType: Type
+    private konst primitiveElementType: Type,
+    konst boxedElementType: Type
 ) : StrictBasicValue(iteratorType) {
 
     var tainted = false
@@ -38,15 +38,15 @@ private constructor(
         tainted = true
     }
 
-    val nextMethodDesc: String
+    konst nextMethodDesc: String
         get() = "()" + primitiveElementType.descriptor
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || javaClass != other.javaClass) return false
         if (!super.equals(other)) return false
-        val value = other as ProgressionIteratorBasicValue
-        return primitiveElementType == value.primitiveElementType
+        konst konstue = other as ProgressionIteratorBasicValue
+        return primitiveElementType == konstue.primitiveElementType
     }
 
     override fun hashCode(): Int =
@@ -60,15 +60,15 @@ private constructor(
         private fun progressionIteratorValue(
             iteratorCallInsn: AbstractInsnNode,
             typeName: String,
-            valuesPrimitiveType: Type,
-            valuesBoxedType: Type = AsmUtil.boxType(valuesPrimitiveType)
+            konstuesPrimitiveType: Type,
+            konstuesBoxedType: Type = AsmUtil.boxType(konstuesPrimitiveType)
         ) =
             ProgressionIteratorBasicValue(
                 iteratorCallInsn,
                 "next$typeName",
                 Type.getObjectType("kotlin/collections/${typeName}Iterator"),
-                valuesPrimitiveType,
-                valuesBoxedType
+                konstuesPrimitiveType,
+                konstuesBoxedType
             )
 
         fun byProgressionClassType(iteratorCallInsn: AbstractInsnNode, progressionClassType: Type): ProgressionIteratorBasicValue? =

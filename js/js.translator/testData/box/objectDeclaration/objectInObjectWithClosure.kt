@@ -3,10 +3,10 @@ package foo
 
 class Foo {
     fun bar(param: String): String {
-        val local = "K"
+        konst local = "K"
         var a = object {
-            val b = object {
-                val bar = param + local
+            konst b = object {
+                konst bar = param + local
             }
         }
         return a.b.bar

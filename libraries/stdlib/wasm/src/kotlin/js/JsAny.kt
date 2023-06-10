@@ -10,7 +10,7 @@ import kotlin.wasm.internal.WasmNoOpCast
 import kotlin.wasm.internal.implementedAsIntrinsic
 
 /**
- * Any JavaScript value except null or undefined
+ * Any JavaScript konstue except null or undefined
  */
 public external interface JsAny
 

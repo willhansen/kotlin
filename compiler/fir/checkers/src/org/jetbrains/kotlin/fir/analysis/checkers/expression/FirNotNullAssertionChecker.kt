@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.types.*
 
 object FirNotNullAssertionChecker : FirCheckNotNullCallChecker() {
     override fun check(expression: FirCheckNotNullCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val argument = expression.argumentList.arguments.singleOrNull() ?: return
+        konst argument = expression.argumentList.arguments.singleOrNull() ?: return
         if (argument is FirAnonymousFunctionExpression && argument.anonymousFunction.isLambda) {
             reporter.reportOn(expression.source, FirErrors.NOT_NULL_ASSERTION_ON_LAMBDA_EXPRESSION, context)
             return
@@ -29,13 +29,13 @@ object FirNotNullAssertionChecker : FirCheckNotNullCallChecker() {
             return
         }
         // TODO: use of Unit is subject to change.
-        //  See BodyResolveComponents.typeForQualifier in ResolveUtils.kt which returns Unit for no value type.
+        //  See BodyResolveComponents.typeForQualifier in ResolveUtils.kt which returns Unit for no konstue type.
         if (argument is FirResolvedQualifier && argument.typeRef.isUnit) {
             // Would be reported as NO_COMPANION_OBJECT
             return
         }
 
-        val type = argument.typeRef.coneType.fullyExpandedType(context.session)
+        konst type = argument.typeRef.coneType.fullyExpandedType(context.session)
 
         if (!type.canBeNull && context.languageVersionSettings.supportsFeature(LanguageFeature.EnableDfaWarningsInK2)) {
             reporter.reportOn(expression.source, FirErrors.UNNECESSARY_NOT_NULL_ASSERTION, type, context)

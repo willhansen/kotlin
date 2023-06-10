@@ -13,7 +13,7 @@ import org.junit.Test
 class NoArgModelBuilderTest {
     @Test
     fun testCanBuild() {
-        val modelBuilder = NoArgModelBuilder()
+        konst modelBuilder = NoArgModelBuilder()
         assertTrue(modelBuilder.canBuild(NoArg::class.java.name))
         assertFalse(modelBuilder.canBuild("wrongModel"))
     }

@@ -8,7 +8,7 @@ package lib
 
 var log: String = ""
 
-val hack = ::main
+konst hack = ::main
 
 fun main() {
     log += "fail"

@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirFileAnnotationsContainerImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
+    override konst moduleData: FirModuleData,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val containingFileSymbol: FirFileSymbol,
+    override konst containingFileSymbol: FirFileSymbol,
 ) : FirFileAnnotationsContainer() {
     init {
         @OptIn(ResolveStateAccess::class)

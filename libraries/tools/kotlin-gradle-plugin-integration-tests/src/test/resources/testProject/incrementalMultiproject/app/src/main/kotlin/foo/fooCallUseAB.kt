@@ -3,6 +3,6 @@ package foo
 import bar.*
 
 fun callUseAB() {
-    val b = B()
+    konst b = B()
     useAB(b)
 }

@@ -20,13 +20,13 @@ class EnumEntriesListTest {
 
     @Test
     fun testCannotBeCasted() {
-        val list = enumEntries(EmptyEnum::values)
+        konst list = enumEntries(EmptyEnum::konstues)
         assertTrue { list !is MutableList<*> }
     }
 
     @Test
     fun testForEmptyEnum() {
-        val list = enumEntries(EmptyEnum::values)
+        konst list = enumEntries(EmptyEnum::konstues)
         assertTrue(list.isEmpty())
         assertEquals(0, list.size)
         assertFalse { list is MutableList<*> }
@@ -36,14 +36,14 @@ class EnumEntriesListTest {
 
     @Test
     fun testEmptyEnumBehaviour() {
-        val list = enumEntries(EmptyEnum::values)
-        compare(EmptyEnum.values().toList(), list) { listBehavior() }
+        konst list = enumEntries(EmptyEnum::konstues)
+        compare(EmptyEnum.konstues().toList(), list) { listBehavior() }
     }
 
     @Test
     fun testForEnum() {
-        val list = enumEntries(NonEmptyEnum::values)
-        val goldenCopy = NonEmptyEnum.values().toList()
+        konst list = enumEntries(NonEmptyEnum::konstues)
+        konst goldenCopy = NonEmptyEnum.konstues().toList()
         assertEquals(goldenCopy, list)
         assertFalse { list is MutableList<*> }
         for ((idx, e) in goldenCopy.withIndex()) {
@@ -57,8 +57,8 @@ class EnumEntriesListTest {
 
     @Test
     fun testyEnumBehaviour() {
-        val list = enumEntries(NonEmptyEnum::values)
-        compare(NonEmptyEnum.values().toList(), list) { listBehavior() }
+        konst list = enumEntries(NonEmptyEnum::konstues)
+        compare(NonEmptyEnum.konstues().toList(), list) { listBehavior() }
     }
 
     enum class E1 {
@@ -71,10 +71,10 @@ class EnumEntriesListTest {
 
     @Test
     fun testVariantEnumBehaviour() {
-        val list = enumEntries(E1::values)
+        konst list = enumEntries(E1::konstues)
 
         // Index of
-        val enumList: List<Enum<*>> = list
+        konst enumList: List<Enum<*>> = list
         assertEquals(0, enumList.indexOf(E1.A))
         assertEquals(-1, enumList.indexOf(E2.A))
         assertEquals(-1, enumList.indexOf(E2.B))

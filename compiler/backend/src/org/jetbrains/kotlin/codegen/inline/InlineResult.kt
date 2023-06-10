@@ -21,10 +21,10 @@ import java.util.HashSet
 
 class InlineResult private constructor() {
 
-    private val notChangedTypes = hashSetOf<String>()
-    private val classesToRemove = HashSet<String>()
-    private val changedTypes = HashMap<String, String>()
-    val reifiedTypeParametersUsages = ReifiedTypeParametersUsages()
+    private konst notChangedTypes = hashSetOf<String>()
+    private konst classesToRemove = HashSet<String>()
+    private konst changedTypes = HashMap<String, String>()
+    konst reifiedTypeParametersUsages = ReifiedTypeParametersUsages()
 
     fun merge(child: InlineResult) {
         classesToRemove.addAll(child.calcClassesToRemove())

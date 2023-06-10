@@ -23,32 +23,32 @@ import org.jetbrains.kotlin.contracts.model.functors.IsFunctor
 import org.jetbrains.kotlin.contracts.model.structure.*
 
 internal class ConditionInterpreter(
-    private val dispatcher: ContractInterpretationDispatcher
+    private konst dispatcher: ContractInterpretationDispatcher
 ) : ContractDescriptionVisitor<ESExpression?, Unit> {
     override fun visitLogicalOr(logicalOr: LogicalOr, data: Unit): ESExpression? {
-        val left = logicalOr.left.accept(this, data) ?: return null
-        val right = logicalOr.right.accept(this, data) ?: return null
+        konst left = logicalOr.left.accept(this, data) ?: return null
+        konst right = logicalOr.right.accept(this, data) ?: return null
         return ESOr(left, right)
     }
 
     override fun visitLogicalAnd(logicalAnd: LogicalAnd, data: Unit): ESExpression? {
-        val left = logicalAnd.left.accept(this, data) ?: return null
-        val right = logicalAnd.right.accept(this, data) ?: return null
+        konst left = logicalAnd.left.accept(this, data) ?: return null
+        konst right = logicalAnd.right.accept(this, data) ?: return null
         return ESAnd(left, right)
     }
 
     override fun visitLogicalNot(logicalNot: LogicalNot, data: Unit): ESExpression? {
-        val arg = logicalNot.arg.accept(this, data) ?: return null
+        konst arg = logicalNot.arg.accept(this, data) ?: return null
         return ESNot(arg)
     }
 
     override fun visitIsInstancePredicate(isInstancePredicate: IsInstancePredicate, data: Unit): ESExpression? {
-        val esVariable = dispatcher.interpretVariable(isInstancePredicate.arg) ?: return null
+        konst esVariable = dispatcher.interpretVariable(isInstancePredicate.arg) ?: return null
         return ESIs(esVariable, IsFunctor(isInstancePredicate.type.toESType(), isInstancePredicate.isNegated))
     }
 
     override fun visitIsNullPredicate(isNullPredicate: IsNullPredicate, data: Unit): ESExpression? {
-        val variable = dispatcher.interpretVariable(isNullPredicate.arg) ?: return null
+        konst variable = dispatcher.interpretVariable(isNullPredicate.arg) ?: return null
         return ESEqual(variable, ESConstants.nullValue, isNullPredicate.isNegated)
     }
 

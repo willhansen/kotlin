@@ -14,7 +14,7 @@
 
 fun box(): String {
     var a = A()
-    val res: A = --a
+    konst res: A = --a
     return if (a.i == -1) "OK"
     else "NOK"
 }

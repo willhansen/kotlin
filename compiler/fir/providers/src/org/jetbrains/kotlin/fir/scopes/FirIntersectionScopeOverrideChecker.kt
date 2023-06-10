@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.fir.declarations.FirSimpleFunction
  * while in Java class they would be treated equally.
  */
 class FirIntersectionScopeOverrideChecker(session: FirSession) : FirOverrideChecker {
-    private val standardOverrideChecker = session.firOverrideChecker
-    private val platformSpecificOverridabilityRules = session.platformSpecificOverridabilityRules
+    private konst standardOverrideChecker = session.firOverrideChecker
+    private konst platformSpecificOverridabilityRules = session.platformSpecificOverridabilityRules
 
     override fun isOverriddenFunction(overrideCandidate: FirSimpleFunction, baseDeclaration: FirSimpleFunction): Boolean {
         platformSpecificOverridabilityRules?.isOverriddenFunction(overrideCandidate, baseDeclaration)?.let { return it }

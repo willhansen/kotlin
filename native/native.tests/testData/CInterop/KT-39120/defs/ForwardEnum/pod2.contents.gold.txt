@@ -1,5 +1,5 @@
-    enum class ForwardEnumPOD private constructor(value: Int) : Enum<ForwardEnumPOD>, CEnum {
-        @ConstantValue.Int(value = 0) enum entry Value1POD
-        @ConstantValue.Int(value = 1) enum entry Value2POD
-            var value: ForwardEnumPOD
-            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(value: Int): ForwardEnumPOD
+    enum class ForwardEnumPOD private constructor(konstue: Int) : Enum<ForwardEnumPOD>, CEnum {
+        @ConstantValue.Int(konstue = 0) enum entry Value1POD
+        @ConstantValue.Int(konstue = 1) enum entry Value2POD
+            var konstue: ForwardEnumPOD
+            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(konstue: Int): ForwardEnumPOD

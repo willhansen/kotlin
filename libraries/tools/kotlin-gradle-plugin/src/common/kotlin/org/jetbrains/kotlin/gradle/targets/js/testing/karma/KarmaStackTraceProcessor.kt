@@ -5,16 +5,16 @@
 
 package org.jetbrains.kotlin.gradle.targets.js.testing.karma
 
-private const val KARMA_SOURCE_MAP_DELIMITER = " <-"
+private const konst KARMA_SOURCE_MAP_DELIMITER = " <-"
 
-private const val STACK_TRACE_DELIMITER = "at "
-private const val WEBPACK_LOCAL_DELIMITER = "../"
+private const konst STACK_TRACE_DELIMITER = "at "
+private const konst WEBPACK_LOCAL_DELIMITER = "../"
 
 fun processKarmaStackTrace(stackTrace: String): String {
     return stackTrace.lines()
         .map(::processWebpackName)
         .joinToString("\n") { line ->
-            val index = line.indexOf(KARMA_SOURCE_MAP_DELIMITER)
+            konst index = line.indexOf(KARMA_SOURCE_MAP_DELIMITER)
             if (index == -1)
                 line
             else
@@ -26,26 +26,26 @@ fun processKarmaStackTrace(stackTrace: String): String {
 fun processWebpackName(line: String): String {
     // example: "at MyTest../kotlin/check-js-test-test.js.MyTest.foo (/src/test/kotlin/MyTest.kt:7:8)"
     // should be "at MyTest.foo (/src/test/kotlin/MyTest.kt:7:8)"
-    val stackTraceDelimiterIndex = line.indexOf(STACK_TRACE_DELIMITER)
-    val webpackLocalDelimiterIndex = line.indexOf(WEBPACK_LOCAL_DELIMITER)
+    konst stackTraceDelimiterIndex = line.indexOf(STACK_TRACE_DELIMITER)
+    konst webpackLocalDelimiterIndex = line.indexOf(WEBPACK_LOCAL_DELIMITER)
     if (stackTraceDelimiterIndex == -1 || webpackLocalDelimiterIndex == -1) {
         return line
     }
 
-    val traceStartIndex = stackTraceDelimiterIndex + STACK_TRACE_DELIMITER.length
-    val name = line.substring(
+    konst traceStartIndex = stackTraceDelimiterIndex + STACK_TRACE_DELIMITER.length
+    konst name = line.substring(
         traceStartIndex,
         webpackLocalDelimiterIndex
     ) // MyTest
-    val fileStartIndex = line.indexOf("(")
+    konst fileStartIndex = line.indexOf("(")
 
     if (webpackLocalDelimiterIndex > fileStartIndex) {
         return line
     }
 
-    val fullJsName = line.substring(webpackLocalDelimiterIndex, fileStartIndex) // ../kotlin/check-js-test-test.js.MyTest.foo
+    konst fullJsName = line.substring(webpackLocalDelimiterIndex, fileStartIndex) // ../kotlin/check-js-test-test.js.MyTest.foo
 
-    val nameIndex = fullJsName.indexOf(name)
+    konst nameIndex = fullJsName.indexOf(name)
     if (nameIndex == -1) {
         return line
     }

@@ -31,29 +31,29 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-internal val jvmOptimizationLoweringPhase = makeIrFilePhase(
+internal konst jvmOptimizationLoweringPhase = makeIrFilePhase(
     ::JvmOptimizationLowering,
     name = "JvmOptimizationLowering",
     description = "Optimize code for JVM code generation"
 )
 
-class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass {
+class JvmOptimizationLowering(konst context: JvmBackendContext) : FileLoweringPass {
     private companion object {
         private fun isNegation(expression: IrExpression): Boolean =
             expression is IrCall && expression.symbol.owner.let { not ->
                 not.name == OperatorNameConventions.NOT &&
                         not.extensionReceiverParameter == null &&
-                        not.valueParameters.isEmpty() &&
+                        not.konstueParameters.isEmpty() &&
                         not.dispatchReceiverParameter.let { receiver ->
                             receiver != null && receiver.type.isBoolean()
                         }
             }
     }
 
-    private val IrFunction.isObjectEquals
+    private konst IrFunction.isObjectEquals
         get() = name.asString() == "equals" &&
-                valueParameters.count() == 1 &&
-                valueParameters[0].type.isNullableAny() &&
+                konstueParameters.count() == 1 &&
+                konstueParameters[0].type.isNullableAny() &&
                 extensionReceiverParameter == null &&
                 dispatchReceiverParameter != null
 
@@ -61,14 +61,14 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
     private fun getOperandsIfCallToEQEQOrEquals(call: IrCall): Pair<IrExpression, IrExpression>? =
         when {
             call.symbol == context.irBuiltIns.eqeqSymbol -> {
-                val left = call.getValueArgument(0)!!
-                val right = call.getValueArgument(1)!!
+                konst left = call.getValueArgument(0)!!
+                konst right = call.getValueArgument(1)!!
                 left to right
             }
 
             call.symbol.owner.isObjectEquals -> {
-                val left = call.dispatchReceiver!!
-                val right = call.getValueArgument(0)!!
+                konst left = call.dispatchReceiver!!
+                konst right = call.getValueArgument(0)!!
                 left to right
             }
 
@@ -80,11 +80,11 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
     }
 
     private inner class Transformer(
-        private val fileEntry: IrFileEntry,
-        private val inlineScopeResolver: IrInlineScopeResolver
+        private konst fileEntry: IrFileEntry,
+        private konst inlineScopeResolver: IrInlineScopeResolver
     ) : IrElementTransformer<IrDeclaration?> {
 
-        private val dontTouchTemporaryVals = HashSet<IrVariable>()
+        private konst dontTouchTemporaryVals = HashSet<IrVariable>()
 
         override fun visitDeclaration(declaration: IrDeclarationBase, data: IrDeclaration?): IrStatement =
             super.visitDeclaration(declaration, declaration)
@@ -92,7 +92,7 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         override fun visitCall(expression: IrCall, data: IrDeclaration?): IrExpression {
             expression.transformChildren(this, data)
 
-            val callee = expression.symbol.owner
+            konst callee = expression.symbol.owner
 
             if (callee.origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR) {
                 return optimizePropertyAccess(expression, data)
@@ -114,24 +114,24 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         }
 
         private fun optimizePropertyAccess(expression: IrCall, data: IrDeclaration?): IrExpression {
-            val accessor = expression.symbol.owner as? IrSimpleFunction ?: return expression
+            konst accessor = expression.symbol.owner as? IrSimpleFunction ?: return expression
             if (accessor.modality != Modality.FINAL || accessor.isExternal) return expression
-            val property = accessor.correspondingPropertySymbol?.owner ?: return expression
+            konst property = accessor.correspondingPropertySymbol?.owner ?: return expression
             if (property.isLateinit) return expression
-            val backingField = property.backingField ?: return expression
-            val scope = data?.let(inlineScopeResolver::findContainer) ?: return expression
+            konst backingField = property.backingField ?: return expression
+            konst scope = data?.let(inlineScopeResolver::findContainer) ?: return expression
             if (scope != accessor.parent || scope != backingField.parent) return expression
-            val receiver = expression.dispatchReceiver
+            konst receiver = expression.dispatchReceiver
             return context.createIrBuilder(expression.symbol, expression.startOffset, expression.endOffset).irBlock(expression) {
                 if (backingField.isStatic && receiver != null && receiver !is IrGetValue) {
-                    // If the field is static, evaluate the receiver for potential side effects.
+                    // If the field is static, ekonstuate the receiver for potential side effects.
                     +receiver.coerceToUnit(context.irBuiltIns, this@JvmOptimizationLowering.context.typeSystem)
                 }
-                if (accessor.valueParameters.isNotEmpty()) {
+                if (accessor.konstueParameters.isNotEmpty()) {
                     +irSetField(
                         receiver.takeUnless { backingField.isStatic },
                         backingField,
-                        expression.getValueArgument(expression.valueArgumentsCount - 1)!!
+                        expression.getValueArgument(expression.konstueArgumentsCount - 1)!!
                     )
                 } else {
                     +irGetField(receiver.takeUnless { backingField.isStatic }, backingField)
@@ -140,7 +140,7 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         }
 
         override fun visitWhen(expression: IrWhen, data: IrDeclaration?): IrExpression {
-            val isCompilerGenerated = expression.origin == null
+            konst isCompilerGenerated = expression.origin == null
             expression.transformChildren(this, data)
             // Remove all branches with constant false condition.
             expression.branches.removeIf {
@@ -195,7 +195,7 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
             }
 
             // If the only condition that is left has a constant true condition, remove the 'when' in favor of the result.
-            val firstBranch = expression.branches.first()
+            konst firstBranch = expression.branches.first()
             if (firstBranch.condition.isTrueConst() && isCompilerGenerated) {
                 return firstBranch.result
             }
@@ -204,15 +204,15 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         }
 
         private fun getInlineableValueForTemporaryVal(statement: IrStatement): IrExpression? {
-            val variable = statement as? IrVariable ?: return null
+            konst variable = statement as? IrVariable ?: return null
             if (variable.origin != IrDeclarationOrigin.IR_TEMPORARY_VARIABLE || variable.isVar) return null
             if (variable in dontTouchTemporaryVals) return null
 
-            when (val initializer = variable.initializer) {
+            when (konst initializer = variable.initializer) {
                 is IrConst<*> ->
                     return initializer
                 is IrGetValue ->
-                    when (val initializerValue = initializer.symbol.owner) {
+                    when (konst initializerValue = initializer.symbol.owner) {
                         is IrVariable ->
                             return when {
                                 initializerValue.isVar ->
@@ -241,7 +241,7 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
             }
 
             // Remove a block that contains only two statements: the declaration of a temporary
-            // variable and a load of the value of that temporary variable with just the initializer
+            // variable and a load of the konstue of that temporary variable with just the initializer
             // for the temporary variable. We only perform this transformation for compiler generated
             // temporary variables. Local variables can be changed at runtime and therefore eliminating
             // an actual local variable changes debugging behavior.
@@ -272,8 +272,8 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
             //
             // Doing so we avoid local loads and stores.
             if (statements.size == 2) {
-                val first = statements[0]
-                val second = statements[1]
+                konst first = statements[0]
+                konst second = statements[1]
                 if (first is IrVariable
                     && first.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
                     && second is IrGetValue
@@ -295,7 +295,7 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
             if (expression.origin == IrStatementOrigin.WHEN) {
                 // Don't optimize out 'when' subject initialized with a variable,
                 // otherwise we might get somewhat weird debugging behavior.
-                val subject = expression.statements.firstOrNull()
+                konst subject = expression.statements.firstOrNull()
                 if (subject is IrVariable && subject.initializer is IrGetValue) {
                     dontTouchTemporaryVals.add(subject)
                 }
@@ -317,28 +317,28 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         private fun reuseLoopVariableAsInductionVariableIfPossible(irForLoopBlock: IrContainerExpression) {
             if (irForLoopBlock.statements.size != 2) return
 
-            val loopInitialization = irForLoopBlock.statements[0] as? IrComposite ?: return
-            val inductionVariableIndex = loopInitialization.statements.indexOfFirst { it.isInductionVariable(context) }
+            konst loopInitialization = irForLoopBlock.statements[0] as? IrComposite ?: return
+            konst inductionVariableIndex = loopInitialization.statements.indexOfFirst { it.isInductionVariable(context) }
             if (inductionVariableIndex < 0) return
-            val inductionVariable = loopInitialization.statements[inductionVariableIndex] as? IrVariable ?: return
+            konst inductionVariable = loopInitialization.statements[inductionVariableIndex] as? IrVariable ?: return
 
-            val loopVariablePosition = findLoopVariablePosition(irForLoopBlock.statements[1]) ?: return
-            val (loopVariableContainer, loopVariableIndex) = loopVariablePosition
-            val loopVariable = loopVariableContainer.statements[loopVariableIndex] as? IrVariable ?: return
-            val loopVariableInitializer = loopVariable.initializer ?: return
+            konst loopVariablePosition = findLoopVariablePosition(irForLoopBlock.statements[1]) ?: return
+            konst (loopVariableContainer, loopVariableIndex) = loopVariablePosition
+            konst loopVariable = loopVariableContainer.statements[loopVariableIndex] as? IrVariable ?: return
+            konst loopVariableInitializer = loopVariable.initializer ?: return
             if (loopVariableInitializer !is IrGetValue) return
             if (loopVariableInitializer.symbol != inductionVariable.symbol) return
 
-            val inductionVariableType = inductionVariable.type
-            val loopVariableType = loopVariable.type
+            konst inductionVariableType = inductionVariable.type
+            konst loopVariableType = loopVariable.type
             if (loopVariableType.isNullable()) return
             if (loopVariableType.classifierOrNull != inductionVariableType.classifierOrNull) return
 
-            val newLoopVariable = IrVariableImpl(
+            konst newLoopVariable = IrVariableImpl(
                 loopVariable.startOffset, loopVariable.endOffset, loopVariable.origin,
                 IrVariableSymbolImpl(),
                 loopVariable.name, loopVariableType,
-                isVar = true, // NB original loop variable is 'val'
+                isVar = true, // NB original loop variable is 'konst'
                 isConst = false, isLateinit = false
             )
             newLoopVariable.initializer = inductionVariable.initializer
@@ -346,9 +346,9 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
 
             loopInitialization.statements[inductionVariableIndex] = newLoopVariable
             loopVariableContainer.statements.removeAt(loopVariableIndex)
-            val remapper = object : AbstractVariableRemapper() {
-                override fun remapVariable(value: IrValueDeclaration): IrValueDeclaration? =
-                    if (value == inductionVariable || value == loopVariable) newLoopVariable else null
+            konst remapper = object : AbstractVariableRemapper() {
+                override fun remapVariable(konstue: IrValueDeclaration): IrValueDeclaration? =
+                    if (konstue == inductionVariable || konstue == loopVariable) newLoopVariable else null
             }
             irForLoopBlock.statements[1].transformChildren(remapper, null)
         }
@@ -357,18 +357,18 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
             when (statement) {
                 is IrDoWhileLoop -> {
                     // Expecting counter loop
-                    val doWhileLoop = statement as? IrDoWhileLoop ?: return null
+                    konst doWhileLoop = statement as? IrDoWhileLoop ?: return null
                     if (doWhileLoop.origin != JvmLoweredStatementOrigin.DO_WHILE_COUNTER_LOOP) return null
-                    val doWhileLoopBody = doWhileLoop.body as? IrComposite ?: return null
+                    konst doWhileLoopBody = doWhileLoop.body as? IrComposite ?: return null
                     if (doWhileLoopBody.origin != IrStatementOrigin.FOR_LOOP_INNER_WHILE) return null
-                    val iterationInitialization = doWhileLoopBody.statements[0] as? IrComposite ?: return null
-                    val loopVariableIndex = iterationInitialization.statements.indexOfFirst { it.isLoopVariable() }
+                    konst iterationInitialization = doWhileLoopBody.statements[0] as? IrComposite ?: return null
+                    konst loopVariableIndex = iterationInitialization.statements.indexOfFirst { it.isLoopVariable() }
                     if (loopVariableIndex < 0) return null
                     return iterationInitialization to loopVariableIndex
                 }
                 is IrWhen -> {
                     // Expecting if-guarded counter loop
-                    val doWhileLoop = statement.branches[0].result as? IrDoWhileLoop ?: return null
+                    konst doWhileLoop = statement.branches[0].result as? IrDoWhileLoop ?: return null
                     return findLoopVariablePosition(doWhileLoop)
                 }
                 else -> {
@@ -383,22 +383,22 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         private fun IrContainerExpression.rewritePostfixIncrDecr(): IrCall? {
             if (origin != IrStatementOrigin.POSTFIX_INCR && origin != IrStatementOrigin.POSTFIX_DECR) return null
 
-            val tmpVar = this.statements[0] as? IrVariable ?: return null
-            val getIncrVar = tmpVar.initializer as? IrGetValue ?: return null
+            konst tmpVar = this.statements[0] as? IrVariable ?: return null
+            konst getIncrVar = tmpVar.initializer as? IrGetValue ?: return null
             if (!getIncrVar.type.isInt()) return null
 
-            val setVar = this.statements[1] as? IrSetValue ?: return null
+            konst setVar = this.statements[1] as? IrSetValue ?: return null
             if (setVar.symbol != getIncrVar.symbol) return null
-            val setVarValue = setVar.value as? IrCall ?: return null
-            val calleeName = setVarValue.symbol.owner.name
+            konst setVarValue = setVar.konstue as? IrCall ?: return null
+            konst calleeName = setVarValue.symbol.owner.name
             if (calleeName != OperatorNameConventions.INC && calleeName != OperatorNameConventions.DEC) return null
-            val calleeArg = setVarValue.dispatchReceiver as? IrGetValue ?: return null
+            konst calleeArg = setVarValue.dispatchReceiver as? IrGetValue ?: return null
             if (calleeArg.symbol != tmpVar.symbol) return null
 
-            val getTmpVar = this.statements[2] as? IrGetValue ?: return null
+            konst getTmpVar = this.statements[2] as? IrGetValue ?: return null
             if (getTmpVar.symbol != tmpVar.symbol) return null
 
-            val delta = if (calleeName == OperatorNameConventions.INC)
+            konst delta = if (calleeName == OperatorNameConventions.INC)
                 IrConstImpl.int(startOffset, endOffset, context.irBuiltIns.intType, 1)
             else
                 IrConstImpl.int(startOffset, endOffset, context.irBuiltIns.intType, -1)
@@ -412,8 +412,8 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         override fun visitGetValue(expression: IrGetValue, data: IrDeclaration?): IrExpression {
             // Replace IrGetValue of an immutable temporary variable with a constant
             // initializer with the constant initializer.
-            val variable = expression.symbol.owner
-            return when (val replacement = getInlineableValueForTemporaryVal(variable)) {
+            konst variable = expression.symbol.owner
+            return when (konst replacement = getInlineableValueForTemporaryVal(variable)) {
                 is IrConst<*> ->
                     replacement.copyWithOffsets(expression.startOffset, expression.endOffset)
                 is IrGetValue ->
@@ -436,29 +436,29 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
                     return prefixIncr(expression, if (expression.origin == IrStatementOrigin.PREFIX_INCR) 1 else -1)
                 }
                 IrStatementOrigin.PLUSEQ, IrStatementOrigin.MINUSEQ -> {
-                    val argument = (expression.value as IrCall).getValueArgument(0)!!
+                    konst argument = (expression.konstue as IrCall).getValueArgument(0)!!
                     if (!hasSameLineNumber(argument, expression)) {
                         return null
                     }
                     return rewriteCompoundAssignmentAsPrefixIncrDecr(expression, argument, expression.origin is IrStatementOrigin.MINUSEQ)
                 }
                 IrStatementOrigin.EQ -> {
-                    val value = expression.value
-                    if (!hasSameLineNumber(value, expression)) {
+                    konst konstue = expression.konstue
+                    if (!hasSameLineNumber(konstue, expression)) {
                         return null
                     }
-                    if (value is IrCall) {
-                        val receiver = value.dispatchReceiver
+                    if (konstue is IrCall) {
+                        konst receiver = konstue.dispatchReceiver
                             ?: return null
-                        val symbol = expression.symbol
+                        konst symbol = expression.symbol
                         if (!hasSameLineNumber(receiver, expression)) {
                             return null
                         }
-                        if (value.origin == IrStatementOrigin.PLUS || value.origin == IrStatementOrigin.MINUS) {
-                            val argument = value.getValueArgument(0)!!
+                        if (konstue.origin == IrStatementOrigin.PLUS || konstue.origin == IrStatementOrigin.MINUS) {
+                            konst argument = konstue.getValueArgument(0)!!
                             if (receiver is IrGetValue && receiver.symbol == symbol && hasSameLineNumber(argument, expression)) {
                                 return rewriteCompoundAssignmentAsPrefixIncrDecr(
-                                    expression, argument, value.origin == IrStatementOrigin.MINUS
+                                    expression, argument, konstue.origin == IrStatementOrigin.MINUS
                                 )
                             }
                         }
@@ -470,13 +470,13 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
 
         private fun rewriteCompoundAssignmentAsPrefixIncrDecr(
             expression: IrSetValue,
-            value: IrExpression?,
+            konstue: IrExpression?,
             isMinus: Boolean
         ): IrExpression? {
-            if (value is IrConst<*> && value.kind == IrConstKind.Int) {
-                val delta = IrConstKind.Int.valueOf(value)
-                val upperBound = Byte.MAX_VALUE.toInt() + (if (isMinus) 1 else 0)
-                val lowerBound = Byte.MIN_VALUE.toInt() + (if (isMinus) 1 else 0)
+            if (konstue is IrConst<*> && konstue.kind == IrConstKind.Int) {
+                konst delta = IrConstKind.Int.konstueOf(konstue)
+                konst upperBound = Byte.MAX_VALUE.toInt() + (if (isMinus) 1 else 0)
+                konst lowerBound = Byte.MIN_VALUE.toInt() + (if (isMinus) 1 else 0)
                 if (delta in lowerBound..upperBound) {
                     return prefixIncr(expression, if (isMinus) -delta else delta)
                 }
@@ -485,8 +485,8 @@ class JvmOptimizationLowering(val context: JvmBackendContext) : FileLoweringPass
         }
 
         private fun prefixIncr(expression: IrSetValue, delta: Int): IrExpression {
-            val startOffset = expression.startOffset
-            val endOffset = expression.endOffset
+            konst startOffset = expression.startOffset
+            konst endOffset = expression.endOffset
             return IrCallImpl.fromSymbolOwner(startOffset, endOffset, context.ir.symbols.intPrefixIncrDecr).apply {
                 putValueArgument(0, IrGetValueImpl(startOffset, endOffset, expression.symbol))
                 putValueArgument(1, IrConstImpl.int(startOffset, endOffset, context.irBuiltIns.intType, delta))

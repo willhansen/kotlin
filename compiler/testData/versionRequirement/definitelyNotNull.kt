@@ -3,7 +3,7 @@ package test
 interface A<T> {
     fun foo(x: T & Any)
 
-    val w: T & Any
+    konst w: T & Any
 }
 
 class B<X>(r: X & Any)
@@ -13,7 +13,7 @@ fun <K> inside() {
         override fun foo(x: K & Any) {
         }
 
-        override val w: K & Any
+        override konst w: K & Any
             get() = TODO("")
     }
 }
@@ -21,7 +21,7 @@ fun <K> inside() {
 fun <F> bar1(x: F & Any) {}
 fun <F> bar2(x: F) = x!!
 
-val <E> E.nn: E & Any get() = this!!
+konst <E> E.nn: E & Any get() = this!!
 
 class Outer {
     abstract class R1<T, F : T & Any> : A<T & Any>

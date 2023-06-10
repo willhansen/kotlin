@@ -29,7 +29,7 @@ kotlin {
     }
 }
 
-val emptyJavadocJar by tasks.creating(Jar::class) {
+konst emptyJavadocJar by tasks.creating(Jar::class) {
     archiveClassifier.set("javadoc")
 }
 

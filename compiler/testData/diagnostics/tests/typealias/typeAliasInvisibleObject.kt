@@ -4,5 +4,5 @@ class C {
 
 typealias CAlias = C
 
-val <!EXPOSED_PROPERTY_TYPE!>test1<!> = <!INVISIBLE_MEMBER!>CAlias<!>
-val <!EXPOSED_PROPERTY_TYPE!>test1a<!> = <!INVISIBLE_MEMBER!>C<!>
+konst <!EXPOSED_PROPERTY_TYPE!>test1<!> = <!INVISIBLE_MEMBER!>CAlias<!>
+konst <!EXPOSED_PROPERTY_TYPE!>test1a<!> = <!INVISIBLE_MEMBER!>C<!>

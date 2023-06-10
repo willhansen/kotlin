@@ -6,4 +6,4 @@ class B : A {
     override fun f(x: String) = x
 }
 
-class C(val x: A) : A by x
+class C(konst x: A) : A by x

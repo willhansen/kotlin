@@ -8,16 +8,16 @@ package org.jetbrains.kotlin.kapt3.base.stubs
 import com.sun.tools.javac.tree.JCTree
 
 fun JCTree.JCMethodDecl.getJavacSignature(): String {
-    val name = name.toString()
-    val params = parameters.joinToString { it.getType().toString() }
+    konst name = name.toString()
+    konst params = parameters.joinToString { it.getType().toString() }
     return "$name($params)"
 }
 
 typealias LineInfoMap = MutableMap<String, KotlinPosition>
 
-class FileInfo(private val lineInfo: LineInfoMap, private val signatureInfo: Map<String, String>) {
+class FileInfo(private konst lineInfo: LineInfoMap, private konst signatureInfo: Map<String, String>) {
     companion object {
-        val EMPTY = FileInfo(mutableMapOf(), emptyMap())
+        konst EMPTY = FileInfo(mutableMapOf(), emptyMap())
     }
 
     fun getPositionFor(fqName: String) = lineInfo[fqName]

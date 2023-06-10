@@ -31,11 +31,11 @@ class Cache {
     suspend fun removeById(id: ID, newValue: Info? = null) {}
 }
 
-class Info(val str: String)
+class Info(konst str: String)
 
 typealias ID = String
 
-private val Info.id get() = ""
+private konst Info.id get() = ""
 
 inline fun expectAnyFailure(failureMessage: String? = null, action: () -> Unit) {
     expectFailure<Throwable>(failureMessage) {
@@ -46,19 +46,19 @@ inline fun expectAnyFailure(failureMessage: String? = null, action: () -> Unit) 
 class LoggedErrors {
     var disabled = false
 
-    val disabledTypes = mutableSetOf<String?>()
+    konst disabledTypes = mutableSetOf<String?>()
 }
 
-class AtomicReference<T>(var value: T) {
+class AtomicReference<T>(var konstue: T) {
     fun get(): T = TODO()
 }
 
 object Expector {
-    val currentErrors = AtomicReference<LoggedErrors?>(null)
+    konst currentErrors = AtomicReference<LoggedErrors?>(null)
 
     inline fun <T> disable(action: () -> T) {
         currentErrors.get()?.apply {
-            val oldValue = disabled
+            konst oldValue = disabled
             disabled = true
             try {
                 action()
@@ -96,14 +96,14 @@ fun fail(message: String) {
     error(message)
 }
 
-fun assertTrue(message: String, value: Boolean) {}
+fun assertTrue(message: String, konstue: Boolean) {}
 
 class Test {
-    private val i1 = Info("1")
-    private val i2 = Info("2")
+    private konst i1 = Info("1")
+    private konst i2 = Info("2")
     fun test() {
         doTest(Dispatcher) {
-            val cache = Cache()
+            konst cache = Cache()
 
             cache.getOrPutByString(i1.str) { i1 }
 

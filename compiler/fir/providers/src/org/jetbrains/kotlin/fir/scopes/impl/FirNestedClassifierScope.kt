@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.fir.types.impl.ConeTypeParameterTypeImpl
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 
-abstract class FirNestedClassifierScope(val klass: FirClass, val useSiteSession: FirSession) : FirContainingNamesAwareScope() {
+abstract class FirNestedClassifierScope(konst klass: FirClass, konst useSiteSession: FirSession) : FirContainingNamesAwareScope() {
     protected abstract fun getNestedClassSymbol(name: Name): FirClassLikeSymbol<*>?
 
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
         processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit
     ) {
-        val matchedClass = getNestedClassSymbol(name) ?: return
-        val substitutor = if (klass.typeParameters.isEmpty()) {
+        konst matchedClass = getNestedClassSymbol(name) ?: return
+        konst substitutor = if (klass.typeParameters.isEmpty()) {
             ConeSubstitutor.Empty
         } else {
-            val substitution = klass.typeParameters.associate {
+            konst substitution = klass.typeParameters.associate {
                 it.symbol to it.toConeType()
             }
             ConeSubstitutorByMap(substitution, useSiteSession)
@@ -48,8 +48,8 @@ abstract class FirNestedClassifierScope(val klass: FirClass, val useSiteSession:
 }
 
 class FirNestedClassifierScopeImpl(klass: FirClass, useSiteSession: FirSession) : FirNestedClassifierScope(klass, useSiteSession) {
-    private val classIndex: Map<Name, FirClassLikeSymbol<*>> = run {
-        val result = mutableMapOf<Name, FirClassLikeSymbol<*>>()
+    private konst classIndex: Map<Name, FirClassLikeSymbol<*>> = run {
+        konst result = mutableMapOf<Name, FirClassLikeSymbol<*>>()
         for (declaration in klass.declarations) {
             when (declaration) {
                 is FirRegularClass -> result[declaration.name] = declaration.symbol
@@ -70,7 +70,7 @@ class FirNestedClassifierScopeImpl(klass: FirClass, useSiteSession: FirSession) 
 }
 
 class FirCompositeNestedClassifierScope(
-    val scopes: List<FirNestedClassifierScope>,
+    konst scopes: List<FirNestedClassifierScope>,
     klass: FirClass,
     useSiteSession: FirSession
 ) : FirNestedClassifierScope(klass, useSiteSession) {

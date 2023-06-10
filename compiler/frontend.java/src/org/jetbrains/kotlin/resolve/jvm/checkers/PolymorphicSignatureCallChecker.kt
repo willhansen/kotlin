@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 object PolymorphicSignatureCallChecker : CallChecker {
     @JvmField
-    val polymorphicSignatureFqName = FqName("java.lang.invoke.MethodHandle.PolymorphicSignature")
+    konst polymorphicSignatureFqName = FqName("java.lang.invoke.MethodHandle.PolymorphicSignature")
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.PolymorphicSignature)) return
         if (!resolvedCall.resultingDescriptor.annotations.hasAnnotation(polymorphicSignatureFqName)) return
 
-        for (valueArgument in resolvedCall.valueArgumentsByIndex ?: return) {
-            if (valueArgument !is VarargValueArgument) continue
-            for (argument in valueArgument.arguments) {
-                val spread = argument.getSpreadElement() ?: continue
+        for (konstueArgument in resolvedCall.konstueArgumentsByIndex ?: return) {
+            if (konstueArgument !is VarargValueArgument) continue
+            for (argument in konstueArgument.arguments) {
+                konst spread = argument.getSpreadElement() ?: continue
                 context.trace.report(ErrorsJvm.SPREAD_ON_SIGNATURE_POLYMORPHIC_CALL.on(context.languageVersionSettings, spread))
             }
         }

@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutorByMap
 
 internal abstract class AbstractKtFirSubstitutor<T : ConeSubstitutor>(
-    val substitutor: T,
-    protected val builder: KtSymbolByFirBuilder,
+    konst substitutor: T,
+    protected konst builder: KtSymbolByFirBuilder,
 ) : KtSubstitutor {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
     override fun substituteOrNull(type: KtType): KtType? = withValidityAssertion {
         require(type is KtFirType)
@@ -39,9 +39,9 @@ internal class KtFirMapBackedSubstitutor(
     builder: KtSymbolByFirBuilder,
 ) : AbstractKtFirSubstitutor<ConeSubstitutorByMap>(substitutor, builder,), KtMapBackedSubstitutor {
     override fun getAsMap(): Map<KtTypeParameterSymbol, KtType> = withValidityAssertion {
-        val result = mutableMapOf<KtTypeParameterSymbol, KtType>()
+        konst result = mutableMapOf<KtTypeParameterSymbol, KtType>()
         for ((typeParameter, type) in substitutor.substitution) {
-            val typeParameterSymbol = builder.classifierBuilder.buildTypeParameterSymbolByLookupTag(typeParameter.toLookupTag())
+            konst typeParameterSymbol = builder.classifierBuilder.buildTypeParameterSymbolByLookupTag(typeParameter.toLookupTag())
             if (typeParameterSymbol != null) {
                 result[typeParameterSymbol] = builder.typeBuilder.buildKtType(type)
             }

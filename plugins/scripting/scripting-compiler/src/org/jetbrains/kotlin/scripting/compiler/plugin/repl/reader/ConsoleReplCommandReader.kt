@@ -16,7 +16,7 @@ import java.util.logging.Level
 import java.util.logging.Logger
 
 class ConsoleReplCommandReader : ReplCommandReader {
-    private val lineReader = LineReaderBuilder.builder()
+    private konst lineReader = LineReaderBuilder.builder()
         .appName("kotlin")
         .terminal(TerminalBuilder.terminal())
         .variable(LineReader.HISTORY_FILE, File(File(System.getProperty("user.home")), ".kotlinc_history").absolutePath)
@@ -26,7 +26,7 @@ class ConsoleReplCommandReader : ReplCommandReader {
         }
 
     override fun readLine(next: ReplFromTerminal.WhatNextAfterOneLine): String? {
-        val prompt = if (next == ReplFromTerminal.WhatNextAfterOneLine.INCOMPLETE) "... " else ">>> "
+        konst prompt = if (next == ReplFromTerminal.WhatNextAfterOneLine.INCOMPLETE) "... " else ">>> "
         return try {
             lineReader.readLine(prompt)
         } catch (e: UserInterruptException) {

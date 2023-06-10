@@ -22,7 +22,7 @@ public @interface ExtendWith {}
 // MODULE: main(lib)
 // FILE: main.kt
 @ExtendWith
-class Test(val x: Int)
+class Test(konst x: Int)
 
 fun box(): String {
     Test::class.java.newInstance()

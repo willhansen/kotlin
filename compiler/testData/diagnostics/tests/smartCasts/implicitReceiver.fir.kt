@@ -1,10 +1,10 @@
 open class A {
     class B : A() {
-        val a = "FAIL"
+        konst a = "FAIL"
     }
 
     class C : A() {
-        val a = "FATAL"
+        konst a = "FATAL"
     }
 
     fun foo(): String {

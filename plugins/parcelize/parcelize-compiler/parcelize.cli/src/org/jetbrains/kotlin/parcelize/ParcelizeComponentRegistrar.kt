@@ -37,7 +37,7 @@ class ParcelizeComponentRegistrar : CompilerPluginRegistrar() {
         registerParcelizeComponents(this, configuration.getBoolean(CommonConfigurationKeys.USE_FIR))
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }
 

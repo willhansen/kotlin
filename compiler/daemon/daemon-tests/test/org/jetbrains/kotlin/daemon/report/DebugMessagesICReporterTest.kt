@@ -20,8 +20,8 @@ class DebugMessagesICReporterTest {
 
     @Test
     fun testWarningLevel() {
-        val compilerServices = FakeCompilerServicesFacadeBase()
-        val reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.WARNING)
+        konst compilerServices = FakeCompilerServicesFacadeBase()
+        konst reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.WARNING)
         reporter.warn { WARNING_MESSAGE }
         reporter.info { INFO_MESSAGE }
         reporter.debug { DEBUG_MESSAGE }
@@ -36,8 +36,8 @@ class DebugMessagesICReporterTest {
 
     @Test
     fun testInfoLevel() {
-        val compilerServices = FakeCompilerServicesFacadeBase()
-        val reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.INFO)
+        konst compilerServices = FakeCompilerServicesFacadeBase()
+        konst reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.INFO)
         reporter.warn { WARNING_MESSAGE }
         reporter.info { INFO_MESSAGE }
         reporter.debug { DEBUG_MESSAGE }
@@ -53,8 +53,8 @@ class DebugMessagesICReporterTest {
 
     @Test
     fun testDebugLevel() {
-        val compilerServices = FakeCompilerServicesFacadeBase()
-        val reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.DEBUG)
+        konst compilerServices = FakeCompilerServicesFacadeBase()
+        konst reporter = DebugMessagesICReporter(compilerServices, File("unusedRootDir"), ICReporter.ReportSeverity.DEBUG)
         reporter.warn { WARNING_MESSAGE }
         reporter.info { INFO_MESSAGE }
         reporter.debug { DEBUG_MESSAGE }

@@ -10,13 +10,13 @@ inline fun stub(f: () -> String): String = f()
 
 import test.*
 
-class A(val z: String) {
+class A(konst z: String) {
     fun map(s: String) = z + s
 }
 
 
 fun box(): String {
-    val a = A("O")
-    val s = arrayOf("K")
+    konst a = A("O")
+    konst s = arrayOf("K")
     return s.map(a::map).first()
 }

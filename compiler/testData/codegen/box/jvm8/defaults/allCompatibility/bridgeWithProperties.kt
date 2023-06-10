@@ -19,21 +19,21 @@ public class Foo implements Simple {
 
 interface KInterface<T>  {
 
-    val foo: T
+    konst foo: T
 
-    val bar: T
+    konst bar: T
         get() = foo
 }
 
 interface KInterface2 : KInterface<String> {
-    override val foo: String
+    override konst foo: String
         get() = "OK"
 }
 
 
 fun box(): String {
 
-    val result = Foo().test()
+    konst result = Foo().test()
     if (result != "OK") return "fail 1: ${result}"
 
     return Foo().bar

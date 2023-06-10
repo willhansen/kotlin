@@ -11,7 +11,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
-    val ref = a::foo
+    konst a = A()
+    konst ref = a::foo
     return ref(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a)
 }

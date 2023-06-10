@@ -1,6 +1,6 @@
 annotation class data
 
-public class BinaryResponse(~data~val data: () -> String) {
+public class BinaryResponse(~data~konst data: () -> String) {
     fun writeResponse() {
 
         `data`data()

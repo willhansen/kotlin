@@ -43,7 +43,7 @@ class FirLazyExpressionBuilder : FirAnnotationContainerBuilder, FirExpressionBui
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirLazyExpressionBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)

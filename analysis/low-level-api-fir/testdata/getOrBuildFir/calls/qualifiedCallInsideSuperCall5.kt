@@ -1,6 +1,6 @@
 // LOOK_UP_FOR_ELEMENT_OF_TYPE: org.jetbrains.kotlin.psi.KtSimpleNameExpression
 open class A(init: A.() -> Unit) {
-    val prop: String = ""
+    konst prop: String = ""
 }
 
 object B : A({})

@@ -351,7 +351,7 @@ public class FunctionCodegen {
         // Synthesized class member descriptors corresponding to JvmStatic members of companion object
         if (CodegenUtilKt.isJvmStaticInInlineClass(functionDescriptor)) return false;
 
-        // descriptor corresponds to the underlying value
+        // descriptor corresponds to the underlying konstue
         if (functionDescriptor instanceof PropertyAccessorDescriptor) {
             PropertyDescriptor property = ((PropertyAccessorDescriptor) functionDescriptor).getCorrespondingProperty();
             if (InlineClassesUtilsKt.isUnderlyingPropertyOfInlineClass(property)) {
@@ -498,14 +498,14 @@ public class FunctionCodegen {
             @NotNull FunctionDescriptor functionDescriptor,
             @NotNull MethodVisitor mv,
             @NotNull JvmMethodSignature jvmSignature,
-            @NotNull List<ValueParameterDescriptor> valueParameters,
+            @NotNull List<ValueParameterDescriptor> konstueParameters,
             @NotNull MemberCodegen<?> memberCodegen,
             @NotNull GenerationState state,
             boolean skipNullabilityAnnotations
     ) {
         if (isAccessor(functionDescriptor)) return;
 
-        Iterator<ValueParameterDescriptor> iterator = valueParameters.iterator();
+        Iterator<ValueParameterDescriptor> iterator = konstueParameters.iterator();
         List<JvmMethodParameterSignature> kotlinParameterTypes = jvmSignature.getValueParameters();
         int syntheticParameterCount = CollectionsKt.count(kotlinParameterTypes, signature -> signature.getKind().isSkippedInGenericSignature());
 
@@ -767,11 +767,11 @@ public class FunctionCodegen {
             @Nullable Type thisType,
             @NotNull Label methodBegin,
             @NotNull Label methodEnd,
-            Collection<ValueParameterDescriptor> valueParameters,
+            Collection<ValueParameterDescriptor> konstueParameters,
             boolean isStatic,
             @NotNull GenerationState state
     ) {
-        Iterator<ValueParameterDescriptor> valueParameterIterator = valueParameters.iterator();
+        Iterator<ValueParameterDescriptor> konstueParameterIterator = konstueParameters.iterator();
         List<JvmMethodParameterSignature> params = jvmMethodSignature.getValueParameters();
         int shift = 0;
 
@@ -795,7 +795,7 @@ public class FunctionCodegen {
 
             switch (kind) {
                 case VALUE:
-                    ValueParameterDescriptor parameter = valueParameterIterator.next();
+                    ValueParameterDescriptor parameter = konstueParameterIterator.next();
                     String nameForDestructuredParameter = VariableAsmNameManglingUtils.getNameForDestructuredParameterOrNull(parameter);
 
                     parameterName =
@@ -1049,7 +1049,7 @@ public class FunctionCodegen {
     }
 
     private KotlinType getBridgeReturnType(Bridge<Method, DescriptorBasedFunctionHandleForJvm> bridge) {
-        // Return type for the bridge affects inline class values boxing/unboxing in bridge.
+        // Return type for the bridge affects inline class konstues boxing/unboxing in bridge.
         // Here we take 1st available return type for the bridge.
         // In correct cases it doesn't matter what particular return type to use,
         // since either all return types are inline class itself,
@@ -1103,12 +1103,12 @@ public class FunctionCodegen {
         AnnotationDescriptor annotation = function.getAnnotations().findAnnotation(ThrowUtilKt.JVM_THROWS_ANNOTATION_FQ_NAME);
         if (annotation == null) return Collections.emptyList();
 
-        Collection<ConstantValue<?>> values = annotation.getAllValueArguments().values();
-        if (values.isEmpty()) return Collections.emptyList();
+        Collection<ConstantValue<?>> konstues = annotation.getAllValueArguments().konstues();
+        if (konstues.isEmpty()) return Collections.emptyList();
 
-        Object value = values.iterator().next();
-        if (!(value instanceof ArrayValue)) return Collections.emptyList();
-        ArrayValue arrayValue = (ArrayValue) value;
+        Object konstue = konstues.iterator().next();
+        if (!(konstue instanceof ArrayValue)) return Collections.emptyList();
+        ArrayValue arrayValue = (ArrayValue) konstue;
 
         return CollectionsKt.mapNotNull(
                 arrayValue.getValue(),
@@ -1217,7 +1217,7 @@ public class FunctionCodegen {
         JvmMethodSignature signature = state.getTypeMapper().mapSignatureWithGeneric(functionDescriptor, methodContext.getContextKind());
 
         // 'null' because the "could not find expected declaration" error has been already reported in isDefaultNeeded earlier
-        List<ValueParameterDescriptor> valueParameters =
+        List<ValueParameterDescriptor> konstueParameters =
                 functionDescriptor.isSuspend()
                 ? CollectionsKt.plus(
                     CodegenUtil.getFunctionParametersForDefaultValueGeneration(
@@ -1226,7 +1226,7 @@ public class FunctionCodegen {
                 : CodegenUtil.getFunctionParametersForDefaultValueGeneration(functionDescriptor, null);
 
         boolean isStatic = isStaticMethod(methodContext.getContextKind(), functionDescriptor);
-        FrameMap frameMap = createFrameMap(state, signature, functionDescriptor.getExtensionReceiverParameter(), valueParameters, isStatic);
+        FrameMap frameMap = createFrameMap(state, signature, functionDescriptor.getExtensionReceiverParameter(), konstueParameters, isStatic);
 
         ExpressionCodegen codegen = new ExpressionCodegen(mv, frameMap, signature.getReturnType(), methodContext, state, parentCodegen);
 
@@ -1242,9 +1242,9 @@ public class FunctionCodegen {
             capturedArgumentsCount++;
         }
 
-        assert valueParameters.size() > 0 : "Expecting value parameters to generate default function " + functionDescriptor;
+        assert konstueParameters.size() > 0 : "Expecting konstue parameters to generate default function " + functionDescriptor;
         int firstMaskIndex = frameMap.enterTemp(Type.INT_TYPE);
-        for (int index = 1; index < valueParameters.size(); index++) {
+        for (int index = 1; index < konstueParameters.size(); index++) {
             if (index % Integer.SIZE == 0) {
                 frameMap.enterTemp(Type.INT_TYPE);
             }
@@ -1252,9 +1252,9 @@ public class FunctionCodegen {
         //default handler or constructor marker
         frameMap.enterTemp(AsmTypes.OBJECT_TYPE);
 
-        for (int index = 0; index < valueParameters.size(); index++) {
+        for (int index = 0; index < konstueParameters.size(); index++) {
             int maskIndex = firstMaskIndex + index / Integer.SIZE;
-            ValueParameterDescriptor parameterDescriptor = valueParameters.get(index);
+            ValueParameterDescriptor parameterDescriptor = konstueParameters.get(index);
             Type type = mappedParameters.get(capturedArgumentsCount + index).getAsmType();
 
             int parameterIndex = frameMap.getIndex(parameterDescriptor);
@@ -1281,8 +1281,8 @@ public class FunctionCodegen {
         // load arguments after defaults generation to avoid redundant stack normalization operations
         loadExplicitArgumentsOnStack(OBJECT_TYPE, isStatic, signature, generator);
 
-        for (int index = 0; index < valueParameters.size(); index++) {
-            ValueParameterDescriptor parameterDescriptor = valueParameters.get(index);
+        for (int index = 0; index < konstueParameters.size(); index++) {
+            ValueParameterDescriptor parameterDescriptor = konstueParameters.get(index);
             Type type = mappedParameters.get(capturedArgumentsCount + index).getAsmType();
             int parameterIndex = frameMap.getIndex(parameterDescriptor);
             generator.putValueIfNeeded(new JvmKotlinType(type, null), StackValue.local(parameterIndex, type));
@@ -1320,7 +1320,7 @@ public class FunctionCodegen {
             @NotNull GenerationState state,
             @NotNull JvmMethodSignature signature,
             @Nullable ReceiverParameterDescriptor extensionReceiverParameter,
-            @NotNull List<ValueParameterDescriptor> valueParameters,
+            @NotNull List<ValueParameterDescriptor> konstueParameters,
             boolean isStatic
     ) {
         FrameMap frameMap = new FrameMapWithExpectActualSupport(state.getModule());
@@ -1342,7 +1342,7 @@ public class FunctionCodegen {
             }
         }
 
-        for (ValueParameterDescriptor parameter : valueParameters) {
+        for (ValueParameterDescriptor parameter : konstueParameters) {
             frameMap.enter(parameter, state.getTypeMapper().mapType(parameter));
         }
 
@@ -1431,16 +1431,16 @@ public class FunctionCodegen {
         iv.load(0, OBJECT_TYPE);
         for (int i = 0, reg = 1; i < originalArgTypes.length; i++) {
             KotlinType kotlinType = safeToUseKotlinTypes ? allKotlinParameters.get(i).getType() : null;
-            StackValue value;
+            StackValue konstue;
             if (isVarargInvoke) {
-                value = StackValue.arrayElement(OBJECT_TYPE, null, StackValue.local(1, argTypes[0]), StackValue.constant(i));
+                konstue = StackValue.arrayElement(OBJECT_TYPE, null, StackValue.local(1, argTypes[0]), StackValue.constant(i));
             }
             else {
-                value = StackValue.local(reg, argTypes[i], kotlinType);
+                konstue = StackValue.local(reg, argTypes[i], kotlinType);
                 //noinspection AssignmentToForLoopParameter
                 reg += argTypes[i].getSize();
             }
-            value.put(originalArgTypes[i], kotlinType, iv);
+            konstue.put(originalArgTypes[i], kotlinType, iv);
         }
 
         if (isStubDeclarationWithDelegationToSuper) {
@@ -1588,7 +1588,7 @@ public class FunctionCodegen {
                         field.put(iv);
 
                         // When delegating to inline class, we invoke static implementation method
-                        // that takes inline class underlying value as 1st argument.
+                        // that takes inline class underlying konstue as 1st argument.
                         int toArgsShift = InlineClassesUtilsKt.isInlineClass(toClass) ? 1 : 0;
 
                         int reg = 1;

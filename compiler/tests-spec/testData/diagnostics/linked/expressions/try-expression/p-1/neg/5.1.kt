@@ -9,7 +9,7 @@
  * MAIN LINK: expressions, try-expression -> paragraph 1 -> sentence 5
  * PRIMARY LINKS: expressions, try-expression -> paragraph 1 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: A valid try-expression must have at least one catch or finally block.
+ * DESCRIPTION: A konstid try-expression must have at least one catch or finally block.
  */
 
 fun throwException(): Nothing = throw Exception()
@@ -26,6 +26,6 @@ fun case1() {
 
 fun case2() {
     try {
-        val a = "foo"
+        konst a = "foo"
     }<!SYNTAX!><!>
 }

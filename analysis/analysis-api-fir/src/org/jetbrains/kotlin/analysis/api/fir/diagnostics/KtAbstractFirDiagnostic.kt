@@ -17,28 +17,28 @@ import org.jetbrains.kotlin.diagnostics.Severity
 import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
 
 internal abstract class KtAbstractFirDiagnostic<PSI : PsiElement>(
-    private val firDiagnostic: KtPsiDiagnostic,
-    override val token: KtLifetimeToken,
+    private konst firDiagnostic: KtPsiDiagnostic,
+    override konst token: KtLifetimeToken,
 ) : KtDiagnosticWithPsi<PSI>, KtLifetimeOwner {
 
-    override val factoryName: String
+    override konst factoryName: String
         get() = withValidityAssertion { firDiagnostic.factory.name }
 
-    override val defaultMessage: String
+    override konst defaultMessage: String
         get() = withValidityAssertion {
-            val diagnostic = firDiagnostic as KtDiagnostic
+            konst diagnostic = firDiagnostic as KtDiagnostic
 
-            val firDiagnosticRenderer = RootDiagnosticRendererFactory(diagnostic)
+            konst firDiagnosticRenderer = RootDiagnosticRendererFactory(diagnostic)
             return firDiagnosticRenderer.render(diagnostic)
         }
 
-    override val textRanges: Collection<TextRange>
+    override konst textRanges: Collection<TextRange>
         get() = withValidityAssertion { firDiagnostic.textRanges }
 
     @Suppress("UNCHECKED_CAST")
-    override val psi: PSI
+    override konst psi: PSI
         get() = withValidityAssertion { firDiagnostic.psiElement as PSI }
 
-    override val severity: Severity
+    override konst severity: Severity
         get() = withValidityAssertion { firDiagnostic.severity }
 }

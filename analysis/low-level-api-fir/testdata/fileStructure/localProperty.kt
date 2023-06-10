@@ -3,7 +3,7 @@ fun foo() {/* ReanalyzableFunctionStructureElement */
 }
 class A {/* NonReanalyzableClassDeclarationStructureElement */
     fun q() {/* ReanalyzableFunctionStructureElement */
-        val y = 42
+        konst y = 42
     }
 }
 class B {/* NonReanalyzableClassDeclarationStructureElement */

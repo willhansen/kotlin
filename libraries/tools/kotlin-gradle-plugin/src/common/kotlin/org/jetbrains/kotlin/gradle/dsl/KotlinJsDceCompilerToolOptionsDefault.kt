@@ -9,10 +9,10 @@ internal abstract class KotlinJsDceCompilerToolOptionsDefault @javax.inject.Inje
     objectFactory: org.gradle.api.model.ObjectFactory
 ) : org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerToolOptionsDefault(objectFactory), org.jetbrains.kotlin.gradle.dsl.KotlinJsDceCompilerToolOptions {
 
-    override val devMode: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst devMode: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
     @Deprecated(message = "Use task 'destinationDirectory' to configure output directory", level = DeprecationLevel.WARNING)
-    override val outputDirectory: org.gradle.api.provider.Property<kotlin.String> =
+    override konst outputDirectory: org.gradle.api.provider.Property<kotlin.String> =
         objectFactory.property(kotlin.String::class.java)
 }

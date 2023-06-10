@@ -8,7 +8,7 @@ package codegen.enum.reorderedArguments
 import kotlin.test.*
 
 // Regression test for https://github.com/JetBrains/kotlin-native/issues/1779
-enum class Foo(val a: Int, val b: Int, val c: Int = 0) {
+enum class Foo(konst a: Int, konst b: Int, konst c: Int = 0) {
     A(a = 1, b = 0),
     B(b = 1, a = 0),
     C(c = 1, b = 0, a = 0),
@@ -17,10 +17,10 @@ enum class Foo(val a: Int, val b: Int, val c: Int = 0) {
 }
 
 interface Base<T> {
-    val value: T
+    konst konstue: T
 }
 
-enum class Bar(override val value: Foo) : Base<Foo> {
+enum class Bar(override konst konstue: Foo) : Base<Foo> {
     A(Foo.A),
     B(Foo.B),
     C(Foo.C),
@@ -50,24 +50,24 @@ enum class Bar(override val value: Foo) : Base<Foo> {
     assertEquals(Foo.E.b, 1)
     assertEquals(Foo.E.c, 1)
 
-    assertEquals(Bar.A.value.a, 1)
-    assertEquals(Bar.A.value.b, 0)
-    assertEquals(Bar.A.value.c, 0)
+    assertEquals(Bar.A.konstue.a, 1)
+    assertEquals(Bar.A.konstue.b, 0)
+    assertEquals(Bar.A.konstue.c, 0)
 
-    assertEquals(Bar.B.value.a, 0)
-    assertEquals(Bar.B.value.b, 1)
-    assertEquals(Bar.B.value.c, 0)
+    assertEquals(Bar.B.konstue.a, 0)
+    assertEquals(Bar.B.konstue.b, 1)
+    assertEquals(Bar.B.konstue.c, 0)
 
-    assertEquals(Bar.C.value.a, 0)
-    assertEquals(Bar.C.value.b, 0)
-    assertEquals(Bar.C.value.c, 1)
+    assertEquals(Bar.C.konstue.a, 0)
+    assertEquals(Bar.C.konstue.b, 0)
+    assertEquals(Bar.C.konstue.c, 1)
 
-    assertEquals(Bar.D.value.a, 0)
-    assertEquals(Bar.D.value.b, 0)
-    assertEquals(Bar.D.value.c, 0)
+    assertEquals(Bar.D.konstue.a, 0)
+    assertEquals(Bar.D.konstue.b, 0)
+    assertEquals(Bar.D.konstue.c, 0)
 
-    assertEquals(Bar.E.value.a, 1)
-    assertEquals(Bar.E.value.b, 1)
-    assertEquals(Bar.E.value.c, 1)
+    assertEquals(Bar.E.konstue.a, 1)
+    assertEquals(Bar.E.konstue.b, 1)
+    assertEquals(Bar.E.konstue.c, 1)
 
 }

@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessagesTestExecuti
 import org.jetbrains.kotlin.gradle.targets.js.npm.RequiresNpmDependencies
 
 interface KotlinJsTestFramework : RequiresNpmDependencies {
-    val settingsState: String
+    konst settingsState: String
 
     fun createTestExecutionSpec(
         task: KotlinJsTest,

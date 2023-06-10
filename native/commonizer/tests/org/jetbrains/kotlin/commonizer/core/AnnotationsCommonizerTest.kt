@@ -295,7 +295,7 @@ private fun mockDeprecated(
     replaceWithExpression: String = "",
     replaceWithImports: Array<String> = emptyArray()
 ): CirAnnotation {
-    val replaceWith: CirAnnotation? = if (replaceWithExpression.isNotEmpty() || replaceWithImports.isNotEmpty()) {
+    konst replaceWith: CirAnnotation? = if (replaceWithExpression.isNotEmpty() || replaceWithImports.isNotEmpty()) {
         mockAnnotation(
             classId = "kotlin/ReplaceWith",
             constantValueArguments = mapOf(

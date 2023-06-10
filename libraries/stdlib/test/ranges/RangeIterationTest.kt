@@ -9,25 +9,25 @@ import test.collections.behaviors.iteratorBehavior
 import test.collections.compare
 import kotlin.test.*
 
-const val MaxI = Int.MAX_VALUE
-const val MinI = Int.MIN_VALUE
-const val MaxB = Byte.MAX_VALUE
-const val MinB = Byte.MIN_VALUE
-const val MaxS = Short.MAX_VALUE
-const val MinS = Short.MIN_VALUE
-const val MaxL = Long.MAX_VALUE
-const val MinL = Long.MIN_VALUE
-const val MaxC = Char.MAX_VALUE
-const val MinC = Char.MIN_VALUE
+const konst MaxI = Int.MAX_VALUE
+const konst MinI = Int.MIN_VALUE
+const konst MaxB = Byte.MAX_VALUE
+const konst MinB = Byte.MIN_VALUE
+const konst MaxS = Short.MAX_VALUE
+const konst MinS = Short.MIN_VALUE
+const konst MaxL = Long.MAX_VALUE
+const konst MinL = Long.MIN_VALUE
+const konst MaxC = Char.MAX_VALUE
+const konst MinC = Char.MIN_VALUE
 
-const val MaxUI = UInt.MAX_VALUE
-const val MinUI = UInt.MIN_VALUE
-const val MaxUL = ULong.MAX_VALUE
-const val MinUL = ULong.MIN_VALUE
-const val MaxUB = UByte.MAX_VALUE
-const val MinUB = UByte.MIN_VALUE
-const val MaxUS = UShort.MAX_VALUE
-const val MinUS = UShort.MIN_VALUE
+const konst MaxUI = UInt.MAX_VALUE
+const konst MinUI = UInt.MIN_VALUE
+const konst MaxUL = ULong.MAX_VALUE
+const konst MinUL = ULong.MIN_VALUE
+const konst MaxUB = UByte.MAX_VALUE
+const konst MinUB = UByte.MIN_VALUE
+const konst MaxUS = UShort.MAX_VALUE
+const konst MinUS = UShort.MIN_VALUE
 
 // Test data for codegen is generated from this class. If you change it, rerun generateTests task
 public open class RangeIterationTestBase {
@@ -38,9 +38,9 @@ public open class RangeIterationTestBase {
         expectedIncrement: Number,
         expectedElements: List<N>
     ) {
-        val first: Any
-        val last: Any
-        val increment: Number
+        konst first: Any
+        konst last: Any
+        konst increment: Number
         when (sequence) {
             is IntProgression -> {
                 first = sequence.first
@@ -493,7 +493,7 @@ public class RangeIterationTest : RangeIterationTestBase() {
         doTest(0..<MinI step 3, 1, 0, 3, listOf())
         doTest(0L..<MinL step 3, 1L, 0L, 3L, listOf())
 
-        // 1u as used as a start since min value is 0u for unsigned types
+        // 1u as used as a start since min konstue is 0u for unsigned types
         doTest(1u.toUByte()..MinUB step 3, 1u, MinUB.toUInt(), 3, listOf())
         doTest(1u.toUShort()..MinUS step 3, 1u, MinUS.toUInt(), 3, listOf())
         doTest(1u..MinUI step 3, 1u, MinUI, 3, listOf())

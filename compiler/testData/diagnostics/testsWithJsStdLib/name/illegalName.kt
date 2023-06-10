@@ -8,14 +8,14 @@ fun foo(): String<!> = TODO("")
 <!NAME_CONTAINS_ILLEGAL_CHARS!>@JsName("  ___  ")
 private fun bar(): String<!> = TODO("")
 
-@JsName("validName")
+@JsName("konstidName")
 private fun ` .private with @JsName `(): String = TODO("")
 
 private class <!NAME_CONTAINS_ILLEGAL_CHARS!>` .private class `<!> {
-    <!NAME_CONTAINS_ILLEGAL_CHARS!>val ` .field. `<!> = ""
+    <!NAME_CONTAINS_ILLEGAL_CHARS!>konst ` .field. `<!> = ""
 }
 
-val x: Int
+konst x: Int
     <!NAME_CONTAINS_ILLEGAL_CHARS!>@JsName(".")
     get()<!> = TODO("")
 

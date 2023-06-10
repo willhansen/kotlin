@@ -13,7 +13,7 @@ import org.jetbrains.org.objectweb.asm.tree.*
 
 class InplaceArgumentsMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val methodContext = parseMethodOrNull(methodNode)
+        konst methodContext = parseMethodOrNull(methodNode)
         if (methodContext != null) {
             if (methodContext.calls.isEmpty()) return
 
@@ -32,35 +32,35 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
     }
 
     private class MethodContext(
-        val methodNode: MethodNode,
-        val calls: List<CallContext>
+        konst methodNode: MethodNode,
+        konst calls: List<CallContext>
     ) {
-        val startArgToEndArg = HashMap<AbstractInsnNode, AbstractInsnNode>()
-        val lvtEntryForInstruction = HashMap<AbstractInsnNode, LocalVariableNode>()
-        val varInstructionMoved = HashMap<AbstractInsnNode, CallContext>()
-        val suspensionJumpLabels = HashSet<LabelNode>()
+        konst startArgToEndArg = HashMap<AbstractInsnNode, AbstractInsnNode>()
+        konst lvtEntryForInstruction = HashMap<AbstractInsnNode, LocalVariableNode>()
+        konst varInstructionMoved = HashMap<AbstractInsnNode, CallContext>()
+        konst suspensionJumpLabels = HashSet<LabelNode>()
     }
 
     private class CallContext(
-        val callStartMarker: AbstractInsnNode,
-        val callEndMarker: AbstractInsnNode,
-        val args: List<ArgContext>,
-        val calls: List<CallContext>,
+        konst callStartMarker: AbstractInsnNode,
+        konst callEndMarker: AbstractInsnNode,
+        konst args: List<ArgContext>,
+        konst calls: List<CallContext>,
     )
 
     private class ArgContext(
-        val argStartMarker: AbstractInsnNode,
-        val argEndMarker: AbstractInsnNode,
-        val calls: List<CallContext>,
-        val storeInsn: VarInsnNode?
+        konst argStartMarker: AbstractInsnNode,
+        konst argEndMarker: AbstractInsnNode,
+        konst calls: List<CallContext>,
+        konst storeInsn: VarInsnNode?
     ) {
-        val loadOpcode =
+        konst loadOpcode =
             if (storeInsn != null)
                 storeInsn.opcode - Opcodes.ISTORE + Opcodes.ILOAD
             else
                 -1
 
-        val varIndex = storeInsn?.`var` ?: -1
+        konst varIndex = storeInsn?.`var` ?: -1
     }
 
     private fun parseMethodOrNull(methodNode: MethodNode): MethodContext? {
@@ -69,11 +69,11 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
         //  CALL    ::= callStartMarker insn* (ARG insn*)* (CALL insn*)* callEndMarker
         //  ARG     ::= argStartMarker insn* (CALL insn*)* argEndMarker storeInsn
 
-        val iter = methodNode.instructions.iterator()
-        val calls = ArrayList<CallContext>()
+        konst iter = methodNode.instructions.iterator()
+        konst calls = ArrayList<CallContext>()
         try {
             while (iter.hasNext()) {
-                val insn = iter.next()
+                konst insn = iter.next()
                 when {
                     insn.isInplaceCallStartMarker() ->
                         calls.add(parseCall(methodNode, insn, iter))
@@ -89,10 +89,10 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 
     private fun parseCall(methodNode: MethodNode, start: AbstractInsnNode, iter: ListIterator<AbstractInsnNode>): CallContext {
         //  CALL    ::= callStartMarker insn* (ARG insn*)* (CALL insn*)* callEndMarker
-        val args = ArrayList<ArgContext>()
-        val calls = ArrayList<CallContext>()
+        konst args = ArrayList<ArgContext>()
+        konst calls = ArrayList<CallContext>()
         while (iter.hasNext()) {
-            val insn = iter.next()
+            konst insn = iter.next()
             when {
                 insn.isInplaceCallStartMarker() ->
                     calls.add(parseCall(methodNode, insn, iter))
@@ -110,14 +110,14 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 
     private fun parseArg(methodNode: MethodNode, start: AbstractInsnNode, iter: ListIterator<AbstractInsnNode>): ArgContext {
         //  ARG     ::= argStartMarker insn* (CALL insn*)* argEndMarker storeInsn
-        val calls = ArrayList<CallContext>()
+        konst calls = ArrayList<CallContext>()
         while (iter.hasNext()) {
-            val insn = iter.next()
+            konst insn = iter.next()
             when {
                 insn.isInplaceCallStartMarker() ->
                     calls.add(parseCall(methodNode, insn, iter))
                 insn.isInplaceArgumentEndMarker() -> {
-                    val next = insn.next
+                    konst next = insn.next
                     return when {
                         next is VarInsnNode && next.opcode in Opcodes.ISTORE..Opcodes.ASTORE -> {
                             iter.next()
@@ -168,13 +168,13 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
     }
 
     private fun collectLvtEntryInstructions(methodContext: MethodContext) {
-        val insnList = methodContext.methodNode.instructions
-        val insnArray = insnList.toArray()
+        konst insnList = methodContext.methodNode.instructions
+        konst insnArray = insnList.toArray()
         for (lv in methodContext.methodNode.localVariables) {
-            val lvStartIndex = insnList.indexOf(lv.start)
-            val lvEndIndex = insnList.indexOf(lv.end)
+            konst lvStartIndex = insnList.indexOf(lv.start)
+            konst lvEndIndex = insnList.indexOf(lv.end)
             for (i in lvStartIndex until lvEndIndex) {
-                val insn = insnArray[i]
+                konst insn = insnArray[i]
                 if (insn.opcode in Opcodes.ILOAD..Opcodes.ALOAD || insn.opcode in Opcodes.ISTORE..Opcodes.ASTORE) {
                     if ((insn as VarInsnNode).`var` == lv.index) {
                         methodContext.lvtEntryForInstruction[insn] = lv
@@ -189,7 +189,7 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
     }
 
     private fun collectSuspensionPoints(methodContext: MethodContext) {
-        val insnList = methodContext.methodNode.instructions
+        konst insnList = methodContext.methodNode.instructions
         var insn = insnList.first
         while (
             !insn.isMethodInsnWith(Opcodes.INVOKESTATIC) {
@@ -207,12 +207,12 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
                 insn = insn.next
                 continue
             }
-            val getFiendInsn = insn.previous as FieldInsnNode
+            konst getFiendInsn = insn.previous as FieldInsnNode
             if (getFiendInsn.name != "label" || getFiendInsn.desc != "I") {
                 insn = insn.next
                 continue
             }
-            val tableSwitchInsn = insn as TableSwitchInsnNode
+            konst tableSwitchInsn = insn as TableSwitchInsnNode
             methodContext.suspensionJumpLabels.addAll(tableSwitchInsn.labels)
             methodContext.suspensionJumpLabels.add(tableSwitchInsn.dflt)
             return
@@ -238,7 +238,7 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 
         if (callContext.args.any { it.isUnsafeToMove(methodContext) }) {
             // Do not transform such call, just strip call and argument markers.
-            val insnList = methodContext.methodNode.instructions
+            konst insnList = methodContext.methodNode.instructions
             for (arg in callContext.args) {
                 insnList.remove(arg.argStartMarker)
                 insnList.remove(arg.argEndMarker)
@@ -256,8 +256,8 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
         // - non-local jump (moving such argument inside inline function body can interfere with stack normalization);
         // - variable store (variables defined inside argument can interfere with variables in inline function body).
         // TODO investigate whether it's possible to lift these restrictions.
-        val argInsns = InsnSequence(this.argStartMarker, this.argEndMarker)
-        val localLabels = argInsns.filterTo(HashSet()) { it is LabelNode }
+        konst argInsns = InsnSequence(this.argStartMarker, this.argEndMarker)
+        konst localLabels = argInsns.filterTo(HashSet()) { it is LabelNode }
         return argInsns.any { insn ->
             insn.isStoreOperation() ||
                     insn in methodContext.suspensionJumpLabels ||
@@ -267,8 +267,8 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 
     private fun moveInplaceArgumentsFromStoresToLoads(methodContext: MethodContext, callContext: CallContext) {
         // Transform call
-        val insnList = methodContext.methodNode.instructions
-        val args = callContext.args.associateBy { it.varIndex }
+        konst insnList = methodContext.methodNode.instructions
+        konst args = callContext.args.associateBy { it.varIndex }
         var argsProcessed = 0
 
         var insn: AbstractInsnNode = callContext.callStartMarker
@@ -281,9 +281,9 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 
                 insn.opcode in Opcodes.ILOAD..Opcodes.ALOAD -> {
                     // Load instruction
-                    val loadInsn = insn as VarInsnNode
-                    val varIndex = loadInsn.`var`
-                    val arg = args[varIndex]
+                    konst loadInsn = insn as VarInsnNode
+                    konst varIndex = loadInsn.`var`
+                    konst arg = args[varIndex]
 
                     if (arg == null || arg.loadOpcode != insn.opcode) {
                         // Not an argument load
@@ -310,7 +310,7 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
                                 methodContext.varInstructionMoved[argInsn] = callContext
                             }
 
-                            val argInsnNext = argInsn.next
+                            konst argInsnNext = argInsn.next
                             insnList.remove(argInsn)
                             insnList.insertBefore(loadInsn, argInsn)
                             argInsn = argInsnNext
@@ -328,7 +328,7 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
                             } else {
                                 insnList.insertBefore(insn, InsnNode(Opcodes.DUP))
                             }
-                            val next = insn.next
+                            konst next = insn.next
                             insnList.remove(insn)
                             insn = next
                         }
@@ -362,7 +362,7 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
                 insn.isInplaceArgumentStartMarker() ||
                 insn.isInplaceArgumentEndMarker()
             ) {
-                val next = insn.next
+                konst next = insn.next
                 methodNode.instructions.remove(insn)
                 insn = next
                 continue
@@ -375,10 +375,10 @@ class InplaceArgumentsMethodTransformer : MethodTransformer() {
 // HACK: if new end label is before start label, change to the next one
 private fun MethodNode.fixupLVT() {
     for (localVariable in localVariables) {
-        val startIndex = instructions.indexOf(localVariable.start)
-        val endIndex = instructions.indexOf(localVariable.end)
+        konst startIndex = instructions.indexOf(localVariable.start)
+        konst endIndex = instructions.indexOf(localVariable.end)
         if (endIndex < startIndex) {
-            val newEnd = localVariable.start.findNextOrNull { it is LabelNode } as? LabelNode
+            konst newEnd = localVariable.start.findNextOrNull { it is LabelNode } as? LabelNode
             localVariable.end = newEnd ?: localVariable.start
         }
     }

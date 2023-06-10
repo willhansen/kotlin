@@ -1,8 +1,8 @@
 // IGNORE_BACKEND: JVM
-inline class A(val value: Int)
+inline class A(konst konstue: Int)
 
 fun interface I {
-    fun compute(value: Int): A
+    fun compute(konstue: Int): A
 }
 
 fun f(i: I) {}

@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class KtFe10FileSymbol(
-    private val file: KtFile,
-    override val analysisContext: Fe10AnalysisContext
+    private konst file: KtFile,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFileSymbol(), KtSymbolWithDeclarations, KtFe10AnnotatedSymbol {
-    override val psi: KtFile
+    override konst psi: KtFile
         get() = withValidityAssertion { file }
 
-    override val annotationsObject: Annotations
+    override konst annotationsObject: Annotations
         get() = withValidityAssertion { analysisContext.resolveSession.getFileAnnotations(file) }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { if (file.isCompiled) KtSymbolOrigin.LIBRARY else KtSymbolOrigin.SOURCE }
 
     context(KtAnalysisSession)

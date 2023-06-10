@@ -14,7 +14,7 @@
 fun <T, K> case_1(x: T?, y: K?) {
     x <!UNCHECKED_CAST!>as T<!>
     y <!UNCHECKED_CAST!>as K<!>
-    val z = <!DEBUG_INFO_EXPRESSION_TYPE("T & T?")!>x<!> ?: <!DEBUG_INFO_EXPRESSION_TYPE("K & K?")!>y<!>
+    konst z = <!DEBUG_INFO_EXPRESSION_TYPE("T & T?")!>x<!> ?: <!DEBUG_INFO_EXPRESSION_TYPE("K & K?")!>y<!>
 
     <!DEBUG_INFO_EXPRESSION_TYPE("T & T?")!>x<!><!UNSAFE_CALL!>.<!>equals(10)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>z<!>

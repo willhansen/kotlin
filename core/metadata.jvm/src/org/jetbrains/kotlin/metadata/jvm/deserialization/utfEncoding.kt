@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.metadata.jvm.deserialization
 import java.util.*
 
 // The maximum possible length of the byte array in the CONSTANT_Utf8_info structure in the bytecode, as per JVMS7 4.4.7
-const val MAX_UTF8_INFO_LENGTH = 65535
+const konst MAX_UTF8_INFO_LENGTH = 65535
 
-const val UTF8_MODE_MARKER = 0.toChar()
+const konst UTF8_MODE_MARKER = 0.toChar()
 
 fun bytesToStrings(bytes: ByteArray): Array<String> {
-    val result = ArrayList<String>(1)
-    val buffer = StringBuilder()
+    konst result = ArrayList<String>(1)
+    konst buffer = StringBuilder()
     var bytesInBuffer = 0
 
     buffer.append(UTF8_MODE_MARKER)
@@ -33,7 +33,7 @@ fun bytesToStrings(bytes: ByteArray): Array<String> {
     bytesInBuffer += 2
 
     for (b in bytes) {
-        val c = b.toInt() and 0xFF // 0 <= c <= 255
+        konst c = b.toInt() and 0xFF // 0 <= c <= 255
         buffer.append(c.toChar())
         if (b in 1..127) {
             bytesInBuffer++
@@ -56,8 +56,8 @@ fun bytesToStrings(bytes: ByteArray): Array<String> {
 }
 
 fun stringsToBytes(strings: Array<String>): ByteArray {
-    val resultLength = strings.sumOf { it.length }
-    val result = ByteArray(resultLength)
+    konst resultLength = strings.sumOf { it.length }
+    konst result = ByteArray(resultLength)
 
     var i = 0
     for (s in strings) {

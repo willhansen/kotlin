@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.kapt3.base.util
 import java.io.PrintWriter
 
 class WriterBackedKaptLogger(
-    override val isVerbose: Boolean,
-    override val infoWriter: PrintWriter = PrintWriter(System.out),
-    override val warnWriter: PrintWriter = if (isJava17OrLater()) infoWriter else PrintWriter(System.out),
-    override val errorWriter: PrintWriter = PrintWriter(System.err)
+    override konst isVerbose: Boolean,
+    override konst infoWriter: PrintWriter = PrintWriter(System.out),
+    override konst warnWriter: PrintWriter = if (isJava17OrLater()) infoWriter else PrintWriter(System.out),
+    override konst errorWriter: PrintWriter = PrintWriter(System.err)
 ) : KaptLogger {
     override fun info(message: String) {
         if (isVerbose) {

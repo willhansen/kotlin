@@ -1,4 +1,4 @@
-val c: suspend () -> Unit = {}
+konst c: suspend () -> Unit = {}
 
 class WithTypeParameter<T: suspend() -> Unit> {}
 

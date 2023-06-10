@@ -1,5 +1,5 @@
 class LinkedList<T> : IMutableList<T> {
-  private class Item(var value : Item) {
+  private class Item(var konstue : Item) {
     var next : Item
     var previous : Item
   }
@@ -8,10 +8,10 @@ class LinkedList<T> : IMutableList<T> {
   private var tail : Item = null
   override var size get private set
 
-  override fun add(index : Int, value : T) {
+  override fun add(index : Int, konstue : T) {
     size++
     checkIndex(index)
-    val newItem = Item(value)
+    konst newItem = Item(konstue)
     if (index == 0) {
       newItem.next = head
       head = newItem
@@ -36,7 +36,7 @@ class LinkedList<T> : IMutableList<T> {
 
   override fun remove(index : Int) : T {
     checkIndex(index)
-    val item = itemAt(index)
+    konst item = itemAt(index)
     if (item === head) {
       head = item.next
       if (head === null)
@@ -50,14 +50,14 @@ class LinkedList<T> : IMutableList<T> {
       }
     }
     size--
-    return item.value
+    return item.konstue
   }
 
-  override fun set(index : Int, value : T) : T {
+  override fun set(index : Int, konstue : T) : T {
     checkIndex(index)
-    val item = itemAt(index)
-    val result = item.value
-    item.value = value
+    konst item = itemAt(index)
+    konst result = item.konstue
+    item.konstue = konstue
     return result
   }
 

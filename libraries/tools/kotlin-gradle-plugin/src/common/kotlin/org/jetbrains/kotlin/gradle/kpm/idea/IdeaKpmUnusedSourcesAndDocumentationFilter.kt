@@ -12,17 +12,17 @@ internal object IdeaKpmUnusedSourcesAndDocumentationFilter : IdeaKpmDependencyTr
     override fun transform(
         fragment: GradleKpmFragment, dependencies: Set<IdeaKpmDependency>
     ): Set<IdeaKpmDependency> {
-        val sourcesAndDocumentationDependencies = dependencies
+        konst sourcesAndDocumentationDependencies = dependencies
             .filterIsInstance<IdeaKpmResolvedBinaryDependency>()
             .filter { dependency -> dependency.isSourcesType || dependency.isDocumentationType }
             .toSet()
 
-        val classpathCoordinates = dependencies.filterIsInstance<IdeaKpmResolvedBinaryDependency>()
+        konst classpathCoordinates = dependencies.filterIsInstance<IdeaKpmResolvedBinaryDependency>()
             .filter { dependency -> dependency.isClasspathType }
             .mapNotNull { it.coordinates }
             .toSet()
 
-        val unusedSourcesAndDocumentationDependencies = sourcesAndDocumentationDependencies
+        konst unusedSourcesAndDocumentationDependencies = sourcesAndDocumentationDependencies
             .filter { it.coordinates !in classpathCoordinates }
             .toSet()
 

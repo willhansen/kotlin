@@ -3,13 +3,13 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val arg: Int)
+konstue class Foo(konst arg: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny(val arg: Any)
+konstue class AsAny(konst arg: Any)
 
 fun box(): String {
-    val arr = arrayOf(Foo(1), Foo(2))
+    konst arr = arrayOf(Foo(1), Foo(2))
     var sum = 0
     for (el in arr) {
         sum += el.arg

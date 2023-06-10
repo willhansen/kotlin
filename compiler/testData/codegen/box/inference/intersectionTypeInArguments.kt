@@ -6,20 +6,20 @@ import kotlin.reflect.KType
 import kotlin.reflect.full.starProjectedType
 
 fun convertPrimitivesArray(type: KType, args: Sequence<String?>): Any? {
-    val a = when (type.classifier) {
+    konst a = when (type.classifier) {
         IntArray::class -> args.map { it?.toIntOrNull() }
         CharArray::class -> args.map { it?.singleOrNull() }
         else -> null
     }
-    val b = a?.toList()
-    val c = b?.takeUnless { null in it }
-    val d = c?.toTypedArray()
+    konst b = a?.toList()
+    konst c = b?.takeUnless { null in it }
+    konst d = c?.toTypedArray()
     return d
 }
 
 fun box(): String {
-    val type = CharArray::class.starProjectedType
-    val sequence = sequenceOf("O", "K")
-    val array = convertPrimitivesArray(type, sequence) as Array<*>
+    konst type = CharArray::class.starProjectedType
+    konst sequence = sequenceOf("O", "K")
+    konst array = convertPrimitivesArray(type, sequence) as Array<*>
     return array.joinToString("") { it.toString() }
 }

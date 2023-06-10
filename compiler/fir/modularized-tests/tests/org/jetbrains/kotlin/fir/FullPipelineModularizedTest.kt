@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.config.LanguageVersion
 
 // This is used for API version configuration for both frontends
 // TODO: Deprecated and only used in old FP tests
-internal val API_VERSION: String = System.getProperty("fir.bench.language.version", "1.4")
+internal konst API_VERSION: String = System.getProperty("fir.bench.language.version", "1.4")
 
 // This is used for language version configuration for K2 only. K1 uses LANGUAGE_VERSION_K1
-internal val LANGUAGE_VERSION_K2: String = System.getProperty("fir.bench.language.version.k2", "2.0")
+internal konst LANGUAGE_VERSION_K2: String = System.getProperty("fir.bench.language.version.k2", "2.0")
 
 class FullPipelineModularizedTest : AbstractFullPipelineModularizedTest() {
 

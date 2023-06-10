@@ -9,7 +9,7 @@ object A {
     }
 
     object Z {
-        val p = a()
+        konst p = a()
     }
 }
 

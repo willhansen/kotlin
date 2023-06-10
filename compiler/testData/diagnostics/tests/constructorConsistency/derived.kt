@@ -1,4 +1,4 @@
-open class Base(val x: String) {
+open class Base(konst x: String) {
     fun foo() = bar()
 
     open fun bar() = -1
@@ -6,6 +6,6 @@ open class Base(val x: String) {
 
 class Derived(x: String): Base(x) {
     // It's still dangerous: we're not sure that foo() does not call some open function inside
-    val y = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
-    val z = x
+    konst y = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
+    konst z = x
 }

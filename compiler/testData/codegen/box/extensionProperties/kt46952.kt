@@ -1,8 +1,8 @@
-inline class C(val s: String)
+inline class C(konst s: String)
 
 fun f(g: () -> C): C = g()
 
-val C.foo: C
+konst C.foo: C
     get() = f { this }
 
 fun box() = C("OK").foo.s

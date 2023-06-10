@@ -11,12 +11,12 @@ import kotlinx.cinterop.*
 import libcurl.*
 
 actual fun readFile(fileName: String): String {
-    val file = fopen(fileName, "r") ?: error("Cannot read file '$fileName'")
+    konst file = fopen(fileName, "r") ?: error("Cannot read file '$fileName'")
     var buffer = ByteArray(1024)
     var text = StringBuilder()
     try {
         while (true) {
-            val nextLine = fgets(buffer.refTo(0), buffer.size, file)?.toKString()
+            konst nextLine = fgets(buffer.refTo(0), buffer.size, file)?.toKString()
             if (nextLine == null) break
             text.append(nextLine)
         }
@@ -33,7 +33,7 @@ actual fun Double.format(decimalNumber: Int): String {
 }
 
 actual fun writeToFile(fileName: String, text: String) {
-    val file = fopen(fileName, "wt") ?: error("Cannot write file '$fileName'")
+    konst file = fopen(fileName, "wt") ?: error("Cannot write file '$fileName'")
     try {
         if (fputs(text, file) == EOF) throw Error("File write error")
     } finally {
@@ -41,17 +41,17 @@ actual fun writeToFile(fileName: String, text: String) {
     }
 }
 
-actual fun assert(value: Boolean, lazyMessage: () -> Any) =
-    kotlin.assert(value, lazyMessage)
+actual fun assert(konstue: Boolean, lazyMessage: () -> Any) =
+    kotlin.assert(konstue, lazyMessage)
 
 class CUrl(url: String, user: String? = null, password: String? = null, followLocation: Boolean = false)  {
-    private val stableRef = StableRef.create(this)
+    private konst stableRef = StableRef.create(this)
 
-    private val curl = curl_easy_init()
+    private konst curl = curl_easy_init()
 
     init {
         curl_easy_setopt(curl, CURLOPT_URL, url)
-        val writeData = staticCFunction(::collectResponse)
+        konst writeData = staticCFunction(::collectResponse)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeData)
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, stableRef.asCPointer())
         if (followLocation) {
@@ -65,17 +65,17 @@ class CUrl(url: String, user: String? = null, password: String? = null, followLo
         }
     }
 
-    val body = StringBuilder()
+    konst body = StringBuilder()
 
     fun fetch() {
         memScoped {
-            val res = curl_easy_perform(curl)
+            konst res = curl_easy_perform(curl)
             if (res != CURLE_OK)
                 error("curl_easy_perform() failed: ${curl_easy_strerror(res)?.toKString()}")
-            val http_code = alloc<LongVar>()
+            konst http_code = alloc<LongVar>()
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, http_code.ptr)
-            if (http_code.value >= 400L) {
-                error("Error http code ${http_code.value}")
+            if (http_code.konstue >= 400L) {
+                error("Error http code ${http_code.konstue}")
             }
         }
     }
@@ -87,22 +87,22 @@ class CUrl(url: String, user: String? = null, password: String? = null, followLo
 }
 
 fun CPointer<ByteVar>.toKString(length: Int): String {
-    val bytes = this.readBytes(length)
+    konst bytes = this.readBytes(length)
     return bytes.toKString()
 }
 
 fun collectResponse(buffer: CPointer<ByteVar>?, size: size_t, nitems: size_t, userdata: COpaquePointer?): size_t {
     buffer ?: return 0u
     userdata ?. let {
-        val data = buffer.toKString((size * nitems).toInt()).trim()
-        val curl = userdata.asStableRef<CUrl>().get()
+        konst data = buffer.toKString((size * nitems).toInt()).trim()
+        konst curl = userdata.asStableRef<CUrl>().get()
         curl.body.append(data)
     }
     return size * nitems
 }
 
 actual fun sendGetRequest(url: String, user: String?, password: String?, followLocation: Boolean) : String {
-    val curl = CUrl(url, user, password, followLocation)
+    konst curl = CUrl(url, user, password, followLocation)
     curl.fetch()
     curl.close()
     return curl.body.toString()

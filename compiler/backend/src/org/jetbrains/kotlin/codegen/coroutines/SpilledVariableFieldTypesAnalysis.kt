@@ -18,32 +18,32 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.Frame
 
 // BasicValue interpreter from ASM does not distinct 'int' types from other int-like types like 'byte' or 'boolean',
 // neither do HotSpot and JVM spec.
-// But it seems like Dalvik does not follow it, and spilling boolean value into an 'int' field fails with VerifyError on Android 4,
+// But it seems like Dalvik does not follow it, and spilling boolean konstue into an 'int' field fails with VerifyError on Android 4,
 // so this function calculates refined frames' markup.
-// Note that type of some values is only possible to determine by their usages (e.g. ICONST_1, BALOAD both may push boolean or byte on stack)
-// In this case, coerce the type of the value.
+// Note that type of some konstues is only possible to determine by their usages (e.g. ICONST_1, BALOAD both may push boolean or byte on stack)
+// In this case, coerce the type of the konstue.
 
-internal class IloadedValue(val insns: Set<VarInsnNode>) : BasicValue(Type.INT_TYPE)
+internal class IloadedValue(konst insns: Set<VarInsnNode>) : BasicValue(Type.INT_TYPE)
 
 private class IntLikeCoerceInterpreter : OptimizationBasicInterpreter() {
-    val needsToBeCoerced = mutableMapOf<VarInsnNode, Type>()
+    konst needsToBeCoerced = mutableMapOf<VarInsnNode, Type>()
 
-    private fun coerce(value: IloadedValue, type: Type) {
-        for (insn in value.insns) {
+    private fun coerce(konstue: IloadedValue, type: Type) {
+        for (insn in konstue.insns) {
             needsToBeCoerced[insn] = type
         }
     }
 
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? =
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? =
         when {
             insn.opcode == Opcodes.ILOAD -> IloadedValue(setOf(insn as VarInsnNode))
-            value == null -> null
-            else -> BasicValue(value.type)
+            konstue == null -> null
+            else -> BasicValue(konstue.type)
         }
 
     override fun binaryOperation(insn: AbstractInsnNode, v: BasicValue, w: BasicValue): BasicValue? {
         if (insn.opcode == Opcodes.PUTFIELD) {
-            val expectedType = Type.getType((insn as FieldInsnNode).desc)
+            konst expectedType = Type.getType((insn as FieldInsnNode).desc)
             if (w is IloadedValue && expectedType.isIntLike()) {
                 coerce(w, expectedType)
             }
@@ -51,23 +51,23 @@ private class IntLikeCoerceInterpreter : OptimizationBasicInterpreter() {
         return super.binaryOperation(insn, v, w)
     }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
         if (insn.opcode == Opcodes.PUTSTATIC) {
-            val expectedType = Type.getType((insn as FieldInsnNode).desc)
-            if (value is IloadedValue && expectedType.isIntLike()) {
-                coerce(value, expectedType)
+            konst expectedType = Type.getType((insn as FieldInsnNode).desc)
+            if (konstue is IloadedValue && expectedType.isIntLike()) {
+                coerce(konstue, expectedType)
             }
         }
-        return super.unaryOperation(insn, value)
+        return super.unaryOperation(insn, konstue)
     }
 
-    override fun naryOperation(insn: AbstractInsnNode, values: MutableList<out BasicValue?>): BasicValue? {
+    override fun naryOperation(insn: AbstractInsnNode, konstues: MutableList<out BasicValue?>): BasicValue? {
         fun checkTypes(argTypes: Array<Type>, withReceiver: Boolean) {
-            val offset = if (withReceiver) 1 else 0
+            konst offset = if (withReceiver) 1 else 0
             for ((index, argType) in argTypes.withIndex()) {
-                val value = values[index + offset] ?: continue
-                if (argType.isIntLike() && value is IloadedValue) {
-                    coerce(value, argType)
+                konst konstue = konstues[index + offset] ?: continue
+                if (argType.isIntLike() && konstue is IloadedValue) {
+                    coerce(konstue, argType)
                 }
             }
         }
@@ -82,37 +82,37 @@ private class IntLikeCoerceInterpreter : OptimizationBasicInterpreter() {
                 checkTypes(Type.getArgumentTypes((insn as MethodInsnNode).desc), true)
             }
         }
-        return super.naryOperation(insn, values)
+        return super.naryOperation(insn, konstues)
     }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, arrayref: BasicValue?, index: BasicValue?, value: BasicValue?): BasicValue? {
+    override fun ternaryOperation(insn: AbstractInsnNode, arrayref: BasicValue?, index: BasicValue?, konstue: BasicValue?): BasicValue? {
         when (insn.opcode) {
             Opcodes.BASTORE -> {
-                if (value is IloadedValue) {
-                    val type = if (arrayref?.type?.descriptor == "[Z") Type.BOOLEAN_TYPE else Type.BYTE_TYPE
-                    coerce(value, type)
+                if (konstue is IloadedValue) {
+                    konst type = if (arrayref?.type?.descriptor == "[Z") Type.BOOLEAN_TYPE else Type.BYTE_TYPE
+                    coerce(konstue, type)
                 }
             }
             Opcodes.CASTORE -> {
-                if (value is IloadedValue) {
-                    coerce(value, Type.CHAR_TYPE)
+                if (konstue is IloadedValue) {
+                    coerce(konstue, Type.CHAR_TYPE)
                 }
             }
             Opcodes.SASTORE -> {
-                if (value is IloadedValue) {
-                    coerce(value, Type.SHORT_TYPE)
+                if (konstue is IloadedValue) {
+                    coerce(konstue, Type.SHORT_TYPE)
                 }
             }
         }
-        return super.ternaryOperation(insn, arrayref, index, value)
+        return super.ternaryOperation(insn, arrayref, index, konstue)
     }
 
     override fun merge(v: BasicValue, w: BasicValue): BasicValue =
         when {
             v is IloadedValue && w is IloadedValue && v.type == w.type -> {
-                val insns = v.insns + w.insns
+                konst insns = v.insns + w.insns
                 insns.find { it in needsToBeCoerced }?.let {
-                    val type = needsToBeCoerced[it]!!
+                    konst type = needsToBeCoerced[it]!!
                     coerce(v, type)
                     coerce(w, type)
                 }
@@ -129,7 +129,7 @@ internal fun performSpilledVariableFieldTypesAnalysis(
     methodNode: MethodNode,
     thisName: String
 ): Array<out Frame<BasicValue>?> {
-    val interpreter = IntLikeCoerceInterpreter()
+    konst interpreter = IntLikeCoerceInterpreter()
     FastMethodAnalyzer(thisName, methodNode, interpreter).analyze()
     for ((insn, type) in interpreter.needsToBeCoerced) {
         methodNode.instructions.insert(insn, withInstructionAdapter { coerceInt(type, this) })
@@ -140,8 +140,8 @@ internal fun performSpilledVariableFieldTypesAnalysis(
 private fun coerceInt(to: Type, v: InstructionAdapter) {
     if (to == Type.BOOLEAN_TYPE) {
         with(v) {
-            val zeroLabel = Label()
-            val resLabel = Label()
+            konst zeroLabel = Label()
+            konst resLabel = Label()
             ifeq(zeroLabel)
             iconst(1)
             goTo(resLabel)

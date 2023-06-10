@@ -6,7 +6,7 @@ abstract class C<T>(var constructorParam: List<CharSequence>) {
     print(enumValues<T>().joinToString { it.name })
   }
 
-  val <Q : T> Q.w: Q get() = null!!
+  konst <Q : T> Q.w: Q get() = null!!
 
   var sListProp: List<String>?
   var sSetProp: Set<String>?

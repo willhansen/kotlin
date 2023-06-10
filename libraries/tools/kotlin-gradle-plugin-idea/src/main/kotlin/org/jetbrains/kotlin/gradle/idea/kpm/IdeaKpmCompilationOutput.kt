@@ -10,18 +10,18 @@ import java.io.File
 import java.io.Serializable
 
 sealed interface IdeaKpmCompilationOutput : Serializable {
-    val classesDirs: Set<File>
-    val resourcesDir: File?
+    konst classesDirs: Set<File>
+    konst resourcesDir: File?
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmCompilationOutputImpl(
-    override val classesDirs: Set<File>,
-    override val resourcesDir: File?
+    override konst classesDirs: Set<File>,
+    override konst resourcesDir: File?
 ) : IdeaKpmCompilationOutput {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

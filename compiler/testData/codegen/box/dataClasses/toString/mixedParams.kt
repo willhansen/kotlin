@@ -1,7 +1,7 @@
-data class A(var x: Int, val z: Int?)
+data class A(var x: Int, konst z: Int?)
 
 fun box(): String {
-    val a = A(1, null)
+    konst a = A(1, null)
     if("$a" != "A(x=1, z=null)") return "$a"
     return "OK"
 }

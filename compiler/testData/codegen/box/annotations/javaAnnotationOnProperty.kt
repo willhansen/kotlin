@@ -15,7 +15,7 @@ public @interface Ann2 {}
 
 // FILE: box.kt
 class C {
-    @Ann1 @Ann2 val x = 1
+    @Ann1 @Ann2 konst x = 1
 }
 
 fun box(): String {

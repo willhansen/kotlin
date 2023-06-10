@@ -38,7 +38,7 @@ internal fun FirBasedSymbol<*>.errorInLazyResolve(name: String, actualClass: KCl
 internal fun FirMemberDeclaration.resolvedStatus(): FirResolvedDeclarationStatus {
     lazyResolveToPhase(FirResolvePhase.STATUS)
 
-    val status = status
+    konst status = status
     if (status !is FirResolvedDeclarationStatus) {
         symbol.errorInLazyResolve("status", status::class, FirResolvedDeclarationStatus::class)
     }

@@ -7,7 +7,7 @@ interface Getter<T> {
     fun get(): T
 }
 
-class Delegate<T>(val getter: Getter<T>) {
+class Delegate<T>(konst getter: Getter<T>) {
     var t: T? = null
     operator fun getValue(obj: Any, property: KProperty<*>): T {
         if (t != null) {
@@ -15,24 +15,24 @@ class Delegate<T>(val getter: Getter<T>) {
         }
         return getter.get()
     }
-    operator fun setValue(obj: Any, property: KProperty<*>, value: T) {
-        t = value
+    operator fun setValue(obj: Any, property: KProperty<*>, konstue: T) {
+        t = konstue
     }
 }
 
 class A : Getter<Int> {
-    var value = 0
+    var konstue = 0
     override fun get(): Int {
-        return value
+        return konstue
     }
-    val delegate = Delegate(this)
+    konst delegate = Delegate(this)
 
-    val a by delegate
+    konst a by delegate
     var b by delegate
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.a != 0) return "a.a != 0"
     if (a.b != 0) return "a.b != 0"
 

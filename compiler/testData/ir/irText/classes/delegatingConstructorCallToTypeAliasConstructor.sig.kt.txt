@@ -8,15 +8,15 @@ class C1 : Cell<String> {
   constructor() /* primary */
 
   // CHECK:
-  //   Mangled name: C1{}value
-  //   Public signature: /C1.value|1987073854177347439[0]
-  /* fake */ override val value: String
+  //   Mangled name: C1{}konstue
+  //   Public signature: /C1.konstue|1987073854177347439[0]
+  /* fake */ override konst konstue: String
     // CHECK JVM_IR:
-    //   Mangled name: C1#<get-value>(){}kotlin.String
-    //   Public signature: /C1.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: C1#<get-konstue>(){}kotlin.String
+    //   Public signature: /C1.konstue.<get-konstue>|-7202092821145242726[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: C1#<get-value>(){}
-    //   Public signature: /C1.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: C1#<get-konstue>(){}
+    //   Public signature: /C1.konstue.<get-konstue>|3260093555963109437[0]
     /* fake */ override get(): String
 
 }
@@ -31,15 +31,15 @@ class C2 : Cell<String> {
   constructor() /* primary */
 
   // CHECK:
-  //   Mangled name: C2{}value
-  //   Public signature: /C2.value|1987073854177347439[0]
-  /* fake */ override val value: String
+  //   Mangled name: C2{}konstue
+  //   Public signature: /C2.konstue|1987073854177347439[0]
+  /* fake */ override konst konstue: String
     // CHECK JVM_IR:
-    //   Mangled name: C2#<get-value>(){}kotlin.String
-    //   Public signature: /C2.value.<get-value>|-7202092821145242726[0]
+    //   Mangled name: C2#<get-konstue>(){}kotlin.String
+    //   Public signature: /C2.konstue.<get-konstue>|-7202092821145242726[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: C2#<get-value>(){}
-    //   Public signature: /C2.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: C2#<get-konstue>(){}
+    //   Public signature: /C2.konstue.<get-konstue>|3260093555963109437[0]
     /* fake */ override get(): String
 
 }
@@ -49,21 +49,21 @@ class C2 : Cell<String> {
 //   Public signature: /Cell|null[0]
 open class Cell<T : Any?> {
   // CHECK:
-  //   Mangled name: Cell{}value
-  //   Public signature: /Cell.value|1987073854177347439[0]
-  val value: T
+  //   Mangled name: Cell{}konstue
+  //   Public signature: /Cell.konstue|1987073854177347439[0]
+  konst konstue: T
     // CHECK JVM_IR:
-    //   Mangled name: Cell#<get-value>(){}1:0
-    //   Public signature: /Cell.value.<get-value>|3167862337988859752[0]
+    //   Mangled name: Cell#<get-konstue>(){}1:0
+    //   Public signature: /Cell.konstue.<get-konstue>|3167862337988859752[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: Cell#<get-value>(){}
-    //   Public signature: /Cell.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: Cell#<get-konstue>(){}
+    //   Public signature: /Cell.konstue.<get-konstue>|3260093555963109437[0]
     get
 
   // CHECK:
   //   Mangled name: Cell#<init>(1:0){}
   //   Public signature: /Cell.<init>|-8731461708390519279[0]
-  constructor(value: T) /* primary */
+  constructor(konstue: T) /* primary */
 
 }
 

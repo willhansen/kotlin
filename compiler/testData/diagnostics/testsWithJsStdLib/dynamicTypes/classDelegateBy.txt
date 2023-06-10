@@ -1,6 +1,6 @@
 package
 
-public val x: dynamic = 23
+public konst x: dynamic = 23
 public fun box(): kotlin.String
 
 public final class C : I {

@@ -1,3 +1,3 @@
 package constant
 
-const val X = 10
+const konst X = 10

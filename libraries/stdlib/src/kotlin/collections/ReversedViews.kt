@@ -8,15 +8,15 @@
 
 package kotlin.collections
 
-private open class ReversedListReadOnly<out T>(private val delegate: List<T>) : AbstractList<T>() {
-    override val size: Int get() = delegate.size
+private open class ReversedListReadOnly<out T>(private konst delegate: List<T>) : AbstractList<T>() {
+    override konst size: Int get() = delegate.size
     override fun get(index: Int): T = delegate[reverseElementIndex(index)]
 
     override fun iterator(): Iterator<T> = listIterator(0)
     override fun listIterator(): ListIterator<T> = listIterator(0)
 
     override fun listIterator(index: Int): ListIterator<T> = object : ListIterator<T> {
-        val delegateIterator = delegate.listIterator(reversePositionIndex(index))
+        konst delegateIterator = delegate.listIterator(reversePositionIndex(index))
         override fun hasNext(): Boolean = delegateIterator.hasPrevious()
         override fun hasPrevious(): Boolean = delegateIterator.hasNext()
         override fun next(): T = delegateIterator.previous()
@@ -26,8 +26,8 @@ private open class ReversedListReadOnly<out T>(private val delegate: List<T>) : 
     }
 }
 
-private class ReversedList<T>(private val delegate: MutableList<T>) : AbstractMutableList<T>() {
-    override val size: Int get() = delegate.size
+private class ReversedList<T>(private konst delegate: MutableList<T>) : AbstractMutableList<T>() {
+    override konst size: Int get() = delegate.size
     override fun get(index: Int): T = delegate[reverseElementIndex(index)]
 
     override fun clear() = delegate.clear()
@@ -42,7 +42,7 @@ private class ReversedList<T>(private val delegate: MutableList<T>) : AbstractMu
     override fun listIterator(): MutableListIterator<T> = listIterator(0)
 
     override fun listIterator(index: Int): MutableListIterator<T> = object : MutableListIterator<T> {
-        val delegateIterator = delegate.listIterator(reversePositionIndex(index))
+        konst delegateIterator = delegate.listIterator(reversePositionIndex(index))
         override fun hasNext(): Boolean = delegateIterator.hasPrevious()
         override fun hasPrevious(): Boolean = delegateIterator.hasNext()
         override fun next(): T = delegateIterator.previous()
@@ -52,7 +52,7 @@ private class ReversedList<T>(private val delegate: MutableList<T>) : AbstractMu
         override fun add(element: T) {
             delegateIterator.add(element)
             // After an insertion previous() will return an inserted element.
-            // Moving a cursor back by one element to return a correct value from next().
+            // Moving a cursor back by one element to return a correct konstue from next().
             delegateIterator.previous()
         }
 

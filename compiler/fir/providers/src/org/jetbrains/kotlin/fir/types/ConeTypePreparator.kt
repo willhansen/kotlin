@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.types.AbstractTypePreparator
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 
-class ConeTypePreparator(val session: FirSession) : AbstractTypePreparator() {
+class ConeTypePreparator(konst session: FirSession) : AbstractTypePreparator() {
     private fun prepareType(type: ConeSimpleKotlinType): ConeSimpleKotlinType {
         return when (type) {
             is ConeClassLikeType -> type.fullyExpandedType(session)
@@ -24,7 +24,7 @@ class ConeTypePreparator(val session: FirSession) : AbstractTypePreparator() {
         }
         return when (type) {
             is ConeFlexibleType -> {
-                val lowerBound = prepareType(type.lowerBound)
+                konst lowerBound = prepareType(type.lowerBound)
                 if (lowerBound === type.lowerBound) return type
 
                 ConeFlexibleType(lowerBound, prepareType(type.upperBound))

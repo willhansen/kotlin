@@ -79,10 +79,10 @@ internal fun getIrTypeOperator(ktOperator: IElementType): IrTypeOperator? =
         else -> null
     }
 
-internal val AUGMENTED_ASSIGNMENTS =
+internal konst AUGMENTED_ASSIGNMENTS =
     setOf(IrStatementOrigin.PLUSEQ, IrStatementOrigin.MINUSEQ, IrStatementOrigin.MULTEQ, IrStatementOrigin.DIVEQ, IrStatementOrigin.PERCEQ)
 
-internal val OPERATORS_DESUGARED_TO_CALLS =
+internal konst OPERATORS_DESUGARED_TO_CALLS =
     setOf(
         IrStatementOrigin.PLUS,
         IrStatementOrigin.MINUS,
@@ -96,20 +96,20 @@ internal val OPERATORS_DESUGARED_TO_CALLS =
         IrStatementOrigin.UPLUS
     )
 
-internal val COMPARISON_OPERATORS =
+internal konst COMPARISON_OPERATORS =
     setOf(IrStatementOrigin.LT, IrStatementOrigin.LTEQ, IrStatementOrigin.GT, IrStatementOrigin.GTEQ)
 
-internal val EQUALITY_OPERATORS =
+internal konst EQUALITY_OPERATORS =
     setOf(IrStatementOrigin.EQEQ, IrStatementOrigin.EXCLEQ)
 
-internal val IDENTITY_OPERATORS =
+internal konst IDENTITY_OPERATORS =
     setOf(IrStatementOrigin.EQEQEQ, IrStatementOrigin.EXCLEQEQ)
 
-internal val IN_OPERATORS =
+internal konst IN_OPERATORS =
     setOf(IrStatementOrigin.IN, IrStatementOrigin.NOT_IN)
 
-internal val BINARY_BOOLEAN_OPERATORS =
+internal konst BINARY_BOOLEAN_OPERATORS =
     setOf(IrStatementOrigin.ANDAND, IrStatementOrigin.OROR)
 
-internal val INCREMENT_DECREMENT_OPERATORS =
+internal konst INCREMENT_DECREMENT_OPERATORS =
     setOf(IrStatementOrigin.PREFIX_INCR, IrStatementOrigin.PREFIX_DECR, IrStatementOrigin.POSTFIX_INCR, IrStatementOrigin.POSTFIX_DECR)

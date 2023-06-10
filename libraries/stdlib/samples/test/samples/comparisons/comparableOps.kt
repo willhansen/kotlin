@@ -82,7 +82,7 @@ class ComparableOps {
 
     @Sample
     fun coerceInComparable() {
-        val workingDays = DayOfWeek.MONDAY..DayOfWeek.FRIDAY
+        konst workingDays = DayOfWeek.MONDAY..DayOfWeek.FRIDAY
         assertPrints(DayOfWeek.WEDNESDAY.coerceIn(workingDays), "WEDNESDAY")
         assertPrints(DayOfWeek.SATURDAY.coerceIn(workingDays), "FRIDAY")
 

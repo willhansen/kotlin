@@ -5,8 +5,8 @@
 
 fun foo() = 42
 
-val x = foo()
-val y = x.toLong()
+konst x = foo()
+konst y = x.toLong()
 
 // MODULE: m2(m1)
 // FILE: m2.kt

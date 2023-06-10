@@ -33,18 +33,18 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 // Outlines `kotlin.js.js(code: String)` calls where JS code references Kotlin locals.
 // Makes locals usages explicit.
-class JsCodeOutliningLowering(val backendContext: JsIrBackendContext) : BodyLoweringPass {
+class JsCodeOutliningLowering(konst backendContext: JsIrBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         // Fast path to avoid tracking locals scopes for bodies without js() calls
         if (!irBody.containsCallsTo(backendContext.intrinsics.jsCode))
             return
 
-        val replacer = JsCodeOutlineTransformer(backendContext, container)
+        konst replacer = JsCodeOutlineTransformer(backendContext, container)
         irBody.transformChildrenVoid(replacer)
     }
 
     companion object {
-        val OUTLINED_JS_CODE_ORIGIN = object : IrDeclarationOriginImpl("OUTLINED_JS_CODE") {}
+        konst OUTLINED_JS_CODE_ORIGIN = object : IrDeclarationOriginImpl("OUTLINED_JS_CODE") {}
     }
 }
 
@@ -67,15 +67,15 @@ private fun IrElement.containsCallsTo(symbol: IrFunctionSymbol): Boolean {
 }
 
 private class JsCodeOutlineTransformer(
-    val backendContext: JsIrBackendContext,
-    val container: IrDeclaration,
+    konst backendContext: JsIrBackendContext,
+    konst container: IrDeclaration,
 ) : IrElementTransformerVoidWithContext() {
-    val localScopes: MutableList<MutableMap<String, IrValueDeclaration>> =
+    konst localScopes: MutableList<MutableMap<String, IrValueDeclaration>> =
         mutableListOf(mutableMapOf())
 
     init {
         if (container is IrFunction) {
-            container.valueParameters.forEach {
+            container.konstueParameters.forEach {
                 registerValueDeclaration(it)
             }
         }
@@ -83,16 +83,16 @@ private class JsCodeOutlineTransformer(
 
     inline fun <T> withLocalScope(body: () -> T): T {
         localScopes.push(mutableMapOf())
-        val res = body()
+        konst res = body()
         localScopes.pop()
         return res
     }
 
     fun registerValueDeclaration(irValueDeclaration: IrValueDeclaration) {
-        val name = irValueDeclaration.name
+        konst name = irValueDeclaration.name
         if (!name.isSpecial) {
-            val identifier = name.identifier
-            val currentScope = localScopes.lastOrNull()
+            konst identifier = name.identifier
+            konst currentScope = localScopes.lastOrNull()
                 ?: compilationException(
                     "Expecting a scope",
                     irValueDeclaration
@@ -103,7 +103,7 @@ private class JsCodeOutlineTransformer(
 
     fun findValueDeclarationWithName(name: String): IrValueDeclaration? {
         for (i in (localScopes.size - 1) downTo 0) {
-            val scope = localScopes[i]
+            konst scope = localScopes[i]
             return scope[name] ?: continue
         }
         return null
@@ -133,19 +133,19 @@ private class JsCodeOutlineTransformer(
         if (expression.symbol != backendContext.intrinsics.jsCode)
             return null
 
-        val jsCodeArg = expression.getValueArgument(0) ?: compilationException("Expected js code string", expression)
-        val jsStatements = translateJsCodeIntoStatementList(jsCodeArg, backendContext, container) ?: return null
+        konst jsCodeArg = expression.getValueArgument(0) ?: compilationException("Expected js code string", expression)
+        konst jsStatements = translateJsCodeIntoStatementList(jsCodeArg, backendContext, container) ?: return null
 
         // Collect used Kotlin local variables and parameters.
-        val scope = JsScopesCollector().apply { acceptList(jsStatements) }
-        val localsUsageCollector = KotlinLocalsUsageCollector(scope, ::findValueDeclarationWithName).apply { acceptList(jsStatements) }
-        val kotlinLocalsUsedInJs = localsUsageCollector.usedLocals
+        konst scope = JsScopesCollector().apply { acceptList(jsStatements) }
+        konst localsUsageCollector = KotlinLocalsUsageCollector(scope, ::findValueDeclarationWithName).apply { acceptList(jsStatements) }
+        konst kotlinLocalsUsedInJs = localsUsageCollector.usedLocals
 
         if (kotlinLocalsUsedInJs.isEmpty())
             return null
 
         // Building outlined IR function skeleton
-        val outlinedFunction = backendContext.irFactory.buildFun {
+        konst outlinedFunction = backendContext.irFactory.buildFun {
             name = Name.identifier(container.safeAs<IrDeclarationWithName>()?.name?.asString()?.let { "$it\$outlinedJsCode\$" }
                                        ?: "outlinedJsCode\$")
             returnType = backendContext.dynamicType
@@ -156,7 +156,7 @@ private class JsCodeOutlineTransformer(
         outlinedFunction.body = backendContext.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET)
         outlinedFunction.parent = container.file
         container.file.declarations.add(outlinedFunction)
-        kotlinLocalsUsedInJs.values.forEach { local ->
+        kotlinLocalsUsedInJs.konstues.forEach { local ->
             outlinedFunction.addValueParameter {
                 name = local.name
                 type = local.type
@@ -164,8 +164,8 @@ private class JsCodeOutlineTransformer(
         }
 
         // Building JS Ast function
-        val lastStatement = jsStatements.findLast { it !is JsSingleLineComment && it !is JsMultiLineComment }
-        val newStatements = jsStatements.toMutableList()
+        konst lastStatement = jsStatements.findLast { it !is JsSingleLineComment && it !is JsMultiLineComment }
+        konst newStatements = jsStatements.toMutableList()
         when (lastStatement) {
             is JsReturn -> {
             }
@@ -176,7 +176,7 @@ private class JsCodeOutlineTransformer(
                 newStatements += JsReturn(JsPrefixOperation(JsUnaryOperator.VOID, JsIntLiteral(3)))
             }
         }
-        val newFun = JsFunction(emptyScope, JsBlock(newStatements), "Outlined js() call")
+        konst newFun = JsFunction(emptyScope, JsBlock(newStatements), "Outlined js() call")
         kotlinLocalsUsedInJs.keys.forEach { jsName ->
             newFun.parameters.add(JsParameter(jsName))
         }
@@ -185,7 +185,7 @@ private class JsCodeOutlineTransformer(
 
         return with(backendContext.createIrBuilder(container.symbol)) {
             irCall(outlinedFunction).apply {
-                kotlinLocalsUsedInJs.values.forEachIndexed { index, local ->
+                kotlinLocalsUsedInJs.konstues.forEachIndexed { index, local ->
                     putValueArgument(index, irGet(local))
                 }
             }
@@ -194,11 +194,11 @@ private class JsCodeOutlineTransformer(
 }
 
 class JsScopesCollector : RecursiveJsVisitor() {
-    private val functionsStack = mutableListOf(Scope(null))
-    private val functionalScopes = mutableMapOf<JsFunction?, Scope>(null to functionsStack.first())
+    private konst functionsStack = mutableListOf(Scope(null))
+    private konst functionalScopes = mutableMapOf<JsFunction?, Scope>(null to functionsStack.first())
 
-    private class Scope(val parent: Scope?) {
-        private val variables = hashSetOf<String>()
+    private class Scope(konst parent: Scope?) {
+        private konst variables = hashSetOf<String>()
 
         fun add(variableName: String) {
             variables.add(variableName)
@@ -212,14 +212,14 @@ class JsScopesCollector : RecursiveJsVisitor() {
 
     override fun visitVars(x: JsVars) {
         super.visitVars(x)
-        val currentScope = functionsStack.last()
+        konst currentScope = functionsStack.last()
         x.vars.forEach { currentScope.add(it.name.ident) }
     }
 
     override fun visitFunction(x: JsFunction) {
-        val parentScope = functionsStack.last()
-        val newScope = Scope(parentScope).apply {
-            val name = x.name?.ident
+        konst parentScope = functionsStack.last()
+        konst newScope = Scope(parentScope).apply {
+            konst name = x.name?.ident
             if (name != null) add(name)
             x.parameters.forEach { add(it.name.ident) }
         }
@@ -235,14 +235,14 @@ class JsScopesCollector : RecursiveJsVisitor() {
 }
 
 private class KotlinLocalsUsageCollector(
-    private val scopeInfo: JsScopesCollector,
-    private val findValueDeclarationWithName: (String) -> IrValueDeclaration?
+    private konst scopeInfo: JsScopesCollector,
+    private konst findValueDeclarationWithName: (String) -> IrValueDeclaration?
 ) : RecursiveJsVisitor() {
-    private val functionStack = mutableListOf<JsFunction?>(null)
-    private val processedNames = mutableSetOf<String>()
-    private val kotlinLocalsUsedInJs = mutableMapOf<JsName, IrValueDeclaration>()
+    private konst functionStack = mutableListOf<JsFunction?>(null)
+    private konst processedNames = mutableSetOf<String>()
+    private konst kotlinLocalsUsedInJs = mutableMapOf<JsName, IrValueDeclaration>()
 
-    val usedLocals: Map<JsName, IrValueDeclaration>
+    konst usedLocals: Map<JsName, IrValueDeclaration>
         get() = kotlinLocalsUsedInJs
 
     override fun visitFunction(x: JsFunction) {
@@ -253,7 +253,7 @@ private class KotlinLocalsUsageCollector(
 
     override fun visitNameRef(nameRef: JsNameRef) {
         super.visitNameRef(nameRef)
-        val name = nameRef.name.takeIf { nameRef.qualifier == null } ?: return
+        konst name = nameRef.name.takeIf { nameRef.qualifier == null } ?: return
         // With this approach we should be able to find all usages of Kotlin variables in JS code.
         // We will also collect shadowed usages, but it is OK since the same shadowing will be present in generated JS code.
         // Keeping track of processed names to avoid registering them multiple times

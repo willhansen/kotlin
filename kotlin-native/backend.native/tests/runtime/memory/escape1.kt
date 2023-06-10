@@ -7,14 +7,14 @@ package runtime.memory.escape1
 
 import kotlin.test.*
 
-class B(val s: String)
+class B(konst s: String)
 
 class A {
-    val b = B("zzz")
+    konst b = B("zzz")
 }
 
 fun foo(): B {
-    val a = A()
+    konst a = A()
     return a.b
 }
 

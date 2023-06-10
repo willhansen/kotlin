@@ -15,40 +15,40 @@ import java.io.File
 import java.util.regex.Pattern
 
 class SimpleTestClassModel(
-    val rootFile: File,
-    val recursive: Boolean,
-    private val excludeParentDirs: Boolean,
-    val filenamePattern: Pattern,
-    val excludePattern: Pattern?,
-    private val checkFilenameStartsLowerCase: Boolean?,
-    private val doTestMethodName: String,
-    private val testClassName: String,
-    val targetBackend: TargetBackend,
+    konst rootFile: File,
+    konst recursive: Boolean,
+    private konst excludeParentDirs: Boolean,
+    konst filenamePattern: Pattern,
+    konst excludePattern: Pattern?,
+    private konst checkFilenameStartsLowerCase: Boolean?,
+    private konst doTestMethodName: String,
+    private konst testClassName: String,
+    konst targetBackend: TargetBackend,
     excludeDirs: Collection<String>,
     excludeDirsRecursively: Collection<String>,
-    private val skipIgnored: Boolean,
-    private val testRunnerMethodName: String,
-    private val additionalRunnerArguments: List<String>,
-    private val deep: Int?,
-    override val annotations: Collection<AnnotationModel>,
-    override val tags: List<String>,
-    private val additionalMethods: Collection<MethodModel>,
+    private konst skipIgnored: Boolean,
+    private konst testRunnerMethodName: String,
+    private konst additionalRunnerArguments: List<String>,
+    private konst deep: Int?,
+    override konst annotations: Collection<AnnotationModel>,
+    override konst tags: List<String>,
+    private konst additionalMethods: Collection<MethodModel>,
 ) : TestClassModel() {
-    override val name: String
+    override konst name: String
         get() = testClassName
 
-    val excludeDirs: Set<String> = excludeDirs.toSet()
-    val excludeDirsRecursively: Set<String> = excludeDirsRecursively.toSet()
+    konst excludeDirs: Set<String> = excludeDirs.toSet()
+    konst excludeDirsRecursively: Set<String> = excludeDirsRecursively.toSet()
 
-    override val innerTestClasses: Collection<TestClassModel> by lazy {
+    override konst innerTestClasses: Collection<TestClassModel> by lazy {
         if (!rootFile.isDirectory || !recursive || deep != null && deep < 1) {
             return@lazy emptyList()
         }
-        val children = mutableListOf<TestClassModel>()
-        val files = rootFile.listFiles() ?: return@lazy emptyList()
+        konst children = mutableListOf<TestClassModel>()
+        konst files = rootFile.listFiles() ?: return@lazy emptyList()
         for (file in files) {
             if (file.isDirectory && dirHasFilesInside(file) && !excludeDirs.contains(file.name) && !excludeDirsRecursively.contains(file.name)) {
-                val innerTestClassName = fileNameToJavaIdentifier(file)
+                konst innerTestClassName = fileNameToJavaIdentifier(file)
                 children.add(
                     SimpleTestClassModel(
                         file,
@@ -80,9 +80,9 @@ class SimpleTestClassModel(
 
     private fun excludesStripOneDirectory(directoryName: String): Set<String> {
         if (excludeDirs.isEmpty()) return excludeDirs
-        val result: MutableSet<String> = LinkedHashSet()
+        konst result: MutableSet<String> = LinkedHashSet()
         for (excludeDir in excludeDirs) {
-            val firstSlash = excludeDir.indexOf('/')
+            konst firstSlash = excludeDir.indexOf('/')
             if (firstSlash >= 0 && excludeDir.substring(0, firstSlash) == directoryName) {
                 result.add(excludeDir.substring(firstSlash + 1))
             }
@@ -90,7 +90,7 @@ class SimpleTestClassModel(
         return result
     }
 
-    override val methods: Collection<MethodModel> by lazy {
+    override konst methods: Collection<MethodModel> by lazy {
         if (!rootFile.isDirectory) {
             return@lazy methodModelLocator(
                 rootFile,
@@ -102,14 +102,14 @@ class SimpleTestClassModel(
                 extractTagsFromTestFile(rootFile)
             )
         }
-        val result = mutableListOf<MethodModel>()
+        konst result = mutableListOf<MethodModel>()
         result.add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName, additionalRunnerArguments))
         result.add(TestAllFilesPresentMethodModel())
         result.addAll(additionalMethods)
-        val listFiles = rootFile.listFiles()
+        konst listFiles = rootFile.listFiles()
         if (listFiles != null && (deep == null || deep == 0)) {
             for (file in listFiles) {
-                val excluded = excludePattern != null && excludePattern.matcher(file.name).matches()
+                konst excluded = excludePattern != null && excludePattern.matcher(file.name).matches()
                 if (filenamePattern.matcher(file.name).matches() && !excluded) {
                     if (file.isDirectory && excludeParentDirs && dirHasSubDirs(file)) {
                         continue
@@ -124,7 +124,7 @@ class SimpleTestClassModel(
             }
         }
         if (result.any { it is TransformingTestMethodModel && it.shouldBeGenerated() }) {
-            val additionalRunner =
+            konst additionalRunner =
                 RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName, additionalRunnerArguments, withTransformer = true)
             result.add(additionalRunner)
         }
@@ -132,50 +132,50 @@ class SimpleTestClassModel(
         result
     }
 
-    override val isEmpty: Boolean
+    override konst isEmpty: Boolean
         get() {
-            val noTestMethods = methods.size == 1
+            konst noTestMethods = methods.size == 1
             return noTestMethods && innerTestClasses.isEmpty()
         }
 
-    override val dataString: String
+    override konst dataString: String
         get() = KtTestUtil.getFilePath(rootFile)
 
-    override val dataPathRoot: String
+    override konst dataPathRoot: String
         get() = "\$PROJECT_ROOT"
 
     object TestAllFilesPresentMethodKind : MethodModel.Kind()
 
     inner class TestAllFilesPresentMethodModel : MethodModel {
-        override val kind: MethodModel.Kind
+        override konst kind: MethodModel.Kind
             get() = TestAllFilesPresentMethodKind
 
-        override val name: String
+        override konst name: String
             get() = "testAllFilesPresentIn$testClassName"
 
-        override val dataString: String?
+        override konst dataString: String?
             get() = null
 
-        val classModel: SimpleTestClassModel
+        konst classModel: SimpleTestClassModel
             get() = this@SimpleTestClassModel
 
         override fun shouldBeGenerated(): Boolean {
             return true
         }
 
-        override val tags: List<String>
+        override konst tags: List<String>
             get() = emptyList()
     }
 
     companion object {
-        private val BY_NAME = Comparator.comparing(TestEntityModel::name)
+        private konst BY_NAME = Comparator.comparing(TestEntityModel::name)
 
         private fun dirHasFilesInside(dir: File): Boolean {
             return !FileUtil.processFilesRecursively(dir) { obj: File -> obj.isDirectory }
         }
 
         private fun dirHasSubDirs(dir: File): Boolean {
-            val listFiles = dir.listFiles() ?: return false
+            konst listFiles = dir.listFiles() ?: return false
             for (file in listFiles) {
                 if (file.isDirectory) {
                     return true

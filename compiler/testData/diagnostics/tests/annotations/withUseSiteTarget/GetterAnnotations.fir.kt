@@ -13,22 +13,22 @@ class SomeClass {
     constructor()
 
     @get:Ann
-    protected val simpleProperty: String = "text"
+    protected konst simpleProperty: String = "text"
 
     @get:Ann
     protected var mutableProperty: String = "text"
 
     @get:[Ann]
-    protected val simplePropertyWithAnnotationList: String = "text"
+    protected konst simplePropertyWithAnnotationList: String = "text"
 
     @get:Ann
-    protected val delegatedProperty: String by CustomDelegate()
+    protected konst delegatedProperty: String by CustomDelegate()
 
     @get:Ann
-    val propertyWithCustomGetter: Int
+    konst propertyWithCustomGetter: Int
         get() = 5
 
-    val useSiteTarget: Int
+    konst useSiteTarget: Int
         <!INAPPLICABLE_TARGET_ON_PROPERTY!>@get:Ann<!> get() = 5
 
     <!INAPPLICABLE_TARGET_ON_PROPERTY, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@get:Ann<!>
@@ -36,7 +36,7 @@ class SomeClass {
 
     fun anotherFun() {
         <!INAPPLICABLE_TARGET_ON_PROPERTY, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@get:Ann<!>
-        val localVariable = 5
+        konst localVariable = 5
     }
 
 }

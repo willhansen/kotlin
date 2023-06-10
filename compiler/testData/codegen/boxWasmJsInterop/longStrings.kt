@@ -12,7 +12,7 @@ fun box(): String {
     var x = "1234567890"
     for (i in 1 until 20) {
         x += x
-        val stringFromJs = id(x)
+        konst stringFromJs = id(x)
         if (!stringFromJs.equals(x)) return "FAIL"
     }
     return "OK"

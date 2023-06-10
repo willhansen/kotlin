@@ -1,8 +1,8 @@
-val x = object {
-    val someString = "123"
+konst x = object {
+    konst someString = "123"
 
     private fun foo(): Unit = with(someString) {
-        val presentations = mutableListOf<String>()
+        konst presentations = mutableListOf<String>()
         bar(true)?.let {
             presentations.add(it)
         }
@@ -15,10 +15,10 @@ val x = object {
 
 fun owner() {
     class Local {
-        val someString = "123"
+        konst someString = "123"
 
         private fun foo(): Unit = with(someString) {
-            val presentations = mutableListOf<String>()
+            konst presentations = mutableListOf<String>()
             bar(true)?.let {
                 presentations.add(it)
             }

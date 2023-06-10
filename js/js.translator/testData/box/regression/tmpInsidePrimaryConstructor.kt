@@ -1,29 +1,29 @@
 // EXPECTED_REACHABLE_NODES: 1313
 package foo
 
-val x: Int?
+konst x: Int?
     get() = null
 
 // Note: `x ?: 2` expression used to force to create tempary variable
 
 class A {
-    val a = x ?: 2
+    konst a = x ?: 2
 }
 
-enum class E(val a: Int = 0) {
+enum class E(konst a: Int = 0) {
     X(),
     Y() {
-        val y = x ?: 4
+        konst y = x ?: 4
 
-        override fun value() = y
+        override fun konstue() = y
     };
 
-    val e = x ?: 3
+    konst e = x ?: 3
 
-    open fun value() = e
+    open fun konstue() = e
 }
 
-open class B(val b: Int)
+open class B(konst b: Int)
 
 class C : B(x ?: 6)
 
@@ -31,7 +31,7 @@ class C : B(x ?: 6)
 fun box(): String {
     assertEquals(2, A().a)
     assertEquals(3, E.X.e)
-    assertEquals(4, E.Y.value())
+    assertEquals(4, E.Y.konstue())
     assertEquals(6, C().b)
 
     return "OK"

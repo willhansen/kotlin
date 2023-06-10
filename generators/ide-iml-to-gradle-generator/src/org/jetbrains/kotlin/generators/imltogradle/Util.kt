@@ -21,11 +21,11 @@ import java.net.URL
 import java.util.*
 
 fun String.trimMarginWithInterpolations(): String {
-    val regex = Regex("""^(\s*\|)(\s*).*$""")
-    val out = mutableListOf<String>()
+    konst regex = Regex("""^(\s*\|)(\s*).*$""")
+    konst out = mutableListOf<String>()
     var prevIndent = ""
     for (line in lines()) {
-        val matchResult = regex.matchEntire(line)
+        konst matchResult = regex.matchEntire(line)
         if (matchResult != null) {
             out.add(line.removePrefix(matchResult.groupValues[1]))
             prevIndent = matchResult.groupValues[2]
@@ -52,35 +52,35 @@ inline fun <reified T> Any?.safeAs(): T? {
     return this as? T
 }
 
-val JpsDependencyElement.scope: JpsJavaDependencyScope
+konst JpsDependencyElement.scope: JpsJavaDependencyScope
     get() = JpsJavaExtensionServiceImpl.getInstance().getDependencyExtension(this)?.scope
         ?: error("Cannot get dependency scope for $this")
 
-val JpsDependencyElement.isExported: Boolean
+konst JpsDependencyElement.isExported: Boolean
     get() = JpsJavaExtensionServiceImpl.getInstance().getDependencyExtension(this)?.isExported
         ?: error("Cannot get dependency isExported for $this")
 
 fun File.loadJpsProject(): JpsProject {
-    val model = JpsElementFactory.getInstance().createModel()
-    val project = model.project
+    konst model = JpsElementFactory.getInstance().createModel()
+    konst project = model.project
     JpsProjectLoader.loadProject(project, mapOf(), this.canonicalPath)
     return project
 }
 
 sealed class Either<out A, out B> {
-    data class First<out A>(val value: A) : Either<A, Nothing>()
-    data class Second<out B>(val value: B) : Either<Nothing, B>()
+    data class First<out A>(konst konstue: A) : Either<A, Nothing>()
+    data class Second<out B>(konst konstue: B) : Either<Nothing, B>()
 }
 
-val <T, A : T, B : T> Either<A, B>.value: T
+konst <T, A : T, B : T> Either<A, B>.konstue: T
     get() = when (this) {
-        is Either.First -> this.value
-        is Either.Second -> this.value
+        is Either.First -> this.konstue
+        is Either.Second -> this.konstue
     }
 
 inline fun <T> T?.orElse(block: () -> T): T = this ?: block()
 
-val JpsModule.dependencies: List<JpsDependencyElement>
+konst JpsModule.dependencies: List<JpsDependencyElement>
     get() = dependenciesList.dependencies.filter { it is JpsModuleDependency || it is JpsLibraryDependency }
 
 

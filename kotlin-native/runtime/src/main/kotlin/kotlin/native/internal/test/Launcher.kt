@@ -19,7 +19,7 @@ import kotlin.native.concurrent.*
 @ExperimentalNativeApi
 @ThreadLocal
 public object GeneratedSuites {
-   val suites = mutableListOf<TestSuite>()
+   konst suites = mutableListOf<TestSuite>()
    fun add(suite: TestSuite) = suites.add(suite)
 }
 
@@ -35,7 +35,7 @@ fun testLauncherEntryPoint(args: Array<String>): Int {
 
 @ExperimentalNativeApi
 fun main(args: Array<String>) {
-    val exitCode = testLauncherEntryPoint(args)
+    konst exitCode = testLauncherEntryPoint(args)
     if (exitCode != 0) {
         exitProcess(exitCode)
     }
@@ -45,8 +45,8 @@ fun main(args: Array<String>) {
 @ExperimentalNativeApi
 @ObsoleteWorkersApi
 fun worker(args: Array<String>) {
-    val worker = Worker.start()
-    val exitCode = worker.execute(TransferMode.SAFE, { args.freeze() }) {
+    konst worker = Worker.start()
+    konst exitCode = worker.execute(TransferMode.SAFE, { args.freeze() }) {
         it -> testLauncherEntryPoint(it)
     }.result
     worker.requestTermination().result

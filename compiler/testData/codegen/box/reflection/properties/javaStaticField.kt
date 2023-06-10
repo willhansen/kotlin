@@ -14,7 +14,7 @@ public class J {
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val f = J::x
+    konst f = J::x
     assertEquals("x", f.name)
 
     assertEquals(f, J::class.members.single { it.name == "x" })
@@ -23,7 +23,7 @@ fun box(): String {
     assertEquals("OK", J.x)
     assertEquals("OK", f.getter())
 
-    val pl = J::packageLocalField.getter
+    konst pl = J::packageLocalField.getter
     try {
         pl()
         return "Fail: package local field must be inaccessible"

@@ -24,7 +24,7 @@ import first.foo
 import checkSubtype
 
 fun main() {
-    val x = first.A::foo
+    konst x = first.A::foo
     first.A::<!UNRESOLVED_REFERENCE!>bar<!>
     A::<!UNRESOLVED_REFERENCE!>baz<!>
 

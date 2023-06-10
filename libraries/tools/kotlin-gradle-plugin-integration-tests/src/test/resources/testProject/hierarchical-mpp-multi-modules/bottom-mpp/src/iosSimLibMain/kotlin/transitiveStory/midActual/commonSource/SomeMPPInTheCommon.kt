@@ -1,12 +1,12 @@
 package transitiveStory.midActual.commonSource
 
 actual open class SomeMPPInTheCommon actual constructor() {
-    actual val simpleVal: Int = 85
+    actual konst simpleVal: Int = 85
 
     actual companion object Compainon {
-        actual val inTheCompanionOfBottomActualDeclarations: String = "I'm the string in `$sourceSetName` source set"
+        actual konst inTheCompanionOfBottomActualDeclarations: String = "I'm the string in `$sourceSetName` source set"
     }
 
 }
 
-actual val sourceSetName: String = "iosSimLibMain"
+actual konst sourceSetName: String = "iosSimLibMain"

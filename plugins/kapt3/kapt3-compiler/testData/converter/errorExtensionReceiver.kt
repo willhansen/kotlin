@@ -4,17 +4,17 @@
 class TypeHook {
     var customProperty: UnknownType
         get() = UnknownType()
-        set(value) {}
+        set(konstue) {}
 
     var UnknownType.receiverProperty: UnknownType
         get() = UnknownType()
-        set(value) {}
+        set(konstue) {}
 
     fun UnknownType.receiverFunction(): UnknownType = UnknownType()
 
     companion object {
         var UnknownType.extensionProperty: UnknownType
             get() = UnknownType()
-            set(value) {}
+            set(konstue) {}
     }
 }

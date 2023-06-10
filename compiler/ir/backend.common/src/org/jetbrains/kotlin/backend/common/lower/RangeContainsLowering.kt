@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-val rangeContainsLoweringPhase = makeIrFilePhase(
+konst rangeContainsLoweringPhase = makeIrFilePhase(
     ::RangeContainsLowering,
     name = "RangeContainsLowering",
     description = "Optimizes calls to contains() for ClosedRanges"
@@ -45,23 +45,23 @@ val rangeContainsLoweringPhase = makeIrFilePhase(
  *
  * For example, the expression `X in A..B` is transformed into `A <= X && X <= B`.
  */
-class RangeContainsLowering(val context: CommonBackendContext) : BodyLoweringPass {
+class RangeContainsLowering(konst context: CommonBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val transformer = Transformer(context, container as IrSymbolOwner)
+        konst transformer = Transformer(context, container as IrSymbolOwner)
         irBody.transformChildrenVoid(transformer)
     }
 }
 
 private class Transformer(
-    val context: CommonBackendContext,
-    val container: IrSymbolOwner
+    konst context: CommonBackendContext,
+    konst container: IrSymbolOwner
 ) : IrElementTransformerVoidWithContext() {
-    private val headerInfoBuilder = RangeHeaderInfoBuilder(context, this::getScopeOwnerSymbol)
+    private konst headerInfoBuilder = RangeHeaderInfoBuilder(context, this::getScopeOwnerSymbol)
     fun getScopeOwnerSymbol() = currentScope?.scope?.scopeOwnerSymbol ?: container.symbol
 
     private fun matchStdlibExtensionContainsCall(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.size == 1 &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.size == 1 &&
                 callee.extensionReceiverParameter?.type?.isSubtypeOfClass(context.ir.symbols.closedRange) == true &&
                 callee.kotlinFqName == FqName("kotlin.ranges.${OperatorNameConventions.CONTAINS}")
     }
@@ -69,15 +69,15 @@ private class Transformer(
     override fun visitCall(expression: IrCall): IrExpression {
         // The call to contains() in `5 in 0..10` has origin=IN:
         //
-        //   CALL 'public open fun contains (value: kotlin.Int): kotlin.Boolean [operator] declared in kotlin.ranges.IntRange' type=kotlin.Boolean origin=IN
+        //   CALL 'public open fun contains (konstue: kotlin.Int): kotlin.Boolean [operator] declared in kotlin.ranges.IntRange' type=kotlin.Boolean origin=IN
         //
         // And when `!in` is used in `5 !in 0..10`, _both_ the not() and contains() calls have origin=NOT_IN:
         //
         //   CALL 'public final fun not (): kotlin.Boolean [operator] declared in kotlin.Boolean' type=kotlin.Boolean origin=NOT_IN
-        //     $this: CALL 'public open fun contains (value: kotlin.Int): kotlin.Boolean [operator] declared in kotlin.ranges.IntRange' type=kotlin.Boolean origin=NOT_IN
+        //     $this: CALL 'public open fun contains (konstue: kotlin.Int): kotlin.Boolean [operator] declared in kotlin.ranges.IntRange' type=kotlin.Boolean origin=NOT_IN
         //
         // We only want to lower the call to contains(); in the `!in` case, the call to not() should be preserved.
-        val origin = expression.origin
+        konst origin = expression.origin
         if (origin != IrStatementOrigin.IN && origin != IrStatementOrigin.NOT_IN) {
             return super.visitCall(expression)  // The call is not an `in` expression.
         }
@@ -94,18 +94,18 @@ private class Transformer(
 
         // The HeaderInfoBuilder extracts information (e.g., lower/upper bounds, direction) from the range expression, which is the
         // receiver for the contains() call.
-        val receiver = expression.dispatchReceiver ?: expression.extensionReceiver
-        val headerInfo = receiver?.accept(headerInfoBuilder, expression)
+        konst receiver = expression.dispatchReceiver ?: expression.extensionReceiver
+        konst headerInfo = receiver?.accept(headerInfoBuilder, expression)
             ?: return super.visitCall(expression)  // The receiver is not a supported range (or not a range at all).
 
-        val argument = expression.getValueArgument(0)!!
+        konst argument = expression.getValueArgument(0)!!
         if (argument.type.isNullable()) {
             // There are stdlib extension functions that return false for null arguments, e.g., IntRange.contains(Int?). We currently
             // do not optimize such calls.
             return super.visitCall(expression)
         }
 
-        val builder = context.createIrBuilder(getScopeOwnerSymbol(), expression.startOffset, expression.endOffset)
+        konst builder = context.createIrBuilder(getScopeOwnerSymbol(), expression.startOffset, expression.endOffset)
         return builder.buildContainsComparison(headerInfo, argument, origin) ?: super.visitCall(expression)  // The call cannot be lowered.
     }
 
@@ -116,18 +116,18 @@ private class Transformer(
     ): IrExpression? {
         // If the lower bound of the range is A, the upper bound is B, and the argument is X, the contains() call is generally transformed
         // into `A <= X && X <= B`. However, when any of these expressions (A/B/X) can have side-effects, they must resolve in the order
-        // in the expression. E.g., for `X in A..B` the order is A -> B -> X (the equivalent call is `(A..B).contains(X)`), and for
-        // `X in B downTo A` the order is B -> A -> X (the equivalent call is `(B.downTo(A)).contains(X)`).
+        // in the expression. E.g., for `X in A..B` the order is A -> B -> X (the equikonstent call is `(A..B).contains(X)`), and for
+        // `X in B downTo A` the order is B -> A -> X (the equikonstent call is `(B.downTo(A)).contains(X)`).
         // Therefore, we need to know in which order the expressions appear in the contains() expression. `shouldUpperComeFirst` is true
         // when the expression or variable for `B` (upper) should appear in the lowered IR before `A` (lower).
 
-        val lower: IrExpression
-        val upper: IrExpression
-        val isUpperInclusive: Boolean
-        val shouldUpperComeFirst: Boolean
-        val useCompareTo: Boolean
-        val isNumericRange: Boolean
-        val additionalStatements = mutableListOf<IrStatement>()
+        konst lower: IrExpression
+        konst upper: IrExpression
+        konst isUpperInclusive: Boolean
+        konst shouldUpperComeFirst: Boolean
+        konst useCompareTo: Boolean
+        konst isNumericRange: Boolean
+        konst additionalStatements = mutableListOf<IrStatement>()
 
         when (headerInfo) {
             is NumericHeaderInfo -> {
@@ -200,13 +200,13 @@ private class Transformer(
         }
 
         // The transformed expression is `A <= X && X <= B`. If the argument expression X can have side effects, it must be stored in a
-        // temp variable before the expression so it does not get evaluated twice. If A and/or B can have side effects, they must also be
+        // temp variable before the expression so it does not get ekonstuated twice. If A and/or B can have side effects, they must also be
         // stored in temp variables BEFORE X.
         //
         // On the other hand, if X can NOT have side effects, it does NOT need to be stored in a temp variable. However, because of
-        // short-circuit evaluation of &&, if A and/or B can have side effects, we need to make sure they get evaluated regardless.
+        // short-circuit ekonstuation of &&, if A and/or B can have side effects, we need to make sure they get ekonstuated regardless.
         // We accomplish this be storing it in a temp variable (the alternative is to duplicate A/B in a block in the "else" branch before
-        // returning false). We can also switch the order of the clauses to ensure evaluation. See below for the expected outcomes:
+        // returning false). We can also switch the order of the clauses to ensure ekonstuation. See below for the expected outcomes:
         //
         //   =======|=======|=======|======================|================|=======================
         //   Can have side effects? | (Note B is "upper")  |                |
@@ -226,12 +226,12 @@ private class Transformer(
         //   =======|=======|=======|======================|================|=======================
         //
         // *   - Order does not matter.
-        // **  - Bound with side effect is stored in a temp variable to ensure evaluation even if right side is short-circuited.
-        // *** - Bound with side effect is on left side of && to make sure it always gets evaluated.
+        // **  - Bound with side effect is stored in a temp variable to ensure ekonstuation even if right side is short-circuited.
+        // *** - Bound with side effect is on left side of && to make sure it always gets ekonstuated.
 
         var arg = argument
-        val builtIns = context.irBuiltIns
-        val comparisonClass = if (isNumericRange) {
+        konst builtIns = context.irBuiltIns
+        konst comparisonClass = if (isNumericRange) {
             computeComparisonClass(this@Transformer.context.ir.symbols, lower.type, upper.type, arg.type) ?: return null
         } else {
             assert(headerInfo is ComparableRangeInfo)
@@ -245,13 +245,13 @@ private class Transformer(
             arg = arg.castIfNecessary(comparisonClass)
         }
 
-        val (argVar, argExpression) = createTemporaryVariableIfNecessary(arg, "containsArg")
+        konst (argVar, argExpression) = createTemporaryVariableIfNecessary(arg, "containsArg")
         var lowerExpression: IrExpression
         var upperExpression: IrExpression
-        val useLowerClauseOnLeftSide: Boolean
+        konst useLowerClauseOnLeftSide: Boolean
         if (argVar != null) {
-            val (lowerVar, tmpLowerExpression) = createTemporaryVariableIfNecessary(lower, "containsLower")
-            val (upperVar, tmpUpperExpression) = createTemporaryVariableIfNecessary(upper, "containsUpper")
+            konst (lowerVar, tmpLowerExpression) = createTemporaryVariableIfNecessary(lower, "containsLower")
+            konst (upperVar, tmpUpperExpression) = createTemporaryVariableIfNecessary(upper, "containsUpper")
             if (shouldUpperComeFirst) {
                 additionalStatements.addIfNotNull(upperVar)
                 additionalStatements.addIfNotNull(lowerVar)
@@ -264,13 +264,13 @@ private class Transformer(
             useLowerClauseOnLeftSide = true
         } else if (lower.canHaveSideEffects && upper.canHaveSideEffects) {
             if (shouldUpperComeFirst) {
-                val (upperVar, tmpUpperExpression) = createTemporaryVariableIfNecessary(upper, "containsUpper")
+                konst (upperVar, tmpUpperExpression) = createTemporaryVariableIfNecessary(upper, "containsUpper")
                 additionalStatements.add(upperVar!!)
                 lowerExpression = lower
                 upperExpression = tmpUpperExpression.shallowCopy()
                 useLowerClauseOnLeftSide = true
             } else {
-                val (lowerVar, tmpLowerExpression) = createTemporaryVariableIfNecessary(lower, "containsLower")
+                konst (lowerVar, tmpLowerExpression) = createTemporaryVariableIfNecessary(lower, "containsLower")
                 additionalStatements.add(lowerVar!!)
                 lowerExpression = tmpLowerExpression.shallowCopy()
                 upperExpression = upper
@@ -288,23 +288,23 @@ private class Transformer(
             upperExpression = upperExpression.castIfNecessary(comparisonClass)
         }
 
-        val lowerCompFun = builtIns.lessOrEqualFunByOperandType.getValue(if (useCompareTo) builtIns.intClass else comparisonClass.symbol)
-        val upperCompFun = if (isUpperInclusive) {
+        konst lowerCompFun = builtIns.lessOrEqualFunByOperandType.getValue(if (useCompareTo) builtIns.intClass else comparisonClass.symbol)
+        konst upperCompFun = if (isUpperInclusive) {
             builtIns.lessOrEqualFunByOperandType
         } else {
             builtIns.lessFunByOperandType
         }.getValue(if (useCompareTo) builtIns.intClass else comparisonClass.symbol)
-        val compareToFun = comparisonClass.functions.singleOrNull {
+        konst compareToFun = comparisonClass.functions.singleOrNull {
             it.name == OperatorNameConventions.COMPARE_TO &&
                     it.dispatchReceiverParameter != null && it.extensionReceiverParameter == null &&
-                    it.valueParameters.size == 1 && (!isNumericRange || it.valueParameters[0].type == comparisonClass.defaultType)
+                    it.konstueParameters.size == 1 && (!isNumericRange || it.konstueParameters[0].type == comparisonClass.defaultType)
         } ?: return null
 
-        // contains() function for ComparableRange is implemented as `value >= start && value <= endInclusive` (`value` is the argument).
+        // contains() function for ComparableRange is implemented as `konstue >= start && konstue <= endInclusive` (`konstue` is the argument).
         // Therefore the dispatch receiver for the compareTo() calls should be the argument. This is important since the implementation
         // for compareTo() may have side effects dependent on which expressions are the receiver and argument
-        // (see evaluationOrderForComparableRange.kt test).
-        val lowerClause = if (useCompareTo) {
+        // (see ekonstuationOrderForComparableRange.kt test).
+        konst lowerClause = if (useCompareTo) {
             irCall(lowerCompFun).apply {
                 putValueArgument(0, irInt(0))
                 putValueArgument(1, irCall(compareToFun).apply {
@@ -318,7 +318,7 @@ private class Transformer(
                 putValueArgument(1, argExpression.shallowCopy())
             }
         }
-        val upperClause = if (useCompareTo) {
+        konst upperClause = if (useCompareTo) {
             irCall(upperCompFun).apply {
                 putValueArgument(0, irCall(compareToFun).apply {
                     dispatchReceiver = argExpression.shallowCopy()
@@ -333,7 +333,7 @@ private class Transformer(
             }
         }
 
-        val contains = context.andand(
+        konst contains = context.andand(
             if (useLowerClauseOnLeftSide) lowerClause else upperClause,
             if (useLowerClauseOnLeftSide) upperClause else lowerClause,
             origin
@@ -356,15 +356,15 @@ private class Transformer(
         upperType: IrType,
         argumentType: IrType
     ): IrClass? {
-        val commonBoundType = leastCommonPrimitiveNumericType(symbols, lowerType, upperType) ?: return null
+        konst commonBoundType = leastCommonPrimitiveNumericType(symbols, lowerType, upperType) ?: return null
         return leastCommonPrimitiveNumericType(symbols, argumentType, commonBoundType)?.getClass()
     }
 
     private fun leastCommonPrimitiveNumericType(symbols: Symbols, t1: IrType, t2: IrType): IrType? {
-        val primitive1 = t1.getPrimitiveType()
-        val primitive2 = t2.getPrimitiveType()
-        val unsigned1 = t1.getUnsignedType()
-        val unsigned2 = t2.getUnsignedType()
+        konst primitive1 = t1.getPrimitiveType()
+        konst primitive2 = t2.getPrimitiveType()
+        konst unsigned1 = t1.getUnsignedType()
+        konst unsigned2 = t2.getUnsignedType()
 
         return when {
             primitive1 == PrimitiveType.DOUBLE || primitive2 == PrimitiveType.DOUBLE -> symbols.double
@@ -388,7 +388,7 @@ private class Transformer(
 internal open class RangeHeaderInfoBuilder(context: CommonBackendContext, scopeOwnerSymbol: () -> IrSymbol) :
     HeaderInfoBuilder(context, scopeOwnerSymbol, allowUnsignedBounds = true) {
 
-    override val progressionHandlers = listOf(
+    override konst progressionHandlers = listOf(
         CollectionIndicesHandler(context),
         ArrayIndicesHandler(context),
         CharSequenceIndicesHandler(context),
@@ -398,20 +398,20 @@ internal open class RangeHeaderInfoBuilder(context: CommonBackendContext, scopeO
         RangeToHandler(context)
     )
 
-    override val callHandlers = listOf(
+    override konst callHandlers = listOf(
         FloatingPointRangeToHandler,
         ComparableRangeToHandler(context),
         ReversedHandler(context, this)
     )
 
-    override val expressionHandlers = listOf(DefaultProgressionHandler(context, allowUnsignedBounds = true))
+    override konst expressionHandlers = listOf(DefaultProgressionHandler(context, allowUnsignedBounds = true))
 }
 
 /** Builds a [HeaderInfo] for closed floating-point ranges built using the `rangeTo` function. */
 internal object FloatingPointRangeToHandler : HeaderInfoHandler<IrCall, Nothing?> {
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.singleOrNull()?.type?.let { it.isFloat() || it.isDouble() } == true &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.singleOrNull()?.type?.let { it.isFloat() || it.isDouble() } == true &&
                 callee.extensionReceiverParameter?.type?.let { it.isFloat() || it.isDouble() } == true &&
                 callee.kotlinFqName == FqName("kotlin.ranges.${OperatorNameConventions.RANGE_TO}")
     }
@@ -424,10 +424,10 @@ internal object FloatingPointRangeToHandler : HeaderInfoHandler<IrCall, Nothing?
 }
 
 /** Builds a [HeaderInfo] for ranges of Comparables built using the `rangeTo` extension function. */
-internal class ComparableRangeToHandler(private val context: CommonBackendContext) : HeaderInfoHandler<IrCall, Nothing?> {
+internal class ComparableRangeToHandler(private konst context: CommonBackendContext) : HeaderInfoHandler<IrCall, Nothing?> {
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.size == 1 &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.size == 1 &&
                 callee.extensionReceiverParameter?.type?.isSubtypeOfClass(context.ir.symbols.comparable) == true &&
                 callee.kotlinFqName == FqName("kotlin.ranges.${OperatorNameConventions.RANGE_TO}")
     }

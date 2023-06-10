@@ -15,5 +15,5 @@ typealias TWC = WC
 import something.T
 import something.TWC
 
-val test1 = T.hashCode()
-val test2 = TWC.hashCode()
+konst test1 = T.hashCode()
+konst test2 = TWC.hashCode()

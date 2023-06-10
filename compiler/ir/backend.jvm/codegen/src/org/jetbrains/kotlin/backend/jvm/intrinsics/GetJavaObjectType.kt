@@ -24,11 +24,11 @@ import org.jetbrains.org.objectweb.asm.Type
 object GetJavaObjectType : IntrinsicMethod() {
 
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? =
-        when (val receiver = expression.extensionReceiver) {
+        when (konst receiver = expression.extensionReceiver) {
             is IrClassReference -> {
-                val symbol = receiver.symbol
+                konst symbol = receiver.symbol
                 if (symbol is IrTypeParameterSymbol) {
-                    val success = codegen.putReifiedOperationMarkerIfTypeIsReifiedParameter(
+                    konst success = codegen.putReifiedOperationMarkerIfTypeIsReifiedParameter(
                         receiver.classType,
                         ReifiedTypeInliner.OperationKind.JAVA_CLASS
                     )
@@ -42,9 +42,9 @@ object GetJavaObjectType : IntrinsicMethod() {
             }
 
             is IrGetClass -> {
-                val argumentValue = receiver.argument.accept(codegen, data)
+                konst argumentValue = receiver.argument.accept(codegen, data)
                 argumentValue.materialize()
-                val argumentType = argumentValue.type
+                konst argumentType = argumentValue.type
                 when {
                     argumentType == Type.VOID_TYPE ->
                         codegen.mv.aconst(AsmTypes.UNIT_TYPE)

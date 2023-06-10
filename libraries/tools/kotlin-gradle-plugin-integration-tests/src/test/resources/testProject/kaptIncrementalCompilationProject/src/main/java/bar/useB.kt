@@ -1,4 +1,4 @@
 package bar
 
 @example.ExampleAnnotation
-fun useB(b: B) = b.valB
+fun useB(b: B) = b.konstB

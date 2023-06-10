@@ -15,15 +15,15 @@ fun main() {
     // kotlin.native.runtime.Debugging.forceCheckedShutdown = true
     Platform.isCleanersLeakCheckerActive = true
 
-    val f = Foo()
+    konst f = Foo()
 
-    val a = Data()
+    konst a = Data()
     a.setData(17)
-    val b = f.qux()!!
+    konst b = f.qux()!!
     b.setData(19)
 
-    val v = f.foo(a)
-    val c = f.bar(v)!!
+    konst v = f.foo(a)
+    konst c = f.bar(v)!!
 
     // Use printf instead of println to avoid messages
     // appearing out of order with the native code.

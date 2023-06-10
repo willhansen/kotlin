@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractWhenMissingCasesTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val whenExpression = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtWhenExpression>(ktFile)
+        konst whenExpression = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtWhenExpression>(ktFile)
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(whenExpression) {
                 buildString {
                     for (missingCase in whenExpression.getMissingCases()) {

@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 
 internal class KtFirReceiverParameterSymbolPointer(
-    private val ownerPointer: KtSymbolPointer<KtCallableSymbol>,
+    private konst ownerPointer: KtSymbolPointer<KtCallableSymbol>,
 ) : KtSymbolPointer<KtReceiverParameterSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtReceiverParameterSymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val callableSymbol = with(analysisSession) {
+        konst callableSymbol = with(analysisSession) {
             ownerPointer.restoreSymbol()
         } ?: return null
 

@@ -39,11 +39,11 @@ class RawTypeImpl private constructor(lowerBound: SimpleType, upperBound: Simple
         }
     }
 
-    override val delegate: SimpleType get() = lowerBound
+    override konst delegate: SimpleType get() = lowerBound
 
-    override val memberScope: MemberScope
+    override konst memberScope: MemberScope
         get() {
-            val classDescriptor = constructor.declarationDescriptor as? ClassDescriptor
+            konst classDescriptor = constructor.declarationDescriptor as? ClassDescriptor
                 ?: error("Incorrect classifier: ${constructor.declarationDescriptor}")
             return classDescriptor.getMemberScope(RawSubstitution())
         }
@@ -65,22 +65,22 @@ class RawTypeImpl private constructor(lowerBound: SimpleType, upperBound: Simple
             return "${substringBefore('<')}<$newArgs>${substringAfterLast('>')}"
         }
 
-        val lowerRendered = renderer.renderType(lowerBound)
-        val upperRendered = renderer.renderType(upperBound)
+        konst lowerRendered = renderer.renderType(lowerBound)
+        konst upperRendered = renderer.renderType(upperBound)
 
         if (options.debugMode) {
             return "raw ($lowerRendered..$upperRendered)"
         }
         if (upperBound.arguments.isEmpty()) return renderer.renderFlexibleType(lowerRendered, upperRendered, builtIns)
 
-        val lowerArgs = renderArguments(lowerBound)
-        val upperArgs = renderArguments(upperBound)
-        val newArgs = lowerArgs.joinToString(", ") { "(raw) $it" }
-        val newUpper =
+        konst lowerArgs = renderArguments(lowerBound)
+        konst upperArgs = renderArguments(upperBound)
+        konst newArgs = lowerArgs.joinToString(", ") { "(raw) $it" }
+        konst newUpper =
             if (lowerArgs.zip(upperArgs).all { onlyOutDiffers(it.first, it.second) })
                 upperRendered.replaceArgs(newArgs)
             else upperRendered
-        val newLower = lowerRendered.replaceArgs(newArgs)
+        konst newLower = lowerRendered.replaceArgs(newArgs)
         if (newLower == newUpper) return newLower
         return renderer.renderFlexibleType(newLower, newUpper, builtIns)
     }

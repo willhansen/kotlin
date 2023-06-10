@@ -4,11 +4,11 @@
 package foo
 
 interface Holder {
-    val element: String
+    konst element: String
 }
 
 class BasicHolder : Holder {
-    override val element: String
+    override konst element: String
 
     init {
         element = "ok"

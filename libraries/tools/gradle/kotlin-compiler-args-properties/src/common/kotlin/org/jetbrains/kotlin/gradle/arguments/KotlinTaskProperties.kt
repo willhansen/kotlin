@@ -11,14 +11,14 @@ import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 class KotlinTaskProperties(
-    private val providerFactory: ProviderFactory
+    private konst providerFactory: ProviderFactory
 ) {
-    private val toKotlinVersionMapper: (String) -> KotlinVersion = { KotlinVersion.fromVersion(it) }
-    private val toBooleanMapper: (String) -> Boolean = { it.toBoolean() }
+    private konst toKotlinVersionMapper: (String) -> KotlinVersion = { KotlinVersion.fromVersion(it) }
+    private konst toBooleanMapper: (String) -> Boolean = { it.toBoolean() }
 
-    val kotlinLanguageVersion: Provider<KotlinVersion> = readProperty(KOTLIN_LANGUAGE_VERSION_PROPERTY, toKotlinVersionMapper)
-    val kotlinApiVersion: Provider<KotlinVersion> = readProperty(KOTLIN_API_VERSION_PROPERTY, toKotlinVersionMapper)
-    val kotlinOverrideUserValues: Provider<Boolean> = readProperty(KOTLIN_OVERRIDE_USER_VALUES, toBooleanMapper).orElse(false)
+    konst kotlinLanguageVersion: Provider<KotlinVersion> = readProperty(KOTLIN_LANGUAGE_VERSION_PROPERTY, toKotlinVersionMapper)
+    konst kotlinApiVersion: Provider<KotlinVersion> = readProperty(KOTLIN_API_VERSION_PROPERTY, toKotlinVersionMapper)
+    konst kotlinOverrideUserValues: Provider<Boolean> = readProperty(KOTLIN_OVERRIDE_USER_VALUES, toBooleanMapper).orElse(false)
 
     private fun <T : Any> readProperty(
         propertyName: String,
@@ -39,8 +39,8 @@ class KotlinTaskProperties(
     }
 
     companion object {
-        private const val KOTLIN_LANGUAGE_VERSION_PROPERTY = "kotlin.test.languageVersion"
-        private const val KOTLIN_API_VERSION_PROPERTY = "kotlin.test.apiVersion"
-        private const val KOTLIN_OVERRIDE_USER_VALUES = "kotlin.test.overrideUserValues"
+        private const konst KOTLIN_LANGUAGE_VERSION_PROPERTY = "kotlin.test.languageVersion"
+        private const konst KOTLIN_API_VERSION_PROPERTY = "kotlin.test.apiVersion"
+        private const konst KOTLIN_OVERRIDE_USER_VALUES = "kotlin.test.overrideUserValues"
     }
 }

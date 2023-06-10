@@ -21,8 +21,8 @@ object JavaClassChangesComputer {
         currentJavaClassSnapshots: List<JavaClassSnapshot>,
         previousJavaClassSnapshots: List<JavaClassSnapshot>
     ): ProgramSymbolSet {
-        val currentClasses: Map<ClassId, JavaClassSnapshot> = currentJavaClassSnapshots.associateBy { it.classId }
-        val previousClasses: Map<ClassId, JavaClassSnapshot> = previousJavaClassSnapshots.associateBy { it.classId }
+        konst currentClasses: Map<ClassId, JavaClassSnapshot> = currentJavaClassSnapshots.associateBy { it.classId }
+        konst previousClasses: Map<ClassId, JavaClassSnapshot> = previousJavaClassSnapshots.associateBy { it.classId }
 
         // Note: Added classes can also impact recompilation.
         // For example, suppose a source file uses `SomeClass` through `*` imports:
@@ -30,9 +30,9 @@ object JavaClassChangesComputer {
         //     import bar.* // `bar.SomeClass` is added in the second build
         // The addition of `bar.SomeClass` will require the source file to be recompiled as `SomeClass` will be ambiguous. (In this example,
         // the recompilation will fail, but recompilation needs to happen.)
-        val addedClasses = currentClasses.keys - previousClasses.keys
-        val removedClasses = previousClasses.keys - currentClasses.keys
-        val unchangedOrModifiedClasses = currentClasses.keys - addedClasses
+        konst addedClasses = currentClasses.keys - previousClasses.keys
+        konst removedClasses = previousClasses.keys - currentClasses.keys
+        konst unchangedOrModifiedClasses = currentClasses.keys - addedClasses
 
         return ProgramSymbolSet.Collector().run {
             addClasses(addedClasses)
@@ -56,7 +56,7 @@ object JavaClassChangesComputer {
     ) {
         if (currentClassSnapshot.classAbiHash == previousClassSnapshot.classAbiHash) return
 
-        val classId = currentClassSnapshot.classId.also { check(it == previousClassSnapshot.classId) }
+        konst classId = currentClassSnapshot.classId.also { check(it == previousClassSnapshot.classId) }
         if (currentClassSnapshot.classMemberLevelSnapshot != null && previousClassSnapshot.classMemberLevelSnapshot != null) {
             if (currentClassSnapshot.classMemberLevelSnapshot.classAbiExcludingMembers.abiHash
                 != previousClassSnapshot.classMemberLevelSnapshot.classAbiExcludingMembers.abiHash
@@ -88,11 +88,11 @@ object JavaClassChangesComputer {
         previousMemberSnapshots: List<JavaElementSnapshot>,
         changes: ProgramSymbolSet.Collector
     ) {
-        val currentMemberHashes: Map<Long, JavaElementSnapshot> = currentMemberSnapshots.associateBy { it.abiHash }
-        val previousMemberHashes: Map<Long, JavaElementSnapshot> = previousMemberSnapshots.associateBy { it.abiHash }
+        konst currentMemberHashes: Map<Long, JavaElementSnapshot> = currentMemberSnapshots.associateBy { it.abiHash }
+        konst previousMemberHashes: Map<Long, JavaElementSnapshot> = previousMemberSnapshots.associateBy { it.abiHash }
 
-        val addedMembers = currentMemberHashes.keys - previousMemberHashes.keys
-        val removedMembers = previousMemberHashes.keys - currentMemberHashes.keys
+        konst addedMembers = currentMemberHashes.keys - previousMemberHashes.keys
+        konst removedMembers = previousMemberHashes.keys - currentMemberHashes.keys
 
         // Note:
         //   - Added members can also impact recompilation. For example, suppose a source file calls `foo(1)` where `foo` is defined as:

@@ -21,19 +21,19 @@ import org.jetbrains.kotlin.psi.KtElement
 import java.util.*
 
 class SubroutineExitInstruction(
-    val subroutine: KtElement,
+    konst subroutine: KtElement,
     blockScope: BlockScope,
-    val isError: Boolean
+    konst isError: Boolean
 ) : InstructionImpl(blockScope) {
     private var _sink: SubroutineSinkInstruction? = null
 
     var sink: SubroutineSinkInstruction
         get() = _sink!!
-        set(value: SubroutineSinkInstruction) {
-            _sink = outgoingEdgeTo(value) as SubroutineSinkInstruction
+        set(konstue: SubroutineSinkInstruction) {
+            _sink = outgoingEdgeTo(konstue) as SubroutineSinkInstruction
         }
 
-    override val nextInstructions: Collection<Instruction>
+    override konst nextInstructions: Collection<Instruction>
         get() = Collections.singleton(sink)
 
     override fun accept(visitor: InstructionVisitor) {

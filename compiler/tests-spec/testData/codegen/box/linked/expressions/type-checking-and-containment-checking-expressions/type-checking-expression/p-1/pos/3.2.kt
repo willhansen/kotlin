@@ -10,8 +10,8 @@
  */
 
 fun box(): String {
-    val bar = ::boo
-    val bar1 = ::exit
+    konst bar = ::boo
+    konst bar1 = ::exit
 
     if (bar is () -> Nothing && bar1 is (Nothing) -> Nothing) return "OK"
 

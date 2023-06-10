@@ -36,7 +36,7 @@ abstract class KtConstructor<T : KtConstructor<T>> : KtDeclarationStub<KotlinCon
 
     override fun getValueParameterList() = getStubOrPsiChild(KtStubElementTypes.VALUE_PARAMETER_LIST)
 
-    override fun getValueParameters() = valueParameterList?.parameters ?: emptyList()
+    override fun getValueParameters() = konstueParameterList?.parameters ?: emptyList()
 
     override fun getReceiverTypeReference() = null
 
@@ -102,7 +102,7 @@ abstract class KtConstructor<T : KtConstructor<T>> : KtDeclarationStub<KotlinCon
 
     override fun getTextOffset(): Int {
         return getConstructorKeyword()?.textOffset
-            ?: valueParameterList?.textOffset
+            ?: konstueParameterList?.textOffset
             ?: super.getTextOffset()
     }
 

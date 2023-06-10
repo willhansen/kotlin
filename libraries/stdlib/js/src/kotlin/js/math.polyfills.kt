@@ -22,7 +22,7 @@ if (typeof Math.sign === "undefined") {
     };
 }
 """)
-internal external fun nativeSign(value: Number): Double
+internal external fun nativeSign(konstue: Number): Double
 
 @PublishedApi
 @JsName("trunc")
@@ -39,7 +39,7 @@ if (typeof Math.trunc === "undefined") {
     };
 }
 """)
-internal external fun nativeTrunc(value: Number): Double
+internal external fun nativeTrunc(konstue: Number): Double
 
 @PublishedApi
 @JsName("sinh")
@@ -63,7 +63,7 @@ if (typeof Math.sinh === "undefined") {
     };
 }
 """)
-internal external fun nativeSinh(value: Double): Double
+internal external fun nativeSinh(konstue: Double): Double
 
 @PublishedApi
 @JsName("cosh")
@@ -77,7 +77,7 @@ if (typeof Math.cosh === "undefined") {
     };
 }
 """)
-internal external fun nativeCosh(value: Double): Double
+internal external fun nativeCosh(konstue: Double): Double
 
 @PublishedApi
 @JsName("tanh")
@@ -99,7 +99,7 @@ if (typeof Math.tanh === "undefined") {
     };
 }
 """)
-internal external fun nativeTanh(value: Double): Double
+internal external fun nativeTanh(konstue: Double): Double
 
 @PublishedApi
 @JsName("asinh")
@@ -147,7 +147,7 @@ if (typeof Math.asinh === "undefined") {
     Math.asinh = asinh;
 }
 """)
-internal external fun nativeAsinh(value: Double): Double
+internal external fun nativeAsinh(konstue: Double): Double
 
 @PublishedApi
 @JsName("acosh")
@@ -188,7 +188,7 @@ if (typeof Math.acosh === "undefined") {
     };
 }
 """)
-internal external fun nativeAcosh(value: Double): Double
+internal external fun nativeAcosh(konstue: Double): Double
 
 @PublishedApi
 @JsName("atanh")
@@ -207,7 +207,7 @@ if (typeof Math.atanh === "undefined") {
     };
 }
 """)
-internal external fun nativeAtanh(value: Double): Double
+internal external fun nativeAtanh(konstue: Double): Double
 
 @PublishedApi
 @JsName("log1p")
@@ -226,7 +226,7 @@ if (typeof Math.log1p === "undefined") {
     };
 }
 """)
-internal external fun nativeLog1p(value: Double): Double
+internal external fun nativeLog1p(konstue: Double): Double
 
 @PublishedApi
 @JsName("expm1")
@@ -245,7 +245,7 @@ if (typeof Math.expm1 === "undefined") {
     };
 }
 """)
-internal external fun nativeExpm1(value: Double): Double
+internal external fun nativeExpm1(konstue: Double): Double
 
 @PublishedApi
 @JsName("hypot")
@@ -277,7 +277,7 @@ if (typeof Math.log10 === "undefined") {
     };
 }
 """)
-internal external fun nativeLog10(value: Double): Double
+internal external fun nativeLog10(konstue: Double): Double
 
 @PublishedApi
 @JsName("log2")
@@ -288,7 +288,7 @@ if (typeof Math.log2 === "undefined") {
     };
 }
 """)
-internal external fun nativeLog2(value: Double): Double
+internal external fun nativeLog2(konstue: Double): Double
 
 @PublishedApi
 @JsName("clz32")
@@ -305,4 +305,4 @@ if (typeof Math.clz32 === "undefined") {
     })(Math.log, Math.LN2);
 }
 """)
-internal external fun nativeClz32(value: Int): Int
+internal external fun nativeClz32(konstue: Int): Int

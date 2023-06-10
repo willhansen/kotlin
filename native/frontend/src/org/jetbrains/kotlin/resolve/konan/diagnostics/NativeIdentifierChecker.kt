@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 
 // Note: IdentifierChecker doesn't check typealiases, so inheriting DeclarationChecker as well.
 // Originally based on JvmSimpleNameBacktickChecker.
-class NativeIdentifierChecker(private val languageVersionSettings: LanguageVersionSettings) : IdentifierChecker, DeclarationChecker {
+class NativeIdentifierChecker(private konst languageVersionSettings: LanguageVersionSettings) : IdentifierChecker, DeclarationChecker {
     // Also includes characters used by IR mangler (see MangleConstant).
-    private val invalidChars = setOf(
+    private konst inkonstidChars = setOf(
         '.', ';', ',', '(', ')', '[', ']', '{', '}', '/', '<', '>',
         ':', '\\', '$', '&', '~', '*', '?', '#', '|', '§', '%', '@',
     )
@@ -32,7 +32,7 @@ class NativeIdentifierChecker(private val languageVersionSettings: LanguageVersi
             declaration.entries.forEach { checkNamed(it, diagnosticHolder) }
         }
         if (declaration is KtCallableDeclaration) {
-            declaration.valueParameters.forEach { checkNamed(it, diagnosticHolder) }
+            declaration.konstueParameters.forEach { checkNamed(it, diagnosticHolder) }
         }
         if (declaration is KtTypeParameterListOwner) {
             declaration.typeParameters.forEach { checkNamed(it, diagnosticHolder) }
@@ -49,13 +49,13 @@ class NativeIdentifierChecker(private val languageVersionSettings: LanguageVersi
     }
 
     private fun checkNamed(declaration: KtNamedDeclaration, diagnosticHolder: DiagnosticSink) {
-        val name = declaration.name ?: return
+        konst name = declaration.name ?: return
 
         reportIfNeeded(name, { declaration.nameIdentifier ?: declaration }, diagnosticHolder)
     }
 
     private fun reportIfNeeded(name: String, reportOn: () -> PsiElement?, diagnosticHolder: DiagnosticSink) {
-        val text = KtPsiUtil.unquoteIdentifier(name)
+        konst text = KtPsiUtil.unquoteIdentifier(name)
         when {
             text.isEmpty() -> {
                 diagnosticHolder.report(
@@ -66,13 +66,13 @@ class NativeIdentifierChecker(private val languageVersionSettings: LanguageVersi
                     )
                 )
             }
-            text.any { it in invalidChars } -> {
+            text.any { it in inkonstidChars } -> {
                 diagnosticHolder.report(
                     ErrorsNative.INVALID_CHARACTERS_NATIVE.on(
                         languageVersionSettings,
                         reportOn() ?: return,
                         "contains illegal characters: " +
-                                invalidChars.intersect(text.toSet()).joinToString("", prefix = "\"", postfix = "\"")
+                                inkonstidChars.intersect(text.toSet()).joinToString("", prefix = "\"", postfix = "\"")
                     )
                 )
             }

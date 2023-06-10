@@ -20,15 +20,15 @@ import org.jetbrains.report.BenchmarkResult
 import kotlinx.cli.*
 
 data class RecordTimeMeasurement(
-    val status: BenchmarkResult.Status,
-    val iteration: Int,
-    val warmupCount: Int,
-    val durationNs: Double)
+    konst status: BenchmarkResult.Status,
+    konst iteration: Int,
+    konst warmupCount: Int,
+    konst durationNs: Double)
 
 abstract class Launcher {
-    abstract val baseBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry>
-    open val extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf()
-    val benchmarks: BenchmarksCollection by lazy { BenchmarksCollection((baseBenchmarksSet + extendedBenchmarksSet).toMutableMap()) }
+    abstract konst baseBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry>
+    open konst extendedBenchmarksSet: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf()
+    konst benchmarks: BenchmarksCollection by lazy { BenchmarksCollection((baseBenchmarksSet + extendedBenchmarksSet).toMutableMap()) }
 
     fun add(name: String, benchmark: AbstractBenchmarkEntry) {
         benchmarks[name] = benchmark
@@ -46,7 +46,7 @@ abstract class Launcher {
         var i = repeatNumber
         return if (benchmark is BenchmarkEntryWithInit) {
             cleanup()
-            val result = measureNanoTime {
+            konst result = measureNanoTime {
                 while (i-- > 0) benchmark.lambda(benchmarkInstance!!)
                 cleanup()
             }
@@ -66,7 +66,7 @@ abstract class Launcher {
 
     enum class LogLevel { DEBUG, OFF }
 
-    class Logger(val level: LogLevel = LogLevel.OFF) {
+    class Logger(konst level: LogLevel = LogLevel.OFF) {
          fun log(message: String, messageLevel: LogLevel = LogLevel.DEBUG, usePrefix: Boolean = true) {
             if (messageLevel == level) {
                 if (usePrefix) {
@@ -84,30 +84,30 @@ abstract class Launcher {
                      name: String,
                      recordMeasurement: (RecordTimeMeasurement) -> Unit,
                      benchmark: AbstractBenchmarkEntry) {
-        val benchmarkInstance = (benchmark as? BenchmarkEntryWithInit)?.ctor?.invoke()
+        konst benchmarkInstance = (benchmark as? BenchmarkEntryWithInit)?.ctor?.invoke()
         logger.log("Warm up iterations for benchmark $name\n")
         runBenchmark(benchmarkInstance, benchmark, numWarmIterations)
-        val expectedDuration = 1000L * 1_000_000 // 1s
-        var autoEvaluatedNumberOfMeasureIteration = 1
-        if (benchmark.useAutoEvaluatedNumberOfMeasure) {
-            val time = runBenchmark(benchmarkInstance, benchmark, 1)
+        konst expectedDuration = 1000L * 1_000_000 // 1s
+        var autoEkonstuatedNumberOfMeasureIteration = 1
+        if (benchmark.useAutoEkonstuatedNumberOfMeasure) {
+            konst time = runBenchmark(benchmarkInstance, benchmark, 1)
             if (time < expectedDuration)
-                // Made auto evaluated number of measurements to be a multiple of 4.
+                // Made auto ekonstuated number of measurements to be a multiple of 4.
                 // Loops which iteration number is a multiple of 4 execute optimally,
                 // because of different optimizations on processor (e.g. LSD)
-                autoEvaluatedNumberOfMeasureIteration = ((expectedDuration / time).toInt() / 4 + 1) * 4
+                autoEkonstuatedNumberOfMeasureIteration = ((expectedDuration / time).toInt() / 4 + 1) * 4
         }
         logger.log("Running benchmark $name ")
         for (k in 0.until(numberOfAttempts)) {
             logger.log(".", usePrefix = false)
-            var i = autoEvaluatedNumberOfMeasureIteration
-            val time = runBenchmark(benchmarkInstance, benchmark, i)
-            val scaledTime = time * 1.0 / autoEvaluatedNumberOfMeasureIteration
+            var i = autoEkonstuatedNumberOfMeasureIteration
+            konst time = runBenchmark(benchmarkInstance, benchmark, i)
+            konst scaledTime = time * 1.0 / autoEkonstuatedNumberOfMeasureIteration
             // Save benchmark object
             recordMeasurement(RecordTimeMeasurement(BenchmarkResult.Status.PASSED, k, numWarmIterations, scaledTime))
         }
         if (benchmark is BenchmarkEntryWithInitAndValidation) {
-            benchmark.validation(benchmarkInstance!!)
+            benchmark.konstidation(benchmarkInstance!!)
         }
         logger.log("\n", usePrefix = false)
     }
@@ -118,20 +118,20 @@ abstract class Launcher {
                filters: Collection<String>? = null,
                filterRegexes: Collection<String>? = null,
                verbose: Boolean): List<BenchmarkResult> {
-        val logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
-        val regexes = filterRegexes?.map { it.toRegex() } ?: listOf()
-        val filterSet = filters?.toHashSet() ?: hashSetOf()
+        konst logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
+        konst regexes = filterRegexes?.map { it.toRegex() } ?: listOf()
+        konst filterSet = filters?.toHashSet() ?: hashSetOf()
         // Filter benchmarks using given filters, or run all benchmarks if none were given.
-        val runningBenchmarks = if (filterSet.isNotEmpty() || regexes.isNotEmpty()) {
+        konst runningBenchmarks = if (filterSet.isNotEmpty() || regexes.isNotEmpty()) {
             benchmarks.filterKeys { benchmark -> benchmark in filterSet || regexes.any { it.matches(benchmark) } }
         } else benchmarks
         if (runningBenchmarks.isEmpty()) {
             printStderr("No matching benchmarks found\n")
             error("No matching benchmarks found")
         }
-        val benchmarkResults = mutableListOf<BenchmarkResult>()
+        konst benchmarkResults = mutableListOf<BenchmarkResult>()
         for ((name, benchmark) in runningBenchmarks) {
-            val recordMeasurement : (RecordTimeMeasurement) -> Unit = {
+            konst recordMeasurement : (RecordTimeMeasurement) -> Unit = {
                 benchmarkResults.add(BenchmarkResult(
                     "$prefix$name",
                     it.status,
@@ -155,7 +155,7 @@ abstract class Launcher {
     }
 
     fun benchmarksListAction(baseOnly: Boolean) {
-        val benchmarksNames = if (baseOnly) baseBenchmarksSet.keys else benchmarks.keys
+        konst benchmarksNames = if (baseOnly) baseBenchmarksSet.keys else benchmarks.keys
         benchmarksNames.forEach {
             println(it)
         }
@@ -165,17 +165,17 @@ abstract class Launcher {
 abstract class BenchmarkArguments(argParser: ArgParser)
 
 class BaseBenchmarkArguments(argParser: ArgParser): BenchmarkArguments(argParser) {
-    val warmup by argParser.option(ArgType.Int, shortName = "w", description = "Number of warm up iterations")
+    konst warmup by argParser.option(ArgType.Int, shortName = "w", description = "Number of warm up iterations")
             .default(20)
-    val repeat by argParser.option(ArgType.Int, shortName = "r", description = "Number of each benchmark run").
+    konst repeat by argParser.option(ArgType.Int, shortName = "r", description = "Number of each benchmark run").
             default(60)
-    val prefix by argParser.option(ArgType.String, shortName = "p", description = "Prefix added to benchmark name")
+    konst prefix by argParser.option(ArgType.String, shortName = "p", description = "Prefix added to benchmark name")
             .default("")
-    val output by argParser.option(ArgType.String, shortName = "o", description = "Output file")
-    val filter by argParser.option(ArgType.String, shortName = "f", description = "Benchmark to run").multiple()
-    val filterRegex by argParser.option(ArgType.String, shortName = "fr",
+    konst output by argParser.option(ArgType.String, shortName = "o", description = "Output file")
+    konst filter by argParser.option(ArgType.String, shortName = "f", description = "Benchmark to run").multiple()
+    konst filterRegex by argParser.option(ArgType.String, shortName = "fr",
             description = "Benchmark to run, described by a regular expression").multiple()
-    val verbose by argParser.option(ArgType.Boolean, shortName = "v", description = "Verbose mode of running")
+    konst verbose by argParser.option(ArgType.Boolean, shortName = "v", description = "Verbose mode of running")
             .default(false)
 }
 
@@ -194,9 +194,9 @@ object BenchmarksRunner {
         }
 
         // Parse args.
-        val argParser = ArgParser("benchmark")
+        konst argParser = ArgParser("benchmark")
         argParser.subcommands(List(), BaseBenchmarksList())
-        val argumentsValues = BaseBenchmarkArguments(argParser)
+        konst argumentsValues = BaseBenchmarkArguments(argParser)
         return if (argParser.parse(args).commandName == "benchmark") argumentsValues else null
     }
 
@@ -211,9 +211,9 @@ object BenchmarksRunner {
                       parseArgs: (args: Array<String>, benchmarksListAction: (Boolean)->Unit) -> BenchmarkArguments? = this::parse,
                       collect: (results: List<BenchmarkResult>, arguments: BenchmarkArguments) -> Unit = this::collect,
                       benchmarksListAction: (Boolean)->Unit) {
-        val arguments = parseArgs(args, benchmarksListAction)
+        konst arguments = parseArgs(args, benchmarksListAction)
         arguments?.let {
-            val results = run(arguments)
+            konst results = run(arguments)
             collect(results, arguments)
         }
     }

@@ -1,12 +1,12 @@
-data class A(val a: Foo<String>) {}
+data class A(konst a: Foo<String>) {}
 
-class Foo<T>(val a: T) { }
+class Foo<T>(konst a: T) { }
 
 fun box() : String {
-    val f1 = Foo("a")
-    val f2 = Foo("b")
-    val a = A(f1)
-    val b = a.copy(f2)
+    konst f1 = Foo("a")
+    konst f2 = Foo("b")
+    konst a = A(f1)
+    konst b = a.copy(f2)
     if (b.a.a == "b") {
         return "OK"
     }

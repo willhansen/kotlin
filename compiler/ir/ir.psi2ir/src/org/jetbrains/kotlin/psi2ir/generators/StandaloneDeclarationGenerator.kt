@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.descriptorUtil.propertyIfAccessor
 import org.jetbrains.kotlin.types.KotlinType
 
-internal class StandaloneDeclarationGenerator(private val context: GeneratorContext) {
-    private val typeTranslator = context.typeTranslator
-    private val symbolTable = context.symbolTable
-    private val irFactory = context.irFactory
+internal class StandaloneDeclarationGenerator(private konst context: GeneratorContext) {
+    private konst typeTranslator = context.typeTranslator
+    private konst symbolTable = context.symbolTable
+    private konst irFactory = context.irFactory
 
     // TODO: use this generator in psi2ir too
 
@@ -58,9 +58,9 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
         declareTypeParameter: (Int, Int, TypeParameterDescriptor) -> IrTypeParameter
     ) {
         irTypeParametersOwner.typeParameters += from.map { typeParameterDescriptor ->
-            val ktTypeParameterDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(typeParameterDescriptor)
-            val startOffset = ktTypeParameterDeclaration.startOffsetOrUndefined
-            val endOffset = ktTypeParameterDeclaration.endOffsetOrUndefined
+            konst ktTypeParameterDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(typeParameterDescriptor)
+            konst startOffset = ktTypeParameterDeclaration.startOffsetOrUndefined
+            konst endOffset = ktTypeParameterDeclaration.endOffsetOrUndefined
             declareTypeParameter(
                 startOffset,
                 endOffset,
@@ -80,7 +80,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
     fun generateClass(
         startOffset: Int, endOffset: Int, origin: IrDeclarationOrigin, descriptor: ClassDescriptor, symbol: IrClassSymbol
     ): IrClass {
-        val irClass = irFactory.createIrClassFromDescriptor(startOffset, endOffset, origin, symbol, descriptor)
+        konst irClass = irFactory.createIrClassFromDescriptor(startOffset, endOffset, origin, symbol, descriptor)
 
         symbolTable.withScope(irClass) {
             irClass.metadata = DescriptorMetadataSource.Class(descriptor)
@@ -97,7 +97,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
                 descriptor.thisAsReceiverParameter.type.toIrType()
             ).also { it.parent = irClass }
 
-            irClass.valueClassRepresentation = descriptor.valueClassRepresentation?.mapUnderlyingType { it.toIrType() as IrSimpleType }
+            irClass.konstueClassRepresentation = descriptor.konstueClassRepresentation?.mapUnderlyingType { it.toIrType() as IrSimpleType }
         }
 
         return irClass
@@ -107,7 +107,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
         startOffset: Int, endOffset: Int, origin: IrDeclarationOrigin, descriptor: ClassDescriptor, symbol: IrEnumEntrySymbol
     ): IrEnumEntry {
         // TODO: corresponging class?
-        val irEntry = irFactory.createEnumEntry(startOffset, endOffset, origin, symbol, descriptor.name)
+        konst irEntry = irFactory.createEnumEntry(startOffset, endOffset, origin, symbol, descriptor.name)
 
         return irEntry
     }
@@ -152,10 +152,10 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
             declareParameter(it, null, irFunction)
         }
 
-        // Declare all the value parameters up first.
-        irFunction.valueParameters = functionDescriptor.valueParameters.map { valueParameterDescriptor ->
-            val ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(valueParameterDescriptor) as? KtParameter
-            declareParameter(valueParameterDescriptor, ktParameter, irFunction).also {
+        // Declare all the konstue parameters up first.
+        irFunction.konstueParameters = functionDescriptor.konstueParameters.map { konstueParameterDescriptor ->
+            konst ktParameter = DescriptorToSourceUtils.getSourceFromDescriptor(konstueParameterDescriptor) as? KtParameter
+            declareParameter(konstueParameterDescriptor, ktParameter, irFunction).also {
                 it.defaultValue = irFunction.defaultArgumentFactory(it)
             }
         }
@@ -165,7 +165,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
         startOffset: Int, endOffset: Int, origin: IrDeclarationOrigin, descriptor: ClassConstructorDescriptor, symbol: IrConstructorSymbol,
         defaultArgumentFactory: IrFunction.(IrValueParameter) -> IrExpressionBody? = { null }
     ): IrConstructor {
-        val irConstructor = with(descriptor) {
+        konst irConstructor = with(descriptor) {
             irFactory.createConstructor(
                 startOffset, endOffset, origin, symbol, name, visibility, IrUninitializedType, isInline,
                 isEffectivelyExternal(), isPrimary, isExpect
@@ -174,7 +174,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
         irConstructor.metadata = DescriptorMetadataSource.Function(descriptor)
 
         symbolTable.withScope(irConstructor) {
-            val ctorTypeParameters = descriptor.typeParameters.filter { it.containingDeclaration === descriptor }
+            konst ctorTypeParameters = descriptor.typeParameters.filter { it.containingDeclaration === descriptor }
             generateScopedTypeParameterDeclarations(irConstructor, ctorTypeParameters)
             generateValueParameterDeclarations(irConstructor, descriptor, defaultArgumentFactory)
             irConstructor.returnType = descriptor.returnType.toIrType()
@@ -191,7 +191,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
         startOffset: Int, endOffset: Int, origin: IrDeclarationOrigin, descriptor: FunctionDescriptor, symbol: IrSimpleFunctionSymbol,
         defaultArgumentFactory: IrFunction.(IrValueParameter) -> IrExpressionBody? = { null }
     ): IrSimpleFunction {
-        val irFunction = with(descriptor) {
+        konst irFunction = with(descriptor) {
             irFactory.createFunction(
                 startOffset, endOffset, origin, symbol, name, visibility, modality, IrUninitializedType,
                 isInline, isEffectivelyExternal(), isTailrec, isSuspend, isOperator, isInfix, isExpect
@@ -212,7 +212,7 @@ internal class StandaloneDeclarationGenerator(private val context: GeneratorCont
     fun generateProperty(
         startOffset: Int, endOffset: Int, origin: IrDeclarationOrigin, descriptor: PropertyDescriptor, symbol: IrPropertySymbol
     ): IrProperty {
-        val irProperty = irFactory.createProperty(
+        konst irProperty = irFactory.createProperty(
             startOffset, endOffset, origin, symbol,
             name = descriptor.name,
             visibility = descriptor.visibility,

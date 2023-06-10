@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 abstract class IrLocalDelegatedProperty : IrDeclarationBase(), IrDeclarationWithName,
         IrSymbolOwner, IrMetadataSourceOwner {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: VariableDescriptorWithAccessors
+    abstract override konst descriptor: VariableDescriptorWithAccessors
 
-    abstract override val symbol: IrLocalDelegatedPropertySymbol
+    abstract override konst symbol: IrLocalDelegatedPropertySymbol
 
     abstract var type: IrType
 

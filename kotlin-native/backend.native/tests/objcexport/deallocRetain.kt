@@ -10,10 +10,10 @@ open class DeallocRetainBase
 @OptIn(kotlin.native.runtime.NativeRuntimeApi::class)
 fun garbageCollect() = kotlin.native.runtime.GC.collect()
 
-fun createWeakReference(value: Any) = kotlin.native.ref.WeakReference(value)
+fun createWeakReference(konstue: Any) = kotlin.native.ref.WeakReference(konstue)
 
-fun assertNull(value: Any?) {
-    kotlin.test.assertNull(value)
+fun assertNull(konstue: Any?) {
+    kotlin.test.assertNull(konstue)
 }
 
 @OptIn(kotlin.ExperimentalStdlibApi::class)

@@ -11,13 +11,13 @@ fun A.foo(newResult: String) {
 }
 
 fun box(): String {
-    val a = A()
-    val x = A::foo
+    konst a = A()
+    konst x = A::foo
     x(a, "OK")
 
     if (a.result != "OK") return a.result
 
-    val a1 = A()
+    konst a1 = A()
     run(a1, "OK", A::foo)
     if (a1.result != "OK") return a1.result
 

@@ -29,9 +29,9 @@ inline fun<T1, T2, T3, T4, T5, T6, reified R1, reified R2> foo(): Pair<G, G> {
 }
 
 fun box(): String {
-    val res = foo<Int, Int, Int, Int, Int, Int, Int, String>();
-    val x1 = res.first.bar()
-    val x2 = res.second.bar()
+    konst res = foo<Int, Int, Int, Int, Int, Int, Int, String>();
+    konst x1 = res.first.bar()
+    konst x2 = res.second.bar()
     assertEquals("OK", x1.toString())
     assertEquals("OK", x2.toString())
     assertEquals("test.A<java.lang.Integer>", x1.javaClass.getGenericSuperclass()?.toString())

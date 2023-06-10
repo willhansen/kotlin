@@ -22,7 +22,7 @@ public class IncrementalAggregatingReferencingClasspathProcessor extends Abstrac
     // Type that the generated source will extend.
     public static final String CLASSPATH_TYPE = "com.example.FromClasspath";
 
-    private Set<String> values = new TreeSet<String>();
+    private Set<String> konstues = new TreeSet<String>();
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -34,12 +34,12 @@ public class IncrementalAggregatingReferencingClasspathProcessor extends Abstrac
         for (TypeElement annotation : annotations) {
             for (Element element : roundEnv.getElementsAnnotatedWith(annotation)) {
                 if (element instanceof TypeElement || element instanceof ExecutableElement || element instanceof VariableElement) {
-                    values.add(element.getSimpleName().toString());
+                    konstues.add(element.getSimpleName().toString());
                 }
             }
         }
 
-        if (roundEnv.processingOver() && !values.isEmpty()) {
+        if (roundEnv.processingOver() && !konstues.isEmpty()) {
 
             try (Writer writer = processingEnv.getFiler().createSourceFile("com.example.AggGenerated").openWriter()) {
                 writer.append("package ").append("com.example").append(";");
@@ -49,7 +49,7 @@ public class IncrementalAggregatingReferencingClasspathProcessor extends Abstrac
                 throw new RuntimeException(e);
             }
 
-            values.clear();
+            konstues.clear();
         }
 
         return true;

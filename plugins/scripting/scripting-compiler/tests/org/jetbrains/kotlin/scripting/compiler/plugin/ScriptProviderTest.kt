@@ -28,10 +28,10 @@ class ScriptProviderTest {
     @Test
     fun testLazyScriptDefinitionsProvider() {
 
-        val genDefCounter = AtomicInteger()
-        val standardDef = FakeScriptDefinition()
-        val shadedDef = FakeScriptDefinition(".x.kts")
-        val provider = TestCliScriptDefinitionProvider(standardDef).apply {
+        konst genDefCounter = AtomicInteger()
+        konst standardDef = FakeScriptDefinition()
+        konst shadedDef = FakeScriptDefinition(".x.kts")
+        konst provider = TestCliScriptDefinitionProvider(standardDef).apply {
             setScriptDefinitions(listOf(shadedDef, standardDef))
             setScriptDefinitionsSources(
                 listOf(
@@ -75,21 +75,21 @@ class ScriptProviderTest {
     }
 }
 
-private open class FakeScriptDefinition(val suffix: String = ".kts") :
+private open class FakeScriptDefinition(konst suffix: String = ".kts") :
     ScriptDefinition.FromLegacy(defaultJvmScriptingHostConfiguration, KotlinScriptDefinition(ScriptTemplateWithArgs::class)) {
-    val matchCounter = AtomicInteger()
+    konst matchCounter = AtomicInteger()
     override fun isScript(script: SourceCode): Boolean {
-        val path = script.locationId ?: return false
+        konst path = script.locationId ?: return false
         return path.endsWith(suffix).also {
             if (it) matchCounter.incrementAndGet()
         }
     }
 
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = suffix == ".kts"
 }
 
-private class TestScriptDefinitionSource(val counter: AtomicInteger, val defGens: Iterable<() -> FakeScriptDefinition>) :
+private class TestScriptDefinitionSource(konst counter: AtomicInteger, konst defGens: Iterable<() -> FakeScriptDefinition>) :
     ScriptDefinitionsSource {
     constructor(counter: AtomicInteger, vararg suffixes: String) : this(counter, suffixes.map {
         {
@@ -99,7 +99,7 @@ private class TestScriptDefinitionSource(val counter: AtomicInteger, val defGens
         }
     })
 
-    override val definitions: Sequence<ScriptDefinition> = sequence {
+    override konst definitions: Sequence<ScriptDefinition> = sequence {
         for (gen in defGens) {
             counter.incrementAndGet()
             yield(gen())
@@ -107,7 +107,7 @@ private class TestScriptDefinitionSource(val counter: AtomicInteger, val defGens
     }
 }
 
-private class TestCliScriptDefinitionProvider(private val standardDef: ScriptDefinition) : CliScriptDefinitionProvider() {
+private class TestCliScriptDefinitionProvider(private konst standardDef: ScriptDefinition) : CliScriptDefinitionProvider() {
     @Suppress("DEPRECATION", "OverridingDeprecatedMember", "OVERRIDE_DEPRECATION")
     override fun getDefaultScriptDefinition(): KotlinScriptDefinition = standardDef.legacyDefinition
 }

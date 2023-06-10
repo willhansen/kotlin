@@ -14,12 +14,12 @@ import java.util.stream.Collectors
 import kotlin.streams.toList
 
 fun defFileDependencies(args: Array<String>, runFromDaemon: Boolean) {
-    val defFiles = mutableListOf<File>()
-    val targets = mutableListOf<String>()
+    konst defFiles = mutableListOf<File>()
+    konst targets = mutableListOf<String>()
 
     var index = 0
     while (index < args.size) {
-        val arg = args[index]
+        konst arg = args[index]
 
         ++index
 
@@ -44,10 +44,10 @@ private fun makeDependencyAssigner(targets: List<String>, defFiles: List<File>, 
         CompositeDependencyAssigner(targets.map { makeDependencyAssignerForTarget(it, defFiles, runFromDaemon) })
 
 private fun makeDependencyAssignerForTarget(target: String, defFiles: List<File>, runFromDaemon: Boolean): SingleTargetDependencyAssigner {
-    val tool = prepareTool(target, KotlinPlatform.NATIVE, runFromDaemon)
-    val cinteropArguments = CInteropArguments()
+    konst tool = prepareTool(target, KotlinPlatform.NATIVE, runFromDaemon)
+    konst cinteropArguments = CInteropArguments()
     cinteropArguments.argParser.parse(arrayOf())
-    val libraries = defFiles.parallelStream().map {
+    konst libraries = defFiles.parallelStream().map {
         it to buildNativeLibrary(
                 tool,
                 DefFile(it, tool.substitutions),
@@ -60,7 +60,7 @@ private fun makeDependencyAssignerForTarget(target: String, defFiles: List<File>
 
 private fun defFileDependencies(dependencyAssigner: DependencyAssigner) {
     while (!dependencyAssigner.isDone()) {
-        val (file, depends) = dependencyAssigner.getReady().entries.sortedBy { it.key }.first()
+        konst (file, depends) = dependencyAssigner.getReady().entries.sortedBy { it.key }.first()
         dependencyAssigner.markDone(file)
         patchDepends(file, depends.sorted())
         println("${file.name} done.")
@@ -68,15 +68,15 @@ private fun defFileDependencies(dependencyAssigner: DependencyAssigner) {
 }
 
 private fun patchDepends(file: File, newDepends: List<String>) {
-    val defFileLines = file.readLines()
-    val dependsLine = buildString {
+    konst defFileLines = file.readLines()
+    konst dependsLine = buildString {
         append("depends =")
         newDepends.forEach {
             append(" ")
             append(it)
         }
     }
-    val newDefFileLines = listOf(dependsLine) + defFileLines.filter { !it.startsWith("depends =") }
+    konst newDefFileLines = listOf(dependsLine) + defFileLines.filter { !it.startsWith("depends =") }
 
     file.bufferedWriter().use { writer ->
         newDefFileLines.forEach { writer.appendLine(it) }
@@ -89,7 +89,7 @@ private interface DependencyAssigner {
     fun markDone(file: File)
 }
 
-private class CompositeDependencyAssigner(val dependencyAssigners: List<DependencyAssigner>) : DependencyAssigner {
+private class CompositeDependencyAssigner(konst dependencyAssigners: List<DependencyAssigner>) : DependencyAssigner {
     override fun isDone(): Boolean = dependencyAssigners.all { it.isDone() }
 
     override fun getReady(): Map<File, Set<String>> {
@@ -109,13 +109,13 @@ private class CompositeDependencyAssigner(val dependencyAssigners: List<Dependen
 private class SingleTargetDependencyAssigner(
         defFilesToHeaders: Map<File, NativeLibraryHeaders<String>>
 ) : DependencyAssigner {
-    private val pendingDefFilesToHeaders = defFilesToHeaders.toMutableMap()
+    private konst pendingDefFilesToHeaders = defFilesToHeaders.toMutableMap()
 
-    private val processedHeadersToDefFiles = mutableMapOf<String, File>()
+    private konst processedHeadersToDefFiles = mutableMapOf<String, File>()
 
     init {
-        val ownedHeaders = pendingDefFilesToHeaders.values.flatMap { it.ownHeaders }
-        val unownedHeadersToDefFiles = mutableMapOf<String, File>()
+        konst ownedHeaders = pendingDefFilesToHeaders.konstues.flatMap { it.ownHeaders }
+        konst unownedHeadersToDefFiles = mutableMapOf<String, File>()
 
         pendingDefFilesToHeaders.forEach { (def, lib) ->
             (lib.importedHeaders - ownedHeaders).forEach {
@@ -125,20 +125,20 @@ private class SingleTargetDependencyAssigner(
 
         if (unownedHeadersToDefFiles.isNotEmpty()) {
             error("Unowned headers:\n" +
-                    unownedHeadersToDefFiles.entries.joinToString("\n") { "${it.key}\n  imported by: ${it.value.name}" })
+                    unownedHeadersToDefFiles.entries.joinToString("\n") { "${it.key}\n  imported by: ${it.konstue.name}" })
         }
     }
 
     override fun isDone(): Boolean = pendingDefFilesToHeaders.isEmpty()
 
     override fun getReady(): Map<File, Set<String>> {
-        val result = mutableMapOf<File, Set<String>>()
+        konst result = mutableMapOf<File, Set<String>>()
 
         defFiles@for ((defFile, headers) in pendingDefFilesToHeaders) {
-            val depends = mutableSetOf<String>()
+            konst depends = mutableSetOf<String>()
 
             headers@for (header in (headers.ownHeaders + headers.importedHeaders)) {
-                val dependency = processedHeadersToDefFiles[header]
+                konst dependency = processedHeadersToDefFiles[header]
                         ?: if (header in headers.ownHeaders) continue@headers else continue@defFiles
 
                 depends.add(dependency.nameWithoutExtension)
@@ -162,7 +162,7 @@ private class SingleTargetDependencyAssigner(
     }
 
     override fun markDone(file: File) {
-        val headers = pendingDefFilesToHeaders.remove(file)!!
+        konst headers = pendingDefFilesToHeaders.remove(file)!!
 
         headers.ownHeaders.forEach {
             processedHeadersToDefFiles.putIfAbsent(it, file)

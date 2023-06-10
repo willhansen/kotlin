@@ -22,9 +22,9 @@ class WasmModuleFragmentGenerator(
     wasmModuleFragment: WasmCompiledModuleFragment,
     allowIncompleteImplementations: Boolean,
 ) {
-    private val hierarchyDisjointUnions = DisjointUnions<IrClassSymbol>()
+    private konst hierarchyDisjointUnions = DisjointUnions<IrClassSymbol>()
 
-    private val declarationGenerator =
+    private konst declarationGenerator =
         DeclarationGenerator(
             WasmModuleCodegenContext(
                 backendContext,
@@ -34,7 +34,7 @@ class WasmModuleFragmentGenerator(
             hierarchyDisjointUnions,
         )
 
-    private val interfaceCollector = object : IrElementVisitorVoid {
+    private konst interfaceCollector = object : IrElementVisitorVoid {
         override fun visitElement(element: IrElement) { }
 
         override fun visitClass(declaration: IrClass) {
@@ -43,7 +43,7 @@ class WasmModuleFragmentGenerator(
             if (declaration.isInterface) return
             if (declaration.isAbstractOrSealed) return
 
-            val classMetadata = declarationGenerator.context.getClassMetadata(declaration.symbol)
+            konst classMetadata = declarationGenerator.context.getClassMetadata(declaration.symbol)
             if (classMetadata.interfaces.isNotEmpty()) {
                 hierarchyDisjointUnions.addUnion(classMetadata.interfaces.map { it.symbol })
             }

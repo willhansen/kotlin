@@ -42,22 +42,22 @@ fun <K> build6(@BuilderInference builderAction1: Inv<K>.() -> Unit, @BuilderInfe
 
 @OptIn(ExperimentalStdlibApi::class)
 fun box(): String {
-    val x1 = build1({ contribute(1f) }, { contribute(1.0) })
+    konst x1 = build1({ contribute(1f) }, { contribute(1.0) })
     <!DEBUG_INFO_EXPRESSION_TYPE("{Comparable<*> & Number}")!>x1<!>
 
-    val y1 = build2({ contribute(B()) }, { contribute(C()) })
+    konst y1 = build2({ contribute(B()) }, { contribute(C()) })
     <!DEBUG_INFO_EXPRESSION_TYPE("A")!>y1<!>
 
-    val x2 = build3({ val x: Float = get() }, { val x: Double = get() })
+    konst x2 = build3({ konst x: Float = get() }, { konst x: Double = get() })
     <!DEBUG_INFO_EXPRESSION_TYPE("{Comparable<*> & Number}")!>x2<!>
 
-    val y2 = build4({ val x: B = get() }, { val x: C = get() })
+    konst y2 = build4({ konst x: B = get() }, { konst x: C = get() })
     <!DEBUG_INFO_EXPRESSION_TYPE("A")!>y2<!>
 
-    val x3 = build5({ val x: Float = get() }, { val x: Double = get() })
+    konst x3 = build5({ konst x: Float = get() }, { konst x: Double = get() })
     <!DEBUG_INFO_EXPRESSION_TYPE("{Comparable<*> & Number}")!>x3<!>
 
-    val y3 = build6({ val x: B = get() }, { val x: C = get() })
+    konst y3 = build6({ konst x: B = get() }, { konst x: C = get() })
     <!DEBUG_INFO_EXPRESSION_TYPE("A")!>y3<!>
 
     return "OK"

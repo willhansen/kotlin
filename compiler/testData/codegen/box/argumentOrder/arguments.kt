@@ -1,4 +1,4 @@
-class C(val x: String) {
+class C(konst x: String) {
     fun test(a: String, b: String): String =
         x + a + b
 }

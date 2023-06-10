@@ -25,15 +25,15 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.commons.Method
 
 fun KotlinType.isInlineClassWithUnderlyingTypeAnyOrAnyN(): Boolean {
-    val classDescriptor = constructor.declarationDescriptor
+    konst classDescriptor = constructor.declarationDescriptor
     return classDescriptor is ClassDescriptor && classDescriptor.inlineClassRepresentation?.underlyingType?.isAnyOrNullableAny() == true
 }
 
 fun CallableDescriptor.isGenericParameter(): Boolean {
     if (this !is ValueParameterDescriptor) return false
     if (containingDeclaration is AnonymousFunctionDescriptor) return true
-    val index = containingDeclaration.valueParameters.indexOf(this)
-    return containingDeclaration.overriddenDescriptors.any { it.original.valueParameters[index].type.isTypeParameter() }
+    konst index = containingDeclaration.konstueParameters.indexOf(this)
+    return containingDeclaration.overriddenDescriptors.any { it.original.konstueParameters[index].type.isTypeParameter() }
 }
 
 fun classFileContainsMethod(descriptor: FunctionDescriptor, state: GenerationState, method: Method): Boolean? {
@@ -43,7 +43,7 @@ fun classFileContainsMethod(descriptor: FunctionDescriptor, state: GenerationSta
         return descriptor.overriddenDescriptors.any { classFileContainsMethod(it, state, method) == true }
     }
 
-    val classId: ClassId = when {
+    konst classId: ClassId = when {
         descriptor.containingDeclaration is DeserializedClassDescriptor -> {
             (descriptor.containingDeclaration as DeserializedClassDescriptor).classId ?: return null
         }
@@ -59,7 +59,7 @@ fun classFileContainsMethod(descriptor: FunctionDescriptor, state: GenerationSta
 }
 
 fun classFileContainsMethod(classId: ClassId, state: GenerationState, method: Method): Boolean? {
-    val bytes = VirtualFileFinder.getInstance(state.project, state.module).findVirtualFileWithHeader(classId)
+    konst bytes = VirtualFileFinder.getInstance(state.project, state.module).findVirtualFileWithHeader(classId)
         ?.contentsToByteArray() ?: return null
     var found = false
     ClassReader(bytes).accept(object : ClassVisitor(Opcodes.API_VERSION) {

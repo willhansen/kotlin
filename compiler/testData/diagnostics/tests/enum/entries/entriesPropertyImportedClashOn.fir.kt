@@ -9,7 +9,7 @@ enum class A {
     ;
 
     companion object {
-        val entries = 0
+        konst entries = 0
     }
 }
 

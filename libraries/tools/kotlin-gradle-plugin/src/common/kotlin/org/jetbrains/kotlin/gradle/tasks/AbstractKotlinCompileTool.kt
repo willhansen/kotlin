@@ -37,7 +37,7 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constr
     TaskWithLocalState {
 
     @Internal
-    protected val sourceFileFilter = PatternSet()
+    protected konst sourceFileFilter = PatternSet()
 
     init {
         sourceFileFilter.include(
@@ -45,9 +45,9 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constr
         )
     }
 
-    private val sourceFiles = objectFactory.fileCollection()
+    private konst sourceFiles = objectFactory.fileCollection()
 
-    override val sources: FileCollection = objectFactory.fileCollection()
+    override konst sources: FileCollection = objectFactory.fileCollection()
         .from(
             { sourceFiles.asFileTree.matching(sourceFileFilter) }
         )
@@ -111,7 +111,7 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constr
     }
 
     @get:Internal
-    final override val metrics: Property<BuildMetricsReporter> = project.objects
+    final override konst metrics: Property<BuildMetricsReporter> = project.objects
         .property(BuildMetricsReporterImpl())
 
     /**
@@ -120,13 +120,13 @@ abstract class AbstractKotlinCompileTool<T : CommonToolArguments> @Inject constr
      * Empty classpath will fail the build.
      */
     @get:Classpath
-    internal val defaultCompilerClasspath: ConfigurableFileCollection =
+    internal konst defaultCompilerClasspath: ConfigurableFileCollection =
         project.objects.fileCollection()
 
     @get:Internal
-    internal abstract val runViaBuildToolsApi: Property<Boolean>
+    internal abstract konst runViaBuildToolsApi: Property<Boolean>
 
-    protected fun validateCompilerClasspath() {
+    protected fun konstidateCompilerClasspath() {
         // Note that the check triggers configuration resolution
         require(!defaultCompilerClasspath.isEmpty) {
             "Default Kotlin compiler classpath is empty! Task: $path (${this::class.qualifiedName})"

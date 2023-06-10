@@ -4,8 +4,8 @@ package foo
 // Test for KT-7502
 // CHECK_NOT_CALLED: plus
 
-class A(val value: Int) {
-    inline fun plus(num: Int): Int = this.value + num
+class A(konst konstue: Int) {
+    inline fun plus(num: Int): Int = this.konstue + num
 }
 
 fun box(): String {

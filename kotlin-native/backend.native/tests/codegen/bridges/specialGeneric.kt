@@ -8,15 +8,15 @@ package codegen.bridges.specialGeneric
 import kotlin.test.*
 
 interface Element {
-    val isContained: Boolean
+    konst isContained: Boolean
 }
 
 object ContainedElement : Element {
-    override val isContained: Boolean = true
+    override konst isContained: Boolean = true
 }
 
 object NotContainedElement : Element {
-    override val isContained: Boolean = false
+    override konst isContained: Boolean = false
 }
 
 internal class MySet<E : Element> : Set<E> {
@@ -26,7 +26,7 @@ internal class MySet<E : Element> : Set<E> {
     override fun hashCode(): Int = TODO()
     override fun toString(): String = TODO()
 
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun isEmpty(): Boolean = TODO()
     override fun containsAll(elements: Collection<E>): Boolean = TODO()
 
@@ -37,7 +37,7 @@ fun set(): Set<Any> = MySet<Element>()
 
 @Test
 fun testMySet() {
-    val set = set()
+    konst set = set()
     assertFalse(set.contains(Any()))
     assertFalse(set.contains(NotContainedElement))
     assertTrue(set.contains(ContainedElement))

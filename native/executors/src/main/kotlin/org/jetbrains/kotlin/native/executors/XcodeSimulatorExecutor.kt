@@ -34,22 +34,22 @@ private fun Executor.run(executableAbsolutePath: String, vararg args: String) = 
  * @property deviceName which simulator to use (optional). When not provided the default simulator for [configurables.target] is used
  */
 class XcodeSimulatorExecutor(
-        private val configurables: AppleConfigurables,
+        private konst configurables: AppleConfigurables,
         var deviceId: String = defaultDeviceId(configurables.target),
 ) : Executor {
-    private val hostExecutor: Executor = HostExecutor()
+    private konst hostExecutor: Executor = HostExecutor()
 
-    private val logger = Logger.getLogger(this::class.java.name)
+    private konst logger = Logger.getLogger(this::class.java.name)
 
-    private val target by configurables::target
+    private konst target by configurables::target
 
     init {
         require(configurables.targetTriple.isSimulator) {
             "$target is not a simulator."
         }
-        val hostArch = HostManager.host.architecture
-        val targetArch = target.architecture
-        val compatibleArchs = when (hostArch) {
+        konst hostArch = HostManager.host.architecture
+        konst targetArch = target.architecture
+        konst compatibleArchs = when (hostArch) {
             Architecture.X64 -> listOf(Architecture.X64, Architecture.X86)
             Architecture.ARM64 -> listOf(Architecture.ARM64, Architecture.ARM32)
             else -> throw IllegalStateException("$hostArch is not a supported host architecture for the simulator")
@@ -59,7 +59,7 @@ class XcodeSimulatorExecutor(
         }
     }
 
-    private val archSpecification = when (target.architecture) {
+    private konst archSpecification = when (target.architecture) {
         Architecture.X86 -> listOf("-a", "i386")
         Architecture.X64 -> listOf() // x86-64 is used by default on Intel Macs.
         Architecture.ARM64 -> listOf() // arm64 is used by default on Apple Silicon.
@@ -67,7 +67,7 @@ class XcodeSimulatorExecutor(
     }.toTypedArray()
 
     private fun simctl(vararg args: String): String {
-        val out = hostExecutor.run("/usr/bin/xcrun", *arrayOf("simctl", *args))
+        konst out = hostExecutor.run("/usr/bin/xcrun", *arrayOf("simctl", *args))
         return out.toString("UTF-8").trim()
     }
 
@@ -80,18 +80,18 @@ class XcodeSimulatorExecutor(
             return
         }
         logger.info("Device was not cheked before. Find the device with id: $deviceId")
-        val simulatorRuntime = getSimulatorRuntime()
+        konst simulatorRuntime = getSimulatorRuntime()
         logger.info("Runtime used for the $deviceId is $simulatorRuntime")
 
-        val device = getDeviceFor(simulatorRuntime)
+        konst device = getDeviceFor(simulatorRuntime)
         logger.info("Found device: $device")
         // If successfully found, remember that.
         deviceChecked = device
     }
 
     private fun getDeviceFor(simulatorRuntime: SimulatorRuntimeDescriptor): SimulatorDeviceDescriptor {
-        val runtimeIdentifier = simulatorRuntime.identifier
-        val deviceOrNull = {
+        konst runtimeIdentifier = simulatorRuntime.identifier
+        konst deviceOrNull = {
             getSimulatorDevices(simctl("list", "devices", "--json"))[runtimeIdentifier]
                     ?.find { it.deviceTypeIdentifier == deviceId && it.isAvailable == true }
         }
@@ -100,14 +100,14 @@ class XcodeSimulatorExecutor(
 
         // Create the device
         logger.info("Current runtime doesn't have $deviceId available")
-        val deviceType = simulatorRuntime.supportedDeviceTypes.find { it.identifier == deviceId }
+        konst deviceType = simulatorRuntime.supportedDeviceTypes.find { it.identifier == deviceId }
         checkNotNull(deviceType) {
             """
             Default device $deviceId is not available for the runtime ${simulatorRuntime.name}
             Supported devices: ${simulatorRuntime.supportedDeviceTypes.map { it.identifier }.joinToString(", ")}
             """.trimIndent()
         }
-        val out = simctl("create", deviceType.name, deviceType.identifier, runtimeIdentifier)
+        konst out = simctl("create", deviceType.name, deviceType.identifier, runtimeIdentifier)
         logger.info("Create device $deviceId: simctl output is: $out")
 
         // Return freshly created device if it fits
@@ -122,7 +122,7 @@ class XcodeSimulatorExecutor(
     }
 
     private fun getSimulatorRuntime(): SimulatorRuntimeDescriptor {
-        val simulatorRuntimeOrNull = {
+        konst simulatorRuntimeOrNull = {
             getSimulatorRuntimesFor(
                     json = simctl("list", "runtimes", "--json"),
                     family = target.family,
@@ -142,13 +142,13 @@ class XcodeSimulatorExecutor(
     }
 
     private fun downloadRuntimeFor(osName: String) {
-        val version = Xcode.findCurrent().version
-        val versionSplit = version.split(".")
+        konst version = Xcode.findCurrent().version
+        konst versionSplit = version.split(".")
         check(versionSplit.size >= 2) {
             "Unrecognised version of Xcode $version was split to $versionSplit"
         }
-        val major = versionSplit[0].toInt()
-        val minor = versionSplit[1].toInt()
+        konst major = versionSplit[0].toInt()
+        konst minor = versionSplit[1].toInt()
         check(major >= 14) {
             "Was unable to get the required runtimes running on Xcode $version. Check the Xcode installation"
         }
@@ -163,12 +163,12 @@ class XcodeSimulatorExecutor(
 
     override fun execute(request: ExecuteRequest): ExecuteResponse {
         ensureSimulatorExists()
-        val executable = request.executableAbsolutePath
-        val env = request.environment.mapKeys {
+        konst executable = request.executableAbsolutePath
+        konst env = request.environment.mapKeys {
             "SIMCTL_CHILD_" + it.key
         }
-        val workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
-        val name = deviceChecked?.name ?: error("No device available for $deviceId")
+        konst workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
+        konst name = deviceChecked?.name ?: error("No device available for $deviceId")
         // Starting Xcode 11 `simctl spawn` requires explicit `--standalone` flag.
         return hostExecutor.execute(request.copying {
             this.executableAbsolutePath = "/usr/bin/xcrun"

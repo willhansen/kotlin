@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.util.getPackageFragment
 import org.jetbrains.kotlin.ir.util.statements
 
-internal val IrSimpleFunction.returnsResultOfStdlibCall: Boolean
+internal konst IrSimpleFunction.returnsResultOfStdlibCall: Boolean
     get() {
         fun IrStatement.isStdlibCall() =
             this is IrCall && symbol.owner.getPackageFragment().packageFqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME
 
-        return when (val body = body) {
+        return when (konst body = body) {
             is IrExpressionBody -> body.expression.isStdlibCall()
             is IrBlockBody -> body.statements.singleOrNull()
-                ?.let { it.isStdlibCall() || (it is IrReturn && it.value.isStdlibCall()) } == true
+                ?.let { it.isStdlibCall() || (it is IrReturn && it.konstue.isStdlibCall()) } == true
             else -> false
         }
     }
@@ -33,7 +33,7 @@ internal val IrSimpleFunction.returnsResultOfStdlibCall: Boolean
 internal fun IrProperty.getPropertyReferenceForOptimizableDelegatedProperty(): IrPropertyReference? {
     if (!isDelegated || isFakeOverride || backingField == null) return null
 
-    val delegate = backingField?.initializer?.expression
+    konst delegate = backingField?.initializer?.expression
     if (delegate !is IrPropertyReference ||
         getter?.returnsResultOfStdlibCall == false ||
         setter?.returnsResultOfStdlibCall == false
@@ -49,11 +49,11 @@ internal fun IrProperty.getSingletonOrConstantForOptimizableDelegatedProperty():
             is IrCall ->
                 dispatchReceiver?.isInlineable() != false
                         && extensionReceiver?.isInlineable() != false
-                        && valueArgumentsCount == 0
+                        && konstueArgumentsCount == 0
                         && symbol.owner.run {
                     modality == Modality.FINAL
                             && origin == IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR
-                            && ((body?.statements?.singleOrNull() as? IrReturn)?.value as? IrGetField)?.symbol?.owner?.isFinal == true
+                            && ((body?.statements?.singleOrNull() as? IrReturn)?.konstue as? IrGetField)?.symbol?.owner?.isFinal == true
                 }
             is IrGetValue ->
                 symbol.owner.origin == IrDeclarationOrigin.INSTANCE_RECEIVER

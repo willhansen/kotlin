@@ -1,6 +1,6 @@
 class My {
     companion object {
-        private val my: String = "O"
+        private konst my: String = "O"
             get() = field + "K"
 
         fun getValue() = my

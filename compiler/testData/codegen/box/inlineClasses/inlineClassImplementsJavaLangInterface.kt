@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineRunnable(val block: () -> Unit) : Runnable {
+konstue class InlineRunnable(konst block: () -> Unit) : Runnable {
     override fun run() = block()
 }
 

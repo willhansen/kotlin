@@ -4,7 +4,7 @@
 
 // TESTCASE NUMBER: 1
 
-class Case1<AT>(val x: AT) {
+class Case1<AT>(konst x: AT) {
 
     inner class C() {
         fun case1a(x: Any) {

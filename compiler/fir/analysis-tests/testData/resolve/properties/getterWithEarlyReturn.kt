@@ -3,7 +3,7 @@
 
 class SomeClass
 
-val SomeClass.lore: List<String>
+konst SomeClass.lore: List<String>
     get() {
         apply {
             return emptyList()

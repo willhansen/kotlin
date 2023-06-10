@@ -26,6 +26,6 @@ enum class UnitSuspendFunctionObjCExport {
     ;
 
     companion object {
-        val DEFAULT = PROPER
+        konst DEFAULT = PROPER
     }
 }

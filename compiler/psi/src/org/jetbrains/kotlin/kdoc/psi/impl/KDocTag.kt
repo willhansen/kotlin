@@ -33,7 +33,7 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
      * or the code has a syntax error.
      */
     override fun getName(): String? {
-        val tagName: PsiElement? = findChildByType(KDocTokens.TAG_NAME)
+        konst tagName: PsiElement? = findChildByType(KDocTokens.TAG_NAME)
         if (tagName != null) {
             return tagName.text.substring(1)
         }
@@ -47,14 +47,14 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
     open fun getSubjectName(): String? = getSubjectLink()?.getLinkText()
 
     fun getSubjectLink(): KDocLink? {
-        val children = childrenAfterTagName()
+        konst children = childrenAfterTagName()
         if (hasSubject(children)) {
             return children.firstOrNull()?.psi as? KDocLink
         }
         return null
     }
 
-    val knownTag: KDocKnownTag?
+    konst knownTag: KDocKnownTag?
         get() {
             return name?.let { KDocKnownTag.findByTagName(it) }
         }
@@ -76,8 +76,8 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
      * with leading asterisks removed).
      */
     open fun getContent(): String {
-        val builder = StringBuilder()
-        val codeBlockBuilder = StringBuilder()
+        konst builder = StringBuilder()
+        konst codeBlockBuilder = StringBuilder()
         var targetBuilder = builder
 
         var contentStarted = false
@@ -103,7 +103,7 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
             children = children.drop(1)
         }
         for (node in children) {
-            val type = node.elementType
+            konst type = node.elementType
             if (type == KDocTokens.CODE_BLOCK_TEXT) {
                 //If first line of code block
                 if (!isCodeBlock())
@@ -115,10 +115,10 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
             }
 
             if (KDocTokens.CONTENT_TOKENS.contains(type)) {
-                val isPlainContent = afterAsterisk && !isCodeBlock()
+                konst isPlainContent = afterAsterisk && !isCodeBlock()
                 // If content not yet started and not part of indented code block
                 // and not inside fenced code block we should trim leading spaces
-                val trimLeadingSpaces = !(contentStarted || indentedCodeBlock) || isPlainContent
+                konst trimLeadingSpaces = !(contentStarted || indentedCodeBlock) || isPlainContent
 
                 targetBuilder.append(if (trimLeadingSpaces) node.text.trimStart() else node.text)
                 contentStarted = true
@@ -141,8 +141,8 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
     }
 
     private fun trimCommonIndent(builder: StringBuilder, prepend4WhiteSpaces: Boolean = false): String {
-        val lines = builder.toString().split('\n')
-        val minIndent = lines.filter { it.trim().isNotEmpty() }.minOfOrNull { it.calcIndent() } ?: 0
+        konst lines = builder.toString().split('\n')
+        konst minIndent = lines.filter { it.trim().isNotEmpty() }.minOfOrNull { it.calcIndent() } ?: 0
         var processedLines = lines.map { it.drop(minIndent) }
         if (prepend4WhiteSpaces)
             processedLines = processedLines.map { if (it.isNotBlank()) it.prependIndent(indentationWhiteSpaces) else it }
@@ -152,6 +152,6 @@ open class KDocTag(node: ASTNode) : KDocElementImpl(node) {
     private fun String.calcIndent() = indexOfFirst { !it.isWhitespace() }
 
     companion object {
-        val indentationWhiteSpaces = " ".repeat(4)
+        konst indentationWhiteSpaces = " ".repeat(4)
     }
 }

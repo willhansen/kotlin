@@ -4,11 +4,11 @@ FILE: annotationArgumentKClassLiteralTypeError.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Array<kotlin/reflect/KClass<*>>| = R|<local>/a|
+        public final konst a: R|kotlin/Array<kotlin/reflect/KClass<*>>| = R|<local>/a|
             public get(): R|kotlin/Array<kotlin/reflect/KClass<*>>|
 
     }
-    public final val <reified T> R|T|.test: R|kotlin/Any|
+    public final konst <reified T> R|T|.test: R|kotlin/Any|
         public inline get(): R|kotlin/Any| {
             ^ @R|Ann|(a = <implicitArrayOf>(<getClass>(R|T|), <getClass>(Q|kotlin/Array|))) object : R|kotlin/Any| {
                 private constructor(): R|<anonymous><T>| {

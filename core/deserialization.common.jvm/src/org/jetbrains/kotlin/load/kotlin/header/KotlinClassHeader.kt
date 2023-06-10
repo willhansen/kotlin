@@ -11,18 +11,18 @@ import org.jetbrains.kotlin.load.kotlin.header.KotlinClassHeader.MultifileClassK
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 
 class KotlinClassHeader(
-    val kind: Kind,
-    val metadataVersion: JvmMetadataVersion,
-    val data: Array<String>?,
-    val incompatibleData: Array<String>?,
-    val strings: Array<String>?,
-    private val extraString: String?,
-    val extraInt: Int,
-    val packageName: String?,
-    val serializedIr: ByteArray?,
+    konst kind: Kind,
+    konst metadataVersion: JvmMetadataVersion,
+    konst data: Array<String>?,
+    konst incompatibleData: Array<String>?,
+    konst strings: Array<String>?,
+    private konst extraString: String?,
+    konst extraInt: Int,
+    konst packageName: String?,
+    konst serializedIr: ByteArray?,
 ) {
     // See kotlin.Metadata
-    enum class Kind(val id: Int) {
+    enum class Kind(konst id: Int) {
         UNKNOWN(0),
         CLASS(1),
         FILE_FACADE(2),
@@ -31,7 +31,7 @@ class KotlinClassHeader(
         MULTIFILE_CLASS_PART(5);
 
         companion object {
-            private val entryById = values().associateBy(Kind::id)
+            private konst entryById = konstues().associateBy(Kind::id)
 
             @JvmStatic
             fun getById(id: Int) = entryById[id] ?: UNKNOWN
@@ -43,15 +43,15 @@ class KotlinClassHeader(
         INHERITING;
     }
 
-    val multifileClassName: String?
+    konst multifileClassName: String?
         get() = extraString.takeIf { kind == Kind.MULTIFILE_CLASS_PART }
 
-    val multifilePartNames: List<String>
+    konst multifilePartNames: List<String>
         get() = data.takeIf { kind == Kind.MULTIFILE_CLASS }?.asList().orEmpty()
 
     // TODO: use in incremental compilation
     @Suppress("unused")
-    val multifileClassKind: MultifileClassKind?
+    konst multifileClassKind: MultifileClassKind?
         get() = if (kind == Kind.MULTIFILE_CLASS || kind == Kind.MULTIFILE_CLASS_PART) {
             if (extraInt.has(METADATA_MULTIFILE_PARTS_INHERIT_FLAG))
                 INHERITING
@@ -59,16 +59,16 @@ class KotlinClassHeader(
                 DELEGATING
         } else null
 
-    val isUnstableJvmIrBinary: Boolean
+    konst isUnstableJvmIrBinary: Boolean
         get() = extraInt.has(METADATA_JVM_IR_FLAG) && !extraInt.has(METADATA_JVM_IR_STABLE_ABI_FLAG)
 
-    val isUnstableFirBinary: Boolean
+    konst isUnstableFirBinary: Boolean
         get() = extraInt.has(METADATA_FIR_FLAG) && !extraInt.has(METADATA_JVM_IR_STABLE_ABI_FLAG)
 
-    val isPreRelease: Boolean
+    konst isPreRelease: Boolean
         get() = extraInt.has(METADATA_PRE_RELEASE_FLAG)
 
-    val isScript: Boolean
+    konst isScript: Boolean
         get() = extraInt.has(METADATA_SCRIPT_FLAG)
 
     override fun toString() = "$kind version=$metadataVersion"

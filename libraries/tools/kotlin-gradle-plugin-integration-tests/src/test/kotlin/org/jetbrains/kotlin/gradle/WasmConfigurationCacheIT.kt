@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName
 
 @MppGradlePluginTests
 class WasmConfigurationCacheIT : KGPBaseTest() {
-    override val defaultBuildOptions =
+    override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(
             configurationCache = true,
         )

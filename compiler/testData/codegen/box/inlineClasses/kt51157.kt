@@ -12,6 +12,6 @@ interface GenericParser<Input, Output> {
 }
 
 fun box(): String {
-    val parser = object : ByteArrayParser<String> {}
+    konst parser = object : ByteArrayParser<String> {}
     return "OK"
 }

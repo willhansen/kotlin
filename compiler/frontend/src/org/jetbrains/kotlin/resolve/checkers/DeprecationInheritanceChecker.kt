@@ -19,9 +19,9 @@ object DeprecationInheritanceChecker : DeclarationChecker {
         if (declaration is KtProperty && descriptor is PropertyAccessorDescriptor && descriptor.isDefault) {
             return
         }
-        val deprecationResolver = context.deprecationResolver
+        konst deprecationResolver = context.deprecationResolver
         if (!deprecationResolver.areDeprecationsInheritedFromOverriden(descriptor)) return
-        val (deprecations, message) = if (context.languageVersionSettings.supportsFeature(StopPropagatingDeprecationThroughOverrides)) {
+        konst (deprecations, message) = if (context.languageVersionSettings.supportsFeature(StopPropagatingDeprecationThroughOverrides)) {
             deprecationResolver.getHiddenDeprecationsFromOverriden(descriptor) to ""
         } else {
             deprecationResolver.getDeprecations(descriptor) to "This deprecation won't be inherited in future releases. "

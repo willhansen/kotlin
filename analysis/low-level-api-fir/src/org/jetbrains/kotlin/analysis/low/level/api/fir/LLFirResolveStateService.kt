@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.util.errorWithFirSpecific
 import org.jetbrains.kotlin.analysis.project.structure.*
 
 class LLFirResolveSessionService(project: Project) {
-    private val cache = LLFirSessionCache.getInstance(project)
+    private konst cache = LLFirSessionCache.getInstance(project)
 
     fun getFirResolveSession(module: KtModule): LLFirResolveSession {
         return create(module, cache::getSession)

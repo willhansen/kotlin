@@ -6,7 +6,7 @@
 package flow
 
 interface FlowCollector<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow<T : Any> {
@@ -19,7 +19,7 @@ public inline fun <T : Any> flow(crossinline block: suspend FlowCollector<T>.() 
 
 inline suspend fun <T : Any> Flow<T>.collect(crossinline action: suspend (T) -> Unit): Unit =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = action(value)
+        override suspend fun emit(konstue: T) = action(konstue)
     })
 
 inline suspend fun inlineMe(crossinline block: suspend () -> Unit) = suspend {

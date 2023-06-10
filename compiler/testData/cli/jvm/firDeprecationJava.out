@@ -6,6 +6,6 @@ compiler/testData/cli/jvm/firDeprecationJava.kt:4:17: warning: '@Deprecated(...)
     JavaClass().bar("", 1, 2.0)
                 ^
 compiler/testData/cli/jvm/firDeprecationJava.kt:5:27: warning: '@Deprecated(...) field baz: List!' is deprecated. Deprecated in Java
-    val baz = JavaClass().baz
+    konst baz = JavaClass().baz
                           ^
 OK

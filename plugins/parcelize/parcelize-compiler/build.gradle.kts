@@ -5,10 +5,10 @@ plugins {
     id("jps-compatible")
 }
 
-val robolectricClasspath by configurations.creating
-val parcelizeRuntimeForTests by configurations.creating
-val layoutLib by configurations.creating
-val layoutLibApi by configurations.creating
+konst robolectricClasspath by configurations.creating
+konst parcelizeRuntimeForTests by configurations.creating
+konst layoutLib by configurations.creating
+konst layoutLibApi by configurations.creating
 
 dependencies {
     embedded(project(":plugins:parcelize:parcelize-compiler:parcelize.common")) { isTransitive = false }
@@ -88,10 +88,10 @@ projectTest(jUnitMode = JUnitMode.JUnit5) {
     workingDir = rootDir
     useAndroidJar()
 
-    val parcelizeRuntimeForTestsConf: FileCollection = parcelizeRuntimeForTests
-    val robolectricClasspathConf: FileCollection = robolectricClasspath
-    val layoutLibConf: FileCollection = layoutLib
-    val layoutLibApiConf: FileCollection = layoutLibApi
+    konst parcelizeRuntimeForTestsConf: FileCollection = parcelizeRuntimeForTests
+    konst robolectricClasspathConf: FileCollection = robolectricClasspath
+    konst layoutLibConf: FileCollection = layoutLib
+    konst layoutLibApiConf: FileCollection = layoutLibApi
     doFirst {
         systemProperty("parcelizeRuntime.classpath", parcelizeRuntimeForTestsConf.asPath)
         systemProperty("robolectric.classpath", robolectricClasspathConf.asPath)

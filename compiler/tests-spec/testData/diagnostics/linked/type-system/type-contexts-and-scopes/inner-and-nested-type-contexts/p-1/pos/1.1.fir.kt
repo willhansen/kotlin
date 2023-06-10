@@ -4,9 +4,9 @@
 
 // TESTCASE NUMBER: 1
 
-class Case1<AT>(val x: AT) {
+class Case1<AT>(konst x: AT) {
 
-    inner class B(val y: AT) {
+    inner class B(konst y: AT) {
         fun case1a(k: AT) {
             k checkType { check<AT>() }
             with(k) {
@@ -16,7 +16,7 @@ class Case1<AT>(val x: AT) {
         }
 
         fun case1b() {
-            val k: AT = x
+            konst k: AT = x
             k checkType { check<AT>() }
 
             when (k) {
@@ -27,7 +27,7 @@ class Case1<AT>(val x: AT) {
         }
 
         fun case1c() {
-            val k: AT = x!!
+            konst k: AT = x!!
 
             if (k is AT) {
                 k checkType { check<AT>() }

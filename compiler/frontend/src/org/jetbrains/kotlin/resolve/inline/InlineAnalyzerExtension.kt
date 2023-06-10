@@ -28,8 +28,8 @@ import org.jetbrains.kotlin.resolve.calls.components.hasDefaultValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.declaresOrInheritsDefaultValue
 
 class InlineAnalyzerExtension(
-    private val reasonableInlineRules: Iterable<ReasonableInlineRule>,
-    private val languageVersionSettings: LanguageVersionSettings
+    private konst reasonableInlineRules: Iterable<ReasonableInlineRule>,
+    private konst languageVersionSettings: LanguageVersionSettings
 ) : AnalyzerExtensions.AnalyzerExtension {
 
     override fun process(descriptor: CallableMemberDescriptor, functionOrProperty: KtCallableDeclaration, trace: BindingTrace) {
@@ -50,7 +50,7 @@ class InlineAnalyzerExtension(
                 "Property descriptor $descriptor should have corresponded KtProperty, but has $functionOrProperty"
             }
 
-            val hasBackingField = trace.get(BindingContext.BACKING_FIELD_REQUIRED, descriptor as PropertyDescriptor) == true
+            konst hasBackingField = trace.get(BindingContext.BACKING_FIELD_REQUIRED, descriptor as PropertyDescriptor) == true
             if (hasBackingField || (functionOrProperty as KtProperty).delegateExpression != null) {
                 trace.report(Errors.INLINE_PROPERTY_WITH_BACKING_FIELD.on(functionOrProperty))
             }
@@ -61,7 +61,7 @@ class InlineAnalyzerExtension(
         functionOrProperty: KtCallableDeclaration,
         trace: BindingTrace
     ) {
-        val visitor = object : KtVisitorVoid() {
+        konst visitor = object : KtVisitorVoid() {
             override fun visitKtElement(element: KtElement) {
                 super.visitKtElement(element)
                 element.acceptChildren(this)
@@ -88,25 +88,25 @@ class InlineAnalyzerExtension(
         function: KtFunction,
         trace: BindingTrace
     ) {
-        val ktParameters = function.valueParameters
-        for (parameter in functionDescriptor.valueParameters) {
+        konst ktParameters = function.konstueParameters
+        for (parameter in functionDescriptor.konstueParameters) {
             if (parameter.hasDefaultValue()) {
-                val ktParameter = ktParameters[parameter.index]
+                konst ktParameter = ktParameters[parameter.index]
                 //Always report unsupported error on functional parameter with inherited default (there are some problems with inlining)
-                val inheritsDefaultValue = !parameter.declaresDefaultValue() && parameter.declaresOrInheritsDefaultValue()
+                konst inheritsDefaultValue = !parameter.declaresDefaultValue() && parameter.declaresOrInheritsDefaultValue()
                 if (checkInlinableParameter(parameter, ktParameter, functionDescriptor, null) || inheritsDefaultValue) {
                     if (inheritsDefaultValue || !languageVersionSettings.supportsFeature(LanguageFeature.InlineDefaultFunctionalParameters)) {
                         trace.report(
                             Errors.NOT_YET_SUPPORTED_IN_INLINE.on(
                                 ktParameter,
-                                "Functional parameters with inherited default values"
+                                "Functional parameters with inherited default konstues"
                             )
                         )
                     } else {
                         checkDefaultValue(trace, parameter, ktParameter)
                     }
                 }
-                // Report unsupported error on inline/crossinline suspend lambdas with default values.
+                // Report unsupported error on inline/crossinline suspend lambdas with default konstues.
                 if (functionDescriptor.isSuspend &&
                     InlineUtil.isInlineParameterExceptNullability(parameter) &&
                     parameter.hasSuspendFunctionType
@@ -114,7 +114,7 @@ class InlineAnalyzerExtension(
                     trace.report(
                         Errors.NOT_YET_SUPPORTED_IN_INLINE.on(
                             ktParameter,
-                            "Suspend functional parameters with default values"
+                            "Suspend functional parameters with default konstues"
                         )
                     )
                 }
@@ -143,14 +143,14 @@ class InlineAnalyzerExtension(
             return
         }
 
-        val overridesAnything = callableDescriptor.overriddenDescriptors.isNotEmpty()
+        konst overridesAnything = callableDescriptor.overriddenDescriptors.isNotEmpty()
 
         if (overridesAnything) {
-            val ktTypeParameters = functionOrProperty.typeParameters
+            konst ktTypeParameters = functionOrProperty.typeParameters
             for (typeParameter in callableDescriptor.typeParameters) {
                 if (typeParameter.isReified) {
-                    val ktTypeParameter = ktTypeParameters[typeParameter.index]
-                    val reportOn = ktTypeParameter.modifierList?.getModifier(KtTokens.REIFIED_KEYWORD) ?: ktTypeParameter
+                    konst ktTypeParameter = ktTypeParameters[typeParameter.index]
+                    konst reportOn = ktTypeParameter.modifierList?.getModifier(KtTokens.REIFIED_KEYWORD) ?: ktTypeParameter
                     trace.report(Errors.REIFIED_TYPE_PARAMETER_IN_OVERRIDE.on(reportOn))
                 }
             }
@@ -170,7 +170,7 @@ class InlineAnalyzerExtension(
 
     private fun checkHasInlinableAndNullability(functionDescriptor: FunctionDescriptor, function: KtFunction, trace: BindingTrace) {
         var hasInlineArgs = false
-        function.valueParameters.zip(functionDescriptor.valueParameters).forEach { (parameter, descriptor) ->
+        function.konstueParameters.zip(functionDescriptor.konstueParameters).forEach { (parameter, descriptor) ->
             hasInlineArgs = hasInlineArgs or checkInlinableParameter(descriptor, parameter, functionDescriptor, trace)
         }
         if (hasInlineArgs) return
@@ -182,7 +182,7 @@ class InlineAnalyzerExtension(
         if (reasonableInlineRules.any { it.isInlineReasonable(functionDescriptor, function, trace.bindingContext) }) return
         if (functionDescriptor.returnType?.needsMfvcFlattening() == true) return
 
-        val reportOn = function.modifierList?.getModifier(KtTokens.INLINE_KEYWORD) ?: function
+        konst reportOn = function.modifierList?.getModifier(KtTokens.INLINE_KEYWORD) ?: function
         trace.report(Errors.NOTHING_TO_INLINE.on(reportOn))
     }
 

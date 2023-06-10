@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     fun foo() {}
 }
 

@@ -14,9 +14,9 @@ fun <R> id2(x: R): R = x
 class Out<out R>(x: R)
 
 fun main() {
-    val x1 = select(id1 { B() }, id2 { C() })
-    val x2 = select({ B() }, { C() })
-    val x3 = select(id1(Out(B())), id2(Out(C())))
+    konst x1 = select(id1 { B() }, id2 { C() })
+    konst x2 = select({ B() }, { C() })
+    konst x3 = select(id1(Out(B())), id2(Out(C())))
 }
 
 // Case 2
@@ -34,7 +34,7 @@ class Foo
 typealias X = Foo.(Foo.() -> Unit) -> Unit
 
 fun bar() {
-    val y = when {
+    konst y = when {
         false -> { _ ->
             Unit
         }

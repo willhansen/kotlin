@@ -5,13 +5,13 @@ FILE fqName:<root> fileName:/javaInnerClass.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.J'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test1 modality:FINAL visibility:public superTypes:[<root>.J]'
-    PROPERTY name:test visibility:public modality:FINAL [val]
+    PROPERTY name:test visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:test type:<root>.J.JInner visibility:private [final]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.J.JInner' type=<root>.J.JInner origin=null
             $outer: GET_VAR '<this>: <root>.Test1 declared in <root>.Test1' type=<root>.Test1 origin=null
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test> visibility:public modality:FINAL <> ($this:<root>.Test1) returnType:<root>.J.JInner
-        correspondingProperty: PROPERTY name:test visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:test visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test1
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-test> (): <root>.J.JInner declared in <root>.Test1'

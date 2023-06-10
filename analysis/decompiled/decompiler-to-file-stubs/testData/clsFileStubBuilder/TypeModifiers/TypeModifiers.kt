@@ -1,9 +1,9 @@
 public class TypeModifiers {
-    val function: () -> Unit = null!!
+    konst function: () -> Unit = null!!
 
-    val suspendFunction: suspend () -> Unit = null!!
+    konst suspendFunction: suspend () -> Unit = null!!
 
-    val suspendExtFunction: suspend Any.() -> Unit = null!!
+    konst suspendExtFunction: suspend Any.() -> Unit = null!!
 
-    val functionOnSuspendFunction: (suspend () -> Unit).() -> Unit = null!!
+    konst functionOnSuspendFunction: (suspend () -> Unit).() -> Unit = null!!
 }

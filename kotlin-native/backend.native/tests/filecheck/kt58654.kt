@@ -6,7 +6,7 @@
 // CHECK-LABEL: define i64 @"kfun:#foo(){}kotlin.Long"()
 fun foo(): Long {
     // CHECK-NOT: @LONG_CACHE
-    val data: Map<String, Any> = mapOf()
+    konst data: Map<String, Any> = mapOf()
     return data.getOrElse("id") { 0L } as Long
 }
 // CHECK: ret i64
@@ -22,8 +22,8 @@ inline fun <T> bar(x: T?, f: Boolean): Any {
 // CHECK-LABEL: define i64 @"kfun:#callBar(kotlin.Boolean){}kotlin.ULong
 fun callBar(f: Boolean): ULong {
     // CHECK: @LONG_CACHE
-    val data: Map<String, Any> = mapOf()
-    val x = data["id"]
+    konst data: Map<String, Any> = mapOf()
+    konst x = data["id"]
     return bar(x, f) as ULong
 }
 // CHECK: ret i64

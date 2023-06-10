@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.commonizer.utils.Interner
 interface CirPropertyGetter : CirPropertyAccessor {
     companion object {
         // optimization for speed
-        val DEFAULT_NO_ANNOTATIONS: CirPropertyGetter
+        konst DEFAULT_NO_ANNOTATIONS: CirPropertyGetter
 
         fun createInterned(
             annotations: List<CirAnnotation>,
@@ -24,7 +24,7 @@ interface CirPropertyGetter : CirPropertyAccessor {
             )
         )
 
-        private val interner = Interner<CirPropertyGetterInternedImpl>()
+        private konst interner = Interner<CirPropertyGetterInternedImpl>()
 
         init {
             DEFAULT_NO_ANNOTATIONS = createInterned(
@@ -37,7 +37,7 @@ interface CirPropertyGetter : CirPropertyAccessor {
 }
 
 private data class CirPropertyGetterInternedImpl(
-    override val annotations: List<CirAnnotation>,
-    override val isDefault: Boolean,
-    override val isInline: Boolean
+    override konst annotations: List<CirAnnotation>,
+    override konst isDefault: Boolean,
+    override konst isInline: Boolean
 ) : CirPropertyGetter

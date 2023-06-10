@@ -20,12 +20,12 @@ import kotlin.test.assertSame
  */
 
 fun classLoaderForBackwardsCompatibleClasses(): ClassLoader {
-    val uris = classpathForBackwardsCompatibleClasses().map { file -> file.toURI().toURL() }.toTypedArray()
+    konst uris = classpathForBackwardsCompatibleClasses().map { file -> file.toURI().toURL() }.toTypedArray()
     return URLClassLoader.newInstance(uris, null)
 }
 
 fun classpathForBackwardsCompatibleClasses(): List<File> {
-    val compatibilityTestClasspath = System.getProperty("compatibilityTestClasspath")
+    konst compatibilityTestClasspath = System.getProperty("compatibilityTestClasspath")
         ?: error("Missing compatibilityTestClasspath system property")
 
     return compatibilityTestClasspath.split(";").map { path -> File(path) }
@@ -40,10 +40,10 @@ fun deserializeIdeaKpmProjectWithBackwardsCompatibleClasses(project: IdeaKpmProj
 }
 
 fun deserializeIdeaKpmProjectWithBackwardsCompatibleClasses(project: ByteArray): Any {
-    val classLoader = classLoaderForBackwardsCompatibleClasses()
-    val serializer = TestIdeaKpmClassLoaderProjectSerializer(classLoader)
+    konst classLoader = classLoaderForBackwardsCompatibleClasses()
+    konst serializer = TestIdeaKpmClassLoaderProjectSerializer(classLoader)
 
-    val deserialized = assertNotNull(
+    konst deserialized = assertNotNull(
         serializer.deserialize(project),
         "Failed to deserialize project: ${serializer.reports}"
     )

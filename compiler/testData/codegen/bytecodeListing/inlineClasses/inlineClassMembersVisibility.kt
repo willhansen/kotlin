@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     constructor(x: Long) : this(x.toInt())
     internal constructor(x: Int, y: Int) : this(x + y)
     private constructor(x: Short) : this(x.toInt())
@@ -13,13 +13,13 @@ inline class Z(val x: Int) {
     internal fun String.internalExtensionFun() {}
     private fun String.privateExtensionFun() {}
     
-    val publicVal: Int get() = x
-    internal val internalVal: Int get() = x
-    private val privateVal: Int get() = x
+    konst publicVal: Int get() = x
+    internal konst internalVal: Int get() = x
+    private konst privateVal: Int get() = x
 
-    val String.publicExtensionVal: Int get() = x
-    internal val String.internalExtensionVal: Int get() = x
-    private val String.privateExtensionVal: Int get() = x
+    konst String.publicExtensionVal: Int get() = x
+    internal konst String.internalExtensionVal: Int get() = x
+    private konst String.privateExtensionVal: Int get() = x
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
     var publicVar: Int

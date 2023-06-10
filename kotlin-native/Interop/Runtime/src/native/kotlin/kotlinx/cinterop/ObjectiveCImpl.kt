@@ -103,7 +103,7 @@ class ObjCNotImplementedVar<T : Any?>(rawPtr: NativePtr) : CVariable(rawPtr) {
 }
 
 @ExperimentalForeignApi
-var <T : Any?> ObjCNotImplementedVar<T>.value: T
+var <T : Any?> ObjCNotImplementedVar<T>.konstue: T
     get() = TODO()
     set(_) = TODO()
 
@@ -119,27 +119,27 @@ internal external fun createObjCSuperStruct(receiver: NativePtr, superClass: Nat
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 @InternalForKotlinNative
-public annotation class ExternalObjCClass(val protocolGetter: String = "", val binaryName: String = "")
+public annotation class ExternalObjCClass(konst protocolGetter: String = "", konst binaryName: String = "")
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
 @Retention(AnnotationRetention.BINARY)
 @InternalForKotlinNative
-public annotation class ObjCMethod(val selector: String, val encoding: String, val isStret: Boolean = false)
+public annotation class ObjCMethod(konst selector: String, konst encoding: String, konst isStret: Boolean = false)
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @InternalForKotlinNative
-public annotation class ObjCDirect(val symbol: String)
+public annotation class ObjCDirect(konst symbol: String)
 
 @Target(AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.BINARY)
 @InternalForKotlinNative
-public annotation class ObjCConstructor(val initSelector: String, val designated: Boolean)
+public annotation class ObjCConstructor(konst initSelector: String, konst designated: Boolean)
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @InternalForKotlinNative
-public annotation class ObjCFactory(val selector: String, val encoding: String, val isStret: Boolean = false)
+public annotation class ObjCFactory(konst selector: String, konst encoding: String, konst isStret: Boolean = false)
 
 @Target(AnnotationTarget.FILE)
 @Retention(AnnotationRetention.BINARY)
@@ -149,7 +149,7 @@ public annotation class InteropStubs()
 @PublishedApi
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.SOURCE)
-internal annotation class ObjCMethodImp(val selector: String, val encoding: String)
+internal annotation class ObjCMethodImp(konst selector: String, konst encoding: String)
 
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.OBJC_GET_SELECTOR)
@@ -157,7 +157,7 @@ internal external fun objCGetSelector(selector: String): COpaquePointer
 
 @kotlin.native.internal.ExportForCompiler
 private fun allocObjCObject(clazz: NativePtr): NativePtr {
-    val rawResult = objc_allocWithZone(clazz)
+    konst rawResult = objc_allocWithZone(clazz)
     if (rawResult == nativeNullPtr) {
         throw OutOfMemoryError("Unable to allocate Objective-C object")
     }
@@ -189,7 +189,7 @@ internal class ObjCWeakReferenceImpl : kotlin.native.ref.WeakReferenceImpl() {
 private external fun ObjCWeakReferenceImpl.init(objcPtr: NativePtr)
 
 @kotlin.native.internal.ExportForCppRuntime internal fun makeObjCWeakReferenceImpl(objcPtr: NativePtr): ObjCWeakReferenceImpl {
-    val result = ObjCWeakReferenceImpl()
+    konst result = ObjCWeakReferenceImpl()
     result.init(objcPtr)
     return result
 }

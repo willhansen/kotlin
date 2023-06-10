@@ -17,7 +17,7 @@ public class J {
 // FILE: test.kt
 
 class KList : MutableList<String> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {

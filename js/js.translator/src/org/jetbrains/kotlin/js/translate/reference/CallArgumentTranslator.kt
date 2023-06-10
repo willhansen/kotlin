@@ -41,22 +41,22 @@ import org.jetbrains.kotlin.types.typeUtil.isPrimitiveNumberType
 import java.util.*
 
 class CallArgumentTranslator private constructor(
-        private val resolvedCall: ResolvedCall<*>,
-        private val receiver: JsExpression?,
-        private val context: TranslationContext
+        private konst resolvedCall: ResolvedCall<*>,
+        private konst receiver: JsExpression?,
+        private konst context: TranslationContext
 ) : AbstractTranslator(context) {
 
     data class ArgumentsInfo(
-            val valueArguments: List<JsExpression>,
-            val hasSpreadOperator: Boolean,
-            val cachedReceiver: TemporaryConstVariable?,
-            val reifiedArguments: List<JsExpression> = listOf()
+            konst konstueArguments: List<JsExpression>,
+            konst hasSpreadOperator: Boolean,
+            konst cachedReceiver: TemporaryConstVariable?,
+            konst reifiedArguments: List<JsExpression> = listOf()
     ) {
-        val translateArguments: List<JsExpression>
-            get() = reifiedArguments + valueArguments
+        konst translateArguments: List<JsExpression>
+            get() = reifiedArguments + konstueArguments
     }
 
-    private val isNativeFunctionCall = AnnotationsUtils.isNativeObject(resolvedCall.candidateDescriptor)
+    private konst isNativeFunctionCall = AnnotationsUtils.isNativeObject(resolvedCall.candidateDescriptor)
 
     private fun removeLastUndefinedArguments(result: MutableList<JsExpression>) {
         var i = result.lastIndex
@@ -78,24 +78,24 @@ class CallArgumentTranslator private constructor(
                 isNamed()
 
     private fun translate(): ArgumentsInfo {
-        val valueParameters = resolvedCall.resultingDescriptor.valueParameters
+        konst konstueParameters = resolvedCall.resultingDescriptor.konstueParameters
         var hasSpreadOperator = false
         var cachedReceiver: TemporaryConstVariable? = null
 
-        var result: MutableList<JsExpression> = ArrayList(valueParameters.size)
-        val valueArgumentsByIndex = resolvedCall.valueArgumentsByIndex ?: throw IllegalStateException(
-                "Failed to arrange value arguments by index: " + resolvedCall.resultingDescriptor)
+        var result: MutableList<JsExpression> = ArrayList(konstueParameters.size)
+        konst konstueArgumentsByIndex = resolvedCall.konstueArgumentsByIndex ?: throw IllegalStateException(
+                "Failed to arrange konstue arguments by index: " + resolvedCall.resultingDescriptor)
         var argsBeforeVararg: List<JsExpression>? = null
         var concatArguments: MutableList<JsExpression>? = null
-        val argsToJsExpr = translateUnresolvedArguments(context(), resolvedCall)
+        konst argsToJsExpr = translateUnresolvedArguments(context(), resolvedCall)
         var varargElementType: KotlinType? = null
 
-        for (parameterDescriptor in valueParameters) {
-            val actualArgument = valueArgumentsByIndex[parameterDescriptor.index]
+        for (parameterDescriptor in konstueParameters) {
+            konst actualArgument = konstueArgumentsByIndex[parameterDescriptor.index]
 
             if (actualArgument is VarargValueArgument) {
 
-                val arguments = actualArgument.getArguments()
+                konst arguments = actualArgument.getArguments()
 
                 if (!hasSpreadOperator) {
                     hasSpreadOperator = arguments.any { it.hasSpreadElementOrNamedArgument()}
@@ -160,7 +160,7 @@ class CallArgumentTranslator private constructor(
             }
         }
 
-        val callableDescriptor = resolvedCall.resultingDescriptor
+        konst callableDescriptor = resolvedCall.resultingDescriptor
         if (callableDescriptor is FunctionDescriptor && callableDescriptor.isSuspend) {
             result.add(TranslationUtils.translateContinuationArgument(context()))
         }
@@ -174,19 +174,19 @@ class CallArgumentTranslator private constructor(
             context: TranslationContext,
             resolvedCall: ResolvedCall<*>
     ): Map<ValueArgument, JsExpression> {
-        val argsToParameters = resolvedCall.valueArguments
+        konst argsToParameters = resolvedCall.konstueArguments
                 .flatMap { (param, args) -> args.arguments.map { param to it } }
                 .associate { (param, arg) -> arg to param }
 
-        val argumentContexts = resolvedCall.call.valueArguments.associate { it to context.innerBlock() }
+        konst argumentContexts = resolvedCall.call.konstueArguments.associate { it to context.innerBlock() }
 
-        var result = resolvedCall.call.valueArguments.associate { arg ->
-            val argumentContext = argumentContexts[arg]!!
-            val parenthisedArgumentExpression = arg.getArgumentExpression()
+        var result = resolvedCall.call.konstueArguments.associate { arg ->
+            konst argumentContext = argumentContexts[arg]!!
+            konst parenthisedArgumentExpression = arg.getArgumentExpression()
 
-            val param = argsToParameters[arg]!!.original
-            val isLambda = resolvedCall.resultingDescriptor.let { it.getFunctionTypeKind() != null || it is FunctionInvokeDescriptor }
-            val parameterType = if (!isLambda) param.varargElementType ?: param.type else context.currentModule.builtIns.anyType
+            konst param = argsToParameters[arg]!!.original
+            konst isLambda = resolvedCall.resultingDescriptor.let { it.getFunctionTypeKind() != null || it is FunctionInvokeDescriptor }
+            konst parameterType = if (!isLambda) param.varargElementType ?: param.type else context.currentModule.builtIns.anyType
 
             var argJs = Translation.translateAsExpression(parenthisedArgumentExpression!!, argumentContext)
             if (!param.isVararg || arg.getSpreadElement() == null) {
@@ -196,20 +196,20 @@ class CallArgumentTranslator private constructor(
             arg to argJs
         }
 
-        val resolvedOrder = resolvedCall.valueArgumentsByIndex.orEmpty()
+        konst resolvedOrder = resolvedCall.konstueArgumentsByIndex.orEmpty()
                 .flatMap { it.arguments }
                 .withIndex()
                 .associate { (index, arg) -> arg to index }
-        val argumentsAreOrdered = resolvedCall.call.valueArguments.withIndex().none { (index, arg) -> resolvedOrder[arg] != index }
+        konst argumentsAreOrdered = resolvedCall.call.konstueArguments.withIndex().none { (index, arg) -> resolvedOrder[arg] != index }
 
-        if (argumentContexts.values.any { !it.currentBlockIsEmpty() } || !argumentsAreOrdered) {
+        if (argumentContexts.konstues.any { !it.currentBlockIsEmpty() } || !argumentsAreOrdered) {
             result = result.map { (arg, expr) ->
-                val argumentContext = argumentContexts[arg]!!
+                konst argumentContext = argumentContexts[arg]!!
                 arg to argumentContext.cacheExpressionIfNeeded(expr)
             }.toMap()
         }
 
-        argumentContexts.values.forEach {
+        argumentContexts.konstues.forEach {
             context.moveVarsFrom(it)
             context.addStatementsToCurrentBlockFrom(it)
         }
@@ -218,13 +218,13 @@ class CallArgumentTranslator private constructor(
     }
 
     // Cache UTypeArray descriptor lookup
-    private val typeToUTypeArray = mutableMapOf<PrimitiveType, ClassDescriptor>()
+    private konst typeToUTypeArray = mutableMapOf<PrimitiveType, ClassDescriptor>()
 
     private fun JsExpression.wrapInUArray(elementType: KotlinType): JsExpression {
         return ArrayFIF.unsignedPrimitiveToSigned(elementType)?.let { primitiveType ->
-            val kotlinMemberScope = context.currentModule.getPackage(FqNameUnsafe("kotlin").toSafe()).memberScope
-            val classDescriptor = typeToUTypeArray.computeIfAbsent(primitiveType) {
-                val className = Name.identifier("U${primitiveType.typeName}Array")
+            konst kotlinMemberScope = context.currentModule.getPackage(FqNameUnsafe("kotlin").toSafe()).memberScope
+            konst classDescriptor = typeToUTypeArray.computeIfAbsent(primitiveType) {
+                konst className = Name.identifier("U${primitiveType.typeName}Array")
                 kotlinMemberScope.getContributedClassifier(className, NoLookupLocation.FROM_BACKEND) as ClassDescriptor
             }
             JsNew(ReferenceTranslator.translateAsTypeReference(classDescriptor, context), listOf(this))
@@ -237,7 +237,7 @@ class CallArgumentTranslator private constructor(
         shouldWrapVarargInArray: Boolean,
         varargElementType: KotlinType
     ): JsExpression? {
-        val arguments = resolvedArgument.arguments
+        konst arguments = resolvedArgument.arguments
         if (arguments.isEmpty()) {
             return if (shouldWrapVarargInArray) {
                 return toArray(varargElementType, mutableListOf()).wrapInUArray(varargElementType)
@@ -246,14 +246,14 @@ class CallArgumentTranslator private constructor(
             }
         }
 
-        val list = translateResolvedArgument(resolvedArgument, translatedArgs)
+        konst list = translateResolvedArgument(resolvedArgument, translatedArgs)
 
         return if (shouldWrapVarargInArray) {
-            val concatArguments = prepareConcatArguments(arguments, list, varargElementType)
-            val concatExpression = concatArgumentsIfNeeded(concatArguments, varargElementType, false)
+            konst concatArguments = prepareConcatArguments(arguments, list, varargElementType)
+            konst concatExpression = concatArgumentsIfNeeded(concatArguments, varargElementType, false)
             concatExpression
         } else {
-            val arg = ArrayFIF.unsignedPrimitiveToSigned(varargElementType)?.let { _ ->
+            konst arg = ArrayFIF.unsignedPrimitiveToSigned(varargElementType)?.let { _ ->
                 JsInvocation(JsNameRef("unbox", list[0]))
             } ?: list[0]
             JsAstUtils.invokeMethod(arg, "slice")
@@ -261,7 +261,7 @@ class CallArgumentTranslator private constructor(
     }
 
     private fun toArray(varargElementType: KotlinType?, elements: List<JsExpression>): JsExpression {
-        val argument = JsArrayLiteral(elements).apply { sideEffects = SideEffectKind.PURE }
+        konst argument = JsArrayLiteral(elements).apply { sideEffects = SideEffectKind.PURE }
 
         if (varargElementType == null) return argument
 
@@ -279,20 +279,20 @@ class CallArgumentTranslator private constructor(
         assert(arguments.isNotEmpty()) { "arguments.size should not be 0" }
         assert(arguments.size == list.size) { "arguments.size: " + arguments.size + " != list.size: " + list.size }
 
-        val concatArguments = mutableListOf<JsExpression>()
+        konst concatArguments = mutableListOf<JsExpression>()
         var lastArrayContent = mutableListOf<JsExpression>()
 
-        val size = arguments.size
+        konst size = arguments.size
         for (index in 0 until size) {
-            val valueArgument = arguments[index]
-            val expressionArgument = list[index]
+            konst konstueArgument = arguments[index]
+            konst expressionArgument = list[index]
 
-            if (valueArgument.hasSpreadElementOrNamedArgument()) {
+            if (konstueArgument.hasSpreadElementOrNamedArgument()) {
                 if (lastArrayContent.size > 0) {
                     concatArguments.add(toArray(varargElementType, lastArrayContent))
                     lastArrayContent = mutableListOf()
                 }
-                val e = if (varargElementType != null && ArrayFIF.unsignedPrimitiveToSigned(varargElementType) != null) {
+                konst e = if (varargElementType != null && ArrayFIF.unsignedPrimitiveToSigned(varargElementType) != null) {
                     JsInvocation(JsNameRef("unbox", expressionArgument))
                 } else expressionArgument
                 concatArguments.add(e)
@@ -315,14 +315,14 @@ class CallArgumentTranslator private constructor(
 
         @JvmStatic fun translate(resolvedCall: ResolvedCall<*>, receiver: JsExpression?, context: TranslationContext,
                                  block: JsBlock): ArgumentsInfo {
-            val innerContext = context.innerBlock(block)
-            val argumentTranslator = CallArgumentTranslator(resolvedCall, receiver, innerContext)
-            val result = argumentTranslator.translate()
+            konst innerContext = context.innerBlock(block)
+            konst argumentTranslator = CallArgumentTranslator(resolvedCall, receiver, innerContext)
+            konst result = argumentTranslator.translate()
             context.moveVarsFrom(innerContext)
-            val callDescriptor = resolvedCall.candidateDescriptor
+            konst callDescriptor = resolvedCall.candidateDescriptor
 
             if (CallExpressionTranslator.shouldBeInlined(callDescriptor)) {
-                val typeArgs = resolvedCall.typeArguments
+                konst typeArgs = resolvedCall.typeArguments
                 return result.copy(reifiedArguments = typeArgs.buildReifiedTypeArgs(context))
             }
 
@@ -346,7 +346,7 @@ class CallArgumentTranslator private constructor(
 
             return if (concatArguments.size > 1) {
                 if (varargElementType != null && (varargElementType.isPrimitiveNumberType() || ArrayFIF.unsignedPrimitiveToSigned(varargElementType) != null)) {
-                    val method = if (isMixed) "arrayConcat" else "primitiveArrayConcat"
+                    konst method = if (isMixed) "arrayConcat" else "primitiveArrayConcat"
                     JsAstUtils.invokeKotlinFunction(
                         method, concatArguments[0],
                         *concatArguments.subList(1, concatArguments.size).toTypedArray()
@@ -362,17 +362,17 @@ class CallArgumentTranslator private constructor(
 }
 
 fun Map<TypeParameterDescriptor, KotlinType>.buildReifiedTypeArgs(context: TranslationContext): List<JsExpression> {
-    val reifiedTypeArguments = mutableListOf<JsExpression>()
-    val patternTranslator = PatternTranslator.newInstance(context)
+    konst reifiedTypeArguments = mutableListOf<JsExpression>()
+    konst patternTranslator = PatternTranslator.newInstance(context)
 
     for (param in keys.sortedBy { it.index }) {
         if (!param.isReified) continue
 
-        val argumentType = get(param) ?: continue
+        konst argumentType = get(param) ?: continue
 
         reifiedTypeArguments.add(getReferenceToJsClass(argumentType, context))
 
-        val isCheckCallable = patternTranslator.getIsTypeCheckCallable(argumentType)
+        konst isCheckCallable = patternTranslator.getIsTypeCheckCallable(argumentType)
         reifiedTypeArguments.add(isCheckCallable)
     }
 

@@ -2,13 +2,13 @@
 
 class A {
     fun foo() {}
-    val bar = 0
+    konst bar = 0
 }
 
 fun A.qux() {}
 
-val test1 = A()::foo
+konst test1 = A()::foo
 
-val test2 = A()::bar
+konst test2 = A()::bar
 
-val test3 = A()::qux
+konst test3 = A()::qux

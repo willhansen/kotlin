@@ -15,42 +15,42 @@ import kotlin.test.*
 
 class CollectionJVMTest {
 
-    private fun <T> identitySetOf(vararg values: T): MutableSet<T> {
-        val map = IdentityHashMap<T, String>()
-        values.forEach { map.put(it, "") }
+    private fun <T> identitySetOf(vararg konstues: T): MutableSet<T> {
+        konst map = IdentityHashMap<T, String>()
+        konstues.forEach { map.put(it, "") }
         return map.keys
     }
 
-    private data class IdentityData(public val value: Int)
+    private data class IdentityData(public konst konstue: Int)
 
     @Test fun removeAllWithDifferentEquality() {
-        val data = listOf(IdentityData(1), IdentityData(1))
-        val list = data.toMutableList()
+        konst data = listOf(IdentityData(1), IdentityData(1))
+        konst list = data.toMutableList()
         list -= identitySetOf(data[0]) as Iterable<IdentityData>
         assertTrue(list.single() === data[1], "Identity contains should be used")
 
-        val list2 = data.toMutableList()
+        konst list2 = data.toMutableList()
         list2 -= hashSetOf(data[0]) as Iterable<IdentityData>
         assertTrue(list2.isEmpty(), "Equality contains should be used")
 
-        val set3: MutableSet<IdentityData> = identitySetOf(*data.toTypedArray())
+        konst set3: MutableSet<IdentityData> = identitySetOf(*data.toTypedArray())
         set3 -= arrayOf(data[1])
         assertTrue(set3.isEmpty(), "Array doesn't have contains, equality contains is used instead")
     }
 
     @Test fun flatMap() {
-        val data = listOf("", "foo", "bar", "x", "")
-        val characters = data.flatMap { it.toList() }
+        konst data = listOf("", "foo", "bar", "x", "")
+        konst characters = data.flatMap { it.toList() }
         println("Got list of characters ${characters}")
         assertEquals(7, characters.size)
-        val text = characters.joinToString("")
+        konst text = characters.joinToString("")
         assertEquals("foobarx", text)
     }
 
 
     @Test fun filterIntoLinkedList() {
-        val data = listOf("foo", "bar")
-        val foo = data.filterTo(LinkedList<String>()) { it.startsWith("f") }
+        konst data = listOf("foo", "bar")
+        konst foo = data.filterTo(LinkedList<String>()) { it.startsWith("f") }
 
         assertTrue {
             foo.all { it.startsWith("f") }
@@ -62,8 +62,8 @@ class CollectionJVMTest {
     }
 
     @Test fun filterNotIntoLinkedListOf() {
-        val data = listOf("foo", "bar")
-        val foo = data.filterNotTo(LinkedList<String>()) { it.startsWith("f") }
+        konst data = listOf("foo", "bar")
+        konst foo = data.filterNotTo(LinkedList<String>()) { it.startsWith("f") }
 
         assertTrue {
             foo.all { !it.startsWith("f") }
@@ -75,8 +75,8 @@ class CollectionJVMTest {
     }
 
     @Test fun filterNotNullIntoLinkedListOf() {
-        val data = listOf(null, "foo", null, "bar")
-        val foo = data.filterNotNullTo(LinkedList<String>())
+        konst data = listOf(null, "foo", null, "bar")
+        konst foo = data.filterNotNullTo(LinkedList<String>())
 
         assertEquals(2, foo.size)
         assertEquals(LinkedList(listOf("foo", "bar")), foo)
@@ -85,8 +85,8 @@ class CollectionJVMTest {
     }
 
     @Test fun filterIntoSortedSet() {
-        val data = listOf("foo", "bar")
-        val sorted = data.filterTo(sortedSetOf<String>()) { it.length == 3 }
+        konst data = listOf("foo", "bar")
+        konst sorted = data.filterTo(sortedSetOf<String>()) { it.length == 3 }
         assertEquals(2, sorted.size)
         assertEquals(sortedSetOf("bar", "foo"), sorted)
 
@@ -98,7 +98,7 @@ class CollectionJVMTest {
     }
 
     @Test fun last() {
-        val data = listOf("foo", "bar")
+        konst data = listOf("foo", "bar")
         assertEquals("bar", data.last())
         assertEquals(25, listOf(15, 19, 20, 25).last())
         assertEquals('a', LinkedList(listOf('a')).last())
@@ -113,8 +113,8 @@ class CollectionJVMTest {
     }
 
     @Test fun toArray() {
-        val data = listOf("foo", "bar")
-        val arr = data.toTypedArray()
+        konst data = listOf("foo", "bar")
+        konst arr = data.toTypedArray()
         println("Got array ${arr}")
         assertEquals(2, arr.size)
         todo {
@@ -125,14 +125,14 @@ class CollectionJVMTest {
     }
 
     @Test fun toSortedSet() {
-        val data = listOf("foo", "Foo", "bar")
-        val set1 = data.toSortedSet()
+        konst data = listOf("foo", "Foo", "bar")
+        konst set1 = data.toSortedSet()
         assertEquals(listOf("Foo", "bar", "foo"), set1.toList())
 
-        val set2 = data.toSortedSet(reverseOrder())
+        konst set2 = data.toSortedSet(reverseOrder())
         assertEquals(listOf("foo", "bar", "Foo"), set2.toList())
 
-        val set3 = data.toSortedSet(String.CASE_INSENSITIVE_ORDER)
+        konst set3 = data.toSortedSet(String.CASE_INSENSITIVE_ORDER)
         assertEquals(listOf("bar", "foo"), set3.toList())
     }
 
@@ -141,40 +141,40 @@ class CollectionJVMTest {
     }
 
     @Test fun filterIsInstanceList() {
-        val values: List<Any> = listOf(1, 2, 3.toDouble(), "abc", "cde")
+        konst konstues: List<Any> = listOf(1, 2, 3.toDouble(), "abc", "cde")
 
-        val intValues: List<Int> = values.filterIsInstance<Int>()
+        konst intValues: List<Int> = konstues.filterIsInstance<Int>()
         assertEquals(listOf(1, 2), intValues)
 
-        val doubleValues: List<Double> = values.filterIsInstance<Double>()
+        konst doubleValues: List<Double> = konstues.filterIsInstance<Double>()
         assertEquals(listOf(3.0), doubleValues)
 
-        val stringValues: List<String> = values.filterIsInstance<String>()
+        konst stringValues: List<String> = konstues.filterIsInstance<String>()
         assertEquals(listOf("abc", "cde"), stringValues)
 
-        val anyValues: List<Any> = values.filterIsInstance<Any>()
-        assertEquals(values.toList(), anyValues)
+        konst anyValues: List<Any> = konstues.filterIsInstance<Any>()
+        assertEquals(konstues.toList(), anyValues)
 
-        val charValues: List<Char> = values.filterIsInstance<Char>()
+        konst charValues: List<Char> = konstues.filterIsInstance<Char>()
         assertEquals(0, charValues.size)
     }
 
     @Test fun filterIsInstanceArray() {
-        val src: Array<Any> = arrayOf(1, 2, 3.toDouble(), "abc", "cde")
+        konst src: Array<Any> = arrayOf(1, 2, 3.toDouble(), "abc", "cde")
 
-        val intValues: List<Int> = src.filterIsInstance<Int>()
+        konst intValues: List<Int> = src.filterIsInstance<Int>()
         assertEquals(listOf(1, 2), intValues)
 
-        val doubleValues: List<Double> = src.filterIsInstance<Double>()
+        konst doubleValues: List<Double> = src.filterIsInstance<Double>()
         assertEquals(listOf(3.0), doubleValues)
 
-        val stringValues: List<String> = src.filterIsInstance<String>()
+        konst stringValues: List<String> = src.filterIsInstance<String>()
         assertEquals(listOf("abc", "cde"), stringValues)
 
-        val anyValues: List<Any> = src.filterIsInstance<Any>()
+        konst anyValues: List<Any> = src.filterIsInstance<Any>()
         assertEquals(src.toList(), anyValues)
 
-        val charValues: List<Char> = src.filterIsInstance<Char>()
+        konst charValues: List<Char> = src.filterIsInstance<Char>()
         assertEquals(0, charValues.size)
     }
 
@@ -184,15 +184,15 @@ class CollectionJVMTest {
 
     @Test fun emptyMapIsSerializable() = testSingletonSerialization(emptyMap<Any, Any>())
 
-    private fun checkSerializeAndDeserialize(value: Any): Any {
-        val result = serializeAndDeserialize(value)
-        assertEquals(value, result)
+    private fun checkSerializeAndDeserialize(konstue: Any): Any {
+        konst result = serializeAndDeserialize(konstue)
+        assertEquals(konstue, result)
         return result
     }
 
-    private fun testSingletonSerialization(value: Any) {
-        val result = checkSerializeAndDeserialize(value)
-        assertSame(value, result)
+    private fun testSingletonSerialization(konstue: Any) {
+        konst result = checkSerializeAndDeserialize(konstue)
+        assertSame(konstue, result)
     }
 
     @Test fun deserializeEmptyList() = testPersistedDeserialization(
@@ -208,13 +208,13 @@ class CollectionJVMTest {
         emptyMap<Any, Any>())
 
     private fun testPersistedDeserialization(hexValue: String, expected: Any) {
-        val actual = deserializeFromHex<Any>(hexValue)
+        konst actual = deserializeFromHex<Any>(hexValue)
         assertEquals(expected, actual)
     }
 
     @Test
     fun builtListIsSerializable() {
-        val source = buildList<Any?> {
+        konst source = buildList<Any?> {
             repeat(5) { add(it.toLong()) }
             add("string")
             add(null)
@@ -227,7 +227,7 @@ class CollectionJVMTest {
 
     @Test
     fun builtSetIsSerializable() {
-        val source = buildSet<Any?> {
+        konst source = buildSet<Any?> {
             repeat(5) { add(it.toShort()) }
             repeat(5) { add(it.toLong()) }
             add("string")
@@ -240,7 +240,7 @@ class CollectionJVMTest {
 
     @Test
     fun builtMapIsSerializable() {
-        val source = buildMap<Any?, Any?> {
+        konst source = buildMap<Any?, Any?> {
             repeat(5) { put(it.toShort(), it.toLong()) }
             put('s', "string")
             put(null, null)
@@ -249,10 +249,10 @@ class CollectionJVMTest {
         testCollectionBuilderSerialization(source)
     }
 
-    private fun testCollectionBuilderSerialization(value: Any) {
-        val result = serializeAndDeserialize(value)
-        assertEquals(value, result)
-        assertEquals(value.javaClass, result.javaClass)
+    private fun testCollectionBuilderSerialization(konstue: Any) {
+        konst result = serializeAndDeserialize(konstue)
+        assertEquals(konstue, result)
+        assertEquals(konstue.javaClass, result.javaClass)
         assertReadOnly(result)
     }
 
@@ -269,8 +269,8 @@ class CollectionJVMTest {
 
     @Test fun singletonMapIsSerializable() = testSingletonCollectionSerialization(mapOf("hello" to "world"))
 
-    private fun testSingletonCollectionSerialization(value: Any) {
-        val deserialized = checkSerializeAndDeserialize(value)
+    private fun testSingletonCollectionSerialization(konstue: Any) {
+        konst deserialized = checkSerializeAndDeserialize(konstue)
         assertReadOnly(deserialized)
     }
 }

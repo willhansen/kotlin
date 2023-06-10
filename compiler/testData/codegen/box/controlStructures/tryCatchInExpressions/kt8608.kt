@@ -7,7 +7,7 @@ inline fun run(f: () -> Unit) { f() }
 class A {
     fun foo(): String {
         run {
-            val x = object : Callable {
+            konst x = object : Callable {
                 override fun call(b: Boolean) {
                     if (b) {
                         x()

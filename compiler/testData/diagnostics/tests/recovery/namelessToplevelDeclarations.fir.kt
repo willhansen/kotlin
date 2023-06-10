@@ -6,7 +6,7 @@ package<!SYNTAX!><!>
 
 }
 
-val<!SYNTAX!><!> : Int = 1
+konst<!SYNTAX!><!> : Int = 1
 
 
 class<!SYNTAX!><!> {

@@ -38,7 +38,7 @@ fun test4(a: Set<String>): String {
 }
 
 fun box(): String {
-    val list = listOf("foo", "bar", "baz")
+    konst list = listOf("foo", "bar", "baz")
 
     var r = test1(list.asSequence())
     if (r != "0:foo;1:bar;2:baz;") return "fail1: $r"

@@ -12,7 +12,7 @@ public final class A : R|kotlin/Any| {
 }
 
 @R|kotlin/annotation/Target|(allowedTargets = <implicitArrayOf>(R|kotlin/annotation/AnnotationTarget.TYPE|)) public final annotation class Ann : R|kotlin/Annotation| {
-    public final val klass: R|kotlin/reflect/KClass<*>|
+    public final konst klass: R|kotlin/reflect/KClass<*>|
         public get(): R|kotlin/reflect/KClass<*>|
 
     public constructor(klass: R|kotlin/reflect/KClass<*>|): R|test/Ann|

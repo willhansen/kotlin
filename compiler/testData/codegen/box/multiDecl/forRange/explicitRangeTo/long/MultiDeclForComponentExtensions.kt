@@ -10,6 +10,6 @@ fun doTest(): String {
 }
 
 fun box(): String {
-  val s = doTest()
+  konst s = doTest()
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

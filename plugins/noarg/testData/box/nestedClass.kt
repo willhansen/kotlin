@@ -4,7 +4,7 @@ annotation class NoArg
 
 class Outer {
     @NoArg
-    class Nested(val a: String)
+    class Nested(konst a: String)
 }
 
 fun box(): String {

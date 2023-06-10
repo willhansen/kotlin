@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.declarations.renderers.classif
 import org.jetbrains.kotlin.analysis.api.renderer.types.impl.KtTypeRendererForDebug
 
 public object KtDeclarationRendererForDebug {
-    public val WITH_QUALIFIED_NAMES: KtDeclarationRenderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
+    public konst WITH_QUALIFIED_NAMES: KtDeclarationRenderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
         singleTypeParameterRenderer = KtSingleTypeParameterSymbolRenderer.WITHOUT_BOUNDS
         samConstructorRenderer = KtSamConstructorSymbolRenderer.AS_FUNCTION
         typeRenderer = KtTypeRendererForDebug.WITH_QUALIFIED_NAMES

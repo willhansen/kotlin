@@ -1,3 +1,3 @@
-data class A(val runA: A.(String) -> Unit = {})
+data class A(konst runA: A.(String) -> Unit = {})
 
-data class B(val x: Any = object {})
+data class B(konst x: Any = object {})

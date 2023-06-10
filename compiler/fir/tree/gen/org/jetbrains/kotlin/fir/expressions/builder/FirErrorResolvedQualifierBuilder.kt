@@ -34,14 +34,14 @@ import org.jetbrains.kotlin.name.FqName
 @FirBuilderDsl
 class FirErrorResolvedQualifierBuilder : FirAbstractResolvedQualifierBuilder, FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var packageFqName: FqName
     override var relativeClassFqName: FqName? = null
     override var symbol: FirClassLikeSymbol<*>? = null
     override var isNullableLHSForCallableReference: Boolean = false
     override var isFullyQualified: Boolean = false
-    override val nonFatalDiagnostics: MutableList<ConeDiagnostic> = mutableListOf()
-    override val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    override konst nonFatalDiagnostics: MutableList<ConeDiagnostic> = mutableListOf()
+    override konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     lateinit var diagnostic: ConeDiagnostic
 
     override fun build(): FirErrorResolvedQualifier {

@@ -28,7 +28,7 @@ object FirOperatorModifierChecker : FirSimpleFunctionChecker() {
         //we are not interested in implicit operators from override
         if (!declaration.hasModifier(KtTokens.OPERATOR_KEYWORD)) return
 
-        when (val checkResult = OperatorFunctionChecks.isOperator(declaration, context.session, context.scopeSession)) {
+        when (konst checkResult = OperatorFunctionChecks.isOperator(declaration, context.session, context.scopeSession)) {
             CheckResult.SuccessCheck -> {}
             CheckResult.IllegalFunctionName -> {
                 reporter.reportOn(declaration.source, FirErrors.INAPPLICABLE_OPERATOR_MODIFIER, "illegal function name", context)
@@ -44,9 +44,9 @@ object FirOperatorModifierChecker : FirSimpleFunctionChecker() {
     }
 
     private fun checkReplaceableLegacyOperators(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val replacement = OperatorNameConventions.MOD_OPERATORS_REPLACEMENT[declaration.name] ?: return
+        konst replacement = OperatorNameConventions.MOD_OPERATORS_REPLACEMENT[declaration.name] ?: return
 
-        val diagnostic = if (
+        konst diagnostic = if (
             declaration.symbol.callableId.packageName.isSubpackageOf(StandardClassIds.BASE_KOTLIN_PACKAGE) ||
             !context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitOperatorMod)
         ) {

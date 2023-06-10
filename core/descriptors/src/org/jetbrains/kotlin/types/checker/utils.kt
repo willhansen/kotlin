@@ -24,21 +24,21 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.typesApproximation.approximateCapturedTypes
 import java.util.*
 
-private class SubtypePathNode(val type: KotlinType, val previous: SubtypePathNode?)
+private class SubtypePathNode(konst type: KotlinType, konst previous: SubtypePathNode?)
 
 fun findCorrespondingSupertype(
         subtype: KotlinType, supertype: KotlinType,
         typeCheckingProcedureCallbacks: TypeCheckingProcedureCallbacks = TypeCheckerProcedureCallbacksImpl()
 ): KotlinType? {
-    val queue = ArrayDeque<SubtypePathNode>()
+    konst queue = ArrayDeque<SubtypePathNode>()
     queue.add(SubtypePathNode(subtype, null))
 
-    val supertypeConstructor = supertype.constructor
+    konst supertypeConstructor = supertype.constructor
 
     while (!queue.isEmpty()) {
-        val lastPathNode = queue.poll()
-        val currentSubtype = lastPathNode.type
-        val constructor = currentSubtype.constructor
+        konst lastPathNode = queue.poll()
+        konst currentSubtype = lastPathNode.type
+        konst constructor = currentSubtype.constructor
 
         if (typeCheckingProcedureCallbacks.assertEqualTypeConstructors(constructor, supertypeConstructor)) {
             var substituted = currentSubtype
@@ -47,7 +47,7 @@ fun findCorrespondingSupertype(
             var currentPathNode = lastPathNode.previous
 
             while (currentPathNode != null) {
-                val currentType = currentPathNode.type
+                konst currentType = currentPathNode.type
                 substituted = if (currentType.arguments.any { it.projectionKind != Variance.INVARIANT }) {
                     TypeConstructorSubstitution.create(currentType)
                             .wrapWithCapturingSubstitution().buildSubstitutor()
@@ -65,7 +65,7 @@ fun findCorrespondingSupertype(
                 currentPathNode = currentPathNode.previous
             }
 
-            val substitutedConstructor = substituted.constructor
+            konst substitutedConstructor = substituted.constructor
             if (!typeCheckingProcedureCallbacks.assertEqualTypeConstructors(substitutedConstructor, supertypeConstructor)) {
                 throw AssertionError("Type constructors should be equals!\n" +
                                      "substitutedSuperType: ${substitutedConstructor.debugInfo()}, \n\n" +
@@ -103,5 +103,5 @@ private fun TypeConstructor.debugInfo() = buildString {
 }
 
 interface NewTypeVariableConstructor : TypeConstructor {
-    val originalTypeParameter: TypeParameterDescriptor?
+    konst originalTypeParameter: TypeParameterDescriptor?
 }

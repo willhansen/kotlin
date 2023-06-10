@@ -25,5 +25,5 @@ object PropertySetterCommonizer : AssociativeCommonizer<CirPropertySetter?> {
         return null
     }
 
-    val privateFallbackSetter = CirPropertySetter.createDefaultNoAnnotations(Visibilities.Private)
+    konst privateFallbackSetter = CirPropertySetter.createDefaultNoAnnotations(Visibilities.Private)
 }

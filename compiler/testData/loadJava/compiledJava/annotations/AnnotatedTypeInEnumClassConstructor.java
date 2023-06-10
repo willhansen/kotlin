@@ -9,7 +9,7 @@ class AnnotatedParameterInInnerClassConstructor {
 
     @Target(ElementType.TYPE_USE)
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     class JavaEnum {

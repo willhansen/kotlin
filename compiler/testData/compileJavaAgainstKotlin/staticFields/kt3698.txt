@@ -5,7 +5,7 @@ public final class KotlinClass {
 
     public companion object Companion {
         private constructor Companion()
-        public const final val FOO: kotlin.Int
+        public const final konst FOO: kotlin.Int
     }
 }
 
@@ -14,9 +14,9 @@ public open class kt3698 {
 
     public/*package*/ final annotation class Foo : kotlin.Annotation {
         public/*package*/ constructor Foo(/*0*/ kotlin.Int)
-        public final val value: kotlin.Int
+        public final konst konstue: kotlin.Int
     }
 
     // Static members
-    @test.kt3698.Foo(value = 10) public open fun main(/*0*/ kotlin.Array<(out) kotlin.String!>!): kotlin.Unit
+    @test.kt3698.Foo(konstue = 10) public open fun main(/*0*/ kotlin.Array<(out) kotlin.String!>!): kotlin.Unit
 }

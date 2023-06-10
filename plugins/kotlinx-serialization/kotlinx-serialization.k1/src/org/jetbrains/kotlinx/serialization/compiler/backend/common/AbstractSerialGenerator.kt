@@ -22,20 +22,20 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SerializationAnnotat
 import org.jetbrains.kotlinx.serialization.compiler.resolve.isKSerializer
 import org.jetbrains.kotlinx.serialization.compiler.resolve.toClassDescriptor
 
-abstract class AbstractSerialGenerator(val bindingContext: BindingContext?, val currentDeclaration: ClassDescriptor) {
+abstract class AbstractSerialGenerator(konst bindingContext: BindingContext?, konst currentDeclaration: ClassDescriptor) {
     private fun getKClassListFromFileAnnotation(annotationFqName: FqName, declarationInFile: DeclarationDescriptor): List<KotlinType> {
         if (bindingContext == null) return emptyList()
-        val annotation = AnnotationsUtils
+        konst annotation = AnnotationsUtils
             .getContainingFileAnnotations(bindingContext, declarationInFile)
             .find { it.fqName == annotationFqName }
             ?: return emptyList()
 
         @Suppress("UNCHECKED_CAST")
-        val typeList: List<KClassValue> = annotation.firstArgument()?.value as? List<KClassValue> ?: return emptyList()
+        konst typeList: List<KClassValue> = annotation.firstArgument()?.konstue as? List<KClassValue> ?: return emptyList()
         return typeList.map { it.getArgumentType(declarationInFile.module) }
     }
 
-    val contextualKClassListInCurrentFile: Set<KotlinType> by lazy {
+    konst contextualKClassListInCurrentFile: Set<KotlinType> by lazy {
         getKClassListFromFileAnnotation(
             SerializationAnnotations.contextualFqName,
             currentDeclaration
@@ -47,12 +47,12 @@ abstract class AbstractSerialGenerator(val bindingContext: BindingContext?, val 
         ).toSet()
     }
 
-    val additionalSerializersInScopeOfCurrentFile: Map<Pair<ClassDescriptor, Boolean>, ClassDescriptor> by lazy {
+    konst additionalSerializersInScopeOfCurrentFile: Map<Pair<ClassDescriptor, Boolean>, ClassDescriptor> by lazy {
         getKClassListFromFileAnnotation(SerializationAnnotations.additionalSerializersFqName, currentDeclaration)
             .associateBy(
                 {
-                    val kotlinType = it.supertypes().find(::isKSerializer)?.arguments?.firstOrNull()?.type
-                    val descriptor = kotlinType.toClassDescriptor
+                    konst kotlinType = it.supertypes().find(::isKSerializer)?.arguments?.firstOrNull()?.type
+                    konst descriptor = kotlinType.toClassDescriptor
                         ?: throw AssertionError("Argument for ${SerializationAnnotations.additionalSerializersFqName} does not implement KSerializer or does not provide serializer for concrete type")
                     descriptor to kotlinType!!.isMarkedNullable
                 },

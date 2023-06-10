@@ -5,12 +5,12 @@ FILE fqName:<root> fileName:/propertyTypeNarrowing.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:it visibility:public modality:FINAL [val]
+    PROPERTY name:it visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:it type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=4
+          CONST Int type=kotlin.Int konstue=4
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-it> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Number
-        correspondingProperty: PROPERTY name:it visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:it visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-it> (): kotlin.Number declared in <root>.A'
@@ -23,13 +23,13 @@ FILE fqName:<root> fileName:/propertyTypeNarrowing.kt
           CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
             $this: CALL 'public final fun <get-it> (): kotlin.Number declared in <root>.A' type=kotlin.Int origin=GET_PROPERTY
               $this: GET_VAR '<this>: <root>.A declared in <root>.A.test' type=<root>.A origin=null
-            other: CONST Int type=kotlin.Int value=3
-    PROPERTY name:p visibility:public modality:FINAL [val]
+            other: CONST Int type=kotlin.Int konstue=3
+    PROPERTY name:p visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=5
+          CONST Int type=kotlin.Int konstue=5
       FUN name:<get-p> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-p> (): kotlin.Int declared in <root>.A'
@@ -50,10 +50,10 @@ FILE fqName:<root> fileName:/propertyTypeNarrowing.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   FUN name:test visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY
-      VAR name:d type:kotlin.Unit [val]
+      VAR name:d type:kotlin.Unit [konst]
         CALL 'public final fun test (): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
-      VAR name:b type:kotlin.Int [val]
+      VAR name:b type:kotlin.Int [konst]
         CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
           $this: CALL 'public final fun <get-p> (): kotlin.Int declared in <root>.A' type=kotlin.Int origin=GET_PROPERTY
             $this: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.A' type=<root>.A origin=null
-          other: CONST Int type=kotlin.Int value=2
+          other: CONST Int type=kotlin.Int konstue=2

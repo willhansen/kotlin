@@ -4,7 +4,7 @@ object O1 : Some
 
 object O2 : Some
 
-enum class SomeEnum(val x: Some) {
+enum class SomeEnum(konst x: Some) {
     FIRST(O1) {
         override fun check(y: Some): Boolean = true
     },
@@ -23,7 +23,7 @@ enum class E {
 enum class EnumClass {
     E1 {
         override fun foo() = 1
-        override val bar: String = "a"
+        override konst bar: String = "a"
     },
 
     <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>E2<!> {
@@ -33,5 +33,5 @@ enum class EnumClass {
     <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>E3<!>();
 
     abstract fun foo(): Int
-    abstract val bar: String
+    abstract konst bar: String
 }

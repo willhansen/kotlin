@@ -27,7 +27,7 @@ class RewriteSourceMapFilterReaderTest {
     fun testPrologSplitByReads() {
         // Test the case when prolog contents is splitted between reads.
         // Like, one buffer ends with `],"sourc`, and the other starts with `esContent"`
-        val prolog = sample("", "").substringBefore(RewriteSourceMapFilterReader.PROLOG_END)
+        konst prolog = sample("", "").substringBefore(RewriteSourceMapFilterReader.PROLOG_END)
         doTest(1, addToProlog = "-".repeat(1024 - prolog.length - "],\"sourc".length))
     }
 
@@ -37,13 +37,13 @@ class RewriteSourceMapFilterReaderTest {
     }
 
     private fun doTest(repeatMappings: Int, addToProlog: String = "") {
-        val mappings0 =
+        konst mappings0 =
             ";;;;;;;;;;;;;;;;;;;;;;;;;IAQc,c;EAAA,C;;IAQc,O;IACJ,W;EAAA,C;;IAFA,aAAE,wBAAF,kBAA4B,gCAA5B," +
                     "C;IAGJ,W;EAAA,C;;IAJA,uBAAI,yBAAJ,C;IAKJ,W;EAAA,C;;IANA,wBAAK,kBAAL,C;IAOJ,W;EAAA,C;;IATR," +
                     "QACqC,KAAb,WAAhB,oBAAgB,CAAa,UAAK,WAAL,CADrC,C;EAWJ,C;;;;;;;;;"
-        val mappings = mappings0.repeat(repeatMappings)
+        konst mappings = mappings0.repeat(repeatMappings)
 
-        val filter = RewriteSourceMapFilterReaderMock(StringReader(sample(mappings, addToProlog)), "", "")
+        konst filter = RewriteSourceMapFilterReaderMock(StringReader(sample(mappings, addToProlog)), "", "")
 
         assertEquals(
             //language=JSON
@@ -54,7 +54,7 @@ class RewriteSourceMapFilterReaderTest {
 
     @Test
     fun testUnsupportedUnderfindProlog() {
-        val filter =
+        konst filter =
             RewriteSourceMapFilterReaderMock(
                 StringReader(
                     //language=JSON
@@ -77,8 +77,8 @@ class RewriteSourceMapFilterReaderTest {
 
     @Test
     fun testUnsupportedPrologSize() {
-        val repeat = "\"../../../../src/main/kotlin/main.kt\",".repeat(0xfffff / 35)
-        val filter =
+        konst repeat = "\"../../../../src/main/kotlin/main.kt\",".repeat(0xfffff / 35)
+        konst filter =
             RewriteSourceMapFilterReaderMock(
                 StringReader(
                     //language=JSON
@@ -99,7 +99,7 @@ class RewriteSourceMapFilterReaderTest {
 
     @Test
     fun testUnsupportedFormat() {
-        val filter =
+        konst filter =
             RewriteSourceMapFilterReaderMock(
                 StringReader(
                     //language=JSON
@@ -121,8 +121,8 @@ class RewriteSourceMapFilterReaderTest {
     }
 
     @Test
-    fun testInvalidJson() {
-        val filter =
+    fun testInkonstidJson() {
+        konst filter =
             RewriteSourceMapFilterReaderMock(
                 StringReader("{:)],\"sourcesContent\":[null]}"),
                 "/root/build/classes/kotlin/test/",
@@ -148,8 +148,8 @@ class RewriteSourceMapFilterReaderTest {
             warning = reason
         }
 
-        override fun transformString(value: String): String {
-            return "TRANSFORMED($value)"
+        override fun transformString(konstue: String): String {
+            return "TRANSFORMED($konstue)"
         }
     }
 }

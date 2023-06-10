@@ -9,7 +9,7 @@ class A {
 }
 
 fun box(): String {
-    val result = A().bar()
+    konst result = A().bar()
     if (result != 333) return "Fail $result"
 
     var r = run(111, 222, ::foo)

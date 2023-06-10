@@ -127,7 +127,7 @@ void mm::SpecialRefRegistry::insertIntoRootsHead(Node& node) noexcept {
             // In either case, do not touch anything anymore here.
             return;
         }
-        // CAS was successfull, so we need to update the expected value of node.nextRoot_
+        // CAS was successfull, so we need to update the expected konstue of node.nextRoot_
         nodeExpectedNext = next;
     } while (!rootsHead()->nextRoot_.compare_exchange_weak(next, &node, std::memory_order_release, std::memory_order_acquire));
 }

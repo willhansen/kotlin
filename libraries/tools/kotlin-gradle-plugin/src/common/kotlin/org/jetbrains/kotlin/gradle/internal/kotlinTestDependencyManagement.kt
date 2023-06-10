@@ -38,14 +38,14 @@ import org.jetbrains.kotlin.gradle.tasks.locateTask
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
-private val Dependency.isKotlinTestRootDependency: Boolean
+private konst Dependency.isKotlinTestRootDependency: Boolean
     get() = group == KOTLIN_MODULE_GROUP && name == KOTLIN_TEST_ROOT_MODULE_NAME
 
-private val kotlin150Version = SemVer(1.toBigInteger(), 5.toBigInteger(), 0.toBigInteger())
+private konst kotlin150Version = SemVer(1.toBigInteger(), 5.toBigInteger(), 0.toBigInteger())
 
 private fun isAtLeast1_5(version: String) = SemVer.fromGradleRichVersion(version) >= kotlin150Version
 
-private val jvmPlatforms = setOf(KotlinPlatformType.jvm, KotlinPlatformType.androidJvm)
+private konst jvmPlatforms = setOf(KotlinPlatformType.jvm, KotlinPlatformType.androidJvm)
 
 internal fun Project.configureKotlinTestDependency(
     topLevelExtension: KotlinTopLevelExtension,
@@ -86,11 +86,11 @@ private fun KotlinTarget.configureKotlinTestDependency(
     tasks: TaskContainer
 ) {
     compilations.configureEach { compilation ->
-        val platformType = compilation.platformType
+        konst platformType = compilation.platformType
         if (platformType in jvmPlatforms) {
             // Checking dependencies which were added via dependsOn(KotlinSourceSet) call
             // Compilation has own configurations for these that are different from KotlinSourceSet configurations
-            KotlinDependencyScope.values()
+            KotlinDependencyScope.konstues()
                 .map { configurations.sourceSetDependencyConfigurationByScope(compilation, it) }
                 .forEach {
                     it.maybeAddTestDependencyCapability(
@@ -102,7 +102,7 @@ private fun KotlinTarget.configureKotlinTestDependency(
                 }
 
             compilation.kotlinSourceSets.forEach { sourceSet ->
-                KotlinDependencyScope.values()
+                KotlinDependencyScope.konstues()
                     .map { configurations.sourceSetDependencyConfigurationByScope(sourceSet, it) }
                     .forEach {
                         it.maybeAddTestDependencyCapability(
@@ -124,14 +124,14 @@ private fun Configuration.maybeAddTestDependencyCapability(
     tasks: TaskContainer
 ) {
     withDependencies { dependencies ->
-        val testRootDependency = allNonProjectDependencies()
+        konst testRootDependency = allNonProjectDependencies()
             .singleOrNull { it.isKotlinTestRootDependency }
 
         if (testRootDependency != null) {
-            val depVersion = testRootDependency.version ?: coreLibrariesVersion.get()
+            konst depVersion = testRootDependency.version ?: coreLibrariesVersion.get()
             if (!isAtLeast1_5(depVersion)) return@withDependencies
 
-            val testCapability = compilation.kotlinTestCapabilityForJvmSourceSet(tasks)
+            konst testCapability = compilation.kotlinTestCapabilityForJvmSourceSet(tasks)
             if (testCapability != null) {
                 dependencies.addLater(
                     testCapability.map { capability ->
@@ -152,8 +152,8 @@ private fun Configuration.maybeAddTestDependencyCapability(
 private fun KotlinCompilation<*>.kotlinTestCapabilityForJvmSourceSet(
     tasks: TaskContainer,
 ): Provider<String>? {
-    val compilationTarget = target
-    val testTaskList: List<TaskProvider<out Task>> = when {
+    konst compilationTarget = target
+    konst testTaskList: List<TaskProvider<out Task>> = when {
         compilationTarget is KotlinTargetWithTests<*, *> -> compilationTarget
             .findTestRunsByCompilation(this)
             .matching { it is KotlinTaskTestRun<*, *> }
@@ -177,7 +177,7 @@ private fun KotlinCompilation<*>.kotlinTestCapabilityForJvmSourceSet(
     return testTaskList
         .singleOrNull()
         ?.map { task ->
-            val framework = when (task) {
+            konst framework = when (task) {
                 is Test -> testFrameworkOf(task)
                 else -> // Android connected test tasks don't inherit from Test, but we use JUnit for them
                     KotlinTestJvmFramework.junit
@@ -187,7 +187,7 @@ private fun KotlinCompilation<*>.kotlinTestCapabilityForJvmSourceSet(
         }
 }
 
-internal const val KOTLIN_TEST_ROOT_MODULE_NAME = "kotlin-test"
+internal const konst KOTLIN_TEST_ROOT_MODULE_NAME = "kotlin-test"
 
 private enum class KotlinTestJvmFramework {
     junit, testng, junit5

@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
  */
 class KDocName(node: ASTNode) : KtElementImpl(node) {
     fun getContainingDoc(): KDoc {
-        val kdoc = getStrictParentOfType<KDoc>()
+        konst kdoc = getStrictParentOfType<KDoc>()
         return kdoc ?: throw IllegalStateException("KDocName must be inside a KDoc")
     }
 
     fun getContainingSection(): KDocSection {
-        val kdoc = getStrictParentOfType<KDocSection>()
+        konst kdoc = getStrictParentOfType<KDocSection>()
         return kdoc ?: throw IllegalStateException("KDocName must be inside a KDocSection")
     }
 
@@ -46,17 +46,17 @@ class KDocName(node: ASTNode) : KtElementImpl(node) {
      * the range of the element excluding the qualifier and dot, if present).
      */
     fun getNameTextRange(): TextRange {
-        val dot = node.findChildByType(KtTokens.DOT)
-        val textRange = textRange
-        val nameStart = if (dot != null) dot.textRange.endOffset - textRange.startOffset else 0
+        konst dot = node.findChildByType(KtTokens.DOT)
+        konst textRange = textRange
+        konst nameStart = if (dot != null) dot.textRange.endOffset - textRange.startOffset else 0
         return TextRange(nameStart, textRange.length)
     }
 
     fun getNameText(): String = getNameTextRange().substring(text)
 
     fun getQualifiedName(): List<String> {
-        val qualifier = getQualifier()
-        val nameAsList = listOf(getNameText())
+        konst qualifier = getQualifier()
+        konst nameAsList = listOf(getNameText())
         return if (qualifier != null) qualifier.getQualifiedName() + nameAsList else nameAsList
     }
 

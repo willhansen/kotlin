@@ -14,4 +14,4 @@ object A {
 }
 
 //from library
-val <T> T.javaClass : Class<T> get() = throw Exception()
+konst <T> T.javaClass : Class<T> get() = throw Exception()

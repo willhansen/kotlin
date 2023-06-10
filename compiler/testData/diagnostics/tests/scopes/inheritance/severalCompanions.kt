@@ -16,8 +16,8 @@ open class B: A() {
 
 class C: B() {
     init {
-        val a: String = foo()
-        val b: Int = bar(1)
-        val c: String = bar("")
+        konst a: String = foo()
+        konst b: Int = bar(1)
+        konst c: String = bar("")
     }
 }

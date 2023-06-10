@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirExpressionStubBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
     var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 
     @OptIn(FirImplementationDetail::class)
     override fun build(): FirExpression {

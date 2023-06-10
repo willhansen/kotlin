@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-val x: Int? = 42
+konst x: Int? = 42
 fun xFun(): Int? = 42
 
-val n: Int? = null
-val nProp: Int?
+konst n: Int? = null
+konst nProp: Int?
     get() = null
 
 fun box(): String {
@@ -20,11 +20,11 @@ fun box(): String {
     if (nProp in 0..2) return "Fail in null property"
     if (!(nProp !in 0..2)) return "Fail !in null property"
 
-    val v: Int? = 10
+    konst v: Int? = 10
     if (v in 0..2) return "Fail in variable"
     if (!(v !in 0..2)) return "Fail !in variable"
 
-    val nul: Int? = null
+    konst nul: Int? = null
     if (nul in 0..2) return "Fail in null variable"
     if (!(nul !in 0..2)) return "Fail !in null variable"
 

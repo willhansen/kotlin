@@ -8,7 +8,7 @@ fun main(x: DataStream<Int>) {
 
 // FILE: KeySelector.java
 public interface KeySelector<IN, KEY> {
-    KEY getKey(IN value);
+    KEY getKey(IN konstue);
 }
 
 // FILE: DataStream.java

@@ -28,9 +28,9 @@ class LabelNormalizationMethodTransformer : MethodTransformer() {
         TransformerForMethod(methodNode).transform()
     }
 
-    private class TransformerForMethod(val methodNode: MethodNode) {
-        val instructions = methodNode.instructions
-        val newLabelNodes = SmartIdentityTable<LabelNode, LabelNode>()
+    private class TransformerForMethod(konst methodNode: MethodNode) {
+        konst instructions = methodNode.instructions
+        konst newLabelNodes = SmartIdentityTable<LabelNode, LabelNode>()
 
         fun transform() {
             if (rewriteLabelInstructions()) {
@@ -46,7 +46,7 @@ class LabelNormalizationMethodTransformer : MethodTransformer() {
             var thisNode = instructions.first
             while (thisNode != null) {
                 if (thisNode is LabelNode) {
-                    val prevNode = thisNode.previous
+                    konst prevNode = thisNode.previous
                     if (prevNode is LabelNode) {
                         newLabelNodes[thisNode] = prevNode
                         removedAnyLabels = true
@@ -99,7 +99,7 @@ class LabelNormalizationMethodTransformer : MethodTransformer() {
 
         private fun rewriteTryCatchBlocks() {
             methodNode.tryCatchBlocks = methodNode.tryCatchBlocks.map { oldTcb ->
-                val newTcb = TryCatchBlockNode(getNew(oldTcb.start), getNew(oldTcb.end), getNew(oldTcb.handler), oldTcb.type)
+                konst newTcb = TryCatchBlockNode(getNew(oldTcb.start), getNew(oldTcb.end), getNew(oldTcb.handler), oldTcb.type)
                 newTcb.visibleTypeAnnotations = oldTcb.visibleTypeAnnotations
                 newTcb.invisibleTypeAnnotations = oldTcb.invisibleTypeAnnotations
                 newTcb
@@ -126,19 +126,19 @@ class LabelNormalizationMethodTransformer : MethodTransformer() {
             JumpInsnNode(opcode, getNew(label))
 
         private fun LookupSwitchInsnNode.rewriteLabels(): AbstractInsnNode {
-            val switchNode = LookupSwitchInsnNode(getNew(dflt), keys.toIntArray(), emptyArray())
+            konst switchNode = LookupSwitchInsnNode(getNew(dflt), keys.toIntArray(), emptyArray())
             switchNode.labels = labels.map { getNew(it) }
             return switchNode
         }
 
         private fun TableSwitchInsnNode.rewriteLabels(): AbstractInsnNode {
-            val switchNode = TableSwitchInsnNode(min, max, getNew(dflt))
+            konst switchNode = TableSwitchInsnNode(min, max, getNew(dflt))
             switchNode.labels = labels.map { getNew(it) }
             return switchNode
         }
 
         private fun FrameNode.rewriteLabels(): AbstractInsnNode {
-            val frameNode = FrameNode(type, 0, emptyArray(), 0, emptyArray())
+            konst frameNode = FrameNode(type, 0, emptyArray(), 0, emptyArray())
             frameNode.local = local.map { if (it is LabelNode) getNewOrOld(it) else it }
             frameNode.stack = stack.map { if (it is LabelNode) getNewOrOld(it) else it }
             return frameNode
@@ -161,7 +161,7 @@ fun InsnList.replaceNodeGetNext(oldNode: AbstractInsnNode, newNode: AbstractInsn
 }
 
 fun InsnList.removeNodeGetNext(oldNode: AbstractInsnNode): AbstractInsnNode? {
-    val next = oldNode.next
+    konst next = oldNode.next
     remove(oldNode)
     return next
 }

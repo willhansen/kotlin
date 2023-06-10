@@ -3,7 +3,7 @@ class MyQueue {
 }
 
 class A {
-    val delayedQueue = MyQueue()
+    konst delayedQueue = MyQueue()
 
     var cond = true
 

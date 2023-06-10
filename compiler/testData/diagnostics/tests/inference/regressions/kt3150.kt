@@ -16,7 +16,7 @@ fun SomeTemplate.query(f: (i: Int) -> Unit) = f
 fun SomeTemplate.query1(f: (i: Int) -> Unit) = f
 
 fun test() {
-    val mapperFunction = { i: Int -> }
+    konst mapperFunction = { i: Int -> }
     SomeTemplate().query(mapperFunction)
 
     // TYPE_MISMATCH: Required Class<[ERROR: CANT_INFER]>, Found (kotlin.Int) -> Unit

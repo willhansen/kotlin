@@ -3,18 +3,18 @@
 package foo
 
 abstract class Base {
-    val x = 23
+    konst x = 23
 }
 
 class Derived : Base(), Comparable<Derived> {
-    val y = 42
+    konst y = 42
     override fun compareTo(other: Derived): Int {
         throw UnsupportedOperationException("not implemented")
     }
 }
 
 fun box(): String {
-    val b = Derived()
+    konst b = Derived()
     if (b.x != 23) return "fail1: ${b.x}"
     if (b.y != 42) return "fail2: ${b.y}"
 

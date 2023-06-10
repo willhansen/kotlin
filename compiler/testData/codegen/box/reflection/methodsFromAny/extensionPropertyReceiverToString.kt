@@ -11,8 +11,8 @@ import kotlin.test.assertEquals
 fun check(expected: String, p: KProperty1<*, *>) {
     var s = p.toString()
 
-    // Strip "val" or "var"
-    assert(s.startsWith("val ") || s.startsWith("var ")) { "Fail val/var: $s" }
+    // Strip "konst" or "var"
+    assert(s.startsWith("konst ") || s.startsWith("var ")) { "Fail konst/var: $s" }
     s = s.substring(4)
 
     // Strip property type
@@ -24,37 +24,37 @@ fun check(expected: String, p: KProperty1<*, *>) {
     assertEquals(expected, s)
 }
 
-val Boolean.x: Any get() = this
-val Char.x: Any get() = this
-val Byte.x: Any get() = this
-val Short.x: Any get() = this
-val Int.x: Any get() = this
-val Float.x: Any get() = this
-val Long.x: Any get() = this
-val Double.x: Any get() = this
+konst Boolean.x: Any get() = this
+konst Char.x: Any get() = this
+konst Byte.x: Any get() = this
+konst Short.x: Any get() = this
+konst Int.x: Any get() = this
+konst Float.x: Any get() = this
+konst Long.x: Any get() = this
+konst Double.x: Any get() = this
 
-val BooleanArray.x: Any get() = this
-val CharArray.x: Any get() = this
-val ByteArray.x: Any get() = this
-val ShortArray.x: Any get() = this
-val IntArray.x: Any get() = this
-val FloatArray.x: Any get() = this
-val LongArray.x: Any get() = this
-val DoubleArray.x: Any get() = this
+konst BooleanArray.x: Any get() = this
+konst CharArray.x: Any get() = this
+konst ByteArray.x: Any get() = this
+konst ShortArray.x: Any get() = this
+konst IntArray.x: Any get() = this
+konst FloatArray.x: Any get() = this
+konst LongArray.x: Any get() = this
+konst DoubleArray.x: Any get() = this
 
-val Array<Int>.a1: Any get() = this
-val Array<Any>.a2: Any get() = this
-val Array<Array<String>>.a3: Any get() = this
-val Array<BooleanArray>.a4: Any get() = this
+konst Array<Int>.a1: Any get() = this
+konst Array<Any>.a2: Any get() = this
+konst Array<Array<String>>.a3: Any get() = this
+konst Array<BooleanArray>.a4: Any get() = this
 
-val Any?.n1: Any get() = Any()
-val Int?.n2: Any get() = Any()
-val Array<Any>?.n3: Any get() = Any()
-val Array<Any?>.n4: Any get() = Any()
-val Array<Any?>?.n5: Any get() = Any()
+konst Any?.n1: Any get() = Any()
+konst Int?.n2: Any get() = Any()
+konst Array<Any>?.n3: Any get() = Any()
+konst Array<Any?>.n4: Any get() = Any()
+konst Array<Any?>?.n5: Any get() = Any()
 
-val Map<String, Runnable>.m: Any get() = this
-val List<MutableSet<Array<CharSequence>>>.l: Any get() = this
+konst Map<String, Runnable>.m: Any get() = this
+konst List<MutableSet<Array<CharSequence>>>.l: Any get() = this
 
 fun box(): String {
     check("kotlin.Boolean", Boolean::x)

@@ -4,6 +4,6 @@
 fun foo(x: String = "OK"): String = x
 
 fun box(): String {
-    val f: () -> String = ::foo
+    konst f: () -> String = ::foo
     return f()
 }

@@ -19,10 +19,10 @@ internal class LLFirLazyDeclarationResolver : FirLazyDeclarationResolver() {
     override fun finishResolvingPhase(phase: FirResolvePhase) {}
 
     override fun lazyResolveToPhase(symbol: FirBasedSymbol<*>, toPhase: FirResolvePhase) {
-        val fir = symbol.fir
-        val session = fir.moduleData.session
+        konst fir = symbol.fir
+        konst session = fir.moduleData.session
         if (session !is LLFirResolvableModuleSession) return
-        val moduleComponents = session.moduleComponents
+        konst moduleComponents = session.moduleComponents
         moduleComponents.firModuleLazyDeclarationResolver.lazyResolve(
             target = fir,
             scopeSession = moduleComponents.scopeSessionProvider.getScopeSession(),
@@ -31,10 +31,10 @@ internal class LLFirLazyDeclarationResolver : FirLazyDeclarationResolver() {
     }
 
     override fun lazyResolveToPhaseWithCallableMembers(symbol: FirClassSymbol<*>, toPhase: FirResolvePhase) {
-        val fir = symbol.fir as? FirRegularClass ?: return
-        val session = fir.moduleData.session
+        konst fir = symbol.fir as? FirRegularClass ?: return
+        konst session = fir.moduleData.session
         if (session !is LLFirResolvableModuleSession) return
-        val moduleComponents = session.moduleComponents
+        konst moduleComponents = session.moduleComponents
         moduleComponents.firModuleLazyDeclarationResolver.lazyResolveWithCallableMembers(
             target = fir,
             scopeSession = moduleComponents.scopeSessionProvider.getScopeSession(),

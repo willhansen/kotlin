@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.metadata.deserialization
 import org.jetbrains.kotlin.metadata.ProtoBuf
 
 class TypeTable(typeTable: ProtoBuf.TypeTable) {
-    val types: List<ProtoBuf.Type> = run {
-        val originalTypes = typeTable.typeList
+    konst types: List<ProtoBuf.Type> = run {
+        konst originalTypes = typeTable.typeList
         if (typeTable.hasFirstNullable()) {
-            val firstNullable = typeTable.firstNullable
+            konst firstNullable = typeTable.firstNullable
             typeTable.typeList.mapIndexed { i, type ->
                 if (i >= firstNullable) {
                     type.toBuilder().setNullable(true).build()

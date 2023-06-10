@@ -1,14 +1,14 @@
 // IGNORE_BACKEND: JS
 
-open class A(val a: String = DEFAULT_A){
+open class A(konst a: String = DEFAULT_A){
     companion object: A(){
-        const val DEFAULT_A = "O"
+        const konst DEFAULT_A = "O"
     }
 }
 
-open class B(val b: String = DEFAULT_B){
+open class B(konst b: String = DEFAULT_B){
     companion object: B(){
-        const val DEFAULT_B = "K"
+        const konst DEFAULT_B = "K"
     }
 }
 

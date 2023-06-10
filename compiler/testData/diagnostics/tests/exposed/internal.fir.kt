@@ -1,8 +1,8 @@
 internal open class My
 
-// valid, internal from internal
+// konstid, internal from internal
 internal open class Your: My() {
-    // valid, effectively internal
+    // konstid, effectively internal
     fun foo() = My()
 }
 
@@ -10,10 +10,10 @@ internal open class Your: My() {
 open class His: <!EXPOSED_SUPER_CLASS!>Your<!>() {
     protected open class Nested
     // error, public from internal
-    val <!EXPOSED_PROPERTY_TYPE!>x<!> = My()
-    // valid, private from internal
+    konst <!EXPOSED_PROPERTY_TYPE!>x<!> = My()
+    // konstid, private from internal
     private fun bar() = My()
-    // valid, internal from internal
+    // konstid, internal from internal
     internal var y: My? = null
     // error, protected from internal
     protected fun <!EXPOSED_FUNCTION_RETURN_TYPE!>baz<!>() = Your()

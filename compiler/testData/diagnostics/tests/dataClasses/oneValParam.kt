@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 
-data class A(val x: Int)
+data class A(konst x: Int)
 
 fun foo(a: A) {
     checkSubtype<Int>(a.component1())

@@ -34,13 +34,13 @@ import org.jetbrains.kotlin.backend.common.lower.isMovedReceiver as isMovedRecei
 // TODO: fix expect/actual default parameters
 
 open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
-    val context: TContext,
-    private val factory: DefaultArgumentFunctionFactory,
-    private val skipInlineMethods: Boolean = true,
-    private val skipExternalMethods: Boolean = false,
-    private val forceSetOverrideSymbols: Boolean = true
+    konst context: TContext,
+    private konst factory: DefaultArgumentFunctionFactory,
+    private konst skipInlineMethods: Boolean = true,
+    private konst skipExternalMethods: Boolean = false,
+    private konst forceSetOverrideSymbols: Boolean = true
 ) : DeclarationTransformer {
-    override val withLocalDeclarations: Boolean get() = true
+    override konst withLocalDeclarations: Boolean get() = true
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrFunction) {
@@ -53,14 +53,14 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
     protected open fun IrFunction.resolveAnnotations(): List<IrConstructorCall> = copyAnnotations()
 
     protected open fun IrFunction.generateDefaultStubBody(originalDeclaration: IrFunction): IrBody {
-        val newIrFunction = this
-        val builder = context.createIrBuilder(newIrFunction.symbol)
+        konst newIrFunction = this
+        konst builder = context.createIrBuilder(newIrFunction.symbol)
         log { "$originalDeclaration -> $newIrFunction" }
 
         return context.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
             statements += builder.irBlockBody(newIrFunction) {
-                val params = mutableListOf<IrValueDeclaration>()
-                val variables = mutableMapOf<IrValueSymbol, IrValueSymbol>()
+                konst params = mutableListOf<IrValueDeclaration>()
+                konst variables = mutableMapOf<IrValueSymbol, IrValueSymbol>()
 
                 originalDeclaration.dispatchReceiverParameter?.let {
                     variables[it.symbol] = newIrFunction.dispatchReceiverParameter?.symbol!!
@@ -70,9 +70,9 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
                     variables[it.symbol] = newIrFunction.extensionReceiverParameter?.symbol!!
                 }
 
-                // In order to deal with forward references in default value lambdas,
+                // In order to deal with forward references in default konstue lambdas,
                 // accesses to the parameter before it has been determined if there is
-                // a default value or not is redirected to the actual parameter of the
+                // a default konstue or not is redirected to the actual parameter of the
                 // $default function. This is to ensure that examples such as:
                 //
                 // fun f(f1: () -> String = { f2() },
@@ -80,28 +80,28 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
                 //
                 // works correctly so that `f() { "OK" }` returns "OK" and
                 // `f()` throws a NullPointerException.
-                originalDeclaration.valueParameters.forEach {
-                    variables[it.symbol] = newIrFunction.valueParameters[it.index].symbol
+                originalDeclaration.konstueParameters.forEach {
+                    variables[it.symbol] = newIrFunction.konstueParameters[it.index].symbol
                 }
 
                 generateSuperCallHandlerCheckIfNeeded(originalDeclaration, newIrFunction)
 
-                val intAnd = this@DefaultArgumentStubGenerator.context.ir.symbols.getBinaryOperator(
+                konst intAnd = this@DefaultArgumentStubGenerator.context.ir.symbols.getBinaryOperator(
                     OperatorNameConventions.AND, context.irBuiltIns.intType, context.irBuiltIns.intType
                 )
                 var sourceParameterIndex = -1
-                for (valueParameter in originalDeclaration.valueParameters) {
-                    if (!valueParameter.isMovedReceiver()) {
+                for (konstueParameter in originalDeclaration.konstueParameters) {
+                    if (!konstueParameter.isMovedReceiver()) {
                         ++sourceParameterIndex
                     }
-                    val parameter = newIrFunction.valueParameters[valueParameter.index]
-                    val remapped = valueParameter.defaultValue?.let { defaultValue ->
-                        val mask = irGet(newIrFunction.valueParameters[originalDeclaration.valueParameters.size + valueParameter.index / 32])
-                        val bit = irInt(1 shl (sourceParameterIndex % 32))
-                        val defaultFlag =
+                    konst parameter = newIrFunction.konstueParameters[konstueParameter.index]
+                    konst remapped = konstueParameter.defaultValue?.let { defaultValue ->
+                        konst mask = irGet(newIrFunction.konstueParameters[originalDeclaration.konstueParameters.size + konstueParameter.index / 32])
+                        konst bit = irInt(1 shl (sourceParameterIndex % 32))
+                        konst defaultFlag =
                             irCallOp(intAnd, context.irBuiltIns.intType, mask, bit)
 
-                        val expression = defaultValue.expression
+                        konst expression = defaultValue.expression
                             .prepareToBeUsedIn(newIrFunction)
                             .transform(ValueRemapper(variables), null)
 
@@ -109,7 +109,7 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
                     } ?: parameter
 
                     params.add(remapped)
-                    variables[valueParameter.symbol] = remapped.symbol
+                    variables[konstueParameter.symbol] = remapped.symbol
                 }
 
                 when (originalDeclaration) {
@@ -130,7 +130,7 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
     }
 
     private fun lower(irFunction: IrFunction): List<IrFunction>? {
-        val newIrFunction =
+        konst newIrFunction =
             factory.generateDefaultsFunction(
                 irFunction,
                 skipInlineMethods,
@@ -149,7 +149,7 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
     }
 
     /**
-     * Prepares the default value to be used inside the `function` body by patching the parents.
+     * Prepares the default konstue to be used inside the `function` body by patching the parents.
      * In K/JS it also copies the expression in order to avoid duplicate declarations after this lowering.
      *
      * In K/JVM copying doesn't preserve metadata, so the following case won't work:
@@ -179,7 +179,7 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
         // bytecode the inliner expects see `expandMaskConditionsAndUpdateVariableNodes`. In short,
         // the bytecode sequence should be
         //
-        //     -- no loads of the parameter here, as after inlining its value will be uninitialized
+        //     -- no loads of the parameter here, as after inlining its konstue will be uninitialized
         //     ILOAD <mask>
         //     ICONST <bit>
         //     IAND
@@ -202,24 +202,24 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
         newIrFunction: IrFunction,
         params: MutableList<IrValueDeclaration>
     ): IrExpression {
-        val dispatchCall = irCall(irFunction, origin = getOriginForCallToImplementation()).apply {
+        konst dispatchCall = irCall(irFunction, origin = getOriginForCallToImplementation()).apply {
             passTypeArgumentsFrom(newIrFunction)
             dispatchReceiver = newIrFunction.dispatchReceiverParameter?.let { irGet(it) }
             extensionReceiver = newIrFunction.extensionReceiverParameter?.let { irGet(it) }
 
             for ((i, variable) in params.withIndex()) {
-                val paramType = irFunction.valueParameters[i].type
+                konst paramType = irFunction.konstueParameters[i].type
                 // The JVM backend doesn't introduce new variables, and hence may have incompatible types here.
-                val value = if (!paramType.isNullable() && variable.type.isNullable()) {
+                konst konstue = if (!paramType.isNullable() && variable.type.isNullable()) {
                     irImplicitCast(irGet(variable), paramType)
                 } else {
                     irGet(variable)
                 }
-                putValueArgument(i, value)
+                putValueArgument(i, konstue)
             }
         }
         return if (needSpecialDispatch(irFunction)) {
-            val handlerDeclaration = newIrFunction.valueParameters.last()
+            konst handlerDeclaration = newIrFunction.konstueParameters.last()
             // if $handler != null $handler(a, b, c) else foo(a, b, c)
             irIfThenElse(
                 irFunction.returnType,
@@ -256,14 +256,14 @@ open class DefaultArgumentStubGenerator<TContext : CommonBackendContext>(
 }
 
 open class DefaultParameterInjector<TContext : CommonBackendContext>(
-    protected val context: TContext,
-    protected val factory: DefaultArgumentFunctionFactory,
-    protected val skipInline: Boolean = true,
-    protected val skipExternalMethods: Boolean = false,
-    protected val forceSetOverrideSymbols: Boolean = true,
+    protected konst context: TContext,
+    protected konst factory: DefaultArgumentFunctionFactory,
+    protected konst skipInline: Boolean = true,
+    protected konst skipExternalMethods: Boolean = false,
+    protected konst forceSetOverrideSymbols: Boolean = true,
 ) : IrElementTransformerVoid(), BodyLoweringPass {
 
-    private val declarationStack = mutableListOf<IrDeclaration>()
+    private konst declarationStack = mutableListOf<IrDeclaration>()
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         declarationStack.push(container)
         irBody.transformChildrenVoid(this)
@@ -271,31 +271,31 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
     }
 
     protected open fun shouldReplaceWithSyntheticFunction(functionAccess: IrFunctionAccessExpression): Boolean {
-        return (0 until functionAccess.valueArgumentsCount).count { functionAccess.getValueArgument(it) != null } != functionAccess.symbol.owner.valueParameters.size
+        return (0 until functionAccess.konstueArgumentsCount).count { functionAccess.getValueArgument(it) != null } != functionAccess.symbol.owner.konstueParameters.size
     }
 
     private fun <T : IrFunctionAccessExpression> visitFunctionAccessExpression(expression: T, builder: (IrFunctionSymbol) -> T): IrExpression {
         if (!shouldReplaceWithSyntheticFunction(expression))
             return expression
 
-        val symbol = createStubFunction(expression) ?: return expression
+        konst symbol = createStubFunction(expression) ?: return expression
         for (i in 0 until expression.typeArgumentsCount) {
             log { "$symbol[$i]: ${expression.getTypeArgument(i)}" }
         }
-        val stubFunction = symbol.owner
+        konst stubFunction = symbol.owner
         stubFunction.typeParameters.forEach { log { "$stubFunction[${it.index}] : $it" } }
 
-        val declaration = expression.symbol.owner
-        val currentDeclaration = declarationStack.last()
+        konst declaration = expression.symbol.owner
+        konst currentDeclaration = declarationStack.last()
         return context.createIrBuilder(
             currentDeclaration.symbol, startOffset = expression.startOffset, endOffset = expression.endOffset
         ).irBlock {
-            val newCall = builder(symbol).apply {
-                val offset = if (needsTypeArgumentOffset(declaration)) declaration.parentAsClass.typeParameters.size else 0
+            konst newCall = builder(symbol).apply {
+                konst offset = if (needsTypeArgumentOffset(declaration)) declaration.parentAsClass.typeParameters.size else 0
                 for (i in 0 until typeArgumentsCount) {
                     putTypeArgument(i, expression.getTypeArgument(i + offset))
                 }
-                val parameter2arguments = argumentsForCall(expression, stubFunction)
+                konst parameter2arguments = argumentsForCall(expression, stubFunction)
 
                 for ((parameter, argument) in parameter2arguments) {
                     when (parameter) {
@@ -323,7 +323,7 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
                 IrDelegatingConstructorCallImpl(
                     startOffset, endOffset, type, it as IrConstructorSymbol,
                     typeArgumentsCount = typeArgumentsCount,
-                    valueArgumentsCount = it.owner.valueParameters.size
+                    konstueArgumentsCount = it.owner.konstueParameters.size
                 )
             }
         }
@@ -351,7 +351,7 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
                 IrEnumConstructorCallImpl(
                     startOffset, endOffset, type, it as IrConstructorSymbol,
                     typeArgumentsCount = typeArgumentsCount,
-                    valueArgumentsCount = it.owner.valueParameters.size
+                    konstueArgumentsCount = it.owner.konstueParameters.size
                 )
             }
         }
@@ -359,14 +359,14 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
 
     override fun visitCall(expression: IrCall): IrExpression {
         expression.transformChildrenVoid()
-        val declaration = expression.symbol.owner
-        val typeParametersToRemove = if (needsTypeArgumentOffset(declaration)) declaration.parentAsClass.typeParameters.size else 0
+        konst declaration = expression.symbol.owner
+        konst typeParametersToRemove = if (needsTypeArgumentOffset(declaration)) declaration.parentAsClass.typeParameters.size else 0
         with(expression) {
             return visitFunctionAccessExpression(expression) {
                 IrCallImpl(
                     startOffset, endOffset, (it as IrSimpleFunctionSymbol).owner.returnType, it,
                     typeArgumentsCount = typeArgumentsCount - typeParametersToRemove,
-                    valueArgumentsCount = it.owner.valueParameters.size,
+                    konstueArgumentsCount = it.owner.konstueParameters.size,
                     origin = LoweredStatementOrigins.DEFAULT_DISPATCH_CALL,
                     superQualifierSymbol = superQualifierSymbol
                 )
@@ -375,14 +375,14 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
     }
 
     private fun createStubFunction(expression: IrFunctionAccessExpression): IrFunctionSymbol? {
-        val declaration = expression.symbol.owner
+        konst declaration = expression.symbol.owner
 
         // We *have* to find the actual function here since on the JVM, a default stub for a function implemented
         // in an interface does not leave an abstract method after being moved to DefaultImpls (see InterfaceLowering).
         // Calling the fake override on an implementation of that interface would then result in a call to a method
         // that does not actually exist as DefaultImpls is not part of the inheritance hierarchy.
-        val baseFunction = factory.findBaseFunctionWithDefaultArgumentsFor(declaration, skipInline, skipExternalMethods)
-        val stubFunction = baseFunction?.let {
+        konst baseFunction = factory.findBaseFunctionWithDefaultArgumentsFor(declaration, skipInline, skipExternalMethods)
+        konst stubFunction = baseFunction?.let {
             factory.generateDefaultsFunction(
                 it,
                 skipInline,
@@ -398,12 +398,12 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
     }
 
     protected open fun IrBlockBuilder.argumentsForCall(expression: IrFunctionAccessExpression, stubFunction: IrFunction): Map<IrValueParameter, IrExpression?> {
-        val startOffset = expression.startOffset
-        val endOffset = expression.endOffset
-        val declaration = expression.symbol.owner
+        konst startOffset = expression.startOffset
+        konst endOffset = expression.endOffset
+        konst declaration = expression.symbol.owner
 
-        val realArgumentsNumber = declaration.valueParameters.filterNot { it.isMovedReceiver() }.size
-        val maskValues = IntArray((realArgumentsNumber + 31) / 32)
+        konst realArgumentsNumber = declaration.konstueParameters.filterNot { it.isMovedReceiver() }.size
+        konst maskValues = IntArray((realArgumentsNumber + 31) / 32)
 
         assert(stubFunction.explicitParametersCount - declaration.explicitParametersCount - maskValues.size in listOf(0, 1)) {
             "argument count mismatch: expected $realArgumentsNumber arguments + ${maskValues.size} masks + optional handler/marker, " +
@@ -412,18 +412,18 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
 
         var sourceParameterIndex = -1
         return buildMap {
-            val valueParametersPrefix: List<IrValueParameter> = if (isStatic(declaration)) {
+            konst konstueParametersPrefix: List<IrValueParameter> = if (isStatic(declaration)) {
                 listOfNotNull(stubFunction.dispatchReceiverParameter, stubFunction.extensionReceiverParameter)
             } else {
                 stubFunction.dispatchReceiverParameter?.let { put(it, expression.dispatchReceiver) }
                 stubFunction.extensionReceiverParameter?.let { put(it, expression.extensionReceiver) }
                 listOf()
             }
-            for ((i, parameter) in (valueParametersPrefix + stubFunction.valueParameters).withIndex()) {
+            for ((i, parameter) in (konstueParametersPrefix + stubFunction.konstueParameters).withIndex()) {
                 if (!parameter.isMovedReceiver() && parameter != stubFunction.dispatchReceiverParameter && parameter != stubFunction.extensionReceiverParameter) {
                     ++sourceParameterIndex
                 }
-                val newArgument = when {
+                konst newArgument = when {
                     sourceParameterIndex >= realArgumentsNumber + maskValues.size -> IrConstImpl.constNull(
                         startOffset,
                         endOffset,
@@ -436,12 +436,12 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
                         maskValues[sourceParameterIndex - realArgumentsNumber]
                     )
                     else -> {
-                        val valueArgument = expression.getValueArgument(i)
-                        if (valueArgument == null) {
+                        konst konstueArgument = expression.getValueArgument(i)
+                        if (konstueArgument == null) {
                             maskValues[sourceParameterIndex / 32] =
                                 maskValues[sourceParameterIndex / 32] or (1 shl (sourceParameterIndex % 32))
                         }
-                        valueArgument ?: nullConst(startOffset, endOffset, parameter)?.let {
+                        konstueArgument ?: nullConst(startOffset, endOffset, parameter)?.let {
                             IrCompositeImpl(
                                 expression.startOffset,
                                 expression.endOffset,
@@ -480,10 +480,10 @@ open class DefaultParameterInjector<TContext : CommonBackendContext>(
 
 // Remove default argument initializers.
 class DefaultParameterCleaner(
-    val context: CommonBackendContext,
-    val replaceDefaultValuesWithStubs: Boolean = false
+    konst context: CommonBackendContext,
+    konst replaceDefaultValuesWithStubs: Boolean = false
 ) : DeclarationTransformer {
-    override val withLocalDeclarations: Boolean get() = true
+    override konst withLocalDeclarations: Boolean get() = true
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrValueParameter && declaration.defaultValue != null) {
@@ -505,7 +505,7 @@ class DefaultParameterCleaner(
 
 // Sets overriden symbols. Should be used in case `forceSetOverrideSymbols = false`
 class DefaultParameterPatchOverridenSymbolsLowering(
-    val context: CommonBackendContext
+    konst context: CommonBackendContext
 ) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrSimpleFunction) {
@@ -528,7 +528,7 @@ open class MaskedDefaultArgumentFunctionFactory(context: CommonBackendContext) :
         copyReceiversFrom(original)
         copyValueParametersFrom(original)
 
-        for (i in 0 until (original.valueParameters.size + 31) / 32) {
+        for (i in 0 until (original.konstueParameters.size + 31) / 32) {
             addValueParameter(
                 "mask$i".synthesizedString,
                 context.irBuiltIns.intType,
@@ -537,7 +537,7 @@ open class MaskedDefaultArgumentFunctionFactory(context: CommonBackendContext) :
         }
 
         if (useConstructorMarker) {
-            val markerType = context.ir.symbols.defaultConstructorMarker.defaultType.makeNullable()
+            konst markerType = context.ir.symbols.defaultConstructorMarker.defaultType.makeNullable()
             addValueParameter("marker".synthesizedString, markerType, IrDeclarationOrigin.DEFAULT_CONSTRUCTOR_MARKER)
         } else if (context.ir.shouldGenerateHandlerParameterForDefaultBodyFun()) {
             addValueParameter(

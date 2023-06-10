@@ -22,7 +22,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val result = arrayListOf<Int>()
+    konst result = arrayListOf<Int>()
 
     builder {
         result.fromTo(1, 5)

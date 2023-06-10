@@ -13,7 +13,7 @@ import java.io.Closeable
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.script.experimental.jvmhost.repl.JvmReplCompiler
-import kotlin.script.experimental.jvmhost.repl.JvmReplEvaluator
+import kotlin.script.experimental.jvmhost.repl.JvmReplEkonstuator
 
 // Adapted form GenericReplTest
 
@@ -21,65 +21,65 @@ import kotlin.script.experimental.jvmhost.repl.JvmReplEvaluator
 class LegacyReplTest : TestCase() {
     fun testReplBasics() {
         LegacyTestRepl().use { repl ->
-            val res1 = repl.replCompiler.compile(repl.state, ReplCodeLine(0, 0, "val x ="))
+            konst res1 = repl.replCompiler.compile(repl.state, ReplCodeLine(0, 0, "konst x ="))
             TestCase.assertTrue("Unexpected check results: $res1", res1 is ReplCompileResult.Incomplete)
 
-            assertEvalResult(repl, "val l1 = listOf(1 + 2)\nl1.first()", 3)
+            assertEkonstResult(repl, "konst l1 = listOf(1 + 2)\nl1.first()", 3)
 
-            assertEvalUnit(repl, "val x = 5")
+            assertEkonstUnit(repl, "konst x = 5")
 
-            assertEvalResult(repl, "x + 2", 7)
+            assertEkonstResult(repl, "x + 2", 7)
         }
     }
 
     fun testReplErrors() {
         LegacyTestRepl().use { repl ->
-            repl.compileAndEval(repl.nextCodeLine("val x = 10"))
+            repl.compileAndEkonst(repl.nextCodeLine("konst x = 10"))
 
-            val res = repl.compileAndEval(repl.nextCodeLine("java.util.fish"))
+            konst res = repl.compileAndEkonst(repl.nextCodeLine("java.util.fish"))
             TestCase.assertTrue("Expected compile error", res.first is ReplCompileResult.Error)
 
-            val result = repl.compileAndEval(repl.nextCodeLine("x"))
-            assertEquals(res.second.toString(), 10, (result.second as? ReplEvalResult.ValueResult)?.value)
+            konst result = repl.compileAndEkonst(repl.nextCodeLine("x"))
+            assertEquals(res.second.toString(), 10, (result.second as? ReplEkonstResult.ValueResult)?.konstue)
         }
     }
 
     fun testReplSyntaxErrorsChecked() {
         LegacyTestRepl().use { repl ->
-            val res = repl.compileAndEval(repl.nextCodeLine("data class Q(val x: Int, val: String)"))
+            konst res = repl.compileAndEkonst(repl.nextCodeLine("data class Q(konst x: Int, konst: String)"))
             TestCase.assertTrue("Expected compile error", res.first is ReplCompileResult.Error)
         }
     }
 
     fun testReplCodeFormat() {
         LegacyTestRepl().use { repl ->
-            val codeLine0 = ReplCodeLine(0, 0, "val l1 = 1\r\nl1\r\n")
-            val res0 = repl.replCompiler.compile(repl.state, codeLine0)
-            val res0c = res0 as? ReplCompileResult.CompiledClasses
+            konst codeLine0 = ReplCodeLine(0, 0, "konst l1 = 1\r\nl1\r\n")
+            konst res0 = repl.replCompiler.compile(repl.state, codeLine0)
+            konst res0c = res0 as? ReplCompileResult.CompiledClasses
             TestCase.assertNotNull("Unexpected compile result: $res0", res0c)
         }
     }
 
     fun testRepPackage() {
         LegacyTestRepl().use { repl ->
-            assertEvalResult(repl, "package mypackage\n\nval x = 1\nx+2", 3)
+            assertEkonstResult(repl, "package mypackage\n\nkonst x = 1\nx+2", 3)
 
-            assertEvalResult(repl, "x+4", 5)
+            assertEkonstResult(repl, "x+4", 5)
         }
     }
 
     fun testReplResultFieldWithFunction() {
         LegacyTestRepl().use { repl ->
-            assertEvalResultIs<Function0<Int>>(repl, "{ 1 + 2 }")
-            assertEvalResultIs<Function0<Int>>(repl, "res0")
-            assertEvalResult(repl, "res0()", 3)
+            assertEkonstResultIs<Function0<Int>>(repl, "{ 1 + 2 }")
+            assertEkonstResultIs<Function0<Int>>(repl, "res0")
+            assertEkonstResult(repl, "res0()", 3)
         }
     }
 
     fun testReplResultField() {
         LegacyTestRepl().use { repl ->
-            assertEvalResult(repl, "5 * 4", 20)
-            assertEvalResult(repl, "res0 + 3", 23)
+            assertEkonstResult(repl, "5 * 4", 20)
+            assertEkonstResult(repl, "res0 + 3", 23)
         }
     }
 }
@@ -87,17 +87,17 @@ class LegacyReplTest : TestCase() {
 // Artificial split into several testsuites, to speed up parallel testing
 class LegacyReplTestLong1 : TestCase() {
 
-    fun test256Evals() {
+    fun test256Ekonsts() {
         LegacyTestRepl().use { repl ->
-            repl.compileAndEval(ReplCodeLine(0, 0, "val x0 = 0"))
+            repl.compileAndEkonst(ReplCodeLine(0, 0, "konst x0 = 0"))
 
-            val evals = 256
-            for (i in 1..evals) {
-                repl.compileAndEval(ReplCodeLine(i, 0, "val x$i = x${i-1} + 1"))
+            konst ekonsts = 256
+            for (i in 1..ekonsts) {
+                repl.compileAndEkonst(ReplCodeLine(i, 0, "konst x$i = x${i-1} + 1"))
             }
 
-            val res = repl.compileAndEval(ReplCodeLine(evals + 1, 0, "x$evals"))
-            assertEquals(res.second.toString(), evals, (res.second as? ReplEvalResult.ValueResult)?.value)
+            konst res = repl.compileAndEkonst(ReplCodeLine(ekonsts + 1, 0, "x$ekonsts"))
+            assertEquals(res.second.toString(), ekonsts, (res.second as? ReplEkonstResult.ValueResult)?.konstue)
         }
     }
 }
@@ -107,34 +107,34 @@ class LegacyReplTestLong2 : TestCase() {
 
     fun testReplSlowdownKt22740() {
         LegacyTestRepl().use { repl ->
-            repl.compileAndEval(ReplCodeLine(0, 0, "class Test<T>(val x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()))
+            repl.compileAndEkonst(ReplCodeLine(0, 0, "class Test<T>(konst x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()))
 
             // We expect that analysis time is not exponential
             for (i in 1..60) {
-                repl.compileAndEval(ReplCodeLine(i, 0, "fun <T> Test<T>.map(f: (T) -> Double): List<Double> = listOf(f(this.x))"))
+                repl.compileAndEkonst(ReplCodeLine(i, 0, "fun <T> Test<T>.map(f: (T) -> Double): List<Double> = listOf(f(this.x))"))
             }
         }
     }
 }
 
 internal class LegacyTestRepl : Closeable {
-    val application = ApplicationManager.getApplication()
+    konst application = ApplicationManager.getApplication()
 
-    val currentLineCounter = AtomicInteger()
+    konst currentLineCounter = AtomicInteger()
 
     fun nextCodeLine(code: String): ReplCodeLine = ReplCodeLine(currentLineCounter.getAndIncrement(), 0, code)
 
-    val replCompiler: JvmReplCompiler by lazy {
+    konst replCompiler: JvmReplCompiler by lazy {
         JvmReplCompiler(simpleScriptCompilationConfiguration)
     }
 
-    val compiledEvaluator: ReplEvaluator by lazy {
-        JvmReplEvaluator(simpleScriptEvaluationConfiguration)
+    konst compiledEkonstuator: ReplEkonstuator by lazy {
+        JvmReplEkonstuator(simpleScriptEkonstuationConfiguration)
     }
 
-    val state by lazy {
-        val stateLock = ReentrantReadWriteLock()
-        AggregatedReplStageState(replCompiler.createState(stateLock), compiledEvaluator.createState(stateLock), stateLock)
+    konst state by lazy {
+        konst stateLock = ReentrantReadWriteLock()
+        AggregatedReplStageState(replCompiler.createState(stateLock), compiledEkonstuator.createState(stateLock), stateLock)
     }
 
     override fun close() {
@@ -143,47 +143,47 @@ internal class LegacyTestRepl : Closeable {
     }
 }
 
-private fun LegacyTestRepl.compileAndEval(codeLine: ReplCodeLine): Pair<ReplCompileResult, ReplEvalResult?> {
+private fun LegacyTestRepl.compileAndEkonst(codeLine: ReplCodeLine): Pair<ReplCompileResult, ReplEkonstResult?> {
 
-    val compRes = replCompiler.compile(state, codeLine)
+    konst compRes = replCompiler.compile(state, codeLine)
 
-    val evalRes = (compRes as? ReplCompileResult.CompiledClasses)?.let {
+    konst ekonstRes = (compRes as? ReplCompileResult.CompiledClasses)?.let {
 
-        compiledEvaluator.eval(state, it)
+        compiledEkonstuator.ekonst(state, it)
     }
-    return compRes to evalRes
+    return compRes to ekonstRes
 }
 
-private fun assertEvalUnit(repl: LegacyTestRepl, line: String) {
-    val compiledClasses = checkCompile(repl, line)
+private fun assertEkonstUnit(repl: LegacyTestRepl, line: String) {
+    konst compiledClasses = checkCompile(repl, line)
 
-    val evalResult = repl.compiledEvaluator.eval(repl.state, compiledClasses!!)
-    val unitResult = evalResult as? ReplEvalResult.UnitResult
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", unitResult)
+    konst ekonstResult = repl.compiledEkonstuator.ekonst(repl.state, compiledClasses!!)
+    konst unitResult = ekonstResult as? ReplEkonstResult.UnitResult
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", unitResult)
 }
 
-private fun<R> assertEvalResult(repl: LegacyTestRepl, line: String, expectedResult: R) {
-    val compiledClasses = checkCompile(repl, line)
+private fun<R> assertEkonstResult(repl: LegacyTestRepl, line: String, expectedResult: R) {
+    konst compiledClasses = checkCompile(repl, line)
 
-    val evalResult = repl.compiledEvaluator.eval(repl.state, compiledClasses!!)
-    val valueResult = evalResult as? ReplEvalResult.ValueResult
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertEquals(expectedResult, valueResult!!.value)
+    konst ekonstResult = repl.compiledEkonstuator.ekonst(repl.state, compiledClasses!!)
+    konst konstueResult = ekonstResult as? ReplEkonstResult.ValueResult
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+    TestCase.assertEquals(expectedResult, konstueResult!!.konstue)
 }
 
-private inline fun<reified R> assertEvalResultIs(repl: LegacyTestRepl, line: String) {
-    val compiledClasses = checkCompile(repl, line)
+private inline fun<reified R> assertEkonstResultIs(repl: LegacyTestRepl, line: String) {
+    konst compiledClasses = checkCompile(repl, line)
 
-    val evalResult = repl.compiledEvaluator.eval(repl.state, compiledClasses!!)
-    val valueResult = evalResult as? ReplEvalResult.ValueResult
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.value is R)
+    konst ekonstResult = repl.compiledEkonstuator.ekonst(repl.state, compiledClasses!!)
+    konst konstueResult = ekonstResult as? ReplEkonstResult.ValueResult
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+    TestCase.assertTrue(konstueResult!!.konstue is R)
 }
 
 private fun checkCompile(repl: LegacyTestRepl, line: String): ReplCompileResult.CompiledClasses? {
-    val codeLine = repl.nextCodeLine(line)
-    val compileResult = repl.replCompiler.compile(repl.state, codeLine)
-    val compiledClasses = compileResult as? ReplCompileResult.CompiledClasses
+    konst codeLine = repl.nextCodeLine(line)
+    konst compileResult = repl.replCompiler.compile(repl.state, codeLine)
+    konst compiledClasses = compileResult as? ReplCompileResult.CompiledClasses
     TestCase.assertNotNull("Unexpected compile result: $compileResult", compiledClasses)
     return compiledClasses
 }

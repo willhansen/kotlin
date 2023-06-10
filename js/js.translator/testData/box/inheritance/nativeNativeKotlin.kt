@@ -14,7 +14,7 @@ external open class B : A {
 class C : B()
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     assertEquals("A.foo", c.foo())
     assertEquals("B.bar", c.bar())

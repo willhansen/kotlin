@@ -33,7 +33,7 @@ class BrokenLazyConfigurationIT : KGPBaseTest() {
     @DisplayName("works in JS")
     fun testBrokenTcaInJs(gradleVersion: GradleVersion) {
         project("kotlin-js-browser-project", gradleVersion) {
-            val subprojects = listOf("app", "base", "lib")
+            konst subprojects = listOf("app", "base", "lib")
             for (subproject in subprojects) {
                 subProject(subproject).buildGradleKts.modify {
                     it.replace(

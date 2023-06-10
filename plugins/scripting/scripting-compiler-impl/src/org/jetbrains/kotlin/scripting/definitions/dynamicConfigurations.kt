@@ -7,10 +7,10 @@ package org.jetbrains.kotlin.scripting.definitions
 
 import org.jetbrains.kotlin.scripting.resolve.ScriptCompilationConfigurationResult
 import kotlin.script.experimental.api.ScriptDiagnostic
-import kotlin.script.experimental.api.valueOr
+import kotlin.script.experimental.api.konstueOr
 
-private fun ScriptCompilationConfigurationResult.valueOrError() = valueOr { failure ->
-    val singleCause = failure.reports.singleOrNull { it.severity == ScriptDiagnostic.Severity.ERROR }
+private fun ScriptCompilationConfigurationResult.konstueOrError() = konstueOr { failure ->
+    konst singleCause = failure.reports.singleOrNull { it.severity == ScriptDiagnostic.Severity.ERROR }
     if (singleCause != null)
         throw IllegalStateException(singleCause.message, singleCause.exception)
     else

@@ -5,12 +5,12 @@ annotation class StringAnno
 annotation class DoubleAnno
 
 class Class {
-    @[IntAnno] val Int.extension: Int
+    @[IntAnno] konst Int.extension: Int
         get() = this
 
-    @[StringAnno] val String.extension: String
+    @[StringAnno] konst String.extension: String
         get() = this
 
-    @[DoubleAnno] val Double.extension: Int
+    @[DoubleAnno] konst Double.extension: Int
         get() = 42
 }

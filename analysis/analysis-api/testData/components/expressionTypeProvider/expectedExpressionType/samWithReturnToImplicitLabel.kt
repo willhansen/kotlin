@@ -1,1 +1,1 @@
-val baz = java.lang.Runnable {<caret> return@Runnable }
+konst baz = java.lang.Runnable {<caret> return@Runnable }

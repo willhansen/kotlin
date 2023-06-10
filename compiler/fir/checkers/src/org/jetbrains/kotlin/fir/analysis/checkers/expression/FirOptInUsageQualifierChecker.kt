@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.fir.expressions.FirResolvedQualifier
 
 object FirOptInUsageQualifierChecker : FirResolvedQualifierChecker() {
     override fun check(expression: FirResolvedQualifier, context: CheckerContext, reporter: DiagnosticReporter) {
-        val symbol = expression.symbol ?: return
+        konst symbol = expression.symbol ?: return
         with(FirOptInUsageBaseChecker) {
-            val experimentalities = symbol.loadExperimentalities(context, fromSetter = false, dispatchReceiverType = null)
+            konst experimentalities = symbol.loadExperimentalities(context, fromSetter = false, dispatchReceiverType = null)
             reportNotAcceptedExperimentalities(experimentalities, expression, context, reporter)
         }
     }

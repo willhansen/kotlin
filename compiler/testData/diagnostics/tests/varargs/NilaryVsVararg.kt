@@ -6,6 +6,6 @@ fun foo0(vararg t : Int) : String = "vararg"
 fun test0() {
     foo0()
     foo0(1)
-    val a = IntArray(0)
+    konst a = IntArray(0)
     foo0(*a)
 }

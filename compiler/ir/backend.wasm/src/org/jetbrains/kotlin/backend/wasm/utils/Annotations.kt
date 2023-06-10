@@ -22,13 +22,13 @@ fun IrAnnotationContainer.hasExcludedFromCodegenAnnotation(): Boolean =
     hasAnnotation(FqName("kotlin.wasm.internal.ExcludedFromCodegen"))
 
 fun IrFunction.getWasmImportDescriptor(): WasmImportDescriptor? {
-    val annotation = getAnnotation(FqName("kotlin.wasm.WasmImport"))
+    konst annotation = getAnnotation(FqName("kotlin.wasm.WasmImport"))
         ?: return null
 
     @Suppress("UNCHECKED_CAST")
     return WasmImportDescriptor(
-        (annotation.getValueArgument(0) as IrConst<String>).value,
-        (annotation.getValueArgument(1) as? IrConst<String>)?.value ?: this.name.asString()
+        (annotation.getValueArgument(0) as IrConst<String>).konstue,
+        (annotation.getValueArgument(1) as? IrConst<String>)?.konstue ?: this.name.asString()
     )
 }
 
@@ -44,15 +44,15 @@ fun IrAnnotationContainer.hasWasmAutoboxedAnnotation(): Boolean =
 fun IrAnnotationContainer.hasWasmPrimitiveConstructorAnnotation(): Boolean =
     hasAnnotation(FqName("kotlin.wasm.internal.WasmPrimitiveConstructor"))
 
-class WasmArrayInfo(val klass: IrClass, val isNullable: Boolean) {
-    val type = klass.defaultType.let { if (isNullable) it.makeNullable() else it }
+class WasmArrayInfo(konst klass: IrClass, konst isNullable: Boolean) {
+    konst type = klass.defaultType.let { if (isNullable) it.makeNullable() else it }
 }
 
 fun IrAnnotationContainer.getWasmArrayAnnotation(): WasmArrayInfo? =
     getAnnotation(FqName("kotlin.wasm.internal.WasmArrayOf"))?.let {
         WasmArrayInfo(
             (it.getValueArgument(0) as IrClassReference).symbol.owner as IrClass,
-            (it.getValueArgument(1) as IrConst<*>).value as Boolean,
+            (it.getValueArgument(1) as IrConst<*>).konstue as Boolean,
         )
     }
 

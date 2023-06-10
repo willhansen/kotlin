@@ -31,23 +31,23 @@ import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.*
 import kotlin.script.experimental.jvm.*
 
-private const val testDataPath = "plugins/scripting/scripting-compiler/testData/cliCompilation"
+private const konst testDataPath = "plugins/scripting/scripting-compiler/testData/cliCompilation"
 
 class ScriptCliCompilationTest : TestCase() {
 
-    protected val testRootDisposable: Disposable = TestDisposable()
+    protected konst testRootDisposable: Disposable = TestDisposable()
 
     fun testPrerequisites() {
         Assert.assertTrue(thisClasspath.isNotEmpty())
     }
 
     fun testSimpleScript() {
-        val out = checkRun("hello.kts")
+        konst out = checkRun("hello.kts")
         Assert.assertEquals("Hello from basic script!", out)
     }
 
     fun testEmptyScript() {
-        val emptyFile = Files.createTempFile("empty",".kts").toFile()
+        konst emptyFile = Files.createTempFile("empty",".kts").toFile()
         try {
             Assert.assertTrue(
                 "Script file is not empty",
@@ -60,17 +60,17 @@ class ScriptCliCompilationTest : TestCase() {
     }
 
     fun testSimpleScriptWithArgs() {
-        val out = checkRun("hello_args.kts", listOf("kotlin"))
+        konst out = checkRun("hello_args.kts", listOf("kotlin"))
         Assert.assertEquals("Hello, kotlin!", out)
     }
 
     fun testScriptWithRequire() {
-        val out = checkRun("hello.req1.kts", scriptDef = TestScriptWithRequire::class)
+        konst out = checkRun("hello.req1.kts", scriptDef = TestScriptWithRequire::class)
         Assert.assertEquals("Hello from required!", out)
     }
 
 
-    private val thisClasspath = listOf(PathUtil.getResourcePathForClass(ScriptCliCompilationTest::class.java))
+    private konst thisClasspath = listOf(PathUtil.getResourcePathForClass(ScriptCliCompilationTest::class.java))
 
     private fun runCompiler(
         script: File,
@@ -79,13 +79,13 @@ class ScriptCliCompilationTest : TestCase() {
         classpath: List<File> = emptyList()
     ): Pair<ExitCode, MessageCollector> {
 
-        val collector = TestMessageCollector()
+        konst collector = TestMessageCollector()
 
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.FULL_JDK).apply {
             updateWithBaseCompilerArguments()
             put(MESSAGE_COLLECTOR_KEY, collector)
             if (scriptDef != null) {
-                val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
+                konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {
                     configurationDependencies(JvmDependency(classpath))
                 }
                 add(
@@ -96,7 +96,7 @@ class ScriptCliCompilationTest : TestCase() {
             loadScriptingPlugin(this)
         }
 
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
         return compileAndExecuteScript(script.toScriptSource(), environment, null, args) to collector
     }
@@ -115,12 +115,12 @@ class ScriptCliCompilationTest : TestCase() {
         classpath: List<File> = emptyList()
     ): String =
         captureOut {
-            val res = runCompiler(scriptFile, args, scriptDef, classpath)
-            val resMessage = lazy {
+            konst res = runCompiler(scriptFile, args, scriptDef, classpath)
+            konst resMessage = lazy {
                 "Compilation results:\n" + res.second.toString()
             }
-            Assert.assertEquals(resMessage.value, ExitCode.OK, res.first)
-            Assert.assertFalse(resMessage.value, res.second.hasErrors())
+            Assert.assertEquals(resMessage.konstue, ExitCode.OK, res.first)
+            Assert.assertFalse(resMessage.konstue, res.second.hasErrors())
         }
 }
 
@@ -138,14 +138,14 @@ object TestScriptWithRequireConfiguration : ScriptCompilationConfiguration(
         }
         refineConfiguration {
             onAnnotations(Import::class, DependsOn::class) { context: ScriptConfigurationRefinementContext ->
-                val scriptBaseDir = (context.script as? FileBasedScriptSource)?.file?.parentFile
-                val sources = context.collectedData?.get(ScriptCollectedData.foundAnnotations)
+                konst scriptBaseDir = (context.script as? FileBasedScriptSource)?.file?.parentFile
+                konst sources = context.collectedData?.get(ScriptCollectedData.foundAnnotations)
                     ?.flatMap {
                         (it as? Import)?.sources?.map { sourceName ->
                             FileScriptSource(scriptBaseDir?.resolve(sourceName) ?: File(sourceName))
                         } ?: emptyList()
                     }
-                val deps = context.collectedData?.get(ScriptCollectedData.foundAnnotations)
+                konst deps = context.collectedData?.get(ScriptCollectedData.foundAnnotations)
                     ?.mapNotNull {
                         (it as? DependsOn)?.path?.let(::File)
                     }
@@ -161,4 +161,4 @@ object TestScriptWithRequireConfiguration : ScriptCompilationConfiguration(
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class Import(vararg val sources: String)
+annotation class Import(vararg konst sources: String)

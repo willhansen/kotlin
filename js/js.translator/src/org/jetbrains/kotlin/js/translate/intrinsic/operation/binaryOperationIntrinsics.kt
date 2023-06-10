@@ -34,31 +34,31 @@ import org.jetbrains.kotlin.types.KotlinType
 class BinaryOperationIntrinsics {
 
     private data class IntrinsicKey(
-        val token: KtToken,
-        val function: FunctionDescriptor,
-        val leftType: KotlinType?,
-        val rightType: KotlinType?
+        konst token: KtToken,
+        konst function: FunctionDescriptor,
+        konst leftType: KotlinType?,
+        konst rightType: KotlinType?
     )
 
-    private val intrinsicCache = mutableMapOf<IntrinsicKey, BinaryOperationIntrinsic?>()
+    private konst intrinsicCache = mutableMapOf<IntrinsicKey, BinaryOperationIntrinsic?>()
 
     fun getIntrinsic(expression: KtBinaryExpression, context: TranslationContext): BinaryOperationIntrinsic? {
-        val descriptor =
+        konst descriptor =
             getCallableDescriptorForOperationExpression(context.bindingContext(), expression) as? FunctionDescriptor ?: return null
 
-        val (leftType, rightType) = binaryOperationTypes(expression, context)
+        konst (leftType, rightType) = binaryOperationTypes(expression, context)
 
-        val token = getOperationToken(expression)
+        konst token = getOperationToken(expression)
 
         return computeAndCache(IntrinsicKey(token, descriptor, leftType, rightType))
     }
 
-    private val factories = listOf(CompareToBOIF, EqualsBOIF)
+    private konst factories = listOf(CompareToBOIF, EqualsBOIF)
 
     private fun computeAndCache(key: IntrinsicKey): BinaryOperationIntrinsic? {
         if (key in intrinsicCache) return intrinsicCache[key]
 
-        val result = factories.firstNotNullOfOrNull { factory ->
+        konst result = factories.firstNotNullOfOrNull { factory ->
             if (factory.getSupportTokens().contains(key.token)) {
                 factory.getIntrinsic(key.function, key.leftType, key.rightType)
             } else null
@@ -72,7 +72,7 @@ class BinaryOperationIntrinsics {
 
 // Takes into account smart-casts (needed for IEEE 754 comparisons)
 fun binaryOperationTypes(expression: KtBinaryExpression, context: TranslationContext): Pair<KotlinType?, KotlinType?> {
-    val info = context.getPrimitiveNumericComparisonInfo(expression)
+    konst info = context.getPrimitiveNumericComparisonInfo(expression)
     if (info != null) {
         return info.leftType to info.rightType
     }
@@ -88,7 +88,7 @@ interface BinaryOperationIntrinsicFactory {
 
 typealias OperatorSelector = (KtBinaryExpression) -> JsBinaryOperator
 
-val defaultOperatorSelector: OperatorSelector = { OperatorTable.getBinaryOperator(getOperationToken(it)) }
+konst defaultOperatorSelector: OperatorSelector = { OperatorTable.getBinaryOperator(getOperationToken(it)) }
 
 // toLeft(L, R) OP toRight(L, R)
 fun complexBinaryIntrinsic(

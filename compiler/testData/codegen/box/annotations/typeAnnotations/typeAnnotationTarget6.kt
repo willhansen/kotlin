@@ -23,7 +23,7 @@ fun box(): String {
         "foo"
     )
 
-    val typeAnnotation = ::foo.returnType.annotations.single().toString()
+    konst typeAnnotation = ::foo.returnType.annotations.single().toString()
     if (typeAnnotation != "@kotlin.ExtensionFunctionType()") return "can't find type annotations: $typeAnnotation"
 
     return "OK"

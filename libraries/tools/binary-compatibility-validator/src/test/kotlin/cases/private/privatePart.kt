@@ -1,12 +1,12 @@
 package cases.private
 
 // properties
-private val privateVal: Any? = 1
+private konst privateVal: Any? = 1
 private var privateVar: Any? = 1
 
 // constants
 
-private const val privateConst: Int = 4
+private const konst privateConst: Int = 4
 
 // fun
 

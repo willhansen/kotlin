@@ -19,26 +19,26 @@ package org.jetbrains.kotlin.descriptors
 import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 abstract class DescriptorVisibility protected constructor() {
-    abstract val delegate: Visibility
+    abstract konst delegate: Visibility
 
-    val name: String
+    konst name: String
         get() = delegate.name
 
-    val isPublicAPI: Boolean
+    konst isPublicAPI: Boolean
         get() = delegate.isPublicAPI
 
     /**
-     * @param receiver can be used to determine callee accessibility for some special receiver value
+     * @param receiver can be used to determine callee accessibility for some special receiver konstue
      *
-     * 'null'-value basically means that receiver is absent in current call
+     * 'null'-konstue basically means that receiver is absent in current call
      *
      * In case if it's needed to perform basic checks ignoring ones considering receiver (e.g. when checks happen beyond any call),
-     * special value Visibilities.ALWAYS_SUITABLE_RECEIVER should be used.
+     * special konstue Visibilities.ALWAYS_SUITABLE_RECEIVER should be used.
      * If it's needed to determine whether visibility accepts any receiver, Visibilities.IRRELEVANT_RECEIVER should be used.
      *
      * NB: Currently Visibilities.IRRELEVANT_RECEIVER has the same effect as 'null'
      *
-     * Also it's important that implementation that take receiver into account do aware about these special values.
+     * Also it's important that implementation that take receiver into account do aware about these special konstues.
      */
     abstract fun isVisible(
         receiver: ReceiverValue?,
@@ -67,10 +67,10 @@ abstract class DescriptorVisibility protected constructor() {
     }
 
     // internal representation for descriptors
-    abstract val internalDisplayName: String
+    abstract konst internalDisplayName: String
 
     // external representation for diagnostics
-    abstract val externalDisplayName: String
+    abstract konst externalDisplayName: String
 
     final override fun toString(): String = delegate.toString()
 
@@ -80,17 +80,17 @@ abstract class DescriptorVisibility protected constructor() {
     fun customEffectiveVisibility(): EffectiveVisibility? = delegate.customEffectiveVisibility()
 }
 
-abstract class DelegatedDescriptorVisibility(override val delegate: Visibility) : DescriptorVisibility() {
+abstract class DelegatedDescriptorVisibility(override konst delegate: Visibility) : DescriptorVisibility() {
     override fun mustCheckInImports(): Boolean {
         return delegate.mustCheckInImports()
     }
 
     // internal representation for descriptors
-    override val internalDisplayName: String
+    override konst internalDisplayName: String
         get() = delegate.internalDisplayName
 
     // external representation for diagnostics
-    override val externalDisplayName: String
+    override konst externalDisplayName: String
         get() = delegate.externalDisplayName
 
     override fun normalize(): DescriptorVisibility = DescriptorVisibilities.toDescriptorVisibility(delegate.normalize())

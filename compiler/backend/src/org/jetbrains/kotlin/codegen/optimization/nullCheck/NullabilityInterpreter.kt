@@ -31,10 +31,10 @@ import org.jetbrains.org.objectweb.asm.tree.MethodInsnNode
 import org.jetbrains.org.objectweb.asm.tree.TypeInsnNode
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 
-class NullabilityInterpreter(private val generationState: GenerationState) : OptimizationBasicInterpreter() {
+class NullabilityInterpreter(private konst generationState: GenerationState) : OptimizationBasicInterpreter() {
     override fun newOperation(insn: AbstractInsnNode): BasicValue? {
-        val defaultResult = super.newOperation(insn)
-        val resultType = defaultResult?.type
+        konst defaultResult = super.newOperation(insn)
+        konst resultType = defaultResult?.type
 
         return when {
             insn.opcode == Opcodes.ACONST_NULL ->
@@ -53,16 +53,16 @@ class NullabilityInterpreter(private val generationState: GenerationState) : Opt
     private fun Type?.isReferenceType() =
         this?.sort.let { it == Type.OBJECT || it == Type.ARRAY }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
-        val defaultResult = super.unaryOperation(insn, value)
-        val resultType = defaultResult?.type
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
+        konst defaultResult = super.unaryOperation(insn, konstue)
+        konst resultType = defaultResult?.type
 
         return when (insn.opcode) {
             Opcodes.CHECKCAST ->
                 if (insn.isReifiedSafeAs())
                     StrictBasicValue(resultType)
                 else
-                    value
+                    konstue
             Opcodes.NEWARRAY, Opcodes.ANEWARRAY ->
                 NotNullBasicValue(resultType)
             else ->
@@ -71,24 +71,24 @@ class NullabilityInterpreter(private val generationState: GenerationState) : Opt
     }
 
     private fun AbstractInsnNode.isReifiedSafeAs(): Boolean {
-        val marker = previous as? MethodInsnNode ?: return false
+        konst marker = previous as? MethodInsnNode ?: return false
         return ReifiedTypeInliner.isOperationReifiedMarker(marker)
                 && marker.operationKind == ReifiedTypeInliner.OperationKind.SAFE_AS
     }
 
-    override fun naryOperation(insn: AbstractInsnNode, values: List<BasicValue>): BasicValue? {
-        val defaultResult = super.naryOperation(insn, values)
-        val resultType = defaultResult?.type
+    override fun naryOperation(insn: AbstractInsnNode, konstues: List<BasicValue>): BasicValue? {
+        konst defaultResult = super.naryOperation(insn, konstues)
+        konst resultType = defaultResult?.type
 
         return when {
             insn.isBoxing(generationState) ->
                 NotNullBasicValue(resultType)
-            insn.isIteratorMethodCallOfProgression(values) ->
-                ProgressionIteratorBasicValue.byProgressionClassType(insn, values[0].type)
-            insn.isNextMethodCallOfProgressionIterator(values) ->
+            insn.isIteratorMethodCallOfProgression(konstues) ->
+                ProgressionIteratorBasicValue.byProgressionClassType(insn, konstues[0].type)
+            insn.isNextMethodCallOfProgressionIterator(konstues) ->
                 NotNullBasicValue(resultType)
             insn.isPseudo(PseudoInsn.AS_NOT_NULL) ->
-                NotNullBasicValue(values[0].type)
+                NotNullBasicValue(konstues[0].type)
             else ->
                 defaultResult
         }

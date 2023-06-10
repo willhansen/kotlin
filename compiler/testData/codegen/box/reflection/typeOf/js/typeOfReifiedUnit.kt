@@ -11,7 +11,7 @@ fun sideEffects() {
 
 inline fun <reified T> foo(): String {
     sideEffects()
-    val x = typeOf<T>().toString()
+    konst x = typeOf<T>().toString()
     return x
 }
 

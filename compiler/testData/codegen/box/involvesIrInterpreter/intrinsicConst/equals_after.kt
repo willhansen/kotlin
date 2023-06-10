@@ -1,97 +1,97 @@
-// !LANGUAGE: +IntrinsicConstEvaluation
+// !LANGUAGE: +IntrinsicConstEkonstuation
 // TARGET_BACKEND: JVM_IR
 fun <T> T.id() = this
 
-const val trueVal = <!EVALUATED("true")!>true<!>
-const val falseVal = <!EVALUATED("false")!>false<!>
+const konst trueVal = <!EVALUATED("true")!>true<!>
+const konst falseVal = <!EVALUATED("false")!>false<!>
 
-const val charOneVal = <!EVALUATED("1")!>'1'<!>
-const val charTwoVal = <!EVALUATED("2")!>'2'<!>
-const val charThreeVal = <!EVALUATED("3")!>'3'<!>
-const val charFourVal = <!EVALUATED("4")!>'4'<!>
+const konst charOneVal = <!EVALUATED("1")!>'1'<!>
+const konst charTwoVal = <!EVALUATED("2")!>'2'<!>
+const konst charThreeVal = <!EVALUATED("3")!>'3'<!>
+const konst charFourVal = <!EVALUATED("4")!>'4'<!>
 
-const val byteMinusOneVal = (-1).<!EVALUATED("-1")!>toByte()<!>
-const val byteOneVal = 1.<!EVALUATED("1")!>toByte()<!>
-const val byteTwoVal = 2.<!EVALUATED("2")!>toByte()<!>
-const val byteThreeVal = 3.<!EVALUATED("3")!>toByte()<!>
-const val byteFourVal = 4.<!EVALUATED("4")!>toByte()<!>
+const konst byteMinusOneVal = (-1).<!EVALUATED("-1")!>toByte()<!>
+const konst byteOneVal = 1.<!EVALUATED("1")!>toByte()<!>
+const konst byteTwoVal = 2.<!EVALUATED("2")!>toByte()<!>
+const konst byteThreeVal = 3.<!EVALUATED("3")!>toByte()<!>
+const konst byteFourVal = 4.<!EVALUATED("4")!>toByte()<!>
 
-const val shortMinusOneVal = (-1).<!EVALUATED("-1")!>toShort()<!>
-const val shortOneVal = 1.<!EVALUATED("1")!>toShort()<!>
-const val shortTwoVal = 2.<!EVALUATED("2")!>toShort()<!>
-const val shortThreeVal = 3.<!EVALUATED("3")!>toShort()<!>
-const val shortFourVal = 4.<!EVALUATED("4")!>toShort()<!>
+const konst shortMinusOneVal = (-1).<!EVALUATED("-1")!>toShort()<!>
+const konst shortOneVal = 1.<!EVALUATED("1")!>toShort()<!>
+const konst shortTwoVal = 2.<!EVALUATED("2")!>toShort()<!>
+const konst shortThreeVal = 3.<!EVALUATED("3")!>toShort()<!>
+const konst shortFourVal = 4.<!EVALUATED("4")!>toShort()<!>
 
-const val intMinusOneVal = <!EVALUATED("-1")!>-1<!>
-const val intOneVal = <!EVALUATED("1")!>1<!>
-const val intTwoVal = <!EVALUATED("2")!>2<!>
-const val intThreeVal = <!EVALUATED("3")!>3<!>
-const val intFourVal = <!EVALUATED("4")!>4<!>
+const konst intMinusOneVal = <!EVALUATED("-1")!>-1<!>
+const konst intOneVal = <!EVALUATED("1")!>1<!>
+const konst intTwoVal = <!EVALUATED("2")!>2<!>
+const konst intThreeVal = <!EVALUATED("3")!>3<!>
+const konst intFourVal = <!EVALUATED("4")!>4<!>
 
-const val longMinusOneVal = <!EVALUATED("-1")!>-1L<!>
-const val longOneVal = <!EVALUATED("1")!>1L<!>
-const val longTwoVal = <!EVALUATED("2")!>2L<!>
-const val longThreeVal = <!EVALUATED("3")!>3L<!>
-const val longFourVal = <!EVALUATED("4")!>4L<!>
+const konst longMinusOneVal = <!EVALUATED("-1")!>-1L<!>
+const konst longOneVal = <!EVALUATED("1")!>1L<!>
+const konst longTwoVal = <!EVALUATED("2")!>2L<!>
+const konst longThreeVal = <!EVALUATED("3")!>3L<!>
+const konst longFourVal = <!EVALUATED("4")!>4L<!>
 
-const val floatMinusOneVal = <!EVALUATED("-1.0")!>-1.0f<!>
-const val floatOneVal = <!EVALUATED("1.0")!>1.0f<!>
-const val floatTwoVal = <!EVALUATED("2.0")!>2.0f<!>
-const val floatThreeVal = <!EVALUATED("3.0")!>3.0f<!>
-const val floatFourVal = <!EVALUATED("4.0")!>4.0f<!>
+const konst floatMinusOneVal = <!EVALUATED("-1.0")!>-1.0f<!>
+const konst floatOneVal = <!EVALUATED("1.0")!>1.0f<!>
+const konst floatTwoVal = <!EVALUATED("2.0")!>2.0f<!>
+const konst floatThreeVal = <!EVALUATED("3.0")!>3.0f<!>
+const konst floatFourVal = <!EVALUATED("4.0")!>4.0f<!>
 
-const val doubleMinusOneVal = <!EVALUATED("-1.0")!>-1.0<!>
-const val doubleOneVal = <!EVALUATED("1.0")!>1.0<!>
-const val doubleTwoVal = <!EVALUATED("2.0")!>2.0<!>
-const val doubleThreeVal = <!EVALUATED("3.0")!>3.0<!>
-const val doubleFourVal = <!EVALUATED("4.0")!>4.0<!>
+const konst doubleMinusOneVal = <!EVALUATED("-1.0")!>-1.0<!>
+const konst doubleOneVal = <!EVALUATED("1.0")!>1.0<!>
+const konst doubleTwoVal = <!EVALUATED("2.0")!>2.0<!>
+const konst doubleThreeVal = <!EVALUATED("3.0")!>3.0<!>
+const konst doubleFourVal = <!EVALUATED("4.0")!>4.0<!>
 
-const val someStr = <!EVALUATED("123")!>"123"<!>
-const val otherStr = <!EVALUATED("other")!>"other"<!>
+const konst someStr = <!EVALUATED("123")!>"123"<!>
+const konst otherStr = <!EVALUATED("other")!>"other"<!>
 
-const val equalsBoolean1 = trueVal.<!EVALUATED("true")!>equals(trueVal)<!>
-const val equalsBoolean2 = <!EVALUATED("false")!>trueVal == falseVal<!>
-const val equalsBoolean3 = falseVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsBoolean1 = trueVal.<!EVALUATED("true")!>equals(trueVal)<!>
+const konst equalsBoolean2 = <!EVALUATED("false")!>trueVal == falseVal<!>
+const konst equalsBoolean3 = falseVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsChar1 = charOneVal.<!EVALUATED("false")!>equals(charTwoVal)<!>
-const val equalsChar2 = charTwoVal.<!EVALUATED("true")!>equals(charTwoVal)<!>
-const val equalsChar3 = <!EVALUATED("false")!>charThreeVal == charTwoVal<!>
-const val equalsChar4 = charFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsChar1 = charOneVal.<!EVALUATED("false")!>equals(charTwoVal)<!>
+const konst equalsChar2 = charTwoVal.<!EVALUATED("true")!>equals(charTwoVal)<!>
+const konst equalsChar3 = <!EVALUATED("false")!>charThreeVal == charTwoVal<!>
+const konst equalsChar4 = charFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsByte1 = byteOneVal.<!EVALUATED("false")!>equals(byteTwoVal)<!>
-const val equalsByte2 = byteTwoVal.<!EVALUATED("true")!>equals(byteTwoVal)<!>
-const val equalsByte3 = <!EVALUATED("false")!>byteThreeVal == byteTwoVal<!>
-const val equalsByte4 = byteFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsByte1 = byteOneVal.<!EVALUATED("false")!>equals(byteTwoVal)<!>
+const konst equalsByte2 = byteTwoVal.<!EVALUATED("true")!>equals(byteTwoVal)<!>
+const konst equalsByte3 = <!EVALUATED("false")!>byteThreeVal == byteTwoVal<!>
+const konst equalsByte4 = byteFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsShort1 = shortOneVal.<!EVALUATED("false")!>equals(shortTwoVal)<!>
-const val equalsShort2 = shortTwoVal.<!EVALUATED("true")!>equals(shortTwoVal)<!>
-const val equalsShort3 = <!EVALUATED("false")!>shortThreeVal == shortTwoVal<!>
-const val equalsShort4 = shortFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsShort1 = shortOneVal.<!EVALUATED("false")!>equals(shortTwoVal)<!>
+const konst equalsShort2 = shortTwoVal.<!EVALUATED("true")!>equals(shortTwoVal)<!>
+const konst equalsShort3 = <!EVALUATED("false")!>shortThreeVal == shortTwoVal<!>
+const konst equalsShort4 = shortFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsInt1 = intOneVal.<!EVALUATED("false")!>equals(intTwoVal)<!>
-const val equalsInt2 = intTwoVal.<!EVALUATED("true")!>equals(intTwoVal)<!>
-const val equalsInt3 = <!EVALUATED("false")!>intThreeVal == intTwoVal<!>
-const val equalsInt4 = intFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsInt1 = intOneVal.<!EVALUATED("false")!>equals(intTwoVal)<!>
+const konst equalsInt2 = intTwoVal.<!EVALUATED("true")!>equals(intTwoVal)<!>
+const konst equalsInt3 = <!EVALUATED("false")!>intThreeVal == intTwoVal<!>
+const konst equalsInt4 = intFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsLong1 = longOneVal.<!EVALUATED("false")!>equals(longTwoVal)<!>
-const val equalsLong2 = longTwoVal.<!EVALUATED("true")!>equals(longTwoVal)<!>
-const val equalsLong3 = <!EVALUATED("false")!>longThreeVal == longTwoVal<!>
-const val equalsLong4 = longFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsLong1 = longOneVal.<!EVALUATED("false")!>equals(longTwoVal)<!>
+const konst equalsLong2 = longTwoVal.<!EVALUATED("true")!>equals(longTwoVal)<!>
+const konst equalsLong3 = <!EVALUATED("false")!>longThreeVal == longTwoVal<!>
+const konst equalsLong4 = longFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsFloat1 = floatOneVal.<!EVALUATED("false")!>equals(floatTwoVal)<!>
-const val equalsFloat2 = floatTwoVal.<!EVALUATED("true")!>equals(floatTwoVal)<!>
-const val equalsFloat3 = <!EVALUATED("false")!>floatThreeVal == floatTwoVal<!>
-const val equalsFloat4 = floatFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsFloat1 = floatOneVal.<!EVALUATED("false")!>equals(floatTwoVal)<!>
+const konst equalsFloat2 = floatTwoVal.<!EVALUATED("true")!>equals(floatTwoVal)<!>
+const konst equalsFloat3 = <!EVALUATED("false")!>floatThreeVal == floatTwoVal<!>
+const konst equalsFloat4 = floatFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsDouble1 = doubleOneVal.<!EVALUATED("false")!>equals(doubleTwoVal)<!>
-const val equalsDouble2 = doubleTwoVal.<!EVALUATED("true")!>equals(doubleTwoVal)<!>
-const val equalsDouble3 = <!EVALUATED("false")!>doubleThreeVal == doubleTwoVal<!>
-const val equalsDouble4 = doubleFourVal.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsDouble1 = doubleOneVal.<!EVALUATED("false")!>equals(doubleTwoVal)<!>
+const konst equalsDouble2 = doubleTwoVal.<!EVALUATED("true")!>equals(doubleTwoVal)<!>
+const konst equalsDouble3 = <!EVALUATED("false")!>doubleThreeVal == doubleTwoVal<!>
+const konst equalsDouble4 = doubleFourVal.<!EVALUATED("false")!>equals(1)<!>
 
-const val equalsString1 = someStr.<!EVALUATED("false")!>equals(otherStr)<!>
-const val equalsString2 = someStr.<!EVALUATED("true")!>equals("123")<!>
-const val equalsString3 = <!EVALUATED("false")!>otherStr == someStr<!>
-const val equalsString4 = someStr.<!EVALUATED("false")!>equals(1)<!>
+const konst equalsString1 = someStr.<!EVALUATED("false")!>equals(otherStr)<!>
+const konst equalsString2 = someStr.<!EVALUATED("true")!>equals("123")<!>
+const konst equalsString3 = <!EVALUATED("false")!>otherStr == someStr<!>
+const konst equalsString4 = someStr.<!EVALUATED("false")!>equals(1)<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

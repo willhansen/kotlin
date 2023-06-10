@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.test.services.TestServices
 abstract class AbstractDelegateMemberScopeTest : AbstractSymbolByFqNameTest() {
 
     override fun KtAnalysisSession.collectSymbols(ktFile: KtFile, testServices: TestServices): SymbolsData {
-        val symbolData = SymbolByFqName.getSymbolDataFromFile(testDataPath)
-        val symbols = with(symbolData) { toSymbols() }
-        val classSymbol = symbols.singleOrNull() as? KtClassOrObjectSymbol
+        konst symbolData = SymbolByFqName.getSymbolDataFromFile(testDataPath)
+        konst symbols = with(symbolData) { toSymbols() }
+        konst classSymbol = symbols.singleOrNull() as? KtClassOrObjectSymbol
             ?: error("Should be a single class symbol, but $symbols found")
         return SymbolsData(classSymbol.getDelegatedMemberScope().getCallableSymbols().toList())
     }

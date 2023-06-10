@@ -16,27 +16,27 @@ Kotlin.callGetter = function (thisObject, klass, propertyName) {
     }
 
     propertyDescriptor = Object.getOwnPropertyDescriptor(thisObject, propertyName);
-    if (propertyDescriptor != null && "value" in propertyDescriptor) {
+    if (propertyDescriptor != null && "konstue" in propertyDescriptor) {
         return thisObject[propertyName];
     }
 
     return Kotlin.callGetter(thisObject, Object.getPrototypeOf(klass), propertyName);
 };
 
-Kotlin.callSetter = function (thisObject, klass, propertyName, value) {
+Kotlin.callSetter = function (thisObject, klass, propertyName, konstue) {
     var propertyDescriptor = Object.getOwnPropertyDescriptor(klass, propertyName);
     if (propertyDescriptor != null && propertyDescriptor.set != null) {
-        propertyDescriptor.set.call(thisObject, value);
+        propertyDescriptor.set.call(thisObject, konstue);
         return;
     }
 
     propertyDescriptor = Object.getOwnPropertyDescriptor(thisObject, propertyName);
-    if (propertyDescriptor != null && "value" in propertyDescriptor) {
-        thisObject[propertyName] = value;
+    if (propertyDescriptor != null && "konstue" in propertyDescriptor) {
+        thisObject[propertyName] = konstue;
         return
     }
 
-    Kotlin.callSetter(thisObject, Object.getPrototypeOf(klass), propertyName, value);
+    Kotlin.callSetter(thisObject, Object.getPrototypeOf(klass), propertyName, konstue);
 };
 
 function isInheritanceFromInterface(ctor, iface) {
@@ -111,19 +111,19 @@ Kotlin.isNumber = function (a) {
     return typeof a == "number" || a instanceof Kotlin.Long;
 };
 
-Kotlin.isChar = function (value) {
-    return value instanceof Kotlin.BoxedChar
+Kotlin.isChar = function (konstue) {
+    return konstue instanceof Kotlin.BoxedChar
 };
 
-Kotlin.isComparable = function (value) {
-    var type = typeof value;
+Kotlin.isComparable = function (konstue) {
+    var type = typeof konstue;
 
     return type === "string" ||
            type === "boolean" ||
-           Kotlin.isNumber(value) ||
-           Kotlin.isType(value, Kotlin.kotlin.Comparable);
+           Kotlin.isNumber(konstue) ||
+           Kotlin.isType(konstue, Kotlin.kotlin.Comparable);
 };
 
-Kotlin.isCharSequence = function (value) {
-    return typeof value === "string" || Kotlin.isType(value, Kotlin.kotlin.CharSequence);
+Kotlin.isCharSequence = function (konstue) {
+    return typeof konstue === "string" || Kotlin.isType(konstue, Kotlin.kotlin.CharSequence);
 };

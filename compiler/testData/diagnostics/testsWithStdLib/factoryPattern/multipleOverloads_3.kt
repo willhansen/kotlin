@@ -26,30 +26,30 @@ public inline fun <T, R> Iterable<T>.myFlatMap(transform: (T) -> Sequence<R>): L
 
 interface Name
 interface DeclarationDescriptor {
-    val nextCandidates: List<DeclarationDescriptor>?
-    val nextCandidatesSeq: Sequence<DeclarationDescriptor>?
-    val name: Name
+    konst nextCandidates: List<DeclarationDescriptor>?
+    konst nextCandidatesSeq: Sequence<DeclarationDescriptor>?
+    konst name: Name
 }
 
 fun test_1(name: Name, toplevelDescriptors: List<DeclarationDescriptor>): List<DeclarationDescriptor> {
-    val candidates = toplevelDescriptors.myFlatMap { container ->
-        val nextCandidates = container.nextCandidates ?: return@myFlatMap emptyList()
+    konst candidates = toplevelDescriptors.myFlatMap { container ->
+        konst nextCandidates = container.nextCandidates ?: return@myFlatMap emptyList()
         nextCandidates
     }
     return candidates
 }
 
 fun test_2(name: Name, toplevelDescriptors: List<DeclarationDescriptor>): List<DeclarationDescriptor> {
-    val candidates = toplevelDescriptors.myFlatMap { container ->
-        val nextCandidates = container.nextCandidatesSeq ?: return@myFlatMap sequenceOf()
+    konst candidates = toplevelDescriptors.myFlatMap { container ->
+        konst nextCandidates = container.nextCandidatesSeq ?: return@myFlatMap sequenceOf()
         nextCandidates
     }
     return candidates
 }
 
 fun test_3(name: Name, toplevelDescriptors: List<DeclarationDescriptor>): List<DeclarationDescriptor> {
-    val candidates = toplevelDescriptors.myFlatMap { container ->
-        val nextCandidates = container.nextCandidatesSeq!!
+    konst candidates = toplevelDescriptors.myFlatMap { container ->
+        konst nextCandidates = container.nextCandidatesSeq!!
         nextCandidates
     }
     return candidates

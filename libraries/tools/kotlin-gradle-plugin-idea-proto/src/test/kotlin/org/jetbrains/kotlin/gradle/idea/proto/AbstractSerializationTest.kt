@@ -12,20 +12,20 @@ import kotlin.test.assertEquals
 
 abstract class AbstractSerializationTest<T : Any> : IdeaKotlinSerializationContext {
 
-    final override val logger = TestIdeaKotlinSerializationLogger()
-    final override val extrasSerializationExtension = TestIdeaExtrasSerializationExtension
+    final override konst logger = TestIdeaKotlinSerializationLogger()
+    final override konst extrasSerializationExtension = TestIdeaExtrasSerializationExtension
 
-    abstract fun serialize(value: T): ByteArray
+    abstract fun serialize(konstue: T): ByteArray
     abstract fun deserialize(data: ByteArray): T
-    open fun normalize(value: T): T = value
+    open fun normalize(konstue: T): T = konstue
 
-    fun testSerialization(value: T) {
-        testSerializeAndDeserializeEquals(value)
+    fun testSerialization(konstue: T) {
+        testSerializeAndDeserializeEquals(konstue)
     }
 
-    private fun testSerializeAndDeserializeEquals(value: T) {
+    private fun testSerializeAndDeserializeEquals(konstue: T) {
         assertEquals(
-            normalize(value), deserialize(serialize(value))
+            normalize(konstue), deserialize(serialize(konstue))
         )
     }
 }

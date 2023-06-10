@@ -8,5 +8,5 @@ class X() {
         class Y() {}
     }
 
-    val y : Y = Y()
+    konst y : Y = Y()
 }

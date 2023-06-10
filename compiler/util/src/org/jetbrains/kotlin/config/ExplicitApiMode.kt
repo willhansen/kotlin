@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.config
 
-enum class ExplicitApiMode(val state: String) {
+enum class ExplicitApiMode(konst state: String) {
     DISABLED("disable"),
     STRICT("strict"),
     WARNING("warning");
 
     companion object {
-        fun fromString(string: String): ExplicitApiMode? = values().find { it.state == string }
+        fun fromString(string: String): ExplicitApiMode? = konstues().find { it.state == string }
 
-        fun availableValues() = values().joinToString(prefix = "{", postfix = "}") { it.state }
+        fun availableValues() = konstues().joinToString(prefix = "{", postfix = "}") { it.state }
     }
 }

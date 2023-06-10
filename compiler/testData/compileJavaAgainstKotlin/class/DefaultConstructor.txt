@@ -2,7 +2,7 @@ package test
 
 public final class A {
     public constructor A(/*0*/ kotlin.Int = ...)
-    public final val a: kotlin.Int
+    public final konst a: kotlin.Int
 }
 
 public/*package*/ open class Simple {

@@ -2,16 +2,16 @@ plugins {
     base
 }
 
-val artifactsVersion: String by project
-val artifactsRepo: String by project
-val kotlin_libs: String by project
+konst artifactsVersion: String by project
+konst artifactsRepo: String by project
+konst kotlin_libs: String by project
 
 repositories {
     maven(url = artifactsRepo)
     mavenCentral()
 }
 
-val modules = listOf(
+konst modules = listOf(
     "kotlin-stdlib",
     "kotlin-stdlib-common",
     "kotlin-stdlib-jdk7",
@@ -27,12 +27,12 @@ val modules = listOf(
 )
 
 
-val extractLibs by tasks.registering(Task::class)
+konst extractLibs by tasks.registering(Task::class)
 
 
 modules.forEach { module ->
 
-    val library = configurations.create("kotlin_lib_$module")
+    konst library = configurations.create("kotlin_lib_$module")
 
     if (module == "kotlin-test-js") {
         library.attributes { attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage::class, "kotlin-runtime")) }
@@ -42,7 +42,7 @@ modules.forEach { module ->
         library(group = "org.jetbrains.kotlin", name = module, version = artifactsVersion)
     }
 
-    val libsTask = tasks.register<Sync>("extract_lib_$module") {
+    konst libsTask = tasks.register<Sync>("extract_lib_$module") {
         dependsOn(library)
 
         from({ library })

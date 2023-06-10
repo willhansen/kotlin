@@ -22,7 +22,7 @@ class OptionalExpectationUsageChecker : ClassifierUsageChecker {
             context.trace.report(Errors.OPTIONAL_DECLARATION_OUTSIDE_OF_ANNOTATION_ENTRY.on(element))
         }
 
-        val ktFile = element.containingFile as KtFile
+        konst ktFile = element.containingFile as KtFile
         // TODO(dsavvinov): unify for compiler/IDE
         // The first part is for the compiler, and the second one is for IDE
         if (ktFile.isCommonSource != true && !targetDescriptor.platform.isCommon()) {

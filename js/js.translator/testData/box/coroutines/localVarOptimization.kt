@@ -17,7 +17,7 @@ suspend fun foo(x: String): String = suspendCoroutine { continuation ->
 fun build(x: suspend () -> Unit) {
     next = {
         x.startCoroutine(object : Continuation<Unit> {
-            override val context = EmptyCoroutineContext
+            override konst context = EmptyCoroutineContext
 
             override fun resumeWith(x: Result<Unit>) {
                 complete = true
@@ -28,9 +28,9 @@ fun build(x: suspend () -> Unit) {
 
 fun box(): String {
     build {
-        val o = foo("O")
+        konst o = foo("O")
         log += "-"
-        val k = foo("K")
+        konst k = foo("K")
         log += ":"
         log += "{$o$k}"
     }

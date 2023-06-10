@@ -7,7 +7,7 @@ open class Outer {
 }
 
 fun box(): String {
-    val b = object : Outer() {
+    konst b = object : Outer() {
         inner class MyClass : A() {
             override fun foo(x: String, y: String?) = super.foo(x, y)
         }

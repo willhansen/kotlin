@@ -1,3 +1,3 @@
 fun x() {
-    val z = java.uti<caret>l.ArrayList<Int>()
+    konst z = java.uti<caret>l.ArrayList<Int>()
 }

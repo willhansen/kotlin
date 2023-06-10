@@ -1,4 +1,4 @@
-const val N = 10
+const konst N = 10
 
 fun sumOdds(): Int {
     var sum = 0
@@ -10,7 +10,7 @@ fun sumOdds(): Int {
 }
 
 fun box(): String {
-    val test = sumOdds()
+    konst test = sumOdds()
     if (test != 25) return "Failed: $test"
     return "OK"
 }

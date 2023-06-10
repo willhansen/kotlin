@@ -16,7 +16,7 @@ FILE: threeReceiversCorrect.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val R|B|.foo: R|C.() -> kotlin/Unit|
+        public final konst R|B|.foo: R|C.() -> kotlin/Unit|
             public get(): R|C.() -> kotlin/Unit| {
                 ^ Null(null)
             }

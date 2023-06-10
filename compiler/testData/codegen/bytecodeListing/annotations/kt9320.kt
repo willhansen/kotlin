@@ -7,6 +7,6 @@ annotation class Ann
 annotation class AnnExpr
 
 fun foo() {
-    val v = @Ann @AnnExpr object: My() {}
-    val w = @Ann @AnnExpr { v: My -> v.hashCode() }
+    konst v = @Ann @AnnExpr object: My() {}
+    konst w = @Ann @AnnExpr { v: My -> v.hashCode() }
 }

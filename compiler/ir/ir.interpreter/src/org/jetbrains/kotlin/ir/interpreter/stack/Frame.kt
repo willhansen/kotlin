@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
 import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 
-internal class Frame(subFrameOwner: IrElement, val irFile: IrFile? = null) {
-    private val innerStack = ArrayDeque<SubFrame>().apply { add(SubFrame(subFrameOwner)) }
+internal class Frame(subFrameOwner: IrElement, konst irFile: IrFile? = null) {
+    private konst innerStack = ArrayDeque<SubFrame>().apply { add(SubFrame(subFrameOwner)) }
     private var currentInstruction: Instruction? = null
 
-    private val currentFrame get() = innerStack.last()
-    val currentSubFrameOwner: IrElement get() = currentFrame.owner
+    private konst currentFrame get() = innerStack.last()
+    konst currentSubFrameOwner: IrElement get() = currentFrame.owner
 
     companion object {
-        const val NOT_DEFINED = "Not defined"
+        const konst NOT_DEFINED = "Not defined"
     }
 
     fun addSubFrame(subFrameOwner: IrElement) {
@@ -32,7 +32,7 @@ internal class Frame(subFrameOwner: IrElement, val irFile: IrFile? = null) {
     }
 
     fun removeSubFrame() {
-        val state = currentFrame.peekState()
+        konst state = currentFrame.peekState()
         removeSubFrameWithoutDataPropagation()
         if (!hasNoSubFrames() && state != null) currentFrame.pushState(state)
     }
@@ -87,7 +87,7 @@ internal class Frame(subFrameOwner: IrElement, val irFile: IrFile? = null) {
 
     private fun getLineNumberForCurrentInstruction(): String {
         irFile ?: return ""
-        val frameOwner = currentInstruction?.element
+        konst frameOwner = currentInstruction?.element
         return when {
             frameOwner is IrExpression || (frameOwner is IrDeclaration && frameOwner.origin == IrDeclarationOrigin.DEFINED) ->
                 ":${irFile.fileEntry.getLineNumber(frameOwner.startOffset) + 1}"
@@ -97,24 +97,24 @@ internal class Frame(subFrameOwner: IrElement, val irFile: IrFile? = null) {
 
     fun getFileAndPositionInfo(): String {
         irFile ?: return NOT_DEFINED
-        val lineNum = getLineNumberForCurrentInstruction()
+        konst lineNum = getLineNumberForCurrentInstruction()
         return "${irFile.name}$lineNum"
     }
 
     override fun toString(): String {
         irFile ?: return NOT_DEFINED
-        val fileNameCapitalized = irFile.name.replace(".kt", "Kt").capitalizeAsciiOnly()
-        val entryPoint = innerStack.firstOrNull { it.owner is IrFunction }?.owner as? IrFunction
-        val lineNum = getLineNumberForCurrentInstruction()
+        konst fileNameCapitalized = irFile.name.replace(".kt", "Kt").capitalizeAsciiOnly()
+        konst entryPoint = innerStack.firstOrNull { it.owner is IrFunction }?.owner as? IrFunction
+        konst lineNum = getLineNumberForCurrentInstruction()
 
         return "at $fileNameCapitalized.${entryPoint?.fqNameWhenAvailable ?: "<clinit>"}(${irFile.name}$lineNum)"
     }
 }
 
-private class SubFrame(val owner: IrElement) {
-    private val instructions = ArrayDeque<Instruction>()
-    private val dataStack = DataStack()
-    private val memory = mutableMapOf<IrSymbol, Variable>()
+private class SubFrame(konst owner: IrElement) {
+    private konst instructions = ArrayDeque<Instruction>()
+    private konst dataStack = DataStack()
+    private konst memory = mutableMapOf<IrSymbol, Variable>()
 
     // Methods to work with instruction
     fun isEmpty() = instructions.isEmpty()
@@ -146,7 +146,7 @@ private class SubFrame(val owner: IrElement) {
 }
 
 private class DataStack {
-    private val stack = ArrayDeque<State>()
+    private konst stack = ArrayDeque<State>()
 
     fun push(state: State) {
         stack.add(state)

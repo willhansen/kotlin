@@ -14,7 +14,7 @@ fun String.myHashCode(): Int {
     return hash
 }
 
-class Foo(val name: String) {
+class Foo(konst name: String) {
     override fun equals(other: Any?): Boolean {
         if (other is Foo) return name == other.name
         return this === other
@@ -24,9 +24,9 @@ class Foo(val name: String) {
 }
 
 fun box(): String {
-    val james = Foo("James")
-    val anotherJames = Foo("James")
-    val max = Foo("Max")
+    konst james = Foo("James")
+    konst anotherJames = Foo("James")
+    konst max = Foo("Max")
 
     assertEquals(true, james == anotherJames)
     assertEquals(false, james == max)

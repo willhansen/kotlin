@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.commonizer.konan.NativeLibrary
 import org.jetbrains.kotlin.commonizer.stdlib
 
 internal class StdlibRepository(
-    private val konanDistribution: KonanDistribution,
-    private val libraryLoader: NativeLibraryLoader,
+    private konst konanDistribution: KonanDistribution,
+    private konst libraryLoader: NativeLibraryLoader,
 ) : Repository {
 
-    private val stdlib by lazy {
+    private konst stdlib by lazy {
         libraryLoader(konanDistribution.stdlib)
     }
 

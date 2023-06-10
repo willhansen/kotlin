@@ -12,8 +12,8 @@ class LateInitNumRef<NN: Number>() : Ref<NN> {
 
     override var x: NN
         get() = xx!!
-        set(value) {
-            xx = value
+        set(konstue) {
+            xx = konstue
         }
 }
 
@@ -24,12 +24,12 @@ fun <V, R : Ref<in V>> update(r: R, v: V): R {
     return r
 }
 
-val r1 = update(LateInitNumRef(), 1)
-val r1a = update(LateNR(), 1)
-val r2 = update(LateInitNumRef(1), 1)
-val r2a = update(LateNR(1), 1)
-val r3 = LateInitNumRef(1)
-val r3a = LateNR(1)
+konst r1 = update(LateInitNumRef(), 1)
+konst r1a = update(LateNR(), 1)
+konst r2 = update(LateInitNumRef(1), 1)
+konst r2a = update(LateNR(1), 1)
+konst r3 = LateInitNumRef(1)
+konst r3a = LateNR(1)
 
 fun test() {
     r1.x = r1.x

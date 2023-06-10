@@ -7,7 +7,7 @@ public final class Class : R|kotlin/Any| {
     public constructor(): R|test/Class|
 
     public abstract interface Trait : R|kotlin/Any| {
-        @PROPERTY:R|test/Anno|() public abstract val property: R|kotlin/Int|
+        @PROPERTY:R|test/Anno|() public abstract konst property: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }

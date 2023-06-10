@@ -5,7 +5,7 @@ import kotlin.reflect.KProperty
 interface Delegate<V> {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): V = null!!
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: V) {}
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: V) {}
 }
 
 fun <V> delegate(): Delegate<V> = null!!
@@ -17,7 +17,7 @@ class A {
         <!VAL_REASSIGNMENT!>x<!> = 10
     }
 
-    val x: Int by delegate()
+    konst x: Int by delegate()
 
     init {
         x = 10

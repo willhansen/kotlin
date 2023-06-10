@@ -9,9 +9,9 @@ package kt606
 
 //KT-606 wrong resolved call
 
-class StandardPipelineFactory(val config : ChannelPipeline.() -> Unit) : ChannelPipelineFactory {
+class StandardPipelineFactory(konst config : ChannelPipeline.() -> Unit) : ChannelPipelineFactory {
     override fun getPipeline() : ChannelPipeline {
-        val pipeline : ChannelPipeline = DefaultChannelPipeline()
+        konst pipeline : ChannelPipeline = DefaultChannelPipeline()
         pipeline.config()
         return pipeline
     }

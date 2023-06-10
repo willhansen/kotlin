@@ -4,7 +4,7 @@
 // FILE: 1.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val x: String)
+konstue class A(konst x: String)
 
 fun accessProperty(y: B): A {
     y.a = A("OK")

@@ -2,10 +2,10 @@
 // IGNORE_BACKEND: JVM
 // WITH_STDLIB
 
-class A<T>(val b: T)
+class A<T>(konst b: T)
 
 fun box(): String {
-    val test = A(1).b::javaClass.get().simpleName
+    konst test = A(1).b::javaClass.get().simpleName
     if (test != "Integer") throw Exception("test: $test")
 
     return "OK"

@@ -1,18 +1,18 @@
-class Value<T>(var value: T = null as T, var text: String? = null)
+class Value<T>(var konstue: T = null as T, var text: String? = null)
 
-val <T> Value<T>.additionalText by DVal(Value<T>::text)
+konst <T> Value<T>.additionalText by DVal(Value<T>::text)
 
-val <T> Value<T>.additionalValue by DVal(Value<T>::value)
+konst <T> Value<T>.additionalValue by DVal(Value<T>::konstue)
 
-class DVal(val kmember: Any) {
+class DVal(konst kmember: Any) {
     operator fun getValue(t: Any?, p: Any) = 42
 }
 
 var recivier : Any? = "fail"
-var value2 : Any? = "fail2"
+var konstue2 : Any? = "fail2"
 
 var <T> T.bar : T
     get() = this
-    set(value) { recivier = this; value2 = value}
+    set(konstue) { recivier = this; konstue2 = konstue}
 
-val barRef = String?::bar
+konst barRef = String?::bar

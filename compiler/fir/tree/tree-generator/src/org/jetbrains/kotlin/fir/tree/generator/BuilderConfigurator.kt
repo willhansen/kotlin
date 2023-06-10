@@ -12,27 +12,27 @@ import org.jetbrains.kotlin.fir.tree.generator.util.traverseParents
 
 object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTreeBuilder) {
     fun configureBuilders() = with(firTreeBuilder) {
-        val declarationBuilder by builder {
+        konst declarationBuilder by builder {
             fields from declaration without "symbol"
         }
 
-        val annotationContainerBuilder by builder {
+        konst annotationContainerBuilder by builder {
             fields from annotationContainer
         }
 
-        val expressionBuilder by builder {
+        konst expressionBuilder by builder {
             fields from expression
         }
 
-        val typeParametersOwnerBuilder by builder {
+        konst typeParametersOwnerBuilder by builder {
             fields from typeParametersOwner
         }
 
-        val typeParameterRefsOwnerBuilder by builder {
+        konst typeParameterRefsOwnerBuilder by builder {
             fields from typeParameterRefsOwner
         }
 
-        val classBuilder by builder {
+        konst classBuilder by builder {
             parents += declarationBuilder
             parents += annotationContainerBuilder
             fields from klass without listOf("symbol", "resolvePhase", "resolveState", "controlFlowGraphReference")
@@ -46,19 +46,19 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             withCopy()
         }
 
-        val qualifiedAccessExpressionBuilder by builder {
+        konst qualifiedAccessExpressionBuilder by builder {
             fields from qualifiedAccessExpression without "calleeReference"
         }
 
-        val callBuilder by builder {
+        konst callBuilder by builder {
             fields from call
         }
 
-        val loopBuilder by builder {
+        konst loopBuilder by builder {
             fields from loop
         }
 
-        val functionBuilder by builder {
+        konst functionBuilder by builder {
             parents += declarationBuilder
             parents += annotationContainerBuilder
             fields from function without listOf(
@@ -71,16 +71,16 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             )
         }
 
-        val loopJumpBuilder by builder {
+        konst loopJumpBuilder by builder {
             fields from loopJump without "typeRef"
         }
 
-        val abstractConstructorBuilder by builder {
+        konst abstractConstructorBuilder by builder {
             parents += functionBuilder
             fields from constructor without listOf("isPrimary")
         }
 
-        val abstractFunctionCallBuilder by builder {
+        konst abstractFunctionCallBuilder by builder {
             parents += qualifiedAccessExpressionBuilder
             parents += callBuilder
             fields from functionCall
@@ -123,7 +123,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         builder(annotationCall) {
             parents += callBuilder
             default("argumentList") {
-                value = "FirEmptyArgumentList"
+                konstue = "FirEmptyArgumentList"
             }
             default("argumentMapping", "FirEmptyAnnotationArgumentMapping")
             default("annotationTypeRef", "FirImplicitTypeRefImplWithoutSource")
@@ -165,7 +165,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             parents += callBuilder
             defaultNoReceivers(notNullExplicitReceiver = true)
             default("argumentList") {
-                value = "FirEmptyArgumentList"
+                konstue = "FirEmptyArgumentList"
             }
             useTypes(emptyArgumentListType)
         }
@@ -191,19 +191,19 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         builder(delegatedConstructorCall, type = "FirDelegatedConstructorCallImpl") {
             parents += callBuilder
             default("argumentList") {
-                value = "FirEmptyArgumentList"
+                konstue = "FirEmptyArgumentList"
             }
             default("dispatchReceiver", "FirNoReceiverExpression")
             useTypes(noReceiverExpressionType)
             useTypes(emptyArgumentListType)
         }
 
-        val configurationForFunctionCallBuilder: LeafBuilderConfigurationContext.() -> Unit = {
+        konst configurationForFunctionCallBuilder: LeafBuilderConfigurationContext.() -> Unit = {
             parents += abstractFunctionCallBuilder
             defaultNoReceivers()
             openBuilder()
             default("argumentList") {
-                value = "FirEmptyArgumentList"
+                konstue = "FirEmptyArgumentList"
             }
             useTypes(emptyArgumentListType)
         }
@@ -211,7 +211,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         builder(functionCall) {
             configurationForFunctionCallBuilder()
             default("origin") {
-                value = "FirFunctionCallOrigin.Regular"
+                konstue = "FirFunctionCallOrigin.Regular"
             }
         }
         builder(integerLiteralOperatorCall, init = configurationForFunctionCallBuilder)
@@ -221,7 +221,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             parents += callBuilder
         }
 
-        val variableBuilder by builder {
+        konst variableBuilder by builder {
             fields from variable without listOf("symbol", "typeParameters", "isVal")
             parents += declarationBuilder
         }
@@ -244,7 +244,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         builder(typeOperatorCall) {
             parents += callBuilder
             default("argumentList") {
-                value = "FirEmptyArgumentList"
+                konstue = "FirEmptyArgumentList"
             }
             useTypes(emptyArgumentListType)
         }
@@ -316,12 +316,12 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             withCopy()
         }
 
-        builder(valueParameter, type = "FirValueParameterImpl") {
+        builder(konstueParameter, type = "FirValueParameterImpl") {
             openBuilder()
             withCopy()
         }
 
-        builder(valueParameter, type = "FirDefaultSetterValueParameter") {
+        builder(konstueParameter, type = "FirDefaultSetterValueParameter") {
             defaultNull("defaultValue", "initializer", "delegate", "receiverParameter", "getter", "setter")
             defaultFalse("isCrossinline", "isNoinline", "isVararg", "isVar")
             defaultTrue("isVal")
@@ -360,7 +360,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             default("symbol", "FirAnonymousInitializerSymbol()")
         }
 
-        val abstractResolvedQualifierBuilder by builder {
+        konst abstractResolvedQualifierBuilder by builder {
             fields from resolvedQualifier
         }
 
@@ -390,7 +390,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
 //            useTypes(whenExpressionType)
 //        }
 
-        val elementsWithDefaultTypeRef = listOf(
+        konst elementsWithDefaultTypeRef = listOf(
             thisReceiverExpression,
             callableReferenceAccess,
             propertyAccessExpression,
@@ -410,7 +410,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             getClassCall
         )
         elementsWithDefaultTypeRef.forEach {
-            val (element, name) = when (it) {
+            konst (element, name) = when (it) {
                 is Pair<*, *> -> it.first as Element to it.second as String
                 is Element -> it to null
                 else -> throw IllegalArgumentException()
@@ -494,7 +494,7 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
         fieldPredicate: ((Field) -> Boolean)? = null,
         init: LeafBuilderConfigurationContext.(field: String) -> Unit
     ) {
-        val builders = FirTreeBuilder.elements.flatMap { it.allImplementations }.mapNotNull { it.builder }
+        konst builders = FirTreeBuilder.elements.flatMap { it.allImplementations }.mapNotNull { it.builder }
         for (builder in builders) {
             if (builderPredicate != null && !builderPredicate(builder)) continue
             if (!builder.allFields.any { it.name == field }) continue

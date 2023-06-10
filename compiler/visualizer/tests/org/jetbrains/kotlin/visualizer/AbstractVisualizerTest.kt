@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.test.services.configuration.CommonEnvironmentConfigu
 import org.jetbrains.kotlin.test.services.configuration.JvmEnvironmentConfigurator
 
 abstract class AbstractVisualizerTest : AbstractKotlinCompilerTest() {
-    abstract val handler: Constructor<FrontendOutputHandler<*>>
-    abstract val frontendKind: FrontendKind<*>
+    abstract konst handler: Constructor<FrontendOutputHandler<*>>
+    abstract konst frontendKind: FrontendKind<*>
 
     override fun TestConfigurationBuilder.configuration() {
         globalDefaults {

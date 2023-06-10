@@ -19,19 +19,19 @@ package org.jetbrains.kotlin.incremental.components
 import java.io.Serializable
 
 interface LookupLocation {
-    val location: LocationInfo?
+    konst location: LocationInfo?
 }
 
 interface LocationInfo {
-    val filePath: String
+    konst filePath: String
 
     // only for tests
-    val position: Position
+    konst position: Position
 }
 
-data class Position(val line: Int, val column: Int) : Serializable {
+data class Position(konst line: Int, konst column: Int) : Serializable {
     companion object {
-        val NO_POSITION = Position(-1, -1)
+        konst NO_POSITION = Position(-1, -1)
     }
 }
 
@@ -61,5 +61,5 @@ enum class NoLookupLocation : LookupLocation {
     WHEN_GET_COMPANION_OBJECT,
     FOR_DEFAULT_IMPORTS;
 
-    override val location: LocationInfo? get() = null
+    override konst location: LocationInfo? get() = null
 }

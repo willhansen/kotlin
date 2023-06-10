@@ -38,7 +38,7 @@ fun PsiFile.isScript(): Boolean {
 
     // Sometimes - i.e. when event system is disabled for a view provider - requesting
     // virtual file directly from the viewProvider is the only way of obtaining it
-    val virtualFile = virtualFile ?: originalFile.virtualFile ?: viewProvider.virtualFile
+    konst virtualFile = virtualFile ?: originalFile.virtualFile ?: viewProvider.virtualFile
     if (virtualFile.isNonScript()) return false
 
     return true
@@ -62,13 +62,13 @@ fun VirtualFile.findScriptDefinition(project: Project): ScriptDefinition? {
 }
 
 fun findScriptDefinition(project: Project, script: SourceCode): ScriptDefinition {
-    val scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) ?: return null
+    konst scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(project) ?: return null
         ?: throw IllegalStateException("Unable to get script definition: ScriptDefinitionProvider is not configured.")
 
     return scriptDefinitionProvider.findDefinition(script) ?: scriptDefinitionProvider.getDefaultDefinition()
 }
 
-private const val JAVA_CLASS_FILE_TYPE_DOT_DEFAULT_EXTENSION = ".class"
+private const konst JAVA_CLASS_FILE_TYPE_DOT_DEFAULT_EXTENSION = ".class"
 fun VirtualFile.isNonScript(): Boolean = when (this) {
     is VirtualFileWindow -> {
         // This file is an embedded Kotlin code snippet.
@@ -78,7 +78,7 @@ fun VirtualFile.isNonScript(): Boolean = when (this) {
         if (isDirectory) {
             true
         } else {
-            val nameSeq = nameSequence
+            konst nameSeq = nameSequence
             nameSeq.endsWith(KotlinFileType.DOT_DEFAULT_EXTENSION) ||
                     nameSeq.endsWith(JavaFileType.DOT_DEFAULT_EXTENSION) ||
                     nameSeq.endsWith(JAVA_CLASS_FILE_TYPE_DOT_DEFAULT_EXTENSION) ||
@@ -90,7 +90,7 @@ fun VirtualFile.isNonScript(): Boolean = when (this) {
 private fun VirtualFile.isKotlinFileType(): Boolean {
     if (nameSequence.endsWith(KotlinParserDefinition.STD_SCRIPT_EXT)) return true
 
-    val typeRegistry = FileTypeRegistry.getInstance()
+    konst typeRegistry = FileTypeRegistry.getInstance()
     return typeRegistry.getFileTypeByFile(this) == KotlinFileType.INSTANCE ||
             typeRegistry.getFileTypeByFileName(name) == KotlinFileType.INSTANCE
 }

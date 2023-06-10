@@ -12,7 +12,7 @@ class A<T : Any?> {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         A.contextReceiverField0
   //   Mangled name computed from Descriptor: A{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: T
+  private /* final field */ konst contextReceiverField0: T
 
 }
 
@@ -30,7 +30,7 @@ class B<P : Any?> {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         B.contextReceiverField0
   //   Mangled name computed from Descriptor: B{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: Collection<P>
+  private /* final field */ konst contextReceiverField0: Collection<P>
 
 }
 

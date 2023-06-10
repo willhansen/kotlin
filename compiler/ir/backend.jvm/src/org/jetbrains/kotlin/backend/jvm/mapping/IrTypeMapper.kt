@@ -38,9 +38,9 @@ import org.jetbrains.kotlin.backend.jvm.ir.isRawType as isRawTypeImpl
 import org.jetbrains.kotlin.ir.types.isKClass as isKClassImpl
 import org.jetbrains.kotlin.ir.util.isSuspendFunction as isSuspendFunctionImpl
 
-open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapperBase(), TypeMappingContext<JvmSignatureWriter> {
-    override val typeSystem: IrTypeSystemContext = context.typeSystem
-    override val typeContext: TypeSystemCommonBackendContextForTypeMapping = IrTypeCheckerContextForTypeMapping(typeSystem, context)
+open class IrTypeMapper(private konst context: JvmBackendContext) : KotlinTypeMapperBase(), TypeMappingContext<JvmSignatureWriter> {
+    override konst typeSystem: IrTypeSystemContext = context.typeSystem
+    override konst typeContext: TypeSystemCommonBackendContextForTypeMapping = IrTypeCheckerContextForTypeMapping(typeSystem, context)
 
     override fun mapClass(classifier: ClassifierDescriptor): Type =
         when (classifier) {
@@ -60,12 +60,12 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
             return StringBuilder(it)
         }
 
-        val shortName = SpecialNames.safeIdentifier(irClass.name).identifier
+        konst shortName = SpecialNames.safeIdentifier(irClass.name).identifier
 
-        when (val parent = irClass.parent) {
+        when (konst parent = irClass.parent) {
             is IrPackageFragment ->
                 return StringBuilder().apply {
-                    val fqName = parent.packageFqName
+                    konst fqName = parent.packageFqName
                     if (!fqName.isRoot) {
                         append(fqName.asString().replace('.', '/')).append("/")
                     }
@@ -101,8 +101,8 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
         classInternalName((typeConstructor as IrClassSymbol).owner)
 
     override fun getScriptInternalName(typeConstructor: TypeConstructorMarker): String {
-        val script = (typeConstructor as IrScriptSymbol).owner
-        val targetClass = script.targetClass ?: error("No target class computed for script: ${script.render()}")
+        konst script = (typeConstructor as IrScriptSymbol).owner
+        konst targetClass = script.targetClass ?: error("No target class computed for script: ${script.render()}")
         return classInternalName(targetClass.owner)
     }
 
@@ -118,11 +118,11 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
     }
 
     fun boxType(irType: IrType): Type {
-        val irClass = irType.classOrNull?.owner
+        konst irClass = irType.classOrNull?.owner
         if (irClass != null && irClass.isSingleFieldValueClass) {
             return mapTypeAsDeclaration(irType)
         }
-        val type = AbstractTypeMapper.mapType(this, irType)
+        konst type = AbstractTypeMapper.mapType(this, irType)
         return AsmUtil.boxPrimitiveType(type) ?: type
     }
 
@@ -145,16 +145,16 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
             return
         }
 
-        val possiblyInnerType = type.buildPossiblyInnerType() ?: error("possiblyInnerType with arguments should not be null")
+        konst possiblyInnerType = type.buildPossiblyInnerType() ?: error("possiblyInnerType with arguments should not be null")
 
-        val innerTypesAsList = possiblyInnerType.segments()
+        konst innerTypesAsList = possiblyInnerType.segments()
 
-        val indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
+        konst indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
         if (indexOfParameterizedType < 0 || innerTypesAsList.size == 1) {
             writeClassBegin(asmType)
             writeGenericArguments(this, possiblyInnerType, mode)
         } else {
-            val outerType = innerTypesAsList[indexOfParameterizedType]
+            konst outerType = innerTypesAsList[indexOfParameterizedType]
 
             writeOuterClassBegin(asmType, mapType(outerType.classifier.defaultType).internalName)
             writeGenericArguments(this, outerType, mode)
@@ -192,9 +192,9 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
         type: PossiblyInnerIrType,
         mode: TypeMappingMode
     ) {
-        val classifier = type.classifier
-        val parameters = classifier.typeParameters.map(IrTypeParameter::symbol)
-        val arguments = type.arguments
+        konst classifier = type.classifier
+        konst parameters = classifier.typeParameters.map(IrTypeParameter::symbol)
+        konst arguments = type.arguments
 
         if (isBigArityFunction(classifier, arguments) || classifier.symbol.isKFunction() || classifier.symbol.isKSuspendFunction()) {
             writeGenericArguments(sw, listOf(arguments.last()), listOf(parameters.last()), mode)
@@ -223,8 +223,8 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
 }
 
 private class IrTypeCheckerContextForTypeMapping(
-    private val baseContext: IrTypeSystemContext,
-    private val backendContext: JvmBackendContext
+    private konst baseContext: IrTypeSystemContext,
+    private konst backendContext: JvmBackendContext
 ) : IrTypeSystemContext by baseContext, TypeSystemCommonBackendContextForTypeMapping {
     override fun TypeConstructorMarker.isTypeParameter(): Boolean {
         return this is IrTypeParameterSymbol

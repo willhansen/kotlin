@@ -6,13 +6,13 @@ class My(var x: String) {
             if (arg != "") x = arg
         }
 
-    val z: String
+    konst z: String
 
     var d: String = ""
         get
         set
 
-    val z1: String
+    konst z1: String
 
     init {
         d = "d"

@@ -1,6 +1,6 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
-val my: String = "O"
-    get() = eval { field } + "K"
+konst my: String = "O"
+    get() = ekonst { field } + "K"
 
 fun box() = my

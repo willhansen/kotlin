@@ -11,21 +11,21 @@ abstract class Element {
     abstract fun render(builder: StringBuilder, indent: String)
 
     override fun toString(): String {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         render(builder, "")
         return builder.toString()
     }
 }
 
-class TextElement(val text: String) : Element() {
+class TextElement(konst text: String) : Element() {
     override fun render(builder: StringBuilder, indent: String) {
         builder.append("$indent$text\n")
     }
 }
 
-abstract class Tag(val name: String) : Element() {
-    val children = ArrayList<Element>()
-    val attributes = HashMap<String, String>()
+abstract class Tag(konst name: String) : Element() {
+    konst children = ArrayList<Element>()
+    konst attributes = HashMap<String, String>()
 
     inline fun <T : Element> initTag(tag: T, init: T.() -> Unit): T {
         tag.init()
@@ -42,7 +42,7 @@ abstract class Tag(val name: String) : Element() {
     }
 
     private fun renderAttributes(): String? {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         for (a in attributes.keys) {
             builder.append(" $a=\"${attributes[a]}\"")
         }
@@ -77,7 +77,7 @@ abstract class BodyTag(name: String) : TagWithText(name) {
     inline fun h1(init: H1.() -> Unit) = initTag(H1(), init)
     inline fun ul(init: UL.() -> Unit) = initTag(UL(), init)
     inline fun a(href: String, init: A.() -> Unit) {
-        val a = initTag(A(), init)
+        konst a = initTag(A(), init)
         a.href = href
     }
 }
@@ -94,19 +94,19 @@ class H1() : BodyTag("h1")
 class A() : BodyTag("a") {
     public var href: String
         get() = attributes["href"]!!
-        set(value) {
-            attributes["href"] = value
+        set(konstue) {
+            attributes["href"] = konstue
         }
 }
 
 inline fun html(init: HTML.() -> Unit): HTML {
-    val html = HTML()
+    konst html = HTML()
     html.init()
     return html
 }
 
 fun htmlNoInline(init: HTML.() -> Unit): HTML {
-    val html = HTML()
+    konst html = HTML()
     html.init()
     return html
 }
@@ -116,10 +116,10 @@ fun htmlNoInline(init: HTML.() -> Unit): HTML {
 import builders.*
 
 fun testAllInline() : String {
-    val args = arrayOf("1", "2", "3")
-    val result =
+    konst args = arrayOf("1", "2", "3")
+    konst result =
             html {
-                val htmlVal = 0
+                konst htmlVal = 0
                 head {
                     title { +"XML encoding with Kotlin" }
                 }
@@ -156,10 +156,10 @@ fun testAllInline() : String {
 }
 
 fun testHtmlNoInline() : String {
-    val args = arrayOf("1", "2", "3")
-    val result =
+    konst args = arrayOf("1", "2", "3")
+    konst result =
             htmlNoInline() {
-                val htmlVal = 0
+                konst htmlVal = 0
                 head {
                     title { +"XML encoding with Kotlin" }
                 }
@@ -196,10 +196,10 @@ fun testHtmlNoInline() : String {
 }
 
 fun testBodyNoInline() : String {
-    val args = arrayOf("1", "2", "3")
-    val result =
+    konst args = arrayOf("1", "2", "3")
+    konst result =
             html {
-                val htmlVal = 0
+                konst htmlVal = 0
                 head {
                     title { +"XML encoding with Kotlin" }
                 }
@@ -236,10 +236,10 @@ fun testBodyNoInline() : String {
 }
 
 fun testBodyHtmlNoInline() : String {
-    val args = arrayOf("1", "2", "3")
-    val result =
+    konst args = arrayOf("1", "2", "3")
+    konst result =
             htmlNoInline {
-                val htmlVal = 0
+                konst htmlVal = 0
                 head {
                     title { +"XML encoding with Kotlin" }
                 }

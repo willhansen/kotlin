@@ -11,8 +11,8 @@ fun f(x: Int, s: String) {
     // CHECK-NOT: _ZN6kotlin2mm14ThreadRegistry22currentThreadDataNode_E
     if (x < 0) throw IllegalStateException()
     if (x > 0) return f(x - 1, s)
-    val b = Wrapper(2)
-    val a = listOf(x, x, Wrapper(1), 2, x)
+    konst b = Wrapper(2)
+    konst a = listOf(x, x, Wrapper(1), 2, x)
     for (i in a) { println("$s i") }
 // CHECK: {{^}$}}
 }

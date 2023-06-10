@@ -24,13 +24,13 @@ FILE: constructorInObject.kt
 
         }
 
-        public final static [ContainingClassKey=B] fun values(): R|kotlin/Array<B>| {
+        public final static [ContainingClassKey=B] fun konstues(): R|kotlin/Array<B>| {
         }
 
-        public final static [ContainingClassKey=B] fun valueOf(value: R|kotlin/String|): R|B| {
+        public final static [ContainingClassKey=B] fun konstueOf(konstue: R|kotlin/String|): R|B| {
         }
 
-        public final static [ContainingClassKey=B] val entries: R|kotlin/enums/EnumEntries<B>|
+        public final static [ContainingClassKey=B] konst entries: R|kotlin/enums/EnumEntries<B>|
             public get(): R|kotlin/enums/EnumEntries<B>|
 
     }
@@ -47,7 +47,7 @@ FILE: constructorInObject.kt
         }
 
     }
-    public? final? val anonObject: <implicit> = object : R|kotlin/Any| {
+    public? final? konst anonObject: <implicit> = object : R|kotlin/Any| {
         public? [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<R|kotlin/Any|>()
         }

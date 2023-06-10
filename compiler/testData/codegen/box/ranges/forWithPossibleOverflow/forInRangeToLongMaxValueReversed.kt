@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-const val M = Long.MAX_VALUE
+const konst M = Long.MAX_VALUE
 
 fun box(): String {
     var count = 0

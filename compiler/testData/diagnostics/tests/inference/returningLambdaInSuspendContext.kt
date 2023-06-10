@@ -11,7 +11,7 @@ fun <T> runBlocking(block: suspend () -> T) = null as T
 public inline fun <T, R> T.run(block: T.() -> R) = null as R
 
 fun main() {
-    val retry = Foo()
+    konst retry = Foo()
 
     runBlocking {
         retry { 1 } // OK only after fix

@@ -1,4 +1,4 @@
 fun usageWithFunctionExpression() {
-    val a = { ":)" }
+    konst a = { ":)" }
     SamInterface(a)
 }

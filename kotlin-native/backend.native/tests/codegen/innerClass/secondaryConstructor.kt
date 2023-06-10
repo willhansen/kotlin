@@ -7,7 +7,7 @@ package codegen.innerClass.secondaryConstructor
 
 import kotlin.test.*
 
-class Outer(val x: Int) {
+class Outer(konst x: Int) {
     inner class Inner() {
         inner class InnerInner() {
 

@@ -19,7 +19,7 @@ fun <T> channelFlow(block: suspend ProducerScope<T>.() -> Unit): Flow<T> = TODO(
 interface ProducerScope<in E>
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 suspend fun ProducerScope<*>.awaitClose(block: () -> Unit = {}) {}

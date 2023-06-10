@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.gradle.plugin.internal
 import org.gradle.api.Project
 import org.gradle.api.provider.ProviderFactory
 
-internal class IdeaSyncDetectorG71(private val providerFactory: ProviderFactory) : IdeaSyncDetector {
-    override val isInIdeaSync = createIdeaPropertiesEvaluator().isInIdeaSync()
+internal class IdeaSyncDetectorG71(private konst providerFactory: ProviderFactory) : IdeaSyncDetector {
+    override konst isInIdeaSync = createIdeaPropertiesEkonstuator().isInIdeaSync()
 
-    override fun createIdeaPropertiesEvaluator() = object : IdeaPropertiesEvaluator() {
+    override fun createIdeaPropertiesEkonstuator() = object : IdeaPropertiesEkonstuator() {
         // we should declare system property read for Gradle < 7.4
         override fun readSystemPropertyValue(key: String) = providerFactory.systemProperty(key).forUseAtConfigurationTime().orNull
     }

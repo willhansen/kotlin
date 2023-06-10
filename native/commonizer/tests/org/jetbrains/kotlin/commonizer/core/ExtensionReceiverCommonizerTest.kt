@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.commonizer.utils.mockExtensionReceiver
 
 class ExtensionReceiverCommonizerTest : AbstractInlineSourcesCommonizationTest() {
 
-    private val commonizer = ExtensionReceiverCommonizer(TypeCommonizer(MOCK_CLASSIFIERS, DefaultCommonizerSettings))
+    private konst commonizer = ExtensionReceiverCommonizer(TypeCommonizer(MOCK_CLASSIFIERS, DefaultCommonizerSettings))
 
     fun `test null receiver`() {
         assertEquals(

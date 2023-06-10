@@ -90,7 +90,7 @@ public abstract class AbstractPseudocodeTest extends KotlinTestWithEnvironmentMa
         }
         finally {
             if ("true".equals(System.getProperty("kotlin.control.flow.test.dump.graphs"))) {
-                CFGraphToDotFilePrinter.dumpDot(file, data.values());
+                CFGraphToDotFilePrinter.dumpDot(file, data.konstues());
             }
         }
     }
@@ -105,7 +105,7 @@ public abstract class AbstractPseudocodeTest extends KotlinTestWithEnvironmentMa
     }
 
     private void processCFData(File file, SetMultimap<KtElement, Pseudocode> data, BindingContext bindingContext) throws IOException {
-        Collection<Pseudocode> pseudocodes = data.values();
+        Collection<Pseudocode> pseudocodes = data.konstues();
 
         StringBuilder instructionDump = new StringBuilder();
         int i = 0;
@@ -212,7 +212,7 @@ public abstract class AbstractPseudocodeTest extends KotlinTestWithEnvironmentMa
 
             StringBuilder line = new StringBuilder();
 
-            // Only print NEXT and PREV if the values are non-trivial
+            // Only print NEXT and PREV if the konstues are non-trivial
             Instruction next = i == instructions.size() - 1 ? null : instructions.get(i + 1);
             Instruction prev = i == 0 ? null : instructions.get(i - 1);
 

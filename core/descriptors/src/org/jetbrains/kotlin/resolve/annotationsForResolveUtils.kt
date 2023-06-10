@@ -36,7 +36,7 @@ fun CallableDescriptor.hasBuilderInferenceAnnotation(): Boolean =
 
 fun getExactInAnnotations(): Annotations = AnnotationsWithOnly(EXACT_ANNOTATION_FQ_NAME)
 
-private class AnnotationsWithOnly(val presentAnnotation: FqName): Annotations {
+private class AnnotationsWithOnly(konst presentAnnotation: FqName): Annotations {
     override fun iterator(): Iterator<AnnotationDescriptor> = emptyList<AnnotationDescriptor>().iterator()
 
     override fun isEmpty(): Boolean = false

@@ -1,5 +1,5 @@
-@Anno(color = Color.InvalidFieldName)
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@Anno(color = Color.InkonstidFieldName)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Anno {
 

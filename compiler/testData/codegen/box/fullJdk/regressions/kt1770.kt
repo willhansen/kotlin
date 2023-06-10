@@ -11,6 +11,6 @@ class MyElement(e: Element): Element by e {
 }
 
 fun box() : String {
-    val touch = MyElement::class.java
+    konst touch = MyElement::class.java
     return "OK"
 }

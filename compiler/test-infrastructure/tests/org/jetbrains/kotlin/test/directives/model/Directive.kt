@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.test.util.joinToArrayString
 // --------------------------- Directive declaration ---------------------------
 
 enum class DirectiveApplicability(
-    val forGlobal: Boolean = false,
-    val forModule: Boolean = false,
-    val forFile: Boolean = false
+    konst forGlobal: Boolean = false,
+    konst forModule: Boolean = false,
+    konst forFile: Boolean = false
 ) {
     Any(forGlobal = true, forModule = true, forFile = true),
     Global(forGlobal = true, forModule = true),
@@ -20,7 +20,7 @@ enum class DirectiveApplicability(
     File(forFile = true)
 }
 
-sealed class Directive(val name: String, val description: String, val applicability: DirectiveApplicability) {
+sealed class Directive(konst name: String, konst description: String, konst applicability: DirectiveApplicability) {
     override fun toString(): String {
         return name
     }
@@ -36,21 +36,21 @@ class StringDirective(
     name: String,
     description: String,
     applicability: DirectiveApplicability,
-    val multiLine: Boolean
+    konst multiLine: Boolean
 ) : Directive(name, description, applicability)
 
 class ValueDirective<T : Any>(
     name: String,
     description: String,
     applicability: DirectiveApplicability,
-    val parser: (String) -> T?
+    konst parser: (String) -> T?
 ) : Directive(name, description, applicability)
 
 // --------------------------- Registered directive ---------------------------
 
 abstract class RegisteredDirectives : Iterable<Directive> {
     companion object {
-        val Empty = RegisteredDirectivesImpl(emptyList(), emptyMap(), emptyMap())
+        konst Empty = RegisteredDirectivesImpl(emptyList(), emptyMap(), emptyMap())
     }
 
     abstract operator fun contains(directive: Directive): Boolean
@@ -61,15 +61,15 @@ abstract class RegisteredDirectives : Iterable<Directive> {
 }
 
 class RegisteredDirectivesImpl(
-    private val simpleDirectives: List<SimpleDirective>,
-    private val stringDirectives: Map<StringDirective, List<String>>,
-    private val valueDirectives: Map<ValueDirective<*>, List<Any>>
+    private konst simpleDirectives: List<SimpleDirective>,
+    private konst stringDirectives: Map<StringDirective, List<String>>,
+    private konst konstueDirectives: Map<ValueDirective<*>, List<Any>>
 ) : RegisteredDirectives() {
     override operator fun contains(directive: Directive): Boolean {
         return when (directive) {
             is SimpleDirective -> directive in simpleDirectives
             is StringDirective -> directive in stringDirectives
-            is ValueDirective<*> -> directive in valueDirectives
+            is ValueDirective<*> -> directive in konstueDirectives
         }
     }
 
@@ -79,18 +79,18 @@ class RegisteredDirectivesImpl(
 
     override fun <T : Any> get(directive: ValueDirective<T>): List<T> {
         @Suppress("UNCHECKED_CAST")
-        return valueDirectives[directive] as List<T>? ?: emptyList()
+        return konstueDirectives[directive] as List<T>? ?: emptyList()
     }
 
     override fun isEmpty(): Boolean {
-        return simpleDirectives.isEmpty() && stringDirectives.isEmpty() && valueDirectives.isEmpty()
+        return simpleDirectives.isEmpty() && stringDirectives.isEmpty() && konstueDirectives.isEmpty()
     }
 
     override fun toString(): String {
         return buildString {
             simpleDirectives.forEach { appendLine("  $it") }
             stringDirectives.forEach { (d, v) -> appendLine("  $d: ${v.joinToArrayString()}") }
-            valueDirectives.forEach { (d, v) -> appendLine("  $d: ${v.joinToArrayString()}") }
+            konstueDirectives.forEach { (d, v) -> appendLine("  $d: ${v.joinToArrayString()}") }
         }
     }
 
@@ -99,17 +99,17 @@ class RegisteredDirectivesImpl(
         return buildList {
             addAll(simpleDirectives)
             addAll(stringDirectives.keys)
-            addAll(valueDirectives.keys)
+            addAll(konstueDirectives.keys)
         }.iterator()
     }
 }
 
 class ComposedRegisteredDirectives(
-    private val containers: List<RegisteredDirectives>
+    private konst containers: List<RegisteredDirectives>
 ) : RegisteredDirectives() {
     companion object {
         operator fun invoke(vararg containers: RegisteredDirectives): RegisteredDirectives {
-            val notEmptyContainers = containers.filterNot { it.isEmpty() }
+            konst notEmptyContainers = containers.filterNot { it.isEmpty() }
             return when (notEmptyContainers.size) {
                 0 -> Empty
                 1 -> notEmptyContainers.single()
@@ -142,35 +142,35 @@ class ComposedRegisteredDirectives(
 // --------------------------- Utils ---------------------------
 
 fun RegisteredDirectives.singleValue(directive: StringDirective): String {
-    return singleOrZeroValue(directive) ?: error("No values passed to $directive")
+    return singleOrZeroValue(directive) ?: error("No konstues passed to $directive")
 }
 
 fun RegisteredDirectives.singleOrZeroValue(directive: StringDirective): String? {
-    val values = this[directive]
-    return when (values.size) {
+    konst konstues = this[directive]
+    return when (konstues.size) {
         0 -> null
-        1 -> values.single()
-        else -> error("Too many values passed to $directive")
+        1 -> konstues.single()
+        else -> error("Too many konstues passed to $directive")
     }
 }
 
 fun RegisteredDirectives.notEmptyValues(directive: StringDirective): List<String> = this[directive].ifEmpty {
-    error("No values passed to $directive")
+    error("No konstues passed to $directive")
 }
 
 fun <T : Any> RegisteredDirectives.singleValue(directive: ValueDirective<T>): T {
-    return singleOrZeroValue(directive) ?: error("No values passed to $directive")
+    return singleOrZeroValue(directive) ?: error("No konstues passed to $directive")
 }
 
 fun <T : Any> RegisteredDirectives.singleOrZeroValue(directive: ValueDirective<T>): T? {
-    val values = this[directive]
-    return when (values.size) {
+    konst konstues = this[directive]
+    return when (konstues.size) {
         0 -> null
-        1 -> values.single()
-        else -> error("Too many values passed to $directive: ${values.joinToArrayString()}")
+        1 -> konstues.single()
+        else -> error("Too many konstues passed to $directive: ${konstues.joinToArrayString()}")
     }
 }
 
 fun <T : Any> RegisteredDirectives.notEmptyValues(directive: ValueDirective<T>): List<T> = this[directive].ifEmpty {
-    error("No values passed to $directive")
+    error("No konstues passed to $directive")
 }

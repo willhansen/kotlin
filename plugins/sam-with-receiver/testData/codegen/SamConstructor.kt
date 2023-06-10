@@ -12,6 +12,6 @@ fun takeSam(argument: String, sam: Sam): String {
 }
 
 fun box(): String {
-    val sam = Sam { this }
+    konst sam = Sam { this }
     return takeSam("OK", sam)
 }

@@ -9,7 +9,7 @@ public fun <T> query(t: T, args: Map<String, Any>): List<T> {
 }
 
 fun test(pair: Pair<String, Int>) {
-    val id = "Hello" // variable is marked as unused
+    konst id = "Hello" // variable is marked as unused
 
     println("Some" + query(0, mapOf(id to 1)))
 
@@ -18,7 +18,7 @@ fun test(pair: Pair<String, Int>) {
 
 
 //from standard library
-fun <K, V> mapOf(vararg values: Pair<K, V>): Map<K, V> { throw Exception() }
+fun <K, V> mapOf(vararg konstues: Pair<K, V>): Map<K, V> { throw Exception() }
 
 infix fun <A,B> A.to(that: B): Pair<A, B> { throw Exception() }
 

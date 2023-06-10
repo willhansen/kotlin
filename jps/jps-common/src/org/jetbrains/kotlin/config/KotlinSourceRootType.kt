@@ -23,4 +23,4 @@ object TestSourceKotlinRootType : KotlinSourceRootType() {
     override fun isForTests() = true
 }
 
-val ALL_KOTLIN_SOURCE_ROOT_TYPES = setOf(SourceKotlinRootType, TestSourceKotlinRootType)
+konst ALL_KOTLIN_SOURCE_ROOT_TYPES = setOf(SourceKotlinRootType, TestSourceKotlinRootType)

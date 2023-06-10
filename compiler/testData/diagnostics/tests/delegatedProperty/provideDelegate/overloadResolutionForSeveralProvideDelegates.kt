@@ -15,5 +15,5 @@ operator fun Bar.getValue(nothing: Any?, property: KProperty<*>): Any = TODO()
 operator fun Baz.getValue(nothing: Any?, property: KProperty<*>): Any = TODO()
 
 fun test() {
-    val bar by Baz
+    konst bar by Baz
 }

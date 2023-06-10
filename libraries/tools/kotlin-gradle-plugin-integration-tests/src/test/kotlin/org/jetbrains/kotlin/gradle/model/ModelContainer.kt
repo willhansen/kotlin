@@ -12,7 +12,7 @@ import java.io.Serializable
  */
 class ModelContainer<T> : Serializable {
     // Key is the project path
-    private val modelContainer = HashMap<String, T>()
+    private konst modelContainer = HashMap<String, T>()
 
     fun addModel(path: String, model: T) {
         modelContainer[path] = model

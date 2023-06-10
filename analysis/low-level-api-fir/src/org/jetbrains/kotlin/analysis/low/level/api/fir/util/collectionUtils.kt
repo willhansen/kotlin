@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.analysis.low.level.api.fir.util
 
 @Suppress("NOTHING_TO_INLINE")
-internal inline fun <K, V> MutableMap<K, MutableList<V>>.addValueFor(element: K, value: V) {
-    getOrPut(element) { mutableListOf() } += value
+internal inline fun <K, V> MutableMap<K, MutableList<V>>.addValueFor(element: K, konstue: V) {
+    getOrPut(element) { mutableListOf() } += konstue
 }
 
 internal fun <T> MutableList<T>.replaceFirst(from: T, to: T) {
-    val index = indexOf(from)
+    konst index = indexOf(from)
     if (index < 0) {
         error("$from was not found in $this")
     }

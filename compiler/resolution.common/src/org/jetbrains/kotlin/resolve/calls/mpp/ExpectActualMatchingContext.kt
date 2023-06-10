@@ -18,46 +18,46 @@ import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
 import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContext
 
 interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemInferenceExtensionContext {
-    val shouldCheckReturnTypesOfCallables: Boolean
+    konst shouldCheckReturnTypesOfCallables: Boolean
 
-    val RegularClassSymbolMarker.classId: ClassId
-    val TypeAliasSymbolMarker.classId: ClassId
-    val CallableSymbolMarker.callableId: CallableId
-    val TypeParameterSymbolMarker.parameterName: Name
-    val ValueParameterSymbolMarker.parameterName: Name
+    konst RegularClassSymbolMarker.classId: ClassId
+    konst TypeAliasSymbolMarker.classId: ClassId
+    konst CallableSymbolMarker.callableId: CallableId
+    konst TypeParameterSymbolMarker.parameterName: Name
+    konst ValueParameterSymbolMarker.parameterName: Name
 
     fun TypeAliasSymbolMarker.expandToRegularClass(): RegularClassSymbolMarker?
 
-    val RegularClassSymbolMarker.classKind: ClassKind
+    konst RegularClassSymbolMarker.classKind: ClassKind
 
-    val RegularClassSymbolMarker.isCompanion: Boolean
-    val RegularClassSymbolMarker.isInner: Boolean
-    val RegularClassSymbolMarker.isInline: Boolean
-    val RegularClassSymbolMarker.isValue: Boolean
-    val RegularClassSymbolMarker.isFun: Boolean
-    val ClassLikeSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
+    konst RegularClassSymbolMarker.isCompanion: Boolean
+    konst RegularClassSymbolMarker.isInner: Boolean
+    konst RegularClassSymbolMarker.isInline: Boolean
+    konst RegularClassSymbolMarker.isValue: Boolean
+    konst RegularClassSymbolMarker.isFun: Boolean
+    konst ClassLikeSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
 
-    val ClassLikeSymbolMarker.modality: Modality?
-    val ClassLikeSymbolMarker.visibility: Visibility
+    konst ClassLikeSymbolMarker.modality: Modality?
+    konst ClassLikeSymbolMarker.visibility: Visibility
 
-    val CallableSymbolMarker.modality: Modality?
-    val CallableSymbolMarker.visibility: Visibility
+    konst CallableSymbolMarker.modality: Modality?
+    konst CallableSymbolMarker.visibility: Visibility
 
-    val RegularClassSymbolMarker.superTypes: List<KotlinTypeMarker>
+    konst RegularClassSymbolMarker.superTypes: List<KotlinTypeMarker>
 
-    val CallableSymbolMarker.isExpect: Boolean
-    val CallableSymbolMarker.isInline: Boolean
-    val CallableSymbolMarker.isSuspend: Boolean
-    val CallableSymbolMarker.isExternal: Boolean
-    val CallableSymbolMarker.isInfix: Boolean
-    val CallableSymbolMarker.isOperator: Boolean
-    val CallableSymbolMarker.isTailrec: Boolean
+    konst CallableSymbolMarker.isExpect: Boolean
+    konst CallableSymbolMarker.isInline: Boolean
+    konst CallableSymbolMarker.isSuspend: Boolean
+    konst CallableSymbolMarker.isExternal: Boolean
+    konst CallableSymbolMarker.isInfix: Boolean
+    konst CallableSymbolMarker.isOperator: Boolean
+    konst CallableSymbolMarker.isTailrec: Boolean
 
-    val PropertySymbolMarker.isVar: Boolean
-    val PropertySymbolMarker.isLateinit: Boolean
-    val PropertySymbolMarker.isConst: Boolean
+    konst PropertySymbolMarker.isVar: Boolean
+    konst PropertySymbolMarker.isLateinit: Boolean
+    konst PropertySymbolMarker.isConst: Boolean
 
-    val PropertySymbolMarker.setter: FunctionSymbolMarker?
+    konst PropertySymbolMarker.setter: FunctionSymbolMarker?
 
     fun createExpectActualTypeParameterSubstitutor(
         expectTypeParameters: List<TypeParameterSymbolMarker>,
@@ -70,25 +70,25 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemI
 
     fun RegularClassSymbolMarker.collectEnumEntryNames(): List<Name>
 
-    val CallableSymbolMarker.dispatchReceiverType: KotlinTypeMarker?
-    val CallableSymbolMarker.extensionReceiverType: KotlinTypeMarker?
-    val CallableSymbolMarker.returnType: KotlinTypeMarker
-    val CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
-    val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
+    konst CallableSymbolMarker.dispatchReceiverType: KotlinTypeMarker?
+    konst CallableSymbolMarker.extensionReceiverType: KotlinTypeMarker?
+    konst CallableSymbolMarker.returnType: KotlinTypeMarker
+    konst CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
+    konst FunctionSymbolMarker.konstueParameters: List<ValueParameterSymbolMarker>
 
-    val CallableSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
-        get() = (this as? FunctionSymbolMarker)?.valueParameters ?: emptyList()
+    konst CallableSymbolMarker.konstueParameters: List<ValueParameterSymbolMarker>
+        get() = (this as? FunctionSymbolMarker)?.konstueParameters ?: emptyList()
 
-    val ValueParameterSymbolMarker.isVararg: Boolean
-    val ValueParameterSymbolMarker.isNoinline: Boolean
-    val ValueParameterSymbolMarker.isCrossinline: Boolean
-    val ValueParameterSymbolMarker.hasDefaultValue: Boolean
+    konst ValueParameterSymbolMarker.isVararg: Boolean
+    konst ValueParameterSymbolMarker.isNoinline: Boolean
+    konst ValueParameterSymbolMarker.isCrossinline: Boolean
+    konst ValueParameterSymbolMarker.hasDefaultValue: Boolean
 
     fun CallableSymbolMarker.isAnnotationConstructor(): Boolean
 
-    val TypeParameterSymbolMarker.bounds: List<KotlinTypeMarker>
-    val TypeParameterSymbolMarker.variance: Variance
-    val TypeParameterSymbolMarker.isReified: Boolean
+    konst TypeParameterSymbolMarker.bounds: List<KotlinTypeMarker>
+    konst TypeParameterSymbolMarker.variance: Variance
+    konst TypeParameterSymbolMarker.isReified: Boolean
 
     fun areCompatibleExpectActualTypes(
         expectType: KotlinTypeMarker?,
@@ -105,5 +105,5 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemI
      */
     fun CallableSymbolMarker.shouldSkipMatching(containingExpectClass: RegularClassSymbolMarker): Boolean
 
-    val CallableSymbolMarker.hasStableParameterNames: Boolean
+    konst CallableSymbolMarker.hasStableParameterNames: Boolean
 }

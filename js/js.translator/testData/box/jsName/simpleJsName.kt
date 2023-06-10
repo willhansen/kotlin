@@ -6,9 +6,9 @@ object A {
 
     @JsName("js_g") fun g(x: Int) = "g($x)"
 
-    @JsName("js_p") val p = "p"
+    @JsName("js_p") konst p = "p"
 
-    @JsName("js_q") val q: String get() = "q"
+    @JsName("js_q") konst q: String get() = "q"
 }
 
 fun test(): dynamic {
@@ -17,7 +17,7 @@ fun test(): dynamic {
 }
 
 fun box(): String {
-    val result = test()
+    konst result = test()
     assertEquals("f(23);g(42);p;q", result);
     return "OK"
 }

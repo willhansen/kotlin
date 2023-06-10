@@ -12,7 +12,7 @@ import kotlin.annotation.AnnotationTarget.*
  */
 @Target(CLASS, FUNCTION, PROPERTY, CONSTRUCTOR, PROPERTY_GETTER, PROPERTY_SETTER)
 @OptionalExpectation
-public expect annotation class JsName(val name: String)
+public expect annotation class JsName(konst name: String)
 
 /**
  * Marks experimental JS export annotations.

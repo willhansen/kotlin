@@ -23,7 +23,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
  */
 @ExportTypeInfo("theThrowableTypeInfo")
 @OptIn(FreezingIsDeprecated::class)
-public open class Throwable(open val message: String?, open val cause: Throwable?) {
+public open class Throwable(open konst message: String?, open konst cause: Throwable?) {
 
     constructor(message: String?) : this(message, null)
 
@@ -32,9 +32,9 @@ public open class Throwable(open val message: String?, open val cause: Throwable
     constructor() : this(null, null)
 
     @get:ExportForCppRuntime("Kotlin_Throwable_getStackTrace")
-    private val stackTrace: NativePtrArray = getCurrentStackTrace()
+    private konst stackTrace: NativePtrArray = getCurrentStackTrace()
 
-    private val stackTraceStrings: Array<String> by lazy {
+    private konst stackTraceStrings: Array<String> by lazy {
         getStackTraceStrings(stackTrace).freeze()
     }
 
@@ -56,10 +56,10 @@ public open class Throwable(open val message: String?, open val cause: Throwable
 
     internal fun dumpStackTrace(): String = ExceptionTraceBuilder(this).build()
 
-    private class ExceptionTraceBuilder(private val top: Throwable) {
-        private val target = StringBuilder()
+    private class ExceptionTraceBuilder(private konst top: Throwable) {
+        private konst target = StringBuilder()
         private var printOut = false
-        private val visited = mutableSetOf<Throwable>()
+        private konst visited = mutableSetOf<Throwable>()
 
         fun build(): String {
             top.dumpFullTrace("", "")
@@ -97,17 +97,17 @@ public open class Throwable(open val message: String?, open val cause: Throwable
             }
             target.append(indent).append(qualifier).append(this).endln()
             // leave 1 common frame to ease matching with the top exception stack
-            val commonFrames = (commonStackFrames() - 1).coerceAtLeast(0)
+            konst commonFrames = (commonStackFrames() - 1).coerceAtLeast(0)
             for (frameIndex in 0 until stackTraceStrings.size - commonFrames) {
-                val element = stackTraceStrings[frameIndex]
+                konst element = stackTraceStrings[frameIndex]
                 target.append(indent).append("    at ").append(element).endln()
             }
             if (commonFrames > 0) {
                 target.append(indent).append("    ... and ").append(commonFrames).append(" more common stack frames skipped").endln()
             }
-            val suppressed = suppressedExceptionsList
+            konst suppressed = suppressedExceptionsList
             if (!suppressed.isNullOrEmpty()) {
-                val suppressedIndent = indent + "    "
+                konst suppressedIndent = indent + "    "
                 for (s in suppressed) {
                     s.dumpFullTrace(suppressedIndent, "Suppressed: ")
                 }
@@ -117,11 +117,11 @@ public open class Throwable(open val message: String?, open val cause: Throwable
 
         private fun Throwable.commonStackFrames(): Int {
             if (top === this) return 0
-            val topStack = top.stackTrace
-            val topSize = topStack.size
-            val thisStack = this.stackTrace
-            val thisSize = thisStack.size
-            val maxSize = minOf(topSize, thisSize)
+            konst topStack = top.stackTrace
+            konst topSize = topStack.size
+            konst thisStack = this.stackTrace
+            konst thisSize = thisStack.size
+            konst maxSize = minOf(topSize, thisSize)
             var frame = 0
             while (frame < maxSize) {
                 if (thisStack[thisSize - 1 - frame] != topStack[topSize - 1 - frame]) break
@@ -138,8 +138,8 @@ public open class Throwable(open val message: String?, open val cause: Throwable
      * followed by the exception message if it is not null.
      */
     public override fun toString(): String {
-        val kClass = this::class
-        val s = kClass.qualifiedName ?: kClass.simpleName ?: "Throwable"
+        konst kClass = this::class
+        konst s = kClass.qualifiedName ?: kClass.simpleName ?: "Throwable"
         return if (message != null) s + ": " + message.toString() else s
     }
 
@@ -182,7 +182,7 @@ public actual inline fun Throwable.printStackTrace(): Unit = printStackTrace()
 @OptIn(FreezingIsDeprecated::class)
 public actual fun Throwable.addSuppressed(exception: Throwable) {
     if (this !== exception && !this.isFrozen) {
-        val suppressed = suppressedExceptionsList
+        konst suppressed = suppressedExceptionsList
         when {
             suppressed == null -> suppressedExceptionsList = mutableListOf<Throwable>(exception)
             suppressed.isFrozen -> suppressedExceptionsList = suppressed.toMutableList().apply { add(exception) }
@@ -195,6 +195,6 @@ public actual fun Throwable.addSuppressed(exception: Throwable) {
  * Returns a list of all exceptions that were suppressed in order to deliver this exception.
  */
 @SinceKotlin("1.4")
-public actual val Throwable.suppressedExceptions: List<Throwable> get() {
+public actual konst Throwable.suppressedExceptions: List<Throwable> get() {
     return this.suppressedExceptionsList ?: emptyList()
 }

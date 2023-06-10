@@ -30,14 +30,14 @@ class ContractSerializer {
         proto: ProtoBuf.Function.Builder,
         parentSerializer: DescriptorSerializer
     ) {
-        val contractDescription = functionDescriptor.getUserData(ContractProviderKey)?.getContractDescription()
+        konst contractDescription = functionDescriptor.getUserData(ContractProviderKey)?.getContractDescription()
         if (contractDescription != null) {
-            val worker = ContractSerializerWorker(parentSerializer)
+            konst worker = ContractSerializerWorker(parentSerializer)
             proto.setContract(worker.contractProto(contractDescription))
         }
     }
 
-    private class ContractSerializerWorker(private val parentSerializer: DescriptorSerializer) {
+    private class ContractSerializerWorker(private konst parentSerializer: DescriptorSerializer) {
         fun contractProto(contractDescription: ContractDescription): ProtoBuf.Contract.Builder {
             return ProtoBuf.Contract.newBuilder().apply {
                 contractDescription.effects.forEach { addEffect(effectProto(it, contractDescription)) }
@@ -63,13 +63,13 @@ class ContractSerializer {
 
                 is ReturnsEffectDeclaration -> {
                     when {
-                        effectDeclaration.value == ConstantReference.NOT_NULL ->
+                        effectDeclaration.konstue == ConstantReference.NOT_NULL ->
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_NOT_NULL
-                        effectDeclaration.value == ConstantReference.WILDCARD ->
+                        effectDeclaration.konstue == ConstantReference.WILDCARD ->
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_CONSTANT
                         else -> {
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_CONSTANT
-                            builder.addEffectConstructorArgument(contractExpressionProto(effectDeclaration.value, contractDescription))
+                            builder.addEffectConstructorArgument(contractExpressionProto(effectDeclaration.konstue, contractDescription))
                         }
                     }
                 }
@@ -77,7 +77,7 @@ class ContractSerializer {
                 is CallsEffectDeclaration -> {
                     builder.effectType = ProtoBuf.Effect.EffectType.CALLS
                     builder.addEffectConstructorArgument(contractExpressionProto(effectDeclaration.variableReference, contractDescription))
-                    val invocationKindProtobufEnum = invocationKindProtobufEnum(effectDeclaration.kind)
+                    konst invocationKindProtobufEnum = invocationKindProtobufEnum(effectDeclaration.kind)
                     if (invocationKindProtobufEnum != null) {
                         builder.kind = invocationKindProtobufEnum
                     }
@@ -93,7 +93,7 @@ class ContractSerializer {
         ): ProtoBuf.Expression.Builder {
             return contractDescriptionElement.accept(object : ContractDescriptionVisitor<ProtoBuf.Expression.Builder, Unit> {
                 override fun visitLogicalOr(logicalOr: LogicalOr, data: Unit): ProtoBuf.Expression.Builder {
-                    val leftBuilder = logicalOr.left.accept(this, data)
+                    konst leftBuilder = logicalOr.left.accept(this, data)
 
                     return if (leftBuilder.andArgumentCount != 0) {
                         // can't flatten and re-use left builder
@@ -108,7 +108,7 @@ class ContractSerializer {
                 }
 
                 override fun visitLogicalAnd(logicalAnd: LogicalAnd, data: Unit): ProtoBuf.Expression.Builder {
-                    val leftBuilder = logicalAnd.left.accept(this, data)
+                    konst leftBuilder = logicalAnd.left.accept(this, data)
 
                     return if (leftBuilder.orArgumentCount != 0) {
                         // leftBuilder is already a sequence of Or-operators, so we can't re-use it
@@ -129,7 +129,7 @@ class ContractSerializer {
 
                 override fun visitIsInstancePredicate(isInstancePredicate: IsInstancePredicate, data: Unit): ProtoBuf.Expression.Builder {
                     // write variable
-                    val builder = visitVariableReference(isInstancePredicate.arg, data)
+                    konst builder = visitVariableReference(isInstancePredicate.arg, data)
 
                     // write rhs type
                     builder.isInstanceTypeId = parentSerializer.typeId(isInstancePredicate.type)
@@ -142,7 +142,7 @@ class ContractSerializer {
 
                 override fun visitIsNullPredicate(isNullPredicate: IsNullPredicate, data: Unit): ProtoBuf.Expression.Builder {
                     // get builder with variable embedded into it
-                    val builder = visitVariableReference(isNullPredicate.arg, data)
+                    konst builder = visitVariableReference(isNullPredicate.arg, data)
 
                     // set flags
                     builder.writeFlags(Flags.getContractExpressionFlags(isNullPredicate.isNegated, true))
@@ -151,10 +151,10 @@ class ContractSerializer {
                 }
 
                 override fun visitConstantDescriptor(constantReference: ConstantReference, data: Unit): ProtoBuf.Expression.Builder {
-                    val builder = ProtoBuf.Expression.newBuilder()
+                    konst builder = ProtoBuf.Expression.newBuilder()
 
-                    // write constant value
-                    val constantValueProtobufEnum = constantValueProtobufEnum(constantReference)
+                    // write constant konstue
+                    konst constantValueProtobufEnum = constantValueProtobufEnum(constantReference)
                     if (constantValueProtobufEnum != null) {
                         builder.constantValue = constantValueProtobufEnum
                     }
@@ -163,19 +163,19 @@ class ContractSerializer {
                 }
 
                 override fun visitVariableReference(variableReference: VariableReference, data: Unit): ProtoBuf.Expression.Builder {
-                    val builder = ProtoBuf.Expression.newBuilder()
+                    konst builder = ProtoBuf.Expression.newBuilder()
 
-                    val descriptor = variableReference.descriptor
-                    val indexOfParameter = when (descriptor) {
+                    konst descriptor = variableReference.descriptor
+                    konst indexOfParameter = when (descriptor) {
                         is ReceiverParameterDescriptor -> 0
 
                         is ValueParameterDescriptor ->
-                            contractDescription.ownerFunction.valueParameters.indexOf(descriptor).takeIf { it != -1 }?.inc()
+                            contractDescription.ownerFunction.konstueParameters.indexOf(descriptor).takeIf { it != -1 }?.inc()
 
                         else -> null
                     }
 
-                    builder.valueParameterReference = indexOfParameter ?: return builder
+                    builder.konstueParameterReference = indexOfParameter ?: return builder
 
                     return builder
                 }

@@ -36,7 +36,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(X)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

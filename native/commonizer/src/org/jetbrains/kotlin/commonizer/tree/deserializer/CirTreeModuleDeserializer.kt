@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.commonizer.utils.foldToMap
 import org.jetbrains.kotlin.library.SerializedMetadata
 
 internal class CirTreeModuleDeserializer(
-    private val packageDeserializer: CirTreePackageDeserializer
+    private konst packageDeserializer: CirTreePackageDeserializer
 ) {
     operator fun invoke(metadata: SerializedMetadata, typeResolver: CirTypeResolver): CirTreeModule {
-        val module = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(metadata))
+        konst module = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(metadata))
 
-        val fragmentsByPackage: Map<CirPackageName, Collection<KmModuleFragment>> = module.fragments.foldToMap { fragment ->
+        konst fragmentsByPackage: Map<CirPackageName, Collection<KmModuleFragment>> = module.fragments.foldToMap { fragment ->
             fragment.fqName?.let(CirPackageName.Companion::create)
                 ?: error("A fragment without FQ name in module ${module.name}: $fragment")
         }
 
-        val packages = fragmentsByPackage.map { (packageName, fragments) ->
+        konst packages = fragmentsByPackage.map { (packageName, fragments) ->
             packageDeserializer(packageName, fragments, typeResolver)
         }
 

@@ -17,9 +17,9 @@ inline fun inPlace(block: () -> Unit): String {
 fun consume(x: Any?) {}
 
 class A {
-    val a = capture { consume(x) }
+    konst a = capture { consume(x) }
 
-    val b = inPlace {
+    konst b = inPlace {
         consume(x) // error
         capture { consume(x) } // ok
         inPlace {
@@ -28,7 +28,7 @@ class A {
         }
     }
 
-    val c = object {
+    konst c = object {
         fun foo() {
             consume(x) // ok
             capture { consume(x) } // ok
@@ -47,7 +47,7 @@ class A {
             }
         }
 
-        val objectProp = inPlace {
+        konst objectProp = inPlace {
             consume(x) // error
             capture { consume(x) } // ok
             inPlace {
@@ -57,7 +57,7 @@ class A {
         }
     }
 
-    val d = inPlace {
+    konst d = inPlace {
         fun localFun() {
             consume(x) // ok
         }
@@ -67,5 +67,5 @@ class A {
         }
     }
 
-    val x = 10
+    konst x = 10
 }

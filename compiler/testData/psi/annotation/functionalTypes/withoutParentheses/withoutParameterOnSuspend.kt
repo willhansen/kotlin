@@ -1,25 +1,25 @@
 // Issue: KT-31734
 
-val x: (@Foo suspend () -> Unit) get() = {}
+konst x: (@Foo suspend () -> Unit) get() = {}
 
-val x: @Foo (suspend () -> Unit) get() = {}
+konst x: @Foo (suspend () -> Unit) get() = {}
 
-val x: suspend @Foo () -> Unit get() = {}
+konst x: suspend @Foo () -> Unit get() = {}
 
-val x: Comparable<@Foo suspend @Bar(10) @Foo () -> Unit> get() = {}
+konst x: Comparable<@Foo suspend @Bar(10) @Foo () -> Unit> get() = {}
 
-val x: Any = {} as @Foo suspend () -> Unit
+konst x: Any = {} as @Foo suspend () -> Unit
 
 fun foo(x: (suspend @Foo () -> Unit)) = x
 
 fun foo(x: suspend @Foo(10) @Bar () -> Unit = { x: Int -> x }) {}
 
 fun foo() {
-    val x: @Foo suspend @Bar () -> Unit = {}
+    konst x: @Foo suspend @Bar () -> Unit = {}
 }
 
 fun foo() {
-    val x = { x: suspend @Foo () -> () -> Unit -> x }
+    konst x = { x: suspend @Foo () -> () -> Unit -> x }
 }
 
 abstract class A {
@@ -32,7 +32,7 @@ fun foo(): @Foo.Bar suspend () -> Unit = {}
 
 fun foo(): () -> @Foo.Bar suspend () -> Unit = {}
 
-val x: Any get() = fun(): @Foo suspend () -> Unit {}
+konst x: Any get() = fun(): @Foo suspend () -> Unit {}
 
 fun foo() {
     var x: (@Foo ()->suspend ()->Unit) -> Unit = {}

@@ -9,15 +9,15 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.allSuperclasses
 
 class CheckersConfiguration(
-    val aliases: Map<KClass<*>, String>,
-    val additionalCheckers: MutableMap<String, String>
+    konst aliases: Map<KClass<*>, String>,
+    konst additionalCheckers: MutableMap<String, String>
 ) {
-    val parentsMap: Map<KClass<*>, List<KClass<*>>>
+    konst parentsMap: Map<KClass<*>, List<KClass<*>>>
 
     init {
-        val parents: MutableMap<KClass<*>, List<KClass<*>>> = mutableMapOf()
+        konst parents: MutableMap<KClass<*>, List<KClass<*>>> = mutableMapOf()
         for (firKClass in aliases.keys) {
-            val allParents = mutableListOf<KClass<*>>()
+            konst allParents = mutableListOf<KClass<*>>()
             bfs(
                 firKClass,
                 childrenExtractor = { it.allSuperclasses }
@@ -34,19 +34,19 @@ class CheckersConfiguration(
 }
 
 private fun <T> bfs(start: T, childrenExtractor: (T) -> Collection<T>, process: (T) -> Boolean) {
-    val queue = ArrayDeque<T>()
-    val visited = mutableSetOf<T>()
-    val levels = mutableMapOf(start to 0)
+    konst queue = ArrayDeque<T>()
+    konst visited = mutableSetOf<T>()
+    konst levels = mutableMapOf(start to 0)
     queue.addLast(start)
     var levelToStop: Int? = null
     while (queue.isNotEmpty()) {
-        val element = queue.removeFirst()
+        konst element = queue.removeFirst()
         if (!visited.add(element)) continue
-        val level = levels.getValue(element)
+        konst level = levels.getValue(element)
         if (levelToStop != null && level > levelToStop) continue
-        val shouldContinue = if (level > 0) process(element) else true
+        konst shouldContinue = if (level > 0) process(element) else true
         if (shouldContinue) {
-            val children = childrenExtractor(element)
+            konst children = childrenExtractor(element)
             for (child in children) {
                 levels[child] = level + 1
                 queue.addLast(child)

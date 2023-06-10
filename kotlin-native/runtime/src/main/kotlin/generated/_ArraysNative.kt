@@ -108,7 +108,7 @@ public actual inline fun CharArray.elementAt(index: Int): Char {
  */
 public actual fun <T> Array<out T>.asList(): List<T> {
     return object : AbstractList<T>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: T): Boolean = this@asList.contains(element)
         override fun get(index: Int): T = this@asList[index]
@@ -122,7 +122,7 @@ public actual fun <T> Array<out T>.asList(): List<T> {
  */
 public actual fun ByteArray.asList(): List<Byte> {
     return object : AbstractList<Byte>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Byte): Boolean = this@asList.contains(element)
         override fun get(index: Int): Byte = this@asList[index]
@@ -136,7 +136,7 @@ public actual fun ByteArray.asList(): List<Byte> {
  */
 public actual fun ShortArray.asList(): List<Short> {
     return object : AbstractList<Short>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Short): Boolean = this@asList.contains(element)
         override fun get(index: Int): Short = this@asList[index]
@@ -150,7 +150,7 @@ public actual fun ShortArray.asList(): List<Short> {
  */
 public actual fun IntArray.asList(): List<Int> {
     return object : AbstractList<Int>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Int): Boolean = this@asList.contains(element)
         override fun get(index: Int): Int = this@asList[index]
@@ -164,7 +164,7 @@ public actual fun IntArray.asList(): List<Int> {
  */
 public actual fun LongArray.asList(): List<Long> {
     return object : AbstractList<Long>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Long): Boolean = this@asList.contains(element)
         override fun get(index: Int): Long = this@asList[index]
@@ -178,7 +178,7 @@ public actual fun LongArray.asList(): List<Long> {
  */
 public actual fun FloatArray.asList(): List<Float> {
     return object : AbstractList<Float>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Float): Boolean = this@asList.any { it.toBits() == element.toBits() }
         override fun get(index: Int): Float = this@asList[index]
@@ -192,7 +192,7 @@ public actual fun FloatArray.asList(): List<Float> {
  */
 public actual fun DoubleArray.asList(): List<Double> {
     return object : AbstractList<Double>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Double): Boolean = this@asList.any { it.toBits() == element.toBits() }
         override fun get(index: Int): Double = this@asList[index]
@@ -206,7 +206,7 @@ public actual fun DoubleArray.asList(): List<Double> {
  */
 public actual fun BooleanArray.asList(): List<Boolean> {
     return object : AbstractList<Boolean>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Boolean): Boolean = this@asList.contains(element)
         override fun get(index: Int): Boolean = this@asList[index]
@@ -220,7 +220,7 @@ public actual fun BooleanArray.asList(): List<Boolean> {
  */
 public actual fun CharArray.asList(): List<Char> {
     return object : AbstractList<Char>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Char): Boolean = this@asList.contains(element)
         override fun get(index: Int): Char = this@asList[index]
@@ -1289,10 +1289,10 @@ public actual fun CharArray.copyOf(): CharArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1302,10 +1302,10 @@ public actual fun ByteArray.copyOf(newSize: Int): ByteArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1315,10 +1315,10 @@ public actual fun ShortArray.copyOf(newSize: Int): ShortArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1328,10 +1328,10 @@ public actual fun IntArray.copyOf(newSize: Int): IntArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1341,10 +1341,10 @@ public actual fun LongArray.copyOf(newSize: Int): LongArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1354,10 +1354,10 @@ public actual fun FloatArray.copyOf(newSize: Int): FloatArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1367,10 +1367,10 @@ public actual fun DoubleArray.copyOf(newSize: Int): DoubleArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `false` values if necessary.
+ * The copy is either truncated or padded at the end with `false` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1380,10 +1380,10 @@ public actual fun BooleanArray.copyOf(newSize: Int): BooleanArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with null char (`\u0000`) values if necessary.
+ * The copy is either truncated or padded at the end with null char (`\u0000`) konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
@@ -1393,10 +1393,10 @@ public actual fun CharArray.copyOf(newSize: Int): CharArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `null` values if necessary.
+ * The copy is either truncated or padded at the end with `null` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizingCopyOf
  */
@@ -1532,231 +1532,231 @@ public actual fun CharArray.copyOfRange(fromIndex: Int, toIndex: Int): CharArray
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun <T> Array<T>.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): Array<T> {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = arrayOfUninitializedElements<T>(newSize)
+    konst result = arrayOfUninitializedElements<T>(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun ByteArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): ByteArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = ByteArray(newSize)
+    konst result = ByteArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun ShortArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): ShortArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = ShortArray(newSize)
+    konst result = ShortArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun IntArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): IntArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = IntArray(newSize)
+    konst result = IntArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun LongArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): LongArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = LongArray(newSize)
+    konst result = LongArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun FloatArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): FloatArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = FloatArray(newSize)
+    konst result = FloatArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun DoubleArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): DoubleArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = DoubleArray(newSize)
+    konst result = DoubleArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun BooleanArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): BooleanArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = BooleanArray(newSize)
+    konst result = BooleanArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
  * Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
- * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun CharArray.copyOfUninitializedElements(fromIndex: Int, toIndex: Int): CharArray {
-    val newSize = toIndex - fromIndex
+    konst newSize = toIndex - fromIndex
     if (newSize < 0) {
         throw IllegalArgumentException("$fromIndex > $toIndex")
     }
-    val result = CharArray(newSize)
+    konst result = CharArray(newSize)
     this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
     return result
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun <T> Array<T>.copyOfUninitializedElements(newSize: Int): Array<T> {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun ByteArray.copyOfUninitializedElements(newSize: Int): ByteArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun ShortArray.copyOfUninitializedElements(newSize: Int): ShortArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun IntArray.copyOfUninitializedElements(newSize: Int): IntArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun LongArray.copyOfUninitializedElements(newSize: Int): LongArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun FloatArray.copyOfUninitializedElements(newSize: Int): FloatArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun DoubleArray.copyOfUninitializedElements(newSize: Int): DoubleArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun BooleanArray.copyOfUninitializedElements(newSize: Int): BooleanArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 internal fun CharArray.copyOfUninitializedElements(newSize: Int): CharArray {
     return copyOfUninitializedElements(0, newSize)
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1771,7 +1771,7 @@ public actual fun <T> Array<T>.fill(element: T, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1786,7 +1786,7 @@ public actual fun ByteArray.fill(element: Byte, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1801,7 +1801,7 @@ public actual fun ShortArray.fill(element: Short, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1816,7 +1816,7 @@ public actual fun IntArray.fill(element: Int, fromIndex: Int = 0, toIndex: Int =
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1831,7 +1831,7 @@ public actual fun LongArray.fill(element: Long, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1846,7 +1846,7 @@ public actual fun FloatArray.fill(element: Float, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1861,7 +1861,7 @@ public actual fun DoubleArray.fill(element: Double, fromIndex: Int = 0, toIndex:
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1876,7 +1876,7 @@ public actual fun BooleanArray.fill(element: Boolean, fromIndex: Int = 0, toInde
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1894,8 +1894,8 @@ public actual fun CharArray.fill(element: Char, fromIndex: Int = 0, toIndex: Int
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun <T> Array<T>.plus(element: T): Array<T> {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1904,8 +1904,8 @@ public actual operator fun <T> Array<T>.plus(element: T): Array<T> {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun ByteArray.plus(element: Byte): ByteArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1914,8 +1914,8 @@ public actual operator fun ByteArray.plus(element: Byte): ByteArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun ShortArray.plus(element: Short): ShortArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1924,8 +1924,8 @@ public actual operator fun ShortArray.plus(element: Short): ShortArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun IntArray.plus(element: Int): IntArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1934,8 +1934,8 @@ public actual operator fun IntArray.plus(element: Int): IntArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun LongArray.plus(element: Long): LongArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1944,8 +1944,8 @@ public actual operator fun LongArray.plus(element: Long): LongArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun FloatArray.plus(element: Float): FloatArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1954,8 +1954,8 @@ public actual operator fun FloatArray.plus(element: Float): FloatArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun DoubleArray.plus(element: Double): DoubleArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1964,8 +1964,8 @@ public actual operator fun DoubleArray.plus(element: Double): DoubleArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun BooleanArray.plus(element: Boolean): BooleanArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1974,8 +1974,8 @@ public actual operator fun BooleanArray.plus(element: Boolean): BooleanArray {
  * Returns an array containing all elements of the original array and then the given [element].
  */
 public actual operator fun CharArray.plus(element: Char): CharArray {
-    val index = size
-    val result = copyOfUninitializedElements(index + 1)
+    konst index = size
+    konst result = copyOfUninitializedElements(index + 1)
     result[index] = element
     return result
 }
@@ -1985,7 +1985,7 @@ public actual operator fun CharArray.plus(element: Char): CharArray {
  */
 public actual operator fun <T> Array<T>.plus(elements: Collection<T>): Array<T> {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1995,7 +1995,7 @@ public actual operator fun <T> Array<T>.plus(elements: Collection<T>): Array<T> 
  */
 public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2005,7 +2005,7 @@ public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray
  */
 public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2015,7 +2015,7 @@ public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortAr
  */
 public actual operator fun IntArray.plus(elements: Collection<Int>): IntArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2025,7 +2025,7 @@ public actual operator fun IntArray.plus(elements: Collection<Int>): IntArray {
  */
 public actual operator fun LongArray.plus(elements: Collection<Long>): LongArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2035,7 +2035,7 @@ public actual operator fun LongArray.plus(elements: Collection<Long>): LongArray
  */
 public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2045,7 +2045,7 @@ public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatAr
  */
 public actual operator fun DoubleArray.plus(elements: Collection<Double>): DoubleArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2055,7 +2055,7 @@ public actual operator fun DoubleArray.plus(elements: Collection<Double>): Doubl
  */
 public actual operator fun BooleanArray.plus(elements: Collection<Boolean>): BooleanArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2065,7 +2065,7 @@ public actual operator fun BooleanArray.plus(elements: Collection<Boolean>): Boo
  */
 public actual operator fun CharArray.plus(elements: Collection<Char>): CharArray {
     var index = size
-    val result = copyOfUninitializedElements(index + elements.size)
+    konst result = copyOfUninitializedElements(index + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -2074,9 +2074,9 @@ public actual operator fun CharArray.plus(elements: Collection<Char>): CharArray
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun <T> Array<T>.plus(elements: Array<out T>): Array<T> {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2085,9 +2085,9 @@ public actual operator fun <T> Array<T>.plus(elements: Array<out T>): Array<T> {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun ByteArray.plus(elements: ByteArray): ByteArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2096,9 +2096,9 @@ public actual operator fun ByteArray.plus(elements: ByteArray): ByteArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun ShortArray.plus(elements: ShortArray): ShortArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2107,9 +2107,9 @@ public actual operator fun ShortArray.plus(elements: ShortArray): ShortArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun IntArray.plus(elements: IntArray): IntArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2118,9 +2118,9 @@ public actual operator fun IntArray.plus(elements: IntArray): IntArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun LongArray.plus(elements: LongArray): LongArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2129,9 +2129,9 @@ public actual operator fun LongArray.plus(elements: LongArray): LongArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun FloatArray.plus(elements: FloatArray): FloatArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2140,9 +2140,9 @@ public actual operator fun FloatArray.plus(elements: FloatArray): FloatArray {
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun DoubleArray.plus(elements: DoubleArray): DoubleArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2151,9 +2151,9 @@ public actual operator fun DoubleArray.plus(elements: DoubleArray): DoubleArray 
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun BooleanArray.plus(elements: BooleanArray): BooleanArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }
@@ -2162,9 +2162,9 @@ public actual operator fun BooleanArray.plus(elements: BooleanArray): BooleanArr
  * Returns an array containing all elements of the original array and then all elements of the given [elements] array.
  */
 public actual operator fun CharArray.plus(elements: CharArray): CharArray {
-    val thisSize = size
-    val arraySize = elements.size
-    val result = copyOfUninitializedElements(thisSize + arraySize)
+    konst thisSize = size
+    konst arraySize = elements.size
+    konst result = copyOfUninitializedElements(thisSize + arraySize)
     elements.copyInto(result, thisSize)
     return result
 }

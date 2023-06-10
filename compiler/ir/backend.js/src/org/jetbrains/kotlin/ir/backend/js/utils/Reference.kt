@@ -5,6 +5,6 @@
 
 package org.jetbrains.kotlin.ir.backend.js.utils
 
-class MutableReference<T>(var value: T)
+class MutableReference<T>(var konstue: T)
 
-fun <T> mutableReferenceOf(value: T): MutableReference<T> = MutableReference(value)
+fun <T> mutableReferenceOf(konstue: T): MutableReference<T> = MutableReference(konstue)

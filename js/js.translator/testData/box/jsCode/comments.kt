@@ -87,7 +87,7 @@ fun box(): String {
         
         var test = {
              test: Object.defineProperty(/* object: */{}, /* property: */'some_property', /* descriptor: */ {
-              value: 42,
+              konstue: 42,
               writable: false
             } /* Descriptor end */)
         }

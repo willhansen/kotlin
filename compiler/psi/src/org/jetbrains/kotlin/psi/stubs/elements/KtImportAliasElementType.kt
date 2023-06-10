@@ -25,7 +25,7 @@ class KtImportAliasElementType(debugName: String) :
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<PsiElement>?): KotlinImportAliasStub {
-        val name = dataStream.readName()
+        konst name = dataStream.readName()
         return KotlinImportAliasStubImpl(parentStub, name)
     }
 }

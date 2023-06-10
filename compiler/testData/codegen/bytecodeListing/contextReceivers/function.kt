@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 class C {
-    val c = 42
+    konst c = 42
 }
 
 context(C)

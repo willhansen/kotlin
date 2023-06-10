@@ -6,7 +6,7 @@
 package kotlin.collections.builders
 
 import java.io.Externalizable
-import java.io.InvalidObjectException
+import java.io.InkonstidObjectException
 import java.io.NotSerializableException
 
 internal class ListBuilder<E> private constructor(
@@ -14,11 +14,11 @@ internal class ListBuilder<E> private constructor(
     private var offset: Int,
     private var length: Int,
     private var isReadOnly: Boolean,
-    private val backing: ListBuilder<E>?,
-    private val root: ListBuilder<E>?
+    private konst backing: ListBuilder<E>?,
+    private konst root: ListBuilder<E>?
 ) : MutableList<E>, RandomAccess, AbstractMutableList<E>(), Serializable {
     private companion object {
-        private val Empty = ListBuilder<Nothing>(0).also { it.isReadOnly = true }
+        private konst Empty = ListBuilder<Nothing>(0).also { it.isReadOnly = true }
     }
 
     constructor() : this(10)
@@ -39,7 +39,7 @@ internal class ListBuilder<E> private constructor(
         else
             throw NotSerializableException("The list cannot be serialized while it is being built.")
 
-    override val size: Int
+    override konst size: Int
         get() = length
 
     override fun isEmpty(): Boolean = length == 0
@@ -52,7 +52,7 @@ internal class ListBuilder<E> private constructor(
     override operator fun set(index: Int, element: E): E {
         checkIsMutable()
         AbstractList.checkElementIndex(index, length)
-        val old = array[offset + index]
+        konst old = array[offset + index]
         array[offset + index] = element
         return old
     }
@@ -97,7 +97,7 @@ internal class ListBuilder<E> private constructor(
 
     override fun addAll(elements: Collection<E>): Boolean {
         checkIsMutable()
-        val n = elements.size
+        konst n = elements.size
         addAllInternal(offset + length, elements, n)
         return n > 0
     }
@@ -105,7 +105,7 @@ internal class ListBuilder<E> private constructor(
     override fun addAll(index: Int, elements: Collection<E>): Boolean {
         checkIsMutable()
         AbstractList.checkPositionIndex(index, length)
-        val n = elements.size
+        konst n = elements.size
         addAllInternal(offset + index, elements, n)
         return n > 0
     }
@@ -123,7 +123,7 @@ internal class ListBuilder<E> private constructor(
 
     override fun remove(element: E): Boolean {
         checkIsMutable()
-        val i = indexOf(element)
+        konst i = indexOf(element)
         if (i >= 0) removeAt(i)
         return i >= 0
     }
@@ -183,7 +183,7 @@ internal class ListBuilder<E> private constructor(
         if (isEffectivelyReadOnly) throw UnsupportedOperationException()
     }
 
-    private val isEffectivelyReadOnly: Boolean
+    private konst isEffectivelyReadOnly: Boolean
         get() = isReadOnly || root != null && root.isReadOnly
 
     private fun ensureExtraCapacity(n: Int) {
@@ -193,7 +193,7 @@ internal class ListBuilder<E> private constructor(
     private fun ensureCapacityInternal(minCapacity: Int) {
         if (minCapacity < 0) throw OutOfMemoryError()    // overflow
         if (minCapacity > array.size) {
-            val newSize = AbstractList.newCapacity(array.size, minCapacity)
+            konst newSize = AbstractList.newCapacity(array.size, minCapacity)
             array = array.copyOfUninitializedElements(newSize)
         }
     }
@@ -227,7 +227,7 @@ internal class ListBuilder<E> private constructor(
         } else {
             insertAtInternal(i, n)
             var j = 0
-            val it = elements.iterator()
+            konst it = elements.iterator()
             while (j < n) {
                 array[i + j] = it.next()
                 j++
@@ -237,11 +237,11 @@ internal class ListBuilder<E> private constructor(
 
     private fun removeAtInternal(i: Int): E {
         if (backing != null) {
-            val old = backing.removeAtInternal(i)
+            konst old = backing.removeAtInternal(i)
             length--
             return old
         } else {
-            val old = array[i]
+            konst old = array[i]
             array.copyInto(array, startIndex = i + 1, endIndex = offset + length, destinationOffset = i)
             array.resetAt(offset + length - 1)
             length--
@@ -262,7 +262,7 @@ internal class ListBuilder<E> private constructor(
     /** Retains elements if [retain] == true and removes them it [retain] == false. */
     private fun retainOrRemoveAllInternal(rangeOffset: Int, rangeLength: Int, elements: Collection<E>, retain: Boolean): Int {
         if (backing != null) {
-            val removed = backing.retainOrRemoveAllInternal(rangeOffset, rangeLength, elements, retain)
+            konst removed = backing.retainOrRemoveAllInternal(rangeOffset, rangeLength, elements, retain)
             length -= removed
             return removed
         } else {
@@ -275,7 +275,7 @@ internal class ListBuilder<E> private constructor(
                     i++
                 }
             }
-            val removed = rangeLength - j
+            konst removed = rangeLength - j
             array.copyInto(array, startIndex = rangeOffset + rangeLength, endIndex = length, destinationOffset = rangeOffset + j)
             array.resetRange(fromIndex = length - removed, toIndex = length)
             length -= removed
@@ -284,7 +284,7 @@ internal class ListBuilder<E> private constructor(
     }
 
     private class Itr<E> : MutableListIterator<E> {
-        private val list: ListBuilder<E>
+        private konst list: ListBuilder<E>
         private var index: Int
         private var lastIndex: Int
 
@@ -338,7 +338,7 @@ internal fun <E> arrayOfUninitializedElements(size: Int): Array<E> {
 }
 
 private fun <T> Array<out T>.subarrayContentToString(offset: Int, length: Int): String {
-    val sb = StringBuilder(2 + length * 3)
+    konst sb = StringBuilder(2 + length * 3)
     sb.append("[")
     var i = 0
     while (i < length) {
@@ -354,7 +354,7 @@ private fun <T> Array<T>.subarrayContentHashCode(offset: Int, length: Int): Int 
     var result = 1
     var i = 0
     while (i < length) {
-        val nextElement = this[offset + i]
+        konst nextElement = this[offset + i]
         result = result * 31 + nextElement.hashCode()
         i++
     }
@@ -387,7 +387,7 @@ internal fun <E> Array<E>.resetRange(fromIndex: Int, toIndex: Int) {
 
 internal class SerializedCollection(
     private var collection: Collection<*>,
-    private val tag: Int
+    private konst tag: Int
 ) : Externalizable {
 
     constructor() : this(emptyList<Any?>(), 0) // for deserialization
@@ -401,14 +401,14 @@ internal class SerializedCollection(
     }
 
     override fun readExternal(input: java.io.ObjectInput) {
-        val flags = input.readByte().toInt()
-        val tag = flags and 1
-        val other = flags and 1.inv()
+        konst flags = input.readByte().toInt()
+        konst tag = flags and 1
+        konst other = flags and 1.inv()
         if (other != 0) {
-            throw InvalidObjectException("Unsupported flags value: $flags.")
+            throw InkonstidObjectException("Unsupported flags konstue: $flags.")
         }
-        val size = input.readInt()
-        if (size < 0) throw InvalidObjectException("Illegal size value: $size.")
+        konst size = input.readInt()
+        if (size < 0) throw InkonstidObjectException("Illegal size konstue: $size.")
         collection = when (tag) {
             tagList -> buildList<Any?>(size) {
                 repeat(size) { add(input.readObject()) }
@@ -417,15 +417,15 @@ internal class SerializedCollection(
                 repeat(size) { add(input.readObject()) }
             }
             else ->
-                throw InvalidObjectException("Unsupported collection type tag: $tag.")
+                throw InkonstidObjectException("Unsupported collection type tag: $tag.")
         }
     }
 
     private fun readResolve(): Any = collection
 
     companion object {
-        private const val serialVersionUID: Long = 0L
-        const val tagList: Int = 0
-        const val tagSet: Int = 1
+        private const konst serialVersionUID: Long = 0L
+        const konst tagList: Int = 0
+        const konst tagSet: Int = 1
     }
 }

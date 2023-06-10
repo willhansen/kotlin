@@ -15,10 +15,10 @@ object StubRenderer {
     fun render(stub: Stub<*>): List<String> = render(stub, false)
 
     private fun findPositionToInsertGeneratedCommentLine(kDoc: List<String>, generatedCommentLine: String): Int {
-        val generatedWords = generatedCommentLine.trim().split(" ").map { it.trim() }
+        konst generatedWords = generatedCommentLine.trim().split(" ").map { it.trim() }
         if (generatedWords.size >= 2 && generatedWords[0] == "@param") {
             for (i in kDoc.indices.reversed()) {
-                val kDocLineWords = kDoc[i].trim().split(" ").map { it.trim() }.filter { it.isNotEmpty() }.filterNot { it == "*" }
+                konst kDocLineWords = kDoc[i].trim().split(" ").map { it.trim() }.filter { it.isNotEmpty() }.filterNot { it == "*" }
                 if (kDocLineWords.size >= 2 && kDocLineWords[0] == generatedWords[0] && kDocLineWords[1] == generatedWords[1]) {
                     return i + 1  // position after last `@param` kDoc line, describing same parameter as in generatedCommentLine
                 }
@@ -29,16 +29,16 @@ object StubRenderer {
 
     internal fun render(stub: Stub<*>, shouldExportKDoc: Boolean): List<String> = collect {
         stub.run {
-            val (kDocEnding, commentBlockEnding) = if (comment?.contentLines == null) {
+            konst (kDocEnding, commentBlockEnding) = if (comment?.contentLines == null) {
                 Pair("*/", null)  // Close kDoc with `*/`, and print nothing after empty comment
             } else {
                 Pair("", "*/")  // Don't terminate kDoc, though close comment block with `*/`
             }
-            val kDoc = if (shouldExportKDoc) {
+            konst kDoc = if (shouldExportKDoc) {
                 descriptor?.extractKDocString()?.let {
                     if (it.startsWith("/**") && it.endsWith("*/")) {
                         // Nested comment is allowed inside of preformatted ``` block in kdoc but not in ObjC
-                        val kdocClean = "/**${it.substring(3, it.length - 2).replace("*/", "**").replace("/*", "**")}$kDocEnding"
+                        konst kdocClean = "/**${it.substring(3, it.length - 2).replace("*/", "**").replace("/*", "**")}$kDocEnding"
                         kdocClean.lines().map { it.trim().let {
                                 if (it.isNotEmpty() && it[0] == '*') " $it"
                                 else it
@@ -48,7 +48,7 @@ object StubRenderer {
                 }
             } else null
 
-            val kDocAndComment = kDoc?.filterNot { it.isEmpty() }.orEmpty().toMutableList()
+            konst kDocAndComment = kDoc?.filterNot { it.isEmpty() }.orEmpty().toMutableList()
             comment?.contentLines?.let { commentLine ->
                 if (!kDoc.isNullOrEmpty()) kDocAndComment.add(" *")  // Separator between nonempty kDoc and nonempty comment
                 commentLine.forEach { kDocAndComment.add(findPositionToInsertGeneratedCommentLine(kDocAndComment, it), " * $it")}
@@ -100,14 +100,14 @@ object StubRenderer {
         fun ObjCProperty.getAllAttributes(): List<String> {
             if (getterName == null && setterName == null) return propertyAttributes
 
-            val allAttributes = propertyAttributes.toMutableList()
+            konst allAttributes = propertyAttributes.toMutableList()
             getterName?.let { allAttributes += "getter=$it" }
             setterName?.let { allAttributes += "setter=$it" }
             return allAttributes
         }
 
         fun StringBuilder.appendAttributes() {
-            val attributes = property.getAllAttributes()
+            konst attributes = property.getAllAttributes()
             if (attributes.isNotEmpty()) {
                 append(' ')
                 attributes.joinTo(this, prefix = "(", postfix = ")")
@@ -146,8 +146,8 @@ object StubRenderer {
                 for (i in 0 until method.selectors.size) {
                     if (i > 0) append(' ')
 
-                    val parameter = method.parameters[i]
-                    val selector = method.selectors[i]
+                    konst parameter = method.parameters[i]
+                    konst selector = method.selectors[i]
                     append(selector)
                     append("(")
                     append(parameter.type.render())
@@ -180,7 +180,7 @@ object StubRenderer {
     }
 
     private fun StringBuilder.appendSuperProtocols(clazz: ObjCClass<ClassDescriptor>) {
-        val protocols = clazz.superProtocols
+        konst protocols = clazz.superProtocols
         if (protocols.isNotEmpty()) {
             protocols.joinTo(this, separator = ", ", prefix = " <", postfix = ">")
         }
@@ -221,13 +221,13 @@ object StubRenderer {
     private fun renderAttribute(attribute: String) = "__attribute__(($attribute))"
 
     private fun collect(p: Collector.() -> Unit): List<String> {
-        val collector = Collector()
+        konst collector = Collector()
         collector.p()
         return collector.build()
     }
 
     private class Collector {
-        private val collection: MutableList<String> = mutableListOf()
+        private konst collection: MutableList<String> = mutableListOf()
         fun build(): List<String> = collection
 
         operator fun String.unaryPlus() {

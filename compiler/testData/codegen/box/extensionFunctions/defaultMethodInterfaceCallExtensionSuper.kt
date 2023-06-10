@@ -10,12 +10,12 @@ interface DefaultImpl: Top<Int>{
     override fun toString(data: Int): String = data.toString()
 }
 
-class Bottom(val data: Int): DefaultImpl {
+class Bottom(konst data: Int): DefaultImpl {
     override fun getData(): Int =  data
 }
 
 fun box(): String {
-    val bottom = Bottom(10).getString()
+    konst bottom = Bottom(10).getString()
     if (bottom != "10") return "fail: $bottom"
 
     return "OK"

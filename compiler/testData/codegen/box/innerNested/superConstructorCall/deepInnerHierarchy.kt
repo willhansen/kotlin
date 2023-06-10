@@ -1,4 +1,4 @@
-open class A(val s: String) {
+open class A(konst s: String) {
     open inner class B(s: String): A(s)
 
     open inner class C(s: String, additional: Double): B(s)

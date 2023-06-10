@@ -10,21 +10,21 @@ inline fun inline1(a: Int): Int {
 }
 
 inline fun inline2(a: Int): Int {
-    val a1 = inline1(a)
+    konst a1 = inline1(a)
     if (a1 == 0) return 0
     return a1 + inline1(a)
 }
 
 inline fun inline3(a: Int): Int {
-    val i = inline2(a)
-    val i1 = inline1(a) * i
+    konst i = inline2(a)
+    konst i1 = inline1(a) * i
     if (i == i1) return 0
     return i1
 }
 
-val r1 = inline3(1)
-val r3 = inline3(3)
-val r4 = inline3(4)
+konst r1 = inline3(1)
+konst r3 = inline3(3)
+konst r4 = inline3(4)
 
 fun box(): String {
     assertEquals(0, r1)

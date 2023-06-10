@@ -19,23 +19,23 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object JsAnnotations {
-    val jsModuleFqn = FqName("kotlin.js.JsModule")
-    val jsNonModuleFqn = FqName("kotlin.js.JsNonModule")
-    val jsNameFqn = FqName("kotlin.js.JsName")
-    val jsQualifierFqn = FqName("kotlin.js.JsQualifier")
-    val jsExportFqn = FqName("kotlin.js.JsExport")
-    val jsImplicitExportFqn = FqName("kotlin.js.JsImplicitExport")
-    val jsExportIgnoreFqn = FqName("kotlin.js.JsExport.Ignore")
-    val jsNativeGetter = FqName("kotlin.js.nativeGetter")
-    val jsNativeSetter = FqName("kotlin.js.nativeSetter")
-    val jsNativeInvoke = FqName("kotlin.js.nativeInvoke")
-    val jsFunFqn = FqName("kotlin.js.JsFun")
-    val JsPolyfillFqn = FqName("kotlin.js.JsPolyfill")
+    konst jsModuleFqn = FqName("kotlin.js.JsModule")
+    konst jsNonModuleFqn = FqName("kotlin.js.JsNonModule")
+    konst jsNameFqn = FqName("kotlin.js.JsName")
+    konst jsQualifierFqn = FqName("kotlin.js.JsQualifier")
+    konst jsExportFqn = FqName("kotlin.js.JsExport")
+    konst jsImplicitExportFqn = FqName("kotlin.js.JsImplicitExport")
+    konst jsExportIgnoreFqn = FqName("kotlin.js.JsExport.Ignore")
+    konst jsNativeGetter = FqName("kotlin.js.nativeGetter")
+    konst jsNativeSetter = FqName("kotlin.js.nativeSetter")
+    konst jsNativeInvoke = FqName("kotlin.js.nativeInvoke")
+    konst jsFunFqn = FqName("kotlin.js.JsFun")
+    konst JsPolyfillFqn = FqName("kotlin.js.JsPolyfill")
 }
 
 @Suppress("UNCHECKED_CAST")
 fun IrConstructorCall.getSingleConstStringArgument() =
-    (getValueArgument(0) as IrConst<String>).value
+    (getValueArgument(0) as IrConst<String>).konstue
 
 fun IrAnnotationContainer.getJsModule(): String? =
     getAnnotation(JsAnnotations.jsModuleFqn)?.getSingleConstStringArgument()
@@ -72,7 +72,7 @@ fun IrAnnotationContainer.isJsNativeInvoke(): Boolean = hasAnnotation(JsAnnotati
 
 private fun IrOverridableDeclaration<*>.dfsOverridableJsNameOrNull(): String? {
     for (overriddenSymbol in overriddenSymbols) {
-        val symbolOwner = overriddenSymbol.owner
+        konst symbolOwner = overriddenSymbol.owner
         if (symbolOwner is IrAnnotationContainer) {
             symbolOwner.getJsName()?.let { return it }
         }
@@ -84,7 +84,7 @@ private fun IrOverridableDeclaration<*>.dfsOverridableJsNameOrNull(): String? {
 }
 
 fun IrDeclarationWithName.getJsNameForOverriddenDeclaration(): String? {
-    val jsName = getJsName()
+    konst jsName = getJsName()
 
     return when {
         jsName != null -> jsName
@@ -94,18 +94,18 @@ fun IrDeclarationWithName.getJsNameForOverriddenDeclaration(): String? {
 }
 
 fun IrDeclarationWithName.getJsNameOrKotlinName(): Name =
-    when (val jsName = getJsNameForOverriddenDeclaration()) {
+    when (konst jsName = getJsNameForOverriddenDeclaration()) {
         null -> name
         else -> Name.identifier(jsName)
     }
 
-private val associatedObjectKeyAnnotationFqName = FqName("kotlin.reflect.AssociatedObjectKey")
+private konst associatedObjectKeyAnnotationFqName = FqName("kotlin.reflect.AssociatedObjectKey")
 
-val IrClass.isAssociatedObjectAnnotatedAnnotation: Boolean
+konst IrClass.isAssociatedObjectAnnotatedAnnotation: Boolean
     get() = isAnnotationClass && annotations.any { it.symbol.owner.constructedClass.fqNameWhenAvailable == associatedObjectKeyAnnotationFqName }
 
 fun IrConstructorCall.associatedObject(): IrClass? {
     if (!symbol.owner.constructedClass.isAssociatedObjectAnnotatedAnnotation) return null
-    val klass = ((getValueArgument(0) as? IrClassReference)?.symbol as? IrClassSymbol)?.owner ?: return null
+    konst klass = ((getValueArgument(0) as? IrClassReference)?.symbol as? IrClassSymbol)?.owner ?: return null
     return if (klass.isObject) klass else null
 }

@@ -16,9 +16,9 @@ import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.register
 import java.io.File
 
-const val kotlinEmbeddableRootPackage = "org.jetbrains.kotlin"
+const konst kotlinEmbeddableRootPackage = "org.jetbrains.kotlin"
 
-val packagesToRelocate =
+konst packagesToRelocate =
     listOf(
         "com.intellij",
         "com.google",
@@ -39,7 +39,7 @@ val packagesToRelocate =
 // To speed-up rewriting process we want to have this dummy as small as possible.
 // But due to the shadow plugin bug (https://github.com/johnrengelman/shadow/issues/262) it is not possible to use
 // packagesToRelocate list to for the include list. Therefore the exclude list has to be created.
-val packagesToExcludeFromDummy =
+konst packagesToExcludeFromDummy =
     listOf(
         "org/jetbrains/kotlin/**",
         "org/intellij/lang/annotations/**",
@@ -74,7 +74,7 @@ private fun ShadowJar.configureEmbeddableCompilerRelocation(withJavaxInject: Boo
 
 private fun Project.compilerShadowJar(taskName: String, body: ShadowJar.() -> Unit): TaskProvider<ShadowJar> {
 
-    val compilerJar = configurations.getOrCreate("compilerJar").apply {
+    konst compilerJar = configurations.getOrCreate("compilerJar").apply {
         isCanBeConsumed = false
         isCanBeResolved = true
         attributes {
@@ -106,7 +106,7 @@ fun Project.compilerDummyForDependenciesRewriting(
         exclude(packagesToExcludeFromDummy)
         body()
     }
-const val COMPILER_DUMMY_JAR_CONFIGURATION_NAME = "compilerDummyJar"
+const konst COMPILER_DUMMY_JAR_CONFIGURATION_NAME = "compilerDummyJar"
 
 fun Project.compilerDummyJar(task: TaskProvider<out Jar>, body: Jar.() -> Unit = {}) {
     configurations.getOrCreate(COMPILER_DUMMY_JAR_CONFIGURATION_NAME).apply {
@@ -118,12 +118,12 @@ fun Project.compilerDummyJar(task: TaskProvider<out Jar>, body: Jar.() -> Unit =
     addArtifact(COMPILER_DUMMY_JAR_CONFIGURATION_NAME, task)
 }
 
-const val EMBEDDABLE_COMPILER_TASK_NAME = "embeddable"
+const konst EMBEDDABLE_COMPILER_TASK_NAME = "embeddable"
 fun Project.embeddableCompilerDummyForDependenciesRewriting(
     taskName: String = EMBEDDABLE_COMPILER_TASK_NAME,
     body: ShadowJar.() -> Unit = {}
 ): TaskProvider<ShadowJar> {
-    val compilerDummyJar = configurations.getOrCreate(COMPILER_DUMMY_JAR_CONFIGURATION_NAME).apply {
+    konst compilerDummyJar = configurations.getOrCreate(COMPILER_DUMMY_JAR_CONFIGURATION_NAME).apply {
         isCanBeResolved = true
         isCanBeConsumed = false
     }

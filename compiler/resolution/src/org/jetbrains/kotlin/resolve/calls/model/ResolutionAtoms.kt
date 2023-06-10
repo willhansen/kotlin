@@ -38,21 +38,21 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 interface ResolutionAtom
 
 sealed interface CallableReferenceResolutionAtom : ResolutionAtom {
-    val lhsResult: LHSResult
-    val rhsName: Name
-    val call: KotlinCall
+    konst lhsResult: LHSResult
+    konst rhsName: Name
+    konst call: KotlinCall
 }
 
 class CallableReferenceKotlinCall(
-    override val call: KotlinCall,
-    override val lhsResult: LHSResult,
-    override val rhsName: Name,
+    override konst call: KotlinCall,
+    override konst lhsResult: LHSResult,
+    override konst rhsName: Name,
 ) : CallableReferenceResolutionAtom
 
 sealed interface ResolvedCallableReferenceAtom
 
 sealed class ResolvedAtom {
-    abstract val atom: ResolutionAtom? // CallResolutionResult has no ResolutionAtom
+    abstract konst atom: ResolutionAtom? // CallResolutionResult has no ResolutionAtom
 
     var analyzed: Boolean = false
         private set
@@ -77,37 +77,37 @@ sealed class ResolvedAtom {
 }
 
 abstract class ResolvedCallAtom : ResolvedAtom() {
-    abstract override val atom: KotlinCall
-    abstract val candidateDescriptor: CallableDescriptor
-    abstract val explicitReceiverKind: ExplicitReceiverKind
-    abstract val dispatchReceiverArgument: SimpleKotlinCallArgument?
+    abstract override konst atom: KotlinCall
+    abstract konst candidateDescriptor: CallableDescriptor
+    abstract konst explicitReceiverKind: ExplicitReceiverKind
+    abstract konst dispatchReceiverArgument: SimpleKotlinCallArgument?
     abstract var extensionReceiverArgument: SimpleKotlinCallArgument?
-    abstract val extensionReceiverArgumentCandidates: List<SimpleKotlinCallArgument>?
+    abstract konst extensionReceiverArgumentCandidates: List<SimpleKotlinCallArgument>?
     abstract var contextReceiversArguments: List<SimpleKotlinCallArgument>
-    abstract val typeArgumentMappingByOriginal: TypeArgumentsToParametersMapper.TypeArgumentsMapping
-    abstract val argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
-    abstract val freshVariablesSubstitutor: FreshVariableNewTypeSubstitutor
-    abstract val knownParametersSubstitutor: NewTypeSubstitutor
-    abstract val argumentsWithConversion: Map<KotlinCallArgument, SamConversionDescription>
-    abstract val argumentsWithSuspendConversion: Map<KotlinCallArgument, UnwrappedType>
-    abstract val argumentsWithUnitConversion: Map<KotlinCallArgument, UnwrappedType>
-    abstract val argumentsWithConstantConversion: Map<KotlinCallArgument, IntegerValueTypeConstant>
+    abstract konst typeArgumentMappingByOriginal: TypeArgumentsToParametersMapper.TypeArgumentsMapping
+    abstract konst argumentMappingByOriginal: Map<ValueParameterDescriptor, ResolvedCallArgument>
+    abstract konst freshVariablesSubstitutor: FreshVariableNewTypeSubstitutor
+    abstract konst knownParametersSubstitutor: NewTypeSubstitutor
+    abstract konst argumentsWithConversion: Map<KotlinCallArgument, SamConversionDescription>
+    abstract konst argumentsWithSuspendConversion: Map<KotlinCallArgument, UnwrappedType>
+    abstract konst argumentsWithUnitConversion: Map<KotlinCallArgument, UnwrappedType>
+    abstract konst argumentsWithConstantConversion: Map<KotlinCallArgument, IntegerValueTypeConstant>
     abstract fun setCandidateDescriptor(newCandidateDescriptor: CallableDescriptor)
 }
 
 class SamConversionDescription(
-    val convertedTypeByOriginParameter: UnwrappedType,
-    val convertedTypeByCandidateParameter: UnwrappedType, // expected type for corresponding argument
-    val originalParameterType: UnwrappedType // need to overload resolution on inherited SAM interfaces
+    konst convertedTypeByOriginParameter: UnwrappedType,
+    konst convertedTypeByCandidateParameter: UnwrappedType, // expected type for corresponding argument
+    konst originalParameterType: UnwrappedType // need to overload resolution on inherited SAM interfaces
 )
 
-class ResolvedExpressionAtom(override val atom: ExpressionKotlinCallArgument) : ResolvedAtom() {
+class ResolvedExpressionAtom(override konst atom: ExpressionKotlinCallArgument) : ResolvedAtom() {
     init {
         setAnalyzedResults(listOf())
     }
 }
 
-class ResolvedSubCallArgument(override val atom: SubKotlinCallArgument, resolveIndependently: Boolean) : ResolvedAtom() {
+class ResolvedSubCallArgument(override konst atom: SubKotlinCallArgument, resolveIndependently: Boolean) : ResolvedAtom() {
     init {
         if (resolveIndependently)
             setAnalyzedResults(listOf())
@@ -118,17 +118,17 @@ class ResolvedSubCallArgument(override val atom: SubKotlinCallArgument, resolveI
 
 
 sealed class PostponedResolvedAtom : ResolvedAtom(), PostponedResolvedAtomMarker {
-    abstract override val inputTypes: Collection<UnwrappedType>
-    abstract override val outputType: UnwrappedType?
-    abstract override val expectedType: UnwrappedType?
+    abstract override konst inputTypes: Collection<UnwrappedType>
+    abstract override konst outputType: UnwrappedType?
+    abstract override konst expectedType: UnwrappedType?
 }
 
 class LambdaWithTypeVariableAsExpectedTypeAtom(
-    override val atom: LambdaKotlinCallArgument,
-    override val expectedType: UnwrappedType
+    override konst atom: LambdaKotlinCallArgument,
+    override konst expectedType: UnwrappedType
 ) : PostponedResolvedAtom(), LambdaWithTypeVariableAsExpectedTypeMarker {
-    override val inputTypes: Collection<UnwrappedType> get() = listOf(expectedType)
-    override val outputType: UnwrappedType? get() = null
+    override konst inputTypes: Collection<UnwrappedType> get() = listOf(expectedType)
+    override konst outputType: UnwrappedType? get() = null
 
     override var revisedExpectedType: UnwrappedType? = null
         private set
@@ -153,14 +153,14 @@ class LambdaWithTypeVariableAsExpectedTypeAtom(
 }
 
 class ResolvedLambdaAtom(
-    override val atom: LambdaKotlinCallArgument,
-    val isSuspend: Boolean,
-    val receiver: UnwrappedType?,
-    val contextReceivers: List<UnwrappedType>,
-    val parameters: List<UnwrappedType>,
-    val returnType: UnwrappedType,
-    val typeVariableForLambdaReturnType: TypeVariableForLambdaReturnType?,
-    override val expectedType: UnwrappedType?
+    override konst atom: LambdaKotlinCallArgument,
+    konst isSuspend: Boolean,
+    konst receiver: UnwrappedType?,
+    konst contextReceivers: List<UnwrappedType>,
+    konst parameters: List<UnwrappedType>,
+    konst returnType: UnwrappedType,
+    konst typeVariableForLambdaReturnType: TypeVariableForLambdaReturnType?,
+    override konst expectedType: UnwrappedType?
 ) : PostponedResolvedAtom() {
     /**
      * [resultArgumentsInfo] can be null only if lambda was analyzed in process of resolve
@@ -179,7 +179,7 @@ class ResolvedLambdaAtom(
         setAnalyzedResults(subResolvedAtoms)
     }
 
-    override val inputTypes: Collection<UnwrappedType>
+    override konst inputTypes: Collection<UnwrappedType>
         get() {
             if (receiver == null && contextReceivers.isEmpty()) return parameters
             return ArrayList<UnwrappedType>(parameters.size + contextReceivers.size + (if (receiver != null) 1 else 0)).apply {
@@ -189,7 +189,7 @@ class ResolvedLambdaAtom(
             }
         }
 
-    override val outputType: UnwrappedType get() = returnType
+    override konst outputType: UnwrappedType get() = returnType
 }
 
 fun ResolvedLambdaAtom.unwrap(): ResolvedLambdaAtom {
@@ -197,8 +197,8 @@ fun ResolvedLambdaAtom.unwrap(): ResolvedLambdaAtom {
 }
 
 abstract class ResolvedCallableReferenceArgumentAtom(
-    override val atom: CallableReferenceKotlinCallArgument,
-    override val expectedType: UnwrappedType?
+    override konst atom: CallableReferenceKotlinCallArgument,
+    override konst expectedType: UnwrappedType?
 ) : PostponedResolvedAtom(), ResolvedCallableReferenceAtom {
     var candidate: CallableReferenceResolutionCandidate? = null
         private set
@@ -219,8 +219,8 @@ class EagerCallableReferenceAtom(
     atom: CallableReferenceKotlinCallArgument,
     expectedType: UnwrappedType?
 ) : ResolvedCallableReferenceArgumentAtom(atom, expectedType) {
-    override val inputTypes: Collection<UnwrappedType> get() = emptyList()
-    override val outputType: UnwrappedType? get() = null
+    override konst inputTypes: Collection<UnwrappedType> get() = emptyList()
+    override konst outputType: UnwrappedType? get() = null
 
     fun transformToPostponed(): PostponedCallableReferenceAtom = PostponedCallableReferenceAtom(this)
 }
@@ -229,10 +229,10 @@ sealed class AbstractPostponedCallableReferenceAtom(
     atom: CallableReferenceKotlinCallArgument,
     expectedType: UnwrappedType?
 ) : ResolvedCallableReferenceArgumentAtom(atom, expectedType) {
-    override val inputTypes: Collection<UnwrappedType>
+    override konst inputTypes: Collection<UnwrappedType>
         get() = extractInputOutputTypesFromCallableReferenceExpectedType(expectedType)?.inputTypes ?: listOfNotNull(expectedType)
 
-    override val outputType: UnwrappedType?
+    override konst outputType: UnwrappedType?
         get() = extractInputOutputTypesFromCallableReferenceExpectedType(expectedType)?.outputType
 }
 
@@ -255,8 +255,8 @@ class PostponedCallableReferenceAtom(
 }
 
 class ResolvedCollectionLiteralAtom(
-    override val atom: CollectionLiteralKotlinCallArgument,
-    val expectedType: UnwrappedType?
+    override konst atom: CollectionLiteralKotlinCallArgument,
+    konst expectedType: UnwrappedType?
 ) : ResolvedAtom() {
     init {
         setAnalyzedResults(listOf())
@@ -265,8 +265,8 @@ class ResolvedCollectionLiteralAtom(
 
 sealed class CallResolutionResult(
     resultCallAtom: ResolvedCallAtom?,
-    val diagnostics: List<KotlinCallDiagnostic>,
-    val constraintSystem: NewConstraintSystem
+    konst diagnostics: List<KotlinCallDiagnostic>,
+    konst constraintSystem: NewConstraintSystem
 ) : ResolvedAtom() {
     init {
         setAnalyzedResults(listOfNotNull(resultCallAtom))
@@ -278,10 +278,10 @@ sealed class CallResolutionResult(
 
     fun completedDiagnostic(substitutor: NewTypeSubstitutor): List<KotlinCallDiagnostic> {
         return diagnostics.map {
-            val error = it.constraintSystemError ?: return@map it
+            konst error = it.constraintSystemError ?: return@map it
             if (error !is NewConstraintMismatch) return@map it
-            val lowerType = (error.lowerType as? KotlinType)?.unwrap() ?: return@map it
-            val newLowerType = substitutor.safeSubstitute(lowerType.unCapture())
+            konst lowerType = (error.lowerType as? KotlinType)?.unwrap() ?: return@map it
+            konst newLowerType = substitutor.safeSubstitute(lowerType.unCapture())
             when (error) {
                 is NewConstraintError -> NewConstraintError(newLowerType, error.upperType, error.position).asDiagnostic()
                 is NewConstraintWarning -> NewConstraintWarning(newLowerType, error.upperType, error.position).asDiagnostic()
@@ -289,13 +289,13 @@ sealed class CallResolutionResult(
         }
     }
 
-    override val atom: ResolutionAtom? get() = null
+    override konst atom: ResolutionAtom? get() = null
 
     override fun toString(): String = "diagnostics: (${diagnostics.joinToString()})"
 }
 
 open class SingleCallResolutionResult(
-    val resultCallAtom: ResolvedCallAtom,
+    konst resultCallAtom: ResolvedCallAtom,
     diagnostics: List<KotlinCallDiagnostic>,
     constraintSystem: NewConstraintSystem
 ) : CallResolutionResult(resultCallAtom, diagnostics, constraintSystem)
@@ -304,7 +304,7 @@ class PartialCallResolutionResult(
     resultCallAtom: ResolvedCallAtom,
     diagnostics: List<KotlinCallDiagnostic>,
     constraintSystem: NewConstraintSystem,
-    val forwardToInferenceSession: Boolean = false
+    konst forwardToInferenceSession: Boolean = false
 ) : SingleCallResolutionResult(resultCallAtom, diagnostics, constraintSystem)
 
 class CompletedCallResolutionResult(
@@ -320,24 +320,24 @@ class ErrorCallResolutionResult(
 ) : SingleCallResolutionResult(resultCallAtom, diagnostics, constraintSystem)
 
 class AllCandidatesResolutionResult(
-    val allCandidates: Collection<CandidateWithDiagnostics>,
+    konst allCandidates: Collection<CandidateWithDiagnostics>,
     constraintSystem: NewConstraintSystem
 ) : CallResolutionResult(null, emptyList(), constraintSystem)
 
-data class CandidateWithDiagnostics(val candidate: ResolutionCandidate, val diagnostics: List<KotlinCallDiagnostic>)
+data class CandidateWithDiagnostics(konst candidate: ResolutionCandidate, konst diagnostics: List<KotlinCallDiagnostic>)
 
 fun CallResolutionResult.resultCallAtom(): ResolvedCallAtom? =
     if (this is SingleCallResolutionResult) resultCallAtom else null
 
-val ResolvedCallAtom.freshReturnType: UnwrappedType?
+konst ResolvedCallAtom.freshReturnType: UnwrappedType?
     get() {
-        val returnType = candidateDescriptor.returnType ?: return null
+        konst returnType = candidateDescriptor.returnType ?: return null
         return freshVariablesSubstitutor.safeSubstitute(returnType.unwrap())
     }
 
-class PartialCallContainer(val result: PartialCallResolutionResult?) {
+class PartialCallContainer(konst result: PartialCallResolutionResult?) {
     companion object {
-        val empty = PartialCallContainer(null)
+        konst empty = PartialCallContainer(null)
     }
 }
 
@@ -345,6 +345,6 @@ class PartialCallContainer(val result: PartialCallResolutionResult?) {
  * Used only for delegated properties with one good candidate and one for bad
  * e.g. in case `var x by lazy { "" }
  */
-class StubResolvedAtom(val typeVariable: TypeConstructor) : ResolvedAtom() {
-    override val atom: ResolutionAtom? get() = null
+class StubResolvedAtom(konst typeVariable: TypeConstructor) : ResolvedAtom() {
+    override konst atom: ResolutionAtom? get() = null
 }

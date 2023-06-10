@@ -3,7 +3,7 @@ package com.example
 class SomeClass {
 
     companion object CompanionObject {
-        const val constantChangedValue: Int = 0
-        const val constantUnchanged: Int = 0
+        const konst constantChangedValue: Int = 0
+        const konst constantUnchanged: Int = 0
     }
 }

@@ -16,23 +16,23 @@ import org.jetbrains.kotlin.test.model.TestModule
 
 // Only MPP contains several parts inside FirOutputArtifact, other projects only contain single part.
 data class FirOutputPartForDependsOnModule(
-    val module: TestModule,
-    val session: FirSession,
-    val firAnalyzerFacade: AbstractFirAnalyzerFacade,
-    val firFiles: Map<TestFile, FirFile>
+    konst module: TestModule,
+    konst session: FirSession,
+    konst firAnalyzerFacade: AbstractFirAnalyzerFacade,
+    konst firFiles: Map<TestFile, FirFile>
 )
 
-abstract class FirOutputArtifact(val partsForDependsOnModules: List<FirOutputPartForDependsOnModule>) : ResultingArtifact.FrontendOutput<FirOutputArtifact>() {
-    val allFirFiles: Map<TestFile, FirFile> = partsForDependsOnModules.fold(emptyMap()) { acc, part -> acc + part.firFiles }
+abstract class FirOutputArtifact(konst partsForDependsOnModules: List<FirOutputPartForDependsOnModule>) : ResultingArtifact.FrontendOutput<FirOutputArtifact>() {
+    konst allFirFiles: Map<TestFile, FirFile> = partsForDependsOnModules.fold(emptyMap()) { acc, part -> acc + part.firFiles }
 
-    override val kind: FrontendKinds.FIR
+    override konst kind: FrontendKinds.FIR
         get() = FrontendKinds.FIR
 
-    val mainFirFiles: Map<TestFile, FirFile> by lazy { allFirFiles.filterKeys { !it.isAdditional } }
+    konst mainFirFiles: Map<TestFile, FirFile> by lazy { allFirFiles.filterKeys { !it.isAdditional } }
 
-    val hasErrors: Boolean by lazy {
+    konst hasErrors: Boolean by lazy {
         partsForDependsOnModules.any { part ->
-            part.firAnalyzerFacade.runCheckers().values.any { diagnostics -> diagnostics.any { it.severity == Severity.ERROR } }
+            part.firAnalyzerFacade.runCheckers().konstues.any { diagnostics -> diagnostics.any { it.severity == Severity.ERROR } }
         }
     }
 }

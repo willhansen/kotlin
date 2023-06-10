@@ -23,10 +23,10 @@ import java.util.function.UnaryOperator
 class ListTest {
 
     @Test fun replaceAll() {
-        val list = mutableListOf("ab", "cde", "x")
+        konst list = mutableListOf("ab", "cde", "x")
         list.replaceAll { it.length.toString() }
 
-        val expected = listOf("2", "3", "1")
+        konst expected = listOf("2", "3", "1")
         assertEquals(expected, list)
 
         list.replaceAll(UnaryOperator.identity())

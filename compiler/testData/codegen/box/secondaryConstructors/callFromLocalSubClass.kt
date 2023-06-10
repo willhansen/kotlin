@@ -1,15 +1,15 @@
 fun box(): String {
-    val z = "K"
-    open class A(val x: String) {
+    konst z = "K"
+    open class A(konst x: String) {
         constructor() : this("O")
 
-        val y: String
+        konst y: String
             get() = z
     }
 
     class B : A()
 
-    val b = B()
+    konst b = B()
 
     return b.x + b.y
 }

@@ -2,23 +2,23 @@
 
 class A {
     companion object {
-        val s: String
+        konst s: String
 
         init {
             s = "OK"
         }
 
-        val x = x()
+        konst x = x()
 
-        init { val a = 32 }
+        init { konst a = 32 }
 
         init {
-            val b = 42
+            konst b = 42
         }
 
         init
         {
-            val c = 43
+            konst c = 43
         }
     }
 }

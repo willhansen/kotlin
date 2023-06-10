@@ -12,7 +12,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.Array<out ERROR_TYPE>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.Array<out T>, action: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -48,7 +48,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.BooleanArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.BooleanArray, action: kotlin.Function1<kotlin.Boolean, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -82,7 +82,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.ByteArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.ByteArray, action: kotlin.Function1<kotlin.Byte, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -116,7 +116,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.CharArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.CharArray, action: kotlin.Function1<kotlin.Char, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -150,7 +150,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.CharSequence
         returnType = kotlin.Unit
         symbol = kotlin/text/forEach(<extension receiver>: kotlin.CharSequence, action: kotlin.Function1<kotlin.Char, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -184,7 +184,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.DoubleArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.DoubleArray, action: kotlin.Function1<kotlin.Double, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -218,7 +218,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.FloatArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.FloatArray, action: kotlin.Function1<kotlin.Float, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -252,7 +252,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.IntArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.IntArray, action: kotlin.Function1<kotlin.Int, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -286,7 +286,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.LongArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.LongArray, action: kotlin.Function1<kotlin.Long, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -320,7 +320,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.ShortArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.ShortArray, action: kotlin.Function1<kotlin.Short, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -354,7 +354,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.UByteArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.UByteArray, action: kotlin.Function1<kotlin.UByte, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -388,7 +388,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.UIntArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.UIntArray, action: kotlin.Function1<kotlin.UInt, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -422,7 +422,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.ULongArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.ULongArray, action: kotlin.Function1<kotlin.ULong, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -456,7 +456,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.UShortArray
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.UShortArray, action: kotlin.Function1<kotlin.UShort, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -489,7 +489,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.collections.Iterable<kotlin.Int>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Iterable<T>, action: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -524,7 +524,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.collections.Iterable<kotlin.Int>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Iterable<T>, action: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -560,7 +560,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.collections.Iterator<ERROR_TYPE>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Iterator<T>, operation: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = operation
             receiverType = null
@@ -595,7 +595,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.collections.List<kotlin.Int>
         returnType = kotlin.Unit
         symbol = /forEach(<extension receiver>: kotlin.collections.List<kotlin.Int>, action: kotlin.Function1<kotlin.Int, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -629,7 +629,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.collections.Map<out ERROR_TYPE, ERROR_TYPE>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Map<out K, V>, action: kotlin.Function1<kotlin.collections.Map.Entry<K, V>, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -666,7 +666,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.collections.Map<out ERROR_TYPE, ERROR_TYPE>
         returnType = kotlin.Unit
         symbol = kotlin/collections/forEach(<extension receiver>: kotlin.collections.Map<out K, V>, action: kotlin.Function1<kotlin.collections.Map.Entry<K, V>, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null
@@ -703,7 +703,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = kotlin.sequences.Sequence<ERROR_TYPE>
         returnType = kotlin.Unit
         symbol = kotlin/sequences/forEach(<extension receiver>: kotlin.sequences.Sequence<T>, action: kotlin.Function1<T, kotlin.Unit>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = action
             receiverType = null

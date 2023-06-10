@@ -16,8 +16,8 @@ class WithoutPrimary {
 // FILE: WithoutPrimary.kt
 
 class A {
-    val x: String 
-    val y: String
+    konst x: String 
+    konst y: String
     constructor(x: String, y: String) {
         this.x = x
         this.y = y
@@ -28,13 +28,13 @@ class A {
 }
 
 fun box(): String {
-    val test1 = WithoutPrimary.test1().toString()
+    konst test1 = WithoutPrimary.test1().toString()
     if (test1 != "123#abc") return "fail1: $test1"
 
-    val test3 = WithoutPrimary.test3().toString()
+    konst test3 = WithoutPrimary.test3().toString()
     if (test3 != "123#456") return "fail3: $test3"
 
-    val test4 = WithoutPrimary.test4().toString()
+    konst test4 = WithoutPrimary.test4().toString()
     if (test4 != "1.0#def_y") return "fail4: $test4"
 
     return "OK"

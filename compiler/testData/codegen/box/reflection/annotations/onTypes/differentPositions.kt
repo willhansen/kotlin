@@ -5,9 +5,9 @@ import kotlin.reflect.KCallable
 import kotlin.reflect.KType
 
 @Target(AnnotationTarget.TYPE)
-annotation class InRange(val from: Int, val to: Int)
+annotation class InRange(konst from: Int, konst to: Int)
 
-val propertyType: @InRange(1, 10) Int = 5
+konst propertyType: @InRange(1, 10) Int = 5
 
 fun functionType(): @InRange(1, 10) Int = 5
 
@@ -26,10 +26,10 @@ fun typeArgument(): List<@InRange(1, 10) Int>? = null
 // -------
 
 private fun check(what: String, type: KType) {
-    val annotations = type.annotations
+    konst annotations = type.annotations
     if (annotations.isEmpty()) throw AssertionError("No annotations found on $what")
-    val a = annotations.single() as InRange
-    if (a.from != 1 || a.to != 10) throw AssertionError("Incorrect from/to values: ${a.from} ${a.to}")
+    konst a = annotations.single() as InRange
+    if (a.from != 1 || a.to != 10) throw AssertionError("Incorrect from/to konstues: ${a.from} ${a.to}")
 }
 
 fun box(): String {
@@ -39,7 +39,7 @@ fun box(): String {
     check("receiver type", Int::receiverType.parameters.single().type)
     check("supertype", Supertype::class.supertypes.single())
 
-    val typeParameterBound = Supertype::class.members.single { it.name == "typeParameterBound" } as KCallable
+    konst typeParameterBound = Supertype::class.members.single { it.name == "typeParameterBound" } as KCallable
     check("type parameter bound", typeParameterBound.typeParameters.single().upperBounds.single())
 
     check("type argument", ::typeArgument.returnType.arguments.single().type!!)

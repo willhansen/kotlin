@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.name.ClassId
 
-class FirFunctionTypeKindServiceImpl(private val session: FirSession) : FirFunctionTypeKindService() {
-    private val nonReflectKindsFromExtensions = mutableListOf<FunctionTypeKind>()
+class FirFunctionTypeKindServiceImpl(private konst session: FirSession) : FirFunctionTypeKindService() {
+    private konst nonReflectKindsFromExtensions = mutableListOf<FunctionTypeKind>()
 
-    override val extractor: FunctionTypeKindExtractor = run {
-        val kinds = buildList {
+    override konst extractor: FunctionTypeKindExtractor = run {
+        konst kinds = buildList {
             add(FunctionTypeKind.Function)
             add(FunctionTypeKind.SuspendFunction)
             add(FunctionTypeKind.KFunction)
             add(FunctionTypeKind.KSuspendFunction)
 
-            val registrar = object : FirFunctionTypeKindExtension.FunctionTypeKindRegistrar {
+            konst registrar = object : FirFunctionTypeKindExtension.FunctionTypeKindRegistrar {
                 override fun registerKind(nonReflectKind: FunctionTypeKind, reflectKind: FunctionTypeKind) {
                     require(nonReflectKind.reflectKind() == reflectKind)
                     require(reflectKind.nonReflectKind() == nonReflectKind)
@@ -42,7 +42,7 @@ class FirFunctionTypeKindServiceImpl(private val session: FirSession) : FirFunct
                 with(extension) { registrar.registerKinds() }
             }
         }.also { kinds ->
-            val allNames = kinds.map { "${it.packageFqName}.${it.classNamePrefix}" }
+            konst allNames = kinds.map { "${it.packageFqName}.${it.classNamePrefix}" }
             require(allNames.distinct() == allNames) {
                 "There are clashing functional type kinds: $allNames"
             }
@@ -81,12 +81,12 @@ class FirFunctionTypeKindServiceImpl(private val session: FirSession) : FirFunct
         annotations: List<FirAnnotation>
     ): FunctionTypeKind? {
         if (nonReflectKindsFromExtensions.isEmpty() || annotations.isEmpty()) return null
-        val baseKind = extractor.getFunctionalClassKind(classId.packageFqName, classId.shortClassName.asString()) ?: return null
+        konst baseKind = extractor.getFunctionalClassKind(classId.packageFqName, classId.shortClassName.asString()) ?: return null
         if (baseKind.nonReflectKind() != FunctionTypeKind.Function) return null
-        val matchingExtensionKinds = buildList {
+        konst matchingExtensionKinds = buildList {
             extractKindsFromAnnotations(annotations.mapNotNull { it.toAnnotationClassId(session) })
         }
-        val matchingKind = matchingExtensionKinds.singleOrNull() ?: return null
+        konst matchingKind = matchingExtensionKinds.singleOrNull() ?: return null
         return when (baseKind.isReflectType) {
             false -> matchingKind
             true -> matchingKind.reflectKind()

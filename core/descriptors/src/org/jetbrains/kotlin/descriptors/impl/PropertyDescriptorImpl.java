@@ -186,7 +186,7 @@ public class PropertyDescriptorImpl extends VariableDescriptorWithInitializerImp
     }
 
     @Override
-    public void validate() {
+    public void konstidate() {
         getTypeParameters();
     }
 

@@ -27,30 +27,30 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 class ForInCharSequenceLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val canCacheLength: Boolean,
-    private val charSequenceClassType: Type?
+    private konst canCacheLength: Boolean,
+    private konst charSequenceClassType: Type?
 ) : AbstractForLoopGenerator(codegen, forExpression) {
     private var indexVar: Int = 0
     private var charSequenceVar: Int = 0
     private var charSequenceLengthVar: Int = 0
 
-    private val charSequenceType = charSequenceClassType ?: CHAR_SEQUENCE_TYPE
+    private konst charSequenceType = charSequenceClassType ?: CHAR_SEQUENCE_TYPE
 
     override fun beforeLoop() {
         super.beforeLoop()
 
         indexVar = createLoopTempVariable(Type.INT_TYPE)
 
-        val loopRange = forExpression.loopRange
-        val value = codegen.gen(loopRange)
-        val loopRangeType: KotlinType = bindingContext.getType(forExpression.loopRange!!)!!
-        val asmLoopRangeType = codegen.asmType(loopRangeType)
+        konst loopRange = forExpression.loopRange
+        konst konstue = codegen.gen(loopRange)
+        konst loopRangeType: KotlinType = bindingContext.getType(forExpression.loopRange!!)!!
+        konst asmLoopRangeType = codegen.asmType(loopRangeType)
 
         // NB even if we already have a loop range stored in local variable, that variable might be modified in the loop body
         // (see controlStructures/forInCharSequenceMut.kt).
         // We should always store the corresponding CharSequence to a local variable to preserve the Iterator-based behavior.
         charSequenceVar = createLoopTempVariable(charSequenceType)
-        value.put(asmLoopRangeType, loopRangeType, v)
+        konstue.put(asmLoopRangeType, loopRangeType, v)
         v.store(charSequenceVar, charSequenceType)
 
         if (canCacheLength) {
@@ -90,7 +90,7 @@ class ForInCharSequenceLoopGenerator(
     }
 
     private fun InstructionAdapter.invokeCharSequenceMethod(name: String, desc: String) {
-        val charSequenceClassType = charSequenceClassType
+        konst charSequenceClassType = charSequenceClassType
         if (charSequenceClassType != null) {
             invokevirtual(charSequenceClassType.internalName, name, desc, false)
         } else {
@@ -99,6 +99,6 @@ class ForInCharSequenceLoopGenerator(
     }
 
     companion object {
-        val CHAR_SEQUENCE_TYPE: Type = Type.getObjectType("java/lang/CharSequence")
+        konst CHAR_SEQUENCE_TYPE: Type = Type.getObjectType("java/lang/CharSequence")
     }
 }

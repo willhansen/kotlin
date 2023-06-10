@@ -23,8 +23,8 @@ static int posix_errno() {
         return errno;
 }
 
-static void set_posix_errno(int value) {
-        errno = value;
+static void set_posix_errno(int konstue) {
+        errno = konstue;
 }
 
 
@@ -33,8 +33,8 @@ static int posix_h_errno() {
         return h_errno;
 }
 
-static void set_posix_h_errno(int value) {
-        h_errno = value;
+static void set_posix_h_errno(int konstue) {
+        h_errno = konstue;
 }
 
 static int init_sockets() {

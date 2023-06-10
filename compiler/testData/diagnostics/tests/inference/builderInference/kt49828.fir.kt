@@ -45,47 +45,47 @@ fun foo11(x: MutableSet<MutableMap.MutableEntry<Int, String>>) {}
 fun foo11(x: MutableSet<MutableMap.MutableEntry<Int, Int>>) {}
 
 fun main() {
-    val list1 = buildList {
+    konst list1 = buildList {
         add("one")
 
-        val secondParameter = get(1)
+        konst secondParameter = get(1)
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(secondParameter) // ERROR: [OVERLOAD_RESOLUTION_AMBIGUITY] Overload resolution ambiguity. All these functions match.
     }
-    val list2 = buildList {
+    konst list2 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(get(1)) // ERROR: [OVERLOAD_RESOLUTION_AMBIGUITY] Overload resolution ambiguity. All these functions match.
     }
-    val list3 = buildList {
+    konst list3 = buildList {
         add("one")
 
-        val secondParameter = Inv(get(1))
+        konst secondParameter = Inv(get(1))
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>(secondParameter)
     }
-    val list4 = buildList {
+    konst list4 = buildList {
         add("one")
 
-        val secondParameter = get(1)
+        konst secondParameter = get(1)
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>(Inv(secondParameter))
     }
-    val list5 = buildList {
+    konst list5 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>(Inv(get(1)))
     }
-    val list6 = buildList {
+    konst list6 = buildList {
         add("one")
 
         get(0).<!OVERLOAD_RESOLUTION_AMBIGUITY!>bar<!>()
     }
-    val list7 = buildList {
+    konst list7 = buildList {
         add("one")
 
         with (get(0)) {
             <!OVERLOAD_RESOLUTION_AMBIGUITY!>bar<!>()
         }
     }
-    val list71 = buildList {
+    konst list71 = buildList {
         add("one")
 
         with (get(0)) l1@ {
@@ -94,7 +94,7 @@ fun main() {
             }
         }
     }
-    val list711 = buildList {
+    konst list711 = buildList {
         add("one")
 
         with (get(0)) {
@@ -103,12 +103,12 @@ fun main() {
             }
         }
     }
-    val list8 = buildList {
+    konst list8 = buildList {
         add("one")
 
         Inv(get(0)).<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo2<!>()
     }
-    val list9 = buildList {
+    konst list9 = buildList {
         add("one")
 
         with (get(0)) {
@@ -117,7 +117,7 @@ fun main() {
             }
         }
     }
-    val list91 = buildList {
+    konst list91 = buildList {
         add("one")
 
         with (get(0)) {
@@ -128,36 +128,36 @@ fun main() {
     }
 
     // Resolution ambiguities below aren't due to stub types
-    val list10 = buildList {
+    konst list10 = buildList {
         add("one")
 
         foo0(get(0), 0f)
     }
-    val list11 = buildList {
+    konst list11 = buildList {
         add("one")
 
-        val x = get(0)
+        konst x = get(0)
         foo0(x, 0f)
     }
-    val list12 = buildList {
+    konst list12 = buildList {
         add("one")
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo00<!>(get(0), 0f)
     }
 
     // Below are multi-arguments resolution ambiguities
-    val list13 = buildList {
+    konst list13 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo000<!>(get(0), 0f, get(0))
     }
 
-    val list14 = buildList {
+    konst list14 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo0000<!>(get(0), 0f, get(0))
     }
 
-    val list17 = buildList l1@ {
+    konst list17 = buildList l1@ {
         add("one")
 
         with (get(0)) {
@@ -165,26 +165,26 @@ fun main() {
         }
     }
 
-    val list18 = buildList {
+    konst list18 = buildList {
         add("one")
 
         get(0).<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo0003<!>(0f, get(0))
     }
 
-    val map1 = buildMap {
+    konst map1 = buildMap {
         put(1, "one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo11<!>(entries)
     }
 
-    // There aren't specific errors below as casting value arguments doesn't make a resolve successful
-    val list15 = buildList {
+    // There aren't specific errors below as casting konstue arguments doesn't make a resolve successful
+    konst list15 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo0001<!>(get(0), 0f, get(0))
     }
 
-    val list16 = buildList {
+    konst list16 = buildList {
         add("one")
 
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>foo0002<!>(get(0), 0f, get(0))

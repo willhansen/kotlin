@@ -7,14 +7,14 @@ package kotlin.script.experimental.dependencies.impl
 
 import kotlin.script.experimental.dependencies.ExternalDependenciesResolver
 
-fun ExternalDependenciesResolver.Options.value(name: DependenciesResolverOptionsName) =
-    value(name.key)
+fun ExternalDependenciesResolver.Options.konstue(name: DependenciesResolverOptionsName) =
+    konstue(name.key)
 
 fun ExternalDependenciesResolver.Options.flag(name: DependenciesResolverOptionsName) =
     flag(name.key)
 
-operator fun MutableMap<String, String>.set(key: DependenciesResolverOptionsName, value: String) {
-    put(key.key, value)
+operator fun MutableMap<String, String>.set(key: DependenciesResolverOptionsName, konstue: String) {
+    put(key.key, konstue)
 }
 
 /**
@@ -32,54 +32,54 @@ enum class DependenciesResolverOptionsName(optionName: String? = null) {
     CLASSIFIER,
     EXTENSION;
 
-    val key = optionName ?: name.lowercase()
+    konst key = optionName ?: name.lowercase()
 }
 
-val ExternalDependenciesResolver.Options.transitive
+konst ExternalDependenciesResolver.Options.transitive
     get() = flag(DependenciesResolverOptionsName.TRANSITIVE)
 
 /**
  * Enables partial resolution of transitive dependencies.
  * When this flag is enabled, resolver ignores [transitive] flag.
  */
-val ExternalDependenciesResolver.Options.partialResolution
+konst ExternalDependenciesResolver.Options.partialResolution
     get() = flag(DependenciesResolverOptionsName.PARTIAL_RESOLUTION)
 
-val ExternalDependenciesResolver.Options.dependencyScopes
-    get() = value(DependenciesResolverOptionsName.SCOPE)?.split(",")
+konst ExternalDependenciesResolver.Options.dependencyScopes
+    get() = konstue(DependenciesResolverOptionsName.SCOPE)?.split(",")
 
 /**
  * Username to access repository (should be passed with [password])
  */
-val ExternalDependenciesResolver.Options.username
-    get() = value(DependenciesResolverOptionsName.USERNAME)
+konst ExternalDependenciesResolver.Options.username
+    get() = konstue(DependenciesResolverOptionsName.USERNAME)
 
 /**
  * Password to access repository  (should be passed with [username])
  */
-val ExternalDependenciesResolver.Options.password
-    get() = value(DependenciesResolverOptionsName.PASSWORD)
+konst ExternalDependenciesResolver.Options.password
+    get() = konstue(DependenciesResolverOptionsName.PASSWORD)
 
 /**
  * Absolute path to the private key file to access repository
  */
-val ExternalDependenciesResolver.Options.privateKeyFile
-    get() = value(DependenciesResolverOptionsName.KEY_FILE)
+konst ExternalDependenciesResolver.Options.privateKeyFile
+    get() = konstue(DependenciesResolverOptionsName.KEY_FILE)
 
 /**
  * Passphrase to access file passed in [privateKeyFile]
  */
-val ExternalDependenciesResolver.Options.privateKeyPassphrase
-    get() = value(DependenciesResolverOptionsName.KEY_PASSPHRASE)
+konst ExternalDependenciesResolver.Options.privateKeyPassphrase
+    get() = konstue(DependenciesResolverOptionsName.KEY_PASSPHRASE)
 
 /**
  * Classifier of all resolved artifacts
  */
-val ExternalDependenciesResolver.Options.classifier
-    get() = value(DependenciesResolverOptionsName.CLASSIFIER)
+konst ExternalDependenciesResolver.Options.classifier
+    get() = konstue(DependenciesResolverOptionsName.CLASSIFIER)
 
 /**
  * Extension of all resolved artifacts
  */
-val ExternalDependenciesResolver.Options.extension
-    get() = value(DependenciesResolverOptionsName.EXTENSION)
+konst ExternalDependenciesResolver.Options.extension
+    get() = konstue(DependenciesResolverOptionsName.EXTENSION)

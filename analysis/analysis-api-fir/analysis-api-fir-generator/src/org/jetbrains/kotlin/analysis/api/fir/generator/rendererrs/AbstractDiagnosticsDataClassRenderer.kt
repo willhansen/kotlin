@@ -22,12 +22,12 @@ import kotlin.reflect.KType
 
 abstract class AbstractDiagnosticsDataClassRenderer : DiagnosticListRenderer() {
     override fun render(file: File, diagnosticList: DiagnosticList, packageName: String, starImportsToAdd: Set<String>) {
-        val hlDiagnosticsList = HLDiagnosticConverter.convert(diagnosticList)
+        konst hlDiagnosticsList = HLDiagnosticConverter.convert(diagnosticList)
         file.writeToFileUsingSmartPrinterIfFileContentChanged { render(hlDiagnosticsList, packageName) }
     }
 
     private fun SmartPrinter.collectAndPrintImports(diagnosticList: HLDiagnosticList) {
-        val imports = collectImports(diagnosticList)
+        konst imports = collectImports(diagnosticList)
         printImports(imports)
     }
 
@@ -58,5 +58,5 @@ abstract class AbstractDiagnosticsDataClassRenderer : DiagnosticListRenderer() {
 
     protected abstract fun SmartPrinter.render(diagnosticList: HLDiagnosticList, packageName: String)
 
-    protected abstract val defaultImports: Collection<String>
+    protected abstract konst defaultImports: Collection<String>
 }

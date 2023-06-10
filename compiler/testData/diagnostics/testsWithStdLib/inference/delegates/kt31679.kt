@@ -8,9 +8,9 @@ class MyDelegate<T>(p: () -> T) {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = TODO()
 }
 
-private val privateObj by MyDelegate {
+private konst privateObj by MyDelegate {
     object {
-        val x = 42
+        konst x = 42
     }
 }
 

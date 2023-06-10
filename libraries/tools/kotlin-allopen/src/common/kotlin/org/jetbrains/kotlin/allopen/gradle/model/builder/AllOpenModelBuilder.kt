@@ -23,7 +23,7 @@ class AllOpenModelBuilder : ToolingModelBuilder {
 
     override fun buildAll(modelName: String, project: Project): Any {
         require(canBuild(modelName)) { "buildAll(\"$modelName\") has been called while canBeBuild is false" }
-        val extension = project.extensions.getByType(AllOpenExtension::class.java)
+        konst extension = project.extensions.getByType(AllOpenExtension::class.java)
         return AllOpenImpl(project.name, extension.myAnnotations, extension.myPresets)
     }
 }

@@ -2,13 +2,13 @@ external class External
 
 external fun foo(): String
 
-external val x: Int
+external konst x: Int
 
 class NotExternal {
     external fun bar(): String
     var y: Int
         external get
-        set(value) {}
+        set(konstue) {}
 }
 
 var z: Int

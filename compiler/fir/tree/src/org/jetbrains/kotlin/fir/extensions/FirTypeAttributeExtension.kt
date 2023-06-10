@@ -15,17 +15,17 @@ import kotlin.reflect.KClass
  *
  * class MyAttribute : ConeAttribute<MyAttribute>() {...}
  *
- * val ConeAttributes.myAttribute: MyAttribute? by ConeAttributes.attributeAccessor<MyAttribute>()
+ * konst ConeAttributes.myAttribute: MyAttribute? by ConeAttributes.attributeAccessor<MyAttribute>()
  */
 abstract class FirTypeAttributeExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("AdditionalTypeAttributeExtension")
+        konst NAME = FirExtensionPointName("AdditionalTypeAttributeExtension")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension>
+    final override konst extensionType: KClass<out FirExtension>
         get() = FirTypeAttributeExtension::class
 
     abstract fun extractAttributeFromAnnotation(annotation: FirAnnotation): ConeAttribute<*>?
@@ -39,4 +39,4 @@ abstract class FirTypeAttributeExtension(session: FirSession) : FirExtension(ses
     fun interface Factory : FirExtension.Factory<FirTypeAttributeExtension>
 }
 
-val FirExtensionService.typeAttributeExtensions: List<FirTypeAttributeExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.typeAttributeExtensions: List<FirTypeAttributeExtension> by FirExtensionService.registeredExtensions()

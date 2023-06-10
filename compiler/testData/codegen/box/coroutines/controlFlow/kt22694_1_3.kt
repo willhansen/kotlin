@@ -12,12 +12,12 @@ enum class Foo(vararg expected: String) {
     E("start", "E", "end"),
     F("start", "end");
 
-    val expected = expected.toList()
+    konst expected = expected.toList()
 }
 
 fun box(): String {
-    for (c in Foo.values()) {
-        val actual = getSequence(c).toList()
+    for (c in Foo.konstues()) {
+        konst actual = getSequence(c).toList()
         if (actual != c.expected) {
             return "FAIL: -- ${c.expected} != $actual"
         }

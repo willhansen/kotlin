@@ -4,7 +4,7 @@ inline fun test(crossinline l: () -> String) {
     }.let { it() }
 
     object {
-        val z = l() //constuctor
+        konst z = l() //constuctor
     }
 }
 

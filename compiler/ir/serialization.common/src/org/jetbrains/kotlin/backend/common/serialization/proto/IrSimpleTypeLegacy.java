@@ -30,7 +30,7 @@ public final class IrSimpleTypeLegacy extends
   private IrSimpleTypeLegacy(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -107,10 +107,10 @@ public final class IrSimpleTypeLegacy extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -134,7 +134,7 @@ public final class IrSimpleTypeLegacy extends
     public IrSimpleTypeLegacy parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrSimpleTypeLegacy(input, extensionRegistry);
     }
   };
@@ -372,23 +372,23 @@ public final class IrSimpleTypeLegacy extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parseFrom(java.io.InputStream input)
@@ -578,7 +578,7 @@ public final class IrSimpleTypeLegacy extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrSimpleTypeLegacy) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -621,12 +621,12 @@ public final class IrSimpleTypeLegacy extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder setAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.set(index, value);
+      annotation_.set(index, konstue);
 
       return this;
     }
@@ -643,12 +643,12 @@ public final class IrSimpleTypeLegacy extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
-    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(value);
+      annotation_.add(konstue);
 
       return this;
     }
@@ -656,12 +656,12 @@ public final class IrSimpleTypeLegacy extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder addAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(index, value);
+      annotation_.add(index, konstue);
 
       return this;
     }
@@ -689,10 +689,10 @@ public final class IrSimpleTypeLegacy extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder addAllAnnotation(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> konstues) {
       ensureAnnotationIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, annotation_);
+          konstues, annotation_);
 
       return this;
     }
@@ -731,9 +731,9 @@ public final class IrSimpleTypeLegacy extends
     /**
      * <code>required int64 classifier = 2;</code>
      */
-    public Builder setClassifier(long value) {
+    public Builder setClassifier(long konstue) {
       bitField0_ |= 0x00000002;
-      classifier_ = value;
+      classifier_ = konstue;
       
       return this;
     }
@@ -763,9 +763,9 @@ public final class IrSimpleTypeLegacy extends
     /**
      * <code>required bool has_question_mark = 3;</code>
      */
-    public Builder setHasQuestionMark(boolean value) {
+    public Builder setHasQuestionMark(boolean konstue) {
       bitField0_ |= 0x00000004;
-      hasQuestionMark_ = value;
+      hasQuestionMark_ = konstue;
       
       return this;
     }
@@ -825,9 +825,9 @@ public final class IrSimpleTypeLegacy extends
      * </pre>
      */
     public Builder setArgument(
-        int index, long value) {
+        int index, long konstue) {
       ensureArgumentIsMutable();
-      argument_.set(index, value);
+      argument_.set(index, konstue);
       
       return this;
     }
@@ -838,9 +838,9 @@ public final class IrSimpleTypeLegacy extends
      * 0 - STAR, otherwise [63..2 - IrType index | 1..0 - Variance]
      * </pre>
      */
-    public Builder addArgument(long value) {
+    public Builder addArgument(long konstue) {
       ensureArgumentIsMutable();
-      argument_.add(value);
+      argument_.add(konstue);
       
       return this;
     }
@@ -852,10 +852,10 @@ public final class IrSimpleTypeLegacy extends
      * </pre>
      */
     public Builder addAllArgument(
-        java.lang.Iterable<? extends java.lang.Long> values) {
+        java.lang.Iterable<? extends java.lang.Long> konstues) {
       ensureArgumentIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, argument_);
+          konstues, argument_);
       
       return this;
     }
@@ -889,11 +889,11 @@ public final class IrSimpleTypeLegacy extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation abbreviation = 5;</code>
      */
-    public Builder setAbbreviation(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation value) {
-      if (value == null) {
+    public Builder setAbbreviation(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      abbreviation_ = value;
+      abbreviation_ = konstue;
 
       bitField0_ |= 0x00000010;
       return this;
@@ -911,13 +911,13 @@ public final class IrSimpleTypeLegacy extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation abbreviation = 5;</code>
      */
-    public Builder mergeAbbreviation(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation value) {
+    public Builder mergeAbbreviation(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation konstue) {
       if (((bitField0_ & 0x00000010) == 0x00000010) &&
           abbreviation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation.getDefaultInstance()) {
         abbreviation_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation.newBuilder(abbreviation_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation.newBuilder(abbreviation_).mergeFrom(konstue).buildPartial();
       } else {
-        abbreviation_ = value;
+        abbreviation_ = konstue;
       }
 
       bitField0_ |= 0x00000010;

@@ -6,7 +6,7 @@ data class MyRec : Record {
   // CHECK:
   //   Mangled name: MyRec{}name
   //   Public signature: /MyRec.name|4231860309499509769[0]
-  val name: String
+  konst name: String
     // CHECK JVM_IR:
     //   Mangled name: MyRec#<get-name>(){}kotlin.String
     //   Public signature: /MyRec.name.<get-name>|-8006111524522882650[0]

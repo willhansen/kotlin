@@ -23,7 +23,7 @@ public class FreezingException(toFreeze: Any, blocker: Any) :
  * @param where a frozen object that was attempted to mutate
  */
 @FreezingIsDeprecated
-public class InvalidMutabilityException(message: String) : RuntimeException(message)
+public class InkonstidMutabilityException(message: String) : RuntimeException(message)
 
 /**
  * Freezes object subgraph reachable from this object. Frozen objects can be freely
@@ -45,7 +45,7 @@ public fun <T> T.freeze(): T {
  * @return true if given object is null or frozen or permanent
  */
 @FreezingIsDeprecated
-public val Any?.isFrozen
+public konst Any?.isFrozen
     get() = isFrozenInternal(this)
 
 /**

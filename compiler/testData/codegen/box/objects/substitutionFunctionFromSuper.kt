@@ -8,13 +8,13 @@ enum class Enum {
 class Outer {
     fun fooCaller(): Enum = obj.foo()
 
-    private abstract inner class Inner<T>(val default: T) {
+    private abstract inner class Inner<T>(konst default: T) {
         fun foo(): T {
             return default
         }
     }
 
-    private val obj = object : Inner<Enum>(Enum.Entry1) {
+    private konst obj = object : Inner<Enum>(Enum.Entry1) {
         fun bar(): Enum {
             return default
         }
@@ -22,7 +22,7 @@ class Outer {
 }
 
 fun box(): String {
-    val o = Outer()
+    konst o = Outer()
     if (o.fooCaller() != Enum.Entry1) return "Fail"
     return "OK"
 }

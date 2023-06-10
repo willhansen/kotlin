@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 @Suppress("DEPRECATION")
 internal class JvmMetadataExtensions : MetadataExtensions {
     override fun readClassExtensions(v: KmClassVisitor, proto: ProtoBuf.Class, c: ReadContext) {
-        val ext = v.visitExtensions(JvmClassExtensionVisitor.TYPE) as? JvmClassExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmClassExtensionVisitor.TYPE) as? JvmClassExtensionVisitor ?: return
 
-        val anonymousObjectOriginName = proto.getExtensionOrNull(JvmProtoBuf.anonymousObjectOriginName)
+        konst anonymousObjectOriginName = proto.getExtensionOrNull(JvmProtoBuf.anonymousObjectOriginName)
         if (anonymousObjectOriginName != null) {
             ext.visitAnonymousObjectOriginName(c[anonymousObjectOriginName])
         }
@@ -39,7 +39,7 @@ internal class JvmMetadataExtensions : MetadataExtensions {
     }
 
     override fun readPackageExtensions(v: KmPackageVisitor, proto: ProtoBuf.Package, c: ReadContext) {
-        val ext = v.visitExtensions(JvmPackageExtensionVisitor.TYPE) as? JvmPackageExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmPackageExtensionVisitor.TYPE) as? JvmPackageExtensionVisitor ?: return
 
         for (property in proto.getExtension(JvmProtoBuf.packageLocalVariable)) {
             ext.visitLocalDelegatedProperty(
@@ -56,10 +56,10 @@ internal class JvmMetadataExtensions : MetadataExtensions {
     override fun readModuleFragmentExtensions(v: KmModuleFragmentVisitor, proto: ProtoBuf.PackageFragment, c: ReadContext) {}
 
     override fun readFunctionExtensions(v: KmFunctionVisitor, proto: ProtoBuf.Function, c: ReadContext) {
-        val ext = v.visitExtensions(JvmFunctionExtensionVisitor.TYPE) as? JvmFunctionExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmFunctionExtensionVisitor.TYPE) as? JvmFunctionExtensionVisitor ?: return
         ext.visit(JvmProtoBufUtil.getJvmMethodSignature(proto, c.strings, c.types)?.wrapAsPublic())
 
-        val lambdaClassOriginName = proto.getExtensionOrNull(JvmProtoBuf.lambdaClassOriginName)
+        konst lambdaClassOriginName = proto.getExtensionOrNull(JvmProtoBuf.lambdaClassOriginName)
         if (lambdaClassOriginName != null) {
             ext.visitLambdaClassOriginName(c[lambdaClassOriginName])
         }
@@ -68,12 +68,12 @@ internal class JvmMetadataExtensions : MetadataExtensions {
     }
 
     override fun readPropertyExtensions(v: KmPropertyVisitor, proto: ProtoBuf.Property, c: ReadContext) {
-        val ext = v.visitExtensions(JvmPropertyExtensionVisitor.TYPE) as? JvmPropertyExtensionVisitor ?: return
-        val fieldSignature = JvmProtoBufUtil.getJvmFieldSignature(proto, c.strings, c.types)
-        val propertySignature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature)
-        val getterSignature =
+        konst ext = v.visitExtensions(JvmPropertyExtensionVisitor.TYPE) as? JvmPropertyExtensionVisitor ?: return
+        konst fieldSignature = JvmProtoBufUtil.getJvmFieldSignature(proto, c.strings, c.types)
+        konst propertySignature = proto.getExtensionOrNull(JvmProtoBuf.propertySignature)
+        konst getterSignature =
             if (propertySignature != null && propertySignature.hasGetter()) propertySignature.getter else null
-        val setterSignature =
+        konst setterSignature =
             if (propertySignature != null && propertySignature.hasSetter()) propertySignature.setter else null
         ext.visit(
             proto.getExtension(JvmProtoBuf.flags),
@@ -82,11 +82,11 @@ internal class JvmMetadataExtensions : MetadataExtensions {
             setterSignature?.run { JvmMethodSignature(c[name], c[desc]) }
         )
 
-        val syntheticMethod =
+        konst syntheticMethod =
             if (propertySignature != null && propertySignature.hasSyntheticMethod()) propertySignature.syntheticMethod else null
         ext.visitSyntheticMethodForAnnotations(syntheticMethod?.run { JvmMethodSignature(c[name], c[desc]) })
 
-        val delegateMethod =
+        konst delegateMethod =
             if (propertySignature != null && propertySignature.hasDelegateMethod()) propertySignature.delegateMethod else null
         ext.visitSyntheticMethodForDelegate(delegateMethod?.run { JvmMethodSignature(c[name], c[desc]) })
 
@@ -94,12 +94,12 @@ internal class JvmMetadataExtensions : MetadataExtensions {
     }
 
     override fun readConstructorExtensions(v: KmConstructorVisitor, proto: ProtoBuf.Constructor, c: ReadContext) {
-        val ext = v.visitExtensions(JvmConstructorExtensionVisitor.TYPE) as? JvmConstructorExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmConstructorExtensionVisitor.TYPE) as? JvmConstructorExtensionVisitor ?: return
         ext.visit(JvmProtoBufUtil.getJvmConstructorSignature(proto, c.strings, c.types)?.wrapAsPublic())
     }
 
     override fun readTypeParameterExtensions(v: KmTypeParameterVisitor, proto: ProtoBuf.TypeParameter, c: ReadContext) {
-        val ext = v.visitExtensions(JvmTypeParameterExtensionVisitor.TYPE) as? JvmTypeParameterExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmTypeParameterExtensionVisitor.TYPE) as? JvmTypeParameterExtensionVisitor ?: return
         for (annotation in proto.getExtension(JvmProtoBuf.typeParameterAnnotation)) {
             ext.visitAnnotation(annotation.readAnnotation(c.strings))
         }
@@ -107,7 +107,7 @@ internal class JvmMetadataExtensions : MetadataExtensions {
     }
 
     override fun readTypeExtensions(v: KmTypeVisitor, proto: ProtoBuf.Type, c: ReadContext) {
-        val ext = v.visitExtensions(JvmTypeExtensionVisitor.TYPE) as? JvmTypeExtensionVisitor ?: return
+        konst ext = v.visitExtensions(JvmTypeExtensionVisitor.TYPE) as? JvmTypeExtensionVisitor ?: return
         ext.visit(proto.getExtension(JvmProtoBuf.isRaw))
         for (annotation in proto.getExtension(JvmProtoBuf.typeAnnotation)) {
             ext.visitAnnotation(annotation.readAnnotation(c.strings))
@@ -197,7 +197,7 @@ internal class JvmMetadataExtensions : MetadataExtensions {
             private var jvmFlags: Flags = ProtoBuf.Property.getDefaultInstance().getExtension(JvmProtoBuf.flags)
             private var signatureOrNull: JvmProtoBuf.JvmPropertySignature.Builder? = null
 
-            private val signature: JvmProtoBuf.JvmPropertySignature.Builder
+            private konst signature: JvmProtoBuf.JvmPropertySignature.Builder
                 get() = signatureOrNull ?: JvmProtoBuf.JvmPropertySignature.newBuilder().also { signatureOrNull = it }
 
             override fun visit(
@@ -301,7 +301,7 @@ internal class JvmMetadataExtensions : MetadataExtensions {
 
     override fun createModuleFragmentExtensions(): KmModuleFragmentExtension =
         object : KmModuleFragmentExtension {
-            override val type: KmExtensionType = KmExtensionType(KmModuleFragmentExtension::class)
+            override konst type: KmExtensionType = KmExtensionType(KmModuleFragmentExtension::class)
 
             override fun accept(visitor: KmModuleFragmentExtensionVisitor) {
             }

@@ -10,7 +10,7 @@ object DoubleOperations : NumberOperations {
     override operator fun Number.plus(other: Number) = this.toDouble() + other.toDouble()
 }
 
-data class Matrix(val rows: Int, val columns: Int, val data: Array<out Number>) {
+data class Matrix(konst rows: Int, konst columns: Int, konst data: Array<out Number>) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -43,8 +43,8 @@ context(NumberOperations) operator fun Matrix.plus(other: Matrix): Matrix {
 }
 
 fun box(): String {
-    val m1 = matrixOf(2, 2, 1, 2, 3, 4)
-    val m2 = matrixOf(2, 2, .4, .3, .2, .1)
+    konst m1 = matrixOf(2, 2, 1, 2, 3, 4)
+    konst m2 = matrixOf(2, 2, .4, .3, .2, .1)
     with(DoubleOperations) {
         return if (m1 + m2 == matrixOf(2, 2, 1.4, 2.3, 3.2, 4.1)) "OK" else "fail"
     }

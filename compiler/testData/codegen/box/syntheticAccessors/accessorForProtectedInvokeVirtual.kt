@@ -6,32 +6,32 @@ import kotlin.test.assertEquals
 
 open class B : A() {
     fun box(): String {
-        val overriddenMethod: () -> String = {
+        konst overriddenMethod: () -> String = {
             method()
         }
         assertEquals("C.method", overriddenMethod())
 
-        val superMethod: () -> String = {
+        konst superMethod: () -> String = {
             super.method()
         }
         assertEquals("A.method", superMethod())
 
-        val overriddenPropertyGetter: () -> String = {
+        konst overriddenPropertyGetter: () -> String = {
             property
         }
         assertEquals("C.property", overriddenPropertyGetter())
 
-        val superPropertyGetter: () -> String = {
+        konst superPropertyGetter: () -> String = {
             super.property
         }
         assertEquals("A.property", superPropertyGetter())
 
-        val overriddenPropertySetter: () -> Unit = {
+        konst overriddenPropertySetter: () -> Unit = {
             property = ""
         }
         overriddenPropertySetter()
 
-        val superPropertySetter: () -> Unit = {
+        konst superPropertySetter: () -> Unit = {
             super.property = ""
         }
         superPropertySetter()
@@ -46,7 +46,7 @@ class C : B() {
     override fun method() = "C.method"
     override var property: String
         get() = "C.property"
-        set(value) { state += "C.property;" }
+        set(konstue) { state += "C.property;" }
 }
 
 fun box() = C().box()
@@ -64,5 +64,5 @@ abstract class A {
 
     protected open var property: String
         get() = "A.property"
-        set(value) { state += "A.property;" }
+        set(konstue) { state += "A.property;" }
 }

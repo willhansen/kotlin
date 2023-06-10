@@ -1,4 +1,4 @@
-sealed class My(open val x: Int?) {
+sealed class My(open konst x: Int?) {
     init {
         if (<!DEBUG_INFO_LEAKING_THIS!>x<!> != null) {
             // Should be error: property is open

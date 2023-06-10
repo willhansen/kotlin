@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
-class Outer private constructor(val s: S<String>) {
+class Outer private constructor(konst s: S<String>) {
     class Nested {
         fun test(s: S<String>) = Outer(s)
     }

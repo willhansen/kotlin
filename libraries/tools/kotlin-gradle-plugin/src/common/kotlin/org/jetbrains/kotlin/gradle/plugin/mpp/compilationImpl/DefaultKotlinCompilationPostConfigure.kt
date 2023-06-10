@@ -7,6 +7,6 @@ package org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl
 
 import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.KotlinCompilationImplFactory
 
-internal val DefaultKotlinCompilationPostConfigure = KotlinCompilationImplFactory.PostConfigure.composite(
+internal konst DefaultKotlinCompilationPostConfigure = KotlinCompilationImplFactory.PostConfigure.composite(
     KotlinCompilationRegisterInSourceSetsConfigurator
 )

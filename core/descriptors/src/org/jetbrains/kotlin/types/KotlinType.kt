@@ -48,12 +48,12 @@ import org.jetbrains.kotlin.types.model.TypeArgumentListMarker
  */
 sealed class KotlinType : Annotated, KotlinTypeMarker {
 
-    abstract val constructor: TypeConstructor
-    abstract val arguments: List<TypeProjection>
-    abstract val isMarkedNullable: Boolean
-    abstract val memberScope: MemberScope
-    abstract val attributes: TypeAttributes
-    override val annotations: Annotations
+    abstract konst constructor: TypeConstructor
+    abstract konst arguments: List<TypeProjection>
+    abstract konst isMarkedNullable: Boolean
+    abstract konst memberScope: MemberScope
+    abstract konst attributes: TypeAttributes
+    override konst annotations: Annotations
         get() = attributes.annotations
 
     abstract fun unwrap(): UnwrappedType
@@ -78,18 +78,18 @@ sealed class KotlinType : Annotated, KotlinTypeMarker {
     abstract fun refine(kotlinTypeRefiner: KotlinTypeRefiner): KotlinType
 
     @TypeRefinement
-    open val hasNotTrivialRefinementFactory: Boolean
+    open konst hasNotTrivialRefinementFactory: Boolean
         get() = false
 
     /* '0' means "hashCode wasn't computed"
 
-     Note #1. We don't use 'null' as a sign of "uncomputed value" to avoid boxing,
+     Note #1. We don't use 'null' as a sign of "uncomputed konstue" to avoid boxing,
      and even if we get that rumored "integer hashCode collision", we'd just lose
      caching for that "unlucky" instance
 
      Note #2. We don't use @Volatile even though that field can be accessed concurrently.
      The reason is that contended volatile reads may be harmful for performance,
-     and there's no harm in computing this value several times concurrently
+     and there's no harm in computing this konstue several times concurrently
      */
     private var cachedHashCode: Int = 0
 
@@ -126,13 +126,13 @@ fun KotlinType.isNullable(): Boolean = TypeUtils.isNullableType(this)
 
 abstract class WrappedType : KotlinType() {
     open fun isComputed(): Boolean = true
-    protected abstract val delegate: KotlinType
+    protected abstract konst delegate: KotlinType
 
-    override val constructor: TypeConstructor get() = delegate.constructor
-    override val arguments: List<TypeProjection> get() = delegate.arguments
-    override val isMarkedNullable: Boolean get() = delegate.isMarkedNullable
-    override val memberScope: MemberScope get() = delegate.memberScope
-    override val attributes: TypeAttributes get() = delegate.attributes
+    override konst constructor: TypeConstructor get() = delegate.constructor
+    override konst arguments: List<TypeProjection> get() = delegate.arguments
+    override konst isMarkedNullable: Boolean get() = delegate.isMarkedNullable
+    override konst memberScope: MemberScope get() = delegate.memberScope
+    override konst attributes: TypeAttributes get() = delegate.attributes
 
     final override fun unwrap(): UnwrappedType {
         var result = delegate
@@ -198,25 +198,25 @@ abstract class SimpleType : UnwrappedType(), SimpleTypeMarker, TypeArgumentListM
 }
 
 // lowerBound is a subtype of upperBound
-abstract class FlexibleType(val lowerBound: SimpleType, val upperBound: SimpleType) :
+abstract class FlexibleType(konst lowerBound: SimpleType, konst upperBound: SimpleType) :
     UnwrappedType(), SubtypingRepresentatives, FlexibleTypeMarker {
 
-    abstract val delegate: SimpleType
+    abstract konst delegate: SimpleType
 
-    override val subTypeRepresentative: KotlinType
+    override konst subTypeRepresentative: KotlinType
         get() = lowerBound
-    override val superTypeRepresentative: KotlinType
+    override konst superTypeRepresentative: KotlinType
         get() = upperBound
 
     override fun sameTypeConstructor(type: KotlinType) = false
 
     abstract fun render(renderer: DescriptorRenderer, options: DescriptorRendererOptions): String
 
-    override val attributes: TypeAttributes get() = delegate.attributes
-    override val constructor: TypeConstructor get() = delegate.constructor
-    override val arguments: List<TypeProjection> get() = delegate.arguments
-    override val isMarkedNullable: Boolean get() = delegate.isMarkedNullable
-    override val memberScope: MemberScope get() = delegate.memberScope
+    override konst attributes: TypeAttributes get() = delegate.attributes
+    override konst constructor: TypeConstructor get() = delegate.constructor
+    override konst arguments: List<TypeProjection> get() = delegate.arguments
+    override konst isMarkedNullable: Boolean get() = delegate.isMarkedNullable
+    override konst memberScope: MemberScope get() = delegate.memberScope
 
     override fun toString(): String = DescriptorRenderer.DEBUG_TEXT.renderType(this)
 
@@ -224,7 +224,7 @@ abstract class FlexibleType(val lowerBound: SimpleType, val upperBound: SimpleTy
     abstract override fun refine(kotlinTypeRefiner: KotlinTypeRefiner): FlexibleType
 }
 
-val KotlinType.isError: Boolean
+konst KotlinType.isError: Boolean
     get() = unwrap().let { unwrapped ->
         unwrapped is ErrorType ||
                 (unwrapped is FlexibleType && unwrapped.delegate is ErrorType)

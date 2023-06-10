@@ -12,7 +12,7 @@ public class J {
 // FILE: k.kt
 
 fun list(j: J): Any {
-    val a = j.n()!!
+    konst a = j.n()!!
 
     a<!UNNECESSARY_SAFE_CALL!>?.<!>get(0)
     if (<!SENSELESS_COMPARISON!>a == null<!>) {}

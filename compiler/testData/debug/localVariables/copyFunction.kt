@@ -1,10 +1,10 @@
 //FILE: test.kt
 
-data class someClass(val a: Double, val b: Double)
+data class someClass(konst a: Double, konst b: Double)
 
 fun box() {
-    val a = someClass(1.0, 2.0)
-    val b = a.copy(b = 3.0)
+    konst a = someClass(1.0, 2.0)
+    konst b = a.copy(b = 3.0)
 }
 
 // EXPECTATIONS JVM JVM_IR

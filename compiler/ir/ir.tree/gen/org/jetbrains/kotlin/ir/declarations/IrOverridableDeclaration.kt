@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.overridableDeclaration]
  */
 interface IrOverridableDeclaration<S : IrSymbol> : IrOverridableMember {
-    override val symbol: S
+    override konst symbol: S
 
     var isFakeOverride: Boolean
 

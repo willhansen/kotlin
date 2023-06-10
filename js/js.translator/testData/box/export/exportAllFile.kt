@@ -10,9 +10,9 @@
 abstract class A {
     abstract fun foo(k: String): String
 
-    abstract val bar: String
+    abstract konst bar: String
 
-    abstract val baz: String
+    abstract konst baz: String
 
     abstract var bay: String
 
@@ -24,9 +24,9 @@ open class B : A() {
         return "O" + k
     }
 
-    override val bar: String = "bar"
+    override konst bar: String = "bar"
 
-    override val baz: String
+    override konst baz: String
         get() = "baz"
 
     override var bay: String = "bay"
@@ -35,15 +35,15 @@ open class B : A() {
 
     override var bat: String
         get() = _bat
-        set(value) {
-            _bat = value
+        set(konstue) {
+            _bat = konstue
         }
 }
 
 interface I {
-    val gap: String
+    konst gap: String
 
-    val hap: String
+    konst hap: String
 
     var baz: String
 
@@ -53,9 +53,9 @@ interface I {
 }
 
 open class C : I {
-    override val gap: String = "gap"
+    override konst gap: String = "gap"
 
-    override val hap: String
+    override konst hap: String
         get() = "hap"
 
     override var bay: String = "bay"
@@ -64,11 +64,11 @@ open class C : I {
 
     override var baz: String
         get() = _baz
-        set(value) {
-            _baz = value
+        set(konstue) {
+            _baz = konstue
         }
 
-    val koo: String = "koo"
+    konst koo: String = "koo"
 
     override fun foo(): String {
         return "foo"

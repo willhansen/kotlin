@@ -66,13 +66,13 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val lambda = suspend {
+    konst lambda = suspend {
         StateMachineChecker.suspendHere()
         StateMachineChecker.suspendHere()
     }
 
     builder {
-        val r = inlineMe1(lambda)
+        konst r = inlineMe1(lambda)
         r.run()
     }
     StateMachineChecker.check(numberOfSuspensions = 4)
@@ -93,7 +93,7 @@ fun box(): String {
     StateMachineChecker.check(numberOfSuspensions = 4)
     StateMachineChecker.reset()
     builder {
-        val r = inlineMe5(lambda)
+        konst r = inlineMe5(lambda)
         r.run()
     }
     StateMachineChecker.check(numberOfSuspensions = 4)
@@ -110,7 +110,7 @@ fun box(): String {
 
     StateMachineChecker.reset()
     builder {
-        val r = inlineMe11 {
+        konst r = inlineMe11 {
             StateMachineChecker.suspendHere()
             StateMachineChecker.suspendHere()
         }

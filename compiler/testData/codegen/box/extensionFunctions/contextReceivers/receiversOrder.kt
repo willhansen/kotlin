@@ -1,6 +1,6 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
-class A(val x: String)
+class A(konst x: String)
 
 var result = ""
 

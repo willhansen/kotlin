@@ -8,8 +8,8 @@ class IntentionsBundle {
             return KEY + BUNDLE
         }
 
-        private const val BUNDLE = "K"
-        protected const val KEY = "O"
+        private const konst BUNDLE = "K"
+        protected const konst KEY = "O"
     }
 }
 

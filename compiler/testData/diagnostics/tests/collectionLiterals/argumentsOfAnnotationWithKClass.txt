@@ -10,7 +10,7 @@ package
 
 public final annotation class Bar : kotlin.Annotation {
     public constructor Bar(/*0*/ a: kotlin.Array<kotlin.reflect.KClass<*>> = ...)
-    public final val a: kotlin.Array<kotlin.reflect.KClass<*>>
+    public final konst a: kotlin.Array<kotlin.reflect.KClass<*>>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -18,7 +18,7 @@ public final annotation class Bar : kotlin.Annotation {
 
 public final annotation class Foo : kotlin.Annotation {
     public constructor Foo(/*0*/ a: kotlin.Array<kotlin.reflect.KClass<*>> = ...)
-    public final val a: kotlin.Array<kotlin.reflect.KClass<*>>
+    public final konst a: kotlin.Array<kotlin.reflect.KClass<*>>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

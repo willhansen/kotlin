@@ -1,7 +1,7 @@
 // KJS_WITH_FULL_RUNTIME
 
 fun box(): String {
-    val map: MutableMap<String, Int> = HashMap<String, Int>()
+    konst map: MutableMap<String, Int> = HashMap<String, Int>()
     map.put("a", 1)
     map.put("bb", 2)
     map.put("ccc", 3)

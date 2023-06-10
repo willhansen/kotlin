@@ -15,7 +15,7 @@ import kotlin.coroutines.resume
 
 class ResolutionStageRunner {
     fun processCandidate(candidate: Candidate, context: ResolutionContext, stopOnFirstError: Boolean = true): CandidateApplicability {
-        val sink = CheckerSinkImpl(candidate, stopOnFirstError = stopOnFirstError)
+        konst sink = CheckerSinkImpl(candidate, stopOnFirstError = stopOnFirstError)
         var finished = false
         sink.continuation = suspend {
             candidate.callInfo.callKind.resolutionSequence.forEachIndexed { index, stage ->
@@ -24,7 +24,7 @@ class ResolutionStageRunner {
                 stage.check(candidate, candidate.callInfo, sink, context)
             }
         }.createCoroutineUnintercepted(completion = object : Continuation<Unit> {
-            override val context: CoroutineContext
+            override konst context: CoroutineContext
                 get() = EmptyCoroutineContext
 
             override fun resumeWith(result: Result<Unit>) {

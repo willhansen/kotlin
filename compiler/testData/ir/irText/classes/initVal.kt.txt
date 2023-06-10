@@ -5,7 +5,7 @@ class TestInitValFromParameter {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -18,7 +18,7 @@ class TestInitValInClass {
 
   }
 
-  val x: Int
+  konst x: Int
     field = 0
     get
 
@@ -31,7 +31,7 @@ class TestInitValInInitBlock {
 
   }
 
-  val x: Int
+  konst x: Int
     get
 
   init {

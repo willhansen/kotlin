@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.ir.util.copyTypeParametersFrom
 import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.name.Name
 
-class JsInnerClassesSupport(mapping: JsMapping, private val irFactory: IrFactory) : InnerClassesSupport {
-    private val outerThisFieldSymbols = mapping.outerThisFieldSymbols
-    private val innerClassConstructors = mapping.innerClassConstructors
-    private val originalInnerClassPrimaryConstructorByClass = mapping.originalInnerClassPrimaryConstructorByClass
+class JsInnerClassesSupport(mapping: JsMapping, private konst irFactory: IrFactory) : InnerClassesSupport {
+    private konst outerThisFieldSymbols = mapping.outerThisFieldSymbols
+    private konst innerClassConstructors = mapping.innerClassConstructors
+    private konst originalInnerClassPrimaryConstructorByClass = mapping.originalInnerClassPrimaryConstructorByClass
 
     override fun getOuterThisField(innerClass: IrClass): IrField =
         if (!innerClass.isInner) compilationException(
@@ -34,7 +34,7 @@ class JsInnerClassesSupport(mapping: JsMapping, private val irFactory: IrFactory
         )
         else {
             outerThisFieldSymbols.getOrPut(innerClass) {
-                val outerClass = innerClass.parent as? IrClass
+                konst outerClass = innerClass.parent as? IrClass
                     ?: compilationException(
                         "No containing class for inner class",
                         innerClass
@@ -55,7 +55,7 @@ class JsInnerClassesSupport(mapping: JsMapping, private val irFactory: IrFactory
         }
 
     override fun getInnerClassConstructorWithOuterThisParameter(innerClassConstructor: IrConstructor): IrConstructor {
-        val innerClass = innerClassConstructor.parent as IrClass
+        konst innerClass = innerClassConstructor.parent as IrClass
         assert(innerClass.isInner) { "Class is not inner: $innerClass" }
 
         return innerClassConstructors.getOrPut(innerClassConstructor) {
@@ -74,10 +74,10 @@ class JsInnerClassesSupport(mapping: JsMapping, private val irFactory: IrFactory
     }
 
     private fun createInnerClassConstructorWithOuterThisParameter(oldConstructor: IrConstructor): IrConstructor {
-        val irClass = oldConstructor.parent as IrClass
-        val outerThisType = (irClass.parent as IrClass).defaultType
+        konst irClass = oldConstructor.parent as IrClass
+        konst outerThisType = (irClass.parent as IrClass).defaultType
 
-        val newConstructor = irFactory.buildConstructor {
+        konst newConstructor = irFactory.buildConstructor {
             updateFrom(oldConstructor)
             returnType = oldConstructor.returnType
         }.also {
@@ -87,18 +87,18 @@ class JsInnerClassesSupport(mapping: JsMapping, private val irFactory: IrFactory
 
         newConstructor.copyTypeParametersFrom(oldConstructor)
 
-        val newValueParameters = mutableListOf(buildValueParameter(newConstructor) {
+        konst newValueParameters = mutableListOf(buildValueParameter(newConstructor) {
             origin = SYNTHESIZED_DECLARATION
             name = Name.identifier(Namer.OUTER_NAME)
             index = 0
             type = outerThisType
         })
 
-        for (p in oldConstructor.valueParameters) {
+        for (p in oldConstructor.konstueParameters) {
             newValueParameters += p.copyTo(newConstructor, index = p.index + 1)
         }
 
-        newConstructor.valueParameters = newConstructor.valueParameters memoryOptimizedPlus newValueParameters
+        newConstructor.konstueParameters = newConstructor.konstueParameters memoryOptimizedPlus newValueParameters
 
         return newConstructor
     }

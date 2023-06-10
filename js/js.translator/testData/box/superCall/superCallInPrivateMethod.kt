@@ -2,8 +2,8 @@
 
 var result = ""
 abstract class Parent {
-    val o = "O"
-    val k = "K"
+    konst o = "O"
+    konst k = "K"
     protected fun getO() = o
     protected fun getK() = k
 }

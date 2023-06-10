@@ -1,6 +1,6 @@
 // FILE: call.kt
 fun call() {
-    val a = <expr>A()</expr>
+    konst a = <expr>A()</expr>
 }
 
 // FILE: A.java

@@ -7,7 +7,7 @@
 // LANGUAGE: +ValueClasses, +ValueClassesSecondaryConstructorWithBody
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val x: String) {
+konstue class Foo(konst x: String) {
     constructor(y: Int) : this("OK") {
         if (y == 0) return throw java.lang.IllegalArgumentException()
         if (y == 1) return

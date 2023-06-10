@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 object WasmExternalInheritanceChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor is ClassDescriptor && !descriptor.isEffectivelyExternal()) {
-            val superClasses = listOfNotNull(descriptor.getSuperClassNotAny()) + descriptor.getSuperInterfaces()
+            konst superClasses = listOfNotNull(descriptor.getSuperClassNotAny()) + descriptor.getSuperInterfaces()
             for (superClass in superClasses) {
                 if (superClass.isEffectivelyExternal()) {
                     context.trace.report(

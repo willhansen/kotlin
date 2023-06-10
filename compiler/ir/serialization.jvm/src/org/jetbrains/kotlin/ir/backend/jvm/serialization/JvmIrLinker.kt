@@ -38,13 +38,13 @@ class JvmIrLinker(
     messageLogger: IrMessageLogger,
     typeSystem: IrTypeSystemContext,
     symbolTable: SymbolTable,
-    override val translationPluginContext: TranslationPluginContext?,
-    private val stubGenerator: DeclarationStubGenerator,
-    private val manglerDesc: JvmDescriptorMangler,
-    private val enableIdSignatures: Boolean,
+    override konst translationPluginContext: TranslationPluginContext?,
+    private konst stubGenerator: DeclarationStubGenerator,
+    private konst manglerDesc: JvmDescriptorMangler,
+    private konst enableIdSignatures: Boolean,
 ) : KotlinIrLinker(currentModule, messageLogger, typeSystem.irBuiltIns, symbolTable, emptyList()) {
 
-    override val fakeOverrideBuilder = FakeOverrideBuilder(
+    override konst fakeOverrideBuilder = FakeOverrideBuilder(
         linker = this,
         symbolTable = symbolTable,
         mangler = JvmIrMangler,
@@ -53,7 +53,7 @@ class JvmIrLinker(
         partialLinkageSupport = PartialLinkageSupportForLinker.DISABLED
     )
 
-    private val javaName = Name.identifier("java")
+    private konst javaName = Name.identifier("java")
 
     override fun isBuiltInModule(moduleDescriptor: ModuleDescriptor): Boolean =
         moduleDescriptor.name.asString().startsWith("<dependencies of ")
@@ -90,7 +90,7 @@ class JvmIrLinker(
 
     private fun declareJavaFieldStub(symbol: IrFieldSymbol): IrField {
         return with(stubGenerator) {
-            val old = stubGenerator.unboundSymbolGeneration
+            konst old = stubGenerator.unboundSymbolGeneration
             try {
                 stubGenerator.unboundSymbolGeneration = true
                 generateFieldStub(symbol.descriptor)
@@ -109,7 +109,7 @@ class JvmIrLinker(
     private inner class JvmCurrentModuleDeserializer(moduleFragment: IrModuleFragment, dependencies: Collection<IrModuleDeserializer>) :
         CurrentModuleDeserializer(moduleFragment, dependencies) {
         override fun declareIrSymbol(symbol: IrSymbol) {
-            val descriptor = symbol.descriptor
+            konst descriptor = symbol.descriptor
 
             if (descriptor.isJavaDescriptor()) {
                 // Wrap java declaration with lazy ir
@@ -136,7 +136,7 @@ class JvmIrLinker(
         // TODO: implement proper check whether `idSig` belongs to this module
         override fun contains(idSig: IdSignature): Boolean = true
 
-        private val descriptorFinder = DescriptorByIdSignatureFinderImpl(
+        private konst descriptorFinder = DescriptorByIdSignatureFinderImpl(
             moduleDescriptor, manglerDesc,
             DescriptorByIdSignatureFinderImpl.LookupMode.MODULE_ONLY
         )
@@ -144,9 +144,9 @@ class JvmIrLinker(
         private fun resolveDescriptor(idSig: IdSignature): DeclarationDescriptor? = descriptorFinder.findDescriptorBySignature(idSig)
 
         override fun tryDeserializeIrSymbol(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol? {
-            val descriptor = resolveDescriptor(idSig) ?: return null
+            konst descriptor = resolveDescriptor(idSig) ?: return null
 
-            val declaration = stubGenerator.run {
+            konst declaration = stubGenerator.run {
                 when (symbolKind) {
                     BinarySymbolData.SymbolKind.CLASS_SYMBOL -> generateClassStub(descriptor as ClassDescriptor)
                     BinarySymbolData.SymbolKind.PROPERTY_SYMBOL -> generatePropertyStub(descriptor as PropertyDescriptor)
@@ -171,9 +171,9 @@ class JvmIrLinker(
             }
         }
 
-        override val moduleFragment: IrModuleFragment = IrModuleFragmentImpl(moduleDescriptor, builtIns, emptyList())
-        override val moduleDependencies: Collection<IrModuleDeserializer> = dependencies
+        override konst moduleFragment: IrModuleFragment = IrModuleFragmentImpl(moduleDescriptor, builtIns, emptyList())
+        override konst moduleDependencies: Collection<IrModuleDeserializer> = dependencies
 
-        override val kind get() = IrModuleDeserializerKind.SYNTHETIC
+        override konst kind get() = IrModuleDeserializerKind.SYNTHETIC
     }
 }

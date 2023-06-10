@@ -10,12 +10,12 @@ internal class UnicodeDataLine(properties: List<String>) {
         require(properties.size == 15)
     }
 
-    val char: String = properties[0]
-    val name: String = properties[1]
-    val categoryCode: String = properties[2]
-    val uppercaseMapping: String = properties[12]
-    val lowercaseMapping: String = properties[13]
-    val titlecaseMapping: String = properties[14]
+    konst char: String = properties[0]
+    konst name: String = properties[1]
+    konst categoryCode: String = properties[2]
+    konst uppercaseMapping: String = properties[12]
+    konst lowercaseMapping: String = properties[13]
+    konst titlecaseMapping: String = properties[14]
 
     override fun toString(): String {
         return "UnicodeDataLine{char=$char" +

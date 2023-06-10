@@ -1,7 +1,7 @@
 package
 
 public interface AnotherInterface {
-    public open val ambiguousProp: kotlin.Int
+    public open konst ambiguousProp: kotlin.Int
     public open fun ambiguous(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -9,7 +9,7 @@ public interface AnotherInterface {
 }
 
 public interface DerivedInterface : Interface, AnotherInterface {
-    public open override /*2*/ val ambiguousProp: kotlin.Int
+    public open override /*2*/ konst ambiguousProp: kotlin.Int
     public open override /*2*/ fun ambiguous(): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun foo(): kotlin.Unit
@@ -18,7 +18,7 @@ public interface DerivedInterface : Interface, AnotherInterface {
 }
 
 public interface Interface {
-    public open val ambiguousProp: kotlin.Int
+    public open konst ambiguousProp: kotlin.Int
     public open fun ambiguous(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open fun foo(): kotlin.Unit

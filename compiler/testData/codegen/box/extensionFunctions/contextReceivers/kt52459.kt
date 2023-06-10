@@ -6,8 +6,8 @@ interface I<T>{
     fun T.foo(): String
 }
 
-class A(val a: String)
-class B(val b: String)
+class A(konst a: String)
+class B(konst b: String)
 
 object O: I<B>{
     context(A)

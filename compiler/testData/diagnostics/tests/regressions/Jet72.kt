@@ -4,11 +4,11 @@
 
 import java.util.ArrayList
 
-abstract class Item(val room: <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Object<!>) {
-   abstract val name : String
+abstract class Item(konst room: <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Object<!>) {
+   abstract konst name : String
 }
 
-val items: ArrayList<Item> = ArrayList<Item>()
+konst items: ArrayList<Item> = ArrayList<Item>()
 
 fun test(room : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Object<!>) {
   for(item: Item? in items) {

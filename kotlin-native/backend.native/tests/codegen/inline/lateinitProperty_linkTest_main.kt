@@ -9,7 +9,7 @@ import a.*
 
 fun main() {
     try {
-        val res = foo(intArrayOf(1, 2, 3)) { x, y, z -> x + y - z }
+        konst res = foo(intArrayOf(1, 2, 3)) { x, y, z -> x + y - z }
         println(res)
     } catch (t: UninitializedPropertyAccessException) {
         println("OK")

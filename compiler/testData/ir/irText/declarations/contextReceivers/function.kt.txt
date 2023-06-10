@@ -5,7 +5,7 @@ class C {
 
   }
 
-  val c: Int
+  konst c: Int
     field = 42
     get
 

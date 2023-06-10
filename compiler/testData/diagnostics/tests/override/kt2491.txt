@@ -1,6 +1,6 @@
 package
 
-public val obj: C
+public konst obj: C
 
 public open class C {
     public constructor C()

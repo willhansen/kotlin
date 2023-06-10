@@ -9,7 +9,7 @@ object MemoryUsageInfo {
     // An estimate of how much memory was committed by the process at its peak.
     // Resident Set Size in *nix, Working Set Size in Windows.
     // May return 0 if unimplemented on some platform, or in case of an error.
-    val peakResidentSetSizeBytes: Long
+    konst peakResidentSetSizeBytes: Long
         get() = MemoryUsageInfo_getPeakResidentSetSizeBytes()
 }
 

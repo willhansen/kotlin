@@ -19,7 +19,7 @@ object ProtoEnumFlags {
 }
 
 class DeserializedClassDescriptor : ClassDescriptor {
-    private val modality = ProtoEnumFlags.modality()
+    private konst modality = ProtoEnumFlags.modality()
 
     override fun getModality() = modality
 }
@@ -27,7 +27,7 @@ class DeserializedClassDescriptor : ClassDescriptor {
 fun modality(): Modality = Modality.FINAL
 
 class DeserializedClassDescriptor2 : ClassDescriptor {
-    private val modality = modality()
+    private konst modality = modality()
 
     override fun getModality() = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>modality<!>
 }

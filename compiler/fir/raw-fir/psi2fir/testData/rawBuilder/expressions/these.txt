@@ -12,7 +12,7 @@ FILE: these.kt
             ^bar this#.foo#()
         }
 
-        public? final? val instance: Some
+        public? final? konst instance: Some
             public? [ContainingClassKey=Some] get(): Some {
                 ^ this@Some#
             }

@@ -4,5 +4,5 @@ class C
 
 typealias CA = C
 
-val x: <caret>CA = CA()
+konst x: <caret>CA = CA()
 

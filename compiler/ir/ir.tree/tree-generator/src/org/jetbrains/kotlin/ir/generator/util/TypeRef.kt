@@ -18,10 +18,10 @@ interface ClassOrElementRef : TypeRefWithNullability
 
 // Based on com.squareup.kotlinpoet.ClassName
 class ClassRef<P : TypeParameterRef> private constructor(
-    val kind: TypeKind,
+    konst kind: TypeKind,
     names: List<String>,
-    override val args: Map<P, TypeRef>,
-    override val nullable: Boolean = false,
+    override konst args: Map<P, TypeRef>,
+    override konst nullable: Boolean = false,
 ) : ParametrizedTypeRef<ClassRef<P>, P>, ClassOrElementRef {
     /**
      * Returns a class name created from the given parts. For example, calling this with package name
@@ -36,24 +36,24 @@ class ClassRef<P : TypeParameterRef> private constructor(
     }
 
     /** From top to bottom. This will be `["java.util", "Map", "Entry"]` for `Map.Entry`. */
-    private val names = Collections.unmodifiableList(names)
+    private konst names = Collections.unmodifiableList(names)
 
     /** Fully qualified name using `.` as a separator, like `kotlin.collections.Map.Entry`. */
-    val canonicalName: String = if (names[0].isEmpty())
+    konst canonicalName: String = if (names[0].isEmpty())
         names.subList(1, names.size).joinToString(".") else
         names.joinToString(".")
 
     /** Package name, like `"kotlin.collections"` for `Map.Entry`. */
-    val packageName: String get() = names[0]
+    konst packageName: String get() = names[0]
 
     /** Simple name of this class, like `"Entry"` for `Map.Entry`. */
-    val simpleName: String get() = names[names.size - 1]
+    konst simpleName: String get() = names[names.size - 1]
 
     /**
      * The enclosing classes, outermost first, followed by the simple name. This is `["Map", "Entry"]`
      * for `Map.Entry`.
      */
-    val simpleNames: List<String> get() = names.subList(1, names.size)
+    konst simpleNames: List<String> get() = names.subList(1, names.size)
 
     override fun copy(args: Map<P, TypeRef>) = ClassRef(kind, names, args, nullable)
     override fun copy(nullable: Boolean) = ClassRef(kind, names, args, nullable)
@@ -64,13 +64,13 @@ class ClassRef<P : TypeParameterRef> private constructor(
 sealed interface TypeParameterRef : TypeRef
 
 data class PositionTypeParameterRef(
-    val index: Int
+    konst index: Int
 ) : TypeParameterRef {
     override fun toString() = index.toString()
 }
 
 open class NamedTypeParameterRef(
-    val name: String
+    konst name: String
 ) : TypeParameterRef {
     override fun equals(other: Any?): Boolean {
         return other is NamedTypeParameterRef && other.name == name
@@ -84,13 +84,13 @@ open class NamedTypeParameterRef(
 }
 
 interface TypeRefWithNullability : TypeRef {
-    val nullable: Boolean
+    konst nullable: Boolean
 
     fun copy(nullable: Boolean): TypeRefWithNullability
 }
 
 interface ParametrizedTypeRef<Self, P : TypeParameterRef> : TypeRef {
-    val args: Map<P, TypeRef>
+    konst args: Map<P, TypeRef>
 
     fun copy(args: Map<P, TypeRef>): Self
 }
@@ -104,13 +104,13 @@ fun <T> ParametrizedTypeRef<T, PositionTypeParameterRef>.withArgs(vararg args: T
 
 class TypeVariable(
     name: String,
-    val bounds: List<TypeRef>,
-    val variance: Variance
+    konst bounds: List<TypeRef>,
+    konst variance: Variance
 ) : NamedTypeParameterRef(name)
 
 fun <P : TypeParameterRef> KClass<*>.asRef(): ClassRef<P> {
-    val poet = this.asClassName()
-    val kind = if (this.java.isInterface) TypeKind.Interface else TypeKind.Class
+    konst poet = this.asClassName()
+    konst kind = if (this.java.isInterface) TypeKind.Interface else TypeKind.Class
     return ClassRef(kind, poet.packageName, *poet.simpleNames.toTypedArray())
 }
 

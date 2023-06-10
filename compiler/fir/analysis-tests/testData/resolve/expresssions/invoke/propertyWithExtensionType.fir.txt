@@ -4,21 +4,21 @@ FILE: propertyWithExtensionType.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|(kotlin/String.() -> kotlin/Unit)?| = R|<local>/x|
+        public final konst x: R|(kotlin/String.() -> kotlin/Unit)?| = R|<local>/x|
             public get(): R|(kotlin/String.() -> kotlin/Unit)?|
 
-        public final val y: R|kotlin/String.() -> kotlin/Int| = R|<local>/y|
+        public final konst y: R|kotlin/String.() -> kotlin/Int| = R|<local>/y|
             public get(): R|kotlin/String.() -> kotlin/Int|
 
     }
     public final fun test(a: R|A|): R|kotlin/Unit| {
         when () {
             !=(R|<local>/a|.R|/A.x|, Null(null)) ->  {
-                lval b: R|(kotlin/String.() -> kotlin/Unit)?| = R|<local>/a|.R|/A.x|
+                lkonst b: R|(kotlin/String.() -> kotlin/Unit)?| = R|<local>/a|.R|/A.x|
                 R|<local>/b|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Unit|>|(String())
             }
         }
 
-        lval c: R|kotlin/String.() -> kotlin/Int| = R|<local>/a|.R|/A.y|
-        lval d: R|kotlin/Int| = R|<local>/c|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Int|>|(String())
+        lkonst c: R|kotlin/String.() -> kotlin/Int| = R|<local>/a|.R|/A.y|
+        lkonst d: R|kotlin/Int| = R|<local>/c|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Int|>|(String())
     }

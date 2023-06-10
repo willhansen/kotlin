@@ -82,7 +82,7 @@ sink:
 =====================
 == smartcastAndInitialization ==
 fun smartcastAndInitialization(x: Any?) {
-    val y: Int
+    konst y: Int
 
     if (callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -100,8 +100,8 @@ L0:
     v(x: Any?)                                                                                                                                                                                  INIT: in: {} out: {}
     magic[FAKE_INITIALIZER](x: Any?) -> <v0>                                                                                                                                                    INIT: in: {} out: {}
     w(x|<v0>)                                                                                                                                                                                   INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })    INIT: in: {} out: {}
-    v(val y: Int)                                                                                                                                                                               INIT: in: {} out: {y=D}
+  2 mark({ konst y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })    INIT: in: {} out: {}
+    v(konst y: Int)                                                                                                                                                                               INIT: in: {} out: {y=D}
     mark(if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> })                              INIT: in: {y=D} out: {y=D}
     mark(x !is String)
     r(x) -> <v1>
@@ -158,7 +158,7 @@ sink:
 =====================
 == inPresenceOfLazy ==
 fun inPresenceOfLazy(x: Any?, unknownBoolean: Boolean) {
-    val y: Int
+    konst y: Int
 
     if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -179,8 +179,8 @@ L0:
     v(unknownBoolean: Boolean)                                                                                                                                                                                    INIT: in: {} out: {}
     magic[FAKE_INITIALIZER](unknownBoolean: Boolean) -> <v1>                                                                                                                                                      INIT: in: {} out: {}
     w(unknownBoolean|<v1>)                                                                                                                                                                                        INIT: in: {} out: {}              USE: in: {} out: {}
-  2 mark({ val y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })    INIT: in: {} out: {}
-    v(val y: Int)                                                                                                                                                                                                 INIT: in: {} out: {y=D}
+  2 mark({ konst y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })    INIT: in: {} out: {}
+    v(konst y: Int)                                                                                                                                                                                                 INIT: in: {} out: {y=D}
     mark(if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> })                              INIT: in: {y=D} out: {y=D}
     r(unknownBoolean) -> <v2>
     jf(L2|<v2>)                                                                                                                                                                                                                                     USE: in: {y=READ} out: {y=READ}

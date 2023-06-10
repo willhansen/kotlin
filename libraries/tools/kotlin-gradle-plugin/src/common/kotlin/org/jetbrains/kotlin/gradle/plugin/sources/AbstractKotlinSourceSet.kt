@@ -16,20 +16,20 @@ import org.jetbrains.kotlin.gradle.utils.MutableObservableSetImpl
 import org.jetbrains.kotlin.gradle.utils.ObservableSet
 
 abstract class AbstractKotlinSourceSet : InternalKotlinSourceSet {
-    private val dependsOnImpl = MutableObservableSetImpl<KotlinSourceSet>()
-    private val dependsOnClosureImpl = MutableObservableSetImpl<KotlinSourceSet>()
-    private val withDependsOnClosureImpl = MutableObservableSetImpl<KotlinSourceSet>(this)
+    private konst dependsOnImpl = MutableObservableSetImpl<KotlinSourceSet>()
+    private konst dependsOnClosureImpl = MutableObservableSetImpl<KotlinSourceSet>()
+    private konst withDependsOnClosureImpl = MutableObservableSetImpl<KotlinSourceSet>(this)
 
-    final override val dependsOn: ObservableSet<KotlinSourceSet>
+    final override konst dependsOn: ObservableSet<KotlinSourceSet>
         get() = dependsOnImpl
 
-    final override val dependsOnClosure: ObservableSet<KotlinSourceSet>
+    final override konst dependsOnClosure: ObservableSet<KotlinSourceSet>
         get() = dependsOnClosureImpl
 
-    final override val withDependsOnClosure: ObservableSet<KotlinSourceSet>
+    final override konst withDependsOnClosure: ObservableSet<KotlinSourceSet>
         get() = withDependsOnClosureImpl
 
-    override val compilations: MutableObservableSet<KotlinCompilation<*>> = MutableObservableSetImpl()
+    override konst compilations: MutableObservableSet<KotlinCompilation<*>> = MutableObservableSetImpl()
 
     final override fun dependsOn(other: KotlinSourceSet) {
         if (other == this) return

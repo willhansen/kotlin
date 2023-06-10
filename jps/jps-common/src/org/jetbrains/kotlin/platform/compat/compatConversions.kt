@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.platform.wasm.WasmPlatforms
 typealias OldPlatform = org.jetbrains.kotlin.resolve.TargetPlatform
 typealias NewPlatform = org.jetbrains.kotlin.platform.TargetPlatform
 
-fun NewPlatform.toOldPlatform(): OldPlatform = when (val single = singleOrNull()) {
+fun NewPlatform.toOldPlatform(): OldPlatform = when (konst single = singleOrNull()) {
     null -> CommonPlatforms.CompatCommonPlatform
     is JvmPlatform -> JvmPlatforms.CompatJvmPlatform
     is JsPlatform -> JsPlatforms.CompatJsPlatform
@@ -59,7 +59,7 @@ fun IdePlatform<*, *>.toNewPlatform(): NewPlatform = when (this) {
     else -> error("Unknown platform $this")
 }
 
-fun NewPlatform.toIdePlatform(): IdePlatform<*, *> = when (val single = singleOrNull()) {
+fun NewPlatform.toIdePlatform(): IdePlatform<*, *> = when (konst single = singleOrNull()) {
     null -> CommonIdePlatformKind.Platform
     is JdkPlatform -> JvmIdePlatformKind.Platform(single.targetVersion)
     is JvmPlatform -> JvmIdePlatformKind.Platform(JvmTarget.DEFAULT)

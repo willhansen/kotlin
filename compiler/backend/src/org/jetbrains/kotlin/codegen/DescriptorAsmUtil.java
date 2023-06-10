@@ -241,7 +241,7 @@ public class DescriptorAsmUtil {
         DescriptorVisibility visibility = descriptor.getVisibility();
         Integer defaultMapping = getVisibilityAccessFlag(visibility);
         if (defaultMapping == null) {
-            throw new IllegalStateException(visibility + " is not a valid visibility in backend for " + DescriptorRenderer.DEBUG_TEXT.render(descriptor));
+            throw new IllegalStateException(visibility + " is not a konstid visibility in backend for " + DescriptorRenderer.DEBUG_TEXT.render(descriptor));
         }
         return defaultMapping;
     }
@@ -540,7 +540,7 @@ public class DescriptorAsmUtil {
             }
 
             receiver.put(type, kotlinType, v);
-            v.invokestatic("java/lang/String", "valueOf", "(" + type.getDescriptor() + ")Ljava/lang/String;", false);
+            v.invokestatic("java/lang/String", "konstueOf", "(" + type.getDescriptor() + ")Ljava/lang/String;", false);
             return null;
         });
     }
@@ -640,8 +640,8 @@ public class DescriptorAsmUtil {
                     iv.invokestatic("java/lang/Double", "compare", "(DD)I", false);
                     iv.visitJumpInsn(patchOpcode(jumpIfFalse ? Opcodes.IFNE : Opcodes.IFEQ, iv), jumpLabel);
                 } else {
-                    StackValue value = genEqualsForExpressionsOnStack(KtTokens.EQEQ, left, right);
-                    BranchedValue.Companion.condJump(value, jumpLabel, jumpIfFalse, iv);
+                    StackValue konstue = genEqualsForExpressionsOnStack(KtTokens.EQEQ, left, right);
+                    BranchedValue.Companion.condJump(konstue, jumpLabel, jumpIfFalse, iv);
                 }
             }
         };
@@ -685,7 +685,7 @@ public class DescriptorAsmUtil {
             @NotNull FrameMap frameMap
     ) {
         if (state.isParamAssertionsDisabled()) return;
-        // currently when resuming a suspend function we pass default values instead of real arguments (i.e. nulls for references)
+        // currently when resuming a suspend function we pass default konstues instead of real arguments (i.e. nulls for references)
         if (descriptor.isSuspend()) return;
 
         if (getVisibilityAccessFlag(descriptor) == ACC_PRIVATE) {
@@ -731,19 +731,19 @@ public class DescriptorAsmUtil {
 
         Type asmType = state.getTypeMapper().mapType(type);
         if (asmType.getSort() == Type.OBJECT || asmType.getSort() == Type.ARRAY) {
-            StackValue value;
+            StackValue konstue;
             if (JvmCodegenUtil.isDeclarationOfBigArityFunctionInvoke(containingDeclaration) ||
                 JvmCodegenUtil.isDeclarationOfBigArityCreateCoroutineMethod(containingDeclaration)) {
                 int index = getIndexOfParameterInVarargInvokeArray(parameter);
-                value = StackValue.arrayElement(
+                konstue = StackValue.arrayElement(
                         OBJECT_TYPE, null, StackValue.local(1, getArrayType(OBJECT_TYPE)), StackValue.constant(index)
                 );
             }
             else {
                 int index = frameMap.getIndex(parameter);
-                value = StackValue.local(index, asmType);
+                konstue = StackValue.local(index, asmType);
             }
-            value.put(asmType, v);
+            konstue.put(asmType, v);
             v.visitLdcInsn(name);
             String methodName = state.getUnifiedNullChecks() ? "checkNotNullParameter" : "checkParameterIsNotNull";
             v.invokestatic(IntrinsicMethods.INTRINSICS_CLASS_NAME, methodName, "(Ljava/lang/Object;Ljava/lang/String;)V", false);
@@ -780,7 +780,7 @@ public class DescriptorAsmUtil {
         if (parameter instanceof ReceiverParameterDescriptor) return 0;
 
         DeclarationDescriptor container = parameter.getContainingDeclaration();
-        assert parameter instanceof ValueParameterDescriptor : "Non-extension-receiver parameter must be a value parameter: " + parameter;
+        assert parameter instanceof ValueParameterDescriptor : "Non-extension-receiver parameter must be a konstue parameter: " + parameter;
         int extensionShift = ((CallableDescriptor) container).getExtensionReceiverParameter() == null ? 0 : 1;
 
         return extensionShift + ((ValueParameterDescriptor) parameter).getIndex();

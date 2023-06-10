@@ -9,17 +9,17 @@ import kotlin.reflect.full.*
 import kotlin.test.*
 
 open class Super {
-    val a: Int = 1
-    val String.b: String get() = this
+    konst a: Int = 1
+    konst String.b: String get() = this
 }
 
 class Sub : Super() {
-    val c: Double = 1.0
-    val Char.d: Char get() = this
+    konst c: Double = 1.0
+    konst Char.d: Char get() = this
 }
 
 fun box(): String {
-    val sub = Sub::class
+    konst sub = Sub::class
 
     assertEquals(listOf("a", "c"), sub.memberProperties.map { it.name }.sorted())
     assertEquals(listOf("b", "d"), sub.memberExtensionProperties.map { it.name }.sorted())

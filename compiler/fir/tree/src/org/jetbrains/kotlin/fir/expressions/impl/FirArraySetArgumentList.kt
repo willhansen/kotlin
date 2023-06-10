@@ -10,12 +10,12 @@ import org.jetbrains.kotlin.fir.expressions.FirAbstractArgumentList
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 
 class FirArraySetArgumentList internal constructor(
-    private val rValue: FirExpression,
-    private val indexes: List<FirExpression>
+    private konst rValue: FirExpression,
+    private konst indexes: List<FirExpression>
 ) : FirAbstractArgumentList() {
-    override val arguments: List<FirExpression>
+    override konst arguments: List<FirExpression>
         get() = indexes + rValue
 
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
 }

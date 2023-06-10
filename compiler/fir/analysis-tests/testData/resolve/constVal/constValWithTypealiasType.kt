@@ -1,3 +1,3 @@
 typealias Foo = Int
 
-const val x: Foo = 10
+const konst x: Foo = 10

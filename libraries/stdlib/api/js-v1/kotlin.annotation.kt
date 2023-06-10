@@ -102,16 +102,16 @@ public final annotation class Repeatable : kotlin.Annotation {
 /*∆*/ 
 /*∆*/ @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
 public final annotation class Retention : kotlin.Annotation {
-    public constructor Retention(value: kotlin.annotation.AnnotationRetention = ...)
+    public constructor Retention(konstue: kotlin.annotation.AnnotationRetention = ...)
 
-    public final val value: kotlin.annotation.AnnotationRetention { get; }
+    public final konst konstue: kotlin.annotation.AnnotationRetention { get; }
 }
 
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
 /*∆*/ public final annotation class Retention : kotlin.Annotation {
-/*∆*/     public constructor Retention(value: kotlin.annotation.AnnotationRetention = ...)
+/*∆*/     public constructor Retention(konstue: kotlin.annotation.AnnotationRetention = ...)
 /*∆*/ 
-/*∆*/     public final val value: kotlin.annotation.AnnotationRetention { get; }
+/*∆*/     public final konst konstue: kotlin.annotation.AnnotationRetention { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
@@ -119,7 +119,7 @@ public final annotation class Retention : kotlin.Annotation {
 public final annotation class Target : kotlin.Annotation {
     public constructor Target(vararg allowedTargets: kotlin.annotation.AnnotationTarget)
 
-    public final val allowedTargets: kotlin.Array<out kotlin.annotation.AnnotationTarget> { get; }
+    public final konst allowedTargets: kotlin.Array<out kotlin.annotation.AnnotationTarget> { get; }
 }
 /*∆*/ 
 /*∆*/ @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.ANNOTATION_CLASS})
@@ -127,5 +127,5 @@ public final annotation class Target : kotlin.Annotation {
 /*∆*/ public final annotation class Target : kotlin.Annotation {
 /*∆*/     public constructor Target(vararg allowedTargets: kotlin.annotation.AnnotationTarget)
 /*∆*/ 
-/*∆*/     public final val allowedTargets: kotlin.Array<out kotlin.annotation.AnnotationTarget> { get; }
+/*∆*/     public final konst allowedTargets: kotlin.Array<out kotlin.annotation.AnnotationTarget> { get; }
 /*∆*/ }

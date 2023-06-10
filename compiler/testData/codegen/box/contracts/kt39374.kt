@@ -22,9 +22,9 @@ sealed class S {
     }
 }
 
-val z: S = S.Z()
+konst z: S = S.Z()
 
 @ExperimentalContracts
-fun box(): String = when (val w = z) {
+fun box(): String = when (konst w = z) {
     is S.Z -> runBlocking { w.f() }
 }

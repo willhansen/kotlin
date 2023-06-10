@@ -8,7 +8,7 @@ inline fun foo(f: (Int) -> String, x: Int = 23): String = "foo(${f(x)})"
 // RECOMPILE
 
 fun box(): String {
-    val result = foo({ it.toString() }) + foo({ it.toString() }, 42)
+    konst result = foo({ it.toString() }) + foo({ it.toString() }, 42)
     if (result != "foo(23)foo(42)") return "fail: $result"
 
     return "OK"

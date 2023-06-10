@@ -21,7 +21,7 @@ class A {
 }
 
 fun box(): String? {
-    val a = A()
+    konst a = A()
     a.x1 = false
 
     if (f1(true)) return null

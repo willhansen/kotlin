@@ -13,8 +13,8 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
-    val f = a.f()
+    konst a = A()
+    konst f = a.f()
 
     try {
         f.callBy(mapOf(f.parameters.first() to a))

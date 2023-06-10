@@ -5,7 +5,7 @@ class Cell {
 }
 
 fun box(): String {
-    val c = Cell()
+    konst c = Cell()
     (<!UNRESOLVED_REFERENCE!>c[0]<!>)++
     return "OK"
 }

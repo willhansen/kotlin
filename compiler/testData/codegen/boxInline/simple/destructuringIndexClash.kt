@@ -15,14 +15,14 @@ inline fun foo2(x: (Int, StationInt) -> Unit) {
 }
 
 data class Station(
-        val id: String,
-        val name: String,
-        val distance: String)
+        konst id: String,
+        konst name: String,
+        konst distance: String)
 
 data class StationInt(
-        val id: Int,
-        val name: Int,
-        val distance: Int)
+        konst id: Int,
+        konst name: Int,
+        konst distance: Int)
 
 
 // FILE: 2.kt

@@ -4,9 +4,9 @@ import kotlin.test.*
 
 var log: String = ""
 
-open class MyClass(val value: String) {
+open class MyClass(konst konstue: String) {
     override fun toString(): String {
-        return value
+        return konstue
     }
 }
 
@@ -16,14 +16,14 @@ inline fun <L> runLogged(entry: String, action: () -> L): L {
 }
 
 operator fun <P: MyClass> P.provideDelegate(host: Any?, p: Any): P =
-        runLogged("tdf(${this.value});") { this }
+        runLogged("tdf(${this.konstue});") { this }
 
 operator fun <V> V.getValue(receiver: Any?, p: Any): V =
         runLogged("get($this);") { this }
 
-val testO by runLogged("O;") { MyClass("O") }
-val testK by runLogged("K;") { "K" }
-val testOK = runLogged("OK;") { testO.value + testK }
+konst testO by runLogged("O;") { MyClass("O") }
+konst testK by runLogged("K;") { "K" }
+konst testOK = runLogged("OK;") { testO.konstue + testK }
 
 fun box(): String {
     assertEquals("O;tdf(O);K;OK;get(O);get(K);", log)

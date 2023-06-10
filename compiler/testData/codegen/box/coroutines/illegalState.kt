@@ -15,13 +15,13 @@ fun builder1(c: suspend () -> Unit) {
 }
 
 fun builder2(c: suspend () -> Unit) {
-    val continuation = c.createCoroutine(EmptyContinuation)
+    konst continuation = c.createCoroutine(EmptyContinuation)
 
-    val delegateField = continuation.javaClass.getDeclaredField("delegate")
+    konst delegateField = continuation.javaClass.getDeclaredField("delegate")
     delegateField.setAccessible(true)
-    val originalContinuation = delegateField.get(continuation)
+    konst originalContinuation = delegateField.get(continuation)
 
-    val declaredField = originalContinuation.javaClass.getDeclaredField("label")
+    konst declaredField = originalContinuation.javaClass.getDeclaredField("label")
     declaredField.setAccessible(true)
     declaredField.set(originalContinuation, -3)
     continuation.resume(Unit)

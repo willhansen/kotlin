@@ -5,7 +5,7 @@ package foo
 fun box(): String {
     for (i in 0..5);
 
-    val r = 0..5
+    konst r = 0..5
     for (i in r);
 
     for (i in arrayOf(1, 2, 3));

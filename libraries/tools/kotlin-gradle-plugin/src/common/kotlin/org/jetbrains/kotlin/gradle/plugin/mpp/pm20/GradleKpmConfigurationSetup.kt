@@ -12,24 +12,24 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.GradleKpmNameDisambiguat
 /* Internal abbreviation */
 
 data class GradleKpmConfigurationSetup<in T : GradleKpmFragment>(
-    val provider: GradleKpmConfigurationProvider,
-    val attributes: GradleKpmConfigurationAttributesSetup<T> = GradleKpmConfigurationAttributesSetup.None,
-    val artifacts: GradleKpmConfigurationArtifactsSetup<T> = GradleKpmConfigurationArtifactsSetup.None,
-    val relations: GradleKpmConfigurationRelationSetup = GradleKpmConfigurationRelationSetup.None,
+    konst provider: GradleKpmConfigurationProvider,
+    konst attributes: GradleKpmConfigurationAttributesSetup<T> = GradleKpmConfigurationAttributesSetup.None,
+    konst artifacts: GradleKpmConfigurationArtifactsSetup<T> = GradleKpmConfigurationArtifactsSetup.None,
+    konst relations: GradleKpmConfigurationRelationSetup = GradleKpmConfigurationRelationSetup.None,
     @property:AdvancedKotlinGradlePluginApi
-    val capabilities: GradleKpmConfigurationCapabilitiesSetup<T> = GradleKpmConfigurationCapabilitiesSetup.None,
+    konst capabilities: GradleKpmConfigurationCapabilitiesSetup<T> = GradleKpmConfigurationCapabilitiesSetup.None,
 )
 
 
 interface GradleKpmFragmentConfigureContext : GradleKpmNameDisambiguation {
-    val project: Project get() = module.project
-    val module: GradleKpmModule
-    val dependencies: GradleKpmFragmentDependencyConfigurations
+    konst project: Project get() = module.project
+    konst module: GradleKpmModule
+    konst dependencies: GradleKpmFragmentDependencyConfigurations
 }
 
 internal class GradleKpmFragmentConfigureContextImpl(
-    override val module: GradleKpmModule,
-    override val dependencies: GradleKpmFragmentDependencyConfigurations,
+    override konst module: GradleKpmModule,
+    override konst dependencies: GradleKpmFragmentDependencyConfigurations,
     names: GradleKpmNameDisambiguation
 ) : GradleKpmFragmentConfigureContext, GradleKpmNameDisambiguation by names
 

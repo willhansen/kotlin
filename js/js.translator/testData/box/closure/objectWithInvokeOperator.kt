@@ -2,15 +2,15 @@
 package foo
 
 object O {
-    val result = "O"
+    konst result = "O"
 }
 
 operator fun O.invoke() = result
 
 
-class A(val x: Int) {
+class A(konst x: Int) {
     companion object {
-        val result = "A"
+        konst result = "A"
     }
 }
 
@@ -19,7 +19,7 @@ operator fun A.Companion.invoke() = result
 
 enum class B {
     E {
-        val result = "B"
+        konst result = "B"
 
         override operator fun invoke() = result
     };
@@ -30,7 +30,7 @@ enum class B {
 fun f() = { O() + A() + B.E() }
 
 fun box(): String {
-    val result = f()()
+    konst result = f()()
     if (result != "OAB") return "expected 'OAB', got '$result'"
 
     return "OK"

@@ -17,23 +17,23 @@ FILE: conflictingProjection.kt
         }
 
     }
-    public final fun a1(value: R|None<kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a1(konstue: R|None<kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a2(value: R|None<in kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a2(konstue: R|None<in kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a3(value: R|None<out kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a3(konstue: R|None<out kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a4(value: R|In<kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a4(konstue: R|In<kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a5(value: R|In<in kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a5(konstue: R|In<in kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a6(value: R|In<out kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a6(konstue: R|In<out kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a7(value: R|Out<kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a7(konstue: R|Out<kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a8(value: R|Out<in kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a8(konstue: R|Out<in kotlin/Int>|): R|kotlin/Unit| {
     }
-    public final fun a9(value: R|Out<out kotlin/Int>|): R|kotlin/Unit| {
+    public final fun a9(konstue: R|Out<out kotlin/Int>|): R|kotlin/Unit| {
     }
     public final typealias A1<K> = R|None<K>|
     public final typealias A2<K> = R|None<in K>|

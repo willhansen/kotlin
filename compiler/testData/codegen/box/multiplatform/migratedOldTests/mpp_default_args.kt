@@ -70,31 +70,31 @@ actual class Test5 {
 }
 
 fun box(): String {
-    val test1 = test1()
+    konst test1 = test1()
     if (test1 != 42)
         return "test1 is wrongly $test1"
 
-    val test2 = test2(17)
+    konst test2 = test2(17)
     if (test2 != 34)
         return "test2 is wrongly $test2"
 
-    val test3 = test3()
+    konst test3 = test3()
     if (test3 != -1)
         return "test3 is wrongly $test3"
 
-    val test4 = Test4().test()
+    konst test4 = Test4().test()
     if (test4 != "OK")
         return test4
 
-    val test5 = Test5().Inner().test()
+    konst test5 = Test5().Inner().test()
     if (test5 != "OK")
         return test5
 
-    val test6 = 42.test6()
+    konst test6 = 42.test6()
     if (test6 != "OK")
         return test6
 
-    val inlineFunctionResult = inlineFunction("OK")
+    konst inlineFunctionResult = inlineFunction("OK")
     if (inlineFunctionResult != "OK,0,null")
         return "inlineFunctionResult is wrongly $inlineFunctionResult"
 

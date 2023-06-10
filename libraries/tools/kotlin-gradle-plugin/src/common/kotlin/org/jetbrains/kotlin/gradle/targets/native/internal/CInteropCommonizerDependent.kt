@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.gradle.targets.native.internal.CInteropIdentifier.Sc
 import org.jetbrains.kotlin.tooling.core.UnsafeApi
 
 internal class CInteropCommonizerDependent @UnsafeApi constructor(
-    val target: SharedCommonizerTarget,
-    val scopes: Set<Scope>,
-    val interops: Set<CInteropIdentifier>
+    konst target: SharedCommonizerTarget,
+    konst scopes: Set<Scope>,
+    konst interops: Set<CInteropIdentifier>
 ) {
 
     override fun equals(other: Any?): Boolean {
@@ -57,15 +57,15 @@ internal fun CInteropCommonizerDependent.Factory.from(
      *test and *main compilations will be included when build authors declare a *Test dependsOn *Main source set relationship.
      This relationship should not be declared, but we try to be lenient towards it here.
       */
-    val filteredCompilations = compilations.filter { compilation ->
+    konst filteredCompilations = compilations.filter { compilation ->
         compilation.associateWithClosure.none { associateCompilation -> associateCompilation in compilations }
     }.ifEmpty { return null }.toSet()
 
-    val scopes: Set<Scope> = filteredCompilations
+    konst scopes: Set<Scope> = filteredCompilations
         .map { compilation -> Scope.create(compilation) }.toSet()
         .ifEmpty { return null }
 
-    val interops: Set<CInteropIdentifier> = filteredCompilations
+    konst interops: Set<CInteropIdentifier> = filteredCompilations
         .flatMap { compilation -> compilation.cinterops.ifEmpty { return null } }
         .map { cinterop -> cinterop.identifier }.toSet()
 

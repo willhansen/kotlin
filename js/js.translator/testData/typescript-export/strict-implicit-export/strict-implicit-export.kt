@@ -35,50 +35,50 @@ open class NonExportedParent {
 
 interface NonExportedInterface
 interface NonExportedGenericInterface<T>
-open class NonExportedType(val value: Int)
-open class NonExportedGenericType<T>(val value: T)
+open class NonExportedType(konst konstue: Int)
+open class NonExportedGenericType<T>(konst konstue: T)
 
 open class NotExportedChildClass : NonExportedInterface, NeverUsedInsideExportedDeclarationsType, NonExportedType(322)
-open class NotExportedChildGenericClass<T>(value: T) : NonExportedInterface, NeverUsedInsideExportedDeclarationsType, NonExportedGenericInterface<T>, NonExportedGenericType<T>(value)
+open class NotExportedChildGenericClass<T>(konstue: T) : NonExportedInterface, NeverUsedInsideExportedDeclarationsType, NonExportedGenericInterface<T>, NonExportedGenericType<T>(konstue)
 
 
 @JsExport
 interface ExportedInterface
 
 @JsExport
-fun producer(value: Int): NonExportedType {
-    return NonExportedType(value)
+fun producer(konstue: Int): NonExportedType {
+    return NonExportedType(konstue)
 }
 
 @JsExport
-fun consumer(value: NonExportedType): Int {
-    return value.value
+fun consumer(konstue: NonExportedType): Int {
+    return konstue.konstue
 }
 
 @JsExport
-fun childProducer(value: Int): NotExportedChildClass {
+fun childProducer(konstue: Int): NotExportedChildClass {
     return NotExportedChildClass()
 }
 
 @JsExport
-fun childConsumer(value: NotExportedChildClass): Int {
-    return value.value
+fun childConsumer(konstue: NotExportedChildClass): Int {
+    return konstue.konstue
 }
 
 @JsExport
-fun <T: NonExportedGenericType<Int>> genericChildProducer(value: T): NotExportedChildGenericClass<T> {
-    return NotExportedChildGenericClass<T>(value)
+fun <T: NonExportedGenericType<Int>> genericChildProducer(konstue: T): NotExportedChildGenericClass<T> {
+    return NotExportedChildGenericClass<T>(konstue)
 }
 
 @JsExport
-fun <T: NonExportedGenericType<Int>> genericChildConsumer(value: NotExportedChildGenericClass<T>): T {
-    return value.value
+fun <T: NonExportedGenericType<Int>> genericChildConsumer(konstue: NotExportedChildGenericClass<T>): T {
+    return konstue.konstue
 }
 
 @JsExport
-open class A(var value: NonExportedType): NonExportedParent.NonExportedSecond.NonExportedUsedChild() {
+open class A(var konstue: NonExportedType): NonExportedParent.NonExportedSecond.NonExportedUsedChild() {
     fun <T: NonExportedType> increment(t: T): NonExportedType {
-        return NonExportedType(value = t.value + 1)
+        return NonExportedType(konstue = t.konstue + 1)
     }
 
     fun getNonExportedUserChild(): NonExportedParent.NonExportedSecond.NonExportedUsedChild {
@@ -129,11 +129,11 @@ fun <T> pep(x: T) where T: NonExportedInterface,
 {}
 
 @JsExport
-val console: Console
+konst console: Console
     get() = js("console")
 
 @JsExport
-val error: CompileError
+konst error: CompileError
     get() = js("{}")
 
 // Save hierarhy
@@ -166,7 +166,7 @@ fun <T : Forth> acceptForthLike(forth: T) {}
 fun <T> acceptMoreGenericForthLike(forth: T) where T: IB, T: IC, T: Third {}
 
 @JsExport
-val forth = Forth()
+konst forth = Forth()
 
 // Recursive definition KT-57356
 @JsExport

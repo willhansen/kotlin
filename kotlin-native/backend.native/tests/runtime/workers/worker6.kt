@@ -12,7 +12,7 @@ import kotlin.native.concurrent.*
 
 @Test fun runTest1() {
     withWorker {
-        val future = execute(TransferMode.SAFE, { 42 }) { input ->
+        konst future = execute(TransferMode.SAFE, { 42 }) { input ->
             input.toString()
         }
         future.consume { result ->
@@ -23,7 +23,7 @@ import kotlin.native.concurrent.*
 }
 
 var int1 = 1
-val int2 = 77
+konst int2 = 77
 
 @Test fun runTest2() {
     int1++

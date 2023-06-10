@@ -36,7 +36,7 @@ interface KotlinTopLevelExtensionConfig {
  */
 enum class ExplicitApiMode(
     @Deprecated("Should not be exposed in api", level = DeprecationLevel.ERROR)
-    val cliOption: String
+    konst cliOption: String
 ) {
     /** Report issues as errors. */
     Strict("strict"),

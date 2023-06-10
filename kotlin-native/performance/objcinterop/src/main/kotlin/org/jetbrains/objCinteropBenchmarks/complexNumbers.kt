@@ -5,7 +5,7 @@
 
 package org.jetbrains.complexNumbers
 
-const val benchmarkSize = 10000
+const konst benchmarkSize = 10000
 
 expect class ComplexNumber
 

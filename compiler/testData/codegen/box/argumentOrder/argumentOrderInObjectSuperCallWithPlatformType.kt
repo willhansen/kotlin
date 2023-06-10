@@ -7,7 +7,7 @@ public class A {
 }
 // FILE: a.kt
 open class C(x: String, y: String) {
-    val result = x + y
+    konst result = x + y
 }
 
 fun box() = object : C(y = "K", x = A.f()) {}.result

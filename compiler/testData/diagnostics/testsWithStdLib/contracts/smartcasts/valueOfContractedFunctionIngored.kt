@@ -5,8 +5,8 @@
 
 import kotlin.contracts.*
 
-fun f3(value: String?) {
-    if (<!USELESS_IS_CHECK!>!value.isNullOrEmpty() is Boolean<!>) {
-        value<!UNSAFE_CALL!>.<!>length
+fun f3(konstue: String?) {
+    if (<!USELESS_IS_CHECK!>!konstue.isNullOrEmpty() is Boolean<!>) {
+        konstue<!UNSAFE_CALL!>.<!>length
     }
 }

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.ir.interpreter
 import org.jetbrains.kotlin.platform.TargetPlatform
 
 /**
- * @param platform is used to apply unique platform rules. For example, for JS we must handle `Float` values in special way.
+ * @param platform is used to apply unique platform rules. For example, for JS we must handle `Float` konstues in special way.
  * @param maxStack describes the maximum allowed call stack size
  * @param maxCommands describes the maximum allowed number of simple instructions performed
  * @param createNonCompileTimeObjects
@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.platform.TargetPlatform
  */
 // TODO maybe create some sort of builder
 data class IrInterpreterConfiguration(
-    val platform: TargetPlatform? = null,
-    val maxStack: Int = 10_000,
-    val maxCommands: Int = 1_000_000,
-    val createNonCompileTimeObjects: Boolean = false,
-    val printOnlyExceptionMessage: Boolean = false,
-    val collapseStackTraceFromJDK: Boolean = true,
+    konst platform: TargetPlatform? = null,
+    konst maxStack: Int = 10_000,
+    konst maxCommands: Int = 1_000_000,
+    konst createNonCompileTimeObjects: Boolean = false,
+    konst printOnlyExceptionMessage: Boolean = false,
+    konst collapseStackTraceFromJDK: Boolean = true,
 )

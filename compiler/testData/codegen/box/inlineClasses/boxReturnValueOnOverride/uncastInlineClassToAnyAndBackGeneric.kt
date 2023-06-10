@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class X<T: Any>(val x: T)
+konstue class X<T: Any>(konst x: T)
 
 interface IFoo<T> {
     fun foo(): T
@@ -14,6 +14,6 @@ class TestX : IFoo<X<String>> {
 }
 
 fun box(): String {
-    val t: IFoo<X<String>> = TestX()
+    konst t: IFoo<X<String>> = TestX()
     return ((t.foo() as Any) as X<*>).x.toString()
 }

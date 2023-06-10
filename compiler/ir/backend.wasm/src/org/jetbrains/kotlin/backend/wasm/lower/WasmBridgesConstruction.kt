@@ -17,7 +17,7 @@ class WasmBridgesConstruction(context: JsCommonBackendContext) : BridgesConstruc
         function.wasmSignature(context.irBuiltIns)
 
     // Dispatch receiver type must be casted when types are different.
-    override val shouldCastDispatchReceiver: Boolean = true
+    override konst shouldCastDispatchReceiver: Boolean = true
     override fun getBridgeOrigin(bridge: IrSimpleFunction): IrDeclarationOrigin =
         IrDeclarationOrigin.BRIDGE
 }

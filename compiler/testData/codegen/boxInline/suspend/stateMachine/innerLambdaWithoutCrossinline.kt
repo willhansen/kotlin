@@ -8,7 +8,7 @@ import kotlin.coroutines.intrinsics.*
 import helpers.*
 
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
-    val l: suspend () -> Unit = {
+    konst l: suspend () -> Unit = {
         StateMachineChecker.suspendHere()
         StateMachineChecker.suspendHere()
         StateMachineChecker.suspendHere()

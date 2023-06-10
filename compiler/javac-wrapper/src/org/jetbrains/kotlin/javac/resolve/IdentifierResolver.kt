@@ -24,20 +24,20 @@ import org.jetbrains.kotlin.load.java.structure.JavaClass
 import org.jetbrains.kotlin.load.java.structure.JavaField
 import org.jetbrains.kotlin.name.Name
 
-class IdentifierResolver(private val javac: JavacWrapper) {
+class IdentifierResolver(private konst javac: JavacWrapper) {
 
     fun resolve(tree: Tree, compilationUnit: CompilationUnitTree, containingClass: JavaClass): JavaField? {
         if (tree is JCTree.JCIdent) {
-            val fieldName = Name.identifier(tree.name.toString())
+            konst fieldName = Name.identifier(tree.name.toString())
             return CurrentClassAndInnerFieldScope(javac, compilationUnit).findField(containingClass, fieldName)
         }
         else if (tree is JCTree.JCFieldAccess) {
-            val javaClass = javac.resolve(tree.selected, compilationUnit, containingClass) as? JavaClass ?: return null
+            konst javaClass = javac.resolve(tree.selected, compilationUnit, containingClass) as? JavaClass ?: return null
             if (javaClass is MockKotlinClassifier) {
                 return javaClass.findField(tree.name.toString())
             }
 
-            val fieldName = Name.identifier(tree.name.toString())
+            konst fieldName = Name.identifier(tree.name.toString())
             return CurrentClassAndInnerFieldScope(javac, compilationUnit, null).findField(javaClass, fieldName)
         }
 
@@ -46,12 +46,12 @@ class IdentifierResolver(private val javac: JavacWrapper) {
 
 }
 
-private abstract class FieldScope(protected val javac: JavacWrapper,
-                                  protected val compilationUnit: CompilationUnitTree) {
+private abstract class FieldScope(protected konst javac: JavacWrapper,
+                                  protected konst compilationUnit: CompilationUnitTree) {
 
-    protected val helper = ResolveHelper(javac, compilationUnit)
+    protected konst helper = ResolveHelper(javac, compilationUnit)
 
-    abstract val parent: FieldScope?
+    abstract konst parent: FieldScope?
 
     abstract fun findField(javaClass: JavaClass, name: Name): JavaField?
 
@@ -62,7 +62,7 @@ private abstract class FieldScope(protected val javac: JavacWrapper,
         }
         return supertypes
                 .mapNotNull {
-                    val classifier = it.classifier as? JavaClass
+                    konst classifier = it.classifier as? JavaClass
                     if (classifier !in checkedSupertypes) {
                         if (classifier is MockKotlinClassifier) {
                             classifier.findField(name.asString())
@@ -79,15 +79,15 @@ private abstract class FieldScope(protected val javac: JavacWrapper,
 
 private class StaticImportOnDemandFieldScope(javac: JavacWrapper,
                                              compilationUnit: CompilationUnitTree) : FieldScope(javac, compilationUnit) {
-    override val parent: FieldScope?
+    override konst parent: FieldScope?
         get() = null
 
     override fun findField(javaClass: JavaClass, name: Name): JavaField? {
-        val foundFields = hashSetOf<JavaField>()
+        konst foundFields = hashSetOf<JavaField>()
 
         staticAsteriskImports().forEach { import ->
-            val pathSegments = import.split(".")
-            val importedClass = helper.findImport(pathSegments)
+            konst pathSegments = import.split(".")
+            konst importedClass = helper.findImport(pathSegments)
             if (importedClass is MockKotlinClassifier) {
                 return importedClass.findField(name.asString())
             }
@@ -102,7 +102,7 @@ private class StaticImportOnDemandFieldScope(javac: JavacWrapper,
             (compilationUnit as JCTree.JCCompilationUnit).imports
                     .filter { it.staticImport }
                     .mapNotNull {
-                        val fqName = it.qualifiedIdentifier.toString()
+                        konst fqName = it.qualifiedIdentifier.toString()
                         if (fqName.endsWith("*")) {
                             fqName.dropLast(2)
                         }
@@ -114,16 +114,16 @@ private class StaticImportOnDemandFieldScope(javac: JavacWrapper,
 private class StaticImportFieldScope(javac: JavacWrapper,
                                      compilationUnit: CompilationUnitTree) : FieldScope(javac, compilationUnit) {
 
-    override val parent: FieldScope
+    override konst parent: FieldScope
         get() = StaticImportOnDemandFieldScope(javac, compilationUnit)
 
     override fun findField(javaClass: JavaClass, name: Name): JavaField? {
-        val staticImports = staticImports(name.asString()).toSet().takeIf { it.isNotEmpty() }
+        konst staticImports = staticImports(name.asString()).toSet().takeIf { it.isNotEmpty() }
                             ?: return parent.findField(javaClass, name)
 
-        val import = staticImports.singleOrNull() ?: return null
-        val pathSegments = import.split(".").dropLast(1)
-        val importedClass = helper.findImport(pathSegments)
+        konst import = staticImports.singleOrNull() ?: return null
+        konst pathSegments = import.split(".").dropLast(1)
+        konst importedClass = helper.findImport(pathSegments)
         if (importedClass is MockKotlinClassifier) {
             return importedClass.findField(name.asString())
         }
@@ -136,8 +136,8 @@ private class StaticImportFieldScope(javac: JavacWrapper,
             (compilationUnit as JCTree.JCCompilationUnit).imports
                     .filter { it.staticImport }
                     .mapNotNull {
-                        val import = it.qualifiedIdentifier as? JCTree.JCFieldAccess
-                        val importedField = import?.name?.toString()
+                        konst import = it.qualifiedIdentifier as? JCTree.JCFieldAccess
+                        konst importedField = import?.name?.toString()
                         if (importedField == fieldName) {
                             import.toString()
                         }
@@ -148,7 +148,7 @@ private class StaticImportFieldScope(javac: JavacWrapper,
 
 private class CurrentClassAndInnerFieldScope(javac: JavacWrapper,
                                              compilationUnit: CompilationUnitTree,
-                                             override val parent: FieldScope? = StaticImportFieldScope(javac, compilationUnit)) : FieldScope(javac, compilationUnit) {
+                                             override konst parent: FieldScope? = StaticImportFieldScope(javac, compilationUnit)) : FieldScope(javac, compilationUnit) {
 
     override fun findField(javaClass: JavaClass, name: Name): JavaField? {
         javaClass.enclosingClasses().forEach {

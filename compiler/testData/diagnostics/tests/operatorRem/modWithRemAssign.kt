@@ -13,6 +13,6 @@ class ModAndRemAssign {
 <!DEPRECATED_BINARY_MOD!>operator<!> fun ModAndRemAssign.modAssign(x: String) {}
 
 fun test() {
-    val modAndRemAssign = ModAndRemAssign()
+    konst modAndRemAssign = ModAndRemAssign()
     modAndRemAssign %= 1
 }

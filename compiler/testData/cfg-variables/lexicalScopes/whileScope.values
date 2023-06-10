@@ -2,7 +2,7 @@
 fun foo() {
     "before"
     while (true) {
-        val a: Int
+        konst a: Int
     }
     "after"
 }
@@ -11,5 +11,5 @@ fun foo() {
 "before"                                           <v0>: *         NEW: r("before") -> <v0>                     
 true                                               <v1>: Boolean   NEW: r(true) -> <v1>                         
 "after"                                            <v3>: *         NEW: r("after") -> <v3>                      
-{ "before" while (true) { val a: Int } "after" }   <v3>: *         COPY                                         
+{ "before" while (true) { konst a: Int } "after" }   <v3>: *         COPY                                         
 =====================

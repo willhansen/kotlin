@@ -34,15 +34,15 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class KtFe10TypeCreator(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtTypeCreator(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun buildClassType(builder: KtClassTypeBuilder): KtClassType {
-        val descriptor: ClassDescriptor? = when (builder) {
+        konst descriptor: ClassDescriptor? = when (builder) {
             is KtClassTypeBuilder.ByClassId -> {
-                val fqName = builder.classId.asSingleFqName()
+                konst fqName = builder.classId.asSingleFqName()
                 analysisContext.resolveSession
                     .getTopLevelClassifierDescriptors(fqName, NoLookupLocation.FROM_IDE)
                     .firstIsInstanceOrNull()
@@ -53,20 +53,20 @@ internal class KtFe10TypeCreator(
         }
 
         if (descriptor == null) {
-            val name = when (builder) {
+            konst name = when (builder) {
                 is KtClassTypeBuilder.ByClassId -> builder.classId.asString()
                 is KtClassTypeBuilder.BySymbol ->
                     builder.symbol.classIdIfNonLocal?.asString()
                         ?: builder.symbol.name?.asString()
                         ?: SpecialNames.ANONYMOUS_STRING
             }
-            val kotlinType = ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_CLASS_TYPE, name)
+            konst kotlinType = ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_CLASS_TYPE, name)
             return KtFe10ClassErrorType(kotlinType, analysisContext)
         }
 
-        val typeParameters = descriptor.typeConstructor.parameters
-        val type = if (typeParameters.size == builder.arguments.size) {
-            val projections = builder.arguments.mapIndexed { index, arg ->
+        konst typeParameters = descriptor.typeConstructor.parameters
+        konst type = if (typeParameters.size == builder.arguments.size) {
+            konst projections = builder.arguments.mapIndexed { index, arg ->
                 when (arg) {
                     is KtStarTypeProjection -> StarProjectionImpl(typeParameters[index])
                     is KtTypeArgumentWithVariance -> TypeProjectionImpl(arg.variance, (arg.type as KtFe10Type).fe10Type)
@@ -78,17 +78,17 @@ internal class KtFe10TypeCreator(
             descriptor.defaultType
         }
 
-        val typeWithNullability = TypeUtils.makeNullableAsSpecified(type, builder.nullability == KtTypeNullability.NULLABLE)
+        konst typeWithNullability = TypeUtils.makeNullableAsSpecified(type, builder.nullability == KtTypeNullability.NULLABLE)
         return KtFe10UsualClassType(typeWithNullability as SimpleType, descriptor, analysisContext)
     }
 
     override fun buildTypeParameterType(builder: KtTypeParameterTypeBuilder): KtTypeParameterType {
-        val descriptor = when (builder) {
+        konst descriptor = when (builder) {
             is KtTypeParameterTypeBuilder.BySymbol -> {
                 getSymbolDescriptor(builder.symbol) as? TypeParameterDescriptor
             }
         }
-        val kotlinType = descriptor?.defaultType
+        konst kotlinType = descriptor?.defaultType
             ?: ErrorUtils.createErrorType(ErrorTypeKind.NOT_FOUND_DESCRIPTOR_FOR_TYPE_PARAMETER, builder.toString())
         return kotlinType.toKtType(analysisContext) as KtTypeParameterType
     }

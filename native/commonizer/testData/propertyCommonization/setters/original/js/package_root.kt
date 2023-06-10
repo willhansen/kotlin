@@ -6,10 +6,10 @@ var defaultSetter3 = 42
 
 var setterWithoutBackingField1
     get() = 42
-    set(value) = Unit
+    set(konstue) = Unit
 var setterWithoutBackingField2
     get() = 42
-    set(value) = Unit
+    set(konstue) = Unit
 
 var setterWithDelegation1: Int by mutableMapOf("setterWithDelegation1" to 42)
 var setterWithDelegation2: Int by mutableMapOf("setterWithDelegation2" to 42)
@@ -25,6 +25,6 @@ var defaultSetteCustomVisibility4 = 42
 var defaultSetteCustomVisibility5 = 42
     private set
 
-val propertyWithoutSetter = 42
+konst propertyWithoutSetter = 42
 var propertyMaybeSetter = 42
 var propertyWithSetter = 42

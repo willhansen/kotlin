@@ -24,35 +24,35 @@ abstract class IrMemberAccessExpression<S : IrSymbol> : IrDeclarationReference()
 
     var extensionReceiver: IrExpression? = null
 
-    abstract override val symbol: S
+    abstract override konst symbol: S
 
     abstract var origin: IrStatementOrigin?
 
-    protected abstract val valueArguments: Array<IrExpression?>
+    protected abstract konst konstueArguments: Array<IrExpression?>
 
-    protected abstract val typeArguments: Array<IrType?>
+    protected abstract konst typeArguments: Array<IrType?>
 
-    val valueArgumentsCount: Int
-        get() = valueArguments.size
+    konst konstueArgumentsCount: Int
+        get() = konstueArguments.size
 
-    val typeArgumentsCount: Int
+    konst typeArgumentsCount: Int
         get() = typeArguments.size
 
     override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
         dispatchReceiver?.accept(visitor, data)
         extensionReceiver?.accept(visitor, data)
-        valueArguments.forEach { it?.accept(visitor, data) }
+        konstueArguments.forEach { it?.accept(visitor, data) }
     }
 
     override fun <D> transformChildren(transformer: IrElementTransformer<D>, data: D) {
         dispatchReceiver = dispatchReceiver?.transform(transformer, data)
         extensionReceiver = extensionReceiver?.transform(transformer, data)
-        valueArguments.transformInPlace(transformer, data)
+        konstueArguments.transformInPlace(transformer, data)
     }
 
     fun getValueArgument(index: Int): IrExpression? {
-        checkArgumentSlotAccess("value", index, valueArguments.size)
-        return valueArguments[index]
+        checkArgumentSlotAccess("konstue", index, konstueArguments.size)
+        return konstueArguments[index]
     }
 
     fun getTypeArgument(index: Int): IrType? {
@@ -60,9 +60,9 @@ abstract class IrMemberAccessExpression<S : IrSymbol> : IrDeclarationReference()
         return typeArguments[index]
     }
 
-    fun putValueArgument(index: Int, valueArgument: IrExpression?) {
-        checkArgumentSlotAccess("value", index, valueArguments.size)
-        valueArguments[index] = valueArgument
+    fun putValueArgument(index: Int, konstueArgument: IrExpression?) {
+        checkArgumentSlotAccess("konstue", index, konstueArguments.size)
+        konstueArguments[index] = konstueArgument
     }
 
     fun putTypeArgument(index: Int, type: IrType?) {

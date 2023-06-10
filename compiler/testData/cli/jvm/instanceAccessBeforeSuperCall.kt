@@ -8,7 +8,7 @@ class B(other: B = this)
 
 class C() {
     constructor(x: Int) : this({
-        val a = 10
+        konst a = 10
         this
     }) {}
 }

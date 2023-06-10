@@ -16,13 +16,13 @@ import java.io.File
  * @param configurables [Configurables] for emulated target
  */
 class EmulatorExecutor(
-        private val configurables: ConfigurablesWithEmulator,
+        private konst configurables: ConfigurablesWithEmulator,
 ) : Executor {
-    private val hostExecutor: Executor = HostExecutor()
+    private konst hostExecutor: Executor = HostExecutor()
 
     override fun execute(request: ExecuteRequest): ExecuteResponse {
-        val absoluteTargetSysRoot = configurables.absoluteTargetSysRoot
-        val workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
+        konst absoluteTargetSysRoot = configurables.absoluteTargetSysRoot
+        konst workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
 
         return hostExecutor.execute(request.copying {
             this.executableAbsolutePath = configurables.absoluteEmulatorExecutable

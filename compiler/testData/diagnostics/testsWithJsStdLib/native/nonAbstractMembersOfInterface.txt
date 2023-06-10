@@ -1,9 +1,9 @@
 package
 
 public external interface I {
-    public open val a: kotlin.Int?
+    public open konst a: kotlin.Int?
     public open var b: kotlin.String?
-    public open val c: kotlin.Int
+    public open konst c: kotlin.Int
     public open var d: kotlin.String
     public open var e: dynamic
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

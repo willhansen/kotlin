@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.descriptors.impl.SimpleFunctionDescriptorImpl
 import org.jetbrains.kotlin.name.Name
 
 class AccessorForCompanionObjectInstanceFieldDescriptor(
-    val companionObjectDescriptor: ClassDescriptor,
+    konst companionObjectDescriptor: ClassDescriptor,
     name: Name
 ) :
     SimpleFunctionDescriptorImpl(

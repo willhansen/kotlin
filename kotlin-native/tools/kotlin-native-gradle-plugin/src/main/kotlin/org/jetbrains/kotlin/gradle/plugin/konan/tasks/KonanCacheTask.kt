@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.library.uniqueName
 import org.jetbrains.kotlin.*
 import java.io.File
 
-enum class KonanCacheKind(val outputKind: CompilerOutputKind) {
+enum class KonanCacheKind(konst outputKind: CompilerOutputKind) {
     STATIC(CompilerOutputKind.STATIC_CACHE),
     DYNAMIC(CompilerOutputKind.DYNAMIC_CACHE)
 }
@@ -34,11 +34,11 @@ open class KonanCacheTask: DefaultTask() {
 
     @get:Internal
     // TODO: Reuse NativeCacheKind from Big Kotlin plugin when it is available.
-    val cacheDirectory: File
+    konst cacheDirectory: File
         get() = File("$cacheRoot/$target-g$cacheKind")
 
     @get:OutputDirectory
-    val cacheFile: File
+    konst cacheFile: File
         get() = cacheDirectory.resolve(if (makePerFileCache) "${klibUniqName}-per-file-cache" else "${klibUniqName}-cache")
 
     /**
@@ -47,8 +47,8 @@ open class KonanCacheTask: DefaultTask() {
      * the task dependencies are finished, and [originalKlib] might be not build yet.
      */
     private fun readKlibUniqNameFromManifest(): String {
-        val konanHome = compilerDistributionPath.get().absolutePath
-        val resolver = defaultResolver(
+        konst konanHome = compilerDistributionPath.get().absolutePath
+        konst resolver = defaultResolver(
                 emptyList(),
                 PlatformManager(konanHome).targetByName(target),
                 Distribution(konanHome)
@@ -64,7 +64,7 @@ open class KonanCacheTask: DefaultTask() {
 
     @get:Input
     /** Path to a compiler distribution that is used to build this cache. */
-    val compilerDistributionPath: Property<File> = project.objects.property(File::class.java).apply {
+    konst compilerDistributionPath: Property<File> = project.objects.property(File::class.java).apply {
         set(project.provider { project.kotlinNativeDist })
     }
 
@@ -81,16 +81,16 @@ open class KonanCacheTask: DefaultTask() {
 
         // Compiler doesn't create a cache if the cacheFile already exists. So we need to remove it manually.
         if (cacheFile.exists()) {
-            val deleted = cacheFile.deleteRecursively()
+            konst deleted = cacheFile.deleteRecursively()
             check(deleted) { "Cannot delete stale cache: ${cacheFile.absolutePath}" }
         }
         cacheDirectory.mkdirs()
-        val konanHome = compilerDistributionPath.get().absolutePath
-        val additionalCacheFlags = PlatformManager(konanHome).let {
+        konst konanHome = compilerDistributionPath.get().absolutePath
+        konst additionalCacheFlags = PlatformManager(konanHome).let {
             it.targetByName(target).let(it::loader).additionalCacheFlags
         }
         requireNotNull(originalKlib)
-        val args = mutableListOf(
+        konst args = mutableListOf(
             "-g",
             "-target", target,
             "-produce", cacheKind.outputKind.name.toLowerCase(),
@@ -100,7 +100,7 @@ open class KonanCacheTask: DefaultTask() {
         if (makePerFileCache)
             args += "-Xmake-per-file-cache"
         args += additionalCacheFlags
-        args += cachedLibraries.map { "-Xcached-library=${it.key},${it.value}" }
+        args += cachedLibraries.map { "-Xcached-library=${it.key},${it.konstue}" }
         KonanCliCompilerRunner(project, konanHome = konanHome).run(args)
     }
 }

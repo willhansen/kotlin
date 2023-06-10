@@ -41,7 +41,7 @@ public class ClashTest extends SuperClass {
 
 
     static void test() {
-        val obj = new ClashTest();
+        konst obj = new ClashTest();
 
         obj.getAge();
 //        obj.setAge(41);
@@ -80,27 +80,27 @@ class KotlinChildClass : ClashTest() {
 }
 
 fun test() {
-    val obj = ClashTest()
+    konst obj = ClashTest()
 
     obj.<!OVERLOAD_RESOLUTION_AMBIGUITY!>getAge<!>()
     //thats shouldn't work because lombok doesn't generate clashing method
     obj.setAge(41)
     obj.<!OVERLOAD_RESOLUTION_AMBIGUITY!>age<!> = 12
-    val age = obj.<!OVERLOAD_RESOLUTION_AMBIGUITY!>age<!>
+    konst age = obj.<!OVERLOAD_RESOLUTION_AMBIGUITY!>age<!>
 
 
     obj.getName()
     obj.setName("Al")
-    val name = obj.name
+    konst name = obj.name
     obj.name = "sdf"
 
     obj.isHuman()
     obj.setHuman(true)
     obj.isHuman("sdf")
-    val isHuman = obj.isHuman
+    konst isHuman = obj.isHuman
     obj.isHuman = false
 
-    val childObj = KotlinChildClass()
+    konst childObj = KotlinChildClass()
     childObj.getToOverride()
     childObj.setToOverride(34)
     childObj.toOverride

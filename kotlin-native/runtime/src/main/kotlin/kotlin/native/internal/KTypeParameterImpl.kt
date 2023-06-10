@@ -8,15 +8,15 @@ package kotlin.native.internal
 import kotlin.reflect.*
 
 internal class KTypeParameterImpl(
-        override val name: String,
-        private val containerFqName: String,
-        private val upperBoundsArray: Array<KType>,
-        val varianceId: Int, // mapping is used to make static initialization possible
-        override val isReified: Boolean
+        override konst name: String,
+        private konst containerFqName: String,
+        private konst upperBoundsArray: Array<KType>,
+        konst varianceId: Int, // mapping is used to make static initialization possible
+        override konst isReified: Boolean
 ) : KTypeParameter {
-    override val upperBounds: List<KType>
+    override konst upperBounds: List<KType>
         get() = upperBoundsArray.asList()
-    override val variance: KVariance
+    override konst variance: KVariance
         get() = KVarianceMapper.varianceById(varianceId)!!
 
     override fun toString(): String = when (variance) {

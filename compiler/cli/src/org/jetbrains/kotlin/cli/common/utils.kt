@@ -50,7 +50,7 @@ fun <F> checkKotlinPackageUsage(
     if (configuration.getBoolean(CLIConfigurationKeys.ALLOW_KOTLIN_PACKAGE)) {
         return true
     }
-    val kotlinPackage = FqName("kotlin")
+    konst kotlinPackage = FqName("kotlin")
     for (file in files) {
         if (getPackage(file).isSubpackageOf(kotlinPackage)) {
             messageCollector.report(
@@ -64,7 +64,7 @@ fun <F> checkKotlinPackageUsage(
     return true
 }
 
-private val CompilerConfiguration.messageCollector: MessageCollector
+private konst CompilerConfiguration.messageCollector: MessageCollector
     get() = get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
 
 fun checkKotlinPackageUsageForPsi(
@@ -90,9 +90,9 @@ fun checkKotlinPackageUsageForLightTree(
     )
 
 private fun KtSourceElement.getLocationWithin(file: FirFile): CompilerMessageLocationWithRange? {
-    val sourceFile = file.sourceFile ?: return null
-    val (startLine, startColumn) = file.getLineAndColumnStartingWithOnesAt(startOffset) ?: return null
-    val (endLine, endColumn) = file.getLineAndColumnStartingWithOnesAt(endOffset) ?: return null
+    konst sourceFile = file.sourceFile ?: return null
+    konst (startLine, startColumn) = file.getLineAndColumnStartingWithOnesAt(startOffset) ?: return null
+    konst (endLine, endColumn) = file.getLineAndColumnStartingWithOnesAt(endOffset) ?: return null
     return CompilerMessageLocationWithRange.create(sourceFile.path, startLine, startColumn, endLine, endColumn, text?.toString())
 }
 
@@ -101,7 +101,7 @@ private fun FirFile.getLineAndColumnStartingWithOnesAt(offset: Int?): Pair<Int, 
 }
 
 private fun KtSourceFileLinesMapping.getLineAndColumnByOffsetStartingWithOnes(startOffset: Int): Pair<Int, Int> {
-    val (line, column) = getLineAndColumnByOffset(startOffset)
+    konst (line, column) = getLineAndColumnByOffset(startOffset)
     return line + 1 to column + 1
 }
 
@@ -113,7 +113,7 @@ fun <PathProvider : Any> getLibraryFromHome(
     noLibraryArgument: String
 ): File? {
     if (paths != null) {
-        val stdlibJar = getLibrary(paths)
+        konst stdlibJar = getLibrary(paths)
         if (stdlibJar.exists()) {
             return stdlibJar
         }

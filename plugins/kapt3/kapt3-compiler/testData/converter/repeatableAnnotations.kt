@@ -2,7 +2,7 @@
 package lib;
 public @interface Anno {
     String[] construct() default {};
-    String value();
+    String konstue();
 }
 
 // FILE: lib/R.java
@@ -20,29 +20,29 @@ import kotlin.reflect.KClass
 
 class Test {
     @Anno("1")
-    @Anno(value = "2", construct = ["A", "B"])
+    @Anno(konstue = "2", construct = ["A", "B"])
     @Anno("3", construct = ["C"])
-    val value: String = ""
+    konst konstue: String = ""
 }
 
-annotation class AnnoChar(val x: Int, val chr: Char)
-annotation class AnnoBoolean(val x: Int, val bool: Boolean)
-annotation class AnnoInt(val x: Int, val i: Int)
-annotation class AnnoLong(val x: Int, val l: Long)
-annotation class AnnoFloat(val x: Int, val flt: Float)
-annotation class AnnoDouble(val x: Int, val dbl: Double)
+annotation class AnnoChar(konst x: Int, konst chr: Char)
+annotation class AnnoBoolean(konst x: Int, konst bool: Boolean)
+annotation class AnnoInt(konst x: Int, konst i: Int)
+annotation class AnnoLong(konst x: Int, konst l: Long)
+annotation class AnnoFloat(konst x: Int, konst flt: Float)
+annotation class AnnoDouble(konst x: Int, konst dbl: Double)
 
-annotation class AnnoString(val x: Int, val s: String)
+annotation class AnnoString(konst x: Int, konst s: String)
 
-annotation class AnnoIntArray(val x: Int, val b: IntArray)
-annotation class AnnoLongArray(val x: Int, val b: LongArray)
+annotation class AnnoIntArray(konst x: Int, konst b: IntArray)
+annotation class AnnoLongArray(konst x: Int, konst b: LongArray)
 
-annotation class AnnoArray(val x: Int, val a: Array<String>)
+annotation class AnnoArray(konst x: Int, konst a: Array<String>)
 
-annotation class AnnoClass(val x: Int, val c: KClass<Color>)
+annotation class AnnoClass(konst x: Int, konst c: KClass<Color>)
 
 enum class Color { BLACK }
-annotation class AnnoEnum(val x: Int, val c: Color)
+annotation class AnnoEnum(konst x: Int, konst c: Color)
 
 @AnnoChar(lib.R.id.textView, 'c')
 @AnnoBoolean(lib.R.id.textView, false)

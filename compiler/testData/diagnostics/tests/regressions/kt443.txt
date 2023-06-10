@@ -2,7 +2,7 @@ package
 
 public open class M {
     public constructor M()
-    public open val b: kotlin.Int = 5
+    public open konst b: kotlin.Int = 5
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -10,8 +10,8 @@ public open class M {
 
 public final class N : M {
     public constructor N()
-    public final val a: kotlin.Int
-    public open override /*1*/ val b: kotlin.Int
+    public final konst a: kotlin.Int
+    public open override /*1*/ konst b: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

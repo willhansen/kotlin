@@ -12,7 +12,7 @@ internal object DefaultCommonizerSettings : CommonizerSettings {
 }
 
 internal class MapBasedCommonizerSettings private constructor(
-    private val settings: Map<CommonizerSettings.Key<*>, Any>
+    private konst settings: Map<CommonizerSettings.Key<*>, Any>
 ) : CommonizerSettings {
     constructor(vararg settings: Setting<*>) : this(settings.associate { (k, v) -> k to v })
 
@@ -22,7 +22,7 @@ internal class MapBasedCommonizerSettings private constructor(
     }
 
     internal data class Setting<T : Any>(
-        internal val key: CommonizerSettings.Key<T>,
-        internal val settingValue: T,
+        internal konst key: CommonizerSettings.Key<T>,
+        internal konst settingValue: T,
     )
 }

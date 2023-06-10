@@ -48,12 +48,12 @@ internal fun CirPackage.serializePackage(
 }
 
 internal fun addEmptyFragments(fragments: MutableCollection<KmModuleFragment>) {
-    val existingPackageFqNames: Set<String> = fragments.mapTo(HashSet()) { it.fqName!! }
+    konst existingPackageFqNames: Set<String> = fragments.mapTo(HashSet()) { it.fqName!! }
 
-    val missingPackageFqNames: Set<String> = existingPackageFqNames.flatMapTo(HashSet()) { fqName ->
+    konst missingPackageFqNames: Set<String> = existingPackageFqNames.flatMapTo(HashSet()) { fqName ->
         fqName.mapIndexedNotNull { index, ch ->
             if (ch == '.') {
-                val parentFqName = fqName.substring(0, index)
+                konst parentFqName = fqName.substring(0, index)
                 if (parentFqName !in existingPackageFqNames)
                     return@mapIndexedNotNull parentFqName
             }
@@ -87,7 +87,7 @@ internal fun CirClass.serializeClass(
     clazz.properties += nestedProperties
 
     directNestedClasses.forEach { directNestedClass ->
-        val shortClassName = directNestedClass.name.substringAfterLast('.')
+        konst shortClassName = directNestedClass.name.substringAfterLast('.')
 
         if (Flag.Class.IS_ENUM_ENTRY(directNestedClass.flags)) {
             clazz.enumEntries += shortClassName
@@ -99,7 +99,7 @@ internal fun CirClass.serializeClass(
 
     clazz.companionObject = companion?.name
 
-    val supertypes = supertypes
+    konst supertypes = supertypes
     if (supertypes.isEmpty() && className !in SPECIAL_CLASS_WITHOUT_SUPERTYPES_CLASS_NAMES)
         clazz.supertypes += CirStandardTypes.ANY.serializeClassType(context)
     else
@@ -109,16 +109,16 @@ internal fun CirClass.serializeClass(
 internal fun linkSealedClassesWithSubclasses(packageName: CirPackageName, classConsumer: ClassConsumer) {
     if (classConsumer.allClasses.isEmpty() || classConsumer.sealedClasses.isEmpty()) return
 
-    val metadataPackageName = packageName.toMetadataString()
+    konst metadataPackageName = packageName.toMetadataString()
     fun ClassName.isInSamePackage(): Boolean = substringBeforeLast('/', "") == metadataPackageName
 
-    val sealedClassesMap: Map<ClassName, KmClass> = classConsumer.sealedClasses.associateBy { it.name }
+    konst sealedClassesMap: Map<ClassName, KmClass> = classConsumer.sealedClasses.associateBy { it.name }
 
     classConsumer.allClasses.forEach { clazz ->
         clazz.supertypes.forEach supertype@{ supertype ->
-            val superclassName = (supertype.classifier as? KmClassifier.Class)?.name ?: return@supertype
+            konst superclassName = (supertype.classifier as? KmClassifier.Class)?.name ?: return@supertype
             if (!superclassName.isInSamePackage()) return@supertype
-            val sealedClass = sealedClassesMap[superclassName] ?: return@supertype
+            konst sealedClass = sealedClassesMap[superclassName] ?: return@supertype
             sealedClass.sealedSubclasses += clazz.name
         }
     }
@@ -131,7 +131,7 @@ internal fun CirClassConstructor.serializeConstructor(
 ).also { constructor ->
     annotations.mapTo(constructor.annotations) { it.serializeAnnotation() }
     // TODO: nowhere to write constructor type parameters
-    valueParameters.mapTo(constructor.valueParameters) { it.serializeValueParameter(context) }
+    konstueParameters.mapTo(constructor.konstueParameters) { it.serializeValueParameter(context) }
 }
 
 internal fun CirTypeAlias.serializeTypeAlias(
@@ -186,7 +186,7 @@ internal fun CirFunction.serializeFunction(
 ).also { function ->
     annotations.mapTo(function.annotations) { it.serializeAnnotation() }
     typeParameters.serializeTypeParameters(context, output = function.typeParameters)
-    valueParameters.mapTo(function.valueParameters) { it.serializeValueParameter(context) }
+    konstueParameters.mapTo(function.konstueParameters) { it.serializeValueParameter(context) }
     extensionReceiver?.let { receiver ->
         // TODO nowhere to write receiver annotations, see KT-42490
         function.receiverParameterType = receiver.type.serializeType(context)
@@ -195,11 +195,11 @@ internal fun CirFunction.serializeFunction(
 }
 
 private fun CirAnnotation.serializeAnnotation(): KmAnnotation {
-    val arguments = LinkedHashMap<String, KmAnnotationArgument>(constantValueArguments.size + annotationValueArguments.size, 1F)
+    konst arguments = LinkedHashMap<String, KmAnnotationArgument>(constantValueArguments.size + annotationValueArguments.size, 1F)
 
-    constantValueArguments.forEach { (name: CirName, value: CirConstantValue) ->
-        arguments[name.name] = value.serializeConstantValue()
-            ?: error("Unexpected <null> constant value inside of $this")
+    constantValueArguments.forEach { (name: CirName, konstue: CirConstantValue) ->
+        arguments[name.name] = konstue.serializeConstantValue()
+            ?: error("Unexpected <null> constant konstue inside of $this")
     }
 
     annotationValueArguments.forEach { (name: CirName, nested: CirAnnotation) ->
@@ -214,35 +214,35 @@ private fun CirAnnotation.serializeAnnotation(): KmAnnotation {
 
 @OptIn(ExperimentalUnsignedTypes::class)
 private fun CirConstantValue.serializeConstantValue(): KmAnnotationArgument? = when (this) {
-    is CirConstantValue.StringValue -> KmAnnotationArgument.StringValue(value)
-    is CirConstantValue.CharValue -> KmAnnotationArgument.CharValue(value)
+    is CirConstantValue.StringValue -> KmAnnotationArgument.StringValue(konstue)
+    is CirConstantValue.CharValue -> KmAnnotationArgument.CharValue(konstue)
 
-    is CirConstantValue.ByteValue -> KmAnnotationArgument.ByteValue(value)
-    is CirConstantValue.ShortValue -> KmAnnotationArgument.ShortValue(value)
-    is CirConstantValue.IntValue -> KmAnnotationArgument.IntValue(value)
-    is CirConstantValue.LongValue -> KmAnnotationArgument.LongValue(value)
+    is CirConstantValue.ByteValue -> KmAnnotationArgument.ByteValue(konstue)
+    is CirConstantValue.ShortValue -> KmAnnotationArgument.ShortValue(konstue)
+    is CirConstantValue.IntValue -> KmAnnotationArgument.IntValue(konstue)
+    is CirConstantValue.LongValue -> KmAnnotationArgument.LongValue(konstue)
 
-    is CirConstantValue.UByteValue -> KmAnnotationArgument.UByteValue(value)
-    is CirConstantValue.UShortValue -> KmAnnotationArgument.UShortValue(value)
-    is CirConstantValue.UIntValue -> KmAnnotationArgument.UIntValue(value)
-    is CirConstantValue.ULongValue -> KmAnnotationArgument.ULongValue(value)
+    is CirConstantValue.UByteValue -> KmAnnotationArgument.UByteValue(konstue)
+    is CirConstantValue.UShortValue -> KmAnnotationArgument.UShortValue(konstue)
+    is CirConstantValue.UIntValue -> KmAnnotationArgument.UIntValue(konstue)
+    is CirConstantValue.ULongValue -> KmAnnotationArgument.ULongValue(konstue)
 
-    is CirConstantValue.FloatValue -> KmAnnotationArgument.FloatValue(value)
-    is CirConstantValue.DoubleValue -> KmAnnotationArgument.DoubleValue(value)
-    is CirConstantValue.BooleanValue -> KmAnnotationArgument.BooleanValue(value)
+    is CirConstantValue.FloatValue -> KmAnnotationArgument.FloatValue(konstue)
+    is CirConstantValue.DoubleValue -> KmAnnotationArgument.DoubleValue(konstue)
+    is CirConstantValue.BooleanValue -> KmAnnotationArgument.BooleanValue(konstue)
 
     is CirConstantValue.EnumValue -> KmAnnotationArgument.EnumValue(enumClassId.toString(), enumEntryName.name)
     is CirConstantValue.NullValue -> null
 
     is CirConstantValue.ArrayValue -> KmAnnotationArgument.ArrayValue(elements.compactMap { element ->
-        element.serializeConstantValue() ?: error("Unexpected <null> constant value inside of $this")
+        element.serializeConstantValue() ?: error("Unexpected <null> constant konstue inside of $this")
     })
 }
 
 private fun CirValueParameter.serializeValueParameter(
     context: CirTreeSerializationContext
 ): KmValueParameter = KmValueParameter(
-    flags = valueParameterFlags(),
+    flags = konstueParameterFlags(),
     name = name.name
 ).also { parameter ->
     annotations.mapTo(parameter.annotations) { it.serializeAnnotation() }
@@ -318,7 +318,7 @@ private fun CirTypeAliasType.serializeAbbreviationType(
     context: CirTreeSerializationContext,
     expansion: TypeAliasExpansion
 ): KmType {
-    val abbreviationType = KmType(typeFlags())
+    konst abbreviationType = KmType(typeFlags())
     abbreviationType.classifier = KmClassifier.TypeAlias(classifierId.toString())
     arguments.mapTo(abbreviationType.arguments) { it.serializeArgument(context, expansion) }
     return abbreviationType
@@ -329,8 +329,8 @@ private fun CirTypeAliasType.serializeExpandedType(
     context: CirTreeSerializationContext,
     expansion: TypeAliasExpansion
 ): KmType {
-    val cirExpandedType = computeExpandedType(underlyingType)
-    val expandedType = cirExpandedType.serializeClassType(context, expansion)
+    konst cirExpandedType = computeExpandedType(underlyingType)
+    konst expandedType = cirExpandedType.serializeClassType(context, expansion)
     return expandedType
 }
 
@@ -338,7 +338,7 @@ private fun CirTypeProjection.serializeArgument(
     context: CirTreeSerializationContext,
     expansion: TypeAliasExpansion
 ): KmTypeProjection {
-    val effectiveExpansion = if (expansion == FOR_TOP_LEVEL_TYPE) FOR_NESTED_TYPE else expansion
+    konst effectiveExpansion = if (expansion == FOR_TOP_LEVEL_TYPE) FOR_NESTED_TYPE else expansion
     return when (this) {
         CirStarTypeProjection -> KmTypeProjection.STAR
         is CirRegularTypeProjection -> KmTypeProjection(

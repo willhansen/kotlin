@@ -7,7 +7,7 @@ var a1 by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE, DELEGATE_SPECIAL_FUNCTION
 
 var b: Int by B()
 
-val cObj = C()
+konst cObj = C()
 var c: String by cObj
 
 class A {

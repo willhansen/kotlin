@@ -5,7 +5,7 @@ class Delegate {
     operator fun getValue(instance: Any?, property: KProperty<*>) = "OK"
 }
 
-val result: String by Delegate()
+konst result: String by Delegate()
 
 fun box(): String {
     return result

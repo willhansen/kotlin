@@ -4,11 +4,11 @@
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-annotation class Anno(val equals: Boolean)
+annotation class Anno(konst equals: Boolean)
 
 fun box(): String {
-    val t = Anno::class.constructors.single().call(true)
-    val f = Anno::class.constructors.single().call(false)
+    konst t = Anno::class.constructors.single().call(true)
+    konst f = Anno::class.constructors.single().call(false)
     assertEquals(true, t.equals)
     assertEquals(false, f.equals)
     assertNotEquals(t, f)

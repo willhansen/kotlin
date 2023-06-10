@@ -59,7 +59,7 @@ internal fun IdeJvmAndAndroidPlatformBinaryDependencyResolver(project: Project):
  */
 internal fun substituteStdlibCommonWithAndroidJvm(dependencySubstitutions: DependencySubstitutions) {
     dependencySubstitutions.all { dependency ->
-        val requested = dependency.requested
+        konst requested = dependency.requested
         if (requested is ModuleComponentSelector
             && requested.group == KOTLIN_MODULE_GROUP
             && requested.module == KOTLIN_STDLIB_COMMON_MODULE_NAME

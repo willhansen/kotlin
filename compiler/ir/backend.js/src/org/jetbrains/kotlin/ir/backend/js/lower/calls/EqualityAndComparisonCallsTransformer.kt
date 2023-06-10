@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.atMostOne
 
 class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : CallsTransformer {
-    private val intrinsics = context.intrinsics
-    private val irBuiltIns = context.irBuiltIns
-    private val icUtils = context.inlineClassesUtils
+    private konst intrinsics = context.intrinsics
+    private konst irBuiltIns = context.irBuiltIns
+    private konst icUtils = context.inlineClassesUtils
 
-    private val symbolToTransformer: SymbolToTransformer = hashMapOf()
+    private konst symbolToTransformer: SymbolToTransformer = hashMapOf()
 
     init {
         symbolToTransformer.run {
@@ -54,7 +54,7 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
             comparator.owner.returnType,
             comparator,
             typeArgumentsCount = 0,
-            valueArgumentsCount = 2
+            konstueArgumentsCount = 2
         ).apply {
             putValueArgument(0, irCall(call, intrinsics.longCompareToLong, argumentsAsReceivers = true))
             putValueArgument(1, JsIrBuilder.buildInt(irBuiltIns.intType, 0))
@@ -62,7 +62,7 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
     }
 
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean): IrExpression {
-        val symbol = call.symbol
+        konst symbol = call.symbol
         symbolToTransformer[symbol]?.let {
             return it(call)
         }
@@ -75,8 +75,8 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
     }
 
     private fun transformEqeqeqOperator(call: IrFunctionAccessExpression): IrExpression {
-        val lhs = call.getValueArgument(0)!!
-        val rhs = call.getValueArgument(1)!!
+        konst lhs = call.getValueArgument(0)!!
+        konst rhs = call.getValueArgument(1)!!
 
         return if (lhs.isCharBoxing() && rhs.isCharBoxing()) {
             optimizeInlineClassEquality(call, lhs, rhs)
@@ -90,13 +90,13 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
     }
 
     private fun transformEqeqOperator(call: IrFunctionAccessExpression): IrExpression {
-        val lhs = call.getValueArgument(0)!!
-        val rhs = call.getValueArgument(1)!!
+        konst lhs = call.getValueArgument(0)!!
+        konst rhs = call.getValueArgument(1)!!
 
-        val lhsJsType = lhs.type.getPrimitiveType()
-        val rhsJsType = rhs.type.getPrimitiveType()
+        konst lhsJsType = lhs.type.getPrimitiveType()
+        konst rhsJsType = rhs.type.getPrimitiveType()
 
-        val equalsMethod = lhs.type.findEqualsMethod()
+        konst equalsMethod = lhs.type.findEqualsMethod()
 
         return when {
             lhs.type is IrDynamicType ->
@@ -130,10 +130,10 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
     }
 
     private fun IrFunctionAccessExpression.allValueArgumentsAreNullable() =
-        (0 until valueArgumentsCount).all { getValueArgument(it)!!.type.isNullable() }
+        (0 until konstueArgumentsCount).all { getValueArgument(it)!!.type.isNullable() }
 
     private fun transformCompareToMethodCall(call: IrFunctionAccessExpression): IrExpression {
-        val function = call.symbol.owner as IrSimpleFunction
+        konst function = call.symbol.owner as IrSimpleFunction
         if (function.parent !is IrClass) return call
 
         fun IrSimpleFunction.isFakeOverriddenFromComparable(): Boolean = when {
@@ -157,7 +157,7 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
 
 
     private fun transformEqualsMethodCall(call: IrCall): IrExpression {
-        val function = call.symbol.owner
+        konst function = call.symbol.owner
         return when {
             // Nothing special
             !function.isEqualsInheritedFromAny() -> call
@@ -177,7 +177,7 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
     }
 
     private fun IrType.findEqualsMethod(): IrSimpleFunction? {
-        val klass = getClass() ?: return null
+        konst klass = getClass() ?: return null
         if (klass.isEnumClass && klass.isExternal) return null
         return klass.declarations.asSequence()
             .filterIsInstance<IrSimpleFunction>()
@@ -206,14 +206,14 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
         this is IrCall && symbol == icUtils.boxIntrinsic
 
     private fun IrExpression.unboxParamWithInlinedClass(): Pair<IrExpression, IrClass?> {
-        val unboxed = (this as IrFunctionAccessExpression).getValueArgument(0)
+        konst unboxed = (this as IrFunctionAccessExpression).getValueArgument(0)
             ?: error("Boxed expression is expected")
         return Pair(unboxed, icUtils.getInlinedClass(unboxed.type))
     }
 
     private fun optimizeInlineClassEquality(call: IrFunctionAccessExpression, lhs: IrExpression, rhs: IrExpression): IrExpression {
-        val (lhsUnboxed, lhsClassType) = lhs.unboxParamWithInlinedClass()
-        val (rhsUnboxed, rhsClassType) = rhs.unboxParamWithInlinedClass()
+        konst (lhsUnboxed, lhsClassType) = lhs.unboxParamWithInlinedClass()
+        konst (rhsUnboxed, rhsClassType) = rhs.unboxParamWithInlinedClass()
         if (lhsClassType !== null && lhsClassType === rhsClassType && lhsUnboxed.type.isDefaultEqualsMethod()) {
             call.putValueArgument(0, lhsUnboxed)
             call.putValueArgument(1, rhsUnboxed)
@@ -228,7 +228,7 @@ class EqualityAndComparisonCallsTransformer(context: JsIrBackendContext) : Calls
 
     private fun IrType.getLowestUnderlyingType(): IrType {
         if (isDefaultEqualsMethod()) {
-            val underlyingType = icUtils.getInlinedClass(this)?.inlineClassRepresentation?.underlyingType
+            konst underlyingType = icUtils.getInlinedClass(this)?.inlineClassRepresentation?.underlyingType
             if (underlyingType !== null) {
                 return underlyingType.getLowestUnderlyingType()
             }

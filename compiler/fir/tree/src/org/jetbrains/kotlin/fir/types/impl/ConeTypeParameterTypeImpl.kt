@@ -12,14 +12,14 @@ import org.jetbrains.kotlin.fir.types.ConeNullability
 import org.jetbrains.kotlin.fir.types.ConeTypeParameterType
 
 class ConeTypeParameterTypeImpl(
-    override val lookupTag: ConeTypeParameterLookupTag,
+    override konst lookupTag: ConeTypeParameterLookupTag,
     isNullable: Boolean,
-    override val attributes: ConeAttributes = ConeAttributes.Empty
+    override konst attributes: ConeAttributes = ConeAttributes.Empty
 ) : ConeTypeParameterType() {
-    override val typeArguments: Array<out ConeTypeProjection>
+    override konst typeArguments: Array<out ConeTypeProjection>
         get() = EMPTY_ARRAY
 
-    override val nullability: ConeNullability = ConeNullability.create(isNullable)
+    override konst nullability: ConeNullability = ConeNullability.create(isNullable)
 
 
     override fun equals(other: Any?): Boolean {

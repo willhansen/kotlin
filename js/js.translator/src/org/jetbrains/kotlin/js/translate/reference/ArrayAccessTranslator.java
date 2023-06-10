@@ -96,16 +96,16 @@ public class ArrayAccessTranslator extends AbstractTranslator implements AccessT
 
         List<ResolvedValueArgument> arguments = resolvedCall.getValueArgumentsByIndex();
         if (arguments == null) {
-            throw new IllegalStateException("Failed to arrange value arguments by index: " + resolvedCall.getResultingDescriptor());
+            throw new IllegalStateException("Failed to arrange konstue arguments by index: " + resolvedCall.getResultingDescriptor());
         }
         ResolvedValueArgument lastArgument = arguments.get(arguments.size() - 1);
         assert lastArgument instanceof ExpressionValueArgument:
                 "Last argument of array-like setter must be ExpressionValueArgument: " + lastArgument;
 
-        ValueArgument valueArgument = ((ExpressionValueArgument) lastArgument).getValueArgument();
-        assert valueArgument != null;
+        ValueArgument konstueArgument = ((ExpressionValueArgument) lastArgument).getValueArgument();
+        assert konstueArgument != null;
 
-        KtExpression element = valueArgument.getArgumentExpression();
+        KtExpression element = konstueArgument.getArgumentExpression();
         return context().innerContextWithAliasesForExpressions(Collections.singletonMap(element, toSetTo));
     }
 

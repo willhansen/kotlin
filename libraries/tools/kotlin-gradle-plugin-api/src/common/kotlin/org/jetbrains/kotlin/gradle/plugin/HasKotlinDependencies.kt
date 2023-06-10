@@ -17,7 +17,7 @@ import org.gradle.api.logging.Logger
 import java.io.File
 
 interface KotlinDependencyHandler {
-    val project: Project
+    konst project: Project
     fun api(dependencyNotation: Any): Dependency?
     fun api(dependencyNotation: String, configure: ExternalModuleDependency.() -> Unit): ExternalModuleDependency
     fun <T : Dependency> api(dependency: T, configure: T.() -> Unit): T
@@ -60,28 +60,28 @@ interface KotlinDependencyHandler {
     fun project(notation: Map<String, Any?>): ProjectDependency
 
     @Deprecated(
-        "Scheduled for removal in Kotlin 2.0. Check KT-58759",
+        "Scheduled for remokonst in Kotlin 2.0. Check KT-58759",
         replaceWith = ReplaceWith("project.dependencies.enforcedPlatform(notation)")
     )
     fun enforcedPlatform(notation: Any): Dependency =
         project.dependencies.enforcedPlatform(notation)
 
     @Deprecated(
-        "Scheduled for removal in Kotlin 2.0. Check KT-58759",
+        "Scheduled for remokonst in Kotlin 2.0. Check KT-58759",
         replaceWith = ReplaceWith("project.dependencies.enforcedPlatform(notation, configureAction)")
     )
     fun enforcedPlatform(notation: Any, configureAction: Action<in Dependency>): Dependency =
         project.dependencies.enforcedPlatform(notation, configureAction)
 
     @Deprecated(
-        "Scheduled for removal in Kotlin 2.0. Check KT-58759",
+        "Scheduled for remokonst in Kotlin 2.0. Check KT-58759",
         replaceWith = ReplaceWith("project.dependencies.platform(notation)")
     )
     fun platform(notation: Any): Dependency =
         project.dependencies.platform(notation)
 
     @Deprecated(
-        "Scheduled for removal in Kotlin 2.0. Check KT-58759",
+        "Scheduled for remokonst in Kotlin 2.0. Check KT-58759",
         replaceWith = ReplaceWith("project.dependencies.platform(notation, configureAction)")
     )
     fun platform(notation: Any, configureAction: Action<in Dependency>): Dependency =
@@ -192,13 +192,13 @@ interface HasKotlinDependencies {
     fun dependencies(configure: KotlinDependencyHandler.() -> Unit)
     fun dependencies(configure: Action<KotlinDependencyHandler>)
 
-    val apiConfigurationName: String
-    val implementationConfigurationName: String
-    val compileOnlyConfigurationName: String
-    val runtimeOnlyConfigurationName: String
+    konst apiConfigurationName: String
+    konst implementationConfigurationName: String
+    konst compileOnlyConfigurationName: String
+    konst runtimeOnlyConfigurationName: String
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
-    val relatedConfigurationNames: List<String>
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
+    konst relatedConfigurationNames: List<String>
         get() = listOf(apiConfigurationName, implementationConfigurationName, compileOnlyConfigurationName, runtimeOnlyConfigurationName)
 }
 

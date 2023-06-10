@@ -11,10 +11,10 @@ class A<out T> {
 }
 
 fun box(): String {
-    val fn = A.B::class.members.single { it.name == "test" }
+    konst fn = A.B::class.members.single { it.name == "test" }
 
-    val t = A::class.typeParameters.single()
-    val u = A.B::class.typeParameters.single()
+    konst t = A::class.typeParameters.single()
+    konst u = A.B::class.typeParameters.single()
 
     assertEquals("T", t.name)
     assertEquals(KVariance.OUT, t.variance)

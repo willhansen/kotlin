@@ -10,8 +10,8 @@ enum class State {
 }
 
 fun box(): String {
-    val field = State::class.java.getField("O")
-    val className = field.get(null).javaClass.name
+    konst field = State::class.java.getField("O")
+    konst className = field.get(null).javaClass.name
     if (className != "test.State") return "Fail: $className"
 
     return "${State.O.name}${State.K.name}"

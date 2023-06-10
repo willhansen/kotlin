@@ -4,12 +4,12 @@
 // expected: rv: abc
 
 // KT-19423 variation
-val used = "abc"
+konst used = "abc"
 
 object Outer {
     class User {
-        val property = used
+        konst property = used
     }
 }
 
-val rv = Outer.User().property
+konst rv = Outer.User().property

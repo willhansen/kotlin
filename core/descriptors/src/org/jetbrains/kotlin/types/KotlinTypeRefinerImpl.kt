@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.utils.DFS
 
 @OptIn(TypeRefinement::class)
 class KotlinTypeRefinerImpl(
-    private val moduleDescriptor: ModuleDescriptor,
+    private konst moduleDescriptor: ModuleDescriptor,
     storageManager: StorageManager
 ) : KotlinTypeRefiner() {
     private var isStandalone: Boolean = false
@@ -37,13 +37,13 @@ class KotlinTypeRefinerImpl(
 
     init {
         if (!isStandalone) {
-            moduleDescriptor.getCapability(REFINER_CAPABILITY)?.value = TypeRefinementSupport.Enabled(this)
+            moduleDescriptor.getCapability(REFINER_CAPABILITY)?.konstue = TypeRefinementSupport.Enabled(this)
         }
     }
 
-    private val refinedTypeCache = storageManager.createCacheWithNotNullValues<TypeConstructor, KotlinType>()
-    private val isRefinementNeededForTypeConstructorCache = storageManager.createCacheWithNotNullValues<ClassifierDescriptor, Boolean>()
-    private val scopes = storageManager.createCacheWithNotNullValues<ClassDescriptor, MemberScope>()
+    private konst refinedTypeCache = storageManager.createCacheWithNotNullValues<TypeConstructor, KotlinType>()
+    private konst isRefinementNeededForTypeConstructorCache = storageManager.createCacheWithNotNullValues<ClassifierDescriptor, Boolean>()
+    private konst scopes = storageManager.createCacheWithNotNullValues<ClassDescriptor, MemberScope>()
 
     /**
      * IMPORTANT: that function has not obvious contract: it refines only supertypes,
@@ -54,23 +54,23 @@ class KotlinTypeRefinerImpl(
      *
      *   // common module
      *   expect interface A
-     *   class Inv<T>(val value: T)
+     *   class Inv<T>(konst konstue: T)
      *   fun getA(): Inv<A> = ...
      *
      *   // platform module
      *
      *   actual interface A {
-     *       val x: Int
+     *       konst x: Int
      *   }
      *
      *   fun foo() {
-     *      getA().value.x
+     *      getA().konstue.x
      *   }
      *
      *   Let's call type of `actual interface A` A'
      *
      *   expression `getA()` has not refined type Inv<A> and same refined type
-     *   expression `getA().value` has not refined type A that refines into type A', so there is a
+     *   expression `getA().konstue` has not refined type A that refines into type A', so there is a
      *     field `x` in it's member scope
      */
     @TypeRefinement
@@ -81,7 +81,7 @@ class KotlinTypeRefinerImpl(
             !type.needsRefinement() -> type
 
             type.canBeCached() -> {
-                val cached = refinedTypeCache.computeIfAbsent(type.constructor) {
+                konst cached = refinedTypeCache.computeIfAbsent(type.constructor) {
                     type.constructor.declarationDescriptor!!.defaultType.refineWithRespectToAbbreviatedTypes(this)
                 }
 
@@ -118,7 +118,7 @@ class KotlinTypeRefinerImpl(
     @TypeRefinement
     override fun refineDescriptor(descriptor: DeclarationDescriptor): ClassifierDescriptor? {
         if (descriptor !is ClassifierDescriptorWithTypeParameters) return null
-        val classId = descriptor.classId ?: return null
+        konst classId = descriptor.classId ?: return null
         return moduleDescriptor.findClassifierAcrossModuleDependencies(classId)
     }
 
@@ -134,7 +134,7 @@ class KotlinTypeRefinerImpl(
 
     @TypeRefinement
     override fun isRefinementNeededForTypeConstructor(typeConstructor: TypeConstructor): Boolean {
-        val owner = typeConstructor.declarationDescriptor
+        konst owner = typeConstructor.declarationDescriptor
             ?: return typeConstructor.isRefinementNeededForTypeConstructorNoCache()
         return isRefinementNeededForTypeConstructorCache.computeIfAbsent(owner) {
             typeConstructor.isRefinementNeededForTypeConstructorNoCache()
@@ -193,7 +193,7 @@ class KotlinTypeRefinerImpl(
     }
 }
 
-private val TypeConstructor.allDependentTypeConstructors: Collection<TypeConstructor>
+private konst TypeConstructor.allDependentTypeConstructors: Collection<TypeConstructor>
     get() = when (this) {
         is NewCapturedTypeConstructor -> {
             supertypes.map { it.constructor } + projection.type.constructor

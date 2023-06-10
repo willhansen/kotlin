@@ -20,13 +20,13 @@ class ResultTypeWithNullableOperatorsChecker : CallChecker {
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.AllowNullOperatorsForResult)) return
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.AllowNullOperatorsForResultAndResultReturnTypeByDefault)) return
 
-        val name = resolvedCall.resultingDescriptor.name
-        val operationNode = resolvedCall.call.callOperationNode
+        konst name = resolvedCall.resultingDescriptor.name
+        konst operationNode = resolvedCall.call.callOperationNode
 
         when {
             operationNode?.elementType == KtTokens.SAFE_ACCESS -> {
-                val resultingDescriptor = resolvedCall.resultingDescriptor
-                val receiver = resultingDescriptor.extensionReceiverParameter ?: resultingDescriptor.dispatchReceiverParameter ?: return
+                konst resultingDescriptor = resolvedCall.resultingDescriptor
+                konst receiver = resultingDescriptor.extensionReceiverParameter ?: resultingDescriptor.dispatchReceiverParameter ?: return
                 if (receiver.type.isResultType()) {
                     context.trace.report(Errors.RESULT_CLASS_WITH_NULLABLE_OPERATOR.on(operationNode!!.psi, "?."))
                 }
@@ -39,9 +39,9 @@ class ResultTypeWithNullableOperatorsChecker : CallChecker {
             }
 
             name == ControlStructureTypingUtils.ResolveConstruct.ELVIS.specialFunctionName -> {
-                val elvisBinaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
-                val left = elvisBinaryExpression.left ?: return
-                val leftType = context.trace.getType(left) ?: return
+                konst elvisBinaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
+                konst left = elvisBinaryExpression.left ?: return
+                konst leftType = context.trace.getType(left) ?: return
 
                 if (leftType.isResultType()) {
                     context.trace.reportDiagnosticOnce(Errors.RESULT_CLASS_WITH_NULLABLE_OPERATOR.on(reportOn, "?:"))
@@ -50,8 +50,8 @@ class ResultTypeWithNullableOperatorsChecker : CallChecker {
                 // Additional check for case `a ?: b ?: c`, where `b` is Result
                 // This is needed because inference will give common supertype for `a ?: b` which might not be Result
                 if (left is KtBinaryExpression) {
-                    val lastExpression = left.right ?: return
-                    val lastExpressionType = context.trace.getType(lastExpression) ?: return
+                    konst lastExpression = left.right ?: return
+                    konst lastExpressionType = context.trace.getType(lastExpression) ?: return
 
                     if (lastExpressionType.isResultType()) {
                         context.trace.reportDiagnosticOnce(Errors.RESULT_CLASS_WITH_NULLABLE_OPERATOR.on(reportOn, "?:"))

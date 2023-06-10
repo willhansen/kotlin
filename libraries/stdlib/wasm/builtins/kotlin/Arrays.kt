@@ -16,7 +16,7 @@ package kotlin
 import kotlin.wasm.internal.*
 
 public class ByteArray(size: Int) {
-    internal val storage = WasmByteArray(size)
+    internal konst storage = WasmByteArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmByteArray)
@@ -28,12 +28,12 @@ public class ByteArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Byte) {
+    public operator fun set(index: Int, konstue: Byte) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     public operator fun iterator(): ByteIterator = byteArrayIterator(this)
@@ -46,13 +46,13 @@ internal fun byteArrayIterator(array: ByteArray) = object : ByteIterator() {
 }
 
 internal inline fun createByteArray(size: Int, init: (Int) -> Byte): ByteArray {
-    val result = WasmByteArray(size)
+    konst result = WasmByteArray(size)
     result.fill(size, init)
     return ByteArray(result)
 }
 
 public class CharArray(size: Int) {
-    internal val storage = WasmCharArray(size)
+    internal konst storage = WasmCharArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmCharArray)
@@ -64,12 +64,12 @@ public class CharArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Char) {
+    public operator fun set(index: Int, konstue: Char) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
 
@@ -83,13 +83,13 @@ internal fun charArrayIterator(array: CharArray) = object : CharIterator() {
 }
 
 internal inline fun createCharArray(size: Int, init: (Int) -> Char): CharArray {
-    val result = WasmCharArray(size)
+    konst result = WasmCharArray(size)
     result.fill(size, init)
     return CharArray(result)
 }
 
 public class ShortArray(size: Int) {
-    internal val storage = WasmShortArray(size)
+    internal konst storage = WasmShortArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmShortArray)
@@ -101,12 +101,12 @@ public class ShortArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Short) {
+    public operator fun set(index: Int, konstue: Short) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
 
@@ -120,13 +120,13 @@ internal fun shortArrayIterator(array: ShortArray) = object : ShortIterator() {
 }
 
 internal inline fun createShortArray(size: Int, init: (Int) -> Short): ShortArray {
-    val result = WasmShortArray(size)
+    konst result = WasmShortArray(size)
     result.fill(size, init)
     return ShortArray(result)
 }
 
 public class IntArray(size: Int) {
-    internal val storage = WasmIntArray(size)
+    internal konst storage = WasmIntArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmIntArray)
@@ -138,12 +138,12 @@ public class IntArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Int) {
+    public operator fun set(index: Int, konstue: Int) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
 
@@ -157,13 +157,13 @@ internal fun intArrayIterator(array: IntArray) = object : IntIterator() {
 }
 
 internal inline fun createIntArray(size: Int, init: (Int) -> Int): IntArray {
-    val result = WasmIntArray(size)
+    konst result = WasmIntArray(size)
     result.fill(size, init)
     return IntArray(result)
 }
 
 public class LongArray(size: Int) {
-    internal val storage = WasmLongArray (size)
+    internal konst storage = WasmLongArray (size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmLongArray)
@@ -175,12 +175,12 @@ public class LongArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Long) {
+    public operator fun set(index: Int, konstue: Long) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     public operator fun iterator(): LongIterator = longArrayIterator(this)
@@ -193,13 +193,13 @@ internal fun longArrayIterator(array: LongArray) = object : LongIterator() {
 }
 
 internal inline fun createLongArray(size: Int, init: (Int) -> Long): LongArray {
-    val result = WasmLongArray(size)
+    konst result = WasmLongArray(size)
     result.fill(size, init)
     return LongArray(result)
 }
 
 public class FloatArray(size: Int) {
-    internal val storage = WasmFloatArray(size)
+    internal konst storage = WasmFloatArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmFloatArray)
@@ -211,12 +211,12 @@ public class FloatArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Float) {
+    public operator fun set(index: Int, konstue: Float) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     public operator fun iterator(): FloatIterator = floatArrayIterator(this)
@@ -229,13 +229,13 @@ internal fun floatArrayIterator(array: FloatArray) = object : FloatIterator() {
 }
 
 internal inline fun createFloatArray(size: Int, init: (Int) -> Float): FloatArray {
-    val result = WasmFloatArray(size)
+    konst result = WasmFloatArray(size)
     result.fill(size, init)
     return FloatArray(result)
 }
 
 public class DoubleArray(size: Int) {
-    internal val storage = WasmDoubleArray(size)
+    internal konst storage = WasmDoubleArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmDoubleArray)
@@ -247,12 +247,12 @@ public class DoubleArray(size: Int) {
         return storage.get(index)
     }
 
-    public operator fun set(index: Int, value: Double) {
+    public operator fun set(index: Int, konstue: Double) {
         rangeCheck(index, storage.len())
-        storage.set(index, value)
+        storage.set(index, konstue)
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     public operator fun iterator(): DoubleIterator = doubleArrayIterator(this)
@@ -265,13 +265,13 @@ internal fun doubleArrayIterator(array: DoubleArray) = object : DoubleIterator()
 }
 
 internal inline fun createDoubleArray(size: Int, init: (Int) -> Double): DoubleArray {
-    val result = WasmDoubleArray(size)
+    konst result = WasmDoubleArray(size)
     result.fill(size, init)
     return DoubleArray(result)
 }
 
 public class BooleanArray(size: Int) {
-    internal val storage = WasmByteArray(size)
+    internal konst storage = WasmByteArray(size)
 
     @WasmPrimitiveConstructor
     internal constructor(storage: WasmByteArray)
@@ -283,12 +283,12 @@ public class BooleanArray(size: Int) {
         return storage.get(index).reinterpretAsInt().reinterpretAsBoolean()
     }
 
-    public operator fun set(index: Int, value: Boolean) {
+    public operator fun set(index: Int, konstue: Boolean) {
         rangeCheck(index, storage.len())
-        storage.set(index, value.toInt().reinterpretAsByte())
+        storage.set(index, konstue.toInt().reinterpretAsByte())
     }
 
-    public val size: Int
+    public konst size: Int
         get() = storage.len()
 
     public operator fun iterator(): BooleanIterator = booleanArrayIterator(this)
@@ -305,7 +305,7 @@ private fun Boolean.reinterpretAsByte(): Byte =
     implementedAsIntrinsic
 
 internal inline fun createBooleanArray(size: Int, init: (Int) -> Boolean): BooleanArray {
-    val result = WasmByteArray(size)
+    konst result = WasmByteArray(size)
     result.fill(size) {
         init(it).reinterpretAsByte()
     }

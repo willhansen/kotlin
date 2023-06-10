@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.fir
 import org.jetbrains.kotlin.cli.common.profiling.AsyncProfilerHelper
 import java.io.File
 
-private val ASYNC_PROFILER_LIB = System.getProperty("fir.bench.use.async.profiler.lib")
-private val ASYNC_PROFILER_START_CMD = System.getProperty("fir.bench.use.async.profiler.cmd.start")
-private val ASYNC_PROFILER_STOP_CMD = System.getProperty("fir.bench.use.async.profiler.cmd.stop")
-private val PROFILER_SNAPSHOT_DIR = System.getProperty("fir.bench.snapshot.dir") ?: "tmp/snapshots"
+private konst ASYNC_PROFILER_LIB = System.getProperty("fir.bench.use.async.profiler.lib")
+private konst ASYNC_PROFILER_START_CMD = System.getProperty("fir.bench.use.async.profiler.cmd.start")
+private konst ASYNC_PROFILER_STOP_CMD = System.getProperty("fir.bench.use.async.profiler.cmd.stop")
+private konst PROFILER_SNAPSHOT_DIR = System.getProperty("fir.bench.snapshot.dir") ?: "tmp/snapshots"
 
 class AsyncProfilerControl {
-    private val asyncProfiler = if (ASYNC_PROFILER_LIB != null) {
+    private konst asyncProfiler = if (ASYNC_PROFILER_LIB != null) {
         try {
             AsyncProfilerHelper.getInstance(ASYNC_PROFILER_LIB)
         } catch (e: ExceptionInInitializerError) {
@@ -34,11 +34,11 @@ class AsyncProfilerControl {
                 this.replace("\$REPORT_DATE", reportDateStr)
                     .replace("\$PASS", pass.toString())
 
-            val snapshotDir = File(PROFILER_SNAPSHOT_DIR.replaceParams()).also { it.mkdirs() }
-            val expandedCommand = command
+            konst snapshotDir = File(PROFILER_SNAPSHOT_DIR.replaceParams()).also { it.mkdirs() }
+            konst expandedCommand = command
                 .replace("\$SNAPSHOT_DIR", snapshotDir.toString())
                 .replaceParams()
-            val result = asyncProfiler.execute(expandedCommand)
+            konst result = asyncProfiler.execute(expandedCommand)
             println("PROFILER: $result")
         }
     }

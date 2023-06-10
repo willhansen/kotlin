@@ -1,6 +1,6 @@
 type Nullable<T> = T | null | undefined
-export declare const value: { get(): number; };
-export declare const variable: { get(): number; set(value: number): void; };
+export declare const konstue: { get(): number; };
+export declare const variable: { get(): number; set(konstue: number): void; };
 export declare class C {
     constructor(x: number);
     get x(): number;
@@ -8,7 +8,7 @@ export declare class C {
 }
 export declare const O: {
     getInstance(): {
-        get value(): number;
+        get konstue(): number;
     };
 };
 export declare const Parent: {
@@ -20,13 +20,13 @@ declare abstract class __NonExistentParent extends _objects_.foo$Parent {
 declare namespace __NonExistentParent {
     class Nested {
         constructor();
-        get value(): number;
+        get konstue(): number;
     }
 }
 export declare function box(): string;
 declare namespace _objects_ {
     const foo$Parent: {
-        get value(): number;
+        get konstue(): number;
     } & {
         new(): any;
     };

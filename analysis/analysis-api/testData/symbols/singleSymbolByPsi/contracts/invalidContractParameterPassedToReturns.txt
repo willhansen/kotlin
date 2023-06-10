@@ -3,7 +3,7 @@ KtFunctionSymbol:
     kotlin/OptIn(markerClass = [kotlin.contracts.ExperimentalContracts::class])
       psi: KtAnnotationEntry
   ]
-  callableIdIfNonLocal: /invalidContract
+  callableIdIfNonLocal: /inkonstidContract
   contextReceivers: []
   contractEffects: []
   hasStableParameterNames: true
@@ -17,7 +17,7 @@ KtFunctionSymbol:
   isStatic: false
   isSuspend: false
   modality: FINAL
-  name: invalidContract
+  name: inkonstidContract
   origin: SOURCE
   receiverParameter: null
   returnType: KtUsualClassType:
@@ -26,7 +26,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

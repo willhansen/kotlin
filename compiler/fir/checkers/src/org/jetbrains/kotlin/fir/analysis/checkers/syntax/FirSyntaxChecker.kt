@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.fir.expressions.FirStatement
 interface FirSyntaxChecker<in D : FirElement, P : PsiElement> {
 
     fun checkSyntax(element: D, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = element.source ?: return
+        konst source = element.source ?: return
         if (!isApplicable(element, source)) return
         @Suppress("UNCHECKED_CAST")
         when (source) {
@@ -46,7 +46,7 @@ interface FirSyntaxChecker<in D : FirElement, P : PsiElement> {
     }
 
     /**
-     *  By default psi tree should be equivalent to light tree and can be processed the same way.
+     *  By default psi tree should be equikonstent to light tree and can be processed the same way.
      */
     fun checkPsiOrLightTree(element: D, source: KtSourceElement, context: CheckerContext, reporter: DiagnosticReporter) {}
 }

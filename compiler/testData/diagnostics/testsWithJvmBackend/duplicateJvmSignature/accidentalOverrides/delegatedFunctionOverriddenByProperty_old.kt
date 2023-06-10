@@ -4,7 +4,7 @@ interface B {
 }
 
 interface D {
-    val x: Int
+    konst x: Int
 }
 
 class <!CONFLICTING_INHERITED_JVM_DECLARATIONS, CONFLICTING_JVM_DECLARATIONS!>C(d: D)<!> : D by d, B

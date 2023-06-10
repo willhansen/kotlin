@@ -6,12 +6,12 @@
 // FILE: lib.kt
 
 interface ParentI {
-   val str: String
+   konst str: String
 }
 
 @JsExport
 interface I : ParentI {
-    val value: Int
+    konst konstue: Int
     var variable: Int
     fun foo(): String
 }
@@ -20,18 +20,18 @@ interface ExtendedI: I {
     fun bar(): Int
 }
 
-open class NotExportedClass(override var value: Int) : ExtendedI {
-    override var variable: Int = value
+open class NotExportedClass(override var konstue: Int) : ExtendedI {
+    override var variable: Int = konstue
     override open fun foo(): String = "Not Exported"
-    override val str: String = "test 1"
+    override konst str: String = "test 1"
     override open fun bar(): Int = 42
 }
 
 @JsExport
-class ExportedClass(override val value: Int) : ExtendedI {
-    override var variable: Int = value
+class ExportedClass(override konst konstue: Int) : ExtendedI {
+    override var variable: Int = konstue
     override fun foo(): String = "Exported"
-    override val str: String = "test 2"
+    override konst str: String = "test 2"
     override open fun bar(): Int = 43
 }
 
@@ -41,13 +41,13 @@ class AnotherOne : NotExportedClass(42) {
 }
 
 @JsExport
-fun generateNotExported(value: Int): NotExportedClass {
-    return NotExportedClass(value)
+fun generateNotExported(konstue: Int): NotExportedClass {
+    return NotExportedClass(konstue)
 }
 
 @JsExport
 fun consume(i: I): String {
-    return "Value is ${i.value}, variable is ${i.variable} and result is '${i.foo()}'"
+    return "Value is ${i.konstue}, variable is ${i.variable} and result is '${i.foo()}'"
 }
 
 // FILE: test.js
@@ -64,9 +64,9 @@ function box() {
     if (another.foo() !== "Another One Exported") return "Fail: foo function was not generated for AnotherOne"
     if (notExported.foo() !== "Not Exported") return "Fail: foo function was not generated for NotExportedClass"
 
-    if (exported.value !== 1) return "Fail: value getter was not generated for ExportedClass"
-    if (another.value !== 42) return "Fail: value getter was not generated for AnotherOne"
-    if (notExported.value !== 3) return "Fail: value getter was not generated for NotExportedClass"
+    if (exported.konstue !== 1) return "Fail: konstue getter was not generated for ExportedClass"
+    if (another.konstue !== 42) return "Fail: konstue getter was not generated for AnotherOne"
+    if (notExported.konstue !== 3) return "Fail: konstue getter was not generated for NotExportedClass"
 
     if (exported.variable !== 1) return "Fail: variable getter was not generated for ExportedClass"
     if (another.variable !== 42) return "Fail: variable getter was not generated for AnotherOne"
@@ -80,8 +80,8 @@ function box() {
     if (another.variable !== 102) return "Fail: variable setter was not generated for AnotherOne"
     if (notExported.variable !== 103) return "Fail: variable setter was not generated for NotExportedClass"
 
-    notExported.value = 42
-    if (notExported.value !== 3) return "Fail: value setter was generated for NotExportedClass, but it shouldn't"
+    notExported.konstue = 42
+    if (notExported.konstue !== 3) return "Fail: konstue setter was generated for NotExportedClass, but it shouldn't"
 
     if (consume(exported) !== "Value is 1, variable is 101 and result is 'Exported'") return "Fail: methods or fields of ExportedClass was mangled"
     if (consume(another) !== "Value is 42, variable is 102 and result is 'Another One Exported'") return "Fail: methods or fields of AnotherOne was mangled"

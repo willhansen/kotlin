@@ -23,17 +23,17 @@ class ControlFlowAnalysisDiagnosticComponent(
     reporter: DiagnosticReporter,
     declarationCheckers: DeclarationCheckers = session.checkersComponent.declarationCheckers,
 ) : AbstractDiagnosticCollectorComponent(session, reporter) {
-    private val cfaCheckers = declarationCheckers.controlFlowAnalyserCheckers
-    private val variableAssignmentCheckers = declarationCheckers.variableAssignmentCfaBasedCheckers
+    private konst cfaCheckers = declarationCheckers.controlFlowAnalyserCheckers
+    private konst variableAssignmentCheckers = declarationCheckers.variableAssignmentCfaBasedCheckers
 
     private fun analyze(declaration: FirControlFlowGraphOwner, context: CheckerContext) {
-        val graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
+        konst graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
         if (graph.isSubGraph) return
         cfaCheckers.forEach { it.analyze(graph, reporter, context) }
 
-        val properties = mutableSetOf<FirPropertySymbol>().apply { graph.traverse(LocalPropertyCollector(this)) }
+        konst properties = mutableSetOf<FirPropertySymbol>().apply { graph.traverse(LocalPropertyCollector(this)) }
         if (properties.isNotEmpty()) {
-            val data = PropertyInitializationInfoData(properties, receiver = null, graph)
+            konst data = PropertyInitializationInfoData(properties, receiver = null, graph)
             variableAssignmentCheckers.forEach { it.analyze(data, reporter, context) }
         }
     }
@@ -72,7 +72,7 @@ class ControlFlowAnalysisDiagnosticComponent(
         analyze(constructor, data)
     }
 
-    private class LocalPropertyCollector(private val result: MutableSet<FirPropertySymbol>) : ControlFlowGraphVisitorVoid() {
+    private class LocalPropertyCollector(private konst result: MutableSet<FirPropertySymbol>) : ControlFlowGraphVisitorVoid() {
         override fun visitNode(node: CFGNode<*>) {}
 
         override fun visitVariableDeclarationNode(node: VariableDeclarationNode) {

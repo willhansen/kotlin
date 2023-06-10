@@ -24,19 +24,19 @@ class KClassTest {
 
     @Test
     fun isInstanceCastSafeCast() {
-        fun <T : Any> checkIsInstance(kclass: KClass<T>, value: Any?, expectedResult: Boolean) {
+        fun <T : Any> checkIsInstance(kclass: KClass<T>, konstue: Any?, expectedResult: Boolean) {
             if (expectedResult) {
-                assertTrue(kclass.isInstance(value))
-                assertSame(value, kclass.safeCast(value))
-                assertSame(value, kclass.cast(value))
+                assertTrue(kclass.isInstance(konstue))
+                assertSame(konstue, kclass.safeCast(konstue))
+                assertSame(konstue, kclass.cast(konstue))
             } else {
-                assertFalse(kclass.isInstance(value))
-                assertNull(kclass.safeCast(value))
-                assertFailsWith<ClassCastException> { kclass.cast(value) }
+                assertFalse(kclass.isInstance(konstue))
+                assertNull(kclass.safeCast(konstue))
+                assertFailsWith<ClassCastException> { kclass.cast(konstue) }
             }
         }
 
-        val numberClass = Number::class
+        konst numberClass = Number::class
         checkIsInstance(numberClass, 1, true)
         checkIsInstance(numberClass, 1.0, true)
         checkIsInstance(numberClass, null, false)

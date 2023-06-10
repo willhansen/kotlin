@@ -73,7 +73,7 @@ fun hasUnknownReturnType(type: KotlinType): Boolean {
 
 fun replaceReturnTypeForCallable(type: KotlinType, given: KotlinType): KotlinType {
     assert(ReflectionTypes.isCallableType(type) || type.isSuspendFunctionType) { "type $type is not a function or property" }
-    val newArguments = Lists.newArrayList<TypeProjection>()
+    konst newArguments = Lists.newArrayList<TypeProjection>()
     newArguments.addAll(getParameterArgumentsOfCallableType(type))
     newArguments.add(TypeProjectionImpl(Variance.INVARIANT, given))
     return replaceTypeArguments(type, newArguments)
@@ -91,9 +91,9 @@ fun getReturnTypeForCallable(type: KotlinType) =
     type.arguments.last().type
 
 private fun CallableDescriptor.hasReturnTypeDependentOnUninferredParams(constraintSystem: ConstraintSystem): Boolean {
-    val returnType = returnType ?: return false
-    val nestedTypeVariables = constraintSystem.getNestedTypeVariables(returnType)
-    return nestedTypeVariables.any { constraintSystem.getTypeBounds(it).value == null }
+    konst returnType = returnType ?: return false
+    konst nestedTypeVariables = constraintSystem.getNestedTypeVariables(returnType)
+    return nestedTypeVariables.any { constraintSystem.getTypeBounds(it).konstue == null }
 }
 
 fun CallableDescriptor.hasInferredReturnType(constraintSystem: ConstraintSystem): Boolean {
@@ -106,8 +106,8 @@ fun CallableDescriptor.hasInferredReturnType(constraintSystem: ConstraintSystem)
 
 private fun filterOutTypeParameters(upperBounds: List<KotlinType>, candidateDescriptor: CallableDescriptor): List<KotlinType> {
     if (upperBounds.size < 2) return upperBounds
-    val result = upperBounds.filterNot {
-        val declarationDescriptor = it.constructor.declarationDescriptor
+    konst result = upperBounds.filterNot {
+        konst declarationDescriptor = it.constructor.declarationDescriptor
         declarationDescriptor is TypeParameterDescriptor && declarationDescriptor.containingDeclaration == candidateDescriptor
     }
     if (result.isEmpty()) return upperBounds
@@ -118,19 +118,19 @@ fun getErasedReceiverType(receiverParameterDescriptor: ReceiverParameterDescript
     var receiverType = receiverParameterDescriptor.type
     for (typeParameter in descriptor.typeParameters) {
         if (typeParameter.typeConstructor == receiverType.constructor) {
-            val properUpperBounds = filterOutTypeParameters(typeParameter.upperBounds, descriptor)
+            konst properUpperBounds = filterOutTypeParameters(typeParameter.upperBounds, descriptor)
             receiverType = TypeIntersector.intersectUpperBounds(typeParameter, properUpperBounds)
         }
     }
-    val fakeTypeArguments = SmartList<TypeProjection>()
+    konst fakeTypeArguments = SmartList<TypeProjection>()
     for (typeProjection in receiverType.arguments) {
         fakeTypeArguments.add(TypeProjectionImpl(typeProjection.projectionKind, DONT_CARE))
     }
 
-    val oldReceiverTypeConstructor = receiverType.constructor
-    val receiverTypeConstructor = if (oldReceiverTypeConstructor is IntersectionTypeConstructor) {
+    konst oldReceiverTypeConstructor = receiverType.constructor
+    konst receiverTypeConstructor = if (oldReceiverTypeConstructor is IntersectionTypeConstructor) {
         oldReceiverTypeConstructor.transformComponents { supertype ->
-            val fakeArguments = supertype.arguments.map { TypeProjectionImpl(it.projectionKind, DONT_CARE) }
+            konst fakeArguments = supertype.arguments.map { TypeProjectionImpl(it.projectionKind, DONT_CARE) }
             supertype.replace(fakeArguments)
         } ?: oldReceiverTypeConstructor
     } else {
@@ -154,25 +154,25 @@ fun isOrOverridesSynthesized(descriptor: CallableMemberDescriptor): Boolean {
 }
 
 fun isBinaryRemOperator(call: Call): Boolean {
-    val callElement = call.callElement as? KtBinaryExpression ?: return false
-    val operator = callElement.operationToken
+    konst callElement = call.callElement as? KtBinaryExpression ?: return false
+    konst operator = callElement.operationToken
     if (operator !is KtToken) return false
 
-    val name = OperatorConventions.getNameForOperationSymbol(operator, true, true) ?: return false
+    konst name = OperatorConventions.getNameForOperationSymbol(operator, true, true) ?: return false
     return name in OperatorConventions.REM_TO_MOD_OPERATION_NAMES.keys
 }
 
 fun isConventionCall(call: Call): Boolean {
     if (call is CallTransformer.CallForImplicitInvoke) return true
-    val callElement = call.callElement
+    konst callElement = call.callElement
     if (callElement is KtArrayAccessExpression || callElement is KtDestructuringDeclarationEntry) return true
-    val calleeExpression = call.calleeExpression as? KtOperationReferenceExpression ?: return false
+    konst calleeExpression = call.calleeExpression as? KtOperationReferenceExpression ?: return false
     return calleeExpression.isConventionOperator()
 }
 
 fun isInfixCall(call: Call): Boolean {
-    val operationRefExpression = call.calleeExpression as? KtOperationReferenceExpression ?: return false
-    val binaryExpression = operationRefExpression.parent as? KtBinaryExpression ?: return false
+    konst operationRefExpression = call.calleeExpression as? KtOperationReferenceExpression ?: return false
+    konst binaryExpression = operationRefExpression.parent as? KtBinaryExpression ?: return false
     return binaryExpression.operationReference === operationRefExpression && operationRefExpression.operationSignTokenType == null
 }
 
@@ -181,9 +181,9 @@ fun isSuperOrDelegatingConstructorCall(call: Call): Boolean =
 
 fun isInvokeCallOnVariable(call: Call): Boolean {
     if (call.callType !== Call.CallType.INVOKE) return false
-    val dispatchReceiver = call.dispatchReceiver
+    konst dispatchReceiver = call.dispatchReceiver
     //calleeExpressionAsDispatchReceiver for invoke is always ExpressionReceiver, see CallForImplicitInvoke
-    val expression = (dispatchReceiver as ExpressionReceiver).expression
+    konst expression = (dispatchReceiver as ExpressionReceiver).expression
     return expression is KtSimpleNameExpression
 }
 
@@ -202,7 +202,7 @@ fun getEffectiveExpectedType(
     languageVersionSettings: LanguageVersionSettings,
     trace: BindingTrace
 ): KotlinType {
-    val argument = resolvedArgument.arguments.singleOrNull()
+    konst argument = resolvedArgument.arguments.singleOrNull()
     return if (argument != null)
         getEffectiveExpectedTypeForSingleArgument(parameterDescriptor, argument, languageVersionSettings, trace)
     else
@@ -250,7 +250,7 @@ private fun arrayAssignmentToVarargInNamedFormInAnnotation(
 ): Boolean {
     if (!languageVersionSettings.supportsFeature(LanguageFeature.AssigningArraysToVarargsInNamedFormInAnnotations)) return false
 
-    val isAllowedAssigningSingleElementsToVarargsInNamedForm =
+    konst isAllowedAssigningSingleElementsToVarargsInNamedForm =
         !languageVersionSettings.supportsFeature(LanguageFeature.ProhibitAssigningSingleElementsToVarargsInNamedForm)
 
     if (isAllowedAssigningSingleElementsToVarargsInNamedForm && !isArrayOrArrayLiteral(argument, trace)) return false
@@ -266,7 +266,7 @@ private fun arrayAssignmentToVarargInNamedFormInFunction(
 ): Boolean {
     if (!languageVersionSettings.supportsFeature(LanguageFeature.AllowAssigningArrayElementsToVarargsInNamedFormForFunctions)) return false
 
-    val isAllowedAssigningSingleElementsToVarargsInNamedForm =
+    konst isAllowedAssigningSingleElementsToVarargsInNamedForm =
         !languageVersionSettings.supportsFeature(LanguageFeature.ProhibitAssigningSingleElementsToVarargsInNamedForm)
 
     if (isAllowedAssigningSingleElementsToVarargsInNamedForm && !isArrayOrArrayLiteral(argument, trace)) return false
@@ -275,10 +275,10 @@ private fun arrayAssignmentToVarargInNamedFormInFunction(
 }
 
 fun isArrayOrArrayLiteral(argument: ValueArgument, trace: BindingTrace): Boolean {
-    val argumentExpression = argument.getArgumentExpression() ?: return false
+    konst argumentExpression = argument.getArgumentExpression() ?: return false
     if (argumentExpression is KtCollectionLiteralExpression) return true
 
-    val type = trace.getType(argumentExpression) ?: return false
+    konst type = trace.getType(argumentExpression) ?: return false
     return KotlinBuiltIns.isArrayOrPrimitiveArray(type)
 }
 
@@ -289,46 +289,46 @@ fun createResolutionCandidatesForConstructors(
     useKnownTypeSubstitutor: Boolean,
     syntheticScopes: SyntheticScopes
 ): List<OldResolutionCandidate<ConstructorDescriptor>> {
-    val classWithConstructors = typeWithConstructors.constructor.declarationDescriptor as ClassDescriptor
+    konst classWithConstructors = typeWithConstructors.constructor.declarationDescriptor as ClassDescriptor
 
-    val unwrappedType = typeWithConstructors.unwrap()
-    val knownSubstitutor =
+    konst unwrappedType = typeWithConstructors.unwrap()
+    konst knownSubstitutor =
         if (useKnownTypeSubstitutor)
             TypeSubstitutor.create(
                 (unwrappedType as? AbbreviatedType)?.abbreviation ?: unwrappedType
             )
         else null
 
-    val typeAliasDescriptor =
+    konst typeAliasDescriptor =
         if (unwrappedType is AbbreviatedType)
             unwrappedType.abbreviation.constructor.declarationDescriptor as? TypeAliasDescriptor
         else
             null
 
-    val constructors = typeAliasDescriptor?.constructors?.mapNotNull(TypeAliasConstructorDescriptor::withDispatchReceiver)
+    konst constructors = typeAliasDescriptor?.constructors?.mapNotNull(TypeAliasConstructorDescriptor::withDispatchReceiver)
             ?: classWithConstructors.constructors
 
     if (constructors.isEmpty()) return emptyList()
 
-    val receiverKind: ExplicitReceiverKind
-    val dispatchReceiver: ReceiverValue?
+    konst receiverKind: ExplicitReceiverKind
+    konst dispatchReceiver: ReceiverValue?
 
     if (classWithConstructors.isInner) {
-        val outerClassType = (classWithConstructors.containingDeclaration as? ClassDescriptor)?.defaultType ?: return emptyList()
-        val substitutedOuterClassType = knownSubstitutor?.substitute(outerClassType, Variance.INVARIANT) ?: outerClassType
+        konst outerClassType = (classWithConstructors.containingDeclaration as? ClassDescriptor)?.defaultType ?: return emptyList()
+        konst substitutedOuterClassType = knownSubstitutor?.substitute(outerClassType, Variance.INVARIANT) ?: outerClassType
 
-        val receiver = lexicalScope.getImplicitReceiversHierarchy().firstOrNull {
+        konst receiver = lexicalScope.getImplicitReceiversHierarchy().firstOrNull {
             KotlinTypeChecker.DEFAULT.isSubtypeOf(it.type, substitutedOuterClassType)
         } ?: return emptyList()
 
         receiverKind = ExplicitReceiverKind.DISPATCH_RECEIVER
-        dispatchReceiver = receiver.value
+        dispatchReceiver = receiver.konstue
     } else {
         receiverKind = ExplicitReceiverKind.NO_EXPLICIT_RECEIVER
         dispatchReceiver = null
     }
 
-    val syntheticConstructors = constructors.flatMap { syntheticScopes.collectSyntheticConstructors(it) }
+    konst syntheticConstructors = constructors.flatMap { syntheticScopes.collectSyntheticConstructors(it) }
 
     return (constructors + syntheticConstructors).map {
         OldResolutionCandidate.create(call, it, dispatchReceiver, receiverKind, knownSubstitutor)
@@ -348,21 +348,21 @@ internal fun List<KotlinCallArgument>.replaceTypes(
 ): List<KotlinCallArgument> = mapIndexed { i, argument ->
     if (argument !is SimpleKotlinCallArgument) return@mapIndexed argument
 
-    val psiExpression = argument.psiExpression ?: return@mapIndexed argument
-    val argumentSubstitutor = if (argument is SubKotlinCallArgument) {
-        val notFixedVariablesSubstitutor =
+    konst psiExpression = argument.psiExpression ?: return@mapIndexed argument
+    konst argumentSubstitutor = if (argument is SubKotlinCallArgument) {
+        konst notFixedVariablesSubstitutor =
             argument.callResult.constraintSystem.buildNotFixedVariablesToPossibleResultType(resolutionCallbacks) as NewTypeSubstitutor
-        val fixedVariablesSubstitutor =
+        konst fixedVariablesSubstitutor =
             argument.callResult.constraintSystem.getBuilder().buildCurrentSubstitutor() as NewTypeSubstitutor
 
         ComposedSubstitutor(notFixedVariablesSubstitutor, fixedVariablesSubstitutor)
     } else EmptySubstitutor
 
-    val newType = replace(i, argumentSubstitutor.safeSubstitute(argument.receiver.receiverValue.type.unwrap()))
+    konst newType = replace(i, argumentSubstitutor.safeSubstitute(argument.receiver.receiverValue.type.unwrap()))
         ?: return@mapIndexed argument
 
     ExpressionKotlinCallArgumentImpl(
-        argument.psiCallArgument.valueArgument,
+        argument.psiCallArgument.konstueArgument,
         argument.psiCallArgument.dataFlowInfoBeforeThisArgument,
         argument.psiCallArgument.dataFlowInfoAfterThisArgument,
         ReceiverValueWithSmartCastInfo(
@@ -386,7 +386,7 @@ fun checkForConstructorCallOnFunctionalType(
     context: BasicCallResolutionContext
 ) {
     if (typeReference?.typeElement is KtFunctionType) {
-        val factory = when (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitConstructorCallOnFunctionalSupertype)) {
+        konst factory = when (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitConstructorCallOnFunctionalSupertype)) {
             true -> Errors.NO_CONSTRUCTOR
             false -> Errors.NO_CONSTRUCTOR_WARNING
         }

@@ -4,8 +4,8 @@
 sealed class Base
 class Derived : Base()
 
-class Test<out V>(val x: Base) {
-    private val y = when (x) {
+class Test<out V>(konst x: Base) {
+    private konst y = when (x) {
         is Derived -> null
     }
 }

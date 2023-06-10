@@ -3,13 +3,13 @@
 // FILE: JavaAnn.java
 
 @interface JavaAnn {
-    String[] value() default {};
+    String[] konstue() default {};
     String[] path() default {};
 }
 
 // FILE: test.kt
 
-annotation class Ann(vararg val s: String)
+annotation class Ann(vararg konst s: String)
 
 @Ann(s = arrayOf())
 fun test1() {}
@@ -20,23 +20,23 @@ fun test2() {}
 @Ann(s = <!TYPE_MISMATCH!>arrayOf(1)<!>)
 fun test3() {}
 
-@Ann("value1", "value2")
+@Ann("konstue1", "konstue2")
 fun test4() {}
 
-@Ann(s = ["value"])
+@Ann(s = ["konstue"])
 fun test5() {}
 
-@JavaAnn(value = arrayOf("value"))
+@JavaAnn(konstue = arrayOf("konstue"))
 fun jTest1() {}
 
-@JavaAnn(value = ["value"])
+@JavaAnn(konstue = ["konstue"])
 fun jTest2() {}
 
-@JavaAnn(value = ["value"], path = ["path"])
+@JavaAnn(konstue = ["konstue"], path = ["path"])
 fun jTest3() {}
 
 
-annotation class IntAnn(vararg val i: Int)
+annotation class IntAnn(vararg konst i: Int)
 
 @IntAnn(i = [1, 2])
 fun foo1() {}

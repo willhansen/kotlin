@@ -2,7 +2,7 @@ import Kt
 
 #if !NO_GENERICS
 private func testRecursiveGenericArguments() throws {
-    try assertTrue(type(of: RecList<NSArray>(value: []).value) == [Any].self)
+    try assertTrue(type(of: RecList<NSArray>(konstue: []).konstue) == [Any].self)
 }
 #endif
 

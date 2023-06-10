@@ -1,4 +1,4 @@
-open class Base<T>(val x: T)
+open class Base<T>(konst x: T)
 
 class Derived<T : Any>(x: T) : Base<T>(x)
 

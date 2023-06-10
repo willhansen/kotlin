@@ -9,11 +9,11 @@ import kotlinx.cinterop.*
 import platform.windows.*
 
 fun main() {
-    val message = StringBuilder()
+    konst message = StringBuilder()
     memScoped {
-      val buffer = allocArray<UShortVar>(MAX_PATH)
+      konst buffer = allocArray<UShortVar>(MAX_PATH)
       GetModuleFileNameW(null, buffer, MAX_PATH)
-      val path = buffer.toKString().split("\\").dropLast(1).joinToString("\\")
+      konst path = buffer.toKString().split("\\").dropLast(1).joinToString("\\")
       message.append("Я нахожусь в $path\n")
     }
     MessageBoxW(null, "Konan говорит:\nЗДРАВСТВУЙ МИР!\n$message",

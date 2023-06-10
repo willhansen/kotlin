@@ -8,19 +8,19 @@ package runtime.basic.ieee754
 import kotlin.test.*
 
 @Test fun runTest() {
-    val v = Float.POSITIVE_INFINITY
-    val i = v.toInt()
+    konst v = Float.POSITIVE_INFINITY
+    konst i = v.toInt()
     println("$v $i ${i.toShort()}")
 
-    val a = 42
-    val b = Float.MAX_VALUE
+    konst a = 42
+    konst b = Float.MAX_VALUE
     println("${a + b}")
 
-    val s = Float.NaN.toInt().toShort()
+    konst s = Float.NaN.toInt().toShort()
     println("NAN2SHORT:: $s")
 
-    val d: Float = Float.MAX_VALUE
-    val d2i = d.toInt()
+    konst d: Float = Float.MAX_VALUE
+    konst d2i = d.toInt()
     println("$d2i ${d2i.toShort()}")
 
     for (f in arrayOf(Float.POSITIVE_INFINITY, Float.MAX_VALUE / 2, Float.MAX_VALUE,

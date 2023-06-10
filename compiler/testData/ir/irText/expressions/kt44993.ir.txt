@@ -6,30 +6,30 @@ FILE fqName:<root> fileName:/kt44993.kt
         CALL 'public final fun CHECK_NOT_NULL <T0> (arg0: T0 of kotlin.internal.ir.CHECK_NOT_NULL?): {T0 of kotlin.internal.ir.CHECK_NOT_NULL & Any} declared in kotlin.internal.ir' type=kotlin.String origin=EXCLEXCL
           <T0>: kotlin.String
           arg0: BLOCK type=@[FlexibleNullability] kotlin.String? origin=SAFE_CALL
-            VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.JavaBox? [val]
+            VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.JavaBox? [konst]
               BLOCK type=<root>.JavaBox? origin=SAFE_CALL
-                VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:<root>.KotlinBox<<root>.JavaBox> [val]
+                VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:<root>.KotlinBox<<root>.JavaBox> [konst]
                   GET_VAR 'r: <root>.KotlinBox<<root>.JavaBox> declared in <root>.f' type=<root>.KotlinBox<<root>.JavaBox> origin=null
                 WHEN type=<root>.JavaBox? origin=null
                   BRANCH
                     if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                      arg0: GET_VAR 'val tmp_1: <root>.KotlinBox<<root>.JavaBox> declared in <root>.f' type=<root>.KotlinBox<<root>.JavaBox> origin=null
-                      arg1: CONST Null type=kotlin.Nothing? value=null
-                    then: CONST Null type=kotlin.Nothing? value=null
+                      arg0: GET_VAR 'konst tmp_1: <root>.KotlinBox<<root>.JavaBox> declared in <root>.f' type=<root>.KotlinBox<<root>.JavaBox> origin=null
+                      arg1: CONST Null type=kotlin.Nothing? konstue=null
+                    then: CONST Null type=kotlin.Nothing? konstue=null
                   BRANCH
-                    if: CONST Boolean type=kotlin.Boolean value=true
+                    if: CONST Boolean type=kotlin.Boolean konstue=true
                     then: CALL 'public final fun <get-data> (): T of <root>.KotlinBox? declared in <root>.KotlinBox' type=<root>.JavaBox? origin=GET_PROPERTY
-                      $this: GET_VAR 'val tmp_1: <root>.KotlinBox<<root>.JavaBox> declared in <root>.f' type=<root>.KotlinBox<<root>.JavaBox> origin=null
+                      $this: GET_VAR 'konst tmp_1: <root>.KotlinBox<<root>.JavaBox> declared in <root>.f' type=<root>.KotlinBox<<root>.JavaBox> origin=null
             WHEN type=@[FlexibleNullability] kotlin.String? origin=null
               BRANCH
                 if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                  arg0: GET_VAR 'val tmp_0: <root>.JavaBox? declared in <root>.f' type=<root>.JavaBox? origin=null
-                  arg1: CONST Null type=kotlin.Nothing? value=null
-                then: CONST Null type=kotlin.Nothing? value=null
+                  arg0: GET_VAR 'konst tmp_0: <root>.JavaBox? declared in <root>.f' type=<root>.JavaBox? origin=null
+                  arg1: CONST Null type=kotlin.Nothing? konstue=null
+                then: CONST Null type=kotlin.Nothing? konstue=null
               BRANCH
-                if: CONST Boolean type=kotlin.Boolean value=true
+                if: CONST Boolean type=kotlin.Boolean konstue=true
                 then: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:element type:@[FlexibleNullability] kotlin.String? visibility:public [final]' type=@[FlexibleNullability] kotlin.String? origin=GET_PROPERTY
-                  receiver: GET_VAR 'val tmp_0: <root>.JavaBox? declared in <root>.f' type=<root>.JavaBox? origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.JavaBox? declared in <root>.f' type=<root>.JavaBox? origin=null
   CLASS CLASS name:KotlinBox modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.KotlinBox<T of <root>.KotlinBox>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -38,14 +38,14 @@ FILE fqName:<root> fileName:/kt44993.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:KotlinBox modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:data visibility:public modality:FINAL [val]
+    PROPERTY name:data visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:data type:T of <root>.KotlinBox? visibility:public [final]
         annotations:
           JvmField
         EXPRESSION_BODY
           GET_VAR 'data: T of <root>.KotlinBox? declared in <root>.KotlinBox.<init>' type=T of <root>.KotlinBox? origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-data> visibility:public modality:FINAL <> ($this:<root>.KotlinBox<T of <root>.KotlinBox>) returnType:T of <root>.KotlinBox?
-        correspondingProperty: PROPERTY name:data visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:data visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.KotlinBox<T of <root>.KotlinBox>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-data> (): T of <root>.KotlinBox? declared in <root>.KotlinBox'

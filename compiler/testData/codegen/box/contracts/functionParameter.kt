@@ -10,7 +10,7 @@ fun runOnce(action: () -> Unit) {
 }
 
 fun foo(b: Boolean): String {
-    val res: String
+    konst res: String
     runOnce {
         b
         res = "OK"

@@ -22,8 +22,8 @@ fun PsiClass.renderClass() = PsiClassRenderer.renderClass(this)
 
 
 class PsiClassRenderer private constructor(
-    private val renderInner: Boolean,
-    private val membersFilter: MembersFilter
+    private konst renderInner: Boolean,
+    private konst membersFilter: MembersFilter
 ) {
 
     interface MembersFilter {
@@ -33,7 +33,7 @@ class PsiClassRenderer private constructor(
         fun includeClass(psiClass: PsiClass): Boolean = true
 
         companion object {
-            val DEFAULT = object : MembersFilter {}
+            konst DEFAULT = object : MembersFilter {}
         }
     }
 
@@ -49,7 +49,7 @@ class PsiClassRenderer private constructor(
     }
 
     private fun PrettyPrinter.renderClass(psiClass: PsiClass) {
-        val classWord = when {
+        konst classWord = when {
             psiClass.isAnnotationType -> "@interface"
             psiClass.isInterface -> "interface"
             psiClass.isEnum -> "enum"
@@ -118,10 +118,10 @@ class PsiClassRenderer private constructor(
     private fun PsiReferenceList?.renderRefList(keyword: String, sortReferences: Boolean = true): String {
         if (this == null) return ""
 
-        val references = referencedTypes
+        konst references = referencedTypes
         if (references.isEmpty()) return ""
 
-        val referencesTypes = references.map { it.renderType() }.toTypedArray()
+        konst referencesTypes = references.map { it.renderType() }.toTypedArray()
 
         if (sortReferences) referencesTypes.sort()
 
@@ -138,7 +138,7 @@ class PsiClassRenderer private constructor(
             result += " = ${initializer?.text} /* initializer type: ${initializer?.type?.renderType()} */"
         }
 
-        computeConstantValue()?.let { result += " /* constant value $it */" }
+        computeConstantValue()?.let { result += " /* constant konstue $it */" }
 
         return result
     }
@@ -146,7 +146,7 @@ class PsiClassRenderer private constructor(
     private fun Array<PsiTypeParameter>.renderTypeParams() =
         if (isEmpty()) ""
         else "<" + joinToString {
-            val bounds =
+            konst bounds =
                 if (it.extendsListTypes.isNotEmpty())
                     " extends " + it.extendsListTypes.joinToString(" & ", transform = { it.renderType() })
                 else ""
@@ -154,15 +154,15 @@ class PsiClassRenderer private constructor(
         } + "> "
 
     private fun KtLightPsiLiteral.renderKtLightPsiLiteral(): String {
-        val value = value
-        if (value is Pair<*, *>) {
-            val classId = value.first as? ClassId
-            val name = value.second as? Name
+        konst konstue = konstue
+        if (konstue is Pair<*, *>) {
+            konst classId = konstue.first as? ClassId
+            konst name = konstue.second as? Name
             if (classId != null && name != null)
                 return "${classId.asSingleFqName()}.${name.asString()}"
         }
-        if (value is KClassValue.Value.NormalClass && value.arrayDimensions == 0) {
-            return "${value.classId.asSingleFqName()}.class"
+        if (konstue is KClassValue.Value.NormalClass && konstue.arrayDimensions == 0) {
+            return "${konstue.classId.asSingleFqName()}.class"
         }
         return text
     }
@@ -190,21 +190,21 @@ class PsiClassRenderer private constructor(
                 "// ${getSignature(PsiSubstitutor.EMPTY).renderSignature()}"
 
     private fun MethodSignature.renderSignature(): String {
-        val typeParams = typeParameters.renderTypeParams()
-        val paramTypes = parameterTypes.joinToString(prefix = "(", postfix = ")") { it.renderType() }
-        val name = if (isConstructor) ".ctor" else name
+        konst typeParams = typeParameters.renderTypeParams()
+        konst paramTypes = parameterTypes.joinToString(prefix = "(", postfix = ")") { it.renderType() }
+        konst name = if (isConstructor) ".ctor" else name
         return "$typeParams $name$paramTypes"
     }
 
     private fun PsiEnumConstant.renderEnumConstant(): String {
-        val annotations = this@renderEnumConstant.annotations
+        konst annotations = this@renderEnumConstant.annotations
             .map { it.renderAnnotation() }
             .filter { it.isNotBlank() }
             .joinToString(separator = " ", postfix = " ")
             .takeIf { it.isNotBlank() }
             ?: ""
 
-        val initializingClass = initializingClass ?: return "$annotations$name"
+        konst initializingClass = initializingClass ?: return "$annotations$name"
         return prettyPrint {
             append(annotations)
             appendLine("$name {")
@@ -215,19 +215,19 @@ class PsiClassRenderer private constructor(
 
     private fun PrettyPrinter.renderMembers(psiClass: PsiClass) {
         var wasRendered = false
-        val fields = psiClass.fields.filterNot { it is PsiEnumConstant }.filter { membersFilter.includeField(it) }
+        konst fields = psiClass.fields.filterNot { it is PsiEnumConstant }.filter { membersFilter.includeField(it) }
         appendSorted(fields, wasRendered) {
             it.renderVar() + ";"
         }
 
         fields.ifNotEmpty { wasRendered = true }
-        val methods = psiClass.methods.filter { membersFilter.includeMethod(it) }
+        konst methods = psiClass.methods.filter { membersFilter.includeMethod(it) }
         appendSorted(methods, wasRendered) {
             it.renderMethod()
         }
 
         methods.ifNotEmpty { wasRendered = true }
-        val classes = psiClass.innerClasses.filter { membersFilter.includeClass(it) }
+        konst classes = psiClass.innerClasses.filter { membersFilter.includeClass(it) }
         appendSorted(classes, wasRendered) {
             if (renderInner)
                 renderClass(it, renderInner)
@@ -243,7 +243,7 @@ class PsiClassRenderer private constructor(
 
     private fun <T> PrettyPrinter.appendSorted(list: List<T>, addPrefix: Boolean, render: (T) -> String) {
         if (list.isEmpty()) return
-        val prefix = if (addPrefix) "\n\n" else ""
+        konst prefix = if (addPrefix) "\n\n" else ""
         list.map(render).sorted().joinTo(this, separator = "\n\n", prefix = prefix)
     }
 
@@ -251,19 +251,19 @@ class PsiClassRenderer private constructor(
 
         if (qualifiedName == "kotlin.Metadata") return ""
 
-        val renderedAttributes = parameterList.attributes.map {
-            val attributeValue = it.value?.renderAnnotationMemberValue() ?: "?"
+        konst renderedAttributes = parameterList.attributes.map {
+            konst attributeValue = it.konstue?.renderAnnotationMemberValue() ?: "?"
 
-            val isAnnotationQualifiedName =
+            konst isAnnotationQualifiedName =
                 (qualifiedName?.startsWith("java.lang.annotation.") == true || qualifiedName?.startsWith("kotlin.annotation.") == true)
 
-            val name = if (it.name == null && isAnnotationQualifiedName) "value" else it.name
+            konst name = if (it.name == null && isAnnotationQualifiedName) "konstue" else it.name
 
 
             if (name != null) "$name = $attributeValue" else attributeValue
         }
 
-        val renderedAttributesString = renderedAttributes.joinToString()
+        konst renderedAttributesString = renderedAttributes.joinToString()
         if (qualifiedName == null && renderedAttributesString.isEmpty()) {
             return ""
         }
@@ -272,7 +272,7 @@ class PsiClassRenderer private constructor(
 
 
     private fun PsiModifierListOwner.renderModifiers(typeIfApplicable: PsiType? = null): String {
-        val annotationsBuffer = mutableListOf<String>()
+        konst annotationsBuffer = mutableListOf<String>()
         var nullableIsRendered = false
         var notNullIsRendered = false
 
@@ -291,7 +291,7 @@ class PsiClassRenderer private constructor(
                 notNullIsRendered = true
             }
 
-            val renderedAnnotation = annotation.renderAnnotation()
+            konst renderedAnnotation = annotation.renderAnnotation()
             if (renderedAnnotation.isNotEmpty()) {
                 annotationsBuffer.add(
                     renderedAnnotation + (if (this is PsiParameter) " " else "\n")
@@ -300,7 +300,7 @@ class PsiClassRenderer private constructor(
         }
         annotationsBuffer.sort()
 
-        val resultBuffer = StringBuffer(annotationsBuffer.joinToString(separator = ""))
+        konst resultBuffer = StringBuffer(annotationsBuffer.joinToString(separator = ""))
         for (modifier in PsiModifier.MODIFIERS.filter(::hasModifierProperty)) {
             if (modifier == PsiModifier.DEFAULT) {
                 resultBuffer.append(PsiModifier.ABSTRACT).append(" ")
@@ -311,7 +311,7 @@ class PsiClassRenderer private constructor(
         return resultBuffer.toString()
     }
 
-    private val NON_EXISTENT_QUALIFIED_CLASS_NAME = NON_EXISTENT_CLASS_NAME.replace("/", ".")
+    private konst NON_EXISTENT_QUALIFIED_CLASS_NAME = NON_EXISTENT_CLASS_NAME.replace("/", ".")
 
     private fun isPrimitiveOrNonExisting(typeIfApplicable: PsiType?): Boolean {
         if (typeIfApplicable is PsiPrimitiveType) return true

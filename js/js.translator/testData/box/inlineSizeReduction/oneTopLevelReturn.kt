@@ -28,7 +28,7 @@ internal inline fun run3(fn: ()->Int): Int {
 internal fun test1(x: Int): Int = run3 { x }
 
 internal fun test2(x: Int): Int {
-    val result = 1 + run3 { x }
+    konst result = 1 + run3 { x }
     return result
 }
 

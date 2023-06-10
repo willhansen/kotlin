@@ -22,7 +22,7 @@ class C : B {
 }
 
 fun box(): String {
-  val c: C = C()
+  konst c: C = C()
   return "OK"
 }
 

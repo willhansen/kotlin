@@ -42,24 +42,24 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.Method
 
 class JvmSerializerExtension @JvmOverloads constructor(
-    private val bindings: JvmSerializationBindings,
+    private konst bindings: JvmSerializationBindings,
     state: GenerationState,
-    private val typeMapper: KotlinTypeMapperBase = state.typeMapper
+    private konst typeMapper: KotlinTypeMapperBase = state.typeMapper
 ) : SerializerExtension() {
-    private val globalBindings = state.globalSerializationBindings
-    private val codegenBinding = state.bindingContext
-    override val stringTable = JvmCodegenStringTable(typeMapper)
-    private val useTypeTable = state.useTypeTableInSerializer
-    private val moduleName = state.moduleName
-    private val classBuilderMode = state.classBuilderMode
-    private val languageVersionSettings = state.languageVersionSettings
-    private val isParamAssertionsDisabled = state.isParamAssertionsDisabled
-    private val unifiedNullChecks = state.unifiedNullChecks
-    private val functionsWithInlineClassReturnTypesMangled = state.functionsWithInlineClassReturnTypesMangled
-    override val metadataVersion = state.metadataVersion
-    private val jvmDefaultMode = state.jvmDefaultMode
-    private val approximator = state.typeApproximator
-    private val useOldManglingScheme = state.useOldManglingSchemeForFunctionsWithInlineClassesInSignatures
+    private konst globalBindings = state.globalSerializationBindings
+    private konst codegenBinding = state.bindingContext
+    override konst stringTable = JvmCodegenStringTable(typeMapper)
+    private konst useTypeTable = state.useTypeTableInSerializer
+    private konst moduleName = state.moduleName
+    private konst classBuilderMode = state.classBuilderMode
+    private konst languageVersionSettings = state.languageVersionSettings
+    private konst isParamAssertionsDisabled = state.isParamAssertionsDisabled
+    private konst unifiedNullChecks = state.unifiedNullChecks
+    private konst functionsWithInlineClassReturnTypesMangled = state.functionsWithInlineClassReturnTypesMangled
+    override konst metadataVersion = state.metadataVersion
+    private konst jvmDefaultMode = state.jvmDefaultMode
+    private konst approximator = state.typeApproximator
+    private konst useOldManglingScheme = state.useOldManglingSchemeForFunctionsWithInlineClassesInSignatures
 
     override fun shouldUseTypeTable(): Boolean = useTypeTable
 
@@ -73,7 +73,7 @@ class JvmSerializerExtension @JvmOverloads constructor(
             proto.setExtension(JvmProtoBuf.classModuleName, stringTable.getStringIndex(moduleName))
         }
         //TODO: support local delegated properties in new defaults scheme
-        val containerAsmType =
+        konst containerAsmType =
             if (isInterface(descriptor) && !jvmDefaultMode.forAllMethodsWithBody) typeMapper.mapDefaultImpls(descriptor) else typeMapper.mapClass(descriptor)
         writeLocalProperties(proto, containerAsmType, JvmProtoBuf.classLocalVariable)
         writeVersionRequirementForJvmDefaultIfNeeded(descriptor, proto, versionRequirementTable)
@@ -121,11 +121,11 @@ class JvmSerializerExtension @JvmOverloads constructor(
         classAsmType: Type,
         extension: GeneratedMessageLite.GeneratedExtension<MessageType, List<ProtoBuf.Property>>
     ) {
-        val localVariables = CodegenBinding.getLocalDelegatedProperties(codegenBinding, classAsmType) ?: return
+        konst localVariables = CodegenBinding.getLocalDelegatedProperties(codegenBinding, classAsmType) ?: return
 
         for (localVariable in localVariables) {
-            val propertyDescriptor = createFreeFakeLocalPropertyDescriptor(localVariable, approximator)
-            val serializer = DescriptorSerializer.createForLambda(this, languageVersionSettings)
+            konst propertyDescriptor = createFreeFakeLocalPropertyDescriptor(localVariable, approximator)
+            konst serializer = DescriptorSerializer.createForLambda(this, languageVersionSettings)
             proto.addExtension(extension, serializer.propertyProto(propertyDescriptor)?.build() ?: continue)
         }
     }
@@ -161,9 +161,9 @@ class JvmSerializerExtension @JvmOverloads constructor(
     override fun serializeConstructor(
         descriptor: ConstructorDescriptor, proto: ProtoBuf.Constructor.Builder, childSerializer: DescriptorSerializer
     ) {
-        val method = getBinding(METHOD_FOR_FUNCTION, descriptor)
+        konst method = getBinding(METHOD_FOR_FUNCTION, descriptor)
         if (method != null) {
-            val signature = SignatureSerializer().methodSignature(descriptor, method)
+            konst signature = SignatureSerializer().methodSignature(descriptor, method)
             if (signature != null) {
                 proto.setExtension(JvmProtoBuf.constructorSignature, signature)
             }
@@ -176,9 +176,9 @@ class JvmSerializerExtension @JvmOverloads constructor(
         versionRequirementTable: MutableVersionRequirementTable?,
         childSerializer: DescriptorSerializer
     ) {
-        val method = getBinding(METHOD_FOR_FUNCTION, descriptor)
+        konst method = getBinding(METHOD_FOR_FUNCTION, descriptor)
         if (method != null) {
-            val signature = SignatureSerializer().methodSignature(descriptor, method)
+            konst signature = SignatureSerializer().methodSignature(descriptor, method)
             if (signature != null) {
                 proto.setExtension(JvmProtoBuf.methodSignature, signature)
             }
@@ -224,7 +224,7 @@ class JvmSerializerExtension @JvmOverloads constructor(
     private fun FunctionDescriptor.needsInlineParameterNullCheckRequirement(): Boolean =
         isInline && !isSuspend && !isParamAssertionsDisabled &&
                 !DescriptorVisibilities.isPrivate(visibility) &&
-                (valueParameters.any { it.type.isFunctionType } || extensionReceiverParameter?.type?.isFunctionType == true)
+                (konstueParameters.any { it.type.isFunctionType } || extensionReceiverParameter?.type?.isFunctionType == true)
 
     override fun serializeProperty(
         descriptor: PropertyDescriptor,
@@ -232,19 +232,19 @@ class JvmSerializerExtension @JvmOverloads constructor(
         versionRequirementTable: MutableVersionRequirementTable?,
         childSerializer: DescriptorSerializer
     ) {
-        val signatureSerializer = SignatureSerializer()
+        konst signatureSerializer = SignatureSerializer()
 
-        val getter = descriptor.getter
-        val setter = descriptor.setter
-        val getterMethod = if (getter == null) null else getBinding(METHOD_FOR_FUNCTION, getter)
-        val setterMethod = if (setter == null) null else getBinding(METHOD_FOR_FUNCTION, setter)
+        konst getter = descriptor.getter
+        konst setter = descriptor.setter
+        konst getterMethod = if (getter == null) null else getBinding(METHOD_FOR_FUNCTION, getter)
+        konst setterMethod = if (setter == null) null else getBinding(METHOD_FOR_FUNCTION, setter)
 
-        val field = getBinding(FIELD_FOR_PROPERTY, descriptor)
-        val syntheticMethod = getBinding(SYNTHETIC_METHOD_FOR_PROPERTY, descriptor)
-        val delegateMethod = getBinding(DELEGATE_METHOD_FOR_PROPERTY, descriptor)
+        konst field = getBinding(FIELD_FOR_PROPERTY, descriptor)
+        konst syntheticMethod = getBinding(SYNTHETIC_METHOD_FOR_PROPERTY, descriptor)
+        konst delegateMethod = getBinding(DELEGATE_METHOD_FOR_PROPERTY, descriptor)
         assert(descriptor.isDelegated || delegateMethod == null) { "non-delegated property $descriptor has delegate method" }
 
-        val signature = signatureSerializer.propertySignature(
+        konst signature = signatureSerializer.propertySignature(
             descriptor,
             field?.second,
             field?.first?.descriptor,
@@ -277,10 +277,10 @@ class JvmSerializerExtension @JvmOverloads constructor(
     private fun PropertyDescriptor.isJvmFieldPropertyInInterfaceCompanion(): Boolean {
         if (!DescriptorsJvmAbiUtil.hasJvmFieldAnnotation(this)) return false
 
-        val container = containingDeclaration
+        konst container = containingDeclaration
         if (!DescriptorUtils.isCompanionObject(container)) return false
 
-        val grandParent = (container as ClassDescriptor).containingDeclaration
+        konst grandParent = (container as ClassDescriptor).containingDeclaration
         return isInterface(grandParent) || DescriptorUtils.isAnnotationClass(grandParent)
     }
 
@@ -298,7 +298,7 @@ class JvmSerializerExtension @JvmOverloads constructor(
 
     private inner class SignatureSerializer {
         fun methodSignature(descriptor: FunctionDescriptor?, method: Method): JvmProtoBuf.JvmMethodSignature? {
-            val builder = JvmProtoBuf.JvmMethodSignature.newBuilder()
+            konst builder = JvmProtoBuf.JvmMethodSignature.newBuilder()
             if (descriptor == null || descriptor.name.asString() != method.name) {
                 builder.name = stringTable.getStringIndex(method.name)
             }
@@ -311,23 +311,23 @@ class JvmSerializerExtension @JvmOverloads constructor(
         // We don't write those signatures which can be trivially reconstructed from already serialized data
         // TODO: make JvmStringTable implement NameResolver and use JvmProtoBufUtil#getJvmMethodSignature instead
         private fun requiresSignature(descriptor: FunctionDescriptor, desc: String): Boolean {
-            val sb = StringBuilder()
+            konst sb = StringBuilder()
             sb.append("(")
-            val receiverParameter = descriptor.extensionReceiverParameter
+            konst receiverParameter = descriptor.extensionReceiverParameter
             if (receiverParameter != null) {
-                val receiverDesc = mapTypeDefault(receiverParameter.value.type) ?: return true
+                konst receiverDesc = mapTypeDefault(receiverParameter.konstue.type) ?: return true
                 sb.append(receiverDesc)
             }
 
-            for (valueParameter in descriptor.valueParameters) {
-                val paramDesc = mapTypeDefault(valueParameter.type) ?: return true
+            for (konstueParameter in descriptor.konstueParameters) {
+                konst paramDesc = mapTypeDefault(konstueParameter.type) ?: return true
                 sb.append(paramDesc)
             }
 
             sb.append(")")
 
-            val returnType = descriptor.returnType
-            val returnTypeDesc = (if (returnType == null) "V" else mapTypeDefault(returnType)) ?: return true
+            konst returnType = descriptor.returnType
+            konst returnTypeDesc = (if (returnType == null) "V" else mapTypeDefault(returnType)) ?: return true
             sb.append(returnTypeDesc)
 
             return sb.toString() != desc
@@ -338,8 +338,8 @@ class JvmSerializerExtension @JvmOverloads constructor(
         }
 
         private fun mapTypeDefault(type: KotlinType): String? {
-            val classifier = type.constructor.declarationDescriptor as? ClassDescriptor ?: return null
-            val classId = classifier.classId
+            konst classifier = type.constructor.declarationDescriptor as? ClassDescriptor ?: return null
+            konst classId = classifier.classId
             return if (classId == null) null else ClassMapperLite.mapClass(classId.asString())
         }
 
@@ -352,7 +352,7 @@ class JvmSerializerExtension @JvmOverloads constructor(
             getter: JvmProtoBuf.JvmMethodSignature?,
             setter: JvmProtoBuf.JvmMethodSignature?
         ): JvmProtoBuf.JvmPropertySignature? {
-            val signature = JvmProtoBuf.JvmPropertySignature.newBuilder()
+            konst signature = JvmProtoBuf.JvmPropertySignature.newBuilder()
 
             if (fieldDesc != null) {
                 assert(fieldName != null) { "Field name shouldn't be null when there's a field type: $fieldDesc" }
@@ -382,7 +382,7 @@ class JvmSerializerExtension @JvmOverloads constructor(
             name: String,
             desc: String
         ): JvmProtoBuf.JvmFieldSignature {
-            val builder = JvmProtoBuf.JvmFieldSignature.newBuilder()
+            konst builder = JvmProtoBuf.JvmFieldSignature.newBuilder()
             if (descriptor.name.asString() != name) {
                 builder.name = stringTable.getStringIndex(name)
             }

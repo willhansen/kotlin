@@ -29,7 +29,7 @@ open class AbstractAccessorForFunctionDescriptor(
                                  name, CallableMemberDescriptor.Kind.DECLARATION, SourceElement.NO_SOURCE) {
 
     protected fun copyTypeParameters(descriptor: FunctionDescriptor): List<TypeParameterDescriptor> = descriptor.typeParameters.map {
-        val copy = TypeParameterDescriptorImpl.createForFurtherModification(
+        konst copy = TypeParameterDescriptorImpl.createForFurtherModification(
                 this, it.annotations, it.isReified,
                 it.variance, it.name,
                 it.index, SourceElement.NO_SOURCE,
@@ -43,5 +43,5 @@ open class AbstractAccessorForFunctionDescriptor(
     }
 
     protected fun copyValueParameters(descriptor: FunctionDescriptor): List<ValueParameterDescriptor> =
-            descriptor.valueParameters.map { it.copy(this, it.name, it.index) }
+            descriptor.konstueParameters.map { it.copy(this, it.name, it.index) }
 }

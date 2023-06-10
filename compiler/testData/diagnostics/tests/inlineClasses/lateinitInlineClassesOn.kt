@@ -4,37 +4,37 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class IC1(val x: Int)
+konstue class IC1(konst x: Int)
 
 @JvmInline
-value class IC2(val x: IC1)
+konstue class IC2(konst x: IC1)
 
 @JvmInline
-value class IC3(val x: String)
+konstue class IC3(konst x: String)
 
 @JvmInline
-value class IC4(val x: String?)
+konstue class IC4(konst x: String?)
 
 @JvmInline
-value class IC5(val x: IC4)
+konstue class IC5(konst x: IC4)
 
 @JvmInline
-value class IC6<T>(val x: T)
+konstue class IC6<T>(konst x: T)
 
 @JvmInline
-value class IC7<T : Any>(val x: T)
+konstue class IC7<T : Any>(konst x: T)
 
 @JvmInline
-value class IC8(val x: <!VALUE_CLASS_CANNOT_BE_RECURSIVE!>IC9<!>)
+konstue class IC8(konst x: <!VALUE_CLASS_CANNOT_BE_RECURSIVE!>IC9<!>)
 
 @JvmInline
-value class IC9(val x: <!VALUE_CLASS_CANNOT_BE_RECURSIVE!>IC8<!>)
+konstue class IC9(konst x: <!VALUE_CLASS_CANNOT_BE_RECURSIVE!>IC8<!>)
 
 @JvmInline
-value class IC10(val x: IC6<String>)
+konstue class IC10(konst x: IC6<String>)
 
 @JvmInline
-value class IC11(val x : IC4?)
+konstue class IC11(konst x : IC4?)
 
 <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> var a: IC1
 <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> var b: IC2

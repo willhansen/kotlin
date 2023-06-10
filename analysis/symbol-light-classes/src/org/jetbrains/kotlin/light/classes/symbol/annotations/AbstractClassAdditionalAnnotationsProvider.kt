@@ -49,14 +49,14 @@ private fun addAllAnnotationsFromAnnotationClass(
     owner: PsiModifierList,
 ) {
     for (index in currentRawAnnotations.indices) {
-        val currentAnnotation = currentRawAnnotations[index] as? SymbolLightLazyAnnotation ?: continue
-        val newAnnotation = currentAnnotation.tryConvertToRetentionJavaAnnotation(owner)
+        konst currentAnnotation = currentRawAnnotations[index] as? SymbolLightLazyAnnotation ?: continue
+        konst newAnnotation = currentAnnotation.tryConvertToRetentionJavaAnnotation(owner)
             ?: currentAnnotation.tryConvertToTargetJavaAnnotation(owner)
             ?: currentAnnotation.tryConvertToDocumentedJavaAnnotation(owner)
             ?: currentAnnotation.tryConvertToRepeatableJavaAnnotation(owner)
             ?: continue
 
-        val qualifiedName = newAnnotation.qualifiedName
+        konst qualifiedName = newAnnotation.qualifiedName
         requireNotNull(qualifiedName) { "The annotation must have 'qualifiedName'" }
 
         if (!foundQualifiers.add(qualifiedName)) continue
@@ -100,7 +100,7 @@ private fun GranularAnnotationsBox.tryConvertToRetentionJavaAnnotation(
     qualifiedName: String,
     owner: PsiModifierList,
 ): PsiAnnotation? {
-    val javaQualifier = JvmAnnotationNames.RETENTION_ANNOTATION.asString()
+    konst javaQualifier = JvmAnnotationNames.RETENTION_ANNOTATION.asString()
     return tryConvertToJavaAnnotation(
         qualifiedName = qualifiedName,
         javaQualifier = javaQualifier,
@@ -120,14 +120,14 @@ private fun SymbolLightLazyAnnotation.tryConvertToRetentionJavaAnnotation(
 )
 
 private fun SymbolLightJavaAnnotation.computeJavaRetentionArguments(): List<KtNamedAnnotationValue> {
-    val argumentWithKotlinRetention = originalLightAnnotation.annotationApplicationWithArgumentsInfo
-        .value
+    konst argumentWithKotlinRetention = originalLightAnnotation.annotationApplicationWithArgumentsInfo
+        .konstue
         .arguments
         .firstOrNull {
             it.name == StandardNames.DEFAULT_VALUE_PARAMETER
         }?.expression as? KtEnumEntryAnnotationValue
 
-    val kotlinRetentionName = argumentWithKotlinRetention?.callableId?.callableName?.asString()
+    konst kotlinRetentionName = argumentWithKotlinRetention?.callableId?.callableName?.asString()
     return javaRetentionArguments(kotlinRetentionName)
 }
 
@@ -171,7 +171,7 @@ private fun SymbolLightLazyAnnotation.tryConvertToRepeatableJavaAnnotation(
 )
 
 private fun SymbolLightJavaAnnotation.computeRepeatableJavaAnnotationArguments(): List<KtNamedAnnotationValue> {
-    val annotationClassId = originalLightAnnotation.annotationsProvider.ownerClassId() ?: return emptyList()
+    konst annotationClassId = originalLightAnnotation.annotationsProvider.ownerClassId() ?: return emptyList()
 
     return listOf(
         KtNamedAnnotationValue(
@@ -205,19 +205,19 @@ private fun SymbolLightLazyAnnotation.tryConvertToTargetJavaAnnotation(
 )
 
 private fun SymbolLightJavaAnnotation.computeTargetJavaAnnotationArguments(): List<KtNamedAnnotationValue> {
-    val allowedKotlinTargets = originalLightAnnotation.annotationApplicationWithArgumentsInfo
-        .value
+    konst allowedKotlinTargets = originalLightAnnotation.annotationApplicationWithArgumentsInfo
+        .konstue
         .arguments
         .firstOrNull()
         ?.expression as? KtArrayAnnotationValue
         ?: return emptyList()
 
-    val javaTargetNames = allowedKotlinTargets.values.mapNotNullTo(linkedSetOf(), KtAnnotationValue::mapToJavaTarget)
+    konst javaTargetNames = allowedKotlinTargets.konstues.mapNotNullTo(linkedSetOf(), KtAnnotationValue::mapToJavaTarget)
     return listOf(
         KtNamedAnnotationValue(
             name = StandardNames.DEFAULT_VALUE_PARAMETER,
             expression = KtArrayAnnotationValue(
-                values = javaTargetNames.map {
+                konstues = javaTargetNames.map {
                     KtEnumEntryAnnotationValue(
                         callableId = CallableId(
                             classId = StandardClassIds.Annotations.Java.ElementType,
@@ -235,7 +235,7 @@ private fun SymbolLightJavaAnnotation.computeTargetJavaAnnotationArguments(): Li
 private fun KtAnnotationValue.mapToJavaTarget(): String? {
     if (this !is KtEnumEntryAnnotationValue) return null
 
-    val callableId = callableId ?: return null
+    konst callableId = callableId ?: return null
     if (callableId.classId != StandardClassIds.AnnotationTarget) return null
     return when (callableId.callableName.asString()) {
         AnnotationTarget.CLASS.name -> ElementType.TYPE
@@ -261,7 +261,7 @@ private fun GranularAnnotationsBox.tryConvertToJavaAnnotation(
     if (qualifiedName != javaQualifier) return null
     if (hasAnnotation(owner, javaQualifier)) return null
 
-    val originalLightAnnotation = findAnnotation(
+    konst originalLightAnnotation = findAnnotation(
         owner,
         kotlinQualifier,
         withAdditionalAnnotations = false,

@@ -2,12 +2,12 @@ package foo
 
 enum class X {
     B {
-        override val value2 = "K"
-        override val value = "O" + B.value2.get(X.B.ordinal).toString()
+        override konst konstue2 = "K"
+        override konst konstue = "O" + B.konstue2.get(X.B.ordinal).toString()
     };
 
-    abstract val value2: String
-    abstract val value: String
+    abstract konst konstue2: String
+    abstract konst konstue: String
 }
 
-fun box() = X.B.value
+fun box() = X.B.konstue

@@ -50,17 +50,17 @@ import org.jetbrains.kotlin.project.model.infra.KpmTestCase
  *     `describeCase` from "super-case" and then adding additional configuration
  */
 sealed interface KpmTestCaseDescriptor {
-    val name: String
+    konst name: String
         get() = this::class.simpleName ?: error("Can't get simpleName of a KpmTestCaseDescriptor ${this::class}. Is it an anonymous class?")
 
     fun KpmTestCase.describeCase()
 
     companion object {
-        val allCaseDescriptorsByNames: Map<String, KpmTestCaseDescriptor> by lazy {
+        konst allCaseDescriptorsByNames: Map<String, KpmTestCaseDescriptor> by lazy {
             doGetAllCases()
         }
 
-        val allCasesNames: Set<String>
+        konst allCasesNames: Set<String>
             get() = allCaseDescriptorsByNames.keys
 
         private fun doGetAllCases(): Map<String, KpmTestCaseDescriptor> = KpmTestCaseDescriptor::class.sealedSubclasses

@@ -6,7 +6,7 @@ interface Intf2<out T : List<String>, M : T>
 interface OtherIntf<O : CharSequence>
 open class BaseClass<B : Any>
 class MyClass<M1, M2> : Intf<Any, java.util.Date>, OtherIntf<String>, BaseClass<RuntimeException>() {
-    val fld: List<Map<String, M1>>? = null
+    konst fld: List<Map<String, M1>>? = null
 }
 
 interface ABC {

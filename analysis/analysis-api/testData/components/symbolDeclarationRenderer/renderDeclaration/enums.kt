@@ -6,7 +6,7 @@ enum class Order {
     THIRD
 }
 
-enum class Planet(val m: Double, internal val r: Double) {
+enum class Planet(konst m: Double, internal konst r: Double) {
     MERCURY(1.0, 2.0) {
         override fun sayHello() {
             println("Hello!!!")
@@ -23,16 +23,16 @@ enum class Planet(val m: Double, internal val r: Double) {
         }
     };
 
-    val g: Double = G * m / (r * r)
+    konst g: Double = G * m / (r * r)
 
     abstract fun sayHello()
 
     companion object {
-        const val G = 6.67e-11
+        const konst G = 6.67e-11
     }
 }
 
-enum class PseudoInsn(val signature: String = "()V") {
+enum class PseudoInsn(konst signature: String = "()V") {
     FIX_STACK_BEFORE_JUMP,
     FAKE_ALWAYS_TRUE_IFEQ("()I"),
     FAKE_ALWAYS_FALSE_IFEQ("()I"),

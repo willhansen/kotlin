@@ -10,10 +10,10 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class Foo(val x: Int) {
+konstue class Foo(konst x: Int) {
     init {}
 
     init {
-        val f = 1
+        konst f = 1
     }
 }

@@ -21,13 +21,13 @@ class Z {
 }
 
 interface  ARoot<T> {
-    val self : T
+    konst self : T
     infix fun<U : A> consume(init: T.() -> U): U = self.init()
     operator fun<U : A> invoke(init: T.() -> U): U = self.init()
 }
 
 class Y : ARoot<Y> {
-    override val self: Y
+    override konst self: Y
         get() = this
 }
 
@@ -35,8 +35,8 @@ fun box(): String {
     doer {
         object : B {}
     }.hoo()
-    val z = Z()
-    val y = Y()
+    konst z = Z()
+    konst y = Y()
     z.doer { object : B {} }.hoo()
     y {
         z {

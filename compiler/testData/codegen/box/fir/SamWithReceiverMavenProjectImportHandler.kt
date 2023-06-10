@@ -34,6 +34,6 @@ class SamWithReceiverMavenProjectImportHandler : AbstractMavenImportHandler() {
 // FILE: main.kt
 
 fun box(): String {
-    val result = SamWithReceiverMavenProjectImportHandler()
+    konst result = SamWithReceiverMavenProjectImportHandler()
     return result.getOptions(emptyList(), emptyList())?.get(0) ?: "OK"
 }

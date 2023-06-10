@@ -16,27 +16,27 @@ abstract enum class X : Enum<X> {
   //   Public signature: /X.B.<EEC>|null[0]
   private enum entry class B : X {
     // CHECK:
-    //   Mangled name: X.B{}value2
-    //   Public signature: /X.B.<EEC>.value2|-1664181645671419060[0]
-    val value2: String
+    //   Mangled name: X.B{}konstue2
+    //   Public signature: /X.B.<EEC>.konstue2|-1664181645671419060[0]
+    konst konstue2: String
       // CHECK JVM_IR:
-      //   Mangled name: X.B#<get-value2>(){}kotlin.String
-      //   Public signature: /X.B.<EEC>.value2.<get-value2>|2390168402748813003[0]
+      //   Mangled name: X.B#<get-konstue2>(){}kotlin.String
+      //   Public signature: /X.B.<EEC>.konstue2.<get-konstue2>|2390168402748813003[0]
       // CHECK JS_IR NATIVE:
-      //   Mangled name: X.B#<get-value2>(){}
-      //   Public signature: /X.B.<EEC>.value2.<get-value2>|1776957621204807843[0]
+      //   Mangled name: X.B#<get-konstue2>(){}
+      //   Public signature: /X.B.<EEC>.konstue2.<get-konstue2>|1776957621204807843[0]
       get
 
     // CHECK:
-    //   Mangled name: X.B{}value
-    //   Public signature: /X.B.<EEC>.value|1987073854177347439[0]
-    override val value: Function0<String>
+    //   Mangled name: X.B{}konstue
+    //   Public signature: /X.B.<EEC>.konstue|1987073854177347439[0]
+    override konst konstue: Function0<String>
       // CHECK JVM_IR:
-      //   Mangled name: X.B#<get-value>(){}kotlin.Function0<kotlin.String>
-      //   Public signature: /X.B.<EEC>.value.<get-value>|-2160558915408168462[0]
+      //   Mangled name: X.B#<get-konstue>(){}kotlin.Function0<kotlin.String>
+      //   Public signature: /X.B.<EEC>.konstue.<get-konstue>|-2160558915408168462[0]
       // CHECK JS_IR NATIVE:
-      //   Mangled name: X.B#<get-value>(){}
-      //   Public signature: /X.B.<EEC>.value.<get-value>|3260093555963109437[0]
+      //   Mangled name: X.B#<get-konstue>(){}
+      //   Public signature: /X.B.<EEC>.konstue.<get-konstue>|3260093555963109437[0]
       override get
 
     // CHECK:
@@ -86,7 +86,7 @@ abstract enum class X : Enum<X> {
     // CHECK:
     //   Mangled name: X.B{}name
     //   Public signature: /X.B.<EEC>.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: X.B#<get-name>(){}kotlin.String
       //   Public signature: /X.B.<EEC>.name.<get-name>|-8006111524522882650[0]
@@ -98,32 +98,32 @@ abstract enum class X : Enum<X> {
     // CHECK:
     //   Mangled name: X.B{}ordinal
     //   Public signature: /X.B.<EEC>.ordinal|1912745122988592376[0]
-    /* fake */ override val ordinal: Int
+    /* fake */ override konst ordinal: Int
       // CHECK JVM_IR:
       //   Mangled name: X.B#<get-ordinal>(){}kotlin.Int
       //   Public signature: /X.B.<EEC>.ordinal.<get-ordinal>|-6902664390061762634[0]
       // CHECK JS_IR NATIVE:
-      //   Mangled name: X#valueOf#static(kotlin.String){}
-      //   Public signature: /X.valueOf|-4683474617854611729[0]
+      //   Mangled name: X#konstueOf#static(kotlin.String){}
+      //   Public signature: /X.konstueOf|-4683474617854611729[0]
       /* fake */ override get(): Int
 
   }
 
   // CHECK JVM_IR:
-  //   Mangled name: X#valueOf#static(kotlin.String){}X
-  //   Public signature: /X.valueOf|5795127078210310399[0]
+  //   Mangled name: X#konstueOf#static(kotlin.String){}X
+  //   Public signature: /X.konstueOf|5795127078210310399[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: X#values#static(){}
-  //   Public signature: /X.values|-8715569000920726747[0]
-  fun valueOf(value: String): X
+  //   Mangled name: X#konstues#static(){}
+  //   Public signature: /X.konstues|-8715569000920726747[0]
+  fun konstueOf(konstue: String): X
 
   // CHECK JVM_IR:
-  //   Mangled name: X#values#static(){}kotlin.Array<X>
-  //   Public signature: /X.values|-7109739533511471403[0]
+  //   Mangled name: X#konstues#static(){}kotlin.Array<X>
+  //   Public signature: /X.konstues|-7109739533511471403[0]
   // CHECK JS_IR NATIVE:
   //   Mangled name: X#compareTo(X){}
   //   Public signature: /X.compareTo|1261254128967309541[0]
-  fun values(): Array<X>
+  fun konstues(): Array<X>
 
   // CHECK JVM_IR:
   //   Mangled name: X#clone(){}kotlin.Any
@@ -168,7 +168,7 @@ abstract enum class X : Enum<X> {
   // CHECK:
   //   Mangled name: X#static{}entries
   //   Public signature: /X.entries|-5134227801081826149[0]
-  val entries: EnumEntries<X>
+  konst entries: EnumEntries<X>
     // CHECK JVM_IR:
     //   Mangled name: X#<get-entries>#static(){}kotlin.enums.EnumEntries<X>
     //   Public signature: /X.entries.<get-entries>|6681560497291336349[0]
@@ -180,7 +180,7 @@ abstract enum class X : Enum<X> {
   // CHECK:
   //   Mangled name: X{}name
   //   Public signature: /X.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: X#<get-name>(){}kotlin.String
     //   Public signature: /X.name.<get-name>|-8006111524522882650[0]
@@ -192,22 +192,22 @@ abstract enum class X : Enum<X> {
   // CHECK:
   //   Mangled name: X{}ordinal
   //   Public signature: /X.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: X#<get-ordinal>(){}kotlin.Int
     //   Public signature: /X.ordinal.<get-ordinal>|-6902664390061762634[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: X#<get-value>(){}
-    //   Public signature: /X.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: X#<get-konstue>(){}
+    //   Public signature: /X.konstue.<get-konstue>|3260093555963109437[0]
     /* fake */ override get(): Int
 
   // CHECK:
-  //   Mangled name: X{}value
-  //   Public signature: /X.value|1987073854177347439[0]
-  abstract val value: Function0<String>
+  //   Mangled name: X{}konstue
+  //   Public signature: /X.konstue|1987073854177347439[0]
+  abstract konst konstue: Function0<String>
     // CHECK JVM_IR:
-    //   Mangled name: X#<get-value>(){}kotlin.Function0<kotlin.String>
-    //   Public signature: /X.value.<get-value>|-2160558915408168462[0]
+    //   Mangled name: X#<get-konstue>(){}kotlin.Function0<kotlin.String>
+    //   Public signature: /X.konstue.<get-konstue>|-2160558915408168462[0]
     abstract get
 
 }

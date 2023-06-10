@@ -1,12 +1,12 @@
 class Value<T : Any?> {
-  constructor(value: T = null as T, text: String? = null) /* primary */ {
+  constructor(konstue: T = null as T, text: String? = null) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  var value: T
-    field = value
+  var konstue: T
+    field = konstue
     get
     set
 
@@ -17,14 +17,14 @@ class Value<T : Any?> {
 
 }
 
-val <T : Any?> Value<T>.additionalText: Int /* by */
+konst <T : Any?> Value<T>.additionalText: Int /* by */
   field = DVal(kmember = Value::text)
   get(): Int {
     return #additionalText$delegate.getValue(t = <this>, p = ::additionalText/*<T>()*/)
   }
 
-val <T : Any?> Value<T>.additionalValue: Int /* by */
-  field = DVal(kmember = Value::value)
+konst <T : Any?> Value<T>.additionalValue: Int /* by */
+  field = DVal(kmember = Value::konstue)
   get(): Int {
     return #additionalValue$delegate.getValue(t = <this>, p = ::additionalValue/*<T>()*/)
   }
@@ -36,7 +36,7 @@ class DVal {
 
   }
 
-  val kmember: Any
+  konst kmember: Any
     field = kmember
     get
 
@@ -51,7 +51,7 @@ var recivier: Any?
   get
   set
 
-var value2: Any?
+var konstue2: Any?
   field = "fail2"
   get
   set
@@ -60,11 +60,11 @@ var <T : Any?> T.bar: T
   get(): T {
     return <this>
   }
-  set(value: T) {
+  set(konstue: T) {
     <set-recivier>(<set-?> = <this>)
-    <set-value2>(<set-?> = value)
+    <set-konstue2>(<set-?> = konstue)
   }
 
-val barRef: KMutableProperty1<String?, String?>
+konst barRef: KMutableProperty1<String?, String?>
   field = ::bar/*<String?>()*/
   get

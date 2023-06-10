@@ -4,7 +4,7 @@ FILE: propertyTypeNarrowing.reversed.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val it: R|kotlin/Number|
+        public final konst it: R|kotlin/Number|
             private <explicit backing field>: R|kotlin/Int| = Int(4)
             public get(): R|kotlin/Number|
 
@@ -12,14 +12,14 @@ FILE: propertyTypeNarrowing.reversed.kt
             ^test this@R|/A|.R|/A.it|.<Unresolved name: plus>#(Int(3))
         }
 
-        public final val p: R|kotlin/Int| = Int(5)
+        public final konst p: R|kotlin/Int| = Int(5)
             public get(): R|kotlin/Int| {
                 ^ this@R|/A|.F|/A.p|
             }
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval c: <ERROR TYPE REF: Unresolved name: plus> = R|/A.A|().R|/A.it|.<Unresolved name: plus>#(Int(1))
-        lval d: R|kotlin/Unit| = R|/test|()
-        lval b: R|kotlin/Int| = R|/A.A|().R|/A.p|.R|kotlin/Int.plus|(Int(2))
+        lkonst c: <ERROR TYPE REF: Unresolved name: plus> = R|/A.A|().R|/A.it|.<Unresolved name: plus>#(Int(1))
+        lkonst d: R|kotlin/Unit| = R|/test|()
+        lkonst b: R|kotlin/Int| = R|/A.A|().R|/A.p|.R|kotlin/Int.plus|(Int(2))
     }

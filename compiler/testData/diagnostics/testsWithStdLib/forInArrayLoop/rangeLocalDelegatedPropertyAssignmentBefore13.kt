@@ -5,7 +5,7 @@
 
 class Delegate<T>(var v: T) {
     operator fun getValue(thisRef: Any?, kProp: Any?) = v
-    operator fun setValue(thisRef: Any?, kProp: Any?, value: T) { v = value }
+    operator fun setValue(thisRef: Any?, kProp: Any?, konstue: T) { v = konstue }
 }
 
 fun testLocalDelegatedProperty() {

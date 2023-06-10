@@ -7,10 +7,10 @@ FILE fqName:<root> fileName:/fun.kt
   FUN name:test2 visibility:public modality:FINAL <> (i:kotlin.Int, j:kotlin.String) returnType:kotlin.Unit
     VALUE_PARAMETER name:i index:0 type:kotlin.Int
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=0
+        CONST Int type=kotlin.Int konstue=0
     VALUE_PARAMETER name:j index:1 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     BLOCK_BODY
   FUN name:test3 visibility:public modality:FINAL <> (args:kotlin.Array<out kotlin.String>) returnType:kotlin.Unit
     VALUE_PARAMETER name:args index:0 type:kotlin.Array<out kotlin.String> varargElementType:kotlin.String [vararg]

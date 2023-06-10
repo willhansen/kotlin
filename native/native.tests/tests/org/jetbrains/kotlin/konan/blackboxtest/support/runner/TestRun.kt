@@ -17,16 +17,16 @@ import java.io.File
 import java.io.IOException
 
 internal class TestExecutable(
-    val executableFile: File,
-    val loggedCompilationToolCall: LoggedData.CompilerCall,
-    val testNames: Collection<TestName>
+    konst executableFile: File,
+    konst loggedCompilationToolCall: LoggedData.CompilerCall,
+    konst testNames: Collection<TestName>
 ) {
     companion object {
         fun fromCompilationResult(testCase: TestCase, compilationResult: Success<out Executable>): TestExecutable {
-            val testNames = when (testCase.kind) {
+            konst testNames = when (testCase.kind) {
                 TestKind.REGULAR, TestKind.STANDALONE -> {
-                    val testDumpFile = compilationResult.resultingArtifact.testDumpFile
-                    val testDump = try {
+                    konst testDumpFile = compilationResult.resultingArtifact.testDumpFile
+                    konst testDump = try {
                         testDumpFile.readText()
                     } catch (e: IOException) {
                         fail { compilationResult.loggedData.withErrorMessage("Failed to read test dump file: $testDumpFile", e) }
@@ -51,11 +51,11 @@ internal class TestExecutable(
 }
 
 internal class TestRun(
-    val displayName: String,
-    val executable: TestExecutable,
-    val runParameters: List<TestRunParameter>,
-    val testCaseId: TestCaseId,
-    val checks: TestRunChecks
+    konst displayName: String,
+    konst executable: TestExecutable,
+    konst runParameters: List<TestRunParameter>,
+    konst testCaseId: TestCaseId,
+    konst checks: TestRunChecks
 )
 
 internal sealed interface TestRunParameter {
@@ -65,7 +65,7 @@ internal sealed interface TestRunParameter {
         abstract fun testMatches(testName: TestName): Boolean
     }
 
-    class WithPackageFilter(private val packageName: PackageName) : WithFilter() {
+    class WithPackageFilter(private konst packageName: PackageName) : WithFilter() {
         init {
             assertFalse(packageName.isEmpty())
         }
@@ -77,7 +77,7 @@ internal sealed interface TestRunParameter {
         override fun testMatches(testName: TestName) = testName.packageName.startsWith(packageName)
     }
 
-    class WithTestFilter(val testName: TestName) : WithFilter() {
+    class WithTestFilter(konst testName: TestName) : WithFilter() {
         override fun applyTo(programArgs: MutableList<String>) {
             programArgs += "--ktest_filter=$testName"
         }
@@ -92,11 +92,11 @@ internal sealed interface TestRunParameter {
         }
     }
 
-    class WithInputData(val inputDataFile: File) : TestRunParameter {
+    class WithInputData(konst inputDataFile: File) : TestRunParameter {
         override fun applyTo(programArgs: MutableList<String>) = Unit
     }
 
-    class WithLLDB(val commands: List<String>) : TestRunParameter {
+    class WithLLDB(konst commands: List<String>) : TestRunParameter {
         override fun applyTo(programArgs: MutableList<String>) {
             programArgs.add(0, "lldb")
             programArgs.addAll(commands)
@@ -104,11 +104,11 @@ internal sealed interface TestRunParameter {
     }
 
     // Currently, used only for logging the data.
-    class WithExpectedOutputData(val expectedOutputDataFile: File) : TestRunParameter {
+    class WithExpectedOutputData(konst expectedOutputDataFile: File) : TestRunParameter {
         override fun applyTo(programArgs: MutableList<String>) = Unit
     }
 
-    class WithFreeCommandLineArguments(val args: List<String>) : TestRunParameter {
+    class WithFreeCommandLineArguments(konst args: List<String>) : TestRunParameter {
         override fun applyTo(programArgs: MutableList<String>) {
             programArgs += args
         }

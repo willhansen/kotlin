@@ -6,6 +6,6 @@
 package test.text
 
 
-internal actual val surrogateCodePointDecoding: String = "���"
+internal actual konst surrogateCodePointDecoding: String = "���"
 
-internal actual val surrogateCharEncoding: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())
+internal actual konst surrogateCharEncoding: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())

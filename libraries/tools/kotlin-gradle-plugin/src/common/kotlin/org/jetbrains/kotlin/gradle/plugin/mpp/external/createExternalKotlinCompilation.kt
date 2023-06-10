@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTasksProvider
 fun <T : DecoratedExternalKotlinCompilation> DecoratedExternalKotlinTarget.createCompilation(
     descriptor: ExternalKotlinCompilationDescriptor<T>,
 ): T {
-    val compilationImplFactory = KotlinCompilationImplFactory(
+    konst compilationImplFactory = KotlinCompilationImplFactory(
         compilerOptionsFactory = when (platformType) {
             KotlinPlatformType.common -> KotlinMultiplatformCommonCompilerOptionsFactory
             KotlinPlatformType.jvm -> KotlinJvmCompilerOptionsFactory
@@ -43,7 +43,7 @@ fun <T : DecoratedExternalKotlinCompilation> DecoratedExternalKotlinTarget.creat
         },
         compilationSourceSetsContainerFactory = { _, _ -> KotlinCompilationSourceSetsContainer(descriptor.defaultSourceSet) },
         compilationTaskNamesContainerFactory = { target, compilationName ->
-            val default = DefaultKotlinCompilationTaskNamesContainerFactory.create(target, compilationName)
+            konst default = DefaultKotlinCompilationTaskNamesContainerFactory.create(target, compilationName)
             default.copy(
                 compileTaskName = descriptor.compileTaskName ?: default.compileTaskName,
                 compileAllTaskName = descriptor.compileAllTaskName ?: default.compileAllTaskName
@@ -68,8 +68,8 @@ fun <T : DecoratedExternalKotlinCompilation> DecoratedExternalKotlinTarget.creat
         )
     )
 
-    val compilationImpl = compilationImplFactory.create(this, descriptor.compilationName)
-    val decoratedCompilation = descriptor.compilationFactory.create(Delegate(compilationImpl))
+    konst compilationImpl = compilationImplFactory.create(this, descriptor.compilationName)
+    konst decoratedCompilation = descriptor.compilationFactory.create(Delegate(compilationImpl))
     decoratedCompilation.sourceSetTreeClassifier = descriptor.sourceSetTreeClassifier
     descriptor.configure?.invoke(decoratedCompilation)
     this.delegate.compilations.add(decoratedCompilation)
@@ -92,10 +92,10 @@ fun <T : DecoratedExternalKotlinCompilation> DecoratedExternalKotlinTarget.creat
 private fun DecoratedExternalKotlinTarget.setupCompileTask(
     compilation: DecoratedExternalKotlinCompilation,
 ) {
-    val tasksProvider = KotlinTasksProvider()
-    val compilationInfo = KotlinCompilationInfo(compilation)
+    konst tasksProvider = KotlinTasksProvider()
+    konst compilationInfo = KotlinCompilationInfo(compilation)
 
-    val sourceSetProcessor = when (platformType) {
+    konst sourceSetProcessor = when (platformType) {
         KotlinPlatformType.common ->
             KotlinCommonSourceSetProcessor(compilationInfo, tasksProvider)
 

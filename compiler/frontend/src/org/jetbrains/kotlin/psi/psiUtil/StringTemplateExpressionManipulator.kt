@@ -28,11 +28,11 @@ class StringTemplateExpressionManipulator : AbstractElementManipulator<KtStringT
         range: TextRange,
         newContent: String
     ): KtStringTemplateExpression? {
-        val node = element.node
-        val content = if (node.firstChildNode.textLength == 1) StringUtil.escapeStringCharacters(newContent) else newContent
-        val oldText = node.text
-        val newText = oldText.substring(0, range.startOffset) + content + oldText.substring(range.endOffset)
-        val expression = KtPsiFactory(element.project).createExpression(newText)
+        konst node = element.node
+        konst content = if (node.firstChildNode.textLength == 1) StringUtil.escapeStringCharacters(newContent) else newContent
+        konst oldText = node.text
+        konst newText = oldText.substring(0, range.startOffset) + content + oldText.substring(range.endOffset)
+        konst expression = KtPsiFactory(element.project).createExpression(newText)
         node.replaceAllChildrenToChildrenOf(expression.node)
         return node.getPsi(KtStringTemplateExpression::class.java)
     }

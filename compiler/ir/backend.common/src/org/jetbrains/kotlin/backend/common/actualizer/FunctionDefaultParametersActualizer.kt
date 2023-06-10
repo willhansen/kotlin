@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 internal class FunctionDefaultParametersActualizer(
     symbolRemapper: ActualizerSymbolRemapper,
     typeRemapper: DeepCopyTypeRemapper,
-    private val expectActualMap: Map<IrSymbol, IrSymbol>
+    private konst expectActualMap: Map<IrSymbol, IrSymbol>
 ) {
-    private val visitor = FunctionDefaultParametersActualizerVisitor(symbolRemapper, typeRemapper)
+    private konst visitor = FunctionDefaultParametersActualizerVisitor(symbolRemapper, typeRemapper)
 
     fun actualize() {
         for ((expect, actual) in expectActualMap) {
@@ -32,8 +32,8 @@ internal class FunctionDefaultParametersActualizer(
     }
 
     private fun actualize(expectFunction: IrFunction, actualFunction: IrFunction) {
-        expectFunction.valueParameters.zip(actualFunction.valueParameters).forEach { (expectParameter, actualParameter) ->
-            val expectDefaultValue = expectParameter.defaultValue
+        expectFunction.konstueParameters.zip(actualFunction.konstueParameters).forEach { (expectParameter, actualParameter) ->
+            konst expectDefaultValue = expectParameter.defaultValue
             if (actualParameter.defaultValue == null && expectDefaultValue != null) {
                 actualParameter.defaultValue = expectDefaultValue.deepCopyWithSymbols(actualFunction).transform(visitor, null)
             }
@@ -41,11 +41,11 @@ internal class FunctionDefaultParametersActualizer(
     }
 }
 
-private class FunctionDefaultParametersActualizerVisitor(private val symbolRemapper: SymbolRemapper, typeRemapper: TypeRemapper) :
+private class FunctionDefaultParametersActualizerVisitor(private konst symbolRemapper: SymbolRemapper, typeRemapper: TypeRemapper) :
     ActualizerVisitor(symbolRemapper, typeRemapper) {
     override fun visitGetValue(expression: IrGetValue): IrGetValue {
         // It performs actualization of dispatch/extension receivers
-        // It's actual only for default parameter values of expect functions because expect functions don't have bodies
+        // It's actual only for default parameter konstues of expect functions because expect functions don't have bodies
         return expression.actualize(
             classActualizer = { symbolRemapper.getReferencedClass(it.symbol).owner },
             functionActualizer = { symbolRemapper.getReferencedFunction(it.symbol).owner }

@@ -8,15 +8,15 @@ import kotlin.test.*
 object Delegate {
     var storage = ""
     operator fun getValue(instance: Any?, property: KProperty<*>) = storage
-    operator fun setValue(instance: Any?, property: KProperty<*>, value: String) { storage = value }
+    operator fun setValue(instance: Any?, property: KProperty<*>, konstue: String) { storage = konstue }
 }
 
 var result: String by Delegate
 
 fun box(): String {
     result = "Fail"
-    val p = (::result).apply { isAccessible = true }
-    val d = p.getDelegate() as Delegate
+    konst p = (::result).apply { isAccessible = true }
+    konst d = p.getDelegate() as Delegate
     result = "OK"
     assertEquals(d, (::result).apply { isAccessible = true }.getDelegate())
     return d.getValue(null, p)

@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * Note: it currently can't handle local functions and classes declared in default arguments.
  * See [deepCopyWithVariables].
  */
-open class TailrecLowering(val context: BackendContext) : BodyLoweringPass {
+open class TailrecLowering(konst context: BackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (container is IrFunction) {
             // Lower local declarations
@@ -65,7 +65,7 @@ open class TailrecLowering(val context: BackendContext) : BodyLoweringPass {
         }
     }
 
-    open val useProperComputationOrderOfTailrecDefaultParameters: Boolean
+    open konst useProperComputationOrderOfTailrecDefaultParameters: Boolean
         get() = true
 
     open fun followFunctionReference(reference: IrFunctionReference): Boolean = false
@@ -75,14 +75,14 @@ open class TailrecLowering(val context: BackendContext) : BodyLoweringPass {
 }
 
 private fun TailrecLowering.lowerTailRecursionCalls(irFunction: IrFunction) {
-    val (tailRecursionCalls, someCallsAreFromOtherFunctions) = collectTailRecursionCalls(irFunction, ::followFunctionReference)
+    konst (tailRecursionCalls, someCallsAreFromOtherFunctions) = collectTailRecursionCalls(irFunction, ::followFunctionReference)
     if (tailRecursionCalls.isEmpty()) {
         return
     }
 
-    val oldBody = irFunction.body as? IrBlockBody ?: return
-    val oldBodyStatements = ArrayList(oldBody.statements)
-    val builder = context.createIrBuilder(irFunction.symbol).at(oldBody)
+    konst oldBody = irFunction.body as? IrBlockBody ?: return
+    konst oldBodyStatements = ArrayList(oldBody.statements)
+    konst builder = context.createIrBuilder(irFunction.symbol).at(oldBody)
 
     oldBody.statements.clear()
     oldBody.statements += builder.irBlockBody {
@@ -92,7 +92,7 @@ private fun TailrecLowering.lowerTailRecursionCalls(irFunction: IrFunction) {
         // `SharedVariablesLowering`), and that we can't do. So we have to create new `var`s for this purpose.
         // TODO: an optimization pass will rewrite the types of vars back since the lambdas are guaranteed to be inlined
         //  in place (otherwise they can't jump to the start of the function at all), so this is all a waste of CPU time.
-        val parameterToVariable = irFunction.explicitParameters.associateWith {
+        konst parameterToVariable = irFunction.explicitParameters.associateWith {
             if (someCallsAreFromOtherFunctions || !it.isAssignable)
                 createTmpVariable(irGet(it), nameHint = it.symbol.suggestVariableName(), isMutable = true)
             else
@@ -101,7 +101,7 @@ private fun TailrecLowering.lowerTailRecursionCalls(irFunction: IrFunction) {
 
         +irDoWhile().apply loop@{
             body = irBlock(startOffset, endOffset, resultType = context.irBuiltIns.unitType) {
-                val transformer = BodyTransformer(
+                konst transformer = BodyTransformer(
                     this@lowerTailRecursionCalls, builder, irFunction, this@loop, parameterToVariable, tailRecursionCalls
                 )
                 oldBodyStatements.forEach {
@@ -112,7 +112,7 @@ private fun TailrecLowering.lowerTailRecursionCalls(irFunction: IrFunction) {
             condition = irBlock {
                 // The problem with creating new `var`s is that they do not show up in the debugger, so stopping inside
                 // a nested call will still display the parameters from the outermost call. To fix this, we need to
-                // write the new values back even though the parameters are now otherwise unused.
+                // write the new konstues back even though the parameters are now otherwise unused.
                 for ((parameter, variable) in parameterToVariable.entries) {
                     if (parameter.isAssignable && parameter !== variable) {
                         +irSet(parameter, irGet(variable))
@@ -128,15 +128,15 @@ private fun TailrecLowering.lowerTailRecursionCalls(irFunction: IrFunction) {
 }
 
 private class BodyTransformer(
-    private val lowering: TailrecLowering,
-    private val builder: IrBuilderWithScope,
+    private konst lowering: TailrecLowering,
+    private konst builder: IrBuilderWithScope,
     irFunction: IrFunction,
-    private val loop: IrLoop,
-    private val parameterToVariable: Map<IrValueParameter, IrValueDeclaration>,
-    private val tailRecursionCalls: Set<IrCall>,
+    private konst loop: IrLoop,
+    private konst parameterToVariable: Map<IrValueParameter, IrValueDeclaration>,
+    private konst tailRecursionCalls: Set<IrCall>,
 ) : VariableRemapper(parameterToVariable) {
 
-    val parameters = irFunction.explicitParameters
+    konst parameters = irFunction.explicitParameters
 
     override fun visitCall(expression: IrCall): IrExpression {
         expression.transformChildrenVoid(this)
@@ -155,29 +155,29 @@ private class BodyTransformer(
 
     private fun IrBuilderWithScope.genTailCall(expression: IrCall) = this.irBlock(expression) {
         // Get all specified arguments:
-        val parameterToArgument = expression.getArgumentsWithIr().associateTo(mutableMapOf()) { (parameter, argument) ->
-            // Note that we create `val`s for those parameters so that if some default value contains an object
+        konst parameterToArgument = expression.getArgumentsWithIr().associateTo(mutableMapOf()) { (parameter, argument) ->
+            // Note that we create `konst`s for those parameters so that if some default konstue contains an object
             // that captures another parameter, it won't capture it as a mutable ref.
             parameter to irTemporary(argument)
         }
-        // Create new null-initialized variables for all other values in case of forward references:
+        // Create new null-initialized variables for all other konstues in case of forward references:
         //   fun f(x: () -> T = { y }, y: T = ...) // in `f()`, `x()` returns `null`
-        val defaultValuedParameters = parameters.filter { it !in parameterToArgument }
+        konst defaultValuedParameters = parameters.filter { it !in parameterToArgument }
         defaultValuedParameters.associateWithTo(parameterToArgument) {
             // Note that we intentionally keep the original type of the parameter for the variable even though that violates type safety
             // if it's non-null. This ensures that capture parameters have the same types for all copies of `x`.
             irTemporary(lowering.nullConst(UNDEFINED_OFFSET, UNDEFINED_OFFSET, it.type))
         }
-        // Now replace those variables with ones containing actual default values. Unused null-valued temporaries will hopefully
+        // Now replace those variables with ones containing actual default konstues. Unused null-konstued temporaries will hopefully
         // be optimized out later.
-        val remapper = VariableRemapper(parameterToArgument)
+        konst remapper = VariableRemapper(parameterToArgument)
         defaultValuedParameters.let { if (lowering.useProperComputationOrderOfTailrecDefaultParameters) it else it.asReversed() }
             .associateWithTo(parameterToArgument) { parameter ->
-                val originalDefaultValue = parameter.defaultValue?.expression ?: throw Error("no argument specified for $parameter")
+                konst originalDefaultValue = parameter.defaultValue?.expression ?: throw Error("no argument specified for $parameter")
                 irTemporary(originalDefaultValue.deepCopyWithVariables().patchDeclarationParents(parent).transform(remapper, null))
             }
 
-        // Copy the new `val`s into the `var`s declared outside the loop:
+        // Copy the new `konst`s into the `var`s declared outside the loop:
         parameterToArgument.forEach { (parameter, argument) ->
             at(argument)
             +irSet(parameterToVariable[parameter]!!.symbol, irGet(argument))
@@ -190,7 +190,7 @@ private class BodyTransformer(
 
 private fun IrValueParameterSymbol.suggestVariableName(): String =
     if (owner.name.isSpecial) {
-        val oldNameStr = owner.name.asString()
+        konst oldNameStr = owner.name.asString()
         "$" + oldNameStr.substring(1, oldNameStr.length - 1)
     } else {
         owner.name.identifier

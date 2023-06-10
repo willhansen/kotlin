@@ -2,8 +2,8 @@
 // WITH_STDLIB
 
 class X {
-    val num = 42
-    val map: Int = 1.apply {
+    konst num = 42
+    konst map: Int = 1.apply {
         object : Y({ true }) {
             override fun fun1() {
                 println(num)
@@ -12,7 +12,7 @@ class X {
     }
 }
 
-abstract class Y(val lambda: () -> Boolean) {
+abstract class Y(konst lambda: () -> Boolean) {
     abstract fun fun1()
 }
 

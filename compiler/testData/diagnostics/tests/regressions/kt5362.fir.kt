@@ -15,14 +15,14 @@ class Activity(){
     }
 }
 
-// KT-8814 No error in IDE for invalid invoke of OuterClass.()->Unit in static nested class
+// KT-8814 No error in IDE for inkonstid invoke of OuterClass.()->Unit in static nested class
 public class Manager {
     fun task(callback: Manager.() -> Unit): Task {
-        val task = Task(callback)
+        konst task = Task(callback)
         return task
     }
 
-    class Task(val callback: Manager.() -> Unit) : Runnable {
+    class Task(konst callback: Manager.() -> Unit) : Runnable {
         override public fun run() {
             <!ARGUMENT_TYPE_MISMATCH!>callback<!>() // Manager is not accessible here, but no error is shown
         }

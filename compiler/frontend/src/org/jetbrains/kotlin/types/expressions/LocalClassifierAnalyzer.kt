@@ -56,25 +56,25 @@ import org.jetbrains.kotlin.types.WrappedTypeFactory
 import org.jetbrains.kotlin.types.checker.NewKotlinTypeChecker
 
 class LocalClassifierAnalyzer(
-    private val globalContext: GlobalContext,
-    private val storageManager: StorageManager,
-    private val descriptorResolver: DescriptorResolver,
-    private val functionDescriptorResolver: FunctionDescriptorResolver,
-    private val typeResolver: TypeResolver,
-    private val annotationResolver: AnnotationResolver,
-    private val platform: TargetPlatform,
-    private val analyzerServices: PlatformDependentAnalyzerServices,
-    private val lookupTracker: LookupTracker,
-    private val supertypeLoopChecker: SupertypeLoopChecker,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val delegationFilter: DelegationFilter,
-    private val wrappedTypeFactory: WrappedTypeFactory,
-    private val kotlinTypeChecker: NewKotlinTypeChecker,
-    private val samConversionResolver: SamConversionResolver,
-    private val additionalClassPartsProvider: AdditionalClassPartsProvider,
-    private val sealedClassInheritorsProvider: SealedClassInheritorsProvider,
-    private val controlFlowInformationProviderFactory: ControlFlowInformationProvider.Factory,
-    private val absentDescriptorHandler: AbsentDescriptorHandler
+    private konst globalContext: GlobalContext,
+    private konst storageManager: StorageManager,
+    private konst descriptorResolver: DescriptorResolver,
+    private konst functionDescriptorResolver: FunctionDescriptorResolver,
+    private konst typeResolver: TypeResolver,
+    private konst annotationResolver: AnnotationResolver,
+    private konst platform: TargetPlatform,
+    private konst analyzerServices: PlatformDependentAnalyzerServices,
+    private konst lookupTracker: LookupTracker,
+    private konst supertypeLoopChecker: SupertypeLoopChecker,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst delegationFilter: DelegationFilter,
+    private konst wrappedTypeFactory: WrappedTypeFactory,
+    private konst kotlinTypeChecker: NewKotlinTypeChecker,
+    private konst samConversionResolver: SamConversionResolver,
+    private konst additionalClassPartsProvider: AdditionalClassPartsProvider,
+    private konst sealedClassInheritorsProvider: SealedClassInheritorsProvider,
+    private konst controlFlowInformationProviderFactory: ControlFlowInformationProvider.Factory,
+    private konst absentDescriptorHandler: AbsentDescriptorHandler
 ) {
     fun processClassOrObject(
         scope: LexicalWritableScope?,
@@ -82,10 +82,10 @@ class LocalClassifierAnalyzer(
         containingDeclaration: DeclarationDescriptor,
         classOrObject: KtClassOrObject
     ) {
-        val module = DescriptorUtils.getContainingModule(containingDeclaration)
-        val project = classOrObject.project
-        val moduleContext = globalContext.withProject(project).withModule(module)
-        val container = createContainerForLazyLocalClassifierAnalyzer(
+        konst module = DescriptorUtils.getContainingModule(containingDeclaration)
+        konst project = classOrObject.project
+        konst moduleContext = globalContext.withProject(project).withModule(module)
+        konst container = createContainerForLazyLocalClassifierAnalyzer(
             moduleContext,
             context.trace,
             platform,
@@ -128,25 +128,25 @@ class LocalClassifierAnalyzer(
 }
 
 class LocalClassDescriptorHolder(
-    val writableScope: LexicalWritableScope?,
-    val myClass: KtClassOrObject,
-    val containingDeclaration: DeclarationDescriptor,
-    val storageManager: StorageManager,
-    val expressionTypingContext: ExpressionTypingContext,
-    val moduleDescriptor: ModuleDescriptor,
-    val descriptorResolver: DescriptorResolver,
-    val functionDescriptorResolver: FunctionDescriptorResolver,
-    val typeResolver: TypeResolver,
-    val annotationResolver: AnnotationResolver,
-    val supertypeLoopChecker: SupertypeLoopChecker,
-    val languageVersionSettings: LanguageVersionSettings,
-    val syntheticResolveExtension: SyntheticResolveExtension,
-    val delegationFilter: DelegationFilter,
-    val wrappedTypeFactory: WrappedTypeFactory,
-    val kotlinTypeChecker: NewKotlinTypeChecker,
-    val samConversionResolver: SamConversionResolver,
-    val additionalClassPartsProvider: AdditionalClassPartsProvider,
-    val sealedClassInheritorsProvider: SealedClassInheritorsProvider
+    konst writableScope: LexicalWritableScope?,
+    konst myClass: KtClassOrObject,
+    konst containingDeclaration: DeclarationDescriptor,
+    konst storageManager: StorageManager,
+    konst expressionTypingContext: ExpressionTypingContext,
+    konst moduleDescriptor: ModuleDescriptor,
+    konst descriptorResolver: DescriptorResolver,
+    konst functionDescriptorResolver: FunctionDescriptorResolver,
+    konst typeResolver: TypeResolver,
+    konst annotationResolver: AnnotationResolver,
+    konst supertypeLoopChecker: SupertypeLoopChecker,
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst syntheticResolveExtension: SyntheticResolveExtension,
+    konst delegationFilter: DelegationFilter,
+    konst wrappedTypeFactory: WrappedTypeFactory,
+    konst kotlinTypeChecker: NewKotlinTypeChecker,
+    konst samConversionResolver: SamConversionResolver,
+    konst additionalClassPartsProvider: AdditionalClassPartsProvider,
+    konst sealedClassInheritorsProvider: SealedClassInheritorsProvider
 ) {
     // We do not need to synchronize here, because this code is used strictly from one thread
     private var classDescriptor: ClassDescriptor? = null
@@ -159,15 +159,15 @@ class LocalClassDescriptorHolder(
         if (classDescriptor == null) {
             classDescriptor = LazyClassDescriptor(
                 object : LazyClassContext {
-                    override val declarationScopeProvider = declarationScopeProvider
-                    override val inferenceSession = expressionTypingContext.inferenceSession
-                    override val storageManager = this@LocalClassDescriptorHolder.storageManager
-                    override val trace = expressionTypingContext.trace
-                    override val moduleDescriptor = this@LocalClassDescriptorHolder.moduleDescriptor
-                    override val descriptorResolver = this@LocalClassDescriptorHolder.descriptorResolver
-                    override val functionDescriptorResolver = this@LocalClassDescriptorHolder.functionDescriptorResolver
-                    override val typeResolver = this@LocalClassDescriptorHolder.typeResolver
-                    override val declarationProviderFactory = object : DeclarationProviderFactory {
+                    override konst declarationScopeProvider = declarationScopeProvider
+                    override konst inferenceSession = expressionTypingContext.inferenceSession
+                    override konst storageManager = this@LocalClassDescriptorHolder.storageManager
+                    override konst trace = expressionTypingContext.trace
+                    override konst moduleDescriptor = this@LocalClassDescriptorHolder.moduleDescriptor
+                    override konst descriptorResolver = this@LocalClassDescriptorHolder.descriptorResolver
+                    override konst functionDescriptorResolver = this@LocalClassDescriptorHolder.functionDescriptorResolver
+                    override konst typeResolver = this@LocalClassDescriptorHolder.typeResolver
+                    override konst declarationProviderFactory = object : DeclarationProviderFactory {
                         override fun getClassMemberDeclarationProvider(classLikeInfo: KtClassLikeInfo): ClassMemberDeclarationProvider {
                             return PsiBasedClassMemberDeclarationProvider(storageManager, classLikeInfo)
                         }
@@ -180,18 +180,18 @@ class LocalClassDescriptorHolder(
                             throw UnsupportedOperationException()
                         }
                     }
-                    override val annotationResolver = this@LocalClassDescriptorHolder.annotationResolver
-                    override val lookupTracker: LookupTracker = LookupTracker.DO_NOTHING
-                    override val supertypeLoopChecker = this@LocalClassDescriptorHolder.supertypeLoopChecker
-                    override val languageVersionSettings = this@LocalClassDescriptorHolder.languageVersionSettings
-                    override val syntheticResolveExtension = this@LocalClassDescriptorHolder.syntheticResolveExtension
-                    override val delegationFilter: DelegationFilter = this@LocalClassDescriptorHolder.delegationFilter
-                    override val wrappedTypeFactory: WrappedTypeFactory = this@LocalClassDescriptorHolder.wrappedTypeFactory
-                    override val kotlinTypeCheckerOfOwnerModule: NewKotlinTypeChecker = this@LocalClassDescriptorHolder.kotlinTypeChecker
-                    override val samConversionResolver: SamConversionResolver = this@LocalClassDescriptorHolder.samConversionResolver
-                    override val additionalClassPartsProvider: AdditionalClassPartsProvider =
+                    override konst annotationResolver = this@LocalClassDescriptorHolder.annotationResolver
+                    override konst lookupTracker: LookupTracker = LookupTracker.DO_NOTHING
+                    override konst supertypeLoopChecker = this@LocalClassDescriptorHolder.supertypeLoopChecker
+                    override konst languageVersionSettings = this@LocalClassDescriptorHolder.languageVersionSettings
+                    override konst syntheticResolveExtension = this@LocalClassDescriptorHolder.syntheticResolveExtension
+                    override konst delegationFilter: DelegationFilter = this@LocalClassDescriptorHolder.delegationFilter
+                    override konst wrappedTypeFactory: WrappedTypeFactory = this@LocalClassDescriptorHolder.wrappedTypeFactory
+                    override konst kotlinTypeCheckerOfOwnerModule: NewKotlinTypeChecker = this@LocalClassDescriptorHolder.kotlinTypeChecker
+                    override konst samConversionResolver: SamConversionResolver = this@LocalClassDescriptorHolder.samConversionResolver
+                    override konst additionalClassPartsProvider: AdditionalClassPartsProvider =
                         this@LocalClassDescriptorHolder.additionalClassPartsProvider
-                    override val sealedClassInheritorsProvider: SealedClassInheritorsProvider =
+                    override konst sealedClassInheritorsProvider: SealedClassInheritorsProvider =
                         this@LocalClassDescriptorHolder.sealedClassInheritorsProvider
                 },
                 containingDeclaration,
@@ -214,7 +214,7 @@ class LocalClassDescriptorHolder(
 class LocalLazyDeclarationResolver(
     globalContext: GlobalContext,
     trace: BindingTrace,
-    private val localClassDescriptorManager: LocalClassDescriptorHolder,
+    private konst localClassDescriptorManager: LocalClassDescriptorHolder,
     topLevelDescriptorProvider: TopLevelDescriptorProvider,
     absentDescriptorHandler: AbsentDescriptorHandler
 ) : LazyDeclarationResolver(globalContext, trace, topLevelDescriptorProvider, absentDescriptorHandler) {
@@ -238,7 +238,7 @@ class LocalLazyDeclarationResolver(
 class DeclarationScopeProviderForLocalClassifierAnalyzer(
     lazyDeclarationResolver: LazyDeclarationResolver,
     fileScopeProvider: FileScopeProvider,
-    private val localClassDescriptorManager: LocalClassDescriptorHolder
+    private konst localClassDescriptorManager: LocalClassDescriptorHolder
 ) : DeclarationScopeProviderImpl(lazyDeclarationResolver, fileScopeProvider) {
     override fun getResolutionScopeForDeclaration(elementOfDeclaration: PsiElement): LexicalScope {
         if (localClassDescriptorManager.isMyClass(elementOfDeclaration)) {

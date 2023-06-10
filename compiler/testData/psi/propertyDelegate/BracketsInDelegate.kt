@@ -1,1 +1,1 @@
-val a by A {}
+konst a by A {}

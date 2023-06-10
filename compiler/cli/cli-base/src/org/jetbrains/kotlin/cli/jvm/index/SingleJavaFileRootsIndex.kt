@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-class SingleJavaFileRootsIndex(private val roots: List<JavaRoot>) {
+class SingleJavaFileRootsIndex(private konst roots: List<JavaRoot>) {
     init {
         for ((file) in roots) {
             assert(!file.isDirectory) { "Should not be a directory: $file" }
         }
     }
 
-    private val classIdsInRoots = ArrayList<List<ClassId>>(roots.size)
+    private konst classIdsInRoots = ArrayList<List<ClassId>>(roots.size)
 
     fun findJavaSourceClass(classId: ClassId): VirtualFile? =
         roots.indices
@@ -54,7 +54,7 @@ class SingleJavaFileRootsIndex(private val roots: List<JavaRoot>) {
      * Given a .java file, [readClassIds] uses lexer to determine which classes are declared in that file
      */
     private class JavaSourceClassIdReader(file: VirtualFile) {
-        private val lexer = JavaLexer(LanguageLevel.HIGHEST).apply {
+        private konst lexer = JavaLexer(LanguageLevel.HIGHEST).apply {
             start(String(file.contentsToByteArray()))
         }
         private var braceBalance = 0
@@ -91,7 +91,7 @@ class SingleJavaFileRootsIndex(private val roots: List<JavaRoot>) {
                 advance()
             }
             if (at(ElementType.PACKAGE_KEYWORD)) {
-                val packageName = StringBuilder()
+                konst packageName = StringBuilder()
                 while (!end() && !at(ElementType.SEMICOLON)) {
                     if (at(ElementType.IDENTIFIER) || at(ElementType.DOT)) {
                         packageName.append(tokenText())
@@ -101,7 +101,7 @@ class SingleJavaFileRootsIndex(private val roots: List<JavaRoot>) {
                 packageFqName = FqName(packageName.toString())
             }
 
-            val result = ArrayList<ClassId>(1)
+            konst result = ArrayList<ClassId>(1)
 
             while (true) {
                 while (!end() && !atClass()) {
@@ -119,7 +119,7 @@ class SingleJavaFileRootsIndex(private val roots: List<JavaRoot>) {
         }
 
         companion object {
-            private val CLASS_KEYWORDS = setOf(ElementType.CLASS_KEYWORD, ElementType.INTERFACE_KEYWORD, ElementType.ENUM_KEYWORD)
+            private konst CLASS_KEYWORDS = setOf(ElementType.CLASS_KEYWORD, ElementType.INTERFACE_KEYWORD, ElementType.ENUM_KEYWORD)
         }
     }
 }

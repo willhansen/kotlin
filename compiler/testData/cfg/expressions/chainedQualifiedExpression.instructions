@@ -13,7 +13,7 @@ sink:
 == JetKeywordCompletionContributor ==
 public open class JetKeywordCompletionContributor() {
     init {
-        val inTopLevel = 1.0
+        konst inTopLevel = 1.0
 
         BunchKeywordRegister()
                 .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel)
@@ -60,8 +60,8 @@ public open class JetKeywordCompletionContributor() {
 ---------------------
 L0:
   1 <START>
-  2 mark({ val inTopLevel = 1.0 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll() })
-    v(val inTopLevel = 1.0)
+  2 mark({ konst inTopLevel = 1.0 BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll() })
+    v(konst inTopLevel = 1.0)
     r(1.0) -> <v0>
     w(inTopLevel|<v0>)
     mark(BunchKeywordRegister() .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FINAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(OPEN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERNAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PRIVATE_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PROTECTED_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(PUBLIC_KEYWORD, inTopLevel, inTopLevel, inTopLevel, inTopLevel) .add(CLASS_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(ENUM_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(FUN_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(GET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(SET_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(INTERFACE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAL_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(VAR_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(TYPE_KEYWORD, inTopLevel, inTopLevel, inTopLevel) .add(IMPORT_KEYWORD, inTopLevel) .add(PACKAGE_KEYWORD, inTopLevel) .add(OVERRIDE_KEYWORD, inTopLevel) .add(IN_KEYWORD, inTopLevel, inTopLevel) .add(OUT_KEYWORD, inTopLevel) .add(OBJECT_KEYWORD, unresolvedCode) .registerAll())
@@ -225,11 +225,11 @@ sink:
     <SINK>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        PREV:[<ERROR>, <END>]
 =====================
 == ABSTRACT_KEYWORD ==
-val ABSTRACT_KEYWORD = JetToken()
+konst ABSTRACT_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val ABSTRACT_KEYWORD = JetToken())
+    v(konst ABSTRACT_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(ABSTRACT_KEYWORD|<v0>)
@@ -241,11 +241,11 @@ sink:
     <SINK>                                  PREV:[<ERROR>, <END>]
 =====================
 == FINAL_KEYWORD ==
-val FINAL_KEYWORD OPEN_KEYWORD = JetToken()
+konst FINAL_KEYWORD OPEN_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val FINAL_KEYWORD OPEN_KEYWORD = JetToken())
+    v(konst FINAL_KEYWORD OPEN_KEYWORD = JetToken())
 L1:
     <END>                                             NEXT:[<SINK>]
 error:
@@ -254,11 +254,11 @@ sink:
     <SINK>                                            PREV:[<ERROR>, <END>]
 =====================
 == OPEN_KEYWORD ==
-val OPEN_KEYWORD = JetToken()
+konst OPEN_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val OPEN_KEYWORD = JetToken())
+    v(konst OPEN_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(OPEN_KEYWORD|<v0>)
@@ -270,11 +270,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == INTERNAL_KEYWORD ==
-val INTERNAL_KEYWORD = JetToken()
+konst INTERNAL_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val INTERNAL_KEYWORD = JetToken())
+    v(konst INTERNAL_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(INTERNAL_KEYWORD|<v0>)
@@ -286,11 +286,11 @@ sink:
     <SINK>                                  PREV:[<ERROR>, <END>]
 =====================
 == PRIVATE_KEYWORD ==
-val PRIVATE_KEYWORD = JetToken()
+konst PRIVATE_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val PRIVATE_KEYWORD = JetToken())
+    v(konst PRIVATE_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(PRIVATE_KEYWORD|<v0>)
@@ -302,11 +302,11 @@ sink:
     <SINK>                                 PREV:[<ERROR>, <END>]
 =====================
 == PROTECTED_KEYWORD ==
-val PROTECTED_KEYWORD = JetToken()
+konst PROTECTED_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val PROTECTED_KEYWORD = JetToken())
+    v(konst PROTECTED_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(PROTECTED_KEYWORD|<v0>)
@@ -318,11 +318,11 @@ sink:
     <SINK>                                   PREV:[<ERROR>, <END>]
 =====================
 == PUBLIC_KEYWORD ==
-val PUBLIC_KEYWORD = JetToken()
+konst PUBLIC_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val PUBLIC_KEYWORD = JetToken())
+    v(konst PUBLIC_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(PUBLIC_KEYWORD|<v0>)
@@ -334,11 +334,11 @@ sink:
     <SINK>                                PREV:[<ERROR>, <END>]
 =====================
 == CLASS_KEYWORD ==
-val CLASS_KEYWORD = JetToken()
+konst CLASS_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val CLASS_KEYWORD = JetToken())
+    v(konst CLASS_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(CLASS_KEYWORD|<v0>)
@@ -350,11 +350,11 @@ sink:
     <SINK>                               PREV:[<ERROR>, <END>]
 =====================
 == ENUM_KEYWORD ==
-val ENUM_KEYWORD = JetToken()
+konst ENUM_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val ENUM_KEYWORD = JetToken())
+    v(konst ENUM_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(ENUM_KEYWORD|<v0>)
@@ -366,11 +366,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == FUN_KEYWORD ==
-val FUN_KEYWORD = JetToken()
+konst FUN_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val FUN_KEYWORD = JetToken())
+    v(konst FUN_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(FUN_KEYWORD|<v0>)
@@ -382,11 +382,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == GET_KEYWORD ==
-val GET_KEYWORD = JetToken()
+konst GET_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val GET_KEYWORD = JetToken())
+    v(konst GET_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(GET_KEYWORD|<v0>)
@@ -398,11 +398,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == SET_KEYWORD ==
-val SET_KEYWORD = JetToken()
+konst SET_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val SET_KEYWORD = JetToken())
+    v(konst SET_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(SET_KEYWORD|<v0>)
@@ -414,11 +414,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == INTERFACE_KEYWORD ==
-val INTERFACE_KEYWORD = JetToken()
+konst INTERFACE_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val INTERFACE_KEYWORD = JetToken())
+    v(konst INTERFACE_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(INTERFACE_KEYWORD|<v0>)
@@ -430,11 +430,11 @@ sink:
     <SINK>                                   PREV:[<ERROR>, <END>]
 =====================
 == VAL_KEYWORD ==
-val VAL_KEYWORD = JetToken()
+konst VAL_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val VAL_KEYWORD = JetToken())
+    v(konst VAL_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(VAL_KEYWORD|<v0>)
@@ -446,11 +446,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == VAR_KEYWORD ==
-val VAR_KEYWORD = JetToken()
+konst VAR_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val VAR_KEYWORD = JetToken())
+    v(konst VAR_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(VAR_KEYWORD|<v0>)
@@ -462,11 +462,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == TYPE_KEYWORD ==
-val TYPE_KEYWORD = JetToken()
+konst TYPE_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val TYPE_KEYWORD = JetToken())
+    v(konst TYPE_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(TYPE_KEYWORD|<v0>)
@@ -478,11 +478,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == IMPORT_KEYWORD ==
-val IMPORT_KEYWORD = JetToken()
+konst IMPORT_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val IMPORT_KEYWORD = JetToken())
+    v(konst IMPORT_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(IMPORT_KEYWORD|<v0>)
@@ -494,11 +494,11 @@ sink:
     <SINK>                                PREV:[<ERROR>, <END>]
 =====================
 == PACKAGE_KEYWORD ==
-val PACKAGE_KEYWORD = JetToken()
+konst PACKAGE_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val PACKAGE_KEYWORD = JetToken())
+    v(konst PACKAGE_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(PACKAGE_KEYWORD|<v0>)
@@ -510,11 +510,11 @@ sink:
     <SINK>                                 PREV:[<ERROR>, <END>]
 =====================
 == OVERRIDE_KEYWORD ==
-val OVERRIDE_KEYWORD = JetToken()
+konst OVERRIDE_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val OVERRIDE_KEYWORD = JetToken())
+    v(konst OVERRIDE_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(OVERRIDE_KEYWORD|<v0>)
@@ -526,11 +526,11 @@ sink:
     <SINK>                                  PREV:[<ERROR>, <END>]
 =====================
 == IN_KEYWORD ==
-val IN_KEYWORD = JetToken()
+konst IN_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val IN_KEYWORD = JetToken())
+    v(konst IN_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(IN_KEYWORD|<v0>)
@@ -542,11 +542,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == OUT_KEYWORD ==
-val OUT_KEYWORD = JetToken()
+konst OUT_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val OUT_KEYWORD = JetToken())
+    v(konst OUT_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(OUT_KEYWORD|<v0>)
@@ -558,11 +558,11 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == OBJECT_KEYWORD ==
-val OBJECT_KEYWORD = JetToken()
+konst OBJECT_KEYWORD = JetToken()
 ---------------------
 L0:
   1 <START>
-    v(val OBJECT_KEYWORD = JetToken())
+    v(konst OBJECT_KEYWORD = JetToken())
     mark(JetToken())
     call(JetToken(), <init>) -> <v0>
     w(OBJECT_KEYWORD|<v0>)

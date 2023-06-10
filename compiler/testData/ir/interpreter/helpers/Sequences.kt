@@ -21,7 +21,7 @@ private object EmptySequence : Sequence<Nothing>, DropTakeSequence<Nothing> {
 
 public inline fun <T> Sequence<T>?.orEmpty(): Sequence<T> = this ?: emptySequence()
 
-private class GeneratorSequence<T : Any>(private val getInitialValue: () -> T?, private val getNextValue: (T) -> T?) : Sequence<T> {
+private class GeneratorSequence<T : Any>(private konst getInitialValue: () -> T?, private konst getNextValue: (T) -> T?) : Sequence<T> {
     override fun iterator(): Iterator<T> = object : Iterator<T> {
         var nextItem: T? = null
         var nextState: Int = -2 // -2 for initial unknown, -1 for next unknown, 0 for done, 1 for continue
@@ -37,7 +37,7 @@ private class GeneratorSequence<T : Any>(private val getInitialValue: () -> T?, 
 
             if (nextState == 0)
                 throw NoSuchElementException()
-            val result = nextItem as T
+            konst result = nextItem as T
             // Do not clean nextItem (to avoid keeping reference on yielded instance) -- need to keep state for getNextValue
             nextState = -1
             return result

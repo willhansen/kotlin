@@ -1,7 +1,7 @@
 fun bar(x: Int): Int = x + 1
 
 fun foo() {
-    val x: Int? = null
+    konst x: Int? = null
 
     bar(if (x == null) 0 else <!DEBUG_INFO_SMARTCAST!>x<!>)
 
@@ -13,7 +13,7 @@ fun foo() {
     }
     bar(<!DEBUG_INFO_SMARTCAST!>x<!>)
 
-    val y: Int? = null
+    konst y: Int? = null
     if (y is Int) {
         bar(<!DEBUG_INFO_SMARTCAST!>y<!>)
     } else {
@@ -22,7 +22,7 @@ fun foo() {
     }
     bar(<!DEBUG_INFO_SMARTCAST!>y<!>)
 
-    val z: Int? = null
+    konst z: Int? = null
     if (z != null) bar(<!DEBUG_INFO_SMARTCAST!>z<!>)
     bar(<!TYPE_MISMATCH!>z<!>)
     bar(z!!)

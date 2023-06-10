@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirCatch : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
-    abstract val parameter: FirProperty
-    abstract val block: FirBlock
+    abstract override konst source: KtSourceElement?
+    abstract konst parameter: FirProperty
+    abstract konst block: FirBlock
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitCatch(this, data)
 

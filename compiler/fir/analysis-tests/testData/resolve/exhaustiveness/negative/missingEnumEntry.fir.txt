@@ -6,24 +6,24 @@ FILE: missingEnumEntry.kt
 
         public final static enum entry A: R|SomeEnum|
         public final static enum entry B: R|SomeEnum|
-        public final static fun values(): R|kotlin/Array<SomeEnum>| {
+        public final static fun konstues(): R|kotlin/Array<SomeEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|SomeEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|SomeEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<SomeEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<SomeEnum>|
             public get(): R|kotlin/enums/EnumEntries<SomeEnum>|
 
     }
     public final fun test_1(enum: R|SomeEnum|): R|kotlin/Unit| {
-        lval x: R|kotlin/Unit| = when (R|<local>/enum|) {
+        lkonst x: R|kotlin/Unit| = when (R|<local>/enum|) {
             ==($subj$, Q|SomeEnum|.R|/SomeEnum.A|) ->  {
                 Int(1)
             }
         }
 
-        lval y: R|kotlin/Int| = when (R|<local>/enum|) {
+        lkonst y: R|kotlin/Int| = when (R|<local>/enum|) {
             ==($subj$, Q|SomeEnum|.R|/SomeEnum.A|) ->  {
                 Int(1)
             }
@@ -34,7 +34,7 @@ FILE: missingEnumEntry.kt
 
     }
     public final fun test_2(enum: R|SomeEnum?|): R|kotlin/Unit| {
-        lval x: R|kotlin/Unit| = when (R|<local>/enum|) {
+        lkonst x: R|kotlin/Unit| = when (R|<local>/enum|) {
             ==($subj$, Q|SomeEnum|.R|/SomeEnum.A|) ->  {
                 Int(1)
             }
@@ -43,7 +43,7 @@ FILE: missingEnumEntry.kt
             }
         }
 
-        lval y: R|kotlin/Int| = when (R|<local>/enum|) {
+        lkonst y: R|kotlin/Int| = when (R|<local>/enum|) {
             ==($subj$, Q|SomeEnum|.R|/SomeEnum.A|) ->  {
                 Int(1)
             }

@@ -1,6 +1,6 @@
 class A {
     fun bar() {
-        val foo: String.() -> Unit = {} // (1)
+        konst foo: String.() -> Unit = {} // (1)
         fun String.foo(): Unit {} // (2)
         "1".foo() // resolves to (2)
         with("2") {
@@ -9,7 +9,7 @@ class A {
     }
 }
 class B {
-    val foo: String.() -> Unit = {} // (1)
+    konst foo: String.() -> Unit = {} // (1)
     fun String.foo(): Unit {} // (2)
     fun bar() {
         "1".foo() // resolves to (2)
@@ -24,7 +24,7 @@ class E {
         operator fun invoke() = Unit // (1)
     }
     companion object {
-        val f: () -> Unit = {} // (2)
+        konst f: () -> Unit = {} // (2)
     }
 }
 

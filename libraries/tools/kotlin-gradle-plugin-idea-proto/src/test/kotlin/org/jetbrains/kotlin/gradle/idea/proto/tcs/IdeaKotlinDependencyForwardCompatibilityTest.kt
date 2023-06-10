@@ -19,8 +19,8 @@ class IdeaKotlinDependencyForwardCompatibilityTest {
 
     @Test
     fun `test - simple unresolved binary dependency`() {
-        val binary = oldBinaryOf(TestIdeaKotlinInstances::simpleUnresolvedBinaryDependency)
-        val deserialized = deserializeOrFail<IdeaKotlinUnresolvedBinaryDependency>(binary)
+        konst binary = oldBinaryOf(TestIdeaKotlinInstances::simpleUnresolvedBinaryDependency)
+        konst deserialized = deserializeOrFail<IdeaKotlinUnresolvedBinaryDependency>(binary)
 
         assertEquals(TestIdeaKotlinInstances.simpleUnresolvedBinaryDependency.cause, deserialized.cause)
         assertEquals(TestIdeaKotlinInstances.simpleUnresolvedBinaryDependency.coordinates, deserialized.coordinates)
@@ -29,8 +29,8 @@ class IdeaKotlinDependencyForwardCompatibilityTest {
 
     @Test
     fun `test - simple resolved binary dependency`() {
-        val binary = oldBinaryOf(TestIdeaKotlinInstances::simpleResolvedBinaryDependency)
-        val deserialized = deserializeOrFail<IdeaKotlinResolvedBinaryDependency>(binary)
+        konst binary = oldBinaryOf(TestIdeaKotlinInstances::simpleResolvedBinaryDependency)
+        konst deserialized = deserializeOrFail<IdeaKotlinResolvedBinaryDependency>(binary)
 
         assertEquals(TestIdeaKotlinInstances.simpleResolvedBinaryDependency.coordinates, deserialized.coordinates)
         assertEquals(TestIdeaKotlinInstances.simpleResolvedBinaryDependency.binaryType, deserialized.binaryType)
@@ -40,8 +40,8 @@ class IdeaKotlinDependencyForwardCompatibilityTest {
 
     @Test
     fun `test - simple source dependency`() {
-        val binary = oldBinaryOf(TestIdeaKotlinInstances::simpleSourceDependency)
-        val deserialized = deserializeOrFail<IdeaKotlinSourceDependency>(binary)
+        konst binary = oldBinaryOf(TestIdeaKotlinInstances::simpleSourceDependency)
+        konst deserialized = deserializeOrFail<IdeaKotlinSourceDependency>(binary)
 
         assertEquals(TestIdeaKotlinInstances.simpleSourceDependency.type, deserialized.type)
         assertEquals(TestIdeaKotlinInstances.simpleSourceDependency.coordinates, deserialized.coordinates)
@@ -50,8 +50,8 @@ class IdeaKotlinDependencyForwardCompatibilityTest {
 
     @Test
     fun `test - simple project artifact dependency`() {
-        val binary = oldBinaryOf(TestIdeaKotlinInstances::simpleProjectArtifactDependency)
-        val deserialized = deserializeOrFail<IdeaKotlinProjectArtifactDependency>(binary)
+        konst binary = oldBinaryOf(TestIdeaKotlinInstances::simpleProjectArtifactDependency)
+        konst deserialized = deserializeOrFail<IdeaKotlinProjectArtifactDependency>(binary)
 
         assertEquals(TestIdeaKotlinInstances.simpleProjectArtifactDependency.type, deserialized.type)
         assertEquals(TestIdeaKotlinInstances.simpleProjectArtifactDependency.coordinates, deserialized.coordinates)
@@ -60,8 +60,8 @@ class IdeaKotlinDependencyForwardCompatibilityTest {
 }
 
 private inline fun <reified T : IdeaKotlinDependency> deserializeOrFail(data: ByteArray): T {
-    val context = TestIdeaKotlinSerializationContext()
-    val deserialized = context.IdeaKotlinDependency(data) ?: fail(
+    konst context = TestIdeaKotlinSerializationContext()
+    konst deserialized = context.IdeaKotlinDependency(data) ?: fail(
         "Failed to deserialize ${T::class.java.name}. Reports:\n" + context.logger.reports.joinToString("\n")
     )
 
@@ -69,17 +69,17 @@ private inline fun <reified T : IdeaKotlinDependency> deserializeOrFail(data: By
 }
 
 private fun oldBinaryOf(property: KProperty0<IdeaKotlinDependency>): ByteArray {
-    val classLoader = classLoaderForBackwardsCompatibleClasses()
-    val testIdeaKotlinInstancesClazz = classLoader.loadClass(TestIdeaKotlinInstances::class.java.name).kotlin
+    konst classLoader = classLoaderForBackwardsCompatibleClasses()
+    konst testIdeaKotlinInstancesClazz = classLoader.loadClass(TestIdeaKotlinInstances::class.java.name).kotlin
 
-    val testIdeaKotlinInstances = testIdeaKotlinInstancesClazz.objectInstance
+    konst testIdeaKotlinInstances = testIdeaKotlinInstancesClazz.objectInstance
         ?: error("Failed to get ${TestIdeaKotlinInstances::class.java.name} instance")
 
-    val member = testIdeaKotlinInstancesClazz.members
+    konst member = testIdeaKotlinInstancesClazz.members
         .firstOrNull { it.name == property.name }
         ?: error("Failed to get '${property.name}' member")
 
-    val dependencyInstance = member.call(testIdeaKotlinInstances)
+    konst dependencyInstance = member.call(testIdeaKotlinInstances)
         ?: error("Failed to get '${property.name}'")
 
     return TestIdeaKotlinDependencySerializer(classLoader).serialize(dependencyInstance)

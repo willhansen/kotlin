@@ -22,8 +22,8 @@ class JavaClass {
 import java.util.Arrays
 
 fun box(): String {
-    val r: JavaClass.Computable<String> = JavaClass.Computable { "OK" }
-    val supertypes = Arrays.toString(r.javaClass.getGenericInterfaces())
+    konst r: JavaClass.Computable<String> = JavaClass.Computable { "OK" }
+    konst supertypes = Arrays.toString(r.javaClass.getGenericInterfaces())
     if (supertypes != "[interface JavaClass\$Computable]") return "Fail: $supertypes"
     return JavaClass.compute(r)!!
 }

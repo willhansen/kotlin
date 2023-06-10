@@ -19,7 +19,7 @@ class A : J(), MutableList<String> {
         throw UnsupportedOperationException()
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun contains(element: String): Boolean {
@@ -96,16 +96,16 @@ class A : J(), MutableList<String> {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.removeAt(0) != "abc") return "fail 1"
 
-    val l: MutableList<String> = a
+    konst l: MutableList<String> = a
     if (l.removeAt(0) != "abc") return "fail 2"
 
-    val anyList: MutableList<Any?> = a as MutableList<Any?>
+    konst anyList: MutableList<Any?> = a as MutableList<Any?>
     if (anyList.removeAt(0) != "abc") return "fail 3"
 
-    val container: Container = a
+    konst container: Container = a
     if (container.removeAt(0) != "abc") return "fail 4"
 
     return "OK"

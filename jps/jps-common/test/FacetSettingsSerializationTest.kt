@@ -16,20 +16,20 @@ class FacetSettingsSerializationTest {
 
     @Test
     fun `test - module dependencies`() {
-        val source = KotlinFacetSettings().apply {
+        konst source = KotlinFacetSettings().apply {
             implementedModuleNames = listOf("implementedModule1", "implementedModule2")
             dependsOnModuleNames = listOf("dependsOnModule1", "dependsOnModule2")
             additionalVisibleModuleNames = setOf("friend1", "friend2")
         }
 
-        val deserialized = serializeAndDeserialize(source)
+        konst deserialized = serializeAndDeserialize(source)
         assertEquals(source.implementedModuleNames, deserialized.implementedModuleNames)
         assertEquals(source.dependsOnModuleNames, deserialized.dependsOnModuleNames)
         assertEquals(source.additionalVisibleModuleNames, deserialized.additionalVisibleModuleNames)
     }
 
     private fun serializeAndDeserialize(settings: KotlinFacetSettings): KotlinFacetSettings {
-        val element = Element("settings")
+        konst element = Element("settings")
         settings.serializeFacetSettings(element)
         return deserializeFacetSettings(element)
     }

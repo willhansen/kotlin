@@ -18,14 +18,14 @@ class M : Map<String, String> by HashMap<String, String>()
 class MM : MutableMap<String, String> by HashMap<String, String>()
 
 class ME : Map.Entry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
 }
 
 class MME : MutableMap.MutableEntry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
-    override fun setValue(value: String): String = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
+    override fun setValue(konstue: String): String = throw UnsupportedOperationException()
 }
 
 inline fun <reified T> reifiedIs(x: Any): Boolean = x is T
@@ -34,29 +34,29 @@ inline fun <reified T> reifiedIsNot(x: Any): Boolean = x !is T
 fun assert(condition: Boolean, message: () -> String) { if (!condition) throw AssertionError(message())}
 
 fun box(): String {
-    val itr = Itr() as Any
-    val mitr = MItr()
+    konst itr = Itr() as Any
+    konst mitr = MItr()
 
     assert(reifiedIsNot<MutableIterator<*>>(itr)) { "reifiedIsNot<MutableIterator<*>>(itr)" }
     assert(reifiedIs<MutableIterator<*>>(mitr)) { "reifiedIs<MutableIterator<*>>(mitr)" }
 
-    val litr = LItr() as Any
-    val mlitr = MLItr()
+    konst litr = LItr() as Any
+    konst mlitr = MLItr()
 
     assert(reifiedIsNot<MutableIterator<*>>(litr)) { "reifiedIsNot<MutableIterator<*>>(litr)" }
     assert(reifiedIsNot<MutableListIterator<*>>(litr)) { "reifiedIsNot<MutableListIterator<*>>(litr)" }
     assert(reifiedIs<MutableListIterator<*>>(mlitr)) { "reifiedIs<MutableListIterator<*>>(mlitr)" }
 
-    val it = It() as Any
-    val mit = MIt()
-    val arrayList = ArrayList<String>()
+    konst it = It() as Any
+    konst mit = MIt()
+    konst arrayList = ArrayList<String>()
 
     assert(reifiedIsNot<MutableIterable<*>>(it)) { "reifiedIsNot<MutableIterable<*>>(it)" }
     assert(reifiedIs<MutableIterable<*>>(mit)) { "reifiedIs<MutableIterable<*>>(mit)" }
     assert(reifiedIs<MutableIterable<*>>(arrayList)) { "reifiedIs<MutableIterable<*>>(arrayList)" }
 
-    val coll = C() as Any
-    val mcoll = MC()
+    konst coll = C() as Any
+    konst mcoll = MC()
 
     assert(reifiedIsNot<MutableCollection<*>>(coll)) { "reifiedIsNot<MutableCollection<*>>(coll)" }
     assert(reifiedIsNot<MutableIterable<*>>(coll)) { "reifiedIsNot<MutableIterable<*>>(coll)" }
@@ -64,8 +64,8 @@ fun box(): String {
     assert(reifiedIs<MutableIterable<*>>(mcoll)) { "reifiedIs<MutableIterable<*>>(mcoll)" }
     assert(reifiedIs<MutableCollection<*>>(arrayList)) { "reifiedIs<MutableCollection<*>>(arrayList)" }
 
-    val list = L() as Any
-    val mlist = ML()
+    konst list = L() as Any
+    konst mlist = ML()
 
     assert(reifiedIsNot<MutableList<*>>(list)) { "reifiedIsNot<MutableList<*>>(list)" }
     assert(reifiedIsNot<MutableCollection<*>>(list)) { "reifiedIsNot<MutableCollection<*>>(list)" }
@@ -75,9 +75,9 @@ fun box(): String {
     assert(reifiedIs<MutableIterable<*>>(mlist)) { "reifiedIs<MutableIterable<*>>(mlist)" }
     assert(reifiedIs<MutableList<*>>(arrayList)) { "reifiedIs<MutableList<*>>(arrayList)" }
 
-    val set = S() as Any
-    val mset = MS()
-    val hashSet = HashSet<String>()
+    konst set = S() as Any
+    konst mset = MS()
+    konst hashSet = HashSet<String>()
 
     assert(reifiedIsNot<MutableSet<*>>(set)) { "reifiedIsNot<MutableSet<*>>(set)" }
     assert(reifiedIsNot<MutableCollection<*>>(set)) { "reifiedIsNot<MutableCollection<*>>(set)" }
@@ -89,19 +89,19 @@ fun box(): String {
     assert(reifiedIs<MutableCollection<*>>(hashSet)) { "reifiedIs<MutableCollection<*>>(hashSet)" }
     assert(reifiedIs<MutableIterable<*>>(hashSet)) { "reifiedIs<MutableIterable<*>>(hashSet)" }
 
-    val map = M() as Any
-    val mmap = MM()
-    val hashMap = HashMap<String, String>()
+    konst map = M() as Any
+    konst mmap = MM()
+    konst hashMap = HashMap<String, String>()
 
     assert(reifiedIsNot<MutableMap<*, *>>(map)) { "reifiedIsNot<MutableMap<*, *>>(map)" }
     assert(reifiedIs<MutableMap<*, *>>(mmap)) { "reifiedIs<MutableMap<*, *>>(mmap)"}
     assert(reifiedIs<MutableMap<*, *>>(hashMap)) { "reifiedIs<MutableMap<*, *>>(hashMap)" }
 
-    val entry = ME() as Any
-    val mentry = MME()
+    konst entry = ME() as Any
+    konst mentry = MME()
 
     hashMap[""] = ""
-    val hashMapEntry = hashMap.entries.first()
+    konst hashMapEntry = hashMap.entries.first()
 
     assert(reifiedIsNot<MutableMap.MutableEntry<*, *>>(entry)) { "reifiedIsNot<MutableMap.MutableEntry<*, *>>(entry)"}
     assert(reifiedIs<MutableMap.MutableEntry<*, *>>(mentry)) { "reifiedIs<MutableMap.MutableEntry<*, *>>(mentry)"}

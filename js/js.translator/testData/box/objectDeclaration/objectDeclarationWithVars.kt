@@ -2,8 +2,8 @@
 package foo
 
 object State {
-    val c = 2
-    val b = 1
+    konst c = 2
+    konst b = 1
 }
 
 fun box(): String {

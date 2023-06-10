@@ -5,6 +5,6 @@ fun foo(): Int<!> = 1
 <!CONFLICTING_OVERLOADS!>fun foo(): String<!> = ""
 
 fun test() {
-    val s = foo()
+    konst s = foo()
     s.length
 }

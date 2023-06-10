@@ -177,7 +177,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithGenericExpectedTypeInside.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): <implicit> { LAZY_BLOCK }
     public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: Foo<String> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: Foo<String> = bar#()
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -197,7 +197,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithGenericExpectedTypeInside.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): <implicit> { LAZY_BLOCK }
     public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: Foo<String> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: Foo<String> = bar#()
     }
 
 ANNOTATIONS_ARGUMENTS_MAPPING:
@@ -217,7 +217,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithGenericExpectedTypeInside.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] fun bar(): <implicit> { LAZY_BLOCK }
     public final [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(RAW_FIR)] lval x: Foo<String> = bar#()
+        [ResolvedTo(RAW_FIR)] lkonst x: Foo<String> = bar#()
     }
 
 BODY_RESOLVE:
@@ -239,7 +239,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithGenericExpectedTypeInside.kt
         ^bar R|/Bar.Bar|()
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>| = R|/bar|()
+        [ResolvedTo(BODY_RESOLVE)] lkonst x: R|Foo<kotlin/String>| = R|/bar|()
     }
 
 FILE RAW TO BODY:
@@ -261,5 +261,5 @@ FILE: [ResolvedTo(IMPORTS)] functionWithGenericExpectedTypeInside.kt
         ^bar R|/Bar.Bar|()
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>| = R|/bar|()
+        [ResolvedTo(BODY_RESOLVE)] lkonst x: R|Foo<kotlin/String>| = R|/bar|()
     }

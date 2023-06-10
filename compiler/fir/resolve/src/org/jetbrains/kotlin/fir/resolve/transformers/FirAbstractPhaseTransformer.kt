@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.fir.visitors.FirDefaultTransformer
 import org.jetbrains.kotlin.fir.withFileAnalysisExceptionWrapping
 
 abstract class FirAbstractPhaseTransformer<D>(
-    val baseTransformerPhase: FirResolvePhase
+    konst baseTransformerPhase: FirResolvePhase
 ) : FirDefaultTransformer<D>() {
 
-    open val transformerPhase get() = baseTransformerPhase
+    open konst transformerPhase get() = baseTransformerPhase
 
-    abstract val session: FirSession
+    abstract konst session: FirSession
 
     init {
         assert(baseTransformerPhase != FirResolvePhase.RAW_FIR) {

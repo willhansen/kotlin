@@ -1,7 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 
-inline class Z(val x: Int)
+inline class Z(konst x: Int)
 
 @JvmOverloads
 fun testTopLevelFunction1(z: Z, x: Int = 0) {}

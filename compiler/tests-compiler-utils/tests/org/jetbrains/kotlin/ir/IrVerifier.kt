@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.test.Assertions
 
 class IrVerifier(
-    private val assertions: Assertions,
-    private val isFir: Boolean,
+    private konst assertions: Assertions,
+    private konst isFir: Boolean,
 ) : IrElementVisitorVoid {
-    private val errors = ArrayList<String>()
+    private konst errors = ArrayList<String>()
 
-    private val symbolForDeclaration = HashMap<IrElement, IrSymbol>()
+    private konst symbolForDeclaration = HashMap<IrElement, IrSymbol>()
 
-    val hasErrors get() = errors.isNotEmpty()
+    konst hasErrors get() = errors.isNotEmpty()
 
-    val errorsAsMessage get() = errors.joinToString(prefix = "IR verifier errors:\n", separator = "\n")
+    konst errorsAsMessage get() = errors.joinToString(prefix = "IR verifier errors:\n", separator = "\n")
 
     private fun error(message: String) {
         errors.add(message)
@@ -39,8 +39,8 @@ class IrVerifier(
         }
     }
 
-    private val elementsAreUniqueChecker = object : IrElementVisitorVoid {
-        private val elements = HashSet<IrElement>()
+    private konst elementsAreUniqueChecker = object : IrElementVisitorVoid {
+        private konst elements = HashSet<IrElement>()
 
         override fun visitElement(element: IrElement) {
             require(elements.add(element)) { "Non-unique element: ${element.render()}" }
@@ -74,9 +74,9 @@ class IrVerifier(
             "Symbol is not bound to declaration: ${declaration.render()}"
         }
 
-        val containingDeclarationDescriptor = declaration.descriptor.containingDeclaration
+        konst containingDeclarationDescriptor = declaration.descriptor.containingDeclaration
         if (containingDeclarationDescriptor != null) {
-            val parent = declaration.parent
+            konst parent = declaration.parent
             if (parent is IrDeclaration) {
                 require(parent.descriptor == containingDeclarationDescriptor) {
                     "In declaration ${declaration.descriptor}: " +
@@ -103,29 +103,29 @@ class IrVerifier(
         // And at some points, like context descriptors, they might differ
         if (isFir) return
 
-        val functionDescriptor = declaration.descriptor
+        konst functionDescriptor = declaration.descriptor
 
         checkTypeParameters(functionDescriptor, declaration, functionDescriptor.typeParameters)
 
-        val expectedDispatchReceiver = functionDescriptor.dispatchReceiverParameter
-        val actualDispatchReceiver = declaration.dispatchReceiverParameter?.descriptor
+        konst expectedDispatchReceiver = functionDescriptor.dispatchReceiverParameter
+        konst actualDispatchReceiver = declaration.dispatchReceiverParameter?.descriptor
         require(expectedDispatchReceiver == actualDispatchReceiver) {
             "$functionDescriptor: Dispatch receiver parameter mismatch: " +
                     "expected $expectedDispatchReceiver, actual $actualDispatchReceiver"
 
         }
 
-        val expectedExtensionReceiver = functionDescriptor.extensionReceiverParameter
-        val actualExtensionReceiver = declaration.extensionReceiverParameter?.descriptor
+        konst expectedExtensionReceiver = functionDescriptor.extensionReceiverParameter
+        konst actualExtensionReceiver = declaration.extensionReceiverParameter?.descriptor
         require(expectedExtensionReceiver == actualExtensionReceiver) {
             "$functionDescriptor: Extension receiver parameter mismatch: " +
                     "expected $expectedExtensionReceiver, actual $actualExtensionReceiver"
 
         }
 
-        val expectedContextReceivers = functionDescriptor.contextReceiverParameters
-        val actualContextReceivers =
-            declaration.valueParameters.take(declaration.contextReceiverParametersCount).map { it.descriptor }
+        konst expectedContextReceivers = functionDescriptor.contextReceiverParameters
+        konst actualContextReceivers =
+            declaration.konstueParameters.take(declaration.contextReceiverParametersCount).map { it.descriptor }
         if (expectedContextReceivers.size != actualContextReceivers.size) {
             error("$functionDescriptor: Context receivers mismatch: $expectedContextReceivers != $actualContextReceivers")
         } else {
@@ -136,9 +136,9 @@ class IrVerifier(
             }
         }
 
-        val declaredValueParameters =
-            declaration.valueParameters.drop(declaration.contextReceiverParametersCount).map { it.descriptor }
-        val actualValueParameters = functionDescriptor.valueParameters
+        konst declaredValueParameters =
+            declaration.konstueParameters.drop(declaration.contextReceiverParametersCount).map { it.descriptor }
+        konst actualValueParameters = functionDescriptor.konstueParameters
         if (declaredValueParameters.size != actualValueParameters.size) {
             error("$functionDescriptor: Value parameters mismatch: $declaredValueParameters != $actualValueParameters")
         } else {
@@ -182,7 +182,7 @@ class IrVerifier(
         if (!isBound) {
             error("${javaClass.simpleName} descriptor is unbound @$kind ${irElement.render()}")
         } else {
-            val irDeclaration = owner as? IrDeclaration
+            konst irDeclaration = owner as? IrDeclaration
             if (irDeclaration != null) {
                 try {
                     irDeclaration.parent
@@ -192,7 +192,7 @@ class IrVerifier(
             }
         }
 
-        val otherSymbol = symbolForDeclaration.getOrPut(owner) { this }
+        konst otherSymbol = symbolForDeclaration.getOrPut(owner) { this }
         if (this != otherSymbol) {
             error("Multiple symbols for descriptor of @$kind ${irElement.render()}")
         }
@@ -211,7 +211,7 @@ class IrVerifier(
         declaration: IrTypeParametersContainer,
         expectedTypeParameters: List<TypeParameterDescriptor>
     ) {
-        val declaredTypeParameters = declaration.typeParameters.map { it.descriptor }
+        konst declaredTypeParameters = declaration.typeParameters.map { it.descriptor }
 
         if (declaredTypeParameters.size != expectedTypeParameters.size) {
             error("$descriptor: Type parameters mismatch: $declaredTypeParameters != $expectedTypeParameters")

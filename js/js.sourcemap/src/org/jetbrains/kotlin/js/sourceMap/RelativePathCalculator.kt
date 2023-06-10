@@ -10,15 +10,15 @@ import java.io.File
 class RelativePathCalculator(baseDir: File) {
     private fun File.getAllParents() = generateSequence(absoluteFile.normalize()) { it.parentFile }.toList().asReversed()
 
-    private val baseDirPath = baseDir.getAllParents()
+    private konst baseDirPath = baseDir.getAllParents()
 
     fun calculateRelativePathTo(file: File): String? {
-        val parents = file.getAllParents()
+        konst parents = file.getAllParents()
         if (baseDirPath[0] != parents[0]) return null
 
-        val commonLength = baseDirPath.zip(parents).count { (first, second) -> first == second }
+        konst commonLength = baseDirPath.zip(parents).count { (first, second) -> first == second }
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         for (i in commonLength until baseDirPath.size) {
             sb.append("../")
         }

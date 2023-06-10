@@ -30,9 +30,9 @@ import java.util.logging.Logger
 import kotlin.concurrent.thread
 
 
-val CLASSPATH_FILE_ID_DIGEST = "MD5"
-val DEFAULT_CLASSPATH_WATCH_PERIOD_MS = 1000L
-val DEFAULT_CLASSPATH_DIGEST_WATCH_PERIOD_MS = 300000L // 5 min
+konst CLASSPATH_FILE_ID_DIGEST = "MD5"
+konst DEFAULT_CLASSPATH_WATCH_PERIOD_MS = 1000L
+konst DEFAULT_CLASSPATH_DIGEST_WATCH_PERIOD_MS = 300000L // 5 min
 
 
 /**
@@ -41,17 +41,17 @@ val DEFAULT_CLASSPATH_DIGEST_WATCH_PERIOD_MS = 300000L // 5 min
  * TODO: replace with NIO watching when switching to java 7+
  */
 class LazyClasspathWatcher(classpath: Iterable<String>,
-                           val checkPeriod: Long = DEFAULT_CLASSPATH_WATCH_PERIOD_MS,
-                           val digestCheckPeriod: Long = DEFAULT_CLASSPATH_DIGEST_WATCH_PERIOD_MS) {
+                           konst checkPeriod: Long = DEFAULT_CLASSPATH_WATCH_PERIOD_MS,
+                           konst digestCheckPeriod: Long = DEFAULT_CLASSPATH_DIGEST_WATCH_PERIOD_MS) {
 
-    private data class FileId(val file: File, val lastModified: Long, val digest: ByteArray)
+    private data class FileId(konst file: File, konst lastModified: Long, konst digest: ByteArray)
 
-    private val fileIdsLock = Semaphore(1) // a barrier for ensuring ids are initialized, using semaphore to allow modifications from another thread
+    private konst fileIdsLock = Semaphore(1) // a barrier for ensuring ids are initialized, using semaphore to allow modifications from another thread
     private var fileIds: List<FileId>? = null
-    private val lastChangedStatus = AtomicBoolean(false)
-    private val lastUpdate = AtomicLong(0)
-    private val lastDigestUpdate = AtomicLong(0)
-    private val log by lazy { Logger.getLogger("classpath watcher") }
+    private konst lastChangedStatus = AtomicBoolean(false)
+    private konst lastUpdate = AtomicLong(0)
+    private konst lastDigestUpdate = AtomicLong(0)
+    private konst log by lazy { Logger.getLogger("classpath watcher") }
 
     init {
         // locking before entering thread in order to avoid racing with isChanged
@@ -64,7 +64,7 @@ class LazyClasspathWatcher(classpath: Iterable<String>,
                         .flatMap { it.walk().filter(::isClasspathFile) }
                         .map { FileId(it, it.lastModified(), it.md5Digest()) }
                         .toList()
-                val nowMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
+                konst nowMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
                 lastUpdate.set(nowMs)
                 lastDigestUpdate.set(nowMs)
             }
@@ -78,16 +78,16 @@ class LazyClasspathWatcher(classpath: Iterable<String>,
         }
     }
 
-    val isChanged: Boolean get() {
+    konst isChanged: Boolean get() {
         if (lastChangedStatus.get()) return true
-        val nowMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
+        konst nowMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime())
         if (nowMs - lastUpdate.get() < checkPeriod) return false
 
-        val checkDigest = nowMs - lastDigestUpdate.get() > digestCheckPeriod
+        konst checkDigest = nowMs - lastDigestUpdate.get() > digestCheckPeriod
         // making sure that fieldIds are initialized
         fileIdsLock.acquire()
         fileIdsLock.release()
-        val changed =
+        konst changed =
             fileIds?.find {
                 try {
                     if (!it.file.exists()) {
@@ -117,9 +117,9 @@ class LazyClasspathWatcher(classpath: Iterable<String>,
 fun isClasspathFile(file: File): Boolean = file.isFile && listOf("class", "jar").contains(file.extension.lowercase())
 
 fun File.md5Digest(): ByteArray {
-    val md = MessageDigest.getInstance(CLASSPATH_FILE_ID_DIGEST)
+    konst md = MessageDigest.getInstance(CLASSPATH_FILE_ID_DIGEST)
     DigestInputStream(inputStream(), md).use {
-        val buf = ByteArray(1024)
+        konst buf = ByteArray(1024)
         while (it.read(buf) != -1) {}
         it.close()
     }

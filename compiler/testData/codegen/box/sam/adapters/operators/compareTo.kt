@@ -13,7 +13,7 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val obj = JavaClass()
+    konst obj = JavaClass()
 
     var v1 = "FAIL"
     obj < { v1 = "OK" }

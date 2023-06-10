@@ -7,5 +7,5 @@ fun bar() = "baz"
 
 // FILE: main.kt
 fun main() {
-    val x = foo.<caret>bar()
+    konst x = foo.<caret>bar()
 }

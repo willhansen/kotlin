@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.ir.types.IrType
  */
 class ExplicitlyCastExternalTypesLowering(wasmContext: WasmBackendContext) : AbstractValueUsageLowering(wasmContext) {
     override fun IrExpression.useExpressionAsType(actualType: IrType, expectedType: IrType): IrExpression {
-        val expectedExternal = isExternalType(expectedType)
-        val actualExternal = isExternalType(actualType)
+        konst expectedExternal = isExternalType(expectedType)
+        konst actualExternal = isExternalType(actualType)
 
         if (expectedExternal != actualExternal) {
             return JsIrBuilder.buildImplicitCast(this, toType = expectedType)

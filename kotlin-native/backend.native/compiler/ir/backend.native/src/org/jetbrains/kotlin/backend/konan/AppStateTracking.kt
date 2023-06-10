@@ -11,7 +11,7 @@ package org.jetbrains.kotlin.backend.konan
  * Can be turned off via [BinaryOptions] to workaround bugs in implementation.
  */
 // Must match `AppStateTracking` in CompilerConstants.hpp
-enum class AppStateTracking(val value: Int) {
+enum class AppStateTracking(konst konstue: Int) {
     DISABLED(0),
     ENABLED(1),
 }

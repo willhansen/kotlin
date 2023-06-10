@@ -10,16 +10,16 @@
 // FILE: serializableLambdaCapturingInlineClassInt.kt
 import java.io.*
 
-inline class IC(val x: Int)
+inline class IC(konst x: Int)
 
 fun box(): String {
-    val k = IC('K'.toInt())
+    konst k = IC('K'.toInt())
     return roundtrip(Sam { s -> s + k.x.toChar().toString() })
         .get("O")
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

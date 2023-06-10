@@ -2,7 +2,7 @@
 // FILE: common.kt
 
 <!EXPECTED_PRIVATE_DECLARATION, EXPECTED_PRIVATE_DECLARATION{JVM}!>private<!> expect fun foo()
-<!EXPECTED_PRIVATE_DECLARATION, EXPECTED_PRIVATE_DECLARATION{JVM}!>private<!> expect val bar: String
+<!EXPECTED_PRIVATE_DECLARATION, EXPECTED_PRIVATE_DECLARATION{JVM}!>private<!> expect konst bar: String
 <!EXPECTED_PRIVATE_DECLARATION, EXPECTED_PRIVATE_DECLARATION{JVM}!>private<!> expect fun Int.memExt(): Any
 
 <!EXPECTED_PRIVATE_DECLARATION, EXPECTED_PRIVATE_DECLARATION{JVM}!>private<!> expect class Foo
@@ -11,7 +11,7 @@
 // FILE: jvm.kt
 
 private actual fun foo() {}
-private actual val bar: String = ""
+private actual konst bar: String = ""
 private actual fun Int.memExt(): Any = 0
 
 private actual class Foo

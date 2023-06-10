@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.*
 
 internal abstract class KtFe10ScopeResolution : KtScope, KtLifetimeOwner {
-    abstract val analysisContext: Fe10AnalysisContext
-    abstract val scope: ResolutionScope
+    abstract konst analysisContext: Fe10AnalysisContext
+    abstract konst scope: ResolutionScope
 
     override fun getCallableSymbols(nameFilter: KtScopeNameFilter): Sequence<KtCallableSymbol> = withValidityAssertion {
         return scope
@@ -36,7 +36,7 @@ internal abstract class KtFe10ScopeResolution : KtScope, KtLifetimeOwner {
 
     override fun getCallableSymbols(names: Collection<Name>): Sequence<KtCallableSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getCallableSymbols { it in namesSet }
     }
 
@@ -50,7 +50,7 @@ internal abstract class KtFe10ScopeResolution : KtScope, KtLifetimeOwner {
 
     override fun getClassifierSymbols(names: Collection<Name>): Sequence<KtClassifierSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getClassifierSymbols { it in namesSet }
     }
 
@@ -58,13 +58,13 @@ internal abstract class KtFe10ScopeResolution : KtScope, KtLifetimeOwner {
         emptySequence()
     }
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisContext.token
 }
 
 internal class KtFe10ScopeLexical(
-    override val scope: LexicalScope,
-    override val analysisContext: Fe10AnalysisContext
+    override konst scope: LexicalScope,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFe10ScopeResolution(), KtLifetimeOwner {
     override fun getPossibleCallableNames(): Set<Name> = withValidityAssertion {
         return emptySet()
@@ -85,9 +85,9 @@ internal class KtFe10ScopeLexical(
 }
 
 internal open class KtFe10ScopeMember(
-    override val scope: MemberScope,
-    private val constructors: Collection<ConstructorDescriptor>,
-    override val analysisContext: Fe10AnalysisContext
+    override konst scope: MemberScope,
+    private konst constructors: Collection<ConstructorDescriptor>,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFe10ScopeResolution() {
     override fun getPossibleCallableNames(): Set<Name> = withValidityAssertion {
         return scope.getFunctionNames() + scope.getVariableNames()
@@ -103,8 +103,8 @@ internal open class KtFe10ScopeMember(
 }
 
 internal class KtFe10ScopeImporting(
-    override val scope: ImportingScope,
-    override val analysisContext: Fe10AnalysisContext
+    override konst scope: ImportingScope,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFe10ScopeResolution() {
     override fun getPossibleCallableNames(): Set<Name> = withValidityAssertion {
         return getCallableSymbols().mapNotNullTo(mutableSetOf()) { (it as? KtPossiblyNamedSymbol)?.name }

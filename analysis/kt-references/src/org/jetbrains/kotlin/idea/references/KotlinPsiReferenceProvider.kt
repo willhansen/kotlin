@@ -27,7 +27,7 @@ interface KotlinReferenceProviderContributor {
 
 
 class KotlinPsiReferenceRegistrar {
-    val providers: MultiMap<Class<out PsiElement>, KotlinPsiReferenceProvider> = MultiMap(LinkedHashMap())
+    konst providers: MultiMap<Class<out PsiElement>, KotlinPsiReferenceProvider> = MultiMap(LinkedHashMap())
 
     inline fun <reified E : KtElement> registerProvider(crossinline factory: (E) -> PsiReference?) {
         registerMultiProvider<E> { element ->
@@ -36,7 +36,7 @@ class KotlinPsiReferenceRegistrar {
     }
 
     inline fun <reified E : KtElement>  registerMultiProvider(crossinline factory: (E) -> Array<PsiReference>) {
-        val provider: KotlinPsiReferenceProvider = object : KotlinPsiReferenceProvider {
+        konst provider: KotlinPsiReferenceProvider = object : KotlinPsiReferenceProvider {
             override fun getReferencesByElement(element: PsiElement): Array<PsiReference> {
                 return factory(element as E)
             }

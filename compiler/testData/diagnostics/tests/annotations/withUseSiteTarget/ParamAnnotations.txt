@@ -9,7 +9,7 @@ public final annotation class Ann : kotlin.Annotation {
 
 public final class PrimaryConstructorClass {
     public constructor PrimaryConstructorClass(/*0*/ a: kotlin.String, /*1*/ b: kotlin.String, /*2*/ @Ann c: kotlin.String)
-    public final val c: kotlin.String
+    public final konst c: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -24,7 +24,7 @@ public final annotation class Second : kotlin.Annotation {
 
 @Ann public final class SomeClass {
     public constructor SomeClass(/*0*/ a: kotlin.String)
-    protected final val simpleProperty: kotlin.String = "text"
+    protected final konst simpleProperty: kotlin.String = "text"
     public final fun anotherFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -58,4 +58,4 @@ final class _IO_FILE : kotlinx.cinterop.CStructVar {}
 typealias uuid_t = __darwin_uuid_t
 typealias __darwin_uuid_t = kotlinx.cinterop.CArrayPointer<kotlinx.cinterop.UByteVar>
 
-val uuid: uuid_t get() = TODO()
+konst uuid: uuid_t get() = TODO()

@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 internal var interceptor: AtomicOperationInterceptor = DefaultInterceptor
     private set
-private val interceptorLock = ReentrantLock()
+private konst interceptorLock = ReentrantLock()
 
 internal fun lockAndSetInterceptor(impl: AtomicOperationInterceptor) {
     if (!interceptorLock.tryLock() || interceptor !== DefaultInterceptor) {
@@ -50,25 +50,25 @@ private object DefaultInterceptor : AtomicOperationInterceptor() {
 }
 
 @Suppress("UNCHECKED_CAST")
-public actual class AtomicRef<T> internal constructor(value: T) {
+public actual class AtomicRef<T> internal constructor(konstue: T) {
     /**
      * Reading/writing this property maps to read/write of volatile variable.
      */
     @Volatile
-    public actual var value: T = value
-        set(value) {
+    public actual var konstue: T = konstue
+        set(konstue) {
             interceptor.beforeUpdate(this)
-            field = value
-            interceptor.afterSet(this, value)
+            field = konstue
+            interceptor.afterSet(this, konstue)
         }
 
     /**
      * Maps to [AtomicReferenceFieldUpdater.lazySet].
      */
-    public actual fun lazySet(value: T) {
+    public actual fun lazySet(konstue: T) {
         interceptor.beforeUpdate(this)
-        FU.lazySet(this, value)
-        interceptor.afterSet(this, value)
+        FU.lazySet(this, konstue)
+        interceptor.afterSet(this, konstue)
     }
 
     /**
@@ -76,7 +76,7 @@ public actual class AtomicRef<T> internal constructor(value: T) {
      */
     public actual fun compareAndSet(expect: T, update: T): Boolean {
         interceptor.beforeUpdate(this)
-        val result = FU.compareAndSet(this, expect, update)
+        konst result = FU.compareAndSet(this, expect, update)
         if (result) interceptor.afterRMW(this, expect, update)
         return result
     }
@@ -84,17 +84,17 @@ public actual class AtomicRef<T> internal constructor(value: T) {
     /**
      * Maps to [AtomicReferenceFieldUpdater.getAndSet].
      */
-    public actual fun getAndSet(value: T): T {
+    public actual fun getAndSet(konstue: T): T {
         interceptor.beforeUpdate(this)
-        val oldValue = FU.getAndSet(this, value) as T
-        interceptor.afterRMW(this, oldValue, value)
+        konst oldValue = FU.getAndSet(this, konstue) as T
+        interceptor.afterRMW(this, oldValue, konstue)
         return oldValue
     }
 
-    override fun toString(): String = value.toString()
+    override fun toString(): String = konstue.toString()
 
     private companion object {
-        private val FU = AtomicReferenceFieldUpdater.newUpdater(AtomicRef::class.java, Any::class.java, "value")
+        private konst FU = AtomicReferenceFieldUpdater.newUpdater(AtomicRef::class.java, Any::class.java, "konstue")
     }
 }
 

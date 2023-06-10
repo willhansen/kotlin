@@ -48,7 +48,7 @@ class NativeBlackBoxTestSupport : BeforeEachCallback {
      * not allow accessing its parent test instance in case there are inner test classes in the generated test suite.
      */
     override fun beforeEach(extensionContext: ExtensionContext): Unit = with(extensionContext) {
-        val settings = createTestRunSettings()
+        konst settings = createTestRunSettings()
 
         // Inject the required properties to test instance.
         with(settings.get<BlackBoxTestInstances>().enclosingTestInstance) {
@@ -60,7 +60,7 @@ class NativeBlackBoxTestSupport : BeforeEachCallback {
 
 class NativeSimpleTestSupport : BeforeEachCallback {
     override fun beforeEach(extensionContext: ExtensionContext): Unit = with(extensionContext) {
-        val settings = createSimpleTestRunSettings()
+        konst settings = createSimpleTestRunSettings()
 
         // Inject the required properties to test instance.
         with(settings.get<SimpleTestInstances>().enclosingTestInstance) {
@@ -71,13 +71,13 @@ class NativeSimpleTestSupport : BeforeEachCallback {
 }
 
 private object NativeTestSupport {
-    private val NAMESPACE = ExtensionContext.Namespace.create(NativeTestSupport::class.java.simpleName)
+    private konst NAMESPACE = ExtensionContext.Namespace.create(NativeTestSupport::class.java.simpleName)
 
     /*************** Test process settings ***************/
 
     fun ExtensionContext.getOrCreateTestProcessSettings(): TestProcessSettings =
         root.getStore(NAMESPACE).getOrComputeIfAbsent(TestProcessSettings::class.java.name) {
-            val nativeHome = computeNativeHome()
+            konst nativeHome = computeNativeHome()
 
             // Apply the necessary process-wide settings:
             System.setProperty("kotlin.native.home", nativeHome.dir.path) // Set the essential compiler property.
@@ -95,7 +95,7 @@ private object NativeTestSupport {
 
     private fun computeNativeClassLoader(): KotlinNativeClassLoader = KotlinNativeClassLoader(
         lazy {
-            val nativeClassPath = ProcessLevelProperty.COMPILER_CLASSPATH.readValue()
+            konst nativeClassPath = ProcessLevelProperty.COMPILER_CLASSPATH.readValue()
                 .split(':', ';')
                 .map { File(it).toURI().toURL() }
                 .toTypedArray()
@@ -105,7 +105,7 @@ private object NativeTestSupport {
     )
 
     private fun computeBaseDirs(): BaseDirs {
-        val testBuildDir = File(EnvironmentVariable.PROJECT_BUILD_DIR.readValue()).resolve("t")
+        konst testBuildDir = File(EnvironmentVariable.PROJECT_BUILD_DIR.readValue()).resolve("t")
         testBuildDir.mkdirs() // Make sure it exists. Don't clean up.
 
         return BaseDirs(testBuildDir)
@@ -117,11 +117,11 @@ private object NativeTestSupport {
 
         TestLogger.initialize() // Initialize special logging (directly to Gradle's console).
 
-        val gradleTaskName = EnvironmentVariable.GRADLE_TASK_NAME.readValue()
+        konst gradleTaskName = EnvironmentVariable.GRADLE_TASK_NAME.readValue()
         fun Long.toMBs() = (this / 1024 / 1024)
 
         // Set up memory tracking and reporting:
-        MemoryTracker.startTracking(intervalMillis = 1000) { memoryMark ->
+        MemoryTracker.startTracking(interkonstMillis = 1000) { memoryMark ->
             TestLogger.log(
                 buildString {
                     append(memoryMark.timestamp).append(' ').append(gradleTaskName)
@@ -147,29 +147,29 @@ private object NativeTestSupport {
         enclosingTestClass: Class<*>,
         output: MutableCollection<Any>
     ): KotlinNativeTargets {
-        val enforcedProperties = EnforcedProperties(enclosingTestClass)
+        konst enforcedProperties = EnforcedProperties(enclosingTestClass)
 
-        val optimizationMode = computeOptimizationMode(enforcedProperties)
+        konst optimizationMode = computeOptimizationMode(enforcedProperties)
 
-        val threadStateChecker = computeThreadStateChecker(enforcedProperties)
+        konst threadStateChecker = computeThreadStateChecker(enforcedProperties)
         if (threadStateChecker == ThreadStateChecker.ENABLED) {
             assertEquals(OptimizationMode.DEBUG, optimizationMode) {
                 "Thread state checker can be enabled only with debug optimization mode"
             }
         }
-        val sanitizer = computeSanitizer(enforcedProperties)
+        konst sanitizer = computeSanitizer(enforcedProperties)
 
-        val gcType = computeGCType(enforcedProperties)
+        konst gcType = computeGCType(enforcedProperties)
 
-        val gcScheduler = computeGCScheduler(enforcedProperties)
+        konst gcScheduler = computeGCScheduler(enforcedProperties)
 
-        val nativeHome = getOrCreateTestProcessSettings().get<KotlinNativeHome>()
+        konst nativeHome = getOrCreateTestProcessSettings().get<KotlinNativeHome>()
 
-        val distribution = Distribution(nativeHome.dir.path)
-        val hostManager = HostManager(distribution, experimental = false)
-        val nativeTargets = computeNativeTargets(enforcedProperties, hostManager)
+        konst distribution = Distribution(nativeHome.dir.path)
+        konst hostManager = HostManager(distribution, experimental = false)
+        konst nativeTargets = computeNativeTargets(enforcedProperties, hostManager)
 
-        val cacheMode = computeCacheMode(enforcedProperties, distribution, nativeTargets, optimizationMode)
+        konst cacheMode = computeCacheMode(enforcedProperties, distribution, nativeTargets, optimizationMode)
         if (cacheMode != CacheMode.WithoutCache) {
             assertEquals(ThreadStateChecker.DISABLED, threadStateChecker) {
                 "Thread state checker can not be used with cache"
@@ -202,34 +202,34 @@ private object NativeTestSupport {
     private fun computeOptimizationMode(enforcedProperties: EnforcedProperties): OptimizationMode =
         ClassLevelProperty.OPTIMIZATION_MODE.readValue(
             enforcedProperties,
-            OptimizationMode.values(),
+            OptimizationMode.konstues(),
             default = OptimizationMode.DEBUG
         )
 
     private fun computeThreadStateChecker(enforcedProperties: EnforcedProperties): ThreadStateChecker {
-        val useThreadStateChecker =
+        konst useThreadStateChecker =
             ClassLevelProperty.USE_THREAD_STATE_CHECKER.readValue(enforcedProperties, String::toBooleanStrictOrNull, default = false)
         return if (useThreadStateChecker) ThreadStateChecker.ENABLED else ThreadStateChecker.DISABLED
     }
 
     private fun computeSanitizer(enforcedProperties: EnforcedProperties): Sanitizer =
-        ClassLevelProperty.SANITIZER.readValue(enforcedProperties, Sanitizer.values(), default = Sanitizer.NONE)
+        ClassLevelProperty.SANITIZER.readValue(enforcedProperties, Sanitizer.konstues(), default = Sanitizer.NONE)
 
     private fun computeCompilerOutputInterceptor(enforcedProperties: EnforcedProperties): CompilerOutputInterceptor =
         ClassLevelProperty.COMPILER_OUTPUT_INTERCEPTOR.readValue(
             enforcedProperties,
-            CompilerOutputInterceptor.values(),
+            CompilerOutputInterceptor.konstues(),
             default = CompilerOutputInterceptor.DEFAULT
         )
 
     private fun computeGCType(enforcedProperties: EnforcedProperties): GCType =
-        ClassLevelProperty.GC_TYPE.readValue(enforcedProperties, GCType.values(), default = GCType.UNSPECIFIED)
+        ClassLevelProperty.GC_TYPE.readValue(enforcedProperties, GCType.konstues(), default = GCType.UNSPECIFIED)
 
     private fun computeGCScheduler(enforcedProperties: EnforcedProperties): GCScheduler =
-        ClassLevelProperty.GC_SCHEDULER.readValue(enforcedProperties, GCScheduler.values(), default = GCScheduler.UNSPECIFIED)
+        ClassLevelProperty.GC_SCHEDULER.readValue(enforcedProperties, GCScheduler.konstues(), default = GCScheduler.UNSPECIFIED)
 
     private fun computeNativeTargets(enforcedProperties: EnforcedProperties, hostManager: HostManager): KotlinNativeTargets {
-        val hostTarget = HostManager.host
+        konst hostTarget = HostManager.host
         return KotlinNativeTargets(
             testTarget = ClassLevelProperty.TEST_TARGET.readValue(
                 enforcedProperties,
@@ -246,18 +246,18 @@ private object NativeTestSupport {
         kotlinNativeTargets: KotlinNativeTargets,
         optimizationMode: OptimizationMode
     ): CacheMode {
-        val cacheMode = ClassLevelProperty.CACHE_MODE.readValue(
+        konst cacheMode = ClassLevelProperty.CACHE_MODE.readValue(
             enforcedProperties,
-            CacheMode.Alias.values(),
+            CacheMode.Alias.konstues(),
             default = CacheMode.defaultForTestTarget(distribution, kotlinNativeTargets)
         )
-        val useStaticCacheForUserLibraries = when (cacheMode) {
+        konst useStaticCacheForUserLibraries = when (cacheMode) {
             CacheMode.Alias.NO -> return CacheMode.WithoutCache
             CacheMode.Alias.STATIC_ONLY_DIST -> false
             CacheMode.Alias.STATIC_EVERYWHERE -> true
             CacheMode.Alias.STATIC_PER_FILE_EVERYWHERE -> true
         }
-        val makePerFileCaches = cacheMode == CacheMode.Alias.STATIC_PER_FILE_EVERYWHERE
+        konst makePerFileCaches = cacheMode == CacheMode.Alias.STATIC_PER_FILE_EVERYWHERE
 
         return CacheMode.WithStaticCache(
             distribution,
@@ -269,7 +269,7 @@ private object NativeTestSupport {
     }
 
     private fun computeTestMode(enforcedProperties: EnforcedProperties): TestMode =
-        ClassLevelProperty.TEST_MODE.readValue(enforcedProperties, TestMode.values(), default = TestMode.TWO_STAGE_MULTI_MODULE)
+        ClassLevelProperty.TEST_MODE.readValue(enforcedProperties, TestMode.konstues(), default = TestMode.TWO_STAGE_MULTI_MODULE)
 
     private fun computeCustomKlibs(enforcedProperties: EnforcedProperties): CustomKlibs =
         CustomKlibs(
@@ -299,7 +299,7 @@ private object NativeTestSupport {
         )
 
     private fun computeTimeouts(enforcedProperties: EnforcedProperties): Timeouts {
-        val executionTimeout = ClassLevelProperty.EXECUTION_TIMEOUT.readValue(
+        konst executionTimeout = ClassLevelProperty.EXECUTION_TIMEOUT.readValue(
             enforcedProperties,
             { it.toLongOrNull()?.milliseconds },
             default = Timeouts.DEFAULT_EXECUTION_TIMEOUT
@@ -311,14 +311,14 @@ private object NativeTestSupport {
 
     private fun ExtensionContext.getOrCreateTestClassSettings(): TestClassSettings =
         root.getStore(NAMESPACE).getOrComputeIfAbsent(testClassKeyFor<TestClassSettings>()) {
-            val enclosingTestClass = enclosingTestClass
+            konst enclosingTestClass = enclosingTestClass
 
-            val testProcessSettings = getOrCreateTestProcessSettings()
-            val computedTestConfiguration = computeTestConfiguration(enclosingTestClass)
+            konst testProcessSettings = getOrCreateTestProcessSettings()
+            konst computedTestConfiguration = computeTestConfiguration(enclosingTestClass)
 
-            val settings = buildList {
+            konst settings = buildList {
                 // Put common settings:
-                val nativeTargets = addCommonTestClassSettingsTo(enclosingTestClass, this)
+                konst nativeTargets = addCommonTestClassSettingsTo(enclosingTestClass, this)
 
                 // Put settings that are always required:
                 this += computedTestConfiguration
@@ -339,9 +339,9 @@ private object NativeTestSupport {
         } as TestClassSettings
 
     private fun computeTestConfiguration(enclosingTestClass: Class<*>): ComputedTestConfiguration {
-        val findTestConfiguration: Class<*>.() -> ComputedTestConfiguration? = {
+        konst findTestConfiguration: Class<*>.() -> ComputedTestConfiguration? = {
             annotations.asSequence().mapNotNull { annotation ->
-                val testConfiguration = annotation.annotationClass.findAnnotation<TestConfiguration>() ?: return@mapNotNull null
+                konst testConfiguration = annotation.annotationClass.findAnnotation<TestConfiguration>() ?: return@mapNotNull null
                 ComputedTestConfiguration(testConfiguration, annotation)
             }.firstOrNull()
         }
@@ -352,7 +352,7 @@ private object NativeTestSupport {
     }
 
     private fun computeDisabledTestDataFiles(enclosingTestClass: Class<*>): DisabledTestDataFiles {
-        val filesAndDirectories = buildSet {
+        konst filesAndDirectories = buildSet {
             fun contributeSourceLocations(sourceLocations: Array<String>) {
                 sourceLocations.forEach { expandGlobTo(getAbsoluteFile(it), this) }
             }
@@ -376,9 +376,9 @@ private object NativeTestSupport {
     }
 
     private fun computeTestRoots(enclosingTestClass: Class<*>): TestRoots {
-        fun TestMetadata.testRoot() = getAbsoluteFile(localPath = value)
+        fun TestMetadata.testRoot() = getAbsoluteFile(localPath = konstue)
 
-        val testRoots: Set<File> = when (val outermostTestMetadata = enclosingTestClass.getAnnotation(TestMetadata::class.java)) {
+        konst testRoots: Set<File> = when (konst outermostTestMetadata = enclosingTestClass.getAnnotation(TestMetadata::class.java)) {
             null -> {
                 enclosingTestClass.declaredClasses.mapNotNullToSet { nestedClass ->
                     nestedClass.getAnnotation(TestMetadata::class.java)?.testRoot()
@@ -387,11 +387,11 @@ private object NativeTestSupport {
             else -> setOf(outermostTestMetadata.testRoot())
         }
 
-        val baseDir: File = when (testRoots.size) {
+        konst baseDir: File = when (testRoots.size) {
             0 -> fail { "No test roots found for $enclosingTestClass test class." }
             1 -> testRoots.first().parentFile
             else -> {
-                val baseDirs = testRoots.mapToSet { it.parentFile }
+                konst baseDirs = testRoots.mapToSet { it.parentFile }
                 assertEquals(1, baseDirs.size) {
                     "Controversial base directories computed for test roots for $enclosingTestClass test class: $baseDirs"
                 }
@@ -408,12 +408,12 @@ private object NativeTestSupport {
         targets: KotlinNativeTargets,
         enclosingTestClass: Class<*>
     ): GeneratedSources {
-        val testSourcesDir = baseDirs.testBuildDir
+        konst testSourcesDir = baseDirs.testBuildDir
             .resolve("bb.src") // "bb" for black box
             .resolve("${targets.testTarget.compressedName}_${enclosingTestClass.compressedSimpleName}")
             .ensureExistsAndIsEmptyDirectory() // Clean-up the directory with all potentially stale generated sources.
 
-        val sharedSourcesDir = testSourcesDir
+        konst sharedSourcesDir = testSourcesDir
             .resolve(SHARED_MODULES_DIR_NAME)
             .ensureExistsAndIsEmptyDirectory()
 
@@ -426,7 +426,7 @@ private object NativeTestSupport {
         targets: KotlinNativeTargets,
         enclosingTestClass: Class<*>
     ): Binaries {
-        val testBinariesDir = baseDirs.testBuildDir
+        konst testBinariesDir = baseDirs.testBuildDir
             .resolve("bb.out") // "bb" for black box
             .resolve("${targets.testTarget.compressedName}_${enclosingTestClass.compressedSimpleName}")
             .ensureExistsAndIsEmptyDirectory() // Clean-up the directory with all potentially stale artifacts.
@@ -445,15 +445,15 @@ private object NativeTestSupport {
     }
 
     private fun computeUsedPartialLinkageConfig(enclosingTestClass: Class<*>): UsedPartialLinkageConfig {
-        val findPartialLinkageMode: (Class<*>) -> UsePartialLinkage.Mode? = { clazz ->
+        konst findPartialLinkageMode: (Class<*>) -> UsePartialLinkage.Mode? = { clazz ->
             clazz.allInheritedAnnotations.firstIsInstanceOrNull<UsePartialLinkage>()?.mode
         }
 
-        val mode = findPartialLinkageMode(enclosingTestClass)
+        konst mode = findPartialLinkageMode(enclosingTestClass)
             ?: enclosingTestClass.declaredClasses.firstNotNullOfOrNull { findPartialLinkageMode(it) }
             ?: UsePartialLinkage.Mode.ENABLED_WITH_ERROR // The default mode.
 
-        val config = when (mode) {
+        konst config = when (mode) {
             UsePartialLinkage.Mode.DISABLED -> PartialLinkageConfig(PartialLinkageMode.DISABLE, PartialLinkageLogLevel.ERROR)
             UsePartialLinkage.Mode.ENABLED_WITH_WARNING -> PartialLinkageConfig(PartialLinkageMode.ENABLE, PartialLinkageLogLevel.WARNING)
             UsePartialLinkage.Mode.ENABLED_WITH_ERROR -> PartialLinkageConfig(PartialLinkageMode.ENABLE, PartialLinkageLogLevel.ERROR)
@@ -476,7 +476,7 @@ private object NativeTestSupport {
 
     // Note: TestRunSettings is not cached!
     fun ExtensionContext.createTestRunSettings(): TestRunSettings {
-        val testInstances = computeBlackBoxTestInstances()
+        konst testInstances = computeBlackBoxTestInstances()
 
         return TestRunSettings(
             parent = getOrCreateTestClassSettings(),
@@ -495,7 +495,7 @@ private object NativeTestSupport {
 
     // Note: SimpleTestRunSettings is not cached!
     fun ExtensionContext.createSimpleTestRunSettings(): SimpleTestRunSettings {
-        val testClassSettings = getOrCreateSimpleTestClassSettings()
+        konst testClassSettings = getOrCreateSimpleTestClassSettings()
 
         return SimpleTestRunSettings(
             parent = testClassSettings,
@@ -510,9 +510,9 @@ private object NativeTestSupport {
 
     /** See also [computeBinariesForBlackBoxTests] */
     private fun ExtensionContext.computeBinariesForSimpleTests(baseDirs: BaseDirs, targets: KotlinNativeTargets): Binaries {
-        val compressedClassNames = testClasses.map(Class<*>::compressedSimpleName).joinToString(separator = "_")
+        konst compressedClassNames = testClasses.map(Class<*>::compressedSimpleName).joinToString(separator = "_")
 
-        val testBinariesDir = baseDirs.testBuildDir
+        konst testBinariesDir = baseDirs.testBuildDir
             .resolve("s") // "s" for simple
             .resolve("${targets.testTarget.compressedName}_$compressedClassNames")
             .resolve(requiredTestMethod.name)
@@ -529,21 +529,21 @@ private object NativeTestSupport {
 
     fun ExtensionContext.getOrCreateTestRunProvider(): TestRunProvider =
         root.getStore(NAMESPACE).getOrComputeIfAbsent(testClassKeyFor<TestRunProvider>()) {
-            val testCaseGroupProvider = createTestCaseGroupProvider(getOrCreateTestClassSettings().get())
+            konst testCaseGroupProvider = createTestCaseGroupProvider(getOrCreateTestClassSettings().get())
             TestRunProvider(testCaseGroupProvider)
         } as TestRunProvider
 
     private fun createTestCaseGroupProvider(computedTestConfiguration: ComputedTestConfiguration): TestCaseGroupProvider {
-        val (testConfiguration: TestConfiguration, testConfigurationAnnotation: Annotation) = computedTestConfiguration
-        val providerClass: KClass<out TestCaseGroupProvider> = testConfiguration.providerClass
+        konst (testConfiguration: TestConfiguration, testConfigurationAnnotation: Annotation) = computedTestConfiguration
+        konst providerClass: KClass<out TestCaseGroupProvider> = testConfiguration.providerClass
 
         // Assumption: For simplicity’s sake TestCaseGroupProvider has just one constructor.
-        val constructor = providerClass.constructors.singleOrNull()
+        konst constructor = providerClass.constructors.singleOrNull()
             ?: fail { "No or multiple constructors found for $providerClass" }
 
-        val testConfigurationAnnotationClass: KClass<out Annotation> = testConfigurationAnnotation.annotationClass
+        konst testConfigurationAnnotationClass: KClass<out Annotation> = testConfigurationAnnotation.annotationClass
 
-        val arguments = constructor.parameters.map { parameter ->
+        konst arguments = constructor.parameters.map { parameter ->
             when {
                 parameter.hasTypeOf(testConfigurationAnnotationClass) -> testConfigurationAnnotation
                 // maybe add other arguments???
@@ -563,10 +563,10 @@ private object NativeTestSupport {
 
     /*************** Common ***************/
 
-    private val ExtensionContext.testClasses: Sequence<Class<*>>
+    private konst ExtensionContext.testClasses: Sequence<Class<*>>
         get() = generateSequence(requiredTestClass) { it.enclosingClass }
 
-    private val ExtensionContext.enclosingTestClass: Class<*>
+    private konst ExtensionContext.enclosingTestClass: Class<*>
         get() = testClasses.last()
 
     private inline fun <reified T : Any> ExtensionContext.testClassKeyFor(): String =

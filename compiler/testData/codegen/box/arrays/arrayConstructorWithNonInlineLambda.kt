@@ -3,13 +3,13 @@
 import kotlin.test.assertEquals
 
 
-val size = 10
+konst size = 10
 
 fun box(): String {
 
-    val intArray = IntArray(size)
+    konst intArray = IntArray(size)
 
-    val array = Array(size) { i -> { intArray[i]++ } }
+    konst array = Array(size) { i -> { intArray[i]++ } }
 
     for (i in intArray) {
         assertEquals(0, i)

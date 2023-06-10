@@ -1,5 +1,5 @@
 interface I {
-    val prop: Int
+    konst prop: Int
 }
 
 open class A {

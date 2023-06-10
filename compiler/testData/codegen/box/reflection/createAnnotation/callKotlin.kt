@@ -8,8 +8,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 
 annotation class NoParams
-annotation class OneDefault(val s: String = "Fail")
-annotation class TwoNonDefaults(val string: String, val klass: KClass<*>)
+annotation class OneDefault(konst s: String = "Fail")
+annotation class TwoNonDefaults(konst string: String, konst klass: KClass<*>)
 
 inline fun <reified T : Annotation> create(vararg args: Any?): T =
         T::class.constructors.single().call(*args)
@@ -20,7 +20,7 @@ fun box(): String {
 
     assertFails { create<OneDefault>() }
     assertFails { create<OneDefault>(42) }
-    val o = create<OneDefault>("OK")
+    konst o = create<OneDefault>("OK")
     assertEquals("OK", o.s)
 
     assertFails("call() should fail because arguments were passed in an incorrect order") {
@@ -30,7 +30,7 @@ fun box(): String {
         create<TwoNonDefaults>("Fail", Any::class.java)
     }
 
-    val k = create<TwoNonDefaults>("OK", Int::class)
+    konst k = create<TwoNonDefaults>("OK", Int::class)
     assertEquals(Int::class, k.klass)
 
     return k.string

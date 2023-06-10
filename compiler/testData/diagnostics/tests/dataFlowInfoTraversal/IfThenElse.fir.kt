@@ -1,7 +1,7 @@
 fun bar(x: Int): Int = x + 1
 
 fun foo() {
-    val x: Int? = null
+    konst x: Int? = null
 
     bar(if (x == null) 0 else x)
 
@@ -13,7 +13,7 @@ fun foo() {
     }
     bar(x)
 
-    val y: Int? = null
+    konst y: Int? = null
     if (y is Int) {
         bar(y)
     } else {
@@ -22,7 +22,7 @@ fun foo() {
     }
     bar(y)
 
-    val z: Int? = null
+    konst z: Int? = null
     if (z != null) bar(z)
     bar(<!ARGUMENT_TYPE_MISMATCH!>z<!>)
     bar(z!!)

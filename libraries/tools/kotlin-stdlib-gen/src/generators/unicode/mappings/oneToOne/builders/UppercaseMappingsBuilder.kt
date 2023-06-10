@@ -8,7 +8,7 @@ package generators.unicode.mappings.oneToOne.builders
 import generators.unicode.UnicodeDataLine
 
 internal class UppercaseMappingsBuilder : MappingsBuilder() {
-    override fun mappingEquivalent(line: UnicodeDataLine): String? {
+    override fun mappingEquikonstent(line: UnicodeDataLine): String? {
         if (line.uppercaseMapping.isEmpty()) return null
         check(line.char != line.uppercaseMapping) { "UnicodeData.txt format has changed!" }
         return line.uppercaseMapping

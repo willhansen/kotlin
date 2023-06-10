@@ -50,21 +50,21 @@ public class KotlinSyntheticClassAnnotationTest extends CodegenTestCase {
 
     public void testSamWrapper() {
         doTestKotlinSyntheticClass(
-                "val f = {}\nval foo = Thread(f)",
+                "konst f = {}\nkonst foo = Thread(f)",
                 "$sam"
         );
     }
 
     public void testSamLambda() {
         doTestKotlinSyntheticClass(
-                "val foo = Thread { }",
+                "konst foo = Thread { }",
                 "$1"
         );
     }
 
     public void testCallableReferenceWrapper() {
         doTestKotlinSyntheticClass(
-                "val f = String::get",
+                "konst f = String::get",
                 "$1"
         );
     }
@@ -78,7 +78,7 @@ public class KotlinSyntheticClassAnnotationTest extends CodegenTestCase {
 
     public void testAnonymousFunction() {
         doTestKotlinSyntheticClass(
-                "val f = {}",
+                "konst f = {}",
                 "$1"
         );
     }
@@ -99,7 +99,7 @@ public class KotlinSyntheticClassAnnotationTest extends CodegenTestCase {
 
     public void testAnonymousObject() {
         doTestKotlinClass(
-                "val o = object {}",
+                "konst o = object {}",
                 "$1"
         );
     }
@@ -107,7 +107,7 @@ public class KotlinSyntheticClassAnnotationTest extends CodegenTestCase {
     public void testWhenMappings() {
         doTestKotlinSyntheticClass(
                 "enum class E { A }\n" +
-                "val x = when (E.A) { E.A -> 1; else -> 0; }",
+                "konst x = when (E.A) { E.A -> 1; else -> 0; }",
                 "WhenMappings"
         );
     }

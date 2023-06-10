@@ -1,8 +1,8 @@
 // !LANGUAGE: +ProperIeee754Comparisons
 fun box(): String {
-    val plusZero: Any = 0.0
-    val minusZero: Any = -0.0
-    val nullDouble: Double? = null
+    konst plusZero: Any = 0.0
+    konst minusZero: Any = -0.0
+    konst nullDouble: Double? = null
     if (plusZero is Double) {
         when (plusZero) {
             nullDouble -> {

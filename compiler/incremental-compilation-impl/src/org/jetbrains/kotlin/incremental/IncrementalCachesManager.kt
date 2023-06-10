@@ -26,7 +26,7 @@ abstract class IncrementalCachesManager<PlatformCache : AbstractIncrementalCache
     icContext: IncrementalCompilationContext,
     cachesRootDir: File,
 ) : Closeable {
-    private val caches = arrayListOf<BasicMapsOwner>()
+    private konst caches = arrayListOf<BasicMapsOwner>()
 
     private var isClosed = false
 
@@ -36,19 +36,19 @@ abstract class IncrementalCachesManager<PlatformCache : AbstractIncrementalCache
         caches.add(this)
     }
 
-    private val inputSnapshotsCacheDir = File(cachesRootDir, "inputs").apply { mkdirs() }
-    private val lookupCacheDir = File(cachesRootDir, "lookups").apply { mkdirs() }
+    private konst inputSnapshotsCacheDir = File(cachesRootDir, "inputs").apply { mkdirs() }
+    private konst lookupCacheDir = File(cachesRootDir, "lookups").apply { mkdirs() }
 
-    val inputsCache: InputsCache = InputsCache(inputSnapshotsCacheDir, icContext).apply { registerCache() }
-    val lookupCache: LookupStorage = LookupStorage(lookupCacheDir, icContext).apply { registerCache() }
-    abstract val platformCache: PlatformCache
+    konst inputsCache: InputsCache = InputsCache(inputSnapshotsCacheDir, icContext).apply { registerCache() }
+    konst lookupCache: LookupStorage = LookupStorage(lookupCacheDir, icContext).apply { registerCache() }
+    abstract konst platformCache: PlatformCache
 
     @Suppress("UnstableApiUsage")
     @Synchronized
     override fun close() {
         check(!isClosed) { "This cache storage has already been closed" }
 
-        val closer = Closer.create()
+        konst closer = Closer.create()
         caches.forEach {
             closer.register(CacheCloser(it))
         }
@@ -57,7 +57,7 @@ abstract class IncrementalCachesManager<PlatformCache : AbstractIncrementalCache
         isClosed = true
     }
 
-    private class CacheCloser(private val cache: BasicMapsOwner) : Closeable {
+    private class CacheCloser(private konst cache: BasicMapsOwner) : Closeable {
 
         override fun close() {
             // It's important to flush the cache when closing (see KT-53168)
@@ -73,8 +73,8 @@ open class IncrementalJvmCachesManager(
     outputDir: File?,
     cachesRootDir: File,
 ) : IncrementalCachesManager<IncrementalJvmCache>(icContext, cachesRootDir) {
-    private val jvmCacheDir = File(cachesRootDir, "jvm").apply { mkdirs() }
-    override val platformCache = IncrementalJvmCache(jvmCacheDir, icContext, outputDir).apply { registerCache() }
+    private konst jvmCacheDir = File(cachesRootDir, "jvm").apply { mkdirs() }
+    override konst platformCache = IncrementalJvmCache(jvmCacheDir, icContext, outputDir).apply { registerCache() }
 }
 
 class IncrementalJsCachesManager(
@@ -82,6 +82,6 @@ class IncrementalJsCachesManager(
     serializerProtocol: SerializerExtensionProtocol,
     cachesRootDir: File,
 ) : IncrementalCachesManager<IncrementalJsCache>(icContext, cachesRootDir) {
-    private val jsCacheFile = File(cachesRootDir, "js").apply { mkdirs() }
-    override val platformCache = IncrementalJsCache(jsCacheFile, icContext, serializerProtocol).apply { registerCache() }
+    private konst jsCacheFile = File(cachesRootDir, "js").apply { mkdirs() }
+    override konst platformCache = IncrementalJsCache(jsCacheFile, icContext, serializerProtocol).apply { registerCache() }
 }

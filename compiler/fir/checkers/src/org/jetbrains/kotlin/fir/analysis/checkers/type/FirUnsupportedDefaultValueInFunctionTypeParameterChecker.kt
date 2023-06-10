@@ -21,12 +21,12 @@ object FirUnsupportedDefaultValueInFunctionTypeParameterChecker : FirFunctionalT
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val defaultValue = source.defaultValueForParameter ?: return
+        konst defaultValue = source.defaultValueForParameter ?: return
         report(defaultValue, reporter, context)
     }
 
     private fun report(defaultValueSource: KtSourceElement, reporter: DiagnosticReporter, context: CheckerContext) {
-        val diagnostic = ConeUnsupportedDefaultValueInFunctionType(defaultValueSource)
+        konst diagnostic = ConeUnsupportedDefaultValueInFunctionType(defaultValueSource)
         reporter.reportOn(diagnostic.source, FirErrors.UNSUPPORTED, diagnostic.reason, context)
     }
 }

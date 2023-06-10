@@ -2,7 +2,7 @@
 // FILE: 1.kt
 package test
 
-val Long.myInc
+konst Long.myInc
     get() = this + 1
 
 
@@ -15,6 +15,6 @@ inline fun inlineFun(lambda: () -> Long = 1L::myInc): Long {
 import test.*
 
 fun box(): String {
-    val result = inlineFun()
+    konst result = inlineFun()
     return if (result == 2L) return "OK" else "fail $result"
 }

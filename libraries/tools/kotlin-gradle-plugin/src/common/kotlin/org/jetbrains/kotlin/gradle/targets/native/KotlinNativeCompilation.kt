@@ -23,28 +23,28 @@ import javax.inject.Inject
 
 abstract class AbstractKotlinNativeCompilation internal constructor(
     compilation: KotlinCompilationImpl,
-    val konanTarget: KonanTarget
+    konst konanTarget: KonanTarget
 ) : AbstractKotlinCompilation<KotlinCommonOptions>(compilation) {
 
     @Suppress("DEPRECATION")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: KotlinNativeCompile
+    override konst compileKotlinTask: KotlinNativeCompile
         get() = compilation.compileKotlinTask as KotlinNativeCompile
 
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
     @Deprecated("Replaced with compileTaskProvider", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTaskProvider: TaskProvider<out KotlinNativeCompile>
+    override konst compileKotlinTaskProvider: TaskProvider<out KotlinNativeCompile>
         get() = compilation.compileKotlinTaskProvider as TaskProvider<out KotlinNativeCompile>
 
     @Suppress("UNCHECKED_CAST")
-    override val compileTaskProvider: TaskProvider<KotlinNativeCompile>
+    override konst compileTaskProvider: TaskProvider<KotlinNativeCompile>
         get() = compilation.compileTaskProvider as TaskProvider<KotlinNativeCompile>
 
     @Suppress("UNCHECKED_CAST")
-    override val compilerOptions: HasCompilerOptions<KotlinNativeCompilerOptions>
+    override konst compilerOptions: HasCompilerOptions<KotlinNativeCompilerOptions>
         get() = compilation.compilerOptions as HasCompilerOptions<KotlinNativeCompilerOptions>
 
-    internal val useGenericPluginArtifact: Boolean
+    internal konst useGenericPluginArtifact: Boolean
         get() = project.nativeUseEmbeddableCompilerJar
 
     // Endorsed library controller.
@@ -60,32 +60,32 @@ open class KotlinNativeCompilation @Inject internal constructor(
     konanTarget: KonanTarget, compilation: KotlinCompilationImpl,
 ) : AbstractKotlinNativeCompilation(compilation, konanTarget) {
 
-    final override val target: KotlinNativeTarget
+    final override konst target: KotlinNativeTarget
         get() = compilation.target as KotlinNativeTarget
 
-    override val compilerOptions: NativeCompilerOptions
+    override konst compilerOptions: NativeCompilerOptions
         get() = super.compilerOptions as NativeCompilerOptions
 
     // Interop DSL.
-    val cinterops = compilation.project.container(DefaultCInteropSettings::class.java, DefaultCInteropSettingsFactory(compilation))
+    konst cinterops = compilation.project.container(DefaultCInteropSettings::class.java, DefaultCInteropSettingsFactory(compilation))
 
     fun cinterops(action: Action<NamedDomainObjectContainer<DefaultCInteropSettings>>) = action.execute(cinterops)
 
     // Naming
-    final override val processResourcesTaskName: String
+    final override konst processResourcesTaskName: String
         get() = disambiguateName("processResources")
 
-    val binariesTaskName: String
+    konst binariesTaskName: String
         get() = lowerCamelCaseName(target.disambiguationClassifier, compilation.compilationName, "binaries")
 }
 
 open class KotlinSharedNativeCompilation @Inject internal constructor(
-    val konanTargets: List<KonanTarget>,
+    konst konanTargets: List<KonanTarget>,
     compilation: KotlinCompilationImpl
 ) : AbstractKotlinNativeCompilation(compilation, konanTargets.find { it.enabledOnCurrentHost } ?: konanTargets.first()),
     KotlinMetadataCompilation<KotlinCommonOptions> {
-    override val target: KotlinMetadataTarget = compilation.target as KotlinMetadataTarget
+    override konst target: KotlinMetadataTarget = compilation.target as KotlinMetadataTarget
 }
 
-internal val Project.nativeUseEmbeddableCompilerJar: Boolean
+internal konst Project.nativeUseEmbeddableCompilerJar: Boolean
     get() = PropertiesProvider(this).nativeUseEmbeddableCompilerJar

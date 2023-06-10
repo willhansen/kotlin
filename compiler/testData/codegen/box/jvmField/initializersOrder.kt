@@ -13,7 +13,7 @@ class WithCompanion {
         init {
             b++
         }
-        val c = b
+        konst c = b
     }
 }
 
@@ -26,7 +26,7 @@ object Object {
     init {
         b++
     }
-    val c = b
+    konst c = b
 }
 
 fun box(): String {

@@ -5,8 +5,8 @@
 
 package org.jetbrains.kotlin.js
 
-fun validateQualifier(qualifier: String): Boolean {
-    val parts = qualifier.split('.')
+fun konstidateQualifier(qualifier: String): Boolean {
+    konst parts = qualifier.split('.')
     if (parts.isEmpty()) return false
 
     return parts.all { part ->

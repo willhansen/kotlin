@@ -11,40 +11,40 @@ import org.jetbrains.kotlin.fir.tree.generator.util.set
 
 interface KindOwner : Importable {
     var kind: Implementation.Kind?
-    val allParents: List<KindOwner>
+    konst allParents: List<KindOwner>
 }
 
 interface FieldContainer {
-    val allFields: List<Field>
+    konst allFields: List<Field>
     operator fun get(fieldName: String): Field?
 }
 
 interface AbstractElement : FieldContainer, KindOwner {
-    val name: String
-    val fields: Set<Field>
-    val parents: List<AbstractElement>
-    val typeArguments: List<TypeArgument>
-    val parentsArguments: Map<AbstractElement, Map<Importable, Importable>>
-    val baseTransformerType: AbstractElement?
-    val transformerType: AbstractElement
-    val doesNotNeedImplementation: Boolean
-    val needTransformOtherChildren: Boolean
-    val allImplementations: List<Implementation>
-    val allFirFields: List<Field>
-    val defaultImplementation: Implementation?
-    val customImplementations: List<Implementation>
-    val overridenFields: Map<Field, Map<Importable, Boolean>>
-    val useNullableForReplace: Set<Field>
+    konst name: String
+    konst fields: Set<Field>
+    konst parents: List<AbstractElement>
+    konst typeArguments: List<TypeArgument>
+    konst parentsArguments: Map<AbstractElement, Map<Importable, Importable>>
+    konst baseTransformerType: AbstractElement?
+    konst transformerType: AbstractElement
+    konst doesNotNeedImplementation: Boolean
+    konst needTransformOtherChildren: Boolean
+    konst allImplementations: List<Implementation>
+    konst allFirFields: List<Field>
+    konst defaultImplementation: Implementation?
+    konst customImplementations: List<Implementation>
+    konst overridenFields: Map<Field, Map<Importable, Boolean>>
+    konst useNullableForReplace: Set<Field>
 
-    val isSealed: Boolean
+    konst isSealed: Boolean
         get() = false
 
-    override val allParents: List<KindOwner> get() = parents
+    override konst allParents: List<KindOwner> get() = parents
 }
 
-class Element(override val name: String, kind: Kind) : AbstractElement {
+class Element(override konst name: String, kind: Kind) : AbstractElement {
     companion object {
-        private val allowedKinds = setOf(
+        private konst allowedKinds = setOf(
             Implementation.Kind.Interface,
             Implementation.Kind.SealedInterface,
             Implementation.Kind.AbstractClass,
@@ -52,52 +52,52 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
         )
     }
 
-    override val fields = mutableSetOf<Field>()
-    override val type: String = "Fir$name"
-    override val packageName: String = BASE_PACKAGE + kind.packageName.let { if (it.isBlank()) it else "." + it }
-    override val fullQualifiedName: String get() = super.fullQualifiedName!!
-    override val parents = mutableListOf<Element>()
+    override konst fields = mutableSetOf<Field>()
+    override konst type: String = "Fir$name"
+    override konst packageName: String = BASE_PACKAGE + kind.packageName.let { if (it.isBlank()) it else "." + it }
+    override konst fullQualifiedName: String get() = super.fullQualifiedName!!
+    override konst parents = mutableListOf<Element>()
     override var defaultImplementation: Implementation? = null
-    override val customImplementations = mutableListOf<Implementation>()
-    override val typeArguments = mutableListOf<TypeArgument>()
-    override val parentsArguments = mutableMapOf<AbstractElement, MutableMap<Importable, Importable>>()
+    override konst customImplementations = mutableListOf<Implementation>()
+    override konst typeArguments = mutableListOf<TypeArgument>()
+    override konst parentsArguments = mutableMapOf<AbstractElement, MutableMap<Importable, Importable>>()
     override var kind: Implementation.Kind? = null
-        set(value) {
-            if (value !in allowedKinds) {
-                throw IllegalArgumentException(value.toString())
+        set(konstue) {
+            if (konstue !in allowedKinds) {
+                throw IllegalArgumentException(konstue.toString())
             }
-            field = value
+            field = konstue
         }
     var _needTransformOtherChildren: Boolean = false
 
     override var isSealed: Boolean = false
 
     override var baseTransformerType: Element? = null
-    override val transformerType: Element get() = baseTransformerType ?: this
+    override konst transformerType: Element get() = baseTransformerType ?: this
 
     override var doesNotNeedImplementation: Boolean = false
 
-    override val needTransformOtherChildren: Boolean get() = _needTransformOtherChildren || parents.any { it.needTransformOtherChildren }
-    override val overridenFields: MutableMap<Field, MutableMap<Importable, Boolean>> = mutableMapOf()
-    override val useNullableForReplace: MutableSet<Field> = mutableSetOf()
-    override val allImplementations: List<Implementation> by lazy {
+    override konst needTransformOtherChildren: Boolean get() = _needTransformOtherChildren || parents.any { it.needTransformOtherChildren }
+    override konst overridenFields: MutableMap<Field, MutableMap<Importable, Boolean>> = mutableMapOf()
+    override konst useNullableForReplace: MutableSet<Field> = mutableSetOf()
+    override konst allImplementations: List<Implementation> by lazy {
         if (doesNotNeedImplementation) {
             emptyList()
         } else {
-            val implementations = customImplementations.toMutableList()
+            konst implementations = customImplementations.toMutableList()
             defaultImplementation?.let { implementations += it }
             implementations
         }
     }
 
-    override val allFields: List<Field> by lazy {
-        val result = LinkedHashSet<Field>()
+    override konst allFields: List<Field> by lazy {
+        konst result = LinkedHashSet<Field>()
         result.addAll(fields.toList().asReversed())
         result.forEach { overridenFields[it, it] = false }
         for (parentField in parentFields.asReversed()) {
-            val overrides = !result.add(parentField)
+            konst overrides = !result.add(parentField)
             if (overrides) {
-                val existingField = result.first { it == parentField }
+                konst existingField = result.first { it == parentField }
                 existingField.fromParent = true
                 existingField.needsSeparateTransform = existingField.needsSeparateTransform || parentField.needsSeparateTransform
                 existingField.needTransformInOtherChildren = existingField.needTransformInOtherChildren || parentField.needTransformInOtherChildren
@@ -119,11 +119,11 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
         result.toList().asReversed()
     }
 
-    val parentFields: List<Field> by lazy {
-        val result = LinkedHashMap<String, Field>()
+    konst parentFields: List<Field> by lazy {
+        konst result = LinkedHashMap<String, Field>()
         parents.forEach { parent ->
-            val fields = parent.allFields.map { field ->
-                val copy = (field as? SimpleField)?.let { simpleField ->
+            konst fields = parent.allFields.map { field ->
+                konst copy = (field as? SimpleField)?.let { simpleField ->
                     parentsArguments[parent]?.get(Type(null, simpleField.type))?.let {
                         simpleField.replaceType(Type(it.packageName, it.type))
                     }
@@ -137,7 +137,7 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
             }
             fields.forEach {
                 result.merge(it.name, it) { previousField, thisField ->
-                    val resultField = previousField.copy()
+                    konst resultField = previousField.copy()
                     if (thisField.withReplace) {
                         resultField.withReplace = true
                     }
@@ -151,10 +151,10 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
                 }
             }
         }
-        result.values.toList()
+        result.konstues.toList()
     }
 
-    override val allFirFields: List<Field> by lazy {
+    override konst allFirFields: List<Field> by lazy {
         allFields.filter { it.isFirType }
     }
 
@@ -166,7 +166,7 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
         return allFields.firstOrNull { it.name == fieldName }
     }
 
-    enum class Kind(val packageName: String) {
+    enum class Kind(konst packageName: String) {
         Expression("expressions"),
         Declaration("declarations"),
         Reference("references"),
@@ -177,7 +177,7 @@ class Element(override val name: String, kind: Kind) : AbstractElement {
     }
 }
 
-class ElementWithArguments(val element: Element, override val typeArguments: List<TypeArgument>) : AbstractElement by element {
+class ElementWithArguments(konst element: Element, override konst typeArguments: List<TypeArgument>) : AbstractElement by element {
     override fun equals(other: Any?): Boolean {
         return element.equals(other)
     }
@@ -187,12 +187,12 @@ class ElementWithArguments(val element: Element, override val typeArguments: Lis
     }
 }
 
-sealed class TypeArgument(val name: String) {
-    abstract val upperBounds: List<Importable>
+sealed class TypeArgument(konst name: String) {
+    abstract konst upperBounds: List<Importable>
 }
 
-class SimpleTypeArgument(name: String, val upperBound: Importable?) : TypeArgument(name) {
-    override val upperBounds: List<Importable> = listOfNotNull(upperBound)
+class SimpleTypeArgument(name: String, konst upperBound: Importable?) : TypeArgument(name) {
+    override konst upperBounds: List<Importable> = listOfNotNull(upperBound)
 
     override fun toString(): String {
         var result = name
@@ -203,10 +203,10 @@ class SimpleTypeArgument(name: String, val upperBound: Importable?) : TypeArgume
     }
 }
 
-class TypeArgumentWithMultipleUpperBounds(name: String, override val upperBounds: List<Importable>) : TypeArgument(name) {
+class TypeArgumentWithMultipleUpperBounds(name: String, override konst upperBounds: List<Importable>) : TypeArgument(name) {
     override fun toString(): String {
         return name
     }
 }
 
-data class ArbitraryImportable(override val packageName: String, override val type: String) : Importable
+data class ArbitraryImportable(override konst packageName: String, override konst type: String) : Importable

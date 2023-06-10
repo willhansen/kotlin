@@ -1,5 +1,5 @@
 // KJS_WITH_FULL_RUNTIME
-class Outer(val foo: StringBuilder) {
+class Outer(konst foo: StringBuilder) {
   inner class Inner() {
     fun len() : Int {
       return foo.length
@@ -12,9 +12,9 @@ class Outer(val foo: StringBuilder) {
 }
 
 fun box() : String {
-  val sb = StringBuilder("xyzzy")
-  val o = Outer(sb)
-  val i = o.test()
-  val l = i.len()
+  konst sb = StringBuilder("xyzzy")
+  konst o = Outer(sb)
+  konst i = o.test()
+  konst l = i.len()
   return if (l != 5) "fail" else "OK"
 }

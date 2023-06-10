@@ -33,16 +33,16 @@ import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 object ES6_BOX_PARAMETER : IrDeclarationOriginImpl("ES6_BOX_PARAMETER")
 object ES6_BOX_PARAMETER_DEFAULT_RESOLUTION : IrStatementOriginImpl("ES6_BOX_PARAMETER_DEFAULT_RESOLUTION")
 
-val IrValueParameter.isBoxParameter: Boolean
+konst IrValueParameter.isBoxParameter: Boolean
     get() = origin == ES6_BOX_PARAMETER
 
-val IrWhen.isBoxParameterDefaultResolution: Boolean
+konst IrWhen.isBoxParameterDefaultResolution: Boolean
     get() = origin == ES6_BOX_PARAMETER_DEFAULT_RESOLUTION
 
-val IrFunction.boxParameter: IrValueParameter?
-    get() = valueParameters.lastOrNull()?.takeIf { it.isBoxParameter }
+konst IrFunction.boxParameter: IrValueParameter?
+    get() = konstueParameters.lastOrNull()?.takeIf { it.isBoxParameter }
 
-class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) : DeclarationTransformer {
+class ES6AddBoxParameterToConstructorsLowering(konst context: JsIrBackendContext) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (!context.es6mode || declaration !is IrConstructor || declaration.hasStrictSignature(context)) return null
 
@@ -58,11 +58,11 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
     }
 
     private fun IrConstructor.addBoxParameter() {
-        val irClass = parentAsClass
-        val boxParameter = generateBoxParameter(irClass).also { valueParameters = valueParameters memoryOptimizedPlus it }
+        konst irClass = parentAsClass
+        konst boxParameter = generateBoxParameter(irClass).also { konstueParameters = konstueParameters memoryOptimizedPlus it }
 
-        val body = body as? IrBlockBody ?: return
-        val isBoxUsed = body.replaceThisWithBoxBeforeSuperCall(irClass, boxParameter.symbol)
+        konst body = body as? IrBlockBody ?: return
+        konst isBoxUsed = body.replaceThisWithBoxBeforeSuperCall(irClass, boxParameter.symbol)
 
         if (isBoxUsed) {
             body.statements.add(0, boxParameter.generateDefaultResolution())
@@ -77,7 +77,7 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
         return JsIrBuilder.buildValueParameter(
             parent = this,
             name = Namer.ES6_BOX_PARAMETER_NAME,
-            index = valueParameters.size,
+            index = konstueParameters.size,
             type = irClass.defaultType.makeNullable(),
             origin = ES6_BOX_PARAMETER,
             isAssignable = true
@@ -98,7 +98,7 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
     private fun IrBody.replaceThisWithBoxBeforeSuperCall(irClass: IrClass, boxParameterSymbol: IrValueSymbol): Boolean {
         var meetCapturing = false
         var meetDelegatingConstructor = false
-        val selfParameterSymbol = irClass.thisReceiver!!.symbol
+        konst selfParameterSymbol = irClass.thisReceiver!!.symbol
 
         transformChildrenVoid(object : ValueRemapper(mapOf(selfParameterSymbol to boxParameterSymbol)) {
             override fun visitGetValue(expression: IrGetValue): IrExpression {
@@ -111,8 +111,8 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
 
             override fun visitSetField(expression: IrSetField): IrExpression {
                 if (meetDelegatingConstructor) return expression
-                val newExpression = super.visitSetField(expression)
-                val receiver = expression.receiver as? IrGetValue
+                konst newExpression = super.visitSetField(expression)
+                konst receiver = expression.receiver as? IrGetValue
 
                 if (receiver?.symbol == boxParameterSymbol) {
                     meetCapturing = true
@@ -139,16 +139,16 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
     }
 
     private fun hackSimpleClassWithCapturing(constructor: IrConstructor) {
-        val irClass = constructor.parentAsClass
+        konst irClass = constructor.parentAsClass
 
         if (irClass.superClass != null || (!irClass.isInner && !irClass.isLocal)) return
 
-        val statements = (constructor.body as? IrBlockBody)?.statements ?: return
-        val delegationConstructorIndex = statements.indexOfFirst { it is IrDelegatingConstructorCall }
+        konst statements = (constructor.body as? IrBlockBody)?.statements ?: return
+        konst delegationConstructorIndex = statements.indexOfFirst { it is IrDelegatingConstructorCall }
 
         if (delegationConstructorIndex == -1) return
 
-        val firstClassFieldAssignment = statements.indexOfFirst { statement ->
+        konst firstClassFieldAssignment = statements.indexOfFirst { statement ->
             statement is IrSetField && statement.receiver?.let { it is IrGetValue && it.symbol == irClass.thisReceiver?.symbol } == true
         }
 
@@ -162,14 +162,14 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
      * Swap call synthetic primary ctor and call extendThrowable
      */
     private fun hackExceptions(constructor: IrConstructor) {
-        val setPropertiesSymbol = context.setPropertiesToThrowableInstanceSymbol
+        konst setPropertiesSymbol = context.setPropertiesToThrowableInstanceSymbol
 
-        val statements = (constructor.body as? IrBlockBody)?.statements ?: return
+        konst statements = (constructor.body as? IrBlockBody)?.statements ?: return
 
         var callIndex = -1
         var superCallIndex = -1
         for (i in statements.indices) {
-            val s = statements[i]
+            konst s = statements[i]
 
             if (s is IrCall && s.symbol === setPropertiesSymbol) {
                 callIndex = i
@@ -180,7 +180,7 @@ class ES6AddBoxParameterToConstructorsLowering(val context: JsIrBackendContext) 
         }
 
         if (callIndex != -1 && superCallIndex != -1) {
-            val tmp = statements[callIndex]
+            konst tmp = statements[callIndex]
             statements[callIndex] = statements[superCallIndex]
             statements[superCallIndex] = tmp
         }

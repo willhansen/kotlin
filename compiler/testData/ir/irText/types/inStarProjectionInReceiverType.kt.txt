@@ -1,5 +1,5 @@
 interface Foo<in T : Any?> {
-  abstract val x: Int
+  abstract konst x: Int
     abstract get
 
   abstract fun foo(x: T)

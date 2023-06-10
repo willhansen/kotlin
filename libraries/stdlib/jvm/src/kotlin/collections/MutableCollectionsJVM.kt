@@ -43,14 +43,14 @@ public actual fun <T> MutableList<T>.sortWith(comparator: Comparator<in T>): Uni
 }
 
 /**
- * Fills the list with the provided [value].
+ * Fills the list with the provided [konstue].
  *
- * Each element in the list gets replaced with the [value].
+ * Each element in the list gets replaced with the [konstue].
  */
 @kotlin.internal.InlineOnly
 @SinceKotlin("1.2")
-public actual inline fun <T> MutableList<T>.fill(value: T) {
-    java.util.Collections.fill(this, value)
+public actual inline fun <T> MutableList<T>.fill(konstue: T) {
+    java.util.Collections.fill(this, konstue)
 }
 
 

@@ -38,11 +38,11 @@ fun testULong(): String {
 
 fun box(): String {
 
-    val r1 = testInt()
+    konst r1 = testInt()
 
     if (r1 != "INT") return "FAIL1: $r1"
 
-    val r2 = testULong()
+    konst r2 = testULong()
 
     if (r2 != "ULONG") return "FAIL2: $r2"
 

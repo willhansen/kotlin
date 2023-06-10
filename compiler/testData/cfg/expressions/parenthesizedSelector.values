@@ -12,7 +12,7 @@ t.f()       <v4>: *                   COPY
 { t.f() }   <v4>: *                   COPY                                                  
 =====================
 == foo ==
-val Int.foo: String.() -> Unit get() = {}
+konst Int.foo: String.() -> Unit get() = {}
 ---------------------
 =====================
 == bar ==

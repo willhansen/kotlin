@@ -5,4 +5,4 @@ fun test(@ann p: Int) {
 
 }
 
-val bar = fun(@ann g: Int) {}
+konst bar = fun(@ann g: Int) {}

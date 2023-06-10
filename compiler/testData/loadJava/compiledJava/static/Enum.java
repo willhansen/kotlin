@@ -7,11 +7,11 @@ public enum Enum {
 
     public static class Nested {
         void foo() {}
-        void values() {}
+        void konstues() {}
     }
 
     public class Inner {
         void bar() {}
-        void valueOf(String s) {}
+        void konstueOf(String s) {}
     }
 }

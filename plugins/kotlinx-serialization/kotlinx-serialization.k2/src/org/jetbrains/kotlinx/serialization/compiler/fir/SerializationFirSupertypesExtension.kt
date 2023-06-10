@@ -40,13 +40,13 @@ class SerializationFirSupertypesExtension(session: FirSession) : FirSupertypeGen
         classLikeDeclaration: FirClassLikeDeclaration,
         resolvedSupertypes: List<FirResolvedTypeRef>
     ): List<FirResolvedTypeRef> {
-        val kSerializerClassId = ClassId(SerializationPackages.packageFqName, SerialEntityNames.KSERIALIZER_NAME)
-        val generatedSerializerClassId = ClassId(SerializationPackages.internalPackageFqName, SerialEntityNames.GENERATED_SERIALIZER_CLASS)
+        konst kSerializerClassId = ClassId(SerializationPackages.packageFqName, SerialEntityNames.KSERIALIZER_NAME)
+        konst generatedSerializerClassId = ClassId(SerializationPackages.internalPackageFqName, SerialEntityNames.GENERATED_SERIALIZER_CLASS)
         if (resolvedSupertypes.any { it.type.classId == kSerializerClassId || it.type.classId == generatedSerializerClassId }) return emptyList()
 
         return if (session.predicateBasedProvider.matches(serializerFor, classLikeDeclaration)) {
-            val getClassArgument = classLikeDeclaration.getSerializerFor(session) ?: return emptyList()
-            val serializerConeType = resolveConeTypeFromArgument(getClassArgument)
+            konst getClassArgument = classLikeDeclaration.getSerializerFor(session) ?: return emptyList()
+            konst serializerConeType = resolveConeTypeFromArgument(getClassArgument)
 
             listOf(
                 buildResolvedTypeRef {
@@ -59,7 +59,7 @@ class SerializationFirSupertypesExtension(session: FirSession) : FirSupertypeGen
     // Function helps to resolve class call from annotation argument to `ConeKotlinType`
     context(TypeResolveServiceContainer)
     private fun resolveConeTypeFromArgument(getClassCall: FirGetClassCall): ConeKotlinType {
-        val typeToResolve = buildUserTypeFromQualifierParts(isMarkedNullable = false) {
+        konst typeToResolve = buildUserTypeFromQualifierParts(isMarkedNullable = false) {
             fun visitQualifiers(expression: FirExpression) {
                 if (expression !is FirPropertyAccessExpression) return
                 expression.explicitReceiver?.let { visitQualifiers(it) }
@@ -70,6 +70,6 @@ class SerializationFirSupertypesExtension(session: FirSession) : FirSupertypeGen
         return typeResolver.resolveUserType(typeToResolve).type
     }
 
-    private val FirPropertyAccessExpression.qualifierName: Name?
+    private konst FirPropertyAccessExpression.qualifierName: Name?
         get() = (calleeReference as? FirSimpleNamedReference)?.name
 }

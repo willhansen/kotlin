@@ -11,17 +11,17 @@ import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.startCoroutine
 
 // Copied with modifications form kotlin.coroutines.jvm.internal.runSuspend/RunSuspend
-// to use as an equivalent of runBlocking without dependency on the kotlinx.coroutines
+// to use as an equikonstent of runBlocking without dependency on the kotlinx.coroutines
 
 @Deprecated("For internal use only, use kotlinx.coroutines instead", level = DeprecationLevel.ERROR)
 fun <T> internalScriptingRunSuspend(block: suspend () -> T) : T {
-    val run = InternalScriptingRunSuspend<T>()
+    konst run = InternalScriptingRunSuspend<T>()
     block.startCoroutine(run)
     return run.await()
 }
 
 private class InternalScriptingRunSuspend<T> : Continuation<T> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     @Suppress("RESULT_CLASS_IN_RETURN_TYPE")

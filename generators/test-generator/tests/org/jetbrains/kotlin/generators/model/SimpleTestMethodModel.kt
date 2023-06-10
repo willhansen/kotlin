@@ -13,22 +13,22 @@ import java.io.File
 import java.util.regex.Pattern
 
 open class SimpleTestMethodModel(
-    private val rootDir: File,
-    val file: File,
-    private val filenamePattern: Pattern,
+    private konst rootDir: File,
+    konst file: File,
+    private konst filenamePattern: Pattern,
     checkFilenameStartsLowerCase: Boolean?,
-    internal val targetBackend: TargetBackend,
-    private val skipIgnored: Boolean,
-    override val tags: List<String>
+    internal konst targetBackend: TargetBackend,
+    private konst skipIgnored: Boolean,
+    override konst tags: List<String>
 ) : MethodModel {
     object Kind : MethodModel.Kind()
 
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = Kind
 
-    override val dataString: String
+    override konst dataString: String
         get() {
-            val path = FileUtil.getRelativePath(rootDir, file)!!
+            konst path = FileUtil.getRelativePath(rootDir, file)!!
             return KtTestUtil.getFilePath(File(path))
         }
 
@@ -36,34 +36,34 @@ open class SimpleTestMethodModel(
         return InTextDirectivesUtils.isCompatibleTarget(targetBackend, file)
     }
 
-    override val name: String
+    override konst name: String
         get() {
-            val matcher = filenamePattern.matcher(file.name)
-            val found = matcher.find()
+            konst matcher = filenamePattern.matcher(file.name)
+            konst found = matcher.find()
             assert(found) { file.name + " isn't matched by regex " + filenamePattern.pattern() }
             assert(matcher.groupCount() >= 1) { filenamePattern.pattern() }
-            val extractedName = try {
+            konst extractedName = try {
                 matcher.group(1) ?: error("extractedName should not be null: " + filenamePattern.pattern())
             } catch (e: Throwable) {
                 throw IllegalStateException("Error generating test ${file.name}", e)
             }
-            val unescapedName = if (rootDir == file.parentFile) {
+            konst unescapedName = if (rootDir == file.parentFile) {
                 extractedName
             } else {
-                val relativePath = FileUtil.getRelativePath(rootDir, file.parentFile)
+                konst relativePath = FileUtil.getRelativePath(rootDir, file.parentFile)
                 relativePath + "-" + extractedName.replaceFirstChar(Char::uppercaseChar)
             }
-            val ignored = skipIgnored && InTextDirectivesUtils.isIgnoredTarget(targetBackend, file)
+            konst ignored = skipIgnored && InTextDirectivesUtils.isIgnoredTarget(targetBackend, file)
             return (if (ignored) "ignore" else "test") + escapeForJavaIdentifier(unescapedName).replaceFirstChar(Char::uppercaseChar)
         }
 
     init {
         if (checkFilenameStartsLowerCase != null) {
-            val c = file.name[0]
+            konst c = file.name[0]
             if (checkFilenameStartsLowerCase) {
-                assert(Character.isLowerCase(c)) { "Invalid file name '$file', file name should start with lower-case letter" }
+                assert(Character.isLowerCase(c)) { "Inkonstid file name '$file', file name should start with lower-case letter" }
             } else {
-                assert(Character.isUpperCase(c)) { "Invalid file name '$file', file name should start with upper-case letter" }
+                assert(Character.isUpperCase(c)) { "Inkonstid file name '$file', file name should start with upper-case letter" }
             }
         }
     }

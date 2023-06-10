@@ -54,13 +54,13 @@ import org.jetbrains.kotlin.utils.addIfNotNull
  * about effects of that call.
  */
 class EffectsExtractingVisitor(
-    private val trace: BindingTrace,
-    private val moduleDescriptor: ModuleDescriptor,
-    private val dataFlowValueFactory: DataFlowValueFactory,
-    private val languageVersionSettings: LanguageVersionSettings
+    private konst trace: BindingTrace,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst dataFlowValueFactory: DataFlowValueFactory,
+    private konst languageVersionSettings: LanguageVersionSettings
 ) : KtVisitor<Computation, Unit>() {
-    private val builtIns: KotlinBuiltIns get() = moduleDescriptor.builtIns
-    private val reducer: Reducer = Reducer(builtIns)
+    private konst builtIns: KotlinBuiltIns get() = moduleDescriptor.builtIns
+    private konst reducer: Reducer = Reducer(builtIns)
 
     fun extractOrGetCached(element: KtElement): Computation {
         trace[BindingContext.EXPRESSION_EFFECTS, element]?.let { return it }
@@ -68,13 +68,13 @@ class EffectsExtractingVisitor(
     }
 
     override fun visitKtElement(element: KtElement, data: Unit): Computation {
-        val resolvedCall = element.getResolvedCall(trace.bindingContext) ?: return UNKNOWN_COMPUTATION
+        konst resolvedCall = element.getResolvedCall(trace.bindingContext) ?: return UNKNOWN_COMPUTATION
         if (resolvedCall.isCallWithUnsupportedReceiver()) return UNKNOWN_COMPUTATION
 
-        val arguments = resolvedCall.getCallArgumentsAsComputations() ?: return UNKNOWN_COMPUTATION
-        val typeSubstitution = resolvedCall.getTypeSubstitution()
+        konst arguments = resolvedCall.getCallArgumentsAsComputations() ?: return UNKNOWN_COMPUTATION
+        konst typeSubstitution = resolvedCall.getTypeSubstitution()
 
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
         return when {
             descriptor.isEqualsDescriptor() -> CallComputation(
                 ESBooleanType,
@@ -85,7 +85,7 @@ class EffectsExtractingVisitor(
                 (element as KtExpression).createDataFlowValue() ?: return UNKNOWN_COMPUTATION
             )
             descriptor is FunctionDescriptor -> {
-                val esType = descriptor.returnType?.toESType()
+                konst esType = descriptor.returnType?.toESType()
                 CallComputation(
                     esType,
                     descriptor.getFunctor()?.invokeWithArguments(arguments, typeSubstitution, reducer) ?: emptyList()
@@ -103,26 +103,26 @@ class EffectsExtractingVisitor(
         KtPsiUtil.deparenthesize(expression)?.accept(this, data) ?: UNKNOWN_COMPUTATION
 
     override fun visitConstantExpression(expression: KtConstantExpression, data: Unit): Computation {
-        val bindingContext = trace.bindingContext
+        konst bindingContext = trace.bindingContext
 
-        val type: KotlinType = bindingContext.getType(expression) ?: return UNKNOWN_COMPUTATION
+        konst type: KotlinType = bindingContext.getType(expression) ?: return UNKNOWN_COMPUTATION
 
-        val compileTimeConstant: CompileTimeConstant<*> =
+        konst compileTimeConstant: CompileTimeConstant<*> =
             bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expression) ?: return UNKNOWN_COMPUTATION
         if (compileTimeConstant.isError || compileTimeConstant is UnsignedErrorValueTypeConstant) return UNKNOWN_COMPUTATION
 
-        val value: Any? = compileTimeConstant.getValue(type)
+        konst konstue: Any? = compileTimeConstant.getValue(type)
 
-        return when (value) {
-            is Boolean -> ESConstants.booleanValue(value)
+        return when (konstue) {
+            is Boolean -> ESConstants.booleanValue(konstue)
             null -> ESConstants.nullValue
             else -> UNKNOWN_COMPUTATION
         }
     }
 
     override fun visitIsExpression(expression: KtIsExpression, data: Unit): Computation {
-        val rightType = trace[BindingContext.TYPE, expression.typeReference]?.toESType() ?: return UNKNOWN_COMPUTATION
-        val arg = extractOrGetCached(expression.leftHandSide)
+        konst rightType = trace[BindingContext.TYPE, expression.typeReference]?.toESType() ?: return UNKNOWN_COMPUTATION
+        konst arg = extractOrGetCached(expression.leftHandSide)
         return CallComputation(
             ESBooleanType,
             IsFunctor(rightType, expression.isNegated).invokeWithArguments(listOf(arg), ESTypeSubstitution.empty(builtIns), reducer)
@@ -130,24 +130,24 @@ class EffectsExtractingVisitor(
     }
 
     override fun visitSafeQualifiedExpression(expression: KtSafeQualifiedExpression, data: Unit?): Computation {
-        val computation = super.visitSafeQualifiedExpression(expression, data)
+        konst computation = super.visitSafeQualifiedExpression(expression, data)
         if (computation === UNKNOWN_COMPUTATION) return computation
 
         // For safecall any clauses of form 'returns(null) -> ...' are incorrect, because safecall can return
         // null bypassing function's contract, so we have to filter them out
 
         fun ESEffect.containsReturnsNull(): Boolean =
-            isReturns { value == ESConstants.nullValue } || this is ConditionalEffect && this.simpleEffect.containsReturnsNull()
+            isReturns { konstue == ESConstants.nullValue } || this is ConditionalEffect && this.simpleEffect.containsReturnsNull()
 
-        val effectsWithoutReturnsNull = computation.effects.filter { !it.containsReturnsNull() }
+        konst effectsWithoutReturnsNull = computation.effects.filter { !it.containsReturnsNull() }
         return CallComputation(computation.type, effectsWithoutReturnsNull)
     }
 
     override fun visitBinaryExpression(expression: KtBinaryExpression, data: Unit): Computation {
-        val left = extractOrGetCached(expression.left ?: return UNKNOWN_COMPUTATION)
-        val right = extractOrGetCached(expression.right ?: return UNKNOWN_COMPUTATION)
+        konst left = extractOrGetCached(expression.left ?: return UNKNOWN_COMPUTATION)
+        konst right = extractOrGetCached(expression.right ?: return UNKNOWN_COMPUTATION)
 
-        val args = listOf(left, right)
+        konst args = listOf(left, right)
 
         return when (expression.operationToken) {
             KtTokens.EXCLEQ -> CallComputation(
@@ -171,7 +171,7 @@ class EffectsExtractingVisitor(
     }
 
     override fun visitUnaryExpression(expression: KtUnaryExpression, data: Unit): Computation {
-        val arg = extractOrGetCached(expression.baseExpression ?: return UNKNOWN_COMPUTATION)
+        konst arg = extractOrGetCached(expression.baseExpression ?: return UNKNOWN_COMPUTATION)
         return when (expression.operationToken) {
             KtTokens.EXCL -> CallComputation(ESBooleanType, NotFunctor().invokeWithArguments(arg))
             else -> UNKNOWN_COMPUTATION
@@ -208,7 +208,7 @@ class EffectsExtractingVisitor(
     }
 
     private fun FunctionDescriptor.getFunctor(): Functor? {
-        val contractDescription = getUserData(ContractProviderKey)?.getContractDescription() ?: return null
+        konst contractDescription = getUserData(ContractProviderKey)?.getContractDescription() ?: return null
         return contractDescription.getFunctor(moduleDescriptor)
     }
 
@@ -218,11 +218,11 @@ class EffectsExtractingVisitor(
                 (explicitReceiverKind == ExplicitReceiverKind.BOTH_RECEIVERS)
 
     private fun ResolvedCall<*>.getCallArgumentsAsComputations(): List<Computation>? {
-        val arguments = mutableListOf<Computation>()
+        konst arguments = mutableListOf<Computation>()
         arguments.addIfNotNull(extensionReceiver?.toComputation())
         arguments.addIfNotNull(dispatchReceiver?.toComputation())
 
-        val passedValueArguments = valueArgumentsByIndex ?: return null
+        konst passedValueArguments = konstueArgumentsByIndex ?: return null
 
         passedValueArguments.mapTo(arguments) { it.toComputation() ?: return null }
 
@@ -230,11 +230,11 @@ class EffectsExtractingVisitor(
     }
 
     private fun ResolvedCall<*>.getTypeSubstitution(): ESTypeSubstitution {
-        val substitution = mutableMapOf<TypeConstructor, UnwrappedType>()
+        konst substitution = mutableMapOf<TypeConstructor, UnwrappedType>()
         for ((typeParameter, typeArgument) in typeArguments) {
             substitution[typeParameter.typeConstructor] = typeArgument.unwrap()
         }
-        val substitutor = if (substitution.isNotEmpty()) {
+        konst substitutor = if (substitution.isNotEmpty()) {
             NewTypeSubstitutorByConstructorMap(substitution)
         } else {
             EmptySubstitutor
@@ -253,7 +253,7 @@ class EffectsExtractingVisitor(
             // Potentially, we could return UNKNOWN_COMPUTATION here too
             is VarargValueArgument -> null
 
-            is ExpressionValueArgument -> valueArgument?.toComputation()
+            is ExpressionValueArgument -> konstueArgument?.toComputation()
 
             // Should be exhaustive
             else -> throw IllegalStateException("Unexpected ResolvedValueArgument $this")

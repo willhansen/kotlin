@@ -1,16 +1,16 @@
 interface B<T> {
-    val bar: T
+    konst bar: T
 }
 
-class S(val value: String) {
+class S(konst konstue: String) {
 
-    fun bar() = value
+    fun bar() = konstue
 
     fun foo(): B<String> {
-        val p  = S("OK");
+        konst p  = S("OK");
         return object : B<String> {
             //we shouldn't capture this@S in such case
-            override val bar: String = p.bar()
+            override konst bar: String = p.bar()
         }
     }
 }

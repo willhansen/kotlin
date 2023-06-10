@@ -24,30 +24,30 @@ import org.jetbrains.kotlin.fir.psi
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 
 internal class KtFirReceiverParameterSymbol(
-    val firSymbol: FirCallableSymbol<*>,
-    val analysisSession: KtFirAnalysisSession,
+    konst firSymbol: FirCallableSymbol<*>,
+    konst analysisSession: KtFirAnalysisSession,
 ) : KtReceiverParameterSymbol(), KtLifetimeOwner {
-    override val token: KtLifetimeToken get() = analysisSession.token
-    override val psi: PsiElement? = withValidityAssertion{ firSymbol.fir.receiverParameter?.typeRef?.psi }
+    override konst token: KtLifetimeToken get() = analysisSession.token
+    override konst psi: PsiElement? = withValidityAssertion{ firSymbol.fir.receiverParameter?.typeRef?.psi }
 
     init {
         require(firSymbol.fir.receiverParameter != null) { "$firSymbol doesn't have an extension receiver." }
     }
 
-    override val type: KtType by cached {
+    override konst type: KtType by cached {
         firSymbol.receiverType(analysisSession.firSymbolBuilder) ?: error("$firSymbol doesn't have an extension receiver.")
     }
 
-    override val owningCallableSymbol: KtCallableSymbol by cached { analysisSession.firSymbolBuilder.callableBuilder.buildCallableSymbol(firSymbol) }
+    override konst owningCallableSymbol: KtCallableSymbol by cached { analysisSession.firSymbolBuilder.callableBuilder.buildCallableSymbol(firSymbol) }
 
-    override val origin: KtSymbolOrigin = withValidityAssertion { firSymbol.fir.ktSymbolOrigin() }
+    override konst origin: KtSymbolOrigin = withValidityAssertion { firSymbol.fir.ktSymbolOrigin() }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtReceiverParameterSymbol> = withValidityAssertion {
         KtFirReceiverParameterSymbolPointer(owningCallableSymbol.createPointer())
     }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForReceiverParameter.create(firSymbol, analysisSession.useSiteSession, token)
     }
 }

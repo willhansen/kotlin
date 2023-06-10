@@ -4,7 +4,7 @@
 // LANGUAGE: +CustomEqualsInValueClasses +ValueClasses
 
 @JvmInline
-value class MFVC1(val x: Int, val y: Int) {
+konstue class MFVC1(konst x: Int, konst y: Int) {
     override fun <!INEFFICIENT_EQUALS_OVERRIDING_IN_VALUE_CLASS!>equals<!>(other: Any?): Boolean {
         if (other !is MFVC1) {
             return false
@@ -14,12 +14,12 @@ value class MFVC1(val x: Int, val y: Int) {
 }
 
 @JvmInline
-value class MFVC2(val x: Int, val y: Int) {
+konstue class MFVC2(konst x: Int, konst y: Int) {
     override fun hashCode() = 0
 }
 
 @JvmInline
-value class MFVC3(val x: Int, val y: Int) {
+konstue class MFVC3(konst x: Int, konst y: Int) {
     override fun equals(other: Any?) = true
 
     fun equals(other: MFVC3) = true

@@ -43,14 +43,14 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMapIndexed
    unbound symbols are encountered (see `Ir...Symbol.toIrBasedDescriptorIfPossible()`).
  */
 
-abstract class IrBasedDeclarationDescriptor<T : IrDeclaration>(val owner: T) : DeclarationDescriptor {
-    override val annotations: Annotations by lazy {
-        val ownerAnnotations = (owner as? IrAnnotationContainer)?.annotations ?: return@lazy Annotations.EMPTY
+abstract class IrBasedDeclarationDescriptor<T : IrDeclaration>(konst owner: T) : DeclarationDescriptor {
+    override konst annotations: Annotations by lazy {
+        konst ownerAnnotations = (owner as? IrAnnotationContainer)?.annotations ?: return@lazy Annotations.EMPTY
         Annotations.create(ownerAnnotations.memoryOptimizedMap { it.toAnnotationDescriptor() })
     }
 
     private fun IrConstructorCall.toAnnotationDescriptor(): AnnotationDescriptor {
-        val annotationClass = symbol.owner.parentAsClass
+        konst annotationClass = symbol.owner.parentAsClass
 
         @OptIn(ObsoleteDescriptorBasedAPI::class)
         if (annotationClass.symbol.descriptor == ErrorUtils.errorClass) {
@@ -65,7 +65,7 @@ abstract class IrBasedDeclarationDescriptor<T : IrDeclaration>(val owner: T) : D
         }
         return AnnotationDescriptorImpl(
             annotationClass.defaultType.toIrBasedKotlinType(),
-            symbol.owner.valueParameters.memoryOptimizedMap { it.name to getValueArgument(it.index) }
+            symbol.owner.konstueParameters.memoryOptimizedMap { it.name to getValueArgument(it.index) }
                 .filter { it.second != null }
                 .associate { it.first to it.second!!.toConstantValue() },
             source
@@ -76,19 +76,19 @@ abstract class IrBasedDeclarationDescriptor<T : IrDeclaration>(val owner: T) : D
         return when (this) {
             is IrConst<*> -> when (kind) {
                 IrConstKind.Null -> NullValue()
-                IrConstKind.Boolean -> BooleanValue(value as Boolean)
-                IrConstKind.Char -> CharValue(value as Char)
-                IrConstKind.Byte -> ByteValue(value as Byte)
-                IrConstKind.Short -> ShortValue(value as Short)
-                IrConstKind.Int -> IntValue(value as Int)
-                IrConstKind.Long -> LongValue(value as Long)
-                IrConstKind.String -> StringValue(value as String)
-                IrConstKind.Float -> FloatValue(value as Float)
-                IrConstKind.Double -> DoubleValue(value as Double)
+                IrConstKind.Boolean -> BooleanValue(konstue as Boolean)
+                IrConstKind.Char -> CharValue(konstue as Char)
+                IrConstKind.Byte -> ByteValue(konstue as Byte)
+                IrConstKind.Short -> ShortValue(konstue as Short)
+                IrConstKind.Int -> IntValue(konstue as Int)
+                IrConstKind.Long -> LongValue(konstue as Long)
+                IrConstKind.String -> StringValue(konstue as String)
+                IrConstKind.Float -> FloatValue(konstue as Float)
+                IrConstKind.Double -> DoubleValue(konstue as Double)
             }
 
             is IrVararg -> {
-                val elements = elements.memoryOptimizedMap { if (it is IrSpreadElement) error("$it is not expected") else it.toConstantValue() }
+                konst elements = elements.memoryOptimizedMap { if (it is IrSpreadElement) error("$it is not expected") else it.toConstantValue() }
                 ArrayValue(elements) { moduleDescriptor ->
                     // TODO: substitute.
                     moduleDescriptor.builtIns.array.defaultType
@@ -192,10 +192,10 @@ abstract class IrBasedCallableDescriptor<T : IrDeclaration>(owner: T) : Callable
 open class IrBasedValueParameterDescriptor(owner: IrValueParameter) : ValueParameterDescriptor,
     IrBasedCallableDescriptor<IrValueParameter>(owner) {
 
-    override val index get() = owner.index
-    override val isCrossinline get() = owner.isCrossinline
-    override val isNoinline get() = owner.isNoinline
-    override val varargElementType get() = owner.varargElementType?.toIrBasedKotlinType()
+    override konst index get() = owner.index
+    override konst isCrossinline get() = owner.isCrossinline
+    override konst isNoinline get() = owner.isNoinline
+    override konst varargElementType get() = owner.varargElementType?.toIrBasedKotlinType()
     override fun isConst() = false
     override fun isVar() = false
 
@@ -273,11 +273,11 @@ open class IrBasedTypeParameterDescriptor(owner: IrTypeParameter) : TypeParamete
 
     override fun getUpperBounds() = owner.superTypes.memoryOptimizedMap { it.toIrBasedKotlinType() }
 
-    private val _typeConstructor: TypeConstructor by lazy {
+    private konst _typeConstructor: TypeConstructor by lazy {
         object : AbstractTypeConstructor(LockBasedStorageManager.NO_LOCKS) {
             override fun computeSupertypes() = upperBounds
 
-            override val supertypeLoopChecker = SupertypeLoopChecker.EMPTY
+            override konst supertypeLoopChecker = SupertypeLoopChecker.EMPTY
 
             override fun getParameters(): List<TypeParameterDescriptor> = emptyList()
 
@@ -303,7 +303,7 @@ open class IrBasedTypeParameterDescriptor(owner: IrTypeParameter) : TypeParamete
 
     override fun isCapturedFromOuterDeclaration() = false
 
-    private val _defaultType: SimpleType by lazy {
+    private konst _defaultType: SimpleType by lazy {
         KotlinTypeFactory.simpleTypeWithNonTrivialMemberScope(
             TypeAttributes.Empty, typeConstructor, emptyList(), false,
             LazyScopeAdapter {
@@ -391,11 +391,11 @@ open class IrBasedVariableDescriptorWithAccessor(owner: IrLocalDelegatedProperty
 
     override fun isLateInit(): Boolean = false
 
-    override val getter: VariableAccessorDescriptor?
+    override konst getter: VariableAccessorDescriptor?
         get() = TODO("not implemented")
-    override val setter: VariableAccessorDescriptor?
+    override konst setter: VariableAccessorDescriptor?
         get() = TODO("not implemented")
-    override val isDelegated: Boolean = true
+    override konst isDelegated: Boolean = true
 }
 
 fun IrLocalDelegatedProperty.toIrBasedDescriptor() = IrBasedVariableDescriptorWithAccessor(this)
@@ -404,13 +404,13 @@ abstract class IrBasedFunctionDescriptor<Function : IrFunction>(owner: Function)
 
     override fun getExtensionReceiverParameter() = owner.extensionReceiverParameter?.toIrBasedDescriptor() as? ReceiverParameterDescriptor
 
-    override fun getContextReceiverParameters() = owner.valueParameters
+    override fun getContextReceiverParameters() = owner.konstueParameters
         .asSequence()
         .take(owner.contextReceiverParametersCount)
         .map(::IrBasedReceiverParameterDescriptor)
         .toMutableList()
 
-    override fun getValueParameters() = owner.valueParameters
+    override fun getValueParameters() = owner.konstueParameters
         .asSequence()
         .drop(owner.contextReceiverParametersCount)
         .map(::IrBasedValueParameterDescriptor)
@@ -445,7 +445,7 @@ open class IrBasedSimpleFunctionDescriptor(owner: IrSimpleFunction) : SimpleFunc
     override fun isInfix() = false
     override fun isOperator() = false
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = owner.containerSource
 
     override fun getOriginal() = this
@@ -612,7 +612,7 @@ open class IrBasedClassDescriptor(owner: IrClass) : ClassDescriptor, IrBasedDecl
     override fun getConstructors() =
         owner.declarations.filterIsInstanceAnd<IrConstructor> { !it.origin.isSynthetic }.memoryOptimizedMap { it.toIrBasedDescriptor() }
 
-    private val _defaultType: SimpleType by lazy {
+    private konst _defaultType: SimpleType by lazy {
         TypeUtils.makeUnsubstitutedType(this, unsubstitutedMemberScope, KotlinTypeFactory.EMPTY_REFINED_TYPE_FACTORY)
     }
 
@@ -653,7 +653,7 @@ open class IrBasedClassDescriptor(owner: IrClass) : ClassDescriptor, IrBasedDecl
     }
 
     override fun getValueClassRepresentation(): ValueClassRepresentation<SimpleType>? =
-        owner.valueClassRepresentation?.mapUnderlyingType { it.toIrBasedKotlinType() as SimpleType }
+        owner.konstueClassRepresentation?.mapUnderlyingType { it.toIrBasedKotlinType() as SimpleType }
 
     override fun getOriginal() = this
 
@@ -664,7 +664,7 @@ open class IrBasedClassDescriptor(owner: IrClass) : ClassDescriptor, IrBasedDecl
 
     override fun isActual() = false
 
-    private val _typeConstructor: TypeConstructor by lazy {
+    private konst _typeConstructor: TypeConstructor by lazy {
         LazyTypeConstructor(
             this,
             ::collectTypeParameters,
@@ -703,13 +703,13 @@ open class IrBasedClassDescriptor(owner: IrClass) : ClassDescriptor, IrBasedDecl
 fun IrClass.toIrBasedDescriptor() = IrBasedClassDescriptor(this)
 
 class LazyTypeConstructor(
-    val classDescriptor: ClassDescriptor,
-    val parametersBuilder: () -> List<TypeParameterDescriptor>,
-    val superTypesBuilder: () -> List<KotlinType>,
+    konst classDescriptor: ClassDescriptor,
+    konst parametersBuilder: () -> List<TypeParameterDescriptor>,
+    konst superTypesBuilder: () -> List<KotlinType>,
     storageManager: StorageManager
 ) : AbstractClassTypeConstructor(storageManager) {
-    val parameters_ by lazy { parametersBuilder() }
-    val superTypes_ by lazy { superTypesBuilder() }
+    konst parameters_ by lazy { parametersBuilder() }
+    konst superTypes_ by lazy { superTypesBuilder() }
 
     override fun getParameters() = parameters_
 
@@ -719,7 +719,7 @@ class LazyTypeConstructor(
 
     override fun getDeclarationDescriptor() = classDescriptor
 
-    override val supertypeLoopChecker: SupertypeLoopChecker
+    override konst supertypeLoopChecker: SupertypeLoopChecker
         get() = SupertypeLoopChecker.EMPTY
 }
 
@@ -743,7 +743,7 @@ open class IrBasedEnumEntryDescriptor(owner: IrEnumEntry) : ClassDescriptor, IrB
 
     private fun getCorrespondingClass() = owner.correspondingClass ?: (owner.parent as IrClass)
 
-    private val _defaultType: SimpleType by lazy {
+    private konst _defaultType: SimpleType by lazy {
         TypeUtils.makeUnsubstitutedType(this, unsubstitutedMemberScope, KotlinTypeFactory.EMPTY_REFINED_TYPE_FACTORY)
     }
 
@@ -792,7 +792,7 @@ open class IrBasedEnumEntryDescriptor(owner: IrEnumEntry) : ClassDescriptor, IrB
 
     override fun isActual() = false
 
-    private val _typeConstructor: TypeConstructor by lazy {
+    private konst _typeConstructor: TypeConstructor by lazy {
         ClassTypeConstructorImpl(
             this,
             emptyList(),
@@ -869,9 +869,9 @@ open class IrBasedPropertyDescriptor(owner: IrProperty) :
 
     override fun getVisibility() = owner.visibility
 
-    override val setter: PropertySetterDescriptor? get() = owner.setter?.toIrBasedDescriptor() as? PropertySetterDescriptor
+    override konst setter: PropertySetterDescriptor? get() = owner.setter?.toIrBasedDescriptor() as? PropertySetterDescriptor
 
-    override val containerSource: DeserializedContainerSource? = owner.containerSource
+    override konst containerSource: DeserializedContainerSource? = owner.containerSource
 
     override fun getOriginal() = this
 
@@ -913,13 +913,13 @@ open class IrBasedPropertyDescriptor(owner: IrProperty) :
         visitor!!.visitPropertyDescriptor(this, null)
     }
 
-    override val getter: PropertyGetterDescriptor? get() = owner.getter?.toIrBasedDescriptor() as? PropertyGetterDescriptor
+    override konst getter: PropertyGetterDescriptor? get() = owner.getter?.toIrBasedDescriptor() as? PropertyGetterDescriptor
 
     override fun newCopyBuilder(): CallableMemberDescriptor.CopyBuilder<out PropertyDescriptor> {
         TODO("not implemented")
     }
 
-    override val isDelegated get() = owner.isDelegated
+    override konst isDelegated get() = owner.isDelegated
 
     override fun getBackingField(): FieldDescriptor? {
         TODO("not implemented")
@@ -929,7 +929,7 @@ open class IrBasedPropertyDescriptor(owner: IrProperty) :
         TODO("not implemented")
     }
 
-    override fun getInType(): KotlinType? = setter?.valueParameters?.get(0)?.type
+    override fun getInType(): KotlinType? = setter?.konstueParameters?.get(0)?.type
 
     override fun <V : Any?> getUserData(key: CallableDescriptor.UserDataKey<V>?): V? = null
 }
@@ -946,7 +946,7 @@ abstract class IrBasedPropertyAccessorDescriptor(owner: IrSimpleFunction) : IrBa
 
     override fun getCorrespondingProperty(): PropertyDescriptor = owner.correspondingPropertySymbol!!.owner.toIrBasedDescriptor()
 
-    override val correspondingVariable: VariableDescriptorWithAccessors get() = correspondingProperty
+    override konst correspondingVariable: VariableDescriptorWithAccessors get() = correspondingProperty
 }
 
 open class IrBasedPropertyGetterDescriptor(owner: IrSimpleFunction) : IrBasedPropertyAccessorDescriptor(owner), PropertyGetterDescriptor {
@@ -969,10 +969,10 @@ open class IrBasedPropertySetterDescriptor(owner: IrSimpleFunction) : IrBasedPro
 
 open class IrBasedTypeAliasDescriptor(owner: IrTypeAlias) : IrBasedDeclarationDescriptor<IrTypeAlias>(owner), TypeAliasDescriptor {
 
-    override val underlyingType: SimpleType
+    override konst underlyingType: SimpleType
         get() = throw UnsupportedOperationException("Unexpected use of IrBasedTypeAliasDescriptor $this")
 
-    override val constructors: Collection<TypeAliasConstructorDescriptor>
+    override konst constructors: Collection<TypeAliasConstructorDescriptor>
         get() = throw UnsupportedOperationException("Unexpected use of IrBasedTypeAliasDescriptor $this")
 
     override fun substitute(substitutor: TypeSubstitutor): ClassifierDescriptorWithTypeParameters =
@@ -984,10 +984,10 @@ open class IrBasedTypeAliasDescriptor(owner: IrTypeAlias) : IrBasedDeclarationDe
     override fun getTypeConstructor(): TypeConstructor =
         throw UnsupportedOperationException("Unexpected use of IrBasedTypeAliasDescriptor $this")
 
-    override val expandedType: SimpleType
+    override konst expandedType: SimpleType
         get() = owner.expandedType.toIrBasedKotlinType() as SimpleType
 
-    override val classDescriptor: ClassDescriptor?
+    override konst classDescriptor: ClassDescriptor?
         get() = TODO("catch type alias class descriptor") //expandedType.constructor.declarationDescriptor as ClassDescriptor?
 
     override fun getOriginal(): TypeAliasDescriptor = this
@@ -1065,7 +1065,7 @@ open class IrBasedFieldDescriptor(owner: IrField) : PropertyDescriptor, IrBasedD
 
     override fun getVisibility() = owner.visibility
 
-    override val setter: PropertySetterDescriptor? get() = null
+    override konst setter: PropertySetterDescriptor? get() = null
 
     override fun getOriginal() = this
 
@@ -1109,19 +1109,19 @@ open class IrBasedFieldDescriptor(owner: IrField) : PropertyDescriptor, IrBasedD
         visitor!!.visitPropertyDescriptor(this, null)
     }
 
-    override val getter: PropertyGetterDescriptor? get() = null
+    override konst getter: PropertyGetterDescriptor? get() = null
 
     override fun newCopyBuilder(): CallableMemberDescriptor.CopyBuilder<out PropertyDescriptor> {
         TODO("not implemented")
     }
 
-    override val isDelegated get() = false
+    override konst isDelegated get() = false
 
     // Following functions are used in error reporting when rendering annotations on properties
     override fun getBackingField(): FieldDescriptor? = null // TODO
     override fun getDelegateField(): FieldDescriptor? = null // TODO
 
-    override fun getInType(): KotlinType? = setter?.valueParameters?.get(0)?.type
+    override fun getInType(): KotlinType? = setter?.konstueParameters?.get(0)?.type
 
     override fun <V : Any?> getUserData(key: CallableDescriptor.UserDataKey<V>?): V? = null
 }
@@ -1149,11 +1149,11 @@ fun IrErrorDeclaration.toIrBasedDescriptor() = IrBasedErrorDescriptor(this)
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 private fun getContainingDeclaration(declaration: IrDeclaration): DeclarationDescriptor {
-    val parent = declaration.parent
+    konst parent = declaration.parent
     if (declaration is IrTypeParameter && parent is IrSimpleFunction) {
         parent.correspondingPropertySymbol?.owner?.let { return it.toIrBasedDescriptor() }
     }
-    val parentDescriptor = (parent as IrSymbolOwner).let {
+    konst parentDescriptor = (parent as IrSymbolOwner).let {
         if (it is IrDeclaration) it.toIrBasedDescriptor() else it.symbol.descriptor
     }
     return if (parent is IrClass && parent.isFileClass) {
@@ -1192,8 +1192,8 @@ private fun makeKotlinType(
         is IrTypeParameterSymbol ->
             classifier.toIrBasedDescriptorIfPossible().defaultType.makeNullableAsSpecified(hasQuestionMark)
         is IrClassSymbol -> {
-            val classDescriptor = classifier.toIrBasedDescriptorIfPossible()
-            val kotlinTypeArguments = arguments.memoryOptimizedMapIndexed { index, it ->
+            konst classDescriptor = classifier.toIrBasedDescriptorIfPossible()
+            konst kotlinTypeArguments = arguments.memoryOptimizedMapIndexed { index, it ->
                 when (it) {
                     is IrTypeProjection -> TypeProjectionImpl(it.variance, it.type.toIrBasedKotlinType(builtins))
                     is IrStarProjection -> StarProjectionImpl(classDescriptor.typeConstructor.parameters[index])
@@ -1208,14 +1208,14 @@ private fun makeKotlinType(
                             "Type parameters:\n" +
                             classDescriptor.defaultType.constructor.parameters.withIndex()
                                 .joinToString(separator = "\n") {
-                                    val irTypeParameter = (it.value as IrBasedTypeParameterDescriptor).owner
+                                    konst irTypeParameter = (it.konstue as IrBasedTypeParameterDescriptor).owner
                                     "${it.index}: ${irTypeParameter.render()} " +
                                             "of ${irTypeParameter.parent.render()}"
                                 } +
                             "\nType arguments:\n" +
                             arguments.withIndex()
                                 .joinToString(separator = "\n") {
-                                    "${it.index}: ${it.value.render()}"
+                                    "${it.index}: ${it.konstue.render()}"
                                 },
                     e
                 )

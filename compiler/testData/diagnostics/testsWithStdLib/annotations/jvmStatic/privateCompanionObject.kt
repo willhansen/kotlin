@@ -5,20 +5,20 @@
 class WithPrivateCompanion {
     private companion object {
         @JvmStatic
-        val staticVal1: Int = 42
+        konst staticVal1: Int = 42
 
-        val staticVal2: Int
+        konst staticVal2: Int
             @JvmStatic get() = 42
 
         @get:JvmStatic
-        val staticVal3: Int = 42
+        konst staticVal3: Int = 42
 
         @JvmStatic
         var staticVar1: Int = 42
 
         var staticVar2: Int
             @JvmStatic get() = 42
-            @JvmStatic set(value) {}
+            @JvmStatic set(konstue) {}
 
         @get: JvmStatic
         @set: JvmStatic

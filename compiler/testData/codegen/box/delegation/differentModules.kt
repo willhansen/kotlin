@@ -14,7 +14,7 @@ interface UClass : PsiClass {
 
 abstract class BaseKotlinUClass(
     psi: PsiClass,
-    val w: String,
+    konst w: String,
 ) : UClass, PsiClass by psi
 
 // MODULE: main(base)

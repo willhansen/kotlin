@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
 fun foo() {
     when {}
-    val x = 0
+    konst x = 0
     when (x) {
         else -> {}
     }
-    val z = when (x) {
+    konst z = when (x) {
         else -> {}
     }
 }

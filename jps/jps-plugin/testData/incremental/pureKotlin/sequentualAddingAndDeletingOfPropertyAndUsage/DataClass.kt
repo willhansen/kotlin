@@ -1,4 +1,4 @@
 data class DatClass(
-    val a: Boolean = false,
-    val b: Int = 1
+    konst a: Boolean = false,
+    konst b: Int = 1
 )

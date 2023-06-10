@@ -5,12 +5,12 @@ plugins {
 
 project.updateJvmTarget("1.8")
 
-val allTestsRuntime by configurations.creating
+konst allTestsRuntime by configurations.creating
 
-val testApi by configurations
+konst testApi by configurations
 testApi.extendsFrom(allTestsRuntime)
 
-val embeddableTestRuntime by configurations.creating {
+konst embeddableTestRuntime by configurations.creating {
     extendsFrom(allTestsRuntime)
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))

@@ -3,7 +3,7 @@
 fun <T> useTConstrained(xs: Array<T>, fn: () -> T) = fn()
 
 fun box(): String {
-    val xs = Array(1) { "" }
+    konst xs = Array(1) { "" }
     try {
         useTConstrained(xs) { J.notNullString() }
     } catch (e: NullPointerException) {

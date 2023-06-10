@@ -3,7 +3,7 @@ fun import() {
 }
 
 fun composite() {
-    val s = 13+<!SYNTAX!>~<!><!DEBUG_INFO_MISSING_UNRESOLVED!>/<!>12
+    konst s = 13+<!SYNTAX!>~<!><!DEBUG_INFO_MISSING_UNRESOLVED!>/<!>12
 }
 
 fun html() {

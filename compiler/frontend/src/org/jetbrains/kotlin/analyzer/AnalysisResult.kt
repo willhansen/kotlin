@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import java.io.File
 
 open class AnalysisResult protected constructor(
-    val bindingContext: BindingContext,
-    val moduleDescriptor: ModuleDescriptor,
-    val shouldGenerateCode: Boolean = true
+    konst bindingContext: BindingContext,
+    konst moduleDescriptor: ModuleDescriptor,
+    konst shouldGenerateCode: Boolean = true
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -46,7 +46,7 @@ open class AnalysisResult protected constructor(
 
     operator fun component3() = shouldGenerateCode
 
-    val error: Throwable
+    konst error: Throwable
         get() = if (this is InternalError) this.exception else throw IllegalStateException("Should only be called for error analysis result")
 
     fun isError(): Boolean = this is InternalError || this is CompilationError
@@ -62,20 +62,20 @@ open class AnalysisResult protected constructor(
 
     private class InternalError(
         bindingContext: BindingContext,
-        val exception: Throwable
+        konst exception: Throwable
     ) : AnalysisResult(bindingContext, ErrorUtils.errorModule)
 
     class RetryWithAdditionalRoots(
         bindingContext: BindingContext,
         moduleDescriptor: ModuleDescriptor,
-        val additionalJavaRoots: List<File>,
-        val additionalKotlinRoots: List<File>,
-        val additionalClassPathRoots: List<File> = emptyList(),
-        val addToEnvironment: Boolean = true
+        konst additionalJavaRoots: List<File>,
+        konst additionalKotlinRoots: List<File>,
+        konst additionalClassPathRoots: List<File> = emptyList(),
+        konst addToEnvironment: Boolean = true
     ) : AnalysisResult(bindingContext, moduleDescriptor)
 
     companion object {
-        val EMPTY: AnalysisResult = success(BindingContext.EMPTY, ErrorUtils.errorModule)
+        konst EMPTY: AnalysisResult = success(BindingContext.EMPTY, ErrorUtils.errorModule)
 
         @JvmStatic
         fun success(bindingContext: BindingContext, module: ModuleDescriptor): AnalysisResult {

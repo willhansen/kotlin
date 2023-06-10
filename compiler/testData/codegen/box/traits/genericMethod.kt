@@ -1,5 +1,5 @@
 interface A<T> {
-    val property : T
+    konst property : T
 
     open  fun a() : T {
         return property
@@ -8,12 +8,12 @@ interface A<T> {
 
 open class B : A<Any> {
 
-    override val property: Any = "fail"
+    override konst property: Any = "fail"
 }
 
 open class C : B(), A<Any> {
 
-    override val property: Any = "OK"
+    override konst property: Any = "OK"
 }
 
 fun box() : String {

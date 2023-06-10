@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/String
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getContainingModule: KtSourceModule "Sources of main"
     deprecationStatus: null
@@ -103,7 +103,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Unit
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: [
+    konstueParameters: [
       KtValueParameterSymbol:
         annotationsList: []
         callableIdIfNonLocal: null

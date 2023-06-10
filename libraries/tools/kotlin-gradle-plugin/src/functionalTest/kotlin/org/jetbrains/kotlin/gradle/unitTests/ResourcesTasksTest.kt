@@ -17,13 +17,13 @@ import kotlin.test.assertEquals
 class ResourcesTasksTest {
     @Test
     fun `test - default resources task names are consistent`() {
-        val project = buildProjectWithJvm()
-        val jvmTarget = project.kotlinExtension.targets.single()
-        val expectedProcessResourceTaskNames = setOf("processResources", "processTestResources")
-        val actualProcessResourceTaskNames = project.tasks.withType<ProcessResources>().names
-        val kotlinReportedProcessResourceTaskNames = hashSetOf<String>()
+        konst project = buildProjectWithJvm()
+        konst jvmTarget = project.kotlinExtension.targets.single()
+        konst expectedProcessResourceTaskNames = setOf("processResources", "processTestResources")
+        konst actualProcessResourceTaskNames = project.tasks.withType<ProcessResources>().names
+        konst kotlinReportedProcessResourceTaskNames = hashSetOf<String>()
         for (compilation in jvmTarget.compilations) {
-            val processResourcesTaskName = (compilation as? InternalKotlinCompilation<*>)?.let { it.processResourcesTaskName }
+            konst processResourcesTaskName = (compilation as? InternalKotlinCompilation<*>)?.let { it.processResourcesTaskName }
             if (processResourcesTaskName != null) {
                 kotlinReportedProcessResourceTaskNames.add(processResourcesTaskName)
             }

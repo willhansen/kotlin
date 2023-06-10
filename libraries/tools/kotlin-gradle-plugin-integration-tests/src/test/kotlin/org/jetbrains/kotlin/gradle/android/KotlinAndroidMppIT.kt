@@ -34,9 +34,9 @@ import kotlin.test.*
 @GradleTestVersions(minVersion = G_7_1)
 @AndroidTestVersions(minVersion = AGP_70)
 class KotlinAndroidMppIT : KGPBaseTest() {
-    @DisplayName("KT-50736: whenEvaluated waits for AGP being applied later")
+    @DisplayName("KT-50736: whenEkonstuated waits for AGP being applied later")
     @GradleAndroidTest
-    fun testAfterEvaluateOrdering(
+    fun testAfterEkonstuateOrdering(
         gradleVersion: GradleVersion,
         agpVersion: String,
         jdkVersion: JdkVersions.ProvidedJdk,
@@ -72,7 +72,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                     }
                 }
         
-                org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginKt.whenEvaluated(project, new MyAction ())
+                org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginKt.whenEkonstuated(project, new MyAction ())
         
                 apply plugin : "android-library"
         
@@ -86,7 +86,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             )
 
             build("help") {
-                val reportedCompilations = output.lines()
+                konst reportedCompilations = output.lines()
                     .single { it.contains("compilations: ") }
                     .substringAfter("compilations: ")
                     .removeSurrounding("[", "]")
@@ -116,7 +116,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             build("assembleDebug") {
                 assertTasksAreNotInTaskGraph(":${BuildKotlinToolingMetadataTask.defaultTaskName}")
 
-                val debugApk = projectPath.resolve("build/outputs/apk/debug/project-debug.apk")
+                konst debugApk = projectPath.resolve("build/outputs/apk/debug/project-debug.apk")
                 assertFileExists(debugApk)
                 ZipFile(debugApk.toFile()).use { zip ->
                     assertNull(zip.getEntry("kotlin-tooling-metadata.json"), "Expected metadata *not* being packaged into debug apk")
@@ -125,7 +125,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
 
             build("assembleRelease") {
                 assertTasksExecuted(":${BuildKotlinToolingMetadataTask.defaultTaskName}")
-                val releaseApk = projectPath.resolve("build/outputs/apk/release/project-release-unsigned.apk")
+                konst releaseApk = projectPath.resolve("build/outputs/apk/release/project-release-unsigned.apk")
 
                 assertFileExists(releaseApk)
                 ZipFile(releaseApk.toFile()).use { zip ->
@@ -210,7 +210,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
         agpVersion: String,
         jdkVersion: JdkVersions.ProvidedJdk,
     ) {
-        val androidSourcesElementsAttributes = arrayOf(
+        konst androidSourcesElementsAttributes = arrayOf(
             "org.gradle.category" to "documentation",
             "org.gradle.dependency.bundling" to "external",
             "org.gradle.docstype" to "sources",
@@ -229,7 +229,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
             buildJdk = jdkVersion.location
         ) {
-            val groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
+            konst groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
             build("publish") {
                 assertDirectoryExists(groupDir.resolve("lib-jvmlib"))
                 assertDirectoryExists(groupDir.resolve("lib-jslib"))
@@ -333,9 +333,9 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             )
             build("publish") {
                 listOf("fooBar", "fooBaz").forEach { flavorName ->
-                    val flavor = flavorName.lowercase()
+                    konst flavor = flavorName.lowercase()
 
-                    val flavorAttributes = if (AGPVersion.fromString(agpVersion) > AGPVersion.v7_0_0) {
+                    konst flavorAttributes = if (AGPVersion.fromString(agpVersion) > AGPVersion.v7_0_0) {
                         arrayOf(
                             "foo" to flavorName,
                             "com.android.build.api.attributes.ProductFlavor:foo" to flavorName
@@ -385,9 +385,9 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             )
             build("publish") {
                 listOf("fooBar", "fooBaz").forEach { flavorName ->
-                    val flavor = flavorName.lowercase()
+                    konst flavor = flavorName.lowercase()
 
-                    val flavorAttributes = if (AGPVersion.fromString(agpVersion) > AGPVersion.v7_0_0) {
+                    konst flavorAttributes = if (AGPVersion.fromString(agpVersion) > AGPVersion.v7_0_0) {
                         arrayOf(
                             "foo" to flavorName,
                             "com.android.build.api.attributes.ProductFlavor:foo" to flavorName
@@ -454,12 +454,12 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                 """.trimIndent()
             )
 
-            val groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
+            konst groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
             build("publish") {
-                val sourcesJarFile = groupDir.resolve("lib-androidlib/1.0/lib-androidlib-1.0-sources.jar").toFile()
+                konst sourcesJarFile = groupDir.resolve("lib-androidlib/1.0/lib-androidlib-1.0-sources.jar").toFile()
                 if (sourcesJarFile.exists()) fail("Release sources jar should not be published")
 
-                val gradleMetadataFileContent = groupDir.resolve("lib-androidlib/1.0/lib-androidlib-1.0.module").readText()
+                konst gradleMetadataFileContent = groupDir.resolve("lib-androidlib/1.0/lib-androidlib-1.0.module").readText()
                 if (gradleMetadataFileContent.contains("releaseSourcesElements-published")) {
                     fail("'releaseSourcesElements-published' variant should not be published")
                 }
@@ -482,7 +482,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
         ) {
             // Convert the 'app' project to a library, publish two flavors without metadata,
             // check that the dependencies in the POMs are correctly rewritten:
-            val appGroupDir = subProject("app").projectPath.resolve("build/repo/com/example")
+            konst appGroupDir = subProject("app").projectPath.resolve("build/repo/com/example")
 
             subProject("lib").buildGradle.appendText(
                 //language=Gradle
@@ -509,7 +509,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                     listOf("-debug", "").forEach { buildType ->
                         assertFileExists(appGroupDir.resolve("app-androidapp-$flavor$buildType/1.0/app-androidapp-$flavor$buildType-1.0.aar"))
                         assertFileExists(appGroupDir.resolve("app-androidapp-$flavor$buildType/1.0/app-androidapp-$flavor$buildType-1.0-sources.jar"))
-                        val pomText =
+                        konst pomText =
                             appGroupDir.resolve("app-androidapp-$flavor$buildType/1.0/app-androidapp-$flavor$buildType-1.0.pom").readText()
                                 .replace("\\s+".toRegex(), "")
                         assertContains(
@@ -535,7 +535,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             build("publish") {
                 listOf("foobar", "foobaz").forEach { flavor ->
                     listOf("-debug", "").forEach { buildType ->
-                        val pomText =
+                        konst pomText =
                             appGroupDir.resolve("app-androidapp-$flavor$buildType/1.0/app-androidapp-$flavor$buildType-1.0.pom").readText()
                                 .replace("\\s+".toRegex(), "")
                         assertContains(
@@ -636,7 +636,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                 """.trimIndent()
             )
 
-            val kotlinVersion = buildOptions.kotlinVersion
+            konst kotlinVersion = buildOptions.kotlinVersion
             testResolveAllConfigurations("lib") { _, buildResult ->
                 // androidLibDebug:
                 buildResult.assertOutputContains(">> :lib:debugCompileClasspath --> kotlin-reflect-$kotlinVersion.jar")
@@ -670,8 +670,8 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
             buildJdk = jdkVersion.location
         ) {
-            val libBuildScript = subProject("lib").buildGradle
-            val appBuildScript = subProject("app").buildGradle
+            konst libBuildScript = subProject("lib").buildGradle
+            konst appBuildScript = subProject("app").buildGradle
 
             // Enable publishing for all Android variants:
             libBuildScript.appendText(
@@ -682,7 +682,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                 """.trimIndent()
             )
 
-            val groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
+            konst groupDir = subProject("lib").projectPath.resolve("build/repo/com/example")
 
             build("publish") {
                 // Also check that custom user-specified attributes are written in all Android modules metadata:
@@ -700,7 +700,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             groupDir.deleteRecursively()
 
             // Check that the consumer side uses custom attributes specified in the target and compilations:
-            val appBuildScriptBackup = appBuildScript.readText()
+            konst appBuildScriptBackup = appBuildScript.readText()
 
             libBuildScript.appendText(
                 //language=Gradle
@@ -729,7 +729,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                 // dependency resolution should fail
                 assertOutputContainsAny(
                     "Required com.example.target 'notAndroidLib'",
-                    "attribute 'com.example.target' with value 'notAndroidLib'",
+                    "attribute 'com.example.target' with konstue 'notAndroidLib'",
                 )
             }
 
@@ -771,7 +771,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             buildAndFail(":app:compileDebugKotlinAndroidApp") {
                 assertOutputContainsAny(
                     "Required com.example.compilation 'notDebug'",
-                    "attribute 'com.example.compilation' with value 'notDebug'",
+                    "attribute 'com.example.compilation' with konstue 'notDebug'",
                 )
             }
         }
@@ -799,7 +799,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
                 dependencies { implementation(project(':sample-lib')) }
                 """.trimIndent()
             )
-            val lintTask = ":Lib:lintFlavor1Debug"
+            konst lintTask = ":Lib:lintFlavor1Debug"
             build(lintTask) {
                 assertTasksExecuted(lintTask) // Check that the lint task ran successfully, KT-27170
             }
@@ -846,18 +846,18 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             buildJdk = jdkVersion.location
         ) {
             build("publish") {
-                val libProject = subProject("lib")
-                val debugPublicationDirectory = libProject.projectPath.resolve("build/repo/com/example/lib-androidlib-debug")
-                val releasePublicationDirectory = libProject.projectPath.resolve("build/repo/com/example/lib-androidlib")
+                konst libProject = subProject("lib")
+                konst debugPublicationDirectory = libProject.projectPath.resolve("build/repo/com/example/lib-androidlib-debug")
+                konst releasePublicationDirectory = libProject.projectPath.resolve("build/repo/com/example/lib-androidlib")
 
                 listOf(debugPublicationDirectory, releasePublicationDirectory).forEach { publicationDirectory ->
                     assertDirectoryExists(publicationDirectory)
-                    val moduleFiles = Files.walk(publicationDirectory).use { it.filter { file -> file.extension == "module" }.toList() }
+                    konst moduleFiles = Files.walk(publicationDirectory).use { it.filter { file -> file.extension == "module" }.toList() }
                     assertTrue(moduleFiles.isNotEmpty(), "Missing .module file in $publicationDirectory")
                     assertTrue(moduleFiles.size == 1, "Multiple .module files in $publicationDirectory: $moduleFiles")
 
-                    val moduleFile = moduleFiles.single()
-                    val moduleFileText = moduleFile.readText()
+                    konst moduleFile = moduleFiles.single()
+                    konst moduleFileText = moduleFile.readText()
                     assertTrue("AgpVersionAttr" !in moduleFileText, ".module file $moduleFile leaks AgpVersionAttr")
                 }
             }
@@ -890,15 +890,15 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             }
         }
 
-        val checkedConsumerAGPVersions = AGPVersion.testedVersions
+        konst checkedConsumerAGPVersions = AGPVersion.testedVersions
             .filter { version -> version >= AGPVersion.fromString(TestVersions.AGP.AGP_42) }
             .filter { version -> version < AGPVersion.fromString(TestVersions.AGP.MAX_SUPPORTED) }
             .map { it.toString() }
 
         checkedConsumerAGPVersions.forEach { consumerAgpVersion ->
-            val agpTestVersion = TestVersions.AgpCompatibilityMatrix.values().find { it.version == consumerAgpVersion }
+            konst agpTestVersion = TestVersions.AgpCompatibilityMatrix.konstues().find { it.version == consumerAgpVersion }
                 ?: fail("AGP version $consumerAgpVersion is not defined in TestVersions.AGP!")
-            val consumerGradleVersion = when {
+            konst consumerGradleVersion = when {
                 gradleVersion < agpTestVersion.minSupportedGradleVersion -> agpTestVersion.minSupportedGradleVersion
                 gradleVersion > agpTestVersion.maxSupportedGradleVersion -> agpTestVersion.maxSupportedGradleVersion
                 else -> gradleVersion
@@ -994,7 +994,7 @@ class KotlinAndroidMppIT : KGPBaseTest() {
             buildJdk = jdkVersion.location
         ) {
             build("tasks") {
-                val warnings = output.lines().filter { it.startsWith("w:") }.toSet()
+                konst warnings = output.lines().filter { it.startsWith("w:") }.toSet()
                 assert(
                     warnings.any { warning -> warning.contains("androidTarget") }
                 )

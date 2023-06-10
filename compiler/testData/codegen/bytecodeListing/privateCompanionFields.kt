@@ -10,25 +10,25 @@ class TestClass {
         var test2: String = "2"
 
         @JvmField
-        val test3: String = "3"
+        konst test3: String = "3"
 
-        const val testConst = 1
+        const konst testConst = 1
     }
 }
 
 class TestClass2 {
 
     private companion object {
-        val testPublic: String = "1"
-        private val testPrivate: String = "2"
-        const val testPublicConst: String = "3"
+        konst testPublic: String = "1"
+        private konst testPrivate: String = "2"
+        const konst testPublicConst: String = "3"
     }
 }
 
 interface TestConst {
 
     private companion object {
-        const val testConst = 1
+        const konst testConst = 1
     }
 }
 
@@ -36,6 +36,6 @@ interface TestJvmField {
 
     private companion object {
         @JvmField
-        val test3: String = "3"
+        konst test3: String = "3"
     }
 }

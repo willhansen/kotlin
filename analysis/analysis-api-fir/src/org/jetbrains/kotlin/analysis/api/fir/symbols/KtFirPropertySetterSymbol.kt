@@ -34,41 +34,41 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirPropertyAccessorSymbol
 import org.jetbrains.kotlin.name.CallableId
 
 internal class KtFirPropertySetterSymbol(
-    override val firSymbol: FirPropertyAccessorSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirPropertyAccessorSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtPropertySetterSymbol(), KtFirSymbol<FirPropertyAccessorSymbol> {
 
     init {
         require(firSymbol.isSetter)
     }
 
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val isDefault: Boolean get() = withValidityAssertion { firSymbol.fir is FirDefaultPropertyAccessor }
-    override val isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
-    override val isOverride: Boolean
+    override konst isDefault: Boolean get() = withValidityAssertion { firSymbol.fir is FirDefaultPropertyAccessor }
+    override konst isInline: Boolean get() = withValidityAssertion { firSymbol.isInline }
+    override konst isOverride: Boolean
         get() = withValidityAssertion {
             if (firSymbol.isOverride) return true
-            val propertySymbol = firSymbol.fir.propertySymbol
+            konst propertySymbol = firSymbol.fir.propertySymbol
             if (!propertySymbol.isOverride) return false
-            val session = analysisSession.useSiteSession
-            val containingClassScope = firSymbol.dispatchReceiverType?.scope(
+            konst session = analysisSession.useSiteSession
+            konst containingClassScope = firSymbol.dispatchReceiverType?.scope(
                 session,
                 analysisSession.getScopeSessionFor(session),
                 FakeOverrideTypeCalculator.DoNothing,
                 requiredMembersPhase = FirResolvePhase.STATUS,
             ) ?: return false
 
-            val overriddenProperties = containingClassScope.getDirectOverriddenProperties(propertySymbol)
+            konst overriddenProperties = containingClassScope.getDirectOverriddenProperties(propertySymbol)
             overriddenProperties.any { it.isVar }
         }
 
-    override val hasBody: Boolean get() = withValidityAssertion { firSymbol.fir.hasBody }
+    override konst hasBody: Boolean get() = withValidityAssertion { firSymbol.fir.hasBody }
 
-    override val modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
-    override val visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
+    override konst modality: Modality get() = withValidityAssertion { firSymbol.modalityOrFinal }
+    override konst visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -80,24 +80,24 @@ internal class KtFirPropertySetterSymbol(
      * Returns [CallableId] of the delegated Java method if the corresponding property of this setter is a synthetic Java property.
      * Otherwise, returns `null`
      */
-    override val callableIdIfNonLocal: CallableId? by cached {
-        val fir = firSymbol.fir
+    override konst callableIdIfNonLocal: CallableId? by cached {
+        konst fir = firSymbol.fir
         if (fir is FirSyntheticPropertyAccessor) {
             fir.delegate.symbol.callableId
         } else null
     }
 
-    override val parameter: KtValueParameterSymbol by cached {
+    override konst parameter: KtValueParameterSymbol by cached {
         firSymbol.createKtValueParameters(builder).single()
     }
 
-    override val valueParameters: List<KtValueParameterSymbol> by cached { listOf(parameter) }
+    override konst konstueParameters: List<KtValueParameterSymbol> by cached { listOf(parameter) }
 
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
-    override val receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.fir.propertySymbol.receiver(builder) }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst receiverParameter: KtReceiverParameterSymbol? get() = withValidityAssertion { firSymbol.fir.propertySymbol.receiver(builder) }
 
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
     context(KtAnalysisSession)

@@ -6,7 +6,7 @@
 package kotlin.text.regex
 
 /* Contains canonical classes (see http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt). */
-private val canonicalClassesKeys = intArrayOf(
+private konst canonicalClassesKeys = intArrayOf(
     768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790,
     791, 792, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 810, 811, 812, 813,
     814, 815, 816, 817, 818, 819, 820, 821, 822, 823, 824, 825, 826, 827, 828, 829, 830, 831, 832, 833, 834, 835, 836,
@@ -29,7 +29,7 @@ private val canonicalClassesKeys = intArrayOf(
     119175, 119176, 119177, 119178, 119179, 119210, 119211, 119212, 119213, 119362, 119363, 119364,
 )
 
-private val canonicalClassesValues = intArrayOf(
+private konst canonicalClassesValues = intArrayOf(
     230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 230, 232, 220,
     220, 220, 220, 232, 216, 220, 220, 220, 220, 220, 202, 202, 220, 220, 220, 220, 202, 202, 220, 220, 220, 220, 220,
     220, 220, 220, 220, 220, 220, 1, 1, 1, 1, 1, 220, 220, 220, 220, 230, 230, 230, 230, 230, 230, 230, 230, 240, 230,
@@ -49,7 +49,7 @@ private val canonicalClassesValues = intArrayOf(
 )
 
 /* Symbols that are one symbol decompositions (see http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt). */
-private val singleDecompositions = intArrayOf(
+private konst singleDecompositions = intArrayOf(
     59, 75, 96, 180, 183, 197, 697, 768, 769, 787, 901, 902, 904, 905, 906, 908, 910, 911, 912, 937, 940, 941, 942, 943,
     944, 953, 972, 973, 974, 8194, 8195, 12296, 12297, 13470, 13497, 13499, 13535, 13589, 14062, 14076, 14209, 14383,
     14434, 14460, 14535, 14563, 14620, 14650, 14894, 14956, 15076, 15112, 15129, 15177, 15261, 15384, 15438, 15667, 15766,
@@ -108,7 +108,7 @@ private val singleDecompositions = intArrayOf(
     169110, 169398, 170800, 172238, 172293, 172558, 172689, 172946, 173568
 )
 
-private val decompositionKeys = intArrayOf(
+private konst decompositionKeys = intArrayOf(
     192, 193, 194, 195, 196, 197, 199, 200, 201, 202, 203, 204, 205, 206, 207, 209, 210, 211, 212, 213, 214, 217, 218,
     219, 220, 221, 224, 225, 226, 227, 228, 229, 231, 232, 233, 234, 235, 236, 237, 238, 239, 241, 242, 243, 244, 245,
     246, 249, 250, 251, 252, 253, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271,
@@ -231,7 +231,7 @@ private val decompositionKeys = intArrayOf(
 )
 
 private fun getCanonicalClass(ch: Int): Int {
-    val index: Int = binarySearchRange(canonicalClassesKeys, ch)
+    konst index: Int = binarySearchRange(canonicalClassesKeys, ch)
     if (index == -1 || canonicalClassesKeys[index] != ch) {
         return 0
     }
@@ -239,7 +239,7 @@ private fun getCanonicalClass(ch: Int): Int {
 }
 
 private fun getDecomposition(codePoint: Int): IntArray? {
-    val index: Int = binarySearchRange(decompositionKeys, codePoint)
+    konst index: Int = binarySearchRange(decompositionKeys, codePoint)
     if (index == -1 || decompositionKeys[index] != codePoint) {
         return null
     }
@@ -253,7 +253,7 @@ internal fun getCanonicalClassInternal(ch: Int): Int {
 
 /** Check if the given character is in table of single decompositions. */
 internal fun hasSingleCodepointDecompositionInternal(ch: Int): Boolean {
-    val index: Int = binarySearchRange(singleDecompositions, ch)
+    konst index: Int = binarySearchRange(singleDecompositions, ch)
     return index != -1 && singleDecompositions[index] == ch
 }
 
@@ -266,7 +266,7 @@ internal fun decomposeString(inputCodePoints: IntArray, inputLength: Int, output
 
     var outputLength = 0
     for (i in 0 until inputLength) {
-        val decomposition = getDecomposition(inputCodePoints[i])
+        konst decomposition = getDecomposition(inputCodePoints[i])
         if (decomposition == null) {
             outputCodePoints[outputLength++] = inputCodePoints[i]
         } else {
@@ -282,7 +282,7 @@ internal fun decomposeString(inputCodePoints: IntArray, inputLength: Int, output
  * Returns the length of the decomposition.
  */
 internal fun decomposeCodePoint(codePoint: Int, outputCodePoints: IntArray, fromIndex: Int): Int {
-    val decomposition = getDecomposition(codePoint)
+    konst decomposition = getDecomposition(codePoint)
     if (decomposition == null) {
         outputCodePoints[fromIndex] = codePoint
         return 1
@@ -300,16 +300,16 @@ private fun binarySearchRange(array: IntArray, needle: Int): Int {
     var bottom = 0
     var top = array.size - 1
     var middle = -1
-    var value = 0
+    var konstue = 0
     while (bottom <= top) {
         middle = (bottom + top) / 2
-        value = array[middle]
-        if (needle > value)
+        konstue = array[middle]
+        if (needle > konstue)
             bottom = middle + 1
-        else if (needle == value)
+        else if (needle == konstue)
             return middle
         else
             top = middle - 1
     }
-    return middle - (if (needle < value) 1 else 0)
+    return middle - (if (needle < konstue) 1 else 0)
 }

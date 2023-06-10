@@ -1,5 +1,5 @@
 package test
 
 interface I {
-    val value: String?
+    konst konstue: String?
 }

@@ -3,8 +3,8 @@
 // WITH_STDLIB
 
 abstract class Base {
-    @JvmField val name: String = "O"
-    @JvmField val Name: String = "K"
+    @JvmField konst name: String = "O"
+    @JvmField konst Name: String = "K"
 }
 
 class Derived : Base()

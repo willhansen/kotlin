@@ -94,32 +94,32 @@ import kotlin.experimental.ExperimentalNativeApi
  * This character can be supplementary (2 chars needed to represent) or from
  * basic multilingual pane (1 needed char to represent it).
  */
-open internal class SupplementaryRangeSet(charClass: AbstractCharClass, val ignoreCase: Boolean = false): SimpleSet() {
+open internal class SupplementaryRangeSet(charClass: AbstractCharClass, konst ignoreCase: Boolean = false): SimpleSet() {
 
-    val chars = charClass.instance
+    konst chars = charClass.instance
 
     // This node can consume a single char or a supplementary code point consisting of two surrogate chars.
     // But this node can't match an unpaired surrogate char.
     // Thus, for a given [testString] and [startIndex] a fixed amount of chars are consumed.
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = true
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val rightBound = testString.length
+        konst rightBound = testString.length
         if (startIndex >= rightBound) {
             return -1
         }
 
         var index = startIndex
 
-        val high = testString[index++]
+        konst high = testString[index++]
         if (contains(high)) {
-            val result = next.matches(index, testString, matchResult)
+            konst result = next.matches(index, testString, matchResult)
             if (result >= 0) return result
         }
 
         if (index < rightBound) {
-            val low = testString[index++]
+            konst low = testString[index++]
             @OptIn(ExperimentalNativeApi::class)
             if (Char.isSurrogatePair(high, low) && contains(Char.toCodePoint(high, low))) {
                 return next.matches(index, testString, matchResult)
@@ -141,7 +141,7 @@ open internal class SupplementaryRangeSet(charClass: AbstractCharClass, val igno
         return chars.contains(char)
     }
 
-    override val name: String
+    override konst name: String
         get() = "range:" + (if (chars.alt) "^ " else " ") + chars.toString()
 
 

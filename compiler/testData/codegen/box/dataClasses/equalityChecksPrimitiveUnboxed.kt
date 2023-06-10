@@ -1,21 +1,21 @@
 // The purpose of this test is to ensure that we don't generate any primitive boxing in the implementation
 // of a data class. See KT-48635.
 
-data class VBoolean(val value: Boolean)
+data class VBoolean(konst konstue: Boolean)
 
-data class VByte(val value: Byte)
+data class VByte(konst konstue: Byte)
 
-data class VChar(val value: Char)
+data class VChar(konst konstue: Char)
 
-data class VShort(val value: Short)
+data class VShort(konst konstue: Short)
 
-data class VInt(val value: Int)
+data class VInt(konst konstue: Int)
 
-data class VLong(val value: Long)
+data class VLong(konst konstue: Long)
 
-data class VFloat(val value: Float)
+data class VFloat(konst konstue: Float)
 
-data class VDouble(val value: Double)
+data class VDouble(konst konstue: Double)
 
 fun box(): String {
     if (VBoolean(true) == VBoolean(false)) return "Fail 0"
@@ -30,13 +30,13 @@ fun box(): String {
 }
 
 // CHECK_BYTECODE_TEXT
-// 0 java/lang/Boolean.valueOf
-// 0 java/lang/Byte.valueOf
-// 0 java/lang/Character.valueOf
-// 0 java/lang/Short.valueOf
-// 0 java/lang/Integer.valueOf
-// 0 java/lang/Long.valueOf
-// 0 java/lang/Float.valueOf
-// 0 java/lang/Double.valueOf
+// 0 java/lang/Boolean.konstueOf
+// 0 java/lang/Byte.konstueOf
+// 0 java/lang/Character.konstueOf
+// 0 java/lang/Short.konstueOf
+// 0 java/lang/Integer.konstueOf
+// 0 java/lang/Long.konstueOf
+// 0 java/lang/Float.konstueOf
+// 0 java/lang/Double.konstueOf
 // 1 java/lang/Float.compare
 // 1 java/lang/Double.compare

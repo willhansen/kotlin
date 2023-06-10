@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.diagnostics.Diagnostics
 
-data class CodeGenerationResult(val stub: PsiJavaFileStub, val bindingContext: BindingContext, val diagnostics: Diagnostics)
+data class CodeGenerationResult(konst stub: PsiJavaFileStub, konst bindingContext: BindingContext, konst diagnostics: Diagnostics)
 
 fun extraJvmDiagnosticsFromBackend(
     packageFqName: FqName,
@@ -31,11 +31,11 @@ fun extraJvmDiagnosticsFromBackend(
     context: LightClassConstructionContext,
     generate: (state: GenerationState, files: Collection<KtFile>) -> Unit,
 ): CodeGenerationResult {
-    val project = files.first().project
+    konst project = files.first().project
 
     try {
-        val classBuilderFactory = KotlinLightClassBuilderFactory(createJavaFileStub(packageFqName, files))
-        val state = GenerationState.Builder(
+        konst classBuilderFactory = KotlinLightClassBuilderFactory(createJavaFileStub(packageFqName, files))
+        konst state = GenerationState.Builder(
             project,
             classBuilderFactory,
             context.module,
@@ -53,7 +53,7 @@ fun extraJvmDiagnosticsFromBackend(
 
         generate(state, files)
 
-        val javaFileStub = classBuilderFactory.result()
+        konst javaFileStub = classBuilderFactory.result()
         return CodeGenerationResult(javaFileStub, context.bindingContext, state.collectedExtraJvmDiagnostics)
     } catch (e: ProcessCanceledException) {
         throw e
@@ -64,10 +64,10 @@ fun extraJvmDiagnosticsFromBackend(
 }
 
 private fun createJavaFileStub(packageFqName: FqName, files: Collection<KtFile>): PsiJavaFileStub {
-    val javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /* compiled = */true)
+    konst javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /* compiled = */true)
     javaFileStub.psiFactory = ClsWrapperStubPsiFactory.INSTANCE
 
-    val fakeFile = object : ClsFileImpl(files.first().viewProvider) {
+    konst fakeFile = object : ClsFileImpl(files.first().viewProvider) {
         override fun getStub() = javaFileStub
         override fun getPackageName() = packageFqName.asString()
         override fun isPhysical() = false
@@ -79,7 +79,7 @@ private fun createJavaFileStub(packageFqName: FqName, files: Collection<KtFile>)
 }
 
 private fun logErrorWithOSInfo(cause: Throwable?, fqName: FqName, virtualFile: VirtualFile?) {
-    val path = virtualFile?.path ?: "<null>"
+    konst path = virtualFile?.path ?: "<null>"
     LOG.error(
         "Could not generate LightClass for $fqName declared in $path\n" +
                 "System: ${SystemInfo.OS_NAME} ${SystemInfo.OS_VERSION} Java Runtime: ${SystemInfo.JAVA_RUNTIME_VERSION}",
@@ -87,4 +87,4 @@ private fun logErrorWithOSInfo(cause: Throwable?, fqName: FqName, virtualFile: V
     )
 }
 
-private val LOG = Logger.getInstance(CodeGenerationResult::class.java)
+private konst LOG = Logger.getInstance(CodeGenerationResult::class.java)

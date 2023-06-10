@@ -5,19 +5,19 @@
 import kotlin.test.*
 import kotlin.text.Regex
 
-val EXTENSION = ".kt:"
-val LOCATION_PATTERN = Regex("\\d+:\\d+")
+konst EXTENSION = ".kt:"
+konst LOCATION_PATTERN = Regex("\\d+:\\d+")
 
 fun checkStringFormat(s: String) {
-    val trimmed = s.trim()
+    konst trimmed = s.trim()
 
     assertTrue(trimmed.endsWith(')'), "Line is not ended with ')'")
     assertNotEquals(trimmed.indexOf('('), -1, "No '(' before filename")
 
-    val fileName = trimmed.substring(trimmed.lastIndexOf('(') + 1, trimmed.lastIndex)
+    konst fileName = trimmed.substring(trimmed.lastIndexOf('(') + 1, trimmed.lastIndex)
     assertNotEquals(fileName.indexOf(EXTENSION), -1, "Filename 'kt' extension is absent")
 
-    val location = fileName.substring(fileName.indexOf(EXTENSION) + EXTENSION.length)
+    konst location = fileName.substring(fileName.indexOf(EXTENSION) + EXTENSION.length)
     assertTrue(LOCATION_PATTERN.matches(location), "Expected location of form 12:8")
 }
 
@@ -32,8 +32,8 @@ fun functionB() {
 var depth = 3
 
 fun main(args : Array<String>) {
-    val sourceInfoType = args.first()
-    val exceptionalFrames = when (sourceInfoType) {
+    konst sourceInfoType = args.first()
+    konst exceptionalFrames = when (sourceInfoType) {
         "libbacktrace" -> 0
         "coresymbolication" -> 2
         else -> throw AssertionError("Unknown source info type " + sourceInfoType)
@@ -42,7 +42,7 @@ fun main(args : Array<String>) {
     try {
         functionB()
     } catch (e: Throwable) {
-        val stacktrace = e.getStackTrace()
+        konst stacktrace = e.getStackTrace()
 	assert(stacktrace.size >= depth)
 	stacktrace.take(depth).forEach(::checkStringFormat)
     }

@@ -1,1 +1,1 @@
-actual val sourceSetsAfterCommonMain = "jvmMain"
+actual konst sourceSetsAfterCommonMain = "jvmMain"

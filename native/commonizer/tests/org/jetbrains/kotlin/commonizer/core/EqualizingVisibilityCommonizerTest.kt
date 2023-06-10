@@ -68,5 +68,5 @@ class EqualizingVisibilityCommonizerTest : AbstractCommonizerTest<CirHasVisibili
 }
 
 private fun Visibility.toMock() = object : CirHasVisibility {
-    override val visibility: Visibility = this@toMock
+    override konst visibility: Visibility = this@toMock
 }

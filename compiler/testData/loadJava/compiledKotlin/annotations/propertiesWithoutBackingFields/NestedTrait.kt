@@ -4,6 +4,6 @@ annotation class Anno
 
 class Class {
     interface Trait {
-        @[Anno] val property: Int
+        @[Anno] konst property: Int
     }
 }

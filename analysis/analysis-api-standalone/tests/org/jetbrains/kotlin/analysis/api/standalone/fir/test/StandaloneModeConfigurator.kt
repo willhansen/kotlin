@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 
 public object StandaloneModeConfigurator : AnalysisApiTestConfigurator() {
-    override val analyseInDependentSession: Boolean get() = false
-    override val frontendKind: FrontendKind get() = FrontendKind.Fir
+    override konst analyseInDependentSession: Boolean get() = false
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fir
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
         with(builder) {
@@ -31,9 +31,9 @@ public object StandaloneModeConfigurator : AnalysisApiTestConfigurator() {
         }
     }
 
-    private val sourceConfigurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    private konst sourceConfigurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar>
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar>
         get() = sourceConfigurator.serviceRegistrars + listOf(StandaloneModeTestServiceRegistrar)
 
     override fun createModules(

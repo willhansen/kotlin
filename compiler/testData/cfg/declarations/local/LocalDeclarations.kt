@@ -1,8 +1,8 @@
 class C() {
-    val a: Int = 1
+    konst a: Int = 1
 
     companion object {
-        val x : Int
+        konst x : Int
 
         init {
             x = 1
@@ -10,7 +10,7 @@ class C() {
 
 
         fun foo() {
-            val b : Int = 1
+            konst b : Int = 1
             doSmth(b)
         }
     }
@@ -19,8 +19,8 @@ class C() {
 fun doSmth(i: Int) {}
 
 fun test1() {
-    val a = object {
-        val x : Int
+    konst a = object {
+        konst x : Int
         init {
             x = 1
         }
@@ -28,30 +28,30 @@ fun test1() {
 }
 
 object O {
-    val x : Int
+    konst x : Int
     init {
         x = 1
     }
 }
 
 fun test2() {
-    val b = 1
-    val a = object {
-        val x = b
+    konst b = 1
+    konst a = object {
+        konst x = b
     }
 }
 fun test3() {
-    val a = object {
-        val y : Int
+    konst a = object {
+        konst y : Int
         fun inner_bar() {
             y = 10
         }
     }
 }
 fun test4() {
-    val a = object {
-        val x : Int
-        val y : Int
+    konst a = object {
+        konst x : Int
+        konst y : Int
         init {
             x = 1
         }
@@ -62,7 +62,7 @@ fun test4() {
 }
 
 fun test5() {
-    val a = object {
+    konst a = object {
         var x = 1
         init {
             x = 2

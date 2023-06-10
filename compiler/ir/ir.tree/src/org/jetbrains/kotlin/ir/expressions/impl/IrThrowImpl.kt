@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.ir.expressions.IrThrow
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrThrowImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override var value: IrExpression,
+    override var konstue: IrExpression,
 ) : IrThrow()

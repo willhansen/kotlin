@@ -1,14 +1,14 @@
 package
 
-public val extensionWithoutName: A.() -> kotlin.Unit
-public val funfun: () -> () -> kotlin.Int
-public const val ok: kotlin.String = "OK"
-public val parentesized: () -> kotlin.Unit
-public val parentesizedWithType: () -> kotlin.Unit
-public val withExpression: () -> kotlin.Int
-public val withReturn: () -> kotlin.Int
-public val withType: () -> kotlin.Unit
-public val withoutName: () -> kotlin.Unit
+public konst extensionWithoutName: A.() -> kotlin.Unit
+public konst funfun: () -> () -> kotlin.Int
+public const konst ok: kotlin.String = "OK"
+public konst parentesized: () -> kotlin.Unit
+public konst parentesizedWithType: () -> kotlin.Unit
+public konst withExpression: () -> kotlin.Int
+public konst withReturn: () -> kotlin.Int
+public konst withType: () -> kotlin.Unit
+public konst withoutName: () -> kotlin.Unit
 public fun withAnnotation(): () -> kotlin.Unit
 
 public final class A {
@@ -20,7 +20,7 @@ public final class A {
 
 public final annotation class ann : kotlin.Annotation {
     public constructor ann(/*0*/ name: kotlin.String)
-    public final val name: kotlin.String
+    public final konst name: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -22,14 +22,14 @@ class A(_a: String) : Parcelable {
 }
 
 fun box() = parcelTest { parcel ->
-    val test = A("OK")
+    konst test = A("OK")
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<A>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<A>().createFromParcel(parcel)
 
     assert(test.a == test2.a)
 }

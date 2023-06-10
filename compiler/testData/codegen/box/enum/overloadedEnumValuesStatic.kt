@@ -6,13 +6,13 @@ enum class E {
 
     companion object {
         @JvmStatic
-        fun values(): Array<String> = arrayOf("OK")
+        fun konstues(): Array<String> = arrayOf("OK")
 
         @JvmStatic
-        fun E.values(): Array<E> = arrayOf(A)
+        fun E.konstues(): Array<E> = arrayOf(A)
 
         @JvmStatic
-        fun values(x: Int): Array<E> = arrayOf(A)
+        fun konstues(x: Int): Array<E> = arrayOf(A)
     }
 }
 

@@ -10,7 +10,7 @@
 
 package a
 
-annotation class A(val i: Int)
+annotation class A(konst i: Int)
 
 inline fun foo(i: Int): A = A(i)
 
@@ -32,9 +32,9 @@ fun two(): A {
 }
 
 fun box(): String {
-    val one = C().one()
+    konst one = C().one()
     assert(one.i == 1)
-    val two = two()
+    konst two = two()
     assert(two.i == 2)
     return "OK"
 }

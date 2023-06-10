@@ -26,7 +26,7 @@ interface KaptExtensionConfig {
     var correctErrorTypes: Boolean
 
     /**
-     * If `true`, put initializers on fields when corresponding primary constructor parameters have a default value specified.
+     * If `true`, put initializers on fields when corresponding primary constructor parameters have a default konstue specified.
      */
     var dumpDefaultParameterValues: Boolean
 
@@ -99,9 +99,9 @@ interface KaptExtensionConfig {
 interface KaptArguments {
 
     /**
-     * Adds argument with the specified name and values.
+     * Adds argument with the specified name and konstues.
      */
-    fun arg(name: Any, vararg values: Any)
+    fun arg(name: Any, vararg konstues: Any)
 }
 
 /**
@@ -110,12 +110,12 @@ interface KaptArguments {
 interface KaptJavacOption {
 
     /**
-     * Adds an option with name and value.
+     * Adds an option with name and konstue.
      */
-    fun option(name: Any, value: Any)
+    fun option(name: Any, konstue: Any)
 
     /**
-     * Adds an option with name only (no value associated).
+     * Adds an option with name only (no konstue associated).
      */
     fun option(name: Any)
 }

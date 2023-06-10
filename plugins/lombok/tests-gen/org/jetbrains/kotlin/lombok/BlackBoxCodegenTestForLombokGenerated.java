@@ -182,15 +182,15 @@ public class BlackBoxCodegenTestForLombokGenerated extends AbstractBlackBoxCodeg
     }
 
     @Test
-    @TestMetadata("value.kt")
+    @TestMetadata("konstue.kt")
     public void testValue() throws Exception {
-        runTest("plugins/lombok/testData/box/value.kt");
+        runTest("plugins/lombok/testData/box/konstue.kt");
     }
 
     @Test
-    @TestMetadata("valueFieldAccess.kt")
+    @TestMetadata("konstueFieldAccess.kt")
     public void testValueFieldAccess() throws Exception {
-        runTest("plugins/lombok/testData/box/valueFieldAccess.kt");
+        runTest("plugins/lombok/testData/box/konstueFieldAccess.kt");
     }
 
     @Test

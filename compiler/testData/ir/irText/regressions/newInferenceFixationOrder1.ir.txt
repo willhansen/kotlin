@@ -37,14 +37,14 @@ FILE fqName:<root> fileName:/newInferenceFixationOrder1.kt
         CALL 'public final fun check <T, R> (x: T of <root>.check, y: R of <root>.check, f: kotlin.Function1<T of <root>.check, R of <root>.check>): <root>.Inv2<T of <root>.check, R of <root>.check> declared in <root>' type=<root>.Inv2<kotlin.String, kotlin.Int> origin=null
           <T>: kotlin.String
           <R>: kotlin.Int
-          x: CONST String type=kotlin.String value=""
-          y: CONST Int type=kotlin.Int value=1
+          x: CONST String type=kotlin.String konstue=""
+          y: CONST Int type=kotlin.Int konstue=1
           f: CALL 'public final fun foo <X, Y> (): kotlin.Function1<X of <root>.foo, Y of <root>.foo> declared in <root>' type=kotlin.Function1<kotlin.String, kotlin.Int> origin=null
             <X>: kotlin.String
             <Y>: kotlin.Int
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:x type:<root>.Inv2<kotlin.String, kotlin.Int> [val]
+      VAR name:x type:<root>.Inv2<kotlin.String, kotlin.Int> [konst]
         CALL 'public final fun test (): <root>.Inv2<kotlin.String, kotlin.Int> declared in <root>' type=<root>.Inv2<kotlin.String, kotlin.Int> origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

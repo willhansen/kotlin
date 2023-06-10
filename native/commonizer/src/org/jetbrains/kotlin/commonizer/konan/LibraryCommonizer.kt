@@ -13,26 +13,26 @@ import org.jetbrains.kotlin.util.Logger
 import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 
 internal class LibraryCommonizer internal constructor(
-    private val outputTargets: Set<SharedCommonizerTarget>,
-    private val repository: Repository,
-    private val dependencies: Repository,
-    private val resultsConsumer: ResultsConsumer,
-    private val statsCollector: StatsCollector?,
-    private val logger: Logger,
-    private val settings: CommonizerSettings,
+    private konst outputTargets: Set<SharedCommonizerTarget>,
+    private konst repository: Repository,
+    private konst dependencies: Repository,
+    private konst resultsConsumer: ResultsConsumer,
+    private konst statsCollector: StatsCollector?,
+    private konst logger: Logger,
+    private konst settings: CommonizerSettings,
 ) {
 
     fun run() {
         logger.progress("Commonized all targets") {
             checkPreconditions()
-            val allLibraries = loadLibraries()
+            konst allLibraries = loadLibraries()
             commonizeAndSaveResults(allLibraries)
         }
     }
 
     private fun loadLibraries(): TargetDependent<NativeLibrariesToCommonize?> {
         return logger.progress("Resolved all libraries for commonization") {
-            val libraries = EagerTargetDependent(outputTargets.allLeaves()) { target ->
+            konst libraries = EagerTargetDependent(outputTargets.allLeaves()) { target ->
                 repository.getLibraries(target).toList().ifNotEmpty { NativeLibrariesToCommonize(target, this) }
             }
 

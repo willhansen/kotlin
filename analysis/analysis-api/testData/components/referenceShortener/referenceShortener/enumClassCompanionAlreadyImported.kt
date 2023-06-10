@@ -2,7 +2,7 @@ package a.b.c
 
 import a.b.c.MyEnum.Companion.foo
 
-enum class MyEnum(val id: Int) {
+enum class MyEnum(konst id: Int) {
     A(1),
     B(2);
 

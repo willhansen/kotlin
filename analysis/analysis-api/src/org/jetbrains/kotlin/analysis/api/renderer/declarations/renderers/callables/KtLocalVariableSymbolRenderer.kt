@@ -18,7 +18,7 @@ public interface KtLocalVariableSymbolRenderer {
     public object AS_SOURCE : KtLocalVariableSymbolRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderSymbol(symbol: KtLocalVariableSymbol, printer: PrettyPrinter) {
-            val mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
+            konst mutabilityKeyword = if (symbol.isVal) KtTokens.VAL_KEYWORD else KtTokens.VAR_KEYWORD
             callableSignatureRenderer.renderCallableSignature(symbol, mutabilityKeyword, printer)
             variableInitializerRenderer.renderInitializer(symbol, printer)
         }

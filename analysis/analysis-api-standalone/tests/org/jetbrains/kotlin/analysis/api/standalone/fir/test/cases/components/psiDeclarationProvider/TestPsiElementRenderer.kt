@@ -18,7 +18,7 @@ public object TestPsiElementRenderer {
             append("KtNamedFunction:")
             append(psiElement.name)
             append("(")
-            psiElement.valueParameters.joinTo(this) { render(it) }
+            psiElement.konstueParameters.joinTo(this) { render(it) }
             append(")")
         }
         is KtParameter -> buildString {

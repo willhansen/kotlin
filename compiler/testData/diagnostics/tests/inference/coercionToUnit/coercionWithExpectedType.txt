@@ -1,6 +1,6 @@
 package
 
-public val a: () -> kotlin.Unit
-public val b: () -> kotlin.Unit
-public val c: () -> kotlin.Unit
+public konst a: () -> kotlin.Unit
+public konst b: () -> kotlin.Unit
+public konst c: () -> kotlin.Unit
 public fun </*0*/ T> materialize(): T

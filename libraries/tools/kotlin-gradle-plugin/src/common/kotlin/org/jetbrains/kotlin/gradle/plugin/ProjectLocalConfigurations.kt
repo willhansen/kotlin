@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaTarget
  * TODO: examine and remove
  */
 object ProjectLocalConfigurations {
-    val ATTRIBUTE: Attribute<String> = Attribute.of("org.jetbrains.kotlin.localToProject", String::class.java)
+    konst ATTRIBUTE: Attribute<String> = Attribute.of("org.jetbrains.kotlin.localToProject", String::class.java)
 
-    const val PUBLIC_VALUE = "public"
+    const konst PUBLIC_VALUE = "public"
 
     fun setupAttributesMatchingStrategy(attributesSchema: AttributesSchema) = with(attributesSchema) {
         attribute(ATTRIBUTE) {

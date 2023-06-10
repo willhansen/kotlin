@@ -1,7 +1,7 @@
 @Target(allowedTargets = [kotlin.annotation.AnnotationTarget.TYPE])
-annotation class A(value: Int) {
-  val value: Int
+annotation class A(konstue: Int) {
+  konst konstue: Int
 }
 
-fun x(): @A(value = 3) Int
+fun x(): @A(konstue = 3) Int
 

@@ -23,7 +23,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 2,
-          "description": "Type checking (comparison with invalid types) of too a big integers.",
+          "description": "Type checking (comparison with inkonstid types) of too a big integers.",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/the-types-for-integer-literals/p-1/neg/2.4.kt",
           "unexpectedBehaviour": false,
           "linkType": "main",
@@ -32,7 +32,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 6,
-          "description": "Type checking (comparison with invalid types) of various integer literals.",
+          "description": "Type checking (comparison with inkonstid types) of various integer literals.",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/the-types-for-integer-literals/p-1/neg/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "main",
@@ -41,7 +41,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 1,
-          "description": "Type checking (comparison with invalid types) of various integer literals with long literal mark.",
+          "description": "Type checking (comparison with inkonstid types) of various integer literals with long literal mark.",
           "path": "compiler/tests-spec/testData/diagnostics/linked/expressions/constant-literals/the-types-for-integer-literals/p-1/neg/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "main",

@@ -25,14 +25,14 @@ class A {
         <!DEBUG_INFO_CALL("fqName: A.foo.baz; typeCall: function")!>baz(1.0)<!>
     }
 
-    val bar: B = TODO()
+    konst bar: B = TODO()
 }
 
 fun A.foo(x: String) {}
 
 fun main() {
     fun A.foo(x: Double) {}
-    val a = A()
+    konst a = A()
     a.<!DEBUG_INFO_CALL("fqName: A.foo; typeCall: function")!>foo(1)<!>
     a.<!DEBUG_INFO_CALL("fqName: foo; typeCall: extension function")!>foo("")<!>
     a.<!DEBUG_INFO_CALL("fqName: main.foo; typeCall: extension function")!>foo(1.0)<!>

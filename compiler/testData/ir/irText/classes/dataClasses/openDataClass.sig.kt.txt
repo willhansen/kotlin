@@ -5,7 +5,7 @@ open data class ValidatedProperties {
   // CHECK:
   //   Mangled name: ValidatedProperties{}test1
   //   Public signature: /ValidatedProperties.test1|6005685442305498193[0]
-  open val test1: String
+  open konst test1: String
     // CHECK JVM_IR:
     //   Mangled name: ValidatedProperties#<get-test1>(){}kotlin.String
     //   Public signature: /ValidatedProperties.test1.<get-test1>|-7403750508378492770[0]
@@ -17,7 +17,7 @@ open data class ValidatedProperties {
   // CHECK:
   //   Mangled name: ValidatedProperties{}test2
   //   Public signature: /ValidatedProperties.test2|2517758057000911509[0]
-  open val test2: String
+  open konst test2: String
     // CHECK JVM_IR:
     //   Mangled name: ValidatedProperties#<get-test2>(){}kotlin.String
     //   Public signature: /ValidatedProperties.test2.<get-test2>|-8062412501290172814[0]

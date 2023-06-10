@@ -10,7 +10,7 @@ import org.gradle.api.internal.artifacts.ArtifactAttributes
 
 internal class ArtifactTypeAttributeAccessorG6(
 ) : ArtifactTypeAttributeAccessor {
-    override val artifactTypeAttribute: Attribute<String>
+    override konst artifactTypeAttribute: Attribute<String>
         get() = ArtifactAttributes.ARTIFACT_FORMAT
 
     internal class ArtifactTypeAttributeAccessorVariantFactoryG6 :

@@ -27,8 +27,8 @@ import org.jetbrains.org.objectweb.asm.Type
 abstract class AbstractForInRangeLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    protected val step: Int,
-    protected val comparisonGenerator: ComparisonGenerator
+    protected konst step: Int,
+    protected konst comparisonGenerator: ComparisonGenerator
 ) : AbstractForInProgressionOrRangeLoopGenerator(codegen, forExpression) {
 
     override fun beforeLoop() {
@@ -62,7 +62,7 @@ abstract class AbstractForInRangeLoopGenerator(
         if (loopParameterType === Type.INT_TYPE) {
             v.iinc(loopParameterVar, step)
         } else {
-            val loopParameter = loopParameter()
+            konst loopParameter = loopParameter()
             loopParameter.put(asmElementType, elementType, v)
             genIncrement(asmElementType, step, v)
             loopParameter.store(StackValue.onStack(asmElementType, elementType), v)

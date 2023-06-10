@@ -50,7 +50,7 @@ fun test_2(x: Any?) {
 }
 
 fun test_3(x: Any?) {
-    when(val y = x) {
+    when(konst y = x) {
         is A -> {
             x.foo()
             y.foo()
@@ -61,7 +61,7 @@ fun test_3(x: Any?) {
         }
     }
 
-    when(val y = x) {
+    when(konst y = x) {
         !is A -> {}
         !is B -> {
             x.foo()

@@ -8,9 +8,9 @@
 // FILE: test.kt
 
 fun box(): String {
-    val kClass = Script::class
-    val nestedClasses = kClass.nestedClasses
-    val nestedClass = nestedClasses.single()
+    konst kClass = Script::class
+    konst nestedClasses = kClass.nestedClasses
+    konst nestedClass = nestedClasses.single()
     return nestedClass.simpleName!!
 }
 
@@ -19,5 +19,5 @@ fun box(): String {
 
 class OK
 typealias Tazz = List<OK>
-val x: Tazz = listOf()
+konst x: Tazz = listOf()
 x

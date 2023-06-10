@@ -18,9 +18,9 @@ class CirEntityIdTest {
     @Test
     fun createAndIntern() {
         class TestRow(
-            val rawEntityId: String,
-            val packageSegments: Array<String>,
-            val rawRelativeNameSegments: List<String>
+            konst rawEntityId: String,
+            konst packageSegments: Array<String>,
+            konst rawRelativeNameSegments: List<String>
         )
 
         listOf(
@@ -127,12 +127,12 @@ class CirEntityIdTest {
         ).forEach { testRow ->
             with(testRow) {
                 // nullable, because ClassId may not have empty class name
-                val classifierId: ClassId? = if (rawRelativeNameSegments.isNotEmpty()) ClassId.fromString(rawEntityId) else null
+                konst classifierId: ClassId? = if (rawRelativeNameSegments.isNotEmpty()) ClassId.fromString(rawEntityId) else null
 
-                val packageName = CirPackageName.create(packageSegments)
-                val relativeNameSegments = rawRelativeNameSegments.map(CirName::create).toTypedArray()
+                konst packageName = CirPackageName.create(packageSegments)
+                konst relativeNameSegments = rawRelativeNameSegments.map(CirName::create).toTypedArray()
 
-                val entityIds = listOfNotNull(
+                konst entityIds = listOfNotNull(
                     CirEntityId.create(rawEntityId),
                     CirEntityId.create(rawEntityId),
                     classifierId?.let(CirEntityId::create),
@@ -141,7 +141,7 @@ class CirEntityIdTest {
                     CirEntityId.create(packageName, relativeNameSegments)
                 )
 
-                val first = entityIds.first()
+                konst first = entityIds.first()
                 entityIds.forEach { entityId ->
                     assertSame(first, entityId)
                     assertSame(packageName, entityId.packageName)
@@ -196,8 +196,8 @@ class CirEntityIdTest {
 
     @Test
     fun createNested() {
-        val nested1 = CirName.create("Nested1")
-        val nested2 = CirName.create("Nested2")
+        konst nested1 = CirName.create("Nested1")
+        konst nested2 = CirName.create("Nested2")
 
         listOf(
             "",
@@ -213,13 +213,13 @@ class CirEntityIdTest {
             "foo/Outer.Nested",
             "foo/bar/Outer.Nested"
         ).forEach { rawEntityId ->
-            val entityId = CirEntityId.create(rawEntityId)
-            val n1 = entityId.createNestedEntityId(nested1)
+            konst entityId = CirEntityId.create(rawEntityId)
+            konst n1 = entityId.createNestedEntityId(nested1)
             assertSame(entityId.packageName, n1.packageName)
             assertEquals(entityId.relativeNameSegments.isNotEmpty(), n1.isNestedEntity)
             assertEquals(entityId.relativeNameSegments.toList(), n1.relativeNameSegments.dropLast(1))
 
-            val n2 = n1.createNestedEntityId(nested2)
+            konst n2 = n1.createNestedEntityId(nested2)
             assertSame(entityId.packageName, n2.packageName)
             assertTrue(n2.isNestedEntity)
             assertEquals(entityId.relativeNameSegments.toList(), n2.relativeNameSegments.dropLast(2))
@@ -242,8 +242,8 @@ class CirEntityIdTest {
             "foo/Outer.Nested1.Nested2" to "foo/Outer.Nested1",
             "foo/bar/Outer.Nested1.Nested2" to "foo/bar/Outer.Nested1"
         ).forEach { (rawEntityId, rawParentEntityId) ->
-            val entityId = CirEntityId.create(rawEntityId)
-            val parentEntityId = rawParentEntityId?.let(CirEntityId::create)
+            konst entityId = CirEntityId.create(rawEntityId)
+            konst parentEntityId = rawParentEntityId?.let(CirEntityId::create)
             assertSame(parentEntityId, entityId.getParentEntityId())
         }
     }

@@ -12,7 +12,7 @@ annotation class ExperimentalAPI
 @ExperimentalAPI
 class C {
     fun function(): String = ""
-    val property: String = ""
+    konst property: String = ""
     class Nested
     inner class Inner
 }
@@ -28,7 +28,7 @@ import api.*
 
 @ExperimentalAPI
 fun useAll() {
-    val c: C = C()
+    konst c: C = C()
     c.function()
     c.property
     C.Nested()
@@ -55,7 +55,7 @@ import api.*
 
 @OptIn(ExperimentalAPI::class)
 fun useAll() {
-    val c: C = C()
+    konst c: C = C()
     c.function()
     c.property
     C.Nested()
@@ -81,7 +81,7 @@ package usage3
 import api.*
 
 fun use() {
-    val c: <!OPT_IN_USAGE!>C<!> = <!OPT_IN_USAGE!>C<!>()
+    konst c: <!OPT_IN_USAGE!>C<!> = <!OPT_IN_USAGE!>C<!>()
     <!OPT_IN_USAGE!>c<!>.<!OPT_IN_USAGE!>function<!>()
     <!OPT_IN_USAGE!>c<!>.<!OPT_IN_USAGE!>property<!>
     <!OPT_IN_USAGE!>C<!>.<!OPT_IN_USAGE!>Nested<!>()

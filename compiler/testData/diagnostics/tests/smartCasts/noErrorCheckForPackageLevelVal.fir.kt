@@ -1,14 +1,14 @@
 //FILE: bar.kt
 package bar
 
-val i: Int? = 2
+konst i: Int? = 2
 
 //FILE: foo.kt
 package foo
 
-val i: Int? = 1
+konst i: Int? = 1
 
-class A(val i: Int?) {
+class A(konst i: Int?) {
     fun testUseFromClass() {
         if (foo.i != null) {
             useInt(<!ARGUMENT_TYPE_MISMATCH!>i<!>)

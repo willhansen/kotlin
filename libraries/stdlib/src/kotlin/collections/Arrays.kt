@@ -17,7 +17,7 @@ import kotlin.contracts.*
  * @sample samples.collections.Arrays.Transformations.flattenArray
  */
 public fun <T> Array<out Array<out T>>.flatten(): List<T> {
-    val result = ArrayList<T>(sumOf { it.size })
+    konst result = ArrayList<T>(sumOf { it.size })
     for (element in this) {
         result.addAll(element)
     }
@@ -26,13 +26,13 @@ public fun <T> Array<out Array<out T>>.flatten(): List<T> {
 
 /**
  * Returns a pair of lists, where
- * *first* list is built from the first values of each pair from this array,
- * *second* list is built from the second values of each pair from this array.
+ * *first* list is built from the first konstues of each pair from this array,
+ * *second* list is built from the second konstues of each pair from this array.
  * @sample samples.collections.Arrays.Transformations.unzipArray
  */
 public fun <T, R> Array<out Pair<T, R>>.unzip(): Pair<List<T>, List<R>> {
-    val listT = ArrayList<T>(size)
-    val listR = ArrayList<R>(size)
+    konst listT = ArrayList<T>(size)
+    konst listR = ArrayList<R>(size)
     for (pair in this) {
         listT.add(pair.first)
         listR.add(pair.second)
@@ -77,8 +77,8 @@ internal fun <T> Array<out T>?.contentDeepEqualsImpl(other: Array<out T>?): Bool
     if (this == null || other == null || this.size != other.size) return false
 
     for (i in indices) {
-        val v1 = this[i]
-        val v2 = other[i]
+        konst v1 = this[i]
+        konst v2 = other[i]
 
         if (v1 === v2) {
             continue
@@ -115,7 +115,7 @@ internal fun <T> Array<out T>?.contentDeepEqualsImpl(other: Array<out T>?): Bool
 @kotlin.js.JsName("contentDeepToStringImpl")
 internal fun <T> Array<out T>?.contentDeepToStringImpl(): String {
     if (this == null) return "null"
-    val length = size.coerceAtMost((Int.MAX_VALUE - 2) / 5) * 5 + 2 // in order not to overflow Int.MAX_VALUE
+    konst length = size.coerceAtMost((Int.MAX_VALUE - 2) / 5) * 5 + 2 // in order not to overflow Int.MAX_VALUE
     return buildString(length) {
         contentDeepToStringInternal(this, mutableListOf())
     }
@@ -134,7 +134,7 @@ private fun <T> Array<out T>.contentDeepToStringInternal(result: StringBuilder, 
         if (i != 0) {
             result.append(", ")
         }
-        val element = this[i]
+        konst element = this[i]
         when (element) {
             null            -> result.append("null")
             is Array<*>     -> element.contentDeepToStringInternal(result, processed)

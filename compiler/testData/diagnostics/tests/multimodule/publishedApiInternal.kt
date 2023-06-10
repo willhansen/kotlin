@@ -6,7 +6,7 @@ package p
 
 public class A {
     @PublishedApi
-    internal val a = A()
+    internal konst a = A()
     @PublishedApi
     internal var v = A()
     @PublishedApi
@@ -16,7 +16,7 @@ public class A {
 }
 
 @PublishedApi
-internal val a = A()
+internal konst a = A()
 @PublishedApi
 internal var v = A()
 @PublishedApi
@@ -30,27 +30,27 @@ internal class B
 import p.*
 
 fun test() {
-    val _a = <!INVISIBLE_MEMBER!>a<!>
-    val _v = <!INVISIBLE_MEMBER!>v<!>
+    konst _a = <!INVISIBLE_MEMBER!>a<!>
+    konst _v = <!INVISIBLE_MEMBER!>v<!>
     <!INVISIBLE_MEMBER!>a<!>()
     <!INVISIBLE_MEMBER!>B<!>()
 
-    val inst = A()
-    val ia = inst.<!INVISIBLE_MEMBER!>a<!>
-    val iv = inst.<!INVISIBLE_MEMBER!>v<!>
+    konst inst = A()
+    konst ia = inst.<!INVISIBLE_MEMBER!>a<!>
+    konst iv = inst.<!INVISIBLE_MEMBER!>v<!>
     inst.<!INVISIBLE_MEMBER!>a<!>()
     inst.<!INVISIBLE_MEMBER!>B<!>()
 }
 
 inline fun testInline() {
-    val _a = <!INVISIBLE_MEMBER!>a<!>
-    val _v = <!INVISIBLE_MEMBER!>v<!>
+    konst _a = <!INVISIBLE_MEMBER!>a<!>
+    konst _v = <!INVISIBLE_MEMBER!>v<!>
     <!INVISIBLE_MEMBER!>a<!>()
     <!INVISIBLE_MEMBER!>B<!>()
 
-    val inst = A()
-    val ia = inst.<!INVISIBLE_MEMBER!>a<!>
-    val iv = inst.<!INVISIBLE_MEMBER!>v<!>
+    konst inst = A()
+    konst ia = inst.<!INVISIBLE_MEMBER!>a<!>
+    konst iv = inst.<!INVISIBLE_MEMBER!>v<!>
     inst.<!INVISIBLE_MEMBER!>a<!>()
     inst.<!INVISIBLE_MEMBER!>B<!>()
 }

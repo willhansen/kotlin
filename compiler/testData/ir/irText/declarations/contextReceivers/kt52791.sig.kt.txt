@@ -12,14 +12,14 @@ class MyClass {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         MyClass.contextReceiverField0
   //   Mangled name computed from Descriptor: MyClass{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: Unit
+  private /* final field */ konst contextReceiverField0: Unit
   // CHECK JVM_IR:
   //   Mangled name computed from Ir:         MyClass.contextReceiverField1
   //   Mangled name computed from Descriptor: MyClass{}contextReceiverField1#jf
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         MyClass.contextReceiverField1
   //   Mangled name computed from Descriptor: MyClass{}contextReceiverField1
-  private /* final field */ val contextReceiverField1: Int
+  private /* final field */ konst contextReceiverField1: Int
 
 }
 

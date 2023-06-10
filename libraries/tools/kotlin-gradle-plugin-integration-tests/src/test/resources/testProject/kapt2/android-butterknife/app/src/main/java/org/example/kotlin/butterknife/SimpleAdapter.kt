@@ -11,7 +11,7 @@ import butterknife.BindView
 
 class SimpleAdapter(context: Context) : BaseAdapter() {
 
-    private val inflater = LayoutInflater.from(context)
+    private konst inflater = LayoutInflater.from(context)
 
     override fun getCount() = CONTENTS.size
     override fun getItem(position: Int) = CONTENTS[position]
@@ -19,7 +19,7 @@ class SimpleAdapter(context: Context) : BaseAdapter() {
 
     override fun getView(position: Int, v: View?, parent: ViewGroup): View {
         var view = v
-        val holder: ViewHolder
+        konst holder: ViewHolder
         if (view != null) {
             holder = view.tag as ViewHolder
         } else {
@@ -28,7 +28,7 @@ class SimpleAdapter(context: Context) : BaseAdapter() {
             view!!.tag = holder
         }
 
-        val word = getItem(position)
+        konst word = getItem(position)
         holder.word.text = "Word: $word"
         holder.length.text = "Length: ${word.length}"
         holder.position.text = "Position: $position"
@@ -52,6 +52,6 @@ class SimpleAdapter(context: Context) : BaseAdapter() {
     }
 
     companion object {
-        private val CONTENTS = "The quick brown fox jumps over the lazy dog".split(" ")
+        private konst CONTENTS = "The quick brown fox jumps over the lazy dog".split(" ")
     }
 }

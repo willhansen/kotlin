@@ -4,7 +4,7 @@ fun initializer() = 4
 
 // MODULE: lib2(lib1)
 // FILE: lib2.kt
-val four = initializer()
+konst four = initializer()
 
 // MODULE: main(lib1, lib2)
 // FILE: main.kt

@@ -2,7 +2,7 @@
 
 interface C {
   companion object {
-    public val FOO: String = "OK"
+    public konst FOO: String = "OK"
   }
 }
 

@@ -157,7 +157,7 @@ public fun <T> MutableCollection<in T>.removeAll(elements: Iterable<T>): Boolean
  * Removes all elements from this [MutableCollection] that are also contained in the given [elements] sequence.
  */
 public fun <T> MutableCollection<in T>.removeAll(elements: Sequence<T>): Boolean {
-    val list = elements.toList()
+    konst list = elements.toList()
     return list.isNotEmpty() && removeAll(list)
 }
 
@@ -189,7 +189,7 @@ public fun <T> MutableCollection<in T>.retainAll(elements: Array<out T>): Boolea
  * Retains only elements of this [MutableCollection] that are contained in the given [elements] sequence.
  */
 public fun <T> MutableCollection<in T>.retainAll(elements: Sequence<T>): Boolean {
-    val list = elements.toList()
+    konst list = elements.toList()
     if (list.isNotEmpty())
         return retainAll(list)
     else
@@ -197,7 +197,7 @@ public fun <T> MutableCollection<in T>.retainAll(elements: Sequence<T>): Boolean
 }
 
 private fun MutableCollection<*>.retainNothing(): Boolean {
-    val result = isNotEmpty()
+    konst result = isNotEmpty()
     clear()
     return result
 }
@@ -286,7 +286,7 @@ private fun <T> MutableList<T>.filterInPlace(predicate: (T) -> Boolean, predicat
 
     var writeIndex: Int = 0
     for (readIndex in 0..lastIndex) {
-        val element = this[readIndex]
+        konst element = this[readIndex]
         if (predicate(element) == predicateResultToRemove)
             continue
 

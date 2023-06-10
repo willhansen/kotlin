@@ -4,7 +4,7 @@ enum class E {
 }
 
 fun foo(e: E) {
-    val result = when(e) {
+    konst result = when(e) {
         E.A -> 1
         E.B -> a<caret>v
     }

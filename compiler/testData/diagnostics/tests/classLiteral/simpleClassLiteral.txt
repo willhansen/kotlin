@@ -1,6 +1,6 @@
 package
 
-public val k: kotlin.reflect.KClass<A>
+public konst k: kotlin.reflect.KClass<A>
 
 public final class A {
     public constructor A()

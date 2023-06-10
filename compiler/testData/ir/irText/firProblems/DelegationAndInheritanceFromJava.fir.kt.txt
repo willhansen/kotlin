@@ -45,12 +45,12 @@ class Impl : A, B {
     return <this>.#$$delegate_0.containsAll(elements = elements)
   }
 
-  override val size: Int
+  override konst size: Int
     override get(): Int {
       return <this>.#$$delegate_0.<get-size>()
     }
 
-  private /* final field */ val $$delegate_0: B = b
+  private /* final field */ konst $$delegate_0: B = b
 
 }
 

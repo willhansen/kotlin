@@ -1,6 +1,6 @@
 object A {
-    val a = "OK"
-    val b = A.a
+    konst a = "OK"
+    konst b = A.a
 }
 
 fun box() = A.b

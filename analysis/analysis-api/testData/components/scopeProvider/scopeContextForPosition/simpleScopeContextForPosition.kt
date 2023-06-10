@@ -23,10 +23,10 @@ fun topLevel() = 1
 
 class C: JavaClass() {
     fun <T> methodInC(param: String?) {
-        val localVarB = 2
+        konst localVarB = 2
         fun localFunB() {}
         param?.let { lambdaArg ->
-            val localVarA = 1
+            konst localVarA = 1
             withB {
                 withA {
                     <expr>e</expr>

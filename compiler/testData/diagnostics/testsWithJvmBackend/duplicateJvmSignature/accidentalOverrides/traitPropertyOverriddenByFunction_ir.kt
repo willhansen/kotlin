@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // TARGET_BACKEND: JVM_IR
 interface T {
-    val x: Int
+    konst x: Int
         get() = 1
 }
 

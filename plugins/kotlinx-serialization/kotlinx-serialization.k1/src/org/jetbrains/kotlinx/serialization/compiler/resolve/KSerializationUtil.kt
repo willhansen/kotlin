@@ -56,53 +56,53 @@ fun ClassDescriptor.getGeneratedSerializerDescriptor(): ClassDescriptor =
     module.getClassFromInternalSerializationPackage(SerialEntityNames.GENERATED_SERIALIZER_CLASS.identifier)
 
 fun ClassDescriptor.createSerializerTypeFor(argument: SimpleType, baseSerializerInterface: FqName): SimpleType {
-    val projectionType = Variance.INVARIANT
-    val types = listOf(TypeProjectionImpl(projectionType, argument))
-    val descriptor = module.findClassAcrossModuleDependencies(ClassId.topLevel(baseSerializerInterface))
+    konst projectionType = Variance.INVARIANT
+    konst types = listOf(TypeProjectionImpl(projectionType, argument))
+    konst descriptor = module.findClassAcrossModuleDependencies(ClassId.topLevel(baseSerializerInterface))
         ?: throw IllegalArgumentException("Can't locate $baseSerializerInterface. Is kotlinx-serialization library present in compile classpath?")
     return KotlinTypeFactory.simpleNotNullType(TypeAttributes.Empty, descriptor, types)
 }
 
 fun extractKSerializerArgumentFromImplementation(implementationClass: ClassDescriptor): KotlinType? {
-    val supertypes = implementationClass.typeConstructor.supertypes
-    val kSerializerSupertype = supertypes.find { isGeneratedKSerializer(it) }
+    konst supertypes = implementationClass.typeConstructor.supertypes
+    konst kSerializerSupertype = supertypes.find { isGeneratedKSerializer(it) }
         ?: supertypes.find { isKSerializer(it) }
         ?: return null
     return kSerializerSupertype.arguments.first().type
 }
 
-val DeclarationDescriptor.serializableWith: KotlinType?
+konst DeclarationDescriptor.serializableWith: KotlinType?
     get() = annotations.serializableWith(module)
 
 fun Annotations.serializableWith(module: ModuleDescriptor): KotlinType? =
     this.findAnnotationKotlinTypeValue(serializableAnnotationFqName, module, "with")
 
-val DeclarationDescriptor.serializerForClass: KotlinType?
+konst DeclarationDescriptor.serializerForClass: KotlinType?
     get() = annotations.findAnnotationKotlinTypeValue(SerializationAnnotations.serializerAnnotationFqName, module, "forClass")
 
-val ClassDescriptor.isSerialInfoAnnotation: Boolean
+konst ClassDescriptor.isSerialInfoAnnotation: Boolean
     get() = annotations.hasAnnotation(serialInfoFqName)
             || annotations.hasAnnotation(inheritableSerialInfoFqName)
             || annotations.hasAnnotation(metaSerializableAnnotationFqName)
 
-val ClassDescriptor.isInheritableSerialInfoAnnotation: Boolean
+konst ClassDescriptor.isInheritableSerialInfoAnnotation: Boolean
     get() = annotations.hasAnnotation(inheritableSerialInfoFqName)
 
-val Annotations.serialNameValue: String?
-    get() = findAnnotationConstantValue(SerializationAnnotations.serialNameAnnotationFqName, "value")
+konst Annotations.serialNameValue: String?
+    get() = findAnnotationConstantValue(SerializationAnnotations.serialNameAnnotationFqName, "konstue")
 
-val Annotations.serialNameAnnotation: AnnotationDescriptor?
+konst Annotations.serialNameAnnotation: AnnotationDescriptor?
     get() = findAnnotation(SerializationAnnotations.serialNameAnnotationFqName)
 
-val Annotations.serialRequired: Boolean
+konst Annotations.serialRequired: Boolean
     get() = hasAnnotation(SerializationAnnotations.requiredAnnotationFqName)
 
-val Annotations.serialTransient: Boolean
+konst Annotations.serialTransient: Boolean
     get() = hasAnnotation(SerializationAnnotations.serialTransientFqName)
 
 // ----------------------------------------
 
-val KotlinType?.toClassDescriptor: ClassDescriptor?
+konst KotlinType?.toClassDescriptor: ClassDescriptor?
     @JvmName("toClassDescriptor")
     get() = this?.constructor?.declarationDescriptor?.let { descriptor ->
         when (descriptor) {
@@ -112,19 +112,19 @@ val KotlinType?.toClassDescriptor: ClassDescriptor?
         }
     }
 
-val ClassDescriptor.shouldHaveGeneratedMethodsInCompanion: Boolean
+konst ClassDescriptor.shouldHaveGeneratedMethodsInCompanion: Boolean
     get() = this.isSerializableObject || this.isSerializableEnum() || (this.kind == ClassKind.CLASS && hasSerializableOrMetaAnnotation) || this.isSealedSerializableInterface
 
-val ClassDescriptor.isSerializableObject: Boolean
+konst ClassDescriptor.isSerializableObject: Boolean
     get() = kind == ClassKind.OBJECT && hasSerializableOrMetaAnnotation
 
-val ClassDescriptor.isInternallySerializableObject: Boolean
+konst ClassDescriptor.isInternallySerializableObject: Boolean
     get() = kind == ClassKind.OBJECT && hasSerializableOrMetaAnnotationWithoutArgs
 
-val ClassDescriptor.isSealedSerializableInterface: Boolean
+konst ClassDescriptor.isSealedSerializableInterface: Boolean
     get() = kind == ClassKind.INTERFACE && modality == Modality.SEALED && hasSerializableOrMetaAnnotation
 
-val ClassDescriptor.isInternalSerializable: Boolean //todo normal checking
+konst ClassDescriptor.isInternalSerializable: Boolean //todo normal checking
     get() {
         if (kind != ClassKind.CLASS) return false
         return hasSerializableOrMetaAnnotationWithoutArgs
@@ -137,13 +137,13 @@ fun ClassDescriptor.isEnumWithLegacyGeneratedSerializer(): Boolean = isInternall
 fun ClassDescriptor.isInternallySerializableEnum(): Boolean =
     kind == ClassKind.ENUM_CLASS && hasSerializableOrMetaAnnotationWithoutArgs
 
-val ClassDescriptor.shouldHaveGeneratedSerializer: Boolean
+konst ClassDescriptor.shouldHaveGeneratedSerializer: Boolean
     get() = (isInternalSerializable && (modality == Modality.FINAL || modality == Modality.OPEN))
             || isEnumWithLegacyGeneratedSerializer()
 
-val ClassDescriptor.useGeneratedEnumSerializer: Boolean
+konst ClassDescriptor.useGeneratedEnumSerializer: Boolean
     get() {
-        val functions = module.getPackage(SerializationPackages.internalPackageFqName).memberScope.getFunctionNames()
+        konst functions = module.getPackage(SerializationPackages.internalPackageFqName).memberScope.getFunctionNames()
         return !functions.contains(ENUM_SERIALIZER_FACTORY_FUNC_NAME) || !functions.contains(ANNOTATED_ENUM_SERIALIZER_FACTORY_FUNC_NAME)
     }
 
@@ -162,50 +162,50 @@ fun ClassDescriptor.isEnumWithSerialInfoAnnotation(): Boolean {
     return enumEntries().any { (it.annotations.hasAnySerialAnnotation) }
 }
 
-val Annotations.hasAnySerialAnnotation: Boolean
+konst Annotations.hasAnySerialAnnotation: Boolean
     get() = serialNameValue != null || any { it.annotationClass?.isSerialInfoAnnotation == true }
 
-val ClassDescriptor.hasSerializableOrMetaAnnotation
+konst ClassDescriptor.hasSerializableOrMetaAnnotation
     get() = hasSerializableAnnotation || hasMetaSerializableAnnotation
 
-private val ClassDescriptor.hasSerializableAnnotation
+private konst ClassDescriptor.hasSerializableAnnotation
     get() = annotations.hasSerializableAnnotation
 
-private val Annotations.hasSerializableAnnotation
+private konst Annotations.hasSerializableAnnotation
     get() = hasAnnotation(serializableAnnotationFqName)
 
-val ClassDescriptor.hasMetaSerializableAnnotation: Boolean
+konst ClassDescriptor.hasMetaSerializableAnnotation: Boolean
     get() = annotations.any { it.isMetaSerializableAnnotation }
 
-val AnnotationDescriptor.isMetaSerializableAnnotation: Boolean
+konst AnnotationDescriptor.isMetaSerializableAnnotation: Boolean
     get() = annotationClass?.annotations?.hasAnnotation(metaSerializableAnnotationFqName) ?: false
 
-val ClassDescriptor.hasSerializableOrMetaAnnotationWithoutArgs: Boolean
+konst ClassDescriptor.hasSerializableOrMetaAnnotationWithoutArgs: Boolean
     get() = hasSerializableAnnotationWithoutArgs
             || (!annotations.hasSerializableAnnotation && hasMetaSerializableAnnotation)
 
-private val ClassDescriptor.hasSerializableAnnotationWithoutArgs: Boolean
+private konst ClassDescriptor.hasSerializableAnnotationWithoutArgs: Boolean
     get() {
         if (!hasSerializableAnnotation) return false
         // If provided descriptor is lazy, carefully look at psi in order not to trigger full resolve which may be recursive.
-        // Otherwise, this descriptor is deserialized from another module, and it is OK to check value right away.
-        val psi = findSerializableAnnotationDeclaration() ?: return (serializableWith == null)
-        return psi.valueArguments.isEmpty()
+        // Otherwise, this descriptor is deserialized from another module, and it is OK to check konstue right away.
+        konst psi = findSerializableAnnotationDeclaration() ?: return (serializableWith == null)
+        return psi.konstueArguments.isEmpty()
     }
 
 private fun Annotated.findSerializableAnnotationDeclaration(): KtAnnotationEntry? {
-    val lazyDesc = annotations.findAnnotation(serializableAnnotationFqName) as? LazyAnnotationDescriptor
+    konst lazyDesc = annotations.findAnnotation(serializableAnnotationFqName) as? LazyAnnotationDescriptor
     return lazyDesc?.annotationEntry
 }
 
 fun Annotated.findSerializableOrMetaAnnotationDeclaration(): KtAnnotationEntry? {
-    val lazyDesc = (annotations.findAnnotation(serializableAnnotationFqName)
+    konst lazyDesc = (annotations.findAnnotation(serializableAnnotationFqName)
         ?: annotations.firstOrNull { it.isMetaSerializableAnnotation }) as? LazyAnnotationDescriptor
     return lazyDesc?.annotationEntry
 }
 
 fun Annotated.findAnnotationDeclaration(fqName: FqName): KtAnnotationEntry? {
-    val lazyDesc = annotations.findAnnotation(fqName) as? LazyAnnotationDescriptor
+    konst lazyDesc = annotations.findAnnotation(fqName) as? LazyAnnotationDescriptor
     return lazyDesc?.annotationEntry
 }
 
@@ -216,7 +216,7 @@ fun ClassDescriptor.isAbstractOrSealedSerializableClass(): Boolean =
     isInternalSerializable && (modality == Modality.ABSTRACT || modality == Modality.SEALED)
 
 fun ClassDescriptor.polymorphicSerializerIfApplicableAutomatically(): ClassDescriptor? {
-    val serializer = when {
+    konst serializer = when {
         kind == ClassKind.INTERFACE && modality == Modality.SEALED -> SpecialBuiltins.sealedSerializer
         kind == ClassKind.INTERFACE -> SpecialBuiltins.polymorphicSerializer
         isInternalSerializable && modality == Modality.ABSTRACT -> SpecialBuiltins.polymorphicSerializer
@@ -227,7 +227,7 @@ fun ClassDescriptor.polymorphicSerializerIfApplicableAutomatically(): ClassDescr
 }
 
 // serializer that was declared for this type
-val ClassDescriptor?.classSerializer: ClassDescriptor?
+konst ClassDescriptor?.classSerializer: ClassDescriptor?
     get() = this?.let {
         // serializer annotation on class?
         serializableWith?.let { return it.toClassDescriptor }
@@ -245,31 +245,31 @@ val ClassDescriptor?.classSerializer: ClassDescriptor?
         return null
     }
 
-val ClassDescriptor.hasCompanionObjectAsSerializer: Boolean
+konst ClassDescriptor.hasCompanionObjectAsSerializer: Boolean
     get() = isInternallySerializableObject || companionObjectDescriptor?.serializerForClass == this.defaultType
 
 // returns only user-overridden Serializer
 fun KotlinType.overriddenSerializer(module: ModuleDescriptor): KotlinType? {
     annotations.serializableWith(module)?.let { return it }
-    val desc = this.toClassDescriptor ?: return null
+    konst desc = this.toClassDescriptor ?: return null
     desc.serializableWith?.let { return it }
     return null
 }
 
-val KotlinType.genericIndex: Int?
+konst KotlinType.genericIndex: Int?
     get() = (this.constructor.declarationDescriptor as? TypeParameterDescriptor)?.index
 
 fun getSerializableClassDescriptorByCompanion(thisDescriptor: ClassDescriptor): ClassDescriptor? {
     if (thisDescriptor.isSerializableObject) return thisDescriptor
     if (!thisDescriptor.isCompanionObject) return null
-    val classDescriptor = (thisDescriptor.containingDeclaration as? ClassDescriptor) ?: return null
+    konst classDescriptor = (thisDescriptor.containingDeclaration as? ClassDescriptor) ?: return null
     if (!classDescriptor.shouldHaveGeneratedMethodsInCompanion) return null
     return classDescriptor
 }
 
 fun ClassDescriptor.needSerializerFactory(): Boolean {
     if (!(this.platform?.isNative() == true || this.platform.isJs() || this.platform.isWasm())) return false
-    val serializableClass = getSerializableClassDescriptorByCompanion(this) ?: return false
+    konst serializableClass = getSerializableClassDescriptorByCompanion(this) ?: return false
     if (serializableClass.isSerializableObject) return true
     if (serializableClass.isSerializableEnum()) return true
     if (serializableClass.isAbstractOrSealedSerializableClass()) return true
@@ -279,19 +279,19 @@ fun ClassDescriptor.needSerializerFactory(): Boolean {
 }
 
 fun DeclarationDescriptor.jsExportIgnore(): AnnotationDescriptor? {
-    val jsExportIgnore = runIf(platform.isJs()) { module.getJsExportIgnore() } ?: return null
+    konst jsExportIgnore = runIf(platform.isJs()) { module.getJsExportIgnore() } ?: return null
     return AnnotationDescriptorImpl(jsExportIgnore.defaultType, mapOf(), jsExportIgnore.source)
 }
 
 fun getSerializableClassDescriptorBySerializer(serializerDescriptor: ClassDescriptor): ClassDescriptor? {
-    val serializerForClass = serializerDescriptor.serializerForClass
+    konst serializerForClass = serializerDescriptor.serializerForClass
     if (serializerForClass != null) return serializerForClass.toClassDescriptor
     if (serializerDescriptor.name !in setOf(
             SerialEntityNames.SERIALIZER_CLASS_NAME,
             SerialEntityNames.GENERATED_SERIALIZER_CLASS
         )
     ) return null
-    val classDescriptor = (serializerDescriptor.containingDeclaration as? ClassDescriptor) ?: return null
+    konst classDescriptor = (serializerDescriptor.containingDeclaration as? ClassDescriptor) ?: return null
     if (!classDescriptor.shouldHaveGeneratedSerializer) return null
     return classDescriptor
 }

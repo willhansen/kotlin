@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 @RequiresOptIn(message = "Should be used just only in resolve processor")
 annotation class AdapterForResolveProcessor
 
-sealed class FirResolveProcessor(val session: FirSession, val scopeSession: ScopeSession, val phase: FirResolvePhase?) {
+sealed class FirResolveProcessor(konst session: FirSession, konst scopeSession: ScopeSession, konst phase: FirResolvePhase?) {
     open fun beforePhase() {
         if (phase != null) {
             session.lazyDeclarationResolver.startResolvingPhase(phase)
@@ -42,7 +42,7 @@ abstract class FirTransformerBasedResolveProcessor(
     scopeSession: ScopeSession,
     phase: FirResolvePhase?,
 ) : FirResolveProcessor(session, scopeSession, phase) {
-    abstract val transformer: FirTransformer<Nothing?>
+    abstract konst transformer: FirTransformer<Nothing?>
 
     open fun processFile(file: FirFile) {
         file.transform<FirFile, Nothing?>(transformer, null)

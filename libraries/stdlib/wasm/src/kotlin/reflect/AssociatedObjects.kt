@@ -16,7 +16,7 @@ import kotlin.wasm.internal.findAssociatedObject
  * or by using the compiler argument `-opt-in=kotlin.reflect.ExperimentalAssociatedObjects`.
  */
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 public annotation class ExperimentalAssociatedObjects
 
 /**

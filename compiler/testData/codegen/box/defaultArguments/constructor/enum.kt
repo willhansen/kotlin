@@ -1,4 +1,4 @@
-enum class A(val a: Int = 1) {
+enum class A(konst a: Int = 1) {
   FIRST(),
   SECOND(2)
 }

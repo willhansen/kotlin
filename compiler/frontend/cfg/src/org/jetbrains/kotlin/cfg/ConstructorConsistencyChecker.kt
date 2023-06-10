@@ -20,9 +20,9 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.cfg.pseudocode.Pseudocode
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.KtElementInstruction
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.MagicInstruction
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.MagicKind
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.ReadValueInstruction
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.MagicInstruction
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.MagicKind
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.ReadValueInstruction
 import org.jetbrains.kotlin.cfg.pseudocodeTraverser.TraversalOrder
 import org.jetbrains.kotlin.cfg.pseudocodeTraverser.traverse
 import org.jetbrains.kotlin.cfg.variable.PseudocodeVariablesData
@@ -35,18 +35,18 @@ import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 class ConstructorConsistencyChecker private constructor(
-    private val classOrObject: KtClassOrObject,
-    private val classDescriptor: ClassDescriptor,
-    private val trace: BindingTrace,
-    private val pseudocode: Pseudocode,
-    private val variablesData: PseudocodeVariablesData
+    private konst classOrObject: KtClassOrObject,
+    private konst classDescriptor: ClassDescriptor,
+    private konst trace: BindingTrace,
+    private konst pseudocode: Pseudocode,
+    private konst variablesData: PseudocodeVariablesData
 ) {
-    private val finalClass = classDescriptor.isFinalClass
+    private konst finalClass = classDescriptor.isFinalClass
 
     private fun insideLValue(reference: KtReferenceExpression): Boolean {
-        val binary = reference.getStrictParentOfType<KtBinaryExpression>() ?: return false
+        konst binary = reference.getStrictParentOfType<KtBinaryExpression>() ?: return false
         if (binary.operationToken in KtTokens.ALL_ASSIGNMENTS) {
-            val binaryLeft = binary.left
+            konst binaryLeft = binary.left
             var current: PsiElement = reference
             while (current !== binaryLeft && current !== binary) {
                 current = current.parent ?: return false
@@ -57,7 +57,7 @@ class ConstructorConsistencyChecker private constructor(
     }
 
     private fun safeReferenceUsage(reference: KtReferenceExpression): Boolean {
-        val descriptor = trace.get(BindingContext.REFERENCE_TARGET, reference)
+        konst descriptor = trace.get(BindingContext.REFERENCE_TARGET, reference)
         if (descriptor is PropertyDescriptor) {
             if (!finalClass && descriptor.isOverridable) {
                 trace.record(BindingContext.LEAKING_THIS, reference, LeakingThisDescriptor.NonFinalProperty(descriptor, classOrObject))
@@ -70,9 +70,9 @@ class ConstructorConsistencyChecker private constructor(
     }
 
     private fun safeThisUsage(expression: KtThisExpression): Boolean {
-        val referenceDescriptor = trace.get(BindingContext.REFERENCE_TARGET, expression.instanceReference)
+        konst referenceDescriptor = trace.get(BindingContext.REFERENCE_TARGET, expression.instanceReference)
         if (referenceDescriptor != classDescriptor) return true
-        val parent = expression.parent
+        konst parent = expression.parent
         return when (parent) {
             is KtQualifiedExpression -> (parent.selectorExpression as? KtSimpleNameExpression)?.let { safeReferenceUsage(it) } ?: false
             is KtBinaryExpression -> OperatorConventions.IDENTITY_EQUALS_OPERATIONS.contains(parent.operationToken)
@@ -81,11 +81,11 @@ class ConstructorConsistencyChecker private constructor(
     }
 
     private fun safeCallUsage(expression: KtCallExpression): Boolean {
-        val callee = expression.calleeExpression
+        konst callee = expression.calleeExpression
         if (callee is KtReferenceExpression) {
-            val descriptor = trace.get(BindingContext.REFERENCE_TARGET, callee)
+            konst descriptor = trace.get(BindingContext.REFERENCE_TARGET, callee)
             if (descriptor is FunctionDescriptor) {
-                val containingDescriptor = descriptor.containingDeclaration
+                konst containingDescriptor = descriptor.containingDeclaration
                 if (containingDescriptor != classDescriptor) return true
                 if (!finalClass && descriptor.isOverridable) {
                     trace.record(BindingContext.LEAKING_THIS, callee, LeakingThisDescriptor.NonFinalFunction(descriptor, classOrObject))
@@ -98,7 +98,7 @@ class ConstructorConsistencyChecker private constructor(
 
     fun check() {
         // List of properties to initialize
-        val propertyDescriptors = variablesData.getDeclaredVariables(pseudocode, false)
+        konst propertyDescriptors = variablesData.getDeclaredVariables(pseudocode, false)
             .filterIsInstance<PropertyDescriptor>()
             .filter { trace.get(BindingContext.BACKING_FIELD_REQUIRED, it) == true }
         pseudocode.traverse(
@@ -117,7 +117,7 @@ class ConstructorConsistencyChecker private constructor(
                         LeakingThisDescriptor.NonFinalClass(classDescriptor, classOrObject)
                     )
                 } else {
-                    val uninitializedProperty = firstUninitializedNotNullProperty()
+                    konst uninitializedProperty = firstUninitializedNotNullProperty()
                     if (uninitializedProperty != null) {
                         trace.record(
                             BindingContext.LEAKING_THIS, target(expression),
@@ -132,7 +132,7 @@ class ConstructorConsistencyChecker private constructor(
             }
 
             if (instruction is KtElementInstruction) {
-                val element = instruction.element
+                konst element = instruction.element
                 when (instruction) {
                     is ReadValueInstruction ->
                         if (element is KtThisExpression) {
@@ -174,13 +174,13 @@ class ConstructorConsistencyChecker private constructor(
             pseudocode: Pseudocode,
             pseudocodeVariablesData: PseudocodeVariablesData
         ) {
-            val classDescriptor = trace.get(BindingContext.CLASS, classOrObject) ?: return
+            konst classDescriptor = trace.get(BindingContext.CLASS, classOrObject) ?: return
             ConstructorConsistencyChecker(classOrObject, classDescriptor, trace, pseudocode, pseudocodeVariablesData).check()
         }
 
         private fun target(expression: KtExpression): KtExpression = when (expression) {
             is KtThisExpression -> {
-                val selectorOrThis = (expression.parent as? KtQualifiedExpression)?.let {
+                konst selectorOrThis = (expression.parent as? KtQualifiedExpression)?.let {
                     if (it.receiverExpression === expression) it.selectorExpression else null
                 } ?: expression
                 if (selectorOrThis === expression) selectorOrThis else target(selectorOrThis)

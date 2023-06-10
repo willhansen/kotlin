@@ -4,11 +4,11 @@
 import kotlin.reflect.KProperty
 
 interface A {
-    val prop: Int
+    konst prop: Int
 }
 
 class AImpl: A  {
-    override val <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>prop<!> by Delegate()
+    override konst <!PROPERTY_TYPE_MISMATCH_ON_OVERRIDE!>prop<!> by Delegate()
 }
 
 fun foo() {

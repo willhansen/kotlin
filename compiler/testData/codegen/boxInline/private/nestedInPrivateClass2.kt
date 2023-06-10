@@ -8,10 +8,10 @@ private class S public constructor() {
             return "K"
         }
 
-        val empty = ""
+        konst empty = ""
     }
 
-    enum class E(val s: String) {
+    enum class E(konst s: String) {
         EMPTY("")
     }
 }

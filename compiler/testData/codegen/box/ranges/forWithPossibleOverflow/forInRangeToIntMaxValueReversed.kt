@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-const val M = Int.MAX_VALUE
+const konst M = Int.MAX_VALUE
 
 fun box(): String {
     var step = 0

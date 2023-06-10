@@ -9,7 +9,7 @@ import kotlin.test.*
 
 class LazyValTest {
     var result = 0
-    val a by lazy {
+    konst a by lazy {
         ++result
     }
 
@@ -21,7 +21,7 @@ class LazyValTest {
 
 class UnsafeLazyValTest {
     var result = 0
-    val a by lazy(LazyThreadSafetyMode.NONE) {
+    konst a by lazy(LazyThreadSafetyMode.NONE) {
         ++result
     }
 
@@ -35,8 +35,8 @@ class NullableLazyValTest {
     var resultA = 0
     var resultB = 0
 
-    val a: Int? by lazy { resultA++; null}
-    val b by lazy { foo() }
+    konst a: Int? by lazy { resultA++; null}
+    konst b by lazy { foo() }
 
     @Test fun doTest() {
         a
@@ -58,8 +58,8 @@ class UnsafeNullableLazyValTest {
     var resultA = 0
     var resultB = 0
 
-    val a: Int? by lazy(LazyThreadSafetyMode.NONE) { resultA++; null}
-    val b by lazy(LazyThreadSafetyMode.NONE) { foo() }
+    konst a: Int? by lazy(LazyThreadSafetyMode.NONE) { resultA++; null}
+    konst b by lazy(LazyThreadSafetyMode.NONE) { foo() }
 
     @Test fun doTest() {
         a
@@ -79,7 +79,7 @@ class UnsafeNullableLazyValTest {
 
 class IdentityEqualsIsUsedToUnescapeLazyValTest {
     var equalsCalled = 0
-    private val a by lazy { ClassWithCustomEquality { equalsCalled++ } }
+    private konst a by lazy { ClassWithCustomEquality { equalsCalled++ } }
 
     @Test fun doTest() {
         a
@@ -88,7 +88,7 @@ class IdentityEqualsIsUsedToUnescapeLazyValTest {
     }
 }
 
-private class ClassWithCustomEquality(private val onEqualsCalled: () -> Unit) {
+private class ClassWithCustomEquality(private konst onEqualsCalled: () -> Unit) {
     override fun equals(other: Any?): Boolean {
         onEqualsCalled()
         return super.equals(other)

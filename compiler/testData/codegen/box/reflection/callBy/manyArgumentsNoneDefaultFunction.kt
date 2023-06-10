@@ -88,8 +88,8 @@ class A {
 }
 
 fun box(): String {
-    val f = A::class.members.single { it.name == "foo" }
-    val parameters = f.parameters
+    konst f = A::class.members.single { it.name == "foo" }
+    konst parameters = f.parameters
 
     f.callBy(mapOf(
             parameters.first() to A(),

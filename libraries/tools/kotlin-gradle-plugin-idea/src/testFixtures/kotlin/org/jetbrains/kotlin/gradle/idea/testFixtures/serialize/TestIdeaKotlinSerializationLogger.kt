@@ -11,16 +11,16 @@ import java.io.Serializable
 
 class TestIdeaKotlinSerializationLogger : IdeaKotlinSerializationLogger {
     data class Report(
-        val severity: Severity,
-        val message: String,
-        val cause: Throwable? = null
+        konst severity: Severity,
+        konst message: String,
+        konst cause: Throwable? = null
     ) : Serializable {
         override fun toString(): String = "[${severity.name}]: $message"
     }
 
-    private val _reports = mutableListOf<Report>()
+    private konst _reports = mutableListOf<Report>()
 
-    val reports get() = _reports.toList()
+    konst reports get() = _reports.toList()
 
     override fun report(severity: Severity, message: String, cause: Throwable?) {
         _reports.add(Report(severity, message, cause))

@@ -30,6 +30,6 @@ typealias ImmutableLinkedHashSet<E> = imm.LinkedHashSet<E>
 
 private typealias ImmutableMultimap<K, V> = ImmutableMap<K, ImmutableSet<V>>
 
-private fun <K, V> ImmutableMultimap<K, V>.put(key: K, value: V) {
+private fun <K, V> ImmutableMultimap<K, V>.put(key: K, konstue: V) {
     this[key].getOrElse(ImmutableLinkedHashSet.empty<V>())
 }

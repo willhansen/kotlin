@@ -6,8 +6,8 @@ object L1 {
 // MODULE: lib2(lib1)
 // FILE: lib2.kt
 object L2 {
-    val sideEffect = L1.block()
-    const val x = 42
+    konst sideEffect = L1.block()
+    const konst x = 42
     fun triggerInitialization() {}
 }
 

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T) {
+konstue class Z<T: Int>(konst x: T) {
     fun test(y: Int = 42) = x + y
 }
 

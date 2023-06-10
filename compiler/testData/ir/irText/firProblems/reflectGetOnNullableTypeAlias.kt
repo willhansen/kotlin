@@ -9,7 +9,7 @@ import kotlin.reflect.KProperty1
 private typealias PropAlias<T> = KProperty1<T, Any?>?
 
 fun box(): String {
-    val backRefProp: PropAlias<Foo> = Foo::bar
+    konst backRefProp: PropAlias<Foo> = Foo::bar
     if (backRefProp != null) {
         return backRefProp.get(Foo()) as String
     }
@@ -17,5 +17,5 @@ fun box(): String {
 }
 
 class Foo {
-    val bar: String = "OK"
+    konst bar: String = "OK"
 }

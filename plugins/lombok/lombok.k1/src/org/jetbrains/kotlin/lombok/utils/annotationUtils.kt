@@ -12,36 +12,36 @@ import org.jetbrains.kotlin.lombok.config.toDescriptorVisibility
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.constants.*
 
-fun getVisibility(annotation: AnnotationDescriptor, field: String = "value"): DescriptorVisibility =
+fun getVisibility(annotation: AnnotationDescriptor, field: String = "konstue"): DescriptorVisibility =
     getAccessLevel(annotation, field).toDescriptorVisibility()
 
-fun getAccessLevel(annotation: AnnotationDescriptor, field: String = "value"): AccessLevel {
-    val value = annotation.getStringArgument(field) ?: return AccessLevel.PUBLIC
-    return AccessLevel.valueOf(value)
+fun getAccessLevel(annotation: AnnotationDescriptor, field: String = "konstue"): AccessLevel {
+    konst konstue = annotation.getStringArgument(field) ?: return AccessLevel.PUBLIC
+    return AccessLevel.konstueOf(konstue)
 }
 
 @JvmName("getAccessLevelWithReceiver")
-fun AnnotationDescriptor.getAccessLevel(field: String = "value"): AccessLevel {
+fun AnnotationDescriptor.getAccessLevel(field: String = "konstue"): AccessLevel {
     return getAccessLevel(this, field)
 }
 
 fun AnnotationDescriptor.getStringArgument(argumentName: String): String? {
-    val argument = allValueArguments[Name.identifier(argumentName)]
+    konst argument = allValueArguments[Name.identifier(argumentName)]
         ?: return null
 
     return extractString(argument)
 }
 
 fun AnnotationDescriptor.getStringArrayArgument(argumentName: String): List<String>? =
-    when (val argument = allValueArguments[Name.identifier(argumentName)]) {
+    when (konst argument = allValueArguments[Name.identifier(argumentName)]) {
         null -> null
-        is ArrayValue -> argument.value.map(::extractString)
+        is ArrayValue -> argument.konstue.map(::extractString)
         else -> throw RuntimeException("Argument should be ArrayValue, got $argument")
     }
 
 private fun extractString(argument: ConstantValue<*>) = when (argument) {
     is EnumValue -> argument.enumEntryName.identifier
-    is StringValue -> argument.value
+    is StringValue -> argument.konstue
     else -> throw RuntimeException("Argument $argument is not supported")
 }
 
@@ -49,11 +49,11 @@ fun AnnotationDescriptor.getNonBlankStringArgument(argumentName: String): String
     getStringArgument(argumentName).trimToNull()
 
 fun AnnotationDescriptor.getBooleanArgument(argumentName: String): Boolean? {
-    val argument = allValueArguments[Name.identifier(argumentName)]
+    konst argument = allValueArguments[Name.identifier(argumentName)]
         ?: return null
 
     return when (argument) {
-        is BooleanValue -> argument.value
-        else -> throw RuntimeException("Argument $argument is not supported for Boolean value")
+        is BooleanValue -> argument.konstue
+        else -> throw RuntimeException("Argument $argument is not supported for Boolean konstue")
     }
 }

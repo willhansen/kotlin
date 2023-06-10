@@ -7,22 +7,22 @@ package org.jetbrains.kotlin.name
 
 // NB: with className == null we are at top level
 data class CallableId(
-    val packageName: FqName,
-    val className: FqName?,
-    val callableName: Name,
+    konst packageName: FqName,
+    konst className: FqName?,
+    konst callableName: Name,
     // Currently, it's only used for debug info
-    private val pathToLocal: FqName? = null
+    private konst pathToLocal: FqName? = null
 ) {
     companion object {
-        private val LOCAL_NAME = SpecialNames.LOCAL
-        val PACKAGE_FQ_NAME_FOR_LOCAL = FqName.topLevel(LOCAL_NAME)
+        private konst LOCAL_NAME = SpecialNames.LOCAL
+        konst PACKAGE_FQ_NAME_FOR_LOCAL = FqName.topLevel(LOCAL_NAME)
     }
 
     /**
      * Return `true` if corresponding declaration is itself local or it is a member of local class
      * Otherwise, returns `false`
      */
-    val isLocal: Boolean
+    konst isLocal: Boolean
         get() = packageName == PACKAGE_FQ_NAME_FOR_LOCAL || classId?.isLocal == true
 
     var classId: ClassId? = null

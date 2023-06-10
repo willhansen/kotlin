@@ -55,28 +55,28 @@ public final class NamePredicate implements Predicate<Name> {
     public static final NamePredicate LONG = new NamePredicate(PrimitiveType.LONG.getTypeName());
 
     @NotNull
-    private final Set<Name> validNames = new HashSet<>();
+    private final Set<Name> konstidNames = new HashSet<>();
 
-    public NamePredicate(@NotNull String... validNames) {
-        this(Arrays.asList(validNames));
+    public NamePredicate(@NotNull String... konstidNames) {
+        this(Arrays.asList(konstidNames));
     }
 
-    private NamePredicate(@NotNull List<String> validNames) {
-        for (String validName : validNames) {
-            this.validNames.add(Name.guessByFirstCharacter(validName));
+    private NamePredicate(@NotNull List<String> konstidNames) {
+        for (String konstidName : konstidNames) {
+            this.konstidNames.add(Name.guessByFirstCharacter(konstidName));
         }
     }
 
-    public NamePredicate(@NotNull Collection<Name> validNames) {
-        this.validNames.addAll(validNames);
+    public NamePredicate(@NotNull Collection<Name> konstidNames) {
+        this.konstidNames.addAll(konstidNames);
     }
 
-    public NamePredicate(@NotNull Name... validNames) {
-        this.validNames.addAll(Lists.newArrayList(validNames));
+    public NamePredicate(@NotNull Name... konstidNames) {
+        this.konstidNames.addAll(Lists.newArrayList(konstidNames));
     }
 
     @Override
     public boolean test(Name name) {
-        return validNames.contains(name);
+        return konstidNames.contains(name);
     }
 }

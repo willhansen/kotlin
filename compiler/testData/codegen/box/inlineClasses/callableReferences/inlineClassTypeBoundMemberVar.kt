@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 class C(var z: Z)
 
 fun box(): String {
-    val x = C(Z(42))
+    konst x = C(Z(42))
 
-    val ref = x::z
+    konst ref = x::z
 
     if (ref.get().x != 42) throw AssertionError()
 

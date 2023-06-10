@@ -2,9 +2,9 @@
 // FILE: 1.kt
 package test
 
-class A(val value: String) {
+class A(konst konstue: String) {
 
-    inline fun inlineFun(lambda: () -> String = { value }): String {
+    inline fun inlineFun(lambda: () -> String = { konstue }): String {
         return lambda()
     }
 }

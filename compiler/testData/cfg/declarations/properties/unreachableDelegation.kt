@@ -1,1 +1,1 @@
-val foo: Int by throw NullPointerException()
+konst foo: Int by throw NullPointerException()

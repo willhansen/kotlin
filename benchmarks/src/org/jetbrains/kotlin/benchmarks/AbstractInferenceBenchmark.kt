@@ -14,6 +14,6 @@ abstract class AbstractInferenceBenchmark : AbstractSimpleFileBenchmark() {
     @Param("true", "false")
     private var useNI: Boolean = false
 
-    override val useNewInference: Boolean
+    override konst useNewInference: Boolean
         get() = useNI
 }

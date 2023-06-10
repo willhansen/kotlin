@@ -36,33 +36,33 @@ class AdditionalBuiltInsMembersSignatureListsTest : KotlinTestWithEnvironment() 
     }
 
     fun testAllListedSignaturesExistInJdk() {
-        val module = JvmResolveUtil.analyze(environment).moduleDescriptor as ModuleDescriptorImpl
+        konst module = JvmResolveUtil.analyze(environment).moduleDescriptor as ModuleDescriptorImpl
 
-        val hiddenSignatures =
+        konst hiddenSignatures =
             JvmBuiltInsSignatures.HIDDEN_METHOD_SIGNATURES +
                     JvmBuiltInsSignatures.MUTABLE_METHOD_SIGNATURES +
                     JvmBuiltInsSignatures.HIDDEN_CONSTRUCTOR_SIGNATURES +
                     JvmBuiltInsSignatures.VISIBLE_METHOD_SIGNATURES +
                     JvmBuiltInsSignatures.VISIBLE_CONSTRUCTOR_SIGNATURES
 
-        val groupedByInternalName = hiddenSignatures.groupBy({ it.split(".")[0] }) { it.split(".")[1] }
+        konst groupedByInternalName = hiddenSignatures.groupBy({ it.split(".")[0] }) { it.split(".")[1] }
 
         groupedByInternalName.entries.forEach { it ->
-            val (internalName, jvmDescriptors) = it
-            val classDescriptor =
+            konst (internalName, jvmDescriptors) = it
+            konst classDescriptor =
                 module.resolveClassByFqName(
                     JvmClassName.byInternalName(internalName).fqNameForClassNameWithoutDollars, NoLookupLocation.FROM_TEST
                 )!!
 
-            val scope = classDescriptor.unsubstitutedMemberScope
+            konst scope = classDescriptor.unsubstitutedMemberScope
 
-            val lateJdkSignatures = LATE_JDK_SIGNATURES[internalName] ?: emptySet()
+            konst lateJdkSignatures = LATE_JDK_SIGNATURES[internalName] ?: emptySet()
 
             for (jvmDescriptor in jvmDescriptors) {
                 if (jvmDescriptor in lateJdkSignatures) continue
 
-                val stringName = jvmDescriptor.split("(")[0]
-                val functions =
+                konst stringName = jvmDescriptor.split("(")[0]
+                konst functions =
                     if (stringName == "<init>")
                         classDescriptor.constructors
                     else
@@ -76,7 +76,7 @@ class AdditionalBuiltInsMembersSignatureListsTest : KotlinTestWithEnvironment() 
     }
 
     // TODO: Get rid of it once JDK 21 is released (KT-58765 for tracking)
-    private val LATE_JDK_SIGNATURES = mapOf(
+    private konst LATE_JDK_SIGNATURES = mapOf(
         "java/util/List" to setOf(
             // From JDK 21
             "addFirst(Ljava/lang/Object;)V",

@@ -33,14 +33,14 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 class MultifileClassPartCodegen(
     v: ClassBuilder,
     file: KtFile,
-    private val packageFragment: PackageFragmentDescriptor,
-    private val superClassInternalName: String,
-    private val shouldGeneratePartHierarchy: Boolean,
+    private konst packageFragment: PackageFragmentDescriptor,
+    private konst superClassInternalName: String,
+    private konst shouldGeneratePartHierarchy: Boolean,
     partContext: MultifileClassPartContext,
     state: GenerationState
 ) : MemberCodegen<KtFile>(state, null, partContext, file, v) {
-    private val partType = partContext.filePartType
-    private val facadeClassType = partContext.multifileClassType
+    private konst partType = partContext.filePartType
+    private konst facadeClassType = partContext.multifileClassType
 
     init {
         if (shouldGeneratePartHierarchy && file.declarations.any { it is KtProperty && shouldInitializeProperty(it) }) {
@@ -53,7 +53,7 @@ class MultifileClassPartCodegen(
 
         super.generate()
 
-        val generateBodies = state.classBuilderMode.generateBodies
+        konst generateBodies = state.classBuilderMode.generateBodies
 
         if (shouldGeneratePartHierarchy) {
             v.newMethod(OtherOrigin(packageFragment), Opcodes.ACC_PUBLIC, "<init>", "()V", null, null).apply {
@@ -70,7 +70,7 @@ class MultifileClassPartCodegen(
     }
 
     override fun generateDeclaration() {
-        val access = if (shouldGeneratePartHierarchy) 0 else Opcodes.ACC_SYNTHETIC or Opcodes.ACC_FINAL
+        konst access = if (shouldGeneratePartHierarchy) 0 else Opcodes.ACC_SYNTHETIC or Opcodes.ACC_FINAL
 
         v.defineClass(
             element, state.classFileVersion, access or Opcodes.ACC_SUPER, partType.internalName, null, superClassInternalName,
@@ -92,15 +92,15 @@ class MultifileClassPartCodegen(
     }
 
     override fun generateKotlinMetadataAnnotation() {
-        val (serializer, packageProto) = PackagePartCodegen.serializePackagePartMembers(this, partType)
+        konst (serializer, packageProto) = PackagePartCodegen.serializePackagePartMembers(this, partType)
 
-        val extraFlags = if (shouldGeneratePartHierarchy) JvmAnnotationNames.METADATA_MULTIFILE_PARTS_INHERIT_FLAG else 0
+        konst extraFlags = if (shouldGeneratePartHierarchy) JvmAnnotationNames.METADATA_MULTIFILE_PARTS_INHERIT_FLAG else 0
 
         writeKotlinMetadata(v, state, KotlinClassHeader.Kind.MULTIFILE_CLASS_PART, false, extraFlags) { av ->
             DescriptorAsmUtil.writeAnnotationData(av, serializer, packageProto)
             av.visit(JvmAnnotationNames.METADATA_MULTIFILE_CLASS_NAME_FIELD_NAME, facadeClassType.internalName)
 
-            val kotlinPackageFqName = element.packageFqName
+            konst kotlinPackageFqName = element.packageFqName
             if (kotlinPackageFqName != JvmClassName.byInternalName(partType.internalName).packageFqName) {
                 av.visit(METADATA_PACKAGE_NAME_FIELD_NAME, kotlinPackageFqName.asString())
             }

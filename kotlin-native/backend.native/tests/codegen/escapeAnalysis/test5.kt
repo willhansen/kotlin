@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test5
 
-class A(val s: String)
+class A(konst s: String)
 class B {
     var f: A = A("qzz")
 }
@@ -27,7 +27,7 @@ class C {
 //     D1 -> D2
 // Escapes: D0 D1
 fun foo(c1: C, c2: C): B {
-    val b = B()
+    konst b = B()
     b.f = c1.g.f
     return b
 }

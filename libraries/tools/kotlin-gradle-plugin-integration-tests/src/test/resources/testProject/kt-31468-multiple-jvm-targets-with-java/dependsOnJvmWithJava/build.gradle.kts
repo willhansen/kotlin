@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-val disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
+konst disambiguationAttribute = Attribute.of("disambiguationAttribute", String::class.java)
 
 kotlin {
     jvm {
@@ -11,7 +11,7 @@ kotlin {
     }
 
     sourceSets {
-        val jvmMain by getting {
+        konst jvmMain by getting {
             dependencies {
                 api(project(":lib"))
             }

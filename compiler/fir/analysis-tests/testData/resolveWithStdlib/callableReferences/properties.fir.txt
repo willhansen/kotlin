@@ -4,13 +4,13 @@ FILE: properties.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val bar: R|kotlin/Int| = Int(1)
+        public final konst bar: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
     }
-    public final val bar: R|kotlin/Int| = Int(1)
+    public final konst bar: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int|
-    public final val R|A|.baz: R|kotlin/Int|
+    public final konst R|A|.baz: R|kotlin/Int|
         public get(): R|kotlin/Int| {
             ^ Int(1)
         }

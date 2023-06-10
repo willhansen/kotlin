@@ -134,8 +134,8 @@ public class DirectiveTestUtils {
     };
 
     private static boolean parseBooleanArgument(@NotNull ArgumentsHelper arguments, @NotNull String name, boolean defaultValue) {
-        String value = arguments.findNamedArgument(name);
-        return value != null ? Boolean.parseBoolean(value) : defaultValue;
+        String konstue = arguments.findNamedArgument(name);
+        return konstue != null ? Boolean.parseBoolean(konstue) : defaultValue;
     }
 
     private static final DirectiveHandler FUNCTIONS_HAVE_SAME_LINES = new DirectiveHandler("CHECK_FUNCTIONS_HAVE_SAME_LINES") {
@@ -231,14 +231,14 @@ public class DirectiveTestUtils {
             }
 
             if (countStr != null) {
-                int expectedCount = Integer.valueOf(countStr);
+                int expectedCount = Integer.konstueOf(countStr);
 
                 String message = "Function " + functionName + " contains " + actualCount +
                                  " nodes of type " + klass.getName() +
                                  ", but expected count is " + expectedCount;
                 assertEquals(message, expectedCount, actualCount);
             } else if (maxCountStr != null) {
-                int expectedCount = Integer.valueOf(maxCountStr);
+                int expectedCount = Integer.konstueOf(maxCountStr);
 
                 String message = "Function " + functionName + " contains " + actualCount +
                                  " nodes of type " + klass.getName() +
@@ -686,10 +686,10 @@ public class DirectiveTestUtils {
     /**
      * Arguments format: ((namedArg|positionalArg)\s+)*`
      *
-     * Where: namedArg -- 'key=value' or 'key="spaced value"'
-     *        positionalArg -- 'value'
+     * Where: namedArg -- 'key=konstue' or 'key="spaced konstue"'
+     *        positionalArg -- 'konstue'
      *
-     * Neither key, nor value should contain spaces.
+     * Neither key, nor konstue should contain spaces.
      */
     private static class ArgumentsHelper {
         private final List<String> positionalArguments = new ArrayList<>();
@@ -708,11 +708,11 @@ public class DirectiveTestUtils {
                 switch (keyVal.length) {
                     case 1: positionalArguments.add(keyVal[0]); break;
                     case 2:
-                        String value = keyVal[1];
-                        if (value.charAt(0) == '"') {
-                            value = value.substring(1, value.length() - 1);
+                        String konstue = keyVal[1];
+                        if (konstue.charAt(0) == '"') {
+                            konstue = konstue.substring(1, konstue.length() - 1);
                         }
-                        namedArguments.put(keyVal[0], value);
+                        namedArguments.put(keyVal[0], konstue);
                         break;
                     default: throw new AssertionError("Wrong argument format: " + argument);
                 }

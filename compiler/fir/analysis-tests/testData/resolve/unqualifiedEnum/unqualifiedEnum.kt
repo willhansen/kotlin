@@ -23,10 +23,10 @@ fun shouldNotWork(s: Sample): Int {
 }
 
 class Container {
-    val SECOND = test.Sample.SECOND
+    konst SECOND = test.Sample.SECOND
 
     fun priority(s: Sample): Int {
-        val FIRST = test.Sample.THIRD
+        konst FIRST = test.Sample.THIRD
         return when (s) {
             FIRST -> 3
             SECOND -> 2

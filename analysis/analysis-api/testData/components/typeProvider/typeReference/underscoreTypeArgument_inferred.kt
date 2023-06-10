@@ -20,13 +20,13 @@ object Runner {
 }
 
 fun test() {
-    val i = SomeImplementation()
+    konst i = SomeImplementation()
     // T is inferred as String because SomeImplementation derives from SomeClass<String>
-    val s = Runner.run<_, _>(i)
+    konst s = Runner.run<_, _>(i)
     assert(s == "Test")
 
-    val j = OtherImplementation()
+    konst j = OtherImplementation()
     // T is inferred as Int because OtherImplementation derives from SomeClass<Int>
-    val n = Runner.run<_, <caret>_>(j)
+    konst n = Runner.run<_, <caret>_>(j)
     assert(n == 42)
 }

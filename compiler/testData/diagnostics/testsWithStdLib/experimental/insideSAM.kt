@@ -8,14 +8,14 @@ internal fun interface StableInterface {
 }
 
 fun regressionTestOverrides() {
-    val anonymous: StableInterface = object : StableInterface {
+    konst anonymous: StableInterface = object : StableInterface {
         override fun <!OPT_IN_OVERRIDE_ERROR!>experimentalMethod<!>() {} // correctly fails check
     }
-    val lambda = <!OPT_IN_USAGE!>StableInterface<!> {} // this does not get flagged
+    konst lambda = <!OPT_IN_USAGE!>StableInterface<!> {} // this does not get flagged
 }
 
 @ExperimentalKotlinAnnotation
 fun suppressed() {
-    val lambda = StableInterface {}
+    konst lambda = StableInterface {}
 }
 

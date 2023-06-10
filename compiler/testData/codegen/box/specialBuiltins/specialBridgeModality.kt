@@ -6,9 +6,9 @@ import java.util.AbstractMap
 abstract class AbstractMutableMap<K, V> : MutableMap<K, V>, AbstractMap<K, V>()
 
 class MyMap<K, V> : AbstractMutableMap<K, V>() {
-    override val size: Int
+    override konst size: Int
         get() = 1
-    override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<K, V>>
         get() = null!!
 }
 

@@ -22,11 +22,11 @@ import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationComp
 import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationIntrinsicsState
 import java.io.File
 
-private val librariesPaths = listOfNotNull(RuntimeLibraryInClasspathTest.coreLibraryPath, RuntimeLibraryInClasspathTest.jsonLibraryPath)
+private konst librariesPaths = listOfNotNull(RuntimeLibraryInClasspathTest.coreLibraryPath, RuntimeLibraryInClasspathTest.jsonLibraryPath)
 
 class SerializationEnvironmentConfigurator(
     testServices: TestServices,
-    private val noLibraries: Boolean
+    private konst noLibraries: Boolean
 ) : EnvironmentConfigurator(testServices) {
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
         if (noLibraries) return

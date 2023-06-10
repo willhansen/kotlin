@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 import org.jetbrains.kotlin.ir.util.KotlinMangler
 
 object DisabledDescriptorMangler : KotlinMangler.DescriptorMangler {
-    override val String.hashMangle: Long
+    override konst String.hashMangle: Long
         get() = error("Should not be called")
 
     override fun DeclarationDescriptor.isExported(compatibleMode: Boolean): Boolean =

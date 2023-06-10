@@ -26,7 +26,7 @@ import kotlin.test.*
 
 class MppPublicationTest {
 
-    private val project = ProjectBuilder.builder().build().also {
+    private konst project = ProjectBuilder.builder().build().also {
         addBuildEventsListenerRegistryMock(it)
         disableLegacyWarning(it)
     } as ProjectInternal
@@ -36,7 +36,7 @@ class MppPublicationTest {
         project.plugins.apply("maven-publish")
     }
 
-    private val kotlin = project.extensions.getByType(KotlinMultiplatformExtension::class.java)
+    private konst kotlin = project.extensions.getByType(KotlinMultiplatformExtension::class.java)
 
     init {
         kotlin.jvm()
@@ -45,8 +45,8 @@ class MppPublicationTest {
 
     @Test
     fun `contains kotlinMultiplatform publication`() {
-        project.evaluate()
-        val publishing = project.extensions.getByType(PublishingExtension::class.java)
+        project.ekonstuate()
+        konst publishing = project.extensions.getByType(PublishingExtension::class.java)
         publishing.publications
             .withType(MavenPublication::class.java)
             .findByName("kotlinMultiplatform") ?: fail("Missing 'kotlinMultiplatform' publication")
@@ -55,19 +55,19 @@ class MppPublicationTest {
 
     @Test
     fun `all publication contains sourcesJar`() {
-        project.evaluate()
-        val publishing = project.extensions.getByType(PublishingExtension::class.java)
+        project.ekonstuate()
+        konst publishing = project.extensions.getByType(PublishingExtension::class.java)
         publishing.publications
             .filterIsInstance<MavenPublication>()
             .forEach { publication ->
-                val sources = publication.artifacts.filter { artifact -> artifact.classifier == "sources" }
+                konst sources = publication.artifacts.filter { artifact -> artifact.classifier == "sources" }
                 assertTrue(sources.isNotEmpty(), "Expected at least one sources artifact for ${publication.name}")
             }
     }
 
     @Test
     fun `jvm sources elements has same attributes as java sources elements from default java gradle plugin`() {
-        val javaProject = ProjectBuilder.builder().build().run {
+        konst javaProject = ProjectBuilder.builder().build().run {
             // Given
             plugins.apply("java")
             plugins.apply("maven-publish")
@@ -78,33 +78,33 @@ class MppPublicationTest {
 
             // When
             this as ProjectInternal
-            this.evaluate()
+            this.ekonstuate()
         }
 
-        val javaSourcesElementsAttributes = javaProject
+        konst javaSourcesElementsAttributes = javaProject
             .components
             .getByName("java")
             .attributesOfUsageContext("sourcesElements")
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val kotlinComponent = project.components.getByName("kotlin") as ComponentWithVariants
-        val jvmComponent = kotlinComponent.variants.first { it.name == "jvm" }
-        val jvmSourcesElementsAttributes = jvmComponent.attributesOfUsageContext("jvmSourcesElements-published")
+        konst kotlinComponent = project.components.getByName("kotlin") as ComponentWithVariants
+        konst jvmComponent = kotlinComponent.variants.first { it.name == "jvm" }
+        konst jvmSourcesElementsAttributes = jvmComponent.attributesOfUsageContext("jvmSourcesElements-published")
 
-        val extraExpectedAttributes = mapOf(               // target disambiguation attribute
+        konst extraExpectedAttributes = mapOf(               // target disambiguation attribute
             "org.jetbrains.kotlin.platform.type" to "jvm", // is set by default by kgp, when it sets usage as `java-runtime-jars`
             "org.gradle.libraryelements" to "jar"          // see [KotlinUsages.producerApiUsage]
         )
 
-        val expectedAttributes = javaSourcesElementsAttributes.toMapOfStrings() + extraExpectedAttributes
-        val actualAttributes = jvmSourcesElementsAttributes.toMapOfStrings()
+        konst expectedAttributes = javaSourcesElementsAttributes.toMapOfStrings() + extraExpectedAttributes
+        konst actualAttributes = jvmSourcesElementsAttributes.toMapOfStrings()
         assertEquals(expectedAttributes, actualAttributes)
     }
 
     @Test
     fun `sources elements includes user-defined attributes`() {
-        val userAttribute = Attribute.of("userAttribute", String::class.java)
+        konst userAttribute = Attribute.of("userAttribute", String::class.java)
         kotlin.run {
             targets.all { target -> target.attributes { attribute(userAttribute, target.name) } }
             js(IR)
@@ -112,10 +112,10 @@ class MppPublicationTest {
             iosX64()
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val kotlinComponent = project.components.getByName("kotlin") as ComponentWithVariants
-        val sourcesElements = listOf("jvm", "js", "linuxX64", "iosX64")
+        konst kotlinComponent = project.components.getByName("kotlin") as ComponentWithVariants
+        konst sourcesElements = listOf("jvm", "js", "linuxX64", "iosX64")
             .map { targetName ->
                 targetName to kotlinComponent.variants
                     .first { it.name == targetName }
@@ -131,7 +131,7 @@ class MppPublicationTest {
 
     @Test
     fun `sources elements should not have any dependencies`() {
-        project.evaluate()
+        project.ekonstuate()
         project.configurations
             .filter { it.name.toLowerCaseAsciiOnly().contains("sourceselements") }
             .forEach { configuration ->
@@ -144,7 +144,7 @@ class MppPublicationTest {
     fun `sourcesJar task should be available during configuration time`() {
         kotlin.linuxX64("linux")
 
-        val sourcesJars = listOf(
+        konst sourcesJars = listOf(
             "sourcesJar", // sources of common source sets i.e. root module
             "jvmSourcesJar",
             "jsSourcesJar",
@@ -152,7 +152,7 @@ class MppPublicationTest {
         )
 
         for (sourcesJarTaskName in sourcesJars) {
-            val sourcesJar = project.tasks.findByName(sourcesJarTaskName)
+            konst sourcesJar = project.tasks.findByName(sourcesJarTaskName)
             assertNotNull(sourcesJar, "Task '$sourcesJarTaskName' should exist during project configuration time")
         }
     }
@@ -188,7 +188,7 @@ class MppPublicationTest {
         kotlin.linuxX64("linux")
         kotlin.withSourcesJar(publish = false)
 
-        val sourcesJars = listOf(
+        konst sourcesJars = listOf(
             "sourcesJar", // sources of common source sets i.e. root module
             "jvmSourcesJar",
             "jsSourcesJar",
@@ -196,7 +196,7 @@ class MppPublicationTest {
         )
 
         for (sourcesJarTaskName in sourcesJars) {
-            val sourcesJar = project.tasks.findByName(sourcesJarTaskName)
+            konst sourcesJar = project.tasks.findByName(sourcesJarTaskName)
             assertNotNull(sourcesJar, "Task '$sourcesJarTaskName' should exist during project configuration time")
         }
     }
@@ -206,9 +206,9 @@ class MppPublicationTest {
         kotlin.linuxX64("linux")
         kotlin.withSourcesJar(publish = true)
 
-        project.evaluate()
+        project.ekonstuate()
         kotlin.targets.forEach {
-            val sourcesElements = project.configurations.getByName(it.sourcesElementsConfigurationName)
+            konst sourcesElements = project.configurations.getByName(it.sourcesElementsConfigurationName)
             if (!sourcesElements.isCanBeConsumed) fail("Configuration '${it.sourcesElementsConfigurationName}' should be consumable")
         }
     }
@@ -218,9 +218,9 @@ class MppPublicationTest {
         kotlin.linuxX64("linux")
         kotlin.withSourcesJar(publish = false)
 
-        project.evaluate()
+        project.ekonstuate()
         kotlin.targets.forEach {
-            val sourcesElements = project.configurations.getByName(it.sourcesElementsConfigurationName)
+            konst sourcesElements = project.configurations.getByName(it.sourcesElementsConfigurationName)
             if (sourcesElements.isCanBeConsumed) fail("Configuration '${it.sourcesElementsConfigurationName}' should not be consumable")
         }
     }

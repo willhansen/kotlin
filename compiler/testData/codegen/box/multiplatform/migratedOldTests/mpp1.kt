@@ -31,11 +31,11 @@ actual class A {
 
 
 fun box(): String {
-    val fourtyTwo = A().B().fourtyTwo()
+    konst fourtyTwo = A().B().fourtyTwo()
     if (fourtyTwo != 42)
         return "fourtyTwo is wrongly $fourtyTwo"
 
-    val seventeen = seventeen()
+    konst seventeen = seventeen()
     if (seventeen != 17)
         return "seventeen is wrongly $seventeen"
 

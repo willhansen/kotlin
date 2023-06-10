@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.BindingContext
 
 class KotlinResolutionFacadeForRepl(
-    private val environment: KotlinCoreEnvironment,
-    private val provider: ComponentProvider
+    private konst environment: KotlinCoreEnvironment,
+    private konst provider: ComponentProvider
 ) :
     ResolutionFacade {
-    override val project: Project
+    override konst project: Project
         get() = environment.project
 
-    override val moduleDescriptor: ModuleDescriptor = provider.getService(ModuleDescriptor::class.java)
+    override konst moduleDescriptor: ModuleDescriptor = provider.getService(ModuleDescriptor::class.java)
 
     @FrontendInternals
     override fun <T : Any> getFrontendService(serviceClass: Class<T>): T {

@@ -1,6 +1,6 @@
 // IGNORE_BACKEND: JVM_IR
 // FILE: test.kt
-class MyPair(val x: String, val y: String) {
+class MyPair(konst x: String, konst y: String) {
     operator fun component1(): String {
         return "O"
     }

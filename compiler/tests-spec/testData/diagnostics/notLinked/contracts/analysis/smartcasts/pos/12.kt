@@ -6,7 +6,7 @@
  *
  * SECTIONS: contracts, analysis, smartcasts
  * NUMBER: 12
- * DESCRIPTION: Smartcasts after non-null assertions or not-null value assignment in lambdas of contract function with 'exactly once' or 'at least once' CallsInPlace effects.
+ * DESCRIPTION: Smartcasts after non-null assertions or not-null konstue assignment in lambdas of contract function with 'exactly once' or 'at least once' CallsInPlace effects.
  * UNEXPECTED BEHAVIOUR
  * ISSUES: KT-26148
  * HELPERS: contractFunctions
@@ -26,14 +26,14 @@ fun case_2(arg: Int?) {
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val value_1: Boolean?
-    funWithExactlyOnceCallsInPlace { value_1 = false }
-    value_1<!UNSAFE_CALL!>.<!>not()
+    konst konstue_1: Boolean?
+    funWithExactlyOnceCallsInPlace { konstue_1 = false }
+    konstue_1<!UNSAFE_CALL!>.<!>not()
 }
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    val value_1: Boolean?
-    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>value_1<!> = true }
-    value_1<!UNSAFE_CALL!>.<!>not()
+    konst konstue_1: Boolean?
+    funWithAtLeastOnceCallsInPlace { <!VAL_REASSIGNMENT!>konstue_1<!> = true }
+    konstue_1<!UNSAFE_CALL!>.<!>not()
 }

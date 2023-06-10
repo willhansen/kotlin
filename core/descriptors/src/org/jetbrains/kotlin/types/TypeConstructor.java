@@ -50,7 +50,7 @@ public interface TypeConstructor extends TypeConstructorMarker {
 
     /**
      * If the type is non-denotable, it can't be written in code directly, it only can appear internally inside a type checker.
-     * Examples: intersection type or number value type.
+     * Examples: intersection type or number konstue type.
      */
     boolean isDenotable();
 

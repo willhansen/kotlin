@@ -18,5 +18,5 @@ object BitcodeEmbedding {
         Mode.FULL -> listOf("-fembed-bitcode=all")
     }
 
-    private val KonanConfig.bitcodeEmbeddingMode get() = configuration.get(KonanConfigKeys.BITCODE_EMBEDDING_MODE)!!
+    private konst KonanConfig.bitcodeEmbeddingMode get() = configuration.get(KonanConfigKeys.BITCODE_EMBEDDING_MODE)!!
 }

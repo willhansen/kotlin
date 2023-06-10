@@ -78,7 +78,7 @@ fun box(): String {
     testSideEffects()
 
 
-    val expected = "getKClassFromRaifed(true);getKClassFromRaifed(true);getKClassFromRaifed(true);" +
+    konst expected = "getKClassFromRaifed(true);getKClassFromRaifed(true);getKClassFromRaifed(true);" +
             "getKClassFromT(true);getKClassFromT(true);getKClassFromT(true);" +
             "getKClassFromErrorType(true);" +
             "getKClassFromRaifed(false);getKClassFromRaifed: null;getKClassFromRaifed(false);getKClassFromRaifed: null;getKClassFromRaifed(false);getKClassFromRaifed: null;" +

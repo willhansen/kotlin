@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.commonizer.utils.isObjCInteropCallableAnnotation
 typealias ObjCFunctionApproximation = Int
 
 data class PropertyApproximationKey(
-    val name: CirName,
-    val extensionReceiverParameterType: CirTypeSignature?
+    konst name: CirName,
+    konst extensionReceiverParameterType: CirTypeSignature?
 ) {
     companion object {
         internal fun create(
@@ -35,10 +35,10 @@ data class PropertyApproximationKey(
 }
 
 data class FunctionApproximationKey(
-    val name: CirName,
-    val valueParametersTypes: Array<CirTypeSignature>,
-    val extensionReceiverParameterType: CirTypeSignature?,
-    val objCFunctionApproximation: ObjCFunctionApproximation
+    konst name: CirName,
+    konst konstueParametersTypes: Array<CirTypeSignature>,
+    konst extensionReceiverParameterType: CirTypeSignature?,
+    konst objCFunctionApproximation: ObjCFunctionApproximation
 ) {
 
     companion object {
@@ -48,7 +48,7 @@ data class FunctionApproximationKey(
         ): FunctionApproximationKey {
             return FunctionApproximationKey(
                 name = function.name,
-                valueParametersTypes = valueParameterTypes(function, signatureBuildingContext),
+                konstueParametersTypes = konstueParameterTypes(function, signatureBuildingContext),
                 extensionReceiverParameterType = function.extensionReceiver?.let {
                     buildApproximationSignature(signatureBuildingContext, it.type)
                 },
@@ -63,20 +63,20 @@ data class FunctionApproximationKey(
 
         return name == other.name
                 && objCFunctionApproximation == other.objCFunctionApproximation
-                && valueParametersTypes.contentEquals(other.valueParametersTypes)
+                && konstueParametersTypes.contentEquals(other.konstueParametersTypes)
                 && extensionReceiverParameterType == other.extensionReceiverParameterType
     }
 
     override fun hashCode() = hashCode(name)
-        .appendHashCode(valueParametersTypes)
+        .appendHashCode(konstueParametersTypes)
         .appendHashCode(extensionReceiverParameterType)
         .appendHashCode(objCFunctionApproximation)
 }
 
 
 data class ConstructorApproximationKey(
-    val valueParametersTypes: Array<CirTypeSignature>,
-    private val objCFunctionApproximation: ObjCFunctionApproximation
+    konst konstueParametersTypes: Array<CirTypeSignature>,
+    private konst objCFunctionApproximation: ObjCFunctionApproximation
 ) {
 
     companion object {
@@ -84,7 +84,7 @@ data class ConstructorApproximationKey(
             constructor: CirClassConstructor, signatureBuildingContext: SignatureBuildingContext
         ): ConstructorApproximationKey {
             return ConstructorApproximationKey(
-                valueParametersTypes = valueParameterTypes(constructor, signatureBuildingContext),
+                konstueParametersTypes = konstueParameterTypes(constructor, signatureBuildingContext),
                 objCFunctionApproximation = objCFunctionApproximation(constructor)
             )
         }
@@ -95,28 +95,28 @@ data class ConstructorApproximationKey(
             return false
 
         return objCFunctionApproximation == other.objCFunctionApproximation
-                && valueParametersTypes.contentEquals(other.valueParametersTypes)
+                && konstueParametersTypes.contentEquals(other.konstueParametersTypes)
     }
 
-    override fun hashCode() = hashCode(valueParametersTypes)
+    override fun hashCode() = hashCode(konstueParametersTypes)
         .appendHashCode(objCFunctionApproximation)
 }
 
-private fun <T> objCFunctionApproximation(value: T): ObjCFunctionApproximation
+private fun <T> objCFunctionApproximation(konstue: T): ObjCFunctionApproximation
         where T : CirHasAnnotations, T : CirCallableMemberWithParameters {
-    return if (value.annotations.any { it.type.classifierId.isObjCInteropCallableAnnotation }) {
-        value.valueParameters.fold(0) { acc, next -> acc.appendHashCode(next.name) }
+    return if (konstue.annotations.any { it.type.classifierId.isObjCInteropCallableAnnotation }) {
+        konstue.konstueParameters.fold(0) { acc, next -> acc.appendHashCode(next.name) }
     } else 0
 }
 
-private fun <T> valueParameterTypes(
+private fun <T> konstueParameterTypes(
     callable: T,
     signatureBuildingContext: SignatureBuildingContext,
 ): Array<CirTypeSignature>
         where T : CirHasTypeParameters, T : CirCallableMemberWithParameters, T : CirMaybeCallableMemberOfClass {
-    if (callable.valueParameters.isEmpty()) return emptyArray()
-    return Array(callable.valueParameters.size) { index ->
-        val parameter = callable.valueParameters[index]
+    if (callable.konstueParameters.isEmpty()) return emptyArray()
+    return Array(callable.konstueParameters.size) { index ->
+        konst parameter = callable.konstueParameters[index]
         buildApproximationSignature(signatureBuildingContext, parameter.returnType)
     }
 }

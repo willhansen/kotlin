@@ -17,7 +17,7 @@ import kotlin.test.Test
 
 class UnresolvedBinaryTest : AbstractSerializationTest<IdeaKpmUnresolvedBinaryDependency>() {
 
-    override fun serialize(value: IdeaKpmUnresolvedBinaryDependency) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmUnresolvedBinaryDependency) = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray) = IdeaKpmUnresolvedBinaryDependency(data)
 
     @Test

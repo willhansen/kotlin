@@ -124,7 +124,7 @@ public class CompileEnvironmentUtil {
             outputStream.close();
         }
         catch (FileNotFoundException e) {
-            messageCollector.report(CompilerMessageSeverity.ERROR, "Invalid jar path: " + jarPath, null);
+            messageCollector.report(CompilerMessageSeverity.ERROR, "Inkonstid jar path: " + jarPath, null);
         }
         catch (IOException e) {
             throw ExceptionUtilsKt.rethrow(e);

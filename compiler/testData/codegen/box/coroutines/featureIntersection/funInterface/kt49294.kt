@@ -8,7 +8,7 @@
 import kotlin.experimental.*
 
 fun interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface SendChannel<in E> {
@@ -16,16 +16,16 @@ interface SendChannel<in E> {
 }
 
 suspend fun <T> Flow<T>.toList(): List<T> {
-    val destination = ArrayList<T>()
-    collect { value ->
-        destination.add(value)
+    konst destination = ArrayList<T>()
+    collect { konstue ->
+        destination.add(konstue)
     }
     return destination
 }
 
 fun <T> flow(block: suspend FlowCollector<T>.() -> Unit): Flow<T> = SafeFlow(block)
 
-private class SafeFlow<T>(private val block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
+private class SafeFlow<T>(private konst block: suspend FlowCollector<T>.() -> Unit) : Flow<T> {
     override suspend fun collect(collector: FlowCollector<T>) {
         collector.block()
     }
@@ -35,7 +35,7 @@ fun <T> channelFlow(block: suspend SendChannel<T>.() -> Unit): Flow<T> =
     ChannelFlowBuilder(block)
 
 private open class ChannelFlowBuilder<T>(
-    private val block: suspend SendChannel<T>.() -> Unit
+    private konst block: suspend SendChannel<T>.() -> Unit
 ) : ChannelFlow<T>() {
     override suspend fun collectTo(scope: SendChannel<T>) =
         block(scope)
@@ -55,13 +55,13 @@ interface Flow<out T> {
     suspend fun collect(collector: FlowCollector<T>)
 }
 
-inline fun <T, R> Flow<T>.map(crossinline transform: suspend (value: T) -> R): Flow<R> = flow {
-    collect { value ->
-        emit(transform(value))
+inline fun <T, R> Flow<T>.map(crossinline transform: suspend (konstue: T) -> R): Flow<R> = flow {
+    collect { konstue ->
+        emit(transform(konstue))
     }
 }
 
-fun <T, R> Flow<T>.flatMapMerge(transform: suspend (value: T) -> Flow<R>): Flow<R> =
+fun <T, R> Flow<T>.flatMapMerge(transform: suspend (konstue: T) -> Flow<R>): Flow<R> =
     map(transform).flattenMerge()
 
 fun <T> Flow<Flow<T>>.flattenMerge(): Flow<T> =
@@ -69,7 +69,7 @@ fun <T> Flow<Flow<T>>.flattenMerge(): Flow<T> =
 
 // FILE: 2.kt
 
-class ChannelFlowMerge<T>(val flow: Flow<Flow<T>>) : ChannelFlow<T>() {
+class ChannelFlowMerge<T>(konst flow: Flow<Flow<T>>) : ChannelFlow<T>() {
     override suspend fun collectTo(scope: SendChannel<T>) {
         flow.collect {}
     }
@@ -80,11 +80,11 @@ class ChannelFlowMerge<T>(val flow: Flow<Flow<T>>) : ChannelFlow<T>() {
 import kotlin.coroutines.*
 
 fun box(): String {
-    val l: suspend Any.() -> Unit = {
+    konst l: suspend Any.() -> Unit = {
         flow { emit(1) }.flatMapMerge {
             channelFlow {
-                val value = channelFlow { send(1) }
-                send(value)
+                konst konstue = channelFlow { send(1) }
+                send(konstue)
             }
         }.toList()
     }

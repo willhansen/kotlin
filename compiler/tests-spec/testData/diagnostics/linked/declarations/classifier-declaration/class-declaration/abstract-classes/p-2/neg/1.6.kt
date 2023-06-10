@@ -42,7 +42,7 @@ class Case1 : BaseJava() {
 }
 
 fun case1() {
-    val v = Case1()
+    konst v = Case1()
     v.boo(true)
 }
 
@@ -56,7 +56,7 @@ class Case2: AbstractClassCase2() {
 }
 
 fun case2() {
-    val v = Case2()
+    konst v = Case2()
     v.boo(true)
 }
 
@@ -65,7 +65,7 @@ fun case2() {
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case3<!> : BaseJava() {}
 
 fun case3() {
-    val v = Case3()
+    konst v = Case3()
     v.boo(true)
 }
 
@@ -77,7 +77,7 @@ abstract class AbstractClassCase4 : BaseJava() {}
 <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class Case4<!> : AbstractClassCase4() {}
 
 fun case4() {
-    val v = Case4()
+    konst v = Case4()
     v.boo(true)
 }
 

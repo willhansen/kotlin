@@ -24,7 +24,7 @@ import kotlin.test.*
 class ComponentContainerTest {
     @Test
     fun should_throw_when_not_composed() {
-        val container = StorageComponentContainer("test")
+        konst container = StorageComponentContainer("test")
         assertFails {
             container.resolve<TestComponentInterface>()
         }
@@ -32,17 +32,17 @@ class ComponentContainerTest {
 
     @Test
     fun should_resolve_to_null_when_empty() {
-        val container = composeContainer("test") { }
+        konst container = composeContainer("test") { }
         assertNull(container.resolve<TestComponentInterface>())
     }
 
     @Test
     fun should_resolve_to_instance_when_registered() {
-        val container = composeContainer("test") { useImpl<TestComponent>() }
+        konst container = composeContainer("test") { useImpl<TestComponent>() }
 
-        val descriptor = container.resolve<TestComponentInterface>()
+        konst descriptor = container.resolve<TestComponentInterface>()
         assertNotNull(descriptor)
-        val instance = descriptor.getValue() as TestComponentInterface
+        konst instance = descriptor.getValue() as TestComponentInterface
         assertNotNull(instance)
         assertFails {
             instance.foo()
@@ -51,14 +51,14 @@ class ComponentContainerTest {
 
     @Test
     fun should_resolve_instance_dependency() {
-        val container = composeContainer("test") {
+        konst container = composeContainer("test") {
             useInstance(ManualTestComponent("name"))
             useImpl<TestClientComponent>()
         }
 
-        val descriptor = container.resolve<TestClientComponent>()
+        konst descriptor = container.resolve<TestClientComponent>()
         assertNotNull(descriptor)
-        val instance = descriptor.getValue() as TestClientComponent
+        konst instance = descriptor.getValue() as TestClientComponent
         assertNotNull(instance)
         assertNotNull(instance.dep)
         assertFails {
@@ -73,14 +73,14 @@ class ComponentContainerTest {
 
     @Test
     fun should_resolve_type_dependency() {
-        val container = composeContainer("test") {
+        konst container = composeContainer("test") {
             useImpl<TestComponent>()
             useImpl<TestClientComponent>()
         }
 
-        val descriptor = container.resolve<TestClientComponent>()
+        konst descriptor = container.resolve<TestClientComponent>()
         assertNotNull(descriptor)
-        val instance = descriptor.getValue() as TestClientComponent
+        konst instance = descriptor.getValue() as TestClientComponent
         assertNotNull(instance)
         assertNotNull(instance.dep)
         assertFails {
@@ -98,7 +98,7 @@ class ComponentContainerTest {
             useImpl<TestClientComponent>()
             useImpl<TestClientComponent2>()
         }.use {
-            val descriptor = it.resolveMultiple<TestClientComponentInterface>()
+            konst descriptor = it.resolveMultiple<TestClientComponentInterface>()
             assertNotNull(descriptor)
             assertEquals(2, descriptor.count())
         }
@@ -110,9 +110,9 @@ class ComponentContainerTest {
             useImpl<TestComponent>()
             useImpl<TestClientComponent>()
         }.use {
-            val descriptor1 = it.resolve<TestClientComponentInterface>()
+            konst descriptor1 = it.resolve<TestClientComponentInterface>()
             assertNotNull(descriptor1)
-            val descriptor2 = it.resolve<TestClientComponentInterface>()
+            konst descriptor2 = it.resolve<TestClientComponentInterface>()
             assertNotNull(descriptor2)
             assertEquals(descriptor1, descriptor2)
             assertEquals(descriptor1.getValue(), descriptor2.getValue())
@@ -125,12 +125,12 @@ class ComponentContainerTest {
             useImpl<TestAdhocComponent1>()
             useImpl<TestAdhocComponent2>()
         }.use {
-            val descriptor1 = it.resolve<TestAdhocComponent1>()
+            konst descriptor1 = it.resolve<TestAdhocComponent1>()
             assertNotNull(descriptor1)
-            val descriptor2 = it.resolve<TestAdhocComponent2>()
+            konst descriptor2 = it.resolve<TestAdhocComponent2>()
             assertNotNull(descriptor2)
-            val component1 = descriptor1.getValue() as TestAdhocComponent1
-            val component2 = descriptor2.getValue() as TestAdhocComponent2
+            konst component1 = descriptor1.getValue() as TestAdhocComponent1
+            konst component2 = descriptor2.getValue() as TestAdhocComponent2
             assertSame(component1.service, component2.service)
         }
     }
@@ -143,9 +143,9 @@ class ComponentContainerTest {
             useImpl<TestClientComponent2>()
             useImpl<TestIterableComponent>()
         }.use { container ->
-            val descriptor = container.resolve<TestIterableComponent>()
+            konst descriptor = container.resolve<TestIterableComponent>()
             assertNotNull(descriptor)
-            val iterableComponent = descriptor.getValue() as TestIterableComponent
+            konst iterableComponent = descriptor.getValue() as TestIterableComponent
             assertEquals(2, iterableComponent.components.count())
             assertTrue(iterableComponent.components.any { it is TestClientComponent })
             assertTrue(iterableComponent.components.any { it is TestClientComponent2 })
@@ -161,9 +161,9 @@ class ComponentContainerTest {
             useImpl<TestStringComponent>()
             useImpl<JavaTestComponents>()
         }.use { container ->
-            val descriptor = container.resolve<JavaTestComponents>()
+            konst descriptor = container.resolve<JavaTestComponents>()
             assertNotNull(descriptor)
-            val iterableComponent = descriptor.getValue() as JavaTestComponents
+            konst iterableComponent = descriptor.getValue() as JavaTestComponents
             assertEquals(2, iterableComponent.components.count())
             assertTrue(iterableComponent.components.any { it is TestClientComponent })
             assertTrue(iterableComponent.components.any { it is TestClientComponent2 })
@@ -179,9 +179,9 @@ class ComponentContainerTest {
             useImpl<TestStringComponent>()
             useImpl<TestIntComponent>()
         }.use {
-            val descriptor = it.resolve<TestGenericClient>()
+            konst descriptor = it.resolve<TestGenericClient>()
             assertNotNull(descriptor)
-            val genericClient = descriptor.getValue() as TestGenericClient
+            konst genericClient = descriptor.getValue() as TestGenericClient
             assertTrue(genericClient.component1 is TestStringComponent)
             assertTrue(genericClient.component2 is TestIntComponent)
         }
@@ -194,16 +194,16 @@ class ComponentContainerTest {
         composeContainer("test") {
             useImpl<TestImplicitGenericClient>()
         }.use {
-            val descriptor = it.resolve<TestImplicitGenericClient>()
+            konst descriptor = it.resolve<TestImplicitGenericClient>()
             assertNotNull(descriptor)
-            val genericClient = descriptor!!.getValue() as TestImplicitGenericClient
+            konst genericClient = descriptor!!.getValue() as TestImplicitGenericClient
             assertTrue(genericClient.component is TestImplicitGeneric)
         }
     }
 */
 
     @Test
-    fun should_fail_with_invalid_cardinality() {
+    fun should_fail_with_inkonstid_cardinality() {
         composeContainer("test") {
             useImpl<TestComponent>()
             useInstance(TestComponent())
@@ -211,7 +211,7 @@ class ComponentContainerTest {
             assertTrue {
                 assertFails {
                     it.resolve<TestComponent>()
-                } is InvalidCardinalityException
+                } is InkonstidCardinalityException
             }
         }
     }
@@ -229,7 +229,7 @@ class ComponentContainerTest {
 
     @Test
     fun should_inject_properties_of_singletons() {
-        val withSetters = composeContainer("test") {
+        konst withSetters = composeContainer("test") {
             useImpl<WithSetters>()
         }.get<WithSetters>()
 
@@ -238,7 +238,7 @@ class ComponentContainerTest {
 
     @Test
     fun should_not_inject_properties_of_instances() {
-        val withSetters = WithSetters()
+        konst withSetters = WithSetters()
         composeContainer("test") {
             useInstance(withSetters)
         }
@@ -261,31 +261,31 @@ class ComponentContainerTest {
                 @Inject set
         }
 
-        val a = composeContainer("test") {
+        konst a = composeContainer("test") {
             useImpl<A>()
         }.get<A>()
 
-        val b = a.b
+        konst b = a.b
         assertTrue(b is B)
-        val c = b.c
+        konst c = b.c
         assertTrue(c is C)
     }
 
     @Test
     fun use_parent_context_to_discover_dependencies() {
         class A
-        class B(val a: A)
+        class B(konst a: A)
 
-        val ac = composeContainer("a") {
+        konst ac = composeContainer("a") {
             useImpl<A>()
         }
 
-        val bc = composeContainer("b", ac) {
+        konst bc = composeContainer("b", ac) {
             useImpl<B>()
         }
-        val b = bc.get<B>()
+        konst b = bc.get<B>()
 
-        val a = ac.get<A>()
+        konst a = ac.get<A>()
         @Suppress("USELESS_IS_CHECK")
         assertTrue(b is B)
         @Suppress("USELESS_IS_CHECK")
@@ -298,19 +298,19 @@ class ComponentContainerTest {
     @Test
     fun several_child_dependencies() {
         class A
-        class B(val a: A)
+        class B(konst a: A)
 
-        val ac = composeContainer("a") {
+        konst ac = composeContainer("a") {
             useImpl<A>()
         }
 
-        val bc1 = composeContainer("b1", ac) {
+        konst bc1 = composeContainer("b1", ac) {
             useImpl<B>()
         }
-        val bc2 = composeContainer("b2", ac) {
+        konst bc2 = composeContainer("b2", ac) {
             useImpl<B>()
         }
-        val a = ac.get<A>()
+        konst a = ac.get<A>()
         @Suppress("USELESS_IS_CHECK")
         assertTrue(a is A)
         assertSame(a, bc2.get<B>().a)
@@ -325,13 +325,13 @@ class ComponentContainerTest {
 
     class Impl2 : I()
 
-    class Use(val i: I)
+    class Use(konst i: I)
 
     @Test
     fun default_implementation() {
-        class Use(val i: I)
+        class Use(konst i: I)
 
-        val u = composeContainer("a") {
+        konst u = composeContainer("a") {
             useImpl<Use>()
         }.get<Use>()
 
@@ -340,12 +340,12 @@ class ComponentContainerTest {
 
     @Test
     fun non_default_implementation() {
-        val ac = composeContainer("a") {
+        konst ac = composeContainer("a") {
             useImpl<Impl2>()
             useImpl<Use>()
         }
 
-        val u = ac.get<Use>()
+        konst u = ac.get<Use>()
         assertTrue(u.i is Impl2)
     }
 
@@ -354,11 +354,11 @@ class ComponentContainerTest {
 
     object A : S
 
-    class UseS(val s: S)
+    class UseS(konst s: S)
 
     @Test
     fun test_default_object() {
-        val useS = composeContainer("s") {
+        konst useS = composeContainer("s") {
             useImpl<UseS>()
         }.get<UseS>()
 

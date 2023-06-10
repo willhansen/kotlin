@@ -6,6 +6,6 @@ fun f(j: Int): Int {
     return g(g(j))
 }
 
-val rv = f(2)
+konst rv = f(2)
 
 // expected: rv: 128

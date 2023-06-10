@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.test
 
 class Directives {
 
-    private val directives = mutableMapOf<String, MutableList<String>?>()
+    private konst directives = mutableMapOf<String, MutableList<String>?>()
 
     operator fun contains(key: String): Boolean {
         return key in directives
@@ -17,24 +17,24 @@ class Directives {
         return directives[key]?.single()
     }
 
-    fun put(key: String, value: String?) {
-        if (value == null) {
+    fun put(key: String, konstue: String?) {
+        if (konstue == null) {
             directives[key] = null
         } else {
             directives.getOrPut(key, { arrayListOf() }).let {
-                it?.add(value) ?: error("Null value was already passed to $key via smth like // $key")
+                it?.add(konstue) ?: error("Null konstue was already passed to $key via smth like // $key")
             }
         }
     }
 
-    // Such values could be defined several times, e.g
+    // Such konstues could be defined several times, e.g
     // MY_DIRECTIVE: XXX
     // MY_DIRECTIVE: YYY
     // or
     // MY_DIRECTIVE: XXX, YYY
     fun listValues(name: String): List<String>? {
-        return directives[name]?.let { values ->
-            values.flatMap { InTextDirectivesUtils.splitValues(arrayListOf(), it) }
+        return directives[name]?.let { konstues ->
+            konstues.flatMap { InTextDirectivesUtils.splitValues(arrayListOf(), it) }
         }
     }
 }

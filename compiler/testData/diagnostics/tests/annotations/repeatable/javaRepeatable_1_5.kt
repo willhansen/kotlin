@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Runtime {
     public @interface Container {
-        Runtime[] value();
+        Runtime[] konstue();
     }
 }
 
@@ -21,7 +21,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.CLASS)
 public @interface Clazz {
     public @interface Container {
-        Clazz[] value();
+        Clazz[] konstue();
     }
 }
 
@@ -33,7 +33,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Source {
     public @interface Container {
-        Source[] value();
+        Source[] konstue();
     }
 }
 

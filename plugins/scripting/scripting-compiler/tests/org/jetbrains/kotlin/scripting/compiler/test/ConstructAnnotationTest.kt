@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.scripting.compiler.plugin.impl.ScriptDiagnosticsMess
 import org.jetbrains.kotlin.scripting.compiler.plugin.impl.createCompilationContextFromEnvironment
 import org.jetbrains.kotlin.scripting.compiler.plugin.impl.getScriptKtFile
 import org.jetbrains.kotlin.scripting.compiler.plugin.updateWithBaseCompilerArguments
-import org.jetbrains.kotlin.scripting.resolve.InvalidScriptResolverAnnotation
+import org.jetbrains.kotlin.scripting.resolve.InkonstidScriptResolverAnnotation
 import org.jetbrains.kotlin.scripting.resolve.getScriptCollectedData
 import org.jetbrains.kotlin.test.ConfigurationKind
 import org.jetbrains.kotlin.test.KotlinTestUtils
@@ -27,24 +27,24 @@ import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.jvm.jvm
 
-private const val testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/constructAnnotations"
+private const konst testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/constructAnnotations"
 
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-private annotation class TestAnnotation(vararg val options: String)
+private annotation class TestAnnotation(vararg konst options: String)
 
 @Target(AnnotationTarget.FILE)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-private annotation class AnnotationWithVarArgAndArray(vararg val options: String, val moreOptions: Array<String>)
+private annotation class AnnotationWithVarArgAndArray(vararg konst options: String, konst moreOptions: Array<String>)
 
 class ConstructAnnotationTest : TestCase() {
-    private val testRootDisposable: Disposable = TestDisposable()
+    private konst testRootDisposable: Disposable = TestDisposable()
 
     fun testAnnotationEmptyVarArg() {
-        val annotations = annotations("TestAnnotationEmptyVarArg.kts", TestAnnotation::class)
-            .valueOrThrow()
+        konst annotations = annotations("TestAnnotationEmptyVarArg.kts", TestAnnotation::class)
+            .konstueOrThrow()
             .filterIsInstance(TestAnnotation::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -52,8 +52,8 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     fun testBasicVarArgTestAnnotation() {
-        val annotations = annotations("SimpleTestAnnotation.kts", TestAnnotation::class)
-            .valueOrThrow()
+        konst annotations = annotations("SimpleTestAnnotation.kts", TestAnnotation::class)
+            .konstueOrThrow()
             .filterIsInstance(TestAnnotation::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -61,8 +61,8 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     fun testAnnotationWithArrayLiteral() {
-        val annotations = annotations("TestAnnotationWithArrayLiteral.kts", TestAnnotation::class)
-            .valueOrThrow()
+        konst annotations = annotations("TestAnnotationWithArrayLiteral.kts", TestAnnotation::class)
+            .konstueOrThrow()
             .filterIsInstance(TestAnnotation::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -70,8 +70,8 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     fun testAnnotationWithArrayOfFunction() {
-        val annotations = annotations("TestAnnotationWithArrayOfFunction.kts", TestAnnotation::class)
-            .valueOrThrow()
+        konst annotations = annotations("TestAnnotationWithArrayOfFunction.kts", TestAnnotation::class)
+            .konstueOrThrow()
             .filterIsInstance(TestAnnotation::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -79,8 +79,8 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     fun testAnnotationWithEmptyArrayFunction() {
-        val annotations = annotations("TestAnnotationWithEmptyArrayFunction.kts", TestAnnotation::class)
-            .valueOrThrow()
+        konst annotations = annotations("TestAnnotationWithEmptyArrayFunction.kts", TestAnnotation::class)
+            .konstueOrThrow()
             .filterIsInstance(TestAnnotation::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -88,8 +88,8 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     fun testArrayAfterVarArgInAnnotation() {
-        val annotations = annotations("TestAnnotationWithVarArgAndArray.kts", AnnotationWithVarArgAndArray::class)
-            .valueOrThrow()
+        konst annotations = annotations("TestAnnotationWithVarArgAndArray.kts", AnnotationWithVarArgAndArray::class)
+            .konstueOrThrow()
             .filterIsInstance(AnnotationWithVarArgAndArray::class.java)
 
         assertEquals(annotations.count(), 1)
@@ -98,13 +98,13 @@ class ConstructAnnotationTest : TestCase() {
     }
 
     private fun annotations(filename: String, vararg classes: KClass<out Annotation>): ResultWithDiagnostics<List<Annotation>> {
-        val file = File(testDataPath, filename)
-        val compilationConfiguration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.MOCK_JDK).apply {
+        konst file = File(testDataPath, filename)
+        konst compilationConfiguration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.MOCK_JDK).apply {
             updateWithBaseCompilerArguments()
             addKotlinSourceRoot(file.path)
             loadScriptingPlugin(this)
         }
-        val configuration = ScriptCompilationConfiguration {
+        konst configuration = ScriptCompilationConfiguration {
             defaultImports(*classes)
             jvm {
                 refineConfiguration {
@@ -115,31 +115,31 @@ class ConstructAnnotationTest : TestCase() {
             }
         }
 
-        val messageCollector = ScriptDiagnosticsMessageCollector(null)
-        val environment = KotlinCoreEnvironment.createForTests(
+        konst messageCollector = ScriptDiagnosticsMessageCollector(null)
+        konst environment = KotlinCoreEnvironment.createForTests(
             testRootDisposable, compilationConfiguration, EnvironmentConfigFiles.JVM_CONFIG_FILES
         )
-        val context = createCompilationContextFromEnvironment(configuration, environment, messageCollector)
-        val source = file.toScriptSource()
-        val ktFile = getScriptKtFile(
+        konst context = createCompilationContextFromEnvironment(configuration, environment, messageCollector)
+        konst source = file.toScriptSource()
+        konst ktFile = getScriptKtFile(
             source,
             configuration,
             context.environment.project,
             messageCollector
-        ).valueOr { return it }
+        ).konstueOr { return it }
 
         if (messageCollector.hasErrors()) {
             return makeFailureResult(messageCollector.diagnostics)
         }
 
-        val data = getScriptCollectedData(ktFile, configuration, environment.project, null)
-        val annotations = data[ScriptCollectedData.foundAnnotations] ?: emptyList()
+        konst data = getScriptCollectedData(ktFile, configuration, environment.project, null)
+        konst annotations = data[ScriptCollectedData.foundAnnotations] ?: emptyList()
 
         annotations
-            .filterIsInstance(InvalidScriptResolverAnnotation::class.java)
+            .filterIsInstance(InkonstidScriptResolverAnnotation::class.java)
             .takeIf { it.isNotEmpty() }
-            ?.let { invalid ->
-                val reports = invalid.map { "Failed to resolve annotation of type ${it.name} due to ${it.error}".asErrorDiagnostics() }
+            ?.let { inkonstid ->
+                konst reports = inkonstid.map { "Failed to resolve annotation of type ${it.name} due to ${it.error}".asErrorDiagnostics() }
                 return makeFailureResult(reports)
             }
 

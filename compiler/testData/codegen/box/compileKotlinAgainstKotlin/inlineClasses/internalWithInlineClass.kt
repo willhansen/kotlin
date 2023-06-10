@@ -3,10 +3,10 @@
 
 package a
 
-inline class Message(val value: String)
+inline class Message(konst konstue: String)
 
 class Box {
-    internal fun result(msg: Message): String = msg.value
+    internal fun result(msg: Message): String = msg.konstue
 }
 
 // MODULE: main()(lib)

@@ -4,9 +4,9 @@ FILE fqName:<root> fileName:/common.kt
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.I1
     FUN name:f visibility:public modality:ABSTRACT <> ($this:<root>.I1) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:<root>.I1
-    PROPERTY name:p visibility:public modality:ABSTRACT [val]
+    PROPERTY name:p visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:ABSTRACT <> ($this:<root>.I1) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.I1
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
@@ -25,9 +25,9 @@ FILE fqName:<root> fileName:/common.kt
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.I2
     FUN name:f visibility:public modality:ABSTRACT <> ($this:<root>.I2) returnType:kotlin.String
       $this: VALUE_PARAMETER name:<this> type:<root>.I2
-    PROPERTY name:p visibility:public modality:ABSTRACT [val]
+    PROPERTY name:p visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:ABSTRACT <> ($this:<root>.I2) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.I2
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
@@ -50,12 +50,12 @@ FILE fqName:<root> fileName:/common.kt
         public abstract fun f (): kotlin.String declared in <root>.I1
         public abstract fun f (): kotlin.String declared in <root>.I2
       $this: VALUE_PARAMETER name:<this> type:<root>.I1
-    PROPERTY FAKE_OVERRIDE name:p visibility:public modality:ABSTRACT [expect,fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:p visibility:public modality:ABSTRACT [expect,fake_override,konst]
       overridden:
         public abstract p: kotlin.Int
         public abstract p: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-p> visibility:public modality:ABSTRACT <> ($this:<root>.I1) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:p visibility:public modality:ABSTRACT [expect,fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:p visibility:public modality:ABSTRACT [expect,fake_override,konst]
         overridden:
           public abstract fun <get-p> (): kotlin.Int declared in <root>.I1
           public abstract fun <get-p> (): kotlin.Int declared in <root>.I2
@@ -91,16 +91,16 @@ FILE fqName:<root> fileName:/platform.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.C
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun f (): kotlin.String declared in <root>.C'
-          CONST String type=kotlin.String value="OK"
-    PROPERTY name:p visibility:public modality:OPEN [val]
+          CONST String type=kotlin.String konstue="OK"
+    PROPERTY name:p visibility:public modality:OPEN [konst]
       overridden:
         public abstract p: kotlin.Int
         public abstract p: kotlin.Int
       FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:OPEN <> ($this:<root>.C) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-p> (): kotlin.Int declared in <root>.I1
           public abstract fun <get-p> (): kotlin.Int declared in <root>.I2

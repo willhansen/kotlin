@@ -4,7 +4,7 @@
 
 object AX {
 
-    @JvmStatic val c: String = "OK"
+    @JvmStatic konst c: String = "OK"
 
     @JvmStatic fun aStatic(): String {
         return AX.b()

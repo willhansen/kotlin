@@ -7,11 +7,11 @@ public interface Context {
 
 // FILE: Test.kt
 
-annotation class Resource(val name: String)
+annotation class Resource(konst name: String)
 
 class MyController {
     companion object {
-        private const val foo = Context.BEAN
+        private const konst foo = Context.BEAN
     }
 
     @Resource(name = Context.BEAN)

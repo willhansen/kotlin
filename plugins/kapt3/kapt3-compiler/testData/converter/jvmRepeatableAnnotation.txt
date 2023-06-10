@@ -1,5 +1,5 @@
-@Condition(condition = "value1")
-@Condition(condition = "value2")
+@Condition(condition = "konstue1")
+@Condition(condition = "konstue2")
 @kotlin.Metadata()
 public final class A {
 
@@ -11,7 +11,7 @@ public final class A {
 ////////////////////
 
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Condition {
 

@@ -30,7 +30,7 @@ public final class IrSetField extends
   private IrSetField(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -69,12 +69,12 @@ public final class IrSetField extends
           case 18: {
             org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.Builder subBuilder = null;
             if (((bitField0_ & 0x00000002) == 0x00000002)) {
-              subBuilder = value_.toBuilder();
+              subBuilder = konstue_.toBuilder();
             }
-            value_ = input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.PARSER, extensionRegistry);
+            konstue_ = input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.PARSER, extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(value_);
-              value_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(konstue_);
+              konstue_ = subBuilder.buildPartial();
             }
             bitField0_ |= 0x00000002;
             break;
@@ -86,10 +86,10 @@ public final class IrSetField extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -107,7 +107,7 @@ public final class IrSetField extends
     public IrSetField parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrSetField(input, extensionRegistry);
     }
   };
@@ -134,18 +134,18 @@ public final class IrSetField extends
   }
 
   public static final int VALUE_FIELD_NUMBER = 2;
-  private org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value_;
+  private org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue_;
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
    */
   public boolean hasValue() {
     return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getValue() {
-    return value_;
+    return konstue_;
   }
 
   public static final int ORIGIN_NAME_FIELD_NUMBER = 3;
@@ -165,7 +165,7 @@ public final class IrSetField extends
 
   private void initFields() {
     fieldAccess_ = org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon.getDefaultInstance();
-    value_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
+    konstue_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
     originName_ = 0;
   }
   private byte memoizedIsInitialized = -1;
@@ -201,7 +201,7 @@ public final class IrSetField extends
       output.writeMessage(1, fieldAccess_);
     }
     if (((bitField0_ & 0x00000002) == 0x00000002)) {
-      output.writeMessage(2, value_);
+      output.writeMessage(2, konstue_);
     }
     if (((bitField0_ & 0x00000004) == 0x00000004)) {
       output.writeInt32(3, originName_);
@@ -221,7 +221,7 @@ public final class IrSetField extends
     }
     if (((bitField0_ & 0x00000002) == 0x00000002)) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-        .computeMessageSize(2, value_);
+        .computeMessageSize(2, konstue_);
     }
     if (((bitField0_ & 0x00000004) == 0x00000004)) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
@@ -241,23 +241,23 @@ public final class IrSetField extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parseFrom(java.io.InputStream input)
@@ -323,7 +323,7 @@ public final class IrSetField extends
       super.clear();
       fieldAccess_ = org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon.getDefaultInstance();
       bitField0_ = (bitField0_ & ~0x00000001);
-      value_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
+      konstue_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
       bitField0_ = (bitField0_ & ~0x00000002);
       originName_ = 0;
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -357,7 +357,7 @@ public final class IrSetField extends
       if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
         to_bitField0_ |= 0x00000002;
       }
-      result.value_ = value_;
+      result.konstue_ = konstue_;
       if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
         to_bitField0_ |= 0x00000004;
       }
@@ -409,7 +409,7 @@ public final class IrSetField extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -437,11 +437,11 @@ public final class IrSetField extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon field_access = 1;</code>
      */
-    public Builder setFieldAccess(org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon value) {
-      if (value == null) {
+    public Builder setFieldAccess(org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      fieldAccess_ = value;
+      fieldAccess_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -459,13 +459,13 @@ public final class IrSetField extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon field_access = 1;</code>
      */
-    public Builder mergeFieldAccess(org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon value) {
+    public Builder mergeFieldAccess(org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           fieldAccess_ != org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon.getDefaultInstance()) {
         fieldAccess_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon.newBuilder(fieldAccess_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.FieldAccessCommon.newBuilder(fieldAccess_).mergeFrom(konstue).buildPartial();
       } else {
-        fieldAccess_ = value;
+        fieldAccess_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -481,61 +481,61 @@ public final class IrSetField extends
       return this;
     }
 
-    private org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
+    private org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getValue() {
-      return value_;
+      return konstue_;
     }
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
-    public Builder setValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      value_ = value;
+      konstue_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
     }
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
     public Builder setValue(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.Builder builderForValue) {
-      value_ = builderForValue.build();
+      konstue_ = builderForValue.build();
 
       bitField0_ |= 0x00000002;
       return this;
     }
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
-    public Builder mergeValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
-          value_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
-        value_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(value_).mergeFrom(value).buildPartial();
+          konstue_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
+        konstue_ =
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(konstue_).mergeFrom(konstue).buildPartial();
       } else {
-        value_ = value;
+        konstue_ = konstue;
       }
 
       bitField0_ |= 0x00000002;
       return this;
     }
     /**
-     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 2;</code>
+     * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 2;</code>
      */
     public Builder clearValue() {
-      value_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
+      konstue_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
 
       bitField0_ = (bitField0_ & ~0x00000002);
       return this;
@@ -557,9 +557,9 @@ public final class IrSetField extends
     /**
      * <code>optional int32 origin_name = 3;</code>
      */
-    public Builder setOriginName(int value) {
+    public Builder setOriginName(int konstue) {
       bitField0_ |= 0x00000004;
-      originName_ = value;
+      originName_ = konstue;
       
       return this;
     }

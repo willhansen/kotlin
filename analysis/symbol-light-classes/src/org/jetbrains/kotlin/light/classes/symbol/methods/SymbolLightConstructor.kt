@@ -32,7 +32,7 @@ internal class SymbolLightConstructor(
     methodIndex = methodIndex,
     argumentsSkipMask = argumentsSkipMask,
 ) {
-    private val _name: String? = containingClass.name
+    private konst _name: String? = containingClass.name
 
     override fun getName(): String = _name ?: ""
 
@@ -43,8 +43,8 @@ internal class SymbolLightConstructor(
     override fun getTypeParameterList(): PsiTypeParameterList? = null
     override fun getTypeParameters(): Array<PsiTypeParameter> = PsiTypeParameter.EMPTY_ARRAY
 
-    private val _modifierList: PsiModifierList by lazyPub {
-        val initialValue = if (this.containingClass is SymbolLightClassForEnumEntry) {
+    private konst _modifierList: PsiModifierList by lazyPub {
+        konst initialValue = if (this.containingClass is SymbolLightClassForEnumEntry) {
             GranularModifiersBox.VISIBILITY_MODIFIERS_MAP.with(PsiModifier.PACKAGE_LOCAL)
         } else {
             emptyMap()

@@ -18,16 +18,16 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-data class K(val x: Int) : Parcelable
+data class K(konst x: Int) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = K(0)
+    konst first = K(0)
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val second = J.readParcel(parcel)
+    konst second = J.readParcel(parcel)
     assert(first == second)
 }

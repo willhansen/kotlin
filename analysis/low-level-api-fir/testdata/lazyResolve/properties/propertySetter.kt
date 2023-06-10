@@ -1,4 +1,4 @@
 var prop = 42
-    se<caret>t(value) {
+    se<caret>t(konstue) {
 
     }

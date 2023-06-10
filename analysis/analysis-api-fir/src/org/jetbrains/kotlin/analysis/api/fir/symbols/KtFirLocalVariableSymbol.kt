@@ -27,20 +27,20 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 import org.jetbrains.kotlin.name.Name
 
 internal abstract class KtFirLocalOrErrorVariableSymbol<E: FirVariable, S: FirVariableSymbol<E>>(
-    override val firSymbol: S,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: S,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtLocalVariableSymbol(), KtFirSymbol<S> {
-    override val psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
+    override konst psi: PsiElement? = withValidityAssertion { firSymbol.fir.getAllowedPsi() }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
 
-    override val symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.LOCAL }
+    override konst symbolKind: KtSymbolKind get() = withValidityAssertion { KtSymbolKind.LOCAL }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtLocalVariableSymbol> = withValidityAssertion {
@@ -59,7 +59,7 @@ internal class KtFirLocalVariableSymbol(firSymbol: FirPropertySymbol, analysisSe
         assert(firSymbol.isLocal)
     }
 
-    override val isVal: Boolean get() = withValidityAssertion { firSymbol.isVal }
+    override konst isVal: Boolean get() = withValidityAssertion { firSymbol.isVal }
 }
 
 internal class KtFirErrorVariableSymbol(
@@ -67,5 +67,5 @@ internal class KtFirErrorVariableSymbol(
     analysisSession: KtFirAnalysisSession,
 ) : KtFirLocalOrErrorVariableSymbol<FirErrorProperty, FirErrorPropertySymbol>(firSymbol, analysisSession),
     KtFirSymbol<FirErrorPropertySymbol> {
-    override val isVal: Boolean get() = withValidityAssertion { firSymbol.fir.isVal }
+    override konst isVal: Boolean get() = withValidityAssertion { firSymbol.fir.isVal }
 }

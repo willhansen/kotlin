@@ -20,8 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.cfg.ControlFlowProcessor;
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.Instruction;
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.AccessTarget;
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.AccessValueInstruction;
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.AccessTarget;
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.AccessValueInstruction;
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.special.VariableDeclarationInstruction;
 import org.jetbrains.kotlin.config.LanguageVersionSettings;
 import org.jetbrains.kotlin.config.LanguageVersionSettingsImpl;
@@ -59,7 +59,7 @@ public class PseudocodeUtil {
             }
 
             @Override
-            public <K, V> void record(WritableSlice<K, V> slice, K key, V value) {
+            public <K, V> void record(WritableSlice<K, V> slice, K key, V konstue) {
             }
 
             @Override

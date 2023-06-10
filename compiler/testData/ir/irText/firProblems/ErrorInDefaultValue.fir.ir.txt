@@ -5,7 +5,7 @@ FILE fqName:<root> fileName:/ErrorInDefaultValue.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.A
       VALUE_PARAMETER name:x index:0 type:kotlin.String
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="OK"
+          CONST String type=kotlin.String konstue="OK"
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -64,12 +64,12 @@ FILE fqName:<root> fileName:/ErrorInDefaultValue.kt
             $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:x type:<root>.A visibility:private [final]' type=<root>.A origin=null
               receiver: GET_VAR '<this>: <root>.C declared in <root>.C.f' type=<root>.C origin=null
             x: GET_VAR 'x: kotlin.String declared in <root>.C.f' type=kotlin.String origin=null
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:<root>.A visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: <root>.A declared in <root>.C.<init>' type=<root>.A origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.C) returnType:<root>.A
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): <root>.A declared in <root>.C'

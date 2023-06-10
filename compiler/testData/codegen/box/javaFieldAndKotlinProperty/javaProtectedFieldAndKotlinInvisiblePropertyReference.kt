@@ -17,7 +17,7 @@ package derived
 import base.BaseJava
 
 open class Intermediate : BaseJava() {
-    private val a = "FAIL"
+    private konst a = "FAIL"
 }
 
 // TODO: remove suppress after dropping the relevant diagnostic
@@ -31,7 +31,7 @@ class Derived : Intermediate() {
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     d.bar()
     return d.foo()
 }

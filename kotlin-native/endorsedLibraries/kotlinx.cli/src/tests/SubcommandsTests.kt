@@ -14,11 +14,11 @@ import kotlin.test.*
 class SubcommandsTests {
     @Test
     fun testSubcommand() {
-        val argParser = ArgParser("testParser")
-        val output by argParser.option(ArgType.String, "output", "o", "Output file")
+        konst argParser = ArgParser("testParser")
+        konst output by argParser.option(ArgType.String, "output", "o", "Output file")
         class Summary: Subcommand("summary", "Calculate summary") {
-            val invert by option(ArgType.Boolean, "invert", "i", "Invert results")
-            val addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
+            konst invert by option(ArgType.Boolean, "invert", "i", "Invert results")
+            konst addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
             var result: Int = 0
 
             override fun execute() {
@@ -26,7 +26,7 @@ class SubcommandsTests {
                 result = if (invert!!) -1 * result else result
             }
         }
-        val action = Summary()
+        konst action = Summary()
         argParser.subcommands(action)
         argParser.parse(arrayOf("summary", "-o", "out.txt", "-i", "2", "3", "5"))
         assertEquals("out.txt", output)
@@ -36,10 +36,10 @@ class SubcommandsTests {
     @Test
     fun testCommonOptions() {
         abstract class CommonOptions(name: String, actionDescription: String): Subcommand(name, actionDescription) {
-            val numbers by argument(ArgType.Int, "numbers", description = "Numbers").vararg()
+            konst numbers by argument(ArgType.Int, "numbers", description = "Numbers").vararg()
         }
         class Summary: CommonOptions("summary", "Calculate summary") {
-            val invert by option(ArgType.Boolean, "invert", "i", "Invert results")
+            konst invert by option(ArgType.Boolean, "invert", "i", "Invert results")
             var result: Int = 0
 
             override fun execute() {
@@ -56,14 +56,14 @@ class SubcommandsTests {
             }
         }
 
-        val summaryAction = Summary()
-        val subtractionAction = Subtraction()
-        val argParser = ArgParser("testParser")
+        konst summaryAction = Summary()
+        konst subtractionAction = Subtraction()
+        konst argParser = ArgParser("testParser")
         argParser.subcommands(summaryAction, subtractionAction)
         argParser.parse(arrayOf("summary", "2", "3", "5"))
         assertEquals(10, summaryAction.result)
 
-        val argParserSubtraction = ArgParser("testParser")
+        konst argParserSubtraction = ArgParser("testParser")
         argParserSubtraction.subcommands(summaryAction, subtractionAction)
         argParserSubtraction.parse(arrayOf("sub", "8", "-2", "3"))
         assertEquals(-9, subtractionAction.result)
@@ -71,10 +71,10 @@ class SubcommandsTests {
 
     @Test
     fun testRecursiveSubcommands() {
-        val argParser = ArgParser("testParser")
+        konst argParser = ArgParser("testParser")
 
         class Summary: Subcommand("summary", "Calculate summary") {
-            val addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
+            konst addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
             var result: Int = 0
 
             override fun execute() {
@@ -86,7 +86,7 @@ class SubcommandsTests {
             init {
                 subcommands(Summary())
             }
-            val invert by option(ArgType.Boolean, "invert", "i", "Invert results")
+            konst invert by option(ArgType.Boolean, "invert", "i", "Invert results")
             var result: Int = 0
 
             override fun execute() {
@@ -95,7 +95,7 @@ class SubcommandsTests {
             }
         }
 
-        val action = Calculation()
+        konst action = Calculation()
         argParser.subcommands(action)
         argParser.parse(arrayOf("calc", "-i", "summary", "2", "3", "5"))
         assertEquals(-10, action.result)
@@ -103,12 +103,12 @@ class SubcommandsTests {
 
     @Test
     fun testCommonDefaultInSubcommand() {
-        val parser = ArgParser("testParser")
-        val output by parser.option(ArgType.String, "output", "o", "Output file")
+        konst parser = ArgParser("testParser")
+        konst output by parser.option(ArgType.String, "output", "o", "Output file")
             .default("any_file")
         class Summary: Subcommand("summary", "Calculate summary") {
-            val invert by option(ArgType.Boolean, "invert", "i", "Invert results").default(false)
-            val addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
+            konst invert by option(ArgType.Boolean, "invert", "i", "Invert results").default(false)
+            konst addendums by argument(ArgType.Int, "addendums", description = "Addendums").vararg()
             var result: Int = 0
 
             override fun execute() {
@@ -118,15 +118,15 @@ class SubcommandsTests {
             }
         }
         class Multiply: Subcommand("mul", "Multiply") {
-            val numbers by argument(ArgType.Int, description = "Addendums").vararg()
+            konst numbers by argument(ArgType.Int, description = "Addendums").vararg()
             var result: Int = 0
 
             override fun execute() {
                 result = numbers.reduce{ acc, it -> acc * it }
             }
         }
-        val summary = Summary()
-        val multiple = Multiply()
+        konst summary = Summary()
+        konst multiple = Multiply()
         parser.subcommands(summary, multiple)
 
         parser.parse(arrayOf("summary", "1", "2", "4"))

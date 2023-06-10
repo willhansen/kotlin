@@ -12,5 +12,5 @@ public class B extends A {
 
 // FILE: main.kt
 
-const val K1 = B.FOO
-const val K2 = A.FOO
+const konst K1 = B.FOO
+const konst K2 = A.FOO
